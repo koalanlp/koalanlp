@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>kr.kaist.ir.korean</groupId>
 	<artifactId>KoreanAnalyzer</artifactId>
-	<version>0.1.2</version>
+	<version>0.2.0</version>
 	<name>Korean Morphology Analyzer</name>
 	<description>한국어 형태소 분석기 모음 (꼬꼬마, 한나눔)</description>
 	<repositories>
