@@ -68,22 +68,26 @@ TaggedSentence s = iParser.dependencyOf(text);
 
 ## 구조
 ### 사용가능한 분석기 클래스
-HannanumTagger : 한나눔 형태소 분석기
-KkokkomaTagger : 꼬꼬마 형태소 분석기
-IntegratedTagger : 두 형태소 분석기의 피상적 통합 (BETA)
+* HannanumTagger : 한나눔 형태소 분석기
+* KkokkomaTagger : 꼬꼬마 형태소 분석기
+* IntegratedTagger : 두 형태소 분석기의 피상적 통합 (BETA)
 
-* TaggedSentence analyzeSentence(String)
-* List<TaggedSentence> analyzeParagraph(String)
+ * TaggedSentence analyzeSentence(String)
+ * List<TaggedSentence> analyzeParagraph(String)
 
-HannanumParser : 한나눔 구문 분석기
-KkokkomaParser : 꼬꼬마 구문 분석기
-IntegratedParser : 두 구문 분석기의 피상적 통합 (BETA)
+* HannanumParser : 한나눔 구문 분석기
+* KkokkomaParser : 꼬꼬마 구문 분석기
+* IntegratedParser : 두 구문 분석기의 피상적 통합 (BETA)
 
-* TaggedSentence dependencyOf(String)
+ * TaggedSentence dependencyOf(String)
 
 ### 자료 클래스
 모든 결과는 다음의 클래스를 사용합니다.
 
-TaggedSentence : 분석 결과인 문장입니다.
-TaggedWord : 분석 결과인 어절입니다.
-TaggedMorpheme : 분석 결과인 형태소입니다.
+* TaggedSentence : 분석 결과인 문장입니다.
+* TaggedWord : 분석 결과인 어절입니다.
+* TaggedMorpheme : 분석 결과인 형태소입니다.
+
+어절 간의 의존관계 역시 TaggedSentence를 사용하며, 의존관계는 Enum형으로 정의되어 있습니다.
+
+** javadoc을 보시면 더 자세합니다. **
