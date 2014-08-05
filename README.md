@@ -8,14 +8,15 @@ KoreanAnalyzer
 사용방법은 간단합니다.
 
 * 프로젝트 소스코드를 받아 컴파일합니다.
-** 이 과정에서 models.zip은 jar파일에 포함되어야 합니다.
-** Maven이 설치되어 있을 경우 필요한 연결 작업을 자동으로 수행하지만, 설치되어있지 않을 경우 lib 내부의 jar를 build path에 추가하셔야 합니다.
+ * 이 과정에서 models.zip은 jar파일에 포함되어야 합니다.
+ * Maven이 설치되어 있을 경우 필요한 연결 작업을 자동으로 수행하지만, 설치되어있지 않을 경우 lib 내부의 jar를 build path에 추가하셔야 합니다.
+
 * 컴파일 된 소스코드를 사용하고자 하는 프로젝트에 첨부합니다.
 
 다음과 같이 소스코드를 작성할 수 있습니다.
 * 형태소 분석을 할 경우 Tagger의 확장클래스를 사용합니다.
 
-[code]
+<pre>
 // 각 Tagger 선언
 Tagger iTagger = null;
 
@@ -29,11 +30,11 @@ try {
 
 // 실질적인 분석 과정은 한 문장.
 TaggedSentence s = iTagger.analyzeSentence(text);
-[/code]
+</pre>
 
 * 구문 분석을 할 경우 Parser의 확장 클래스를 사용합니다.
 
-[code]
+<pre>
 // 각 Parser 선언
 Parser iParser = null;
 
@@ -47,4 +48,4 @@ try {
 
 // 실질적인 분석 과정은 한 문장.
 TaggedSentence s = iParser.dependencyOf(text);
-[/code]
+</pre>
