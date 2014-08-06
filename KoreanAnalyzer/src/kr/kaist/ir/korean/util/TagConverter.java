@@ -6,7 +6,7 @@ import kr.kaist.ir.korean.data.TaggedWord.FunctionalTag;
  * 한나눔과 꼬꼬마의 서로 다른 형태소 유형을 통합 형식으로 변환하는 도구 클래스
  * 
  * @author 김부근
- * @version 0.2.2
+ * @version 0.2.2.3
  * @since 2014-07-31
  */
 public final class TagConverter {
@@ -173,6 +173,15 @@ public final class TagConverter {
 		}
 	}
 
+	/**
+	 * 의존관계 분석 기능 표지를 통일한다.
+	 * 
+	 * @param type
+	 *            변환할 표기
+	 * @param tagger
+	 *            사용한 구문 분석기의 유형
+	 * @return 통합형식으로 변환된 표기
+	 */
 	public static FunctionalTag getDependencyTag(String type, TaggerType tagger) {
 		if (tagger == TaggerType.HNN) {
 			switch (type) {
@@ -213,6 +222,8 @@ public final class TagConverter {
 			case "명사구":
 			case "이유":
 				return FunctionalTag.Modifier;
+			case "동일":
+				return FunctionalTag.Conjunctive;
 			default:
 				if (type.contains("연결")) {
 					return FunctionalTag.Conjunctive;

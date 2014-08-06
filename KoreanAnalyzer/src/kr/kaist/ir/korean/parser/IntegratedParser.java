@@ -25,7 +25,7 @@ public class IntegratedParser implements Parser {
 
 	/**
 	 * 사용할 두 종류의 구문 분석기를 정의하는 생성자.
-	 * @throws Exception
+	 * @throws Exception 초기화가 실패할 경우 발생한다.
 	 */
 	public IntegratedParser() throws Exception {
 		hParser = new HannanumParser();

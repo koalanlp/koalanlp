@@ -21,10 +21,34 @@ import org.snu.ids.ha.ma.MorphemeAnalyzer;
  */
 public final class KkokkomaTagger implements Tagger {
 
+	/** 간섭 현상을 막기 위한 Default Tagger */
+	private static volatile KkokkomaTagger defaultTagger;
+
 	/**
 	 * 꼬꼬마 형태소 분석기
 	 */
 	private MorphemeAnalyzer ma;
+
+	/**
+	 * <p>
+	 * 꼬꼬마의 기본 형태소 분석기를 돌려준다.
+	 * </p>
+	 * <p>
+	 * 리소스 절약을 위해서 꼬꼬마 분석기는 한 개만 사용하는 것이 좋다. 여러개 사용하고 싶다면 별도로 만들 수 있다.
+	 * {@link #KkokkomaTagger()}참조.
+	 * </p>
+	 * 
+	 * @return 꼬꼬마의 기본 형태소 분석기.
+	 * @throws Exception
+	 *             분석기 초기화에 실패할 경우.
+	 */
+	public static KkokkomaTagger getDefaultTagger() throws Exception {
+		if (defaultTagger == null) {
+			defaultTagger = new KkokkomaTagger();
+		}
+
+		return defaultTagger;
+	}
 
 	/**
 	 * 생성자. 꼬꼬마 형태소 분석기를 새로 시동한다.
@@ -81,8 +105,7 @@ public final class KkokkomaTagger implements Tagger {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * kr.kaist.ir.korean.tagger.Tagger#analyzeSentence(java.lang.String)
+	 * @see kr.kaist.ir.korean.tagger.Tagger#analyzeSentence(java.lang.String)
 	 */
 	@Override
 	public TaggedSentence analyzeSentence(String text) throws Exception {
@@ -116,8 +139,7 @@ public final class KkokkomaTagger implements Tagger {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * kr.kaist.ir.korean.tagger.Tagger#analyzeParagraph(java.lang.String)
+	 * @see kr.kaist.ir.korean.tagger.Tagger#analyzeParagraph(java.lang.String)
 	 */
 	@Override
 	public LinkedList<TaggedSentence> analyzeParagraph(String text)

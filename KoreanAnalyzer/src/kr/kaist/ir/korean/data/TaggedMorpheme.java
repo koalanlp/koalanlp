@@ -16,7 +16,7 @@ import kr.kaist.ir.korean.util.TagConverter.TaggerType;
  * 
  * @author 김부근
  * @since 2014-07-31
- * @version 0.2.0
+ * @version 0.2.2.3
  */
 public class TaggedMorpheme implements Serializable {
 	/** Serialize ID */
@@ -40,6 +40,8 @@ public class TaggedMorpheme implements Serializable {
 	 *            형태소 문자열
 	 * @param tag
 	 *            품사구분 문자열
+	 * @param type
+	 *            형태소 분석기의 유형
 	 */
 	public TaggedMorpheme(String morpheme, String tag, TaggerType type) {
 		super();
@@ -159,6 +161,7 @@ public class TaggedMorpheme implements Serializable {
 	 * 
 	 * @param another
 	 *            비교할 다른 형태소.
+	 * @return 태그를 제외하고 같다면 참(true).
 	 */
 	public boolean equalsWithoutTag(TaggedMorpheme another) {
 		return another.getMorpheme().equals(this.morpheme);

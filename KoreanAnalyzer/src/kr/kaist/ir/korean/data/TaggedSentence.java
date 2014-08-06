@@ -17,7 +17,7 @@ import java.util.List;
  * 
  * @author 김부근
  * @since 2014-07-31
- * @version 0.1.2
+ * @version 0.2.2.3
  */
 public class TaggedSentence implements Serializable, Iterable<TaggedWord> {
 	/** Serial ID */
@@ -83,6 +83,8 @@ public class TaggedSentence implements Serializable, Iterable<TaggedWord> {
 	 * 예를 들어 "NN NNGA+JKS VV+ECE"는 "명사 - 동작성명사 및 주격조사 - 동사 및 대등연결어미"를 나타낸다.
 	 * </p>
 	 * 
+	 * @param type
+	 *            확인할 문장 형태
 	 * @return 해당 문장 형태에 부합할 경우 참(true).
 	 */
 	public final boolean isTypeOf(String type) {
@@ -112,6 +114,17 @@ public class TaggedSentence implements Serializable, Iterable<TaggedWord> {
 	 */
 	public final int size() {
 		return words.size();
+	}
+
+	/**
+	 * 문장 내에서 어절을 찾아 그 위치를 돌려준다.
+	 * 
+	 * @param word
+	 *            위치를 찾을 어절.
+	 * @return 어절의 위치를 찾으면 해당 위치를, 찾지 못하면 -1을 돌려준다.
+	 */
+	public final int indexOf(TaggedWord word) {
+		return words.indexOf(word);
 	}
 
 	/**
@@ -188,7 +201,7 @@ public class TaggedSentence implements Serializable, Iterable<TaggedWord> {
 		for (int i = 0; i < words.size(); i++) {
 			TaggedWord w = words.get(i);
 			strbuf.append(w.toString());
-			if(i == root){
+			if (i == root) {
 				strbuf.append("[ROOT]");
 			}
 			strbuf.append('\n');

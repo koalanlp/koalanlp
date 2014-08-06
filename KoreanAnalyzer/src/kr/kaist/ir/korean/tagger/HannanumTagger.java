@@ -45,12 +45,34 @@ public final class HannanumTagger implements Tagger {
 
 	/** jar 리소스 압축 해제할 폴더 */
 	private static final File TMP = new File(".");
+	/** 전체 초기화 여부 */
 	private static boolean initialized = false;
+	/** Default Tagger */
+	private static volatile HannanumTagger defaultTagger;
 
 	/** 한나눔 형태소 분석기와 품사 부착기를 사용하기 위한 변수 */
 	private Workflow workflow;
 	/** 품사부착기 초기화 여부 */
 	private boolean isWorkflowActivated = false;
+	/** 프로세싱 대기 여부 */
+	private Boolean isWorkflowOnline = false;
+
+	/**
+	 * <p>
+	 * 한나눔의 기본 형태소 분석기를 돌려준다.
+	 * </p>
+	 * 
+	 * @return 한나눔의 기본 형태소 분석기.
+	 * @throws Exception
+	 *             분석기 초기화에 실패할 경우.
+	 */
+	public static HannanumTagger getDefaultTagger() throws Exception {
+		if (defaultTagger == null) {
+			defaultTagger = new HannanumTagger();
+		}
+
+		return defaultTagger;
+	}
 
 	/**
 	 * 한나눔 형태소 분석기까지 사용하는 Tagger 생성자.
@@ -126,7 +148,7 @@ public final class HannanumTagger implements Tagger {
 	 * @throws Exception
 	 *             분석기 초기화 과정에서 실패할 경우 발생.
 	 */
-	public HannanumTagger() throws Exception {
+	protected HannanumTagger() throws Exception {
 		this(true, false, PlainTextAddon.SentenceSegment,
 				PlainTextAddon.InformalSentenceFilter);
 	}
@@ -184,7 +206,8 @@ public final class HannanumTagger implements Tagger {
 	 * @see kr.kaist.ir.korean.tagger.Tagger#analyzeSentence(java.lang.String)
 	 */
 	@Override
-	public TaggedSentence analyzeSentence(String text) throws Exception {
+	public synchronized TaggedSentence analyzeSentence(String text)
+			throws Exception {
 		// 초기화가 안되어있다면 분석기를 초기화한다
 		if (!isWorkflowActivated) {
 			isWorkflowActivated = true;
@@ -192,10 +215,17 @@ public final class HannanumTagger implements Tagger {
 		}
 
 		Sentence sentence;
-		// Tagger를 공유할 경우 간혹 문장이 섞이는 경우가 있다.
-		synchronized (workflow) {
+		// Tagger를 공유할 경우 간혹 문장이 섞이는 경우가 있다. 분석이 진행중이면 0.1초간 현 스레드를 대기시킨다.
+		while (isWorkflowOnline) {
+			Thread.sleep(100);
+		}
+		
+		synchronized (isWorkflowOnline) {
 			// 분석한다
+			isWorkflowOnline = true;
 			workflow.analyze(text);
+			
+			isWorkflowOnline = false;
 			sentence = workflow.getResultOfSentence(new Sentence(0, 0, false));
 		}
 
@@ -208,7 +238,7 @@ public final class HannanumTagger implements Tagger {
 	 * @see kr.kaist.ir.korean.taggerTagger#analyzeParagraph(java.lang.String)
 	 */
 	@Override
-	public LinkedList<TaggedSentence> analyzeParagraph(String text)
+	public synchronized LinkedList<TaggedSentence> analyzeParagraph(String text)
 			throws Exception {
 		// 초기화가 안되어있다면 분석기를 초기화한다
 		if (!isWorkflowActivated) {
@@ -218,11 +248,18 @@ public final class HannanumTagger implements Tagger {
 
 		String[] resultStr;
 
-		// Tagger를 공유할 경우 간혹 문장이 섞이는 경우가 있다.
-		synchronized (workflow) {
+		// Tagger를 공유할 경우 간혹 문장이 섞이는 경우가 있다. 분석이 진행중이면 0.1초간 현 스레드를 대기시킨다.
+		while (isWorkflowOnline) {
+			Thread.sleep(100);
+		}
+		
+		synchronized (isWorkflowOnline) {
 			// 분석한다
+			isWorkflowOnline = true;
 			workflow.analyze(text);
-
+			
+			isWorkflowOnline = false;
+			
 			// 문장단위로 변환한다
 			// 한나눔의 API가 오류가 있어 직접 변환하도록 한다.
 			/*
@@ -246,31 +283,36 @@ public final class HannanumTagger implements Tagger {
 				do {
 					delimiter = result.indexOf('/', morpheme + offset);
 					char nextch = result.charAt(delimiter + 1);
-					if (nextch > 'a' && nextch < 'z') {
+					if (nextch >= 'a' && nextch <= 'z') {
 						String morph = result.substring(morpheme, delimiter);
 						morpheme = result.indexOf('+', delimiter) + 1;
 
-						String tag = result.substring(delimiter + 1,
-								(morpheme > 0) ? (morpheme - 1) : result.length());
+						String tag = result.substring(
+								delimiter + 1,
+								(morpheme > 0) ? (morpheme - 1) : result
+										.length());
 
-						if (tag.matches("[npmijexsf]{1}[a-z]{0,3}")) {
+						if (tag.matches("[npmijexsf]{1}[a-z]{0,4}")) {
 							word.addMorpheme(new TaggedMorpheme(morph, tag,
 									TaggerType.HNN));
+							offset = 0;
 						} else {
-							exception = true;
+							offset++;
 						}
-
-						offset = 0;
 					} else {
 						offset++;
 					}
-				} while (morpheme > 0);
+				} while (morpheme + offset > 0 && delimiter > -1);
+
+				if (offset != 0) {
+					exception = true;
+				}
 			} else if (result.equals("")) {
 				// 빈칸이 연속되는 경우 문장이 끝난 것이다.
 				if (word == null && sentence.size() > 0) {
 					paragraph.add(sentence);
 					sentence = new TaggedSentence();
-				} else if (word != null) {
+				} else if (word != null && word.size() > 0) {
 					// 빈칸이 1개라면 어절이 추가되는 것이다.
 					sentence.addWord(word);
 					word = null;
@@ -290,12 +332,16 @@ public final class HannanumTagger implements Tagger {
 		}
 
 		// 마지막 단어와 문장을 처리한다.
-		if (word != null) {
+		if (word != null && word.size() > 0) {
 			sentence.addWord(word);
 		}
 
 		if (sentence.size() > 0) {
 			paragraph.add(sentence);
+		}
+
+		if (paragraph.size() == 0) {
+			throw new IllegalStateException("No output sentence!");
 		}
 
 		return paragraph;

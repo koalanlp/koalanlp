@@ -30,9 +30,9 @@ public class IntegratedTagger implements Tagger {
 	}
 
 	/** 꼬꼬마 Tagger */
-	private final Tagger kTagger;
+	private static volatile Tagger kTagger;
 	/** 한나눔 Tagger */
-	private final Tagger hTagger;
+	private static volatile Tagger hTagger;
 
 	/** 구조를 취할 방법론 */
 	private final ParseStructure priority;
@@ -48,9 +48,16 @@ public class IntegratedTagger implements Tagger {
 	public IntegratedTagger(ParseStructure priority) throws Exception {
 		this.priority = priority;
 
-		kTagger = new KkokkomaTagger();
-		// 한나눔은 통일성을 위해 품사 부착기 사용
-		hTagger = new HannanumTagger();
+		if (kTagger == null) {
+			// 자원 절약을 위해서 꼬꼬마 Tagger는 1개만 사용한다.
+			kTagger = KkokkomaTagger.getDefaultTagger();
+		}
+
+		if (hTagger == null) {
+			// 한나눔은 통일성을 위해 품사 부착기를 사용하고, 한나눔이 내부적으로 Parsing Thread를 사용하기 때문에,
+			// Thread간의 간섭을 막기 위해서 Tagger는 1개만 사용한다.
+			hTagger = HannanumTagger.getDefaultTagger();
+		}
 	}
 
 	/**
@@ -107,8 +114,8 @@ public class IntegratedTagger implements Tagger {
 				if (baseWords.size() == 0 || refWords.size() == 0) {
 					throw new IndexOutOfBoundsException(
 							"Character Mismatch between two sentences! BASE : "
-							+ base.getOriginalString(" ") + " vs REF : "
-							+ ref.getOriginalString(" "));
+									+ base.getOriginalString(" ")
+									+ " vs REF : " + ref.getOriginalString(" "));
 				} else if (baseWords.size() == 1 && refWords.size() == 1) {
 					// 각각 1개의 어절인 경우, 형태소 단위도 일치하는지 확인한다.
 					Iterator<TaggedMorpheme> mitBase = wBase.iterator(), mitRef = wRef
@@ -219,9 +226,10 @@ public class IntegratedTagger implements Tagger {
 		if (priority == ParseStructure.KKMA) {
 			base = kTagger.analyzeParagraph(text);
 			ref = hTagger.analyzeParagraph(text);
+
 		} else {
-			base = hTagger.analyzeParagraph(text);
 			ref = kTagger.analyzeParagraph(text);
+			base = hTagger.analyzeParagraph(text);
 		}
 
 		return integrateParagraph(base, ref);

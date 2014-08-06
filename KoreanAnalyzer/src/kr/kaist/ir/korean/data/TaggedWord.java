@@ -16,7 +16,7 @@ import java.util.List;
  * 
  * @author 김부근
  * @since 2014-07-31
- * @version 0.2.0
+ * @version 0.2.2.3
  */
 public class TaggedWord implements Serializable, Iterable<TaggedMorpheme> {
 	/**
@@ -41,7 +41,9 @@ public class TaggedWord implements Serializable, Iterable<TaggedMorpheme> {
 		/** 독립어. 체언(NP_INT) */
 		Interjective,
 		/** 삽입어구. 삽입된 성분의 기능표지 위치 (예: NP_PRN) */
-		Parenthetical
+		Parenthetical,
+		/** 정의되지 않음 */
+		Undefined
 	}
 
 	/** Serialize ID */
@@ -109,6 +111,8 @@ public class TaggedWord implements Serializable, Iterable<TaggedMorpheme> {
 	 *            의존소로 지정할 어절
 	 * @param tag
 	 *            어절의 의존 관계. 즉 기능 표지.
+	 * @param rawTag
+	 *            원 분석 방법의 기능표지.
 	 */
 	public final void addDependant(TaggedWord word, FunctionalTag tag,
 			String rawTag) {
@@ -380,7 +384,7 @@ public class TaggedWord implements Serializable, Iterable<TaggedMorpheme> {
 				strbuf.append(' ');
 			}
 		}
-		
+
 		return strbuf.toString();
 	}
 

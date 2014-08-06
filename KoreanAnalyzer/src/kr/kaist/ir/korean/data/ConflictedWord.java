@@ -296,7 +296,7 @@ public final class ConflictedWord extends TaggedWord {
 	 * @return 둘을 이어붙인 문자열을 돌려준다.
 	 */
 	private static String concatMorpheme(String current, TaggedMorpheme morp) {
-		if (morp.isTypeOf("S")) {
+		if (morp.isTypeOf("S") || morp.isTypeOf("O") || morp.isNumber()) {
 			return current + morp.getMorpheme();
 		} else if (morp.getType() == TaggerType.HNN
 				&& Hangul.hasJong(current.substring(current.length() - 1))) {
