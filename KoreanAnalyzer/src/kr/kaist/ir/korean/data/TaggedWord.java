@@ -15,7 +15,7 @@ import java.util.List;
  * </p>
  * 
  * @author 김부근
- * @since 2014-08-05
+ * @since 2014-07-31
  * @version 0.2.0
  */
 public class TaggedWord implements Serializable, Iterable<TaggedMorpheme> {

@@ -4,6 +4,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import kaist.cilab.jhannanum.common.Code;
+import kr.kaist.ir.korean.util.TagConverter.TaggerType;
+
+import org.snu.ids.ha.util.Hangul;
+
 /**
  * <p>
  * 통합형태소 분석 과정에서 생기는 충돌을 완화하기 위해, 가장 포괄적인 단위로 어절을 묶어버리는 클래스.
@@ -14,7 +19,7 @@ import java.util.List;
  * 
  * @author 김부근
  * @since 2014-08-01
- * @version 0.1.0
+ * @version 0.2.2
  */
 public final class ConflictedWord extends TaggedWord {
 	/** Serial ID */
@@ -37,21 +42,57 @@ public final class ConflictedWord extends TaggedWord {
 	 *            참고 방법론이 주장하는 어절 목록
 	 */
 	public ConflictedWord(List<TaggedWord> base, List<TaggedWord> ref) {
-		StringBuffer representation = new StringBuffer();
-		for (TaggedWord word : base) {
-			representation.append(word.getOriginalWord());
+		LinkedList<TaggedMorpheme> mBase = new LinkedList<TaggedMorpheme>(), mRef = new LinkedList<TaggedMorpheme>();
+		StringBuffer strbuf = new StringBuffer();
 
-			for (TaggedMorpheme m : word) {
-				if (!m.isProblematic()) {
-					addMorpheme(m);
-				} else {
-					addMorpheme(findSafeMorpheme(m, ref));
-				}
-			}
+		for (TaggedWord word : base) {
+			mBase.addAll(word.getMorphemes());
+			strbuf.append(word.getOriginalWord());
 		}
-		this.originalWord = representation.toString();
+
+		for (TaggedWord word : ref) {
+			mRef.addAll(word.getMorphemes());
+		}
+
+		setLongestMorpheme(mBase, mRef);
+		this.originalWord = strbuf.toString();
+
 		wordsOfBase.addAll(base);
 		wordsOfRef.addAll(ref);
+	}
+
+	/**
+	 * 어절과 어절 목록을 통합하는 내부 생성자.
+	 * 
+	 * @param a
+	 *            어절
+	 * @param b
+	 *            어절 목록
+	 * @param isABase
+	 *            A가 골격 방법론인지의 여부
+	 */
+	private ConflictedWord(TaggedWord a, List<TaggedWord> b, boolean isABase) {
+		LinkedList<TaggedMorpheme> mB = new LinkedList<TaggedMorpheme>();
+		StringBuffer strbuf = new StringBuffer();
+
+		for (TaggedWord word : b) {
+			mB.addAll(word.getMorphemes());
+			strbuf.append(word.getOriginalWord());
+		}
+
+		if (isABase) {
+			setLongestMorpheme(a.getMorphemes(), mB);
+			this.originalWord = a.getOriginalWord();
+
+			wordsOfBase.add(a);
+			wordsOfRef.addAll(b);
+		} else {
+			setLongestMorpheme(mB, a.getMorphemes());
+			this.originalWord = strbuf.toString();
+
+			wordsOfBase.addAll(b);
+			wordsOfRef.add(a);
+		}
 	}
 
 	/**
@@ -61,21 +102,12 @@ public final class ConflictedWord extends TaggedWord {
 	 * </p>
 	 * 
 	 * @param base
-	 *            골격 구성 방법론이 주장하는 어절
+	 *            골격 구성 방법론이 주장하는 어절 목록
 	 * @param ref
-	 *            참고 방법론이 주장하는 어절 목록
+	 *            참고 방법론이 주장하는 어절
 	 */
 	public ConflictedWord(TaggedWord base, List<TaggedWord> ref) {
-		for (TaggedMorpheme m : base) {
-			if (!m.isProblematic()) {
-				addMorpheme(m);
-			} else {
-				addMorpheme(findSafeMorpheme(m, ref));
-			}
-		}
-		this.originalWord = base.getOriginalWord();
-		wordsOfBase.add(base);
-		wordsOfRef.addAll(ref);
+		this(base, ref, true);
 	}
 
 	/**
@@ -90,21 +122,7 @@ public final class ConflictedWord extends TaggedWord {
 	 *            참고 방법론이 주장하는 어절
 	 */
 	public ConflictedWord(List<TaggedWord> base, TaggedWord ref) {
-		StringBuffer representation = new StringBuffer();
-		for (TaggedWord word : base) {
-			representation.append(word.getOriginalWord());
-
-			for (TaggedMorpheme m : word) {
-				if (!m.isProblematic()) {
-					addMorpheme(m);
-				} else {
-					addMorpheme(findSafeMorpheme(m, ref));
-				}
-			}
-		}
-		this.originalWord = representation.toString();
-		wordsOfBase.addAll(base);
-		wordsOfRef.add(ref);
+		this(ref, base, false);
 	}
 
 	/**
@@ -134,15 +152,9 @@ public final class ConflictedWord extends TaggedWord {
 	 */
 	public ConflictedWord(TaggedWord base, TaggedWord ref,
 			boolean findSafeMorpheme) {
-		for (TaggedMorpheme m : base) {
-			if (!findSafeMorpheme || !m.isProblematic()) {
-				addMorpheme(m);
-			} else {
-				addMorpheme(findSafeMorpheme(m, ref));
-			}
-		}
-
+		setLongestMorpheme(base.getMorphemes(), ref.getMorphemes());
 		this.originalWord = base.getOriginalWord();
+
 		wordsOfBase.add(base);
 		wordsOfRef.add(ref);
 	}
@@ -175,69 +187,139 @@ public final class ConflictedWord extends TaggedWord {
 
 		result.append("\n\t[골격 구성]\n\t | ");
 		for (TaggedWord w : wordsOfBase) {
-			result.append(w.toString().replaceAll("\n", "\n\t | "))
-					.append("\n\t | ");
+			result.append(w.toString().replaceAll("\n", "\n\t | ")).append(
+					"\n\t | ");
 		}
 		result.append("\n\t[참조]\n\t | ");
 		for (TaggedWord w : wordsOfRef) {
-			result.append(w.toString().replaceAll("\n", "\n\t | "))
-					.append("\n\t | ");
+			result.append(w.toString().replaceAll("\n", "\n\t | ")).append(
+					"\n\t | ");
 		}
 
 		return result.toString();
 	}
 
 	/**
-	 * 주어진 어절 집합에서 형태소의 통합 형태를 찾는다. 찾지 못할 경우 현재 형태소의 값을 넘긴다.
+	 * 주어진 어절 집합에서 형태소의 통합 형태를 찾는다. 이 과정에서 골격 구성 방법론이 항상 우선하지만, 참고 방법론이 골격 구성
+	 * 방법론의 여러 형태소를 합친 단일 형태소를 가지고 있거나, 골격 방법론과 동일한 형태소가 통합 문제가 없는 경우 참고 방법론의
+	 * 형태소를 취한다.
 	 * 
-	 * @param m
-	 *            찾고자 하는 형태소
+	 * @param base
+	 *            골격 구성 방법론의 형태소 목록
 	 * @param ref
-	 *            대상이 되는 어절 목록
+	 *            참고 방법론의 형태소 목록
 	 * @return 형태소의 통합 형태를 찾은 경우 새로운 형태소가, 아닌 경우 원 형태소를 돌려준다.
 	 */
-	private static TaggedMorpheme findSafeMorpheme(TaggedMorpheme m,
-			List<TaggedWord> ref) {
-		for (TaggedWord w : ref) {
-			TaggedMorpheme m2 = findSafeMorpheme(m, w);
-			if (m != m2) {
-				return m2;
-			}
-		}
+	private void setLongestMorpheme(List<TaggedMorpheme> base,
+			List<TaggedMorpheme> ref) {
+		String strBase = base.get(0).getMorpheme();
+		String strRef = ref.get(0).getMorpheme();
 
-		return m;
-	}
+		TaggedMorpheme mRef = ref.get(0);
+		int iBase = 0, iRef = 0, lBase = 1, lRef = 1;
 
-	/**
-	 * 주어진 단어에서 형태소의 통합 형태를 찾는다. 찾지 못할 경우 현재 형태소의 값을 넘긴다.
-	 * 
-	 * @param m
-	 *            찾고자 하는 형태소
-	 * @param ref
-	 *            대상이 되는 어절
-	 * @return 형태소의 통합 형태를 찾은 경우 새로운 형태소가, 아닌 경우 원 형태소를 돌려준다.
-	 */
-	private static TaggedMorpheme findSafeMorpheme(TaggedMorpheme m,
-			TaggedWord ref) {
-		/* 한나눔의 경우 통합태그 NR, VCP/jp, VA/paa, VX, EP, EF, XP, O에서 문제가 발생한다. */
-		/* 꼬꼬마의 경우 통합태그 NNG, JX, U에서 발생한다. */
+		while (true) {
+			if (strRef.equals(strBase)) {
+				if (lBase == 1 && lRef == 1) {
+					TaggedMorpheme mBase = base.get(iBase);
+					String class1Tag = mBase.getTag().substring(0, 1);
+					boolean useBase = true;
 
-		String class1Tag = m.getTag().substring(0, 1);
-
-		for (TaggedMorpheme morph : ref) {
-			if (morph.equals(m.getMorpheme())) {
-				if (morph.isTypeOf(class1Tag)) {
-					if (class1Tag.equals("V") || class1Tag.equals("O")
-							|| morph.isTypeOf(m.getTag())) {
-						return morph;
+					if (mBase.isProblematic()) {
+						if (mRef.isTypeOf(class1Tag)) {
+							if (class1Tag.equals("V") || class1Tag.equals("O")
+									|| mRef.isTypeOf(mBase.getTag())) {
+								useBase = false;
+							}
+						} else if (mBase.isTypeOf("U")
+								|| (mBase.isNumber() && mRef.isNumber())) {
+							useBase = false;
+						}
 					}
-				} else if (m.isTypeOf("U")
-						|| (m.isNumber() && morph.isNumber())) {
-					return morph;
+
+					addMorpheme((useBase) ? mBase : mRef);
+				} else if (lRef == 1) {
+					addMorpheme(mRef);
+				} else {
+					for (int i = iBase; i < iBase + lBase; i++) {
+						addMorpheme(base.get(i));
+					}
+				}
+
+				iRef += lRef;
+				lRef = 1;
+				iBase += lBase;
+				lBase = 1;
+
+				if (iRef < ref.size()) {
+					mRef = ref.get(iRef);
+					strRef = ref.get(iRef).getMorpheme();
+				} else {
+					break;
+				}
+
+				if (iBase < base.size()) {
+					strBase = base.get(iBase).getMorpheme();
+				} else {
+					break;
+				}
+			} else if (strRef.length() > strBase.length()) {
+				if (iBase + lBase < base.size()) {
+					strBase = concatMorpheme(strBase, base.get(iBase + lBase));
+					lBase++;
+				} else {
+					break;
+				}
+			} else {
+				if (iRef + lRef < ref.size()) {
+					mRef = ref.get(iRef + lRef);
+					strRef = concatMorpheme(strRef, ref.get(iRef + lRef));
+					lRef++;
+				} else {
+					break;
 				}
 			}
 		}
 
-		return m;
+		for (int i = iBase; i < base.size(); i++) {
+			addMorpheme(base.get(i));
+		}
+	}
+
+	/**
+	 * 문자열에 주어진 형태소를 이어붙인다.
+	 * 
+	 * @param current
+	 *            이어붙이기 전의 문자열
+	 * @param morp
+	 *            이어붙일 형태소
+	 * @return 둘을 이어붙인 문자열을 돌려준다.
+	 */
+	private static String concatMorpheme(String current, TaggedMorpheme morp) {
+		if (morp.isTypeOf("S")) {
+			return current + morp.getMorpheme();
+		} else if (morp.getType() == TaggerType.HNN
+				&& Hangul.hasJong(current.substring(current.length() - 1))) {
+			String m = morp.getMorpheme();
+			char[] tplCurrent, tplN;
+			switch (m) {
+			case "ㄴ":
+				tplCurrent = Code.toTripleArray(current);
+				tplN = Code.toTripleArray("은");
+
+				tplCurrent[tplCurrent.length - 1] = tplN[tplN.length - 1];
+				return Code.toString(tplCurrent);
+			case "ㄹ":
+				tplCurrent = Code.toTripleArray(current);
+				tplN = Code.toTripleArray("을");
+
+				tplCurrent[tplCurrent.length - 1] = tplN[tplN.length - 1];
+				return Code.toString(tplCurrent);
+			}
+
+			return Hangul.append(current, m);
+		} else {
+			return Hangul.append(current, morp.getMorpheme());
+		}
 	}
 }

@@ -15,7 +15,7 @@ import kr.kaist.ir.korean.util.TagConverter.TaggerType;
  * {@link TagConverter} 참조
  * 
  * @author 김부근
- * @since 2014-08-04
+ * @since 2014-07-31
  * @version 0.2.0
  */
 public class TaggedMorpheme implements Serializable {
@@ -30,6 +30,8 @@ public class TaggedMorpheme implements Serializable {
 	private final String rawTag;
 	/** 형태소가 통합형 구분을 적용할 때 문제가 발생할 소지가 있는지 확인한다. */
 	private boolean isProblematic = false;
+	/** 방법론 구분 */
+	private TaggerType type;
 
 	/**
 	 * 생성자. 형태소와 품사구분을 받아 형태소 객체를 만든다.
@@ -43,7 +45,9 @@ public class TaggedMorpheme implements Serializable {
 		super();
 		this.morpheme = morpheme;
 		this.rawTag = tag;
-		this.tag = TagConverter.toIntegratedPOSTag(tag, type); // 품사구분을 통합형 구분으로 변환한다.
+		this.type = type;
+		this.tag = TagConverter.toIntegratedPOSTag(tag, type); // 품사구분을 통합형 구분으로
+																// 변환한다.
 		this.isProblematic = TagConverter.isProblematicPOSTag(tag, type);
 	}
 
@@ -158,6 +162,15 @@ public class TaggedMorpheme implements Serializable {
 	 */
 	public boolean equalsWithoutTag(TaggedMorpheme another) {
 		return another.getMorpheme().equals(this.morpheme);
+	}
+
+	/**
+	 * 본 형태소를 만든 형태소분석기의 유형을 돌려준다.
+	 * 
+	 * @return 형태소를 만든 형태소 분석기 유형
+	 */
+	public TaggerType getType() {
+		return type;
 	}
 
 	/**

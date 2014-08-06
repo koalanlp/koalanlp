@@ -1,4 +1,4 @@
-KoreanAnalyzer v 0.2.0
+KoreanAnalyzer v 0.2.2
 ==============
 
 # 소개

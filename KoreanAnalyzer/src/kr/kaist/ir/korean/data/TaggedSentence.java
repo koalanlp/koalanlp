@@ -16,7 +16,7 @@ import java.util.List;
  * </p>
  * 
  * @author 김부근
- * @since 2014-08-04
+ * @since 2014-07-31
  * @version 0.1.2
  */
 public class TaggedSentence implements Serializable, Iterable<TaggedWord> {

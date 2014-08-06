@@ -12,8 +12,8 @@ import kr.kaist.ir.korean.data.TaggedWord;
  * 한쪽 방법론의 품사부착기의 구조를 사용하고, 다른 방법론의 품사 부착 결과를 참고하여 최종 결과를 생성하는 품사부착기 클래스
  * 
  * @author 김부근
- * @since 2014-08-04
- * @version 0.1.1
+ * @since 2014-07-31
+ * @version 0.2.2
  */
 public class IntegratedTagger implements Tagger {
 	/**
@@ -106,7 +106,9 @@ public class IntegratedTagger implements Tagger {
 				// 한 쪽에 비해서 다른 한 쪽이 긴 경우, 명백히 문제가 있는 상황이다.
 				if (baseWords.size() == 0 || refWords.size() == 0) {
 					throw new IndexOutOfBoundsException(
-							"Character Mismatch between two sentences!");
+							"Character Mismatch between two sentences! BASE : "
+							+ base.getOriginalString(" ") + " vs REF : "
+							+ ref.getOriginalString(" "));
 				} else if (baseWords.size() == 1 && refWords.size() == 1) {
 					// 각각 1개의 어절인 경우, 형태소 단위도 일치하는지 확인한다.
 					Iterator<TaggedMorpheme> mitBase = wBase.iterator(), mitRef = wRef
@@ -176,7 +178,9 @@ public class IntegratedTagger implements Tagger {
 
 		if (itBase.hasNext() || itRef.hasNext()) {
 			throw new IndexOutOfBoundsException(
-					"End-point mismatch between sentences!");
+					"End-point mismatch between sentences! BASE : "
+							+ sBase.getOriginalString(" ") + " vs REF : "
+							+ sRef.getOriginalString(" "));
 		}
 
 		return paragraph;

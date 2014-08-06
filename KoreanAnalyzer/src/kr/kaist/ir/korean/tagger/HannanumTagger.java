@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.MalformedParametersException;
 import java.util.LinkedList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -26,8 +27,8 @@ import kr.kaist.ir.korean.util.TagConverter.TaggerType;
  * 한나눔 형태소 분석기를 사용한 품사부착 클래스
  * 
  * @author 김부근
- * @since 2014-08-05
- * @version 0.2.1
+ * @since 2014-07-31
+ * @version 0.2.2
  */
 public final class HannanumTagger implements Tagger {
 	/**
@@ -191,11 +192,15 @@ public final class HannanumTagger implements Tagger {
 			workflow.activateWorkflow(true);
 		}
 
-		// 분석한다
-		workflow.analyze(text);
+		Sentence sentence;
+		// Tagger를 공유할 경우 간혹 문장이 섞이는 경우가 있다.
+		synchronized (workflow) {
+			// 분석한다
+			workflow.analyze(text);
+			sentence = workflow.getResultOfSentence(new Sentence(0, 0, false));
+		}
 
-		return parseResult(workflow.getResultOfSentence(new Sentence(0, 0,
-				false)));
+		return parseResult(sentence);
 	}
 
 	/*
@@ -212,64 +217,88 @@ public final class HannanumTagger implements Tagger {
 			workflow.activateWorkflow(true);
 		}
 
-		// 분석한다
-		workflow.analyze(text);
+		String[] resultStr;
 
-		// 문장단위로 변환한다
-		// 한나눔의 API가 오류가 있어 직접 변환하도록 한다.
-		/*
-		 * LinkedList<Sentence> results = workflow .getResultOfDocument(new
-		 * Sentence(0, 0, false));
-		 */
-		String[] resultStr = workflow.getResultOfDocument().split("\n");
+		// Tagger를 공유할 경우 간혹 문장이 섞이는 경우가 있다.
+		synchronized (workflow) {
+			// 분석한다
+			workflow.analyze(text);
+
+			// 문장단위로 변환한다
+			// 한나눔의 API가 오류가 있어 직접 변환하도록 한다.
+			/*
+			 * LinkedList<Sentence> results = workflow .getResultOfDocument(new
+			 * Sentence(0, 0, false));
+			 */
+			resultStr = workflow.getResultOfDocument().split("\n");
+		}
 
 		LinkedList<TaggedSentence> paragraph = new LinkedList<TaggedSentence>();
 		TaggedWord word = null;
 		TaggedSentence sentence = new TaggedSentence();
+		boolean exception = false;
 
 		// 각 행마다 처리한다.
 		for (String result : resultStr) {
 			// Tab 문자로 시작하는 경우는 형태소의 나열이다.
 			if (result.startsWith("\t")) {
-				String[] split = result.trim().split("\\+");
-				for (String morph : split) {
-					int delimiter = morph.lastIndexOf('/');
+				result = result.trim();
+				int delimiter = 0, morpheme = 0, offset = 0;
+				do {
+					delimiter = result.indexOf('/', morpheme + offset);
+					char nextch = result.charAt(delimiter + 1);
+					if (nextch > 'a' && nextch < 'z') {
+						String morph = result.substring(morpheme, delimiter);
+						morpheme = result.indexOf('+', delimiter) + 1;
 
-					// +기호에 대한 처리
-					if (delimiter == 0) {
-						word.addMorpheme(new TaggedMorpheme("+", morph
-								.substring(delimiter + 1), TaggerType.HNN));
+						String tag = result.substring(delimiter + 1,
+								(morpheme > 0) ? (morpheme - 1) : result.length());
+
+						if (tag.matches("[npmijexsf]{1}[a-z]{0,3}")) {
+							word.addMorpheme(new TaggedMorpheme(morph, tag,
+									TaggerType.HNN));
+						} else {
+							exception = true;
+						}
+
+						offset = 0;
 					} else {
-						word.addMorpheme(new TaggedMorpheme(morph.substring(0,
-								delimiter), morph.substring(delimiter + 1),
-								TaggerType.HNN));
+						offset++;
 					}
-				}
+				} while (morpheme > 0);
 			} else if (result.equals("")) {
 				// 빈칸이 연속되는 경우 문장이 끝난 것이다.
 				if (word == null && sentence.size() > 0) {
 					paragraph.add(sentence);
 					sentence = new TaggedSentence();
-				} else {
+				} else if (word != null) {
 					// 빈칸이 1개라면 어절이 추가되는 것이다.
 					sentence.addWord(word);
 					word = null;
+				} else {
+					exception = true;
+					break;
 				}
 			} else {
 				// 이외의 경우는 어절을 만든다.
 				word = new TaggedWord(result);
 			}
+
+			if (exception) {
+				throw new MalformedParametersException(
+						"Malformed Hannanum Result String : " + result);
+			}
 		}
 
 		// 마지막 단어와 문장을 처리한다.
-		if(word != null){
+		if (word != null) {
 			sentence.addWord(word);
 		}
-		
-		if(sentence.size() > 0){
+
+		if (sentence.size() > 0) {
 			paragraph.add(sentence);
 		}
-		
+
 		return paragraph;
 	}
 
