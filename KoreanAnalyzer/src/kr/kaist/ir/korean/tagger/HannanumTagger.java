@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.MalformedParametersException;
 import java.util.LinkedList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -285,7 +284,7 @@ public final class HannanumTagger implements Tagger {
 			}
 
 			if (exception) {
-				throw new MalformedParametersException(
+				throw new IllegalStateException(
 						"Malformed Hannanum Result String : " + result);
 			}
 		}
