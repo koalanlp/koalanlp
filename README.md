@@ -17,7 +17,7 @@ KoreanAnalyzer v 0.2.0
 # 사용방법
 
 사용방법은 간단합니다.
-자세한 사항은 javadoc을 참고하십시오.
+자세한 사항은 apidocs(javadoc)을 참고하십시오.
 
 ## 컴파일
 
