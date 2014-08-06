@@ -110,7 +110,8 @@ public class TaggedWord implements Serializable, Iterable<TaggedMorpheme> {
 	 * @param tag
 	 *            어절의 의존 관계. 즉 기능 표지.
 	 */
-	public final void addDependant(TaggedWord word, FunctionalTag tag, String rawTag) {
+	public final void addDependant(TaggedWord word, FunctionalTag tag,
+			String rawTag) {
 		word.setTag(tag, rawTag);
 		this.dependents.add(word);
 	}
@@ -241,13 +242,13 @@ public class TaggedWord implements Serializable, Iterable<TaggedMorpheme> {
 	protected final LinkedList<TaggedMorpheme> getMorphemes() {
 		return morphemes;
 	}
-	
+
 	/**
 	 * 이 어절을 지배소로 하는 어절의 목록을 돌려준다.
 	 * 
 	 * @return 이 어절이 지배소인 의존소 어절 목록.
 	 */
-	public final LinkedList<TaggedWord> getDependents(){
+	public final LinkedList<TaggedWord> getDependents() {
 		return dependents;
 	}
 
@@ -295,7 +296,8 @@ public class TaggedWord implements Serializable, Iterable<TaggedMorpheme> {
 	 * @throws IllegalStateException
 	 *             현재 어절의 기능표지가 Null이 아닐 때.
 	 */
-	private final void setTag(FunctionalTag tag, String rawTag) throws IllegalStateException {
+	private final void setTag(FunctionalTag tag, String rawTag)
+			throws IllegalStateException {
 		if (this.tag == null) {
 			this.tag = tag;
 			this.rawTag = rawTag;
@@ -304,7 +306,7 @@ public class TaggedWord implements Serializable, Iterable<TaggedMorpheme> {
 					"Functional tag of this word is not null! Cannot overwrite the functional tag!");
 		}
 	}
-	
+
 	/**
 	 * 본 어절의 기능 표지를, 원래 표기된 상태로 돌려준다.
 	 * 
@@ -359,25 +361,26 @@ public class TaggedWord implements Serializable, Iterable<TaggedMorpheme> {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer strbuf = new StringBuffer(getOriginalWord() + " = ");
+		StringBuffer strbuf = new StringBuffer(getOriginalWord() + "\t= ");
 
 		for (TaggedMorpheme m : this) {
 			strbuf.append(m.toString());
-			strbuf.append('+');
-		}
-		strbuf.deleteCharAt(strbuf.length() - 1);
-		strbuf.append("\n\t의존관계:");
-		
-		for (TaggedWord w : dependents){
-			strbuf.append(w.getOriginalWord());
-			strbuf.append('(');
-			strbuf.append(w.getTag());
-			strbuf.append('/');
-			strbuf.append(w.getRawTag());
-			strbuf.append(')');
-			strbuf.append(' ');
 		}
 
+		if (dependents.size() > 0) {
+			strbuf.append("\n\t의존관계:");
+
+			for (TaggedWord w : dependents) {
+				strbuf.append(w.getOriginalWord());
+				strbuf.append('(');
+				strbuf.append(w.getTag());
+				strbuf.append('/');
+				strbuf.append(w.getRawTag());
+				strbuf.append(')');
+				strbuf.append(' ');
+			}
+		}
+		
 		return strbuf.toString();
 	}
 

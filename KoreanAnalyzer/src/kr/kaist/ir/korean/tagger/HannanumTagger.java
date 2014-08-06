@@ -27,7 +27,7 @@ import kr.kaist.ir.korean.util.TagConverter.TaggerType;
  * 
  * @author 김부근
  * @since 2014-08-05
- * @version 0.2.0
+ * @version 0.2.1
  */
 public final class HannanumTagger implements Tagger {
 	/**
@@ -71,13 +71,11 @@ public final class HannanumTagger implements Tagger {
 		for (PlainTextAddon type : addons) {
 			switch (type) {
 			case SentenceSegment:
-				workflow.appendPlainTextProcessor(
-						new SentenceSegmentor(),
+				workflow.appendPlainTextProcessor(new SentenceSegmentor(),
 						"conf/plugin/SupplementPlugin/PlainTextProcessor/SentenceSegment.json");
 				break;
 			case InformalSentenceFilter:
-				workflow.appendPlainTextProcessor(
-						new InformalSentenceFilter(),
+				workflow.appendPlainTextProcessor(new InformalSentenceFilter(),
 						"conf/plugin/SupplementPlugin/PlainTextProcessor/InformalSentenceFilter.json");
 				break;
 			}
@@ -89,8 +87,7 @@ public final class HannanumTagger implements Tagger {
 
 		// 형태소 분석기 플러그인 추가
 		if (useUnknownMorph) {
-			workflow.appendMorphemeProcessor(
-					new UnknownProcessor(),
+			workflow.appendMorphemeProcessor(new UnknownProcessor(),
 					"conf/plugin/SupplementPlugin/MorphemeProcessor/UnknownMorphProcessor.json");
 		}
 	}
@@ -219,14 +216,60 @@ public final class HannanumTagger implements Tagger {
 		workflow.analyze(text);
 
 		// 문장단위로 변환한다
-		LinkedList<Sentence> results = workflow
-				.getResultOfDocument(new Sentence(0, 0, false));
-		LinkedList<TaggedSentence> paragraph = new LinkedList<TaggedSentence>();
+		// 한나눔의 API가 오류가 있어 직접 변환하도록 한다.
+		/*
+		 * LinkedList<Sentence> results = workflow .getResultOfDocument(new
+		 * Sentence(0, 0, false));
+		 */
+		String[] resultStr = workflow.getResultOfDocument().split("\n");
 
-		for (Sentence result : results) {
-			paragraph.add(parseResult(result));
+		LinkedList<TaggedSentence> paragraph = new LinkedList<TaggedSentence>();
+		TaggedWord word = null;
+		TaggedSentence sentence = new TaggedSentence();
+
+		// 각 행마다 처리한다.
+		for (String result : resultStr) {
+			// Tab 문자로 시작하는 경우는 형태소의 나열이다.
+			if (result.startsWith("\t")) {
+				String[] split = result.trim().split("\\+");
+				for (String morph : split) {
+					int delimiter = morph.lastIndexOf('/');
+
+					// +기호에 대한 처리
+					if (delimiter == 0) {
+						word.addMorpheme(new TaggedMorpheme("+", morph
+								.substring(delimiter + 1), TaggerType.HNN));
+					} else {
+						word.addMorpheme(new TaggedMorpheme(morph.substring(0,
+								delimiter), morph.substring(delimiter + 1),
+								TaggerType.HNN));
+					}
+				}
+			} else if (result.equals("")) {
+				// 빈칸이 연속되는 경우 문장이 끝난 것이다.
+				if (word == null && sentence.size() > 0) {
+					paragraph.add(sentence);
+					sentence = new TaggedSentence();
+				} else {
+					// 빈칸이 1개라면 어절이 추가되는 것이다.
+					sentence.addWord(word);
+					word = null;
+				}
+			} else {
+				// 이외의 경우는 어절을 만든다.
+				word = new TaggedWord(result);
+			}
 		}
 
+		// 마지막 단어와 문장을 처리한다.
+		if(word != null){
+			sentence.addWord(word);
+		}
+		
+		if(sentence.size() > 0){
+			paragraph.add(sentence);
+		}
+		
 		return paragraph;
 	}
 

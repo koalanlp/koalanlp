@@ -181,7 +181,7 @@ public final class ConflictedWord extends TaggedWord {
 		result.append("\n\t[참조]\n\t | ");
 		for (TaggedWord w : wordsOfRef) {
 			result.append(w.toString().replaceAll("\n", "\n\t | "))
-					.append('\n');
+					.append("\n\t | ");
 		}
 
 		return result.toString();

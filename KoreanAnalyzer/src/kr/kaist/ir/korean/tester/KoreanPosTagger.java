@@ -1,5 +1,6 @@
 package kr.kaist.ir.korean.tester;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 import kr.kaist.ir.korean.data.TaggedSentence;
@@ -95,13 +96,13 @@ public final class KoreanPosTagger {
 				System.out.println("대상 문장 : " + text + "\n");
 
 				// 실질적인 분석 과정은 한 문장.
-				TaggedSentence s = iTagger.analyzeSentence(text);
-				show(s, "통합");
+				//TaggedSentence s = iTagger.analyzeSentence(text);
+				//show(s, "통합");
 				// 문단 단위로 하고 싶은 경우,
-				//LinkedList<TaggedSentence> p = iTagger.analyzeParagraph(text);
-				//for (TaggedSentence s : p) {
-				//	show(s, "통합");
-				//}
+				LinkedList<TaggedSentence> p = iTagger.analyzeParagraph(text);
+				for (TaggedSentence s : p) {
+					show(s, "통합");
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
