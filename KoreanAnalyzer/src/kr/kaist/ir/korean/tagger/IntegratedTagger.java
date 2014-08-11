@@ -2,6 +2,7 @@ package kr.kaist.ir.korean.tagger;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map;
 
 import kr.kaist.ir.korean.data.ConflictedWord;
 import kr.kaist.ir.korean.data.TaggedMorpheme;
@@ -13,7 +14,7 @@ import kr.kaist.ir.korean.data.TaggedWord;
  * 
  * @author 김부근
  * @since 2014-07-31
- * @version 0.2.2
+ * @version 0.2.2.4
  */
 public class IntegratedTagger implements Tagger {
 	/**
@@ -233,5 +234,28 @@ public class IntegratedTagger implements Tagger {
 		}
 
 		return integrateParagraph(base, ref);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see kr.kaist.ir.korean.tagger.Tagger#addUserDictionary(java.util.Map)
+	 */
+	@Override
+	public void addUserDictionary(Map<String, String> dict) {
+		kTagger.addUserDictionary(dict);
+		hTagger.addUserDictionary(dict);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see kr.kaist.ir.korean.tagger.Tagger#addUserMorph(java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	public void addUserDictionary(String morph, String tag) {
+		hTagger.addUserDictionary(morph, tag);
+		kTagger.addUserDictionary(morph, tag);
 	}
 }

@@ -1,5 +1,7 @@
 package kr.kaist.ir.korean.parser;
 
+import java.util.Map;
+
 import kaist.cilab.parser.berkeleyadaptation.BerkeleyParserWrapper;
 import kaist.cilab.parser.berkeleyadaptation.Configuration;
 import kaist.cilab.parser.corpusconverter.sejong2treebank.sejongtree.ParseTree;
@@ -16,7 +18,7 @@ import kr.kaist.ir.korean.util.TagConverter;
  * 한나눔 구문분석기를 사용한 의존관계 분석 클래스
  * 
  * @author 김부근
- * @version 0.2.0
+ * @version 0.2.2.4
  * @since 2014-08-05
  */
 public class HannanumParser implements Parser {
@@ -69,7 +71,6 @@ public class HannanumParser implements Parser {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see kr.kaist.ir.korean.parser.Parser#dependencyOf(java.lang.String)
 	 */
 	@Override
@@ -80,6 +81,7 @@ public class HannanumParser implements Parser {
 		// 한나눔 구문분석은 문장을 돌려주지 않으므로, 문장을 다시 분석한다.
 		TaggedSentence value;
 		synchronized (tagger) {
+			// 한나눔 분석기는 Wrapper에 사용자 정의 사전 처리기를 추가할 수 없으므로, Tagger에만 활용하도록 한다.
 			value = tagger.analyzeSentence(sentence);
 		}
 
@@ -108,5 +110,21 @@ public class HannanumParser implements Parser {
 		}
 
 		return value;
+	}
+
+	/* (non-Javadoc)
+	 * @see kr.kaist.ir.korean.parser.Parser#addUserDictionary(java.util.Map)
+	 */
+	@Override
+	public void addUserDictionary(Map<String, String> dict) {
+		tagger.addUserDictionary(dict);
+	}
+
+	/* (non-Javadoc)
+	 * @see kr.kaist.ir.korean.parser.Parser#addUserDictionary(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void addUserDictionary(String morph, String tag) {
+		tagger.addUserDictionary(morph, tag);
 	}
 }

@@ -60,116 +60,213 @@ public final class TagConverter {
 	 */
 	public static String toIntegratedPOSTag(String tag, TaggerType type) {
 		if (type == TaggerType.KKMA) {
-			return toIntegratedFromKkokkoma(tag);
+			return tag.toUpperCase();
 		} else {
-			return toIntegratedFromHannanum(tag);
-		}
-	}
+			if (tag.startsWith("p")) {
+				return "V" + tag.substring(1, 2).toUpperCase();
+			} else if (tag.startsWith("xs")) {
+				if (tag.startsWith("xsm")) {
+					return "XSA";
+				} else if (tag.startsWith("xsa")) {
+					return "XSM";
+				}
 
-	/**
-	 * 꼬꼬마 형태소 분석기의 결과를 변환한다.
-	 * 
-	 * @param tag
-	 *            변환할 표기
-	 * @return 통합형식으로 변환된 표기
-	 */
-	private static String toIntegratedFromKkokkoma(String tag) {
-		return tag.toUpperCase();
-	}
-
-	/**
-	 * 한나눔 형태소 분석기의 결과를 변환한다.
-	 * 
-	 * @param tag
-	 *            변환할 표기
-	 * @return 통합형식으로 변환된 표기
-	 */
-	private static String toIntegratedFromHannanum(String tag) {
-		if (tag.startsWith("p")) {
-			return "V" + tag.substring(1, 2).toUpperCase();
-		} else if (tag.startsWith("xs")) {
-			if (tag.startsWith("xsm")) {
-				return "XSA";
-			} else if (tag.startsWith("xsa")) {
-				return "XSM";
+				return "XS" + tag.substring(2, 3).toUpperCase();
 			}
 
-			return "XS" + tag.substring(2, 3).toUpperCase();
+			switch (tag) {
+			case "ncpa":
+				return "NNGA";
+			case "ncps":
+				return "NNGS";
+			case "ncn":
+			case "ncr":
+				return "NNGN";
+			case "nqpa":
+			case "nqpb":
+			case "nqpc":
+			case "nqq":
+				return "NNP";
+			case "nbn":
+			case "nbs":
+				return "NNB";
+			case "nbu":
+				return "NNM";
+			case "nnc":
+			case "nno":
+				return "NR";
+			case "npp":
+			case "npd":
+				return "NPP";
+			case "jp":
+				return "VCP";
+			case "mmd":
+			case "mma":
+				return "MDT";
+			case "mad":
+			case "mag":
+				return "MAG";
+			case "maj":
+				return "MAC";
+			case "ii":
+				return "IC";
+			case "jcs":
+				return "JKS";
+			case "jcc":
+				return "JKC";
+			case "jcm":
+				return "JKG";
+			case "jco":
+				return "JKO";
+			case "jca":
+				return "JKM";
+			case "jcv":
+				return "JKI";
+			case "jcr":
+				return "JCQ";
+			case "jct":
+			case "jcj":
+				return "JC";
+			case "ecc":
+				return "ECE";
+			case "ecs":
+				return "ECD";
+			case "ecx":
+				return "ECS";
+			case "etm":
+				return "ETD";
+			case "sl":
+			case "sr":
+				return "SS";
+			case "sd":
+				return "SO";
+			case "su":
+			case "sy":
+				return "SW";
+			case "f":
+				return "O";
+			default:
+				return tag.toUpperCase();
+			}
 		}
+	}
 
-		switch (tag) {
-		case "ncpa":
-			return "NNGA";
-		case "ncps":
-			return "NNGS";
-		case "ncn":
-		case "ncr":
-			return "NNGN";
-		case "nqpa":
-		case "nqpb":
-		case "nqpc":
-		case "nqq":
-			return "NNP";
-		case "nbn":
-		case "nbs":
-			return "NNB";
-		case "nbu":
-			return "NNM";
-		case "nnc":
-		case "nno":
-			return "NR";
-		case "npp":
-		case "npd":
-			return "NPP";
-		case "jp":
-			return "VCP";
-		case "mmd":
-		case "mma":
-			return "MDT";
-		case "mad":
-		case "mag":
-			return "MAG";
-		case "maj":
-			return "MAC";
-		case "ii":
-			return "IC";
-		case "jcs":
-			return "JKS";
-		case "jcc":
-			return "JKC";
-		case "jcm":
-			return "JKG";
-		case "jco":
-			return "JKO";
-		case "jca":
-			return "JKM";
-		case "jcv":
-			return "JKI";
-		case "jcr":
-			return "JCQ";
-		case "jct":
-		case "jcj":
-			return "JC";
-		case "ecc":
-			return "ECE";
-		case "ecs":
-			return "ECD";
-		case "ecx":
-			return "ECS";
-		case "etm":
-			return "ETD";
-		case "sl":
-		case "sr":
-			return "SS";
-		case "sd":
-			return "SO";
-		case "su":
-		case "sy":
-			return "SW";
-		case "f":
-			return "O";
-		default:
-			return tag.toUpperCase();
+	/**
+	 * 주어진 통합 품사 표기를 가장 가까운 원형으로 변환한다.
+	 * 
+	 * @param tag
+	 *            원 방법론의 형식으로 변환할 표기
+	 * @param type
+	 *            형태소 분석기 유형
+	 * @return 가장 가깝게 변환된 품사 표기
+	 */
+	public static String toOriginalTag(String tag, TaggerType type) {
+		if (type == TaggerType.KKMA) {
+			if (tag.length() < 4) {
+				return tag.toUpperCase();
+			} else {
+				if (tag.startsWith("JX")) {
+					return "JX";
+				} else {
+					return tag.toUpperCase().substring(0, 3);
+				}
+			}
+		} else {
+			switch (tag) {
+			case "NNGA":
+				return "ncpa";
+			case "NNGS":
+				return "ncps";
+			case "NNGN":
+				return "ncn";
+			case "NNP":
+				return "nqq";
+			case "NNB":
+				return "nbn";
+			case "NNM":
+				return "nbu";
+			case "NR":
+			case "MDN":
+			case "ON":
+				return "nnc";
+			case "NP":
+				return "npd";
+			case "VV":
+				return "pvg";
+			case "VA":
+				return "pad";
+			case "VXV":
+			case "VXA":
+				return "px";
+			case "VCP":
+				return "jp";
+			case "VCN":
+				return "paa";
+			case "MDT":
+				return "mmd";
+			case "MAC":
+				return "maj";
+			case "IC":
+				return "ii";
+			case "JKS":
+				return "jcs";
+			case "JKC":
+				return "jcc";
+			case "JKG":
+				return "jcm";
+			case "JKO":
+				return "jco";
+			case "JKM":
+				return "jca";
+			case "JKI":
+				return "jcv";
+			case "JKQ":
+				return "jcr";
+			case "JC":
+				return "jcj";
+			case "ECE":
+				return "ecc";
+			case "ECD":
+				return "ecs";
+			case "ECS":
+				return "ecx";
+			case "ETM":
+				return "etd";
+			case "JXF":
+			case "JXC":
+			case "MAG":
+			case "ETN":
+				return tag.toLowerCase();
+			case "EPH":
+			case "EPT":
+			case "EPP":
+			case "EFN":
+			case "EFQ":
+			case "EFA":
+			case "EFI":
+			case "EFR":
+			case "XPN":
+			case "XPV":
+				return tag.toLowerCase().substring(0, 2);
+			case "XSN":
+				return "xsnx";
+			case "XSV":
+				return "xsvn";
+			case "XSA":
+				return "xsmn";
+			case "XSM":
+				return "xsam";
+			case "SO":
+				return "sd";
+			case "SW":
+			case "SS":
+				return "sy";
+			case "OL":
+			case "OH":
+				return "f";
+			default:
+				return "ncn";
+			}
 		}
 	}
 

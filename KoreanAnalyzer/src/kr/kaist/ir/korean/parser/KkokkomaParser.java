@@ -1,6 +1,7 @@
 package kr.kaist.ir.korean.parser;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.kaist.ir.korean.data.TaggedSentence;
 import kr.kaist.ir.korean.data.TaggedWord;
@@ -19,7 +20,7 @@ import org.snu.ids.ha.sp.ParseTreeNode;
  * 
  * @author 김부근
  * @since 2014-08-05
- * @version 0.2.0
+ * @version 0.2.2.4
  */
 public class KkokkomaParser implements Parser {
 	/** 꼬꼬마 구문분석기 */
@@ -42,8 +43,9 @@ public class KkokkomaParser implements Parser {
 	 */
 	@Override
 	public TaggedSentence dependencyOf(String sentence) throws Exception {
-		// 형태소 분석을 실시하되, 양쪽 결과가 모두 필요하므로 꼬꼬마의 결과를 받고, 받은 결과를 토대로 TaggedSentence를 생성한다.
-		Sentence rawSentence = tagger.analyzeSentenceRaw(sentence);
+		// 형태소 분석을 실시하되, 양쪽 결과가 모두 필요하므로 꼬꼬마의 결과를 받고, 받은 결과를 토대로 TaggedSentence를
+		// 생성한다.
+		Sentence rawSentence = tagger.analyzeSentenceRaw(sentence).get(0);
 		TaggedSentence value = tagger.parseResult(rawSentence);
 
 		// 구문 분석을 실시한다.
@@ -64,7 +66,7 @@ public class KkokkomaParser implements Parser {
 						TaggerType.KKMA);
 
 				headWord.addDependant(thisWord, tag, rawTag);
-			}else if(to != -1){
+			} else if (to != -1) {
 				// Root를 지정하고 있으므로 표기해준다.
 				value.setRoot(to);
 			}
@@ -73,4 +75,24 @@ public class KkokkomaParser implements Parser {
 		return value;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see kr.kaist.ir.korean.parser.Parser#addUserDictionary(java.util.Map)
+	 */
+	@Override
+	public void addUserDictionary(Map<String, String> dict) {
+		tagger.addUserDictionary(dict);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see kr.kaist.ir.korean.parser.Parser#addUserDictionary(java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	public void addUserDictionary(String morph, String tag) {
+		tagger.addUserDictionary(morph, tag);
+	}
 }

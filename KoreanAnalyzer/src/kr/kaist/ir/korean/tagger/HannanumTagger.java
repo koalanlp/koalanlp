@@ -5,14 +5,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import kaist.cilab.jhannanum.common.Eojeol;
 import kaist.cilab.jhannanum.common.communication.Sentence;
 import kaist.cilab.jhannanum.common.workflow.Workflow;
-import kaist.cilab.jhannanum.plugin.major.morphanalyzer.impl.ChartMorphAnalyzer;
-import kaist.cilab.jhannanum.plugin.major.postagger.impl.HMMTagger;
 import kaist.cilab.jhannanum.plugin.supplement.MorphemeProcessor.UnknownMorphProcessor.UnknownProcessor;
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.InformalSentenceFilter.InformalSentenceFilter;
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.SentenceSegmentor.SentenceSegmentor;
@@ -20,6 +19,9 @@ import kaist.cilab.jhannanum.plugin.supplement.PosProcessor.NounExtractor.NounEx
 import kr.kaist.ir.korean.data.TaggedMorpheme;
 import kr.kaist.ir.korean.data.TaggedSentence;
 import kr.kaist.ir.korean.data.TaggedWord;
+import kr.kaist.ir.korean.extension.ExtendedChartMorphAnalyzer;
+import kr.kaist.ir.korean.extension.ExtendedHMMTagger;
+import kr.kaist.ir.korean.extension.UserDictProcessor;
 import kr.kaist.ir.korean.util.TagConverter.TaggerType;
 
 /**
@@ -27,7 +29,7 @@ import kr.kaist.ir.korean.util.TagConverter.TaggerType;
  * 
  * @author 김부근
  * @since 2014-07-31
- * @version 0.2.2
+ * @version 0.2.2.4
  */
 public final class HannanumTagger implements Tagger {
 	/**
@@ -56,6 +58,8 @@ public final class HannanumTagger implements Tagger {
 	private boolean isWorkflowActivated = false;
 	/** 프로세싱 대기 여부 */
 	private Boolean isWorkflowOnline = false;
+	/** 사용자 사전 */
+	private UserDictProcessor userDictProcessor;
 
 	/**
 	 * <p>
@@ -104,14 +108,17 @@ public final class HannanumTagger implements Tagger {
 		}
 
 		// 형태소 분석기 할당
-		workflow.setMorphAnalyzer(new ChartMorphAnalyzer(),
+		workflow.setMorphAnalyzer(new ExtendedChartMorphAnalyzer(),
 				"conf/plugin/MajorPlugin/MorphAnalyzer/ChartMorphAnalyzer.json");
-
+		
 		// 형태소 분석기 플러그인 추가
 		if (useUnknownMorph) {
 			workflow.appendMorphemeProcessor(new UnknownProcessor(),
 					"conf/plugin/SupplementPlugin/MorphemeProcessor/UnknownMorphProcessor.json");
 		}
+
+		userDictProcessor = new UserDictProcessor();
+		workflow.appendMorphemeProcessor(userDictProcessor, null);
 	}
 
 	/**
@@ -132,7 +139,7 @@ public final class HannanumTagger implements Tagger {
 		this(useUnknownMorph, addons);
 
 		// 기본 품사부착기 추가
-		workflow.setPosTagger(new HMMTagger(),
+		workflow.setPosTagger(new ExtendedHMMTagger(),
 				"conf/plugin/MajorPlugin/PosTagger/HmmPosTagger.json");
 
 		// 품사 부착기 플러그인 추가
@@ -171,8 +178,11 @@ public final class HannanumTagger implements Tagger {
 		// 각 어절마다 변환작업 수행
 		for (int i = 0; i < len; i++) {
 			TaggedWord word = new TaggedWord(plainEojeols[i]);
-			String[] morphemes = eojeols[i].getMorphemes();
-			String[] tags = eojeols[i].getTags();
+			// 형태소는 있으나 파싱 결과가 없는 경우,분석 오류이므로 수동으로 형태소를 삽입한다.
+			String[] morphemes = (eojeols[i] != null) ? eojeols[i]
+					.getMorphemes() : new String[] { plainEojeols[i] };
+			String[] tags = (eojeols[i] != null) ? eojeols[i].getTags()
+					: new String[] { "ncn" };
 
 			// 형태소를 변환한다.
 			for (int m = 0; m < morphemes.length; m++) {
@@ -219,12 +229,12 @@ public final class HannanumTagger implements Tagger {
 		while (isWorkflowOnline) {
 			Thread.sleep(100);
 		}
-		
+
 		synchronized (isWorkflowOnline) {
 			// 분석한다
 			isWorkflowOnline = true;
 			workflow.analyze(text);
-			
+
 			isWorkflowOnline = false;
 			sentence = workflow.getResultOfSentence(new Sentence(0, 0, false));
 		}
@@ -235,7 +245,7 @@ public final class HannanumTagger implements Tagger {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see kr.kaist.ir.korean.taggerTagger#analyzeParagraph(java.lang.String)
+	 * @see kr.kaist.ir.korean.tagger.Tagger#analyzeParagraph(java.lang.String)
 	 */
 	@Override
 	public synchronized LinkedList<TaggedSentence> analyzeParagraph(String text)
@@ -246,105 +256,71 @@ public final class HannanumTagger implements Tagger {
 			workflow.activateWorkflow(true);
 		}
 
-		String[] resultStr;
-
 		// Tagger를 공유할 경우 간혹 문장이 섞이는 경우가 있다. 분석이 진행중이면 0.1초간 현 스레드를 대기시킨다.
 		while (isWorkflowOnline) {
 			Thread.sleep(100);
 		}
-		
+
+		LinkedList<TaggedSentence> paragraph = new LinkedList<TaggedSentence>();
 		synchronized (isWorkflowOnline) {
 			// 분석한다
 			isWorkflowOnline = true;
 			workflow.analyze(text);
-			
-			isWorkflowOnline = false;
-			
+
+			String needToParse = text.replaceAll("\\s+", "");
+
 			// 문장단위로 변환한다
 			// 한나눔의 API가 오류가 있어 직접 변환하도록 한다.
-			/*
-			 * LinkedList<Sentence> results = workflow .getResultOfDocument(new
-			 * Sentence(0, 0, false));
-			 */
-			resultStr = workflow.getResultOfDocument().split("\n");
-		}
+			workflow.analyze("ENDEND");
 
-		LinkedList<TaggedSentence> paragraph = new LinkedList<TaggedSentence>();
-		TaggedWord word = null;
-		TaggedSentence sentence = new TaggedSentence();
-		boolean exception = false;
-
-		// 각 행마다 처리한다.
-		for (String result : resultStr) {
-			// Tab 문자로 시작하는 경우는 형태소의 나열이다.
-			if (result.startsWith("\t")) {
-				result = result.trim();
-				int delimiter = 0, morpheme = 0, offset = 0;
-				do {
-					delimiter = result.indexOf('/', morpheme + offset);
-					char nextch = result.charAt(delimiter + 1);
-					if (nextch >= 'a' && nextch <= 'z') {
-						String morph = result.substring(morpheme, delimiter);
-						morpheme = result.indexOf('+', delimiter) + 1;
-
-						String tag = result.substring(
-								delimiter + 1,
-								(morpheme > 0) ? (morpheme - 1) : result
-										.length());
-
-						if (tag.matches("[npmijexsf]{1}[a-z]{0,4}")) {
-							word.addMorpheme(new TaggedMorpheme(morph, tag,
-									TaggerType.HNN));
-							offset = 0;
-						} else {
-							offset++;
-						}
-					} else {
-						offset++;
+			while (true) {
+				try {
+					Sentence line = workflow.getResultOfSentence(new Sentence(
+							0, 0, false));
+					if (line.toString().contains("ENDEND/f")) {
+						break;
 					}
-				} while (morpheme + offset > 0 && delimiter > -1);
 
-				if (offset != 0) {
-					exception = true;
-				}
-			} else if (result.equals("")) {
-				// 빈칸이 연속되는 경우 문장이 끝난 것이다.
-				if (word == null && sentence.size() > 0) {
+					TaggedSentence sentence = parseResult(line);
+					String parsed = sentence.getOriginalString("");
+
 					paragraph.add(sentence);
-					sentence = new TaggedSentence();
-				} else if (word != null && word.size() > 0) {
-					// 빈칸이 1개라면 어절이 추가되는 것이다.
-					sentence.addWord(word);
-					word = null;
-				} else {
-					exception = true;
-					break;
+					if (needToParse.length() > parsed.length()) {
+						needToParse = needToParse.substring(parsed.length());
+					} else {
+						needToParse = "";
+					}
+				} catch (NullPointerException e) {
+					System.out
+							.println("Hannanum Tagger has problem! At this point : "
+									+ needToParse);
 				}
-			} else {
-				// 이외의 경우는 어절을 만든다.
-				word = new TaggedWord(result);
 			}
-
-			if (exception) {
-				throw new IllegalStateException(
-						"Malformed Hannanum Result String : " + result);
-			}
-		}
-
-		// 마지막 단어와 문장을 처리한다.
-		if (word != null && word.size() > 0) {
-			sentence.addWord(word);
-		}
-
-		if (sentence.size() > 0) {
-			paragraph.add(sentence);
-		}
-
-		if (paragraph.size() == 0) {
-			throw new IllegalStateException("No output sentence!");
+			isWorkflowOnline = false;
 		}
 
 		return paragraph;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see kr.kaist.ir.korean.tagger.Tagger#addUserDictionary(java.util.Map)
+	 */
+	@Override
+	public void addUserDictionary(Map<String, String> dict) {
+		userDictProcessor.setDict(dict);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see kr.kaist.ir.korean.tagger.Tagger#addUserMorph(java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	public void addUserDictionary(String morph, String tag) {
+		userDictProcessor.addDict(morph, tag);
 	}
 
 	/**

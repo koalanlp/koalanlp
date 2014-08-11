@@ -1,5 +1,7 @@
 package kr.kaist.ir.korean.parser;
 
+import java.util.Map;
+
 import kr.kaist.ir.korean.data.TaggedSentence;
 
 /**
@@ -7,7 +9,7 @@ import kr.kaist.ir.korean.data.TaggedSentence;
  * 
  * @author 김부근
  * @since 2014-08-05
- * @version 0.2.0
+ * @version 0.2.2.4
  */
 public interface Parser {
 	/**
@@ -20,4 +22,22 @@ public interface Parser {
 	 *             구문 분석이 실패할 경우 발생한다.
 	 */
 	public TaggedSentence dependencyOf(String sentence) throws Exception;
+
+	/**
+	 * 사용자 정의 형태소 사전을 추가한다.
+	 * 
+	 * @param dict
+	 *            사용자 정의 사전. "어절"이 키, "품사"가 값.
+	 */
+	public void addUserDictionary(Map<String, String> dict);
+
+	/**
+	 * 사용자 정의 형태소를 등록한다.
+	 * 
+	 * @param morph
+	 *            등록할 형태소
+	 * @param tag
+	 *            형태소의 품사 구분 (통합형)
+	 */
+	public abstract void addUserDictionary(String morph, String tag);
 }

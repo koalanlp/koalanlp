@@ -4,10 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import kaist.cilab.jhannanum.common.Code;
-import kr.kaist.ir.korean.util.TagConverter.TaggerType;
-
-import org.snu.ids.ha.util.Hangul;
+import kr.kaist.ir.korean.util.MorphemeOperator;
 
 /**
  * <p>
@@ -265,7 +262,7 @@ public final class ConflictedWord extends TaggedWord {
 				}
 			} else if (strRef.length() > strBase.length()) {
 				if (iBase + lBase < base.size()) {
-					strBase = concatMorpheme(strBase, base.get(iBase + lBase));
+					strBase = MorphemeOperator.concat(strBase, base.get(iBase + lBase));
 					lBase++;
 				} else {
 					break;
@@ -273,7 +270,7 @@ public final class ConflictedWord extends TaggedWord {
 			} else {
 				if (iRef + lRef < ref.size()) {
 					mRef = ref.get(iRef + lRef);
-					strRef = concatMorpheme(strRef, ref.get(iRef + lRef));
+					strRef = MorphemeOperator.concat(strRef, ref.get(iRef + lRef));
 					lRef++;
 				} else {
 					break;
@@ -283,43 +280,6 @@ public final class ConflictedWord extends TaggedWord {
 
 		for (int i = iBase; i < base.size(); i++) {
 			addMorpheme(base.get(i));
-		}
-	}
-
-	/**
-	 * 문자열에 주어진 형태소를 이어붙인다.
-	 * 
-	 * @param current
-	 *            이어붙이기 전의 문자열
-	 * @param morp
-	 *            이어붙일 형태소
-	 * @return 둘을 이어붙인 문자열을 돌려준다.
-	 */
-	private static String concatMorpheme(String current, TaggedMorpheme morp) {
-		if (morp.isTypeOf("S") || morp.isTypeOf("O") || morp.isNumber()) {
-			return current + morp.getMorpheme();
-		} else if (morp.getType() == TaggerType.HNN
-				&& Hangul.hasJong(current.substring(current.length() - 1))) {
-			String m = morp.getMorpheme();
-			char[] tplCurrent, tplN;
-			switch (m) {
-			case "ㄴ":
-				tplCurrent = Code.toTripleArray(current);
-				tplN = Code.toTripleArray("은");
-
-				tplCurrent[tplCurrent.length - 1] = tplN[tplN.length - 1];
-				return Code.toString(tplCurrent);
-			case "ㄹ":
-				tplCurrent = Code.toTripleArray(current);
-				tplN = Code.toTripleArray("을");
-
-				tplCurrent[tplCurrent.length - 1] = tplN[tplN.length - 1];
-				return Code.toString(tplCurrent);
-			}
-
-			return Hangul.append(current, m);
-		} else {
-			return Hangul.append(current, morp.getMorpheme());
 		}
 	}
 }

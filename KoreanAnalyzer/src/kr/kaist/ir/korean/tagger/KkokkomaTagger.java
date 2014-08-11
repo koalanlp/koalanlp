@@ -1,28 +1,42 @@
 package kr.kaist.ir.korean.tagger;
 
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import kr.kaist.ir.korean.data.TaggedMorpheme;
 import kr.kaist.ir.korean.data.TaggedSentence;
 import kr.kaist.ir.korean.data.TaggedWord;
+import kr.kaist.ir.korean.extension.UserDicReader;
+import kr.kaist.ir.korean.util.TagConverter;
 import kr.kaist.ir.korean.util.TagConverter.TaggerType;
 
+import org.snu.ids.ha.dic.DicReader;
+import org.snu.ids.ha.dic.Dictionary;
+import org.snu.ids.ha.dic.RawDicFileReader;
+import org.snu.ids.ha.dic.SimpleDicFileReader;
 import org.snu.ids.ha.ma.Eojeol;
 import org.snu.ids.ha.ma.MExpression;
 import org.snu.ids.ha.ma.MorphemeAnalyzer;
+import org.snu.ids.ha.ma.Sentence;
 
 /**
  * 꼬꼬마 형태소 분석기를 사용한 품사부착 클래스
  * 
  * @author 김부근
  * @since 2014-07-31
- * @version 0.1.0
+ * @version 0.2.2.4
  */
 public final class KkokkomaTagger implements Tagger {
 
-	/** 간섭 현상을 막기 위한 Default Tagger */
+	/** Default Tagger */
 	private static volatile KkokkomaTagger defaultTagger;
+	/** 사용자 정의 Dictionary를 위한 리스트 */
+	private static LinkedList<DicReader> readers = new LinkedList<DicReader>();
+	/** 사용자 정의 Dictionary */
+	private static volatile UserDicReader userdic;
 
 	/**
 	 * 꼬꼬마 형태소 분석기
@@ -65,7 +79,7 @@ public final class KkokkomaTagger implements Tagger {
 	 *            변환할 꼬꼬마 형태소 분석기 결과
 	 * @return 변환된 품사 부착 결과
 	 */
-	public TaggedSentence parseResult(org.snu.ids.ha.ma.Sentence result) {
+	public TaggedSentence parseResult(Sentence result) {
 		// 새로운 문장
 		TaggedSentence sentence = new TaggedSentence();
 
@@ -102,16 +116,6 @@ public final class KkokkomaTagger implements Tagger {
 		super.finalize();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see kr.kaist.ir.korean.tagger.Tagger#analyzeSentence(java.lang.String)
-	 */
-	@Override
-	public TaggedSentence analyzeSentence(String text) throws Exception {
-		return parseResult(analyzeSentenceRaw(text));
-	}
-
 	/**
 	 * 꼬꼬마 분석기의 결과를 그대로 돌려줍니다.
 	 * 
@@ -121,19 +125,25 @@ public final class KkokkomaTagger implements Tagger {
 	 * @throws Exception
 	 *             분석 과정에서 오류가 발생할 경우 발생합니다.
 	 */
-	public org.snu.ids.ha.ma.Sentence analyzeSentenceRaw(String text)
-			throws Exception {
+	public List<Sentence> analyzeSentenceRaw(String text) throws Exception {
 		// 문장을 분석한다.
 		List<MExpression> ret = ma.analyze(text);
 		// 띄어쓰기를 정돈한다.
 		ret = ma.postProcess(ret);
 		// 가장 적합한 품사 부착 결과만을 남겨둔다.
 		ret = ma.leaveJustBest(ret);
-		// 문장단위로 분할한다.
-		List<org.snu.ids.ha.ma.Sentence> stl = ma.divideToSentences(ret);
+		// 문장단위로 분할하고 돌려준다.
+		return ma.divideToSentences(ret);
+	}
 
-		// 1개 문장이었으므로, 첫번째 문장 결과만을 취한다.
-		return stl.get(0);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see kr.kaist.ir.korean.tagger.Tagger#analyzeSentence(java.lang.String)
+	 */
+	@Override
+	public TaggedSentence analyzeSentence(String text) throws Exception {
+		return parseResult(analyzeSentenceRaw(text).get(0));
 	}
 
 	/*
@@ -144,15 +154,8 @@ public final class KkokkomaTagger implements Tagger {
 	@Override
 	public LinkedList<TaggedSentence> analyzeParagraph(String text)
 			throws Exception {
-		// 문장을 분석한다.
-		List<MExpression> ret = ma.analyze(text);
-		// 띄어쓰기를 정돈한다.
-		ret = ma.postProcess(ret);
-		// 가장 적합한 품사 부착 결과만을 남겨둔다.
-		ret = ma.leaveJustBest(ret);
-
 		// 문장 단위로 분할하여 각 문장을 통합형태로 변환한다.
-		List<org.snu.ids.ha.ma.Sentence> results = ma.divideToSentences(ret);
+		List<Sentence> results = analyzeSentenceRaw(text);
 		LinkedList<TaggedSentence> paragraph = new LinkedList<TaggedSentence>();
 
 		for (org.snu.ids.ha.ma.Sentence result : results) {
@@ -160,5 +163,73 @@ public final class KkokkomaTagger implements Tagger {
 		}
 
 		return paragraph;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see kr.kaist.ir.korean.tagger.Tagger#addUserDictionary(java.util.Map)
+	 */
+	@Override
+	public void addUserDictionary(Map<String, String> dict) {
+		if (dict != null && dict.size() > 0) {
+			try {
+				initReaders();
+				Set<String> keySet = dict.keySet();
+				for (String word : keySet) {
+					if (word.trim().length() > 0) {
+						userdic.addMorpheme(word, TagConverter.toOriginalTag(
+								dict.get(word), TaggerType.KKMA));
+					}
+				}
+
+				Dictionary.reload(readers);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see kr.kaist.ir.korean.tagger.Tagger#addUserMorph(java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	public void addUserDictionary(String morph, String tag) {
+		if (morph != null && morph.length() > 0 && tag != null) {
+			try {
+				initReaders();
+				userdic.addMorpheme(morph,
+						TagConverter.toOriginalTag(tag, TaggerType.KKMA));
+
+				Dictionary.reload(readers);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * 사전 목록의 초기화
+	 * 
+	 * @throws UnsupportedEncodingException
+	 *             초기화 실패시 발생
+	 */
+	private static synchronized void initReaders()
+			throws UnsupportedEncodingException {
+		synchronized (readers) {
+			if (userdic == null) {
+				userdic = new UserDicReader();
+				readers.add(new SimpleDicFileReader("/dic/kcc.dic"));
+				readers.add(new SimpleDicFileReader("/dic/noun.dic"));
+				readers.add(new SimpleDicFileReader("/dic/person.dic"));
+				readers.add(new RawDicFileReader("/dic/raw.dic"));
+				readers.add(new SimpleDicFileReader("/dic/simple.dic"));
+				readers.add(new SimpleDicFileReader("/dic/verb.dic"));
+				readers.add(userdic);
+			}
+		}
 	}
 }
