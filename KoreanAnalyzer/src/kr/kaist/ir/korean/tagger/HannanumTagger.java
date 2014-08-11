@@ -12,6 +12,8 @@ import java.util.zip.ZipInputStream;
 import kaist.cilab.jhannanum.common.Eojeol;
 import kaist.cilab.jhannanum.common.communication.Sentence;
 import kaist.cilab.jhannanum.common.workflow.Workflow;
+import kaist.cilab.jhannanum.plugin.major.morphanalyzer.impl.ChartMorphAnalyzer;
+import kaist.cilab.jhannanum.plugin.major.postagger.impl.HMMTagger;
 import kaist.cilab.jhannanum.plugin.supplement.MorphemeProcessor.UnknownMorphProcessor.UnknownProcessor;
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.InformalSentenceFilter.InformalSentenceFilter;
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.SentenceSegmentor.SentenceSegmentor;
@@ -19,8 +21,6 @@ import kaist.cilab.jhannanum.plugin.supplement.PosProcessor.NounExtractor.NounEx
 import kr.kaist.ir.korean.data.TaggedMorpheme;
 import kr.kaist.ir.korean.data.TaggedSentence;
 import kr.kaist.ir.korean.data.TaggedWord;
-import kr.kaist.ir.korean.extension.ExtendedChartMorphAnalyzer;
-import kr.kaist.ir.korean.extension.ExtendedHMMTagger;
 import kr.kaist.ir.korean.extension.UserDictProcessor;
 import kr.kaist.ir.korean.util.TagConverter.TaggerType;
 
@@ -108,7 +108,7 @@ public final class HannanumTagger implements Tagger {
 		}
 
 		// 형태소 분석기 할당
-		workflow.setMorphAnalyzer(new ExtendedChartMorphAnalyzer(),
+		workflow.setMorphAnalyzer(new ChartMorphAnalyzer(),
 				"conf/plugin/MajorPlugin/MorphAnalyzer/ChartMorphAnalyzer.json");
 		
 		// 형태소 분석기 플러그인 추가
@@ -139,7 +139,7 @@ public final class HannanumTagger implements Tagger {
 		this(useUnknownMorph, addons);
 
 		// 기본 품사부착기 추가
-		workflow.setPosTagger(new ExtendedHMMTagger(),
+		workflow.setPosTagger(new HMMTagger(),
 				"conf/plugin/MajorPlugin/PosTagger/HmmPosTagger.json");
 
 		// 품사 부착기 플러그인 추가
@@ -261,6 +261,9 @@ public final class HannanumTagger implements Tagger {
 			Thread.sleep(100);
 		}
 
+		//한글 사이 특수 기호가 붙어있을 경우 문제가 발생할 수 있으므로, 문장부호를 제하고 앞 뒤에 한칸씩 띄어쓰기를 더한다.
+		text = text.replaceAll("\\s*([^ㄱ-힣0-9A-Za-z,\\.!\\?\'\"]+)\\s*", " $1 ");
+		
 		LinkedList<TaggedSentence> paragraph = new LinkedList<TaggedSentence>();
 		synchronized (isWorkflowOnline) {
 			// 분석한다

@@ -126,6 +126,9 @@ public final class KkokkomaTagger implements Tagger {
 	 *             분석 과정에서 오류가 발생할 경우 발생합니다.
 	 */
 	public List<Sentence> analyzeSentenceRaw(String text) throws Exception {
+		//한글 사이 특수 기호가 붙어있을 경우 문제가 발생할 수 있으므로, 문장부호를 제하고 앞 뒤에 한칸씩 띄어쓰기를 더한다.
+		text = text.replaceAll("\\s*([^ㄱ-힣0-9A-Za-z,\\.!\\?\'\"]+)\\s*", " $1 ");
+		
 		// 문장을 분석한다.
 		List<MExpression> ret = ma.analyze(text);
 		// 띄어쓰기를 정돈한다.

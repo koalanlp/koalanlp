@@ -107,6 +107,8 @@ public class UserDictProcessor implements MorphemeProcessor {
 					if (findMorp) {
 						newEojeols[k] = new Eojeol(morp.toArray(new String[0]),
 								tags.toArray(new String[0]));
+					}else{
+						newEojeols[k] = e;
 					}
 				}
 
