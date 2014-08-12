@@ -6,14 +6,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import kaist.cilab.jhannanum.common.Eojeol;
 import kaist.cilab.jhannanum.common.communication.Sentence;
 import kaist.cilab.jhannanum.common.workflow.Workflow;
-import kaist.cilab.jhannanum.plugin.major.morphanalyzer.impl.ChartMorphAnalyzer;
-import kaist.cilab.jhannanum.plugin.major.postagger.impl.HMMTagger;
 import kaist.cilab.jhannanum.plugin.supplement.MorphemeProcessor.UnknownMorphProcessor.UnknownProcessor;
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.InformalSentenceFilter.InformalSentenceFilter;
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.SentenceSegmentor.SentenceSegmentor;
@@ -21,7 +20,8 @@ import kaist.cilab.jhannanum.plugin.supplement.PosProcessor.NounExtractor.NounEx
 import kr.kaist.ir.korean.data.TaggedMorpheme;
 import kr.kaist.ir.korean.data.TaggedSentence;
 import kr.kaist.ir.korean.data.TaggedWord;
-import kr.kaist.ir.korean.extension.UserDictProcessor;
+import kr.kaist.ir.korean.extension.SafeChartMorphAnalyzer;
+import kr.kaist.ir.korean.extension.SafeHMMTagger;
 import kr.kaist.ir.korean.util.TagConverter.TaggerType;
 
 /**
@@ -58,8 +58,8 @@ public final class HannanumTagger implements Tagger {
 	private boolean isWorkflowActivated = false;
 	/** 프로세싱 대기 여부 */
 	private Boolean isWorkflowOnline = false;
-	/** 사용자 사전 */
-	private UserDictProcessor userDictProcessor;
+	/** 사용자 사전 처리를 위해, 형태소 분석 클래스를 저장함 */
+	private SafeChartMorphAnalyzer analyzer = null;
 
 	/**
 	 * <p>
@@ -108,17 +108,15 @@ public final class HannanumTagger implements Tagger {
 		}
 
 		// 형태소 분석기 할당
-		workflow.setMorphAnalyzer(new ChartMorphAnalyzer(),
+		analyzer = new SafeChartMorphAnalyzer();
+		workflow.setMorphAnalyzer(analyzer,
 				"conf/plugin/MajorPlugin/MorphAnalyzer/ChartMorphAnalyzer.json");
-		
+
 		// 형태소 분석기 플러그인 추가
 		if (useUnknownMorph) {
 			workflow.appendMorphemeProcessor(new UnknownProcessor(),
 					"conf/plugin/SupplementPlugin/MorphemeProcessor/UnknownMorphProcessor.json");
 		}
-
-		userDictProcessor = new UserDictProcessor();
-		workflow.appendMorphemeProcessor(userDictProcessor, null);
 	}
 
 	/**
@@ -139,7 +137,7 @@ public final class HannanumTagger implements Tagger {
 		this(useUnknownMorph, addons);
 
 		// 기본 품사부착기 추가
-		workflow.setPosTagger(new HMMTagger(),
+		workflow.setPosTagger(new SafeHMMTagger(),
 				"conf/plugin/MajorPlugin/PosTagger/HmmPosTagger.json");
 
 		// 품사 부착기 플러그인 추가
@@ -261,9 +259,10 @@ public final class HannanumTagger implements Tagger {
 			Thread.sleep(100);
 		}
 
-		//한글 사이 특수 기호가 붙어있을 경우 문제가 발생할 수 있으므로, 문장부호를 제하고 앞 뒤에 한칸씩 띄어쓰기를 더한다.
-		text = text.replaceAll("\\s*([^ㄱ-힣0-9A-Za-z,\\.!\\?\'\"]+)\\s*", " $1 ");
-		
+		// 한글 사이 특수 기호가 붙어있을 경우 문제가 발생할 수 있으므로, 문장부호를 제하고 앞 뒤에 한칸씩 띄어쓰기를 더한다.
+		text = text
+				.replaceAll("\\s*([^ㄱ-힣0-9A-Za-z,\\.!\\?\'\"]+)\\s*", " $1 ");
+
 		LinkedList<TaggedSentence> paragraph = new LinkedList<TaggedSentence>();
 		synchronized (isWorkflowOnline) {
 			// 분석한다
@@ -297,6 +296,7 @@ public final class HannanumTagger implements Tagger {
 					System.out
 							.println("Hannanum Tagger has problem! At this point : "
 									+ needToParse);
+					e.printStackTrace();
 				}
 			}
 			isWorkflowOnline = false;
@@ -312,7 +312,20 @@ public final class HannanumTagger implements Tagger {
 	 */
 	@Override
 	public void addUserDictionary(Map<String, String> dict) {
-		userDictProcessor.setDict(dict);
+		try {
+			// 초기화가 안되어있다면 분석기를 초기화한다
+			if (!isWorkflowActivated) {
+				isWorkflowActivated = true;
+				workflow.activateWorkflow(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Set<String> keySet = dict.keySet();
+		for (String word : keySet) {
+			analyzer.addMorpheme(word, dict.get(word));
+		}
 	}
 
 	/*
@@ -323,7 +336,17 @@ public final class HannanumTagger implements Tagger {
 	 */
 	@Override
 	public void addUserDictionary(String morph, String tag) {
-		userDictProcessor.addDict(morph, tag);
+		try {
+			// 초기화가 안되어있다면 분석기를 초기화한다
+			if (!isWorkflowActivated) {
+				isWorkflowActivated = true;
+				workflow.activateWorkflow(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		analyzer.addMorpheme(morph, tag);
 	}
 
 	/**

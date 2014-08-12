@@ -25,6 +25,7 @@ public class UserDicReader implements SimpleDicReader {
 	 */
 	public void addMorpheme(String morph, String tag) {
 		morphemes.add(morph + "/" + tag);
+		seek = 0;
 	}
 
 	/*
