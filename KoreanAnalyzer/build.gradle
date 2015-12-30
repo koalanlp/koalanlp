@@ -1,0 +1,46 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'kr.kaist.ir.korean'
+version = '0.2.2.3'
+
+description = """Korean Morphology Analyzer"""
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+sourceSets {
+    main {
+        java {
+            srcDirs += 'src'
+        }
+    }
+    test {
+        java {
+            srcDirs += 'test'
+        }
+    }
+}
+
+repositories {
+    maven { url "http://maven.nameislocus.iptime.org/nexus/content/groups/repositories" }
+    maven { url "file:///Users/yeoupooh/Documents/git/public/github/KoreanAnalyzer/KoreanAnalyzer/lib" }
+    maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+dependencies {
+    compile group: 'KoreanParser', name: 'NLPHub', version: 'latest'
+    compile group: 'KKMA', name: 'KKMA', version: '2.0'
+}
+
+task runKoreanDependencyParser(dependsOn: 'classes', type: JavaExec) {
+    main = 'kr.kaist.ir.korean.tester.KoreanDependencyParser'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task runKoreanPosTagger(dependsOn: 'classes', type: JavaExec) {
+    main = 'kr.kaist.ir.korean.tester.KoreanPosTagger'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+
