@@ -91,3 +91,14 @@ TaggedSentence s = iParser.dependencyOf(text);
 어절 간의 의존관계 역시 TaggedSentence를 사용하며, 의존관계는 Enum형으로 정의되어 있습니다.
 
 ** javadoc을 보시면 더 자세합니다. **
+
+# Build with gradle
+```
+./gradlew build
+```
+
+# Run Testers with gradle
+```
+./gradlew runKoreanDependencyParser
+./gradlew runKoreanPosTagger
+```
