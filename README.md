@@ -1,5 +1,7 @@
 KoalaNLP v0.9
 ==============
+
+[![Join the chat at https://gitter.im/nearbydelta/KoalaNLP](https://badges.gitter.im/nearbydelta/KoalaNLP.svg)](https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 (구) KoreanAnalyzer
 
 # 소개
