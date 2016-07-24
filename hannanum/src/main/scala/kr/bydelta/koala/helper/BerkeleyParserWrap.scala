@@ -11,7 +11,15 @@ import edu.berkeley.nlp.util.Numberer
 import kaist.cilab.jhannanum.common.communication.Sentence
 import kr.bydelta.koala.hnn.Dictionary
 
-class BerkeleyParserWrap(val grammarName: String) {
+/**
+  * 한나눔 BerkeleyParserWrapper를 개량한 Class.
+  * - Scala에 맞게 Logic 수정.
+  * - 한나눔 품사분석결과에서 시작하도록 수정.
+  * - 모델의 경로를 임시 디렉터리가 되도록 수정.
+  *
+  * @param grammarName 문법의 유형.
+  */
+private[koala] class BerkeleyParserWrap(val grammarName: String) {
   val parser = {
     val args: String = "-in " + grammarName
     val optParser: OptionParser = new OptionParser(classOf[GrammarTester.Options])

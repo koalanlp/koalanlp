@@ -12,23 +12,35 @@ import kr.bydelta.koala.traits.CanSplitSentence
 import scala.annotation.tailrec
 import scala.collection.mutable.ArrayBuffer
 
-
+/**
+  * 한나눔 문장분리기
+  */
 final class SentenceSplitter extends CanSplitSentence {
-  private val workflow = new Workflow
-  private val basePath = Dictionary.extractResource()
+  /** 한나눔 분석 Workflow **/
+  private val workflow = {
+    val workflow = new Workflow
+    val basePath = Dictionary.extractResource()
 
-  workflow.appendPlainTextProcessor(new SentenceSegmentor,
-    basePath + File.separator + "conf" + File.separator + "SentenceSegment.json")
-  workflow.appendPlainTextProcessor(new InformalSentenceFilter,
-    basePath + File.separator + "conf" + File.separator + "InformalSentenceFilter.json")
-  workflow.activateWorkflow(false)
+    workflow.appendPlainTextProcessor(new SentenceSegmentor,
+      basePath + File.separator + "conf" + File.separator + "SentenceSegment.json")
+    workflow.appendPlainTextProcessor(new InformalSentenceFilter,
+      basePath + File.separator + "conf" + File.separator + "InformalSentenceFilter.json")
+    workflow.activateWorkflow(false)
 
-  @throws[Exception]
+    workflow
+  }
+
   override def sentences(text: String): Seq[String] = {
     workflow.analyze(text.replaceAll("\\s*([^ㄱ-힣0-9A-Za-z,\\.!\\?\'\"]+)\\s*", " $1 "))
     retrieveSentences()
   }
 
+  /**
+    * 문장결과를 읽어들임.
+    *
+    * @param acc 읽어들인 문장들이 누적되는 버퍼.
+    * @return 문장분리 결과.
+    */
   @tailrec
   private def retrieveSentences(acc: ArrayBuffer[String] = ArrayBuffer()): ArrayBuffer[String] = {
     (try {

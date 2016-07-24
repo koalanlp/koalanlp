@@ -1,16 +1,25 @@
 package kr.bydelta.koala.traits
 
-import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.data.Sentence
 
-trait CanDepParse {
-  @throws[Exception]
+/**
+  * 의존구문분석 Trait
+  */
+trait CanDepParse extends CanUserDict {
+  /**
+    * String 텍스트의 의존구문을 분석함.
+    *
+    * @param sentence 의존구문분석을 할 String.
+    * @return 의존구문분석 결과가 포함된 Sentence 객체.
+    */
   def parse(sentence: String): Sentence
 
+  /**
+    * Sentence 객체의 의존구문을 분석함.
+    *
+    * @param sentence 의존구문분석을 할 Sentence 객체.
+    * @return 의존구문분석 결과가 포함된 Sentence 객체. (입력값과 동일한 객체)
+    */
   def parse(sentence: Sentence): Sentence
-
-  def addUserDictionary(dict: (String, POSTag)*)
-
-  def addUserDictionary(morph: String, tag: POSTag)
 }
 

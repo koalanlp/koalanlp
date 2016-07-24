@@ -13,14 +13,17 @@ import scala.annotation.tailrec
 import scala.collection.JavaConversions._
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
-class SafeHMMTagger extends PosTagger {
+/**
+  * 한나눔의 HMMTagger를 Scala에 맞게 개량한 버전.
+  */
+private[koala] class SafeHMMTagger extends PosTagger {
   private final val SF = -4.60517018598809136803598290936873
   private final val PCONSTANT = -20.0
   private val wordPts = ArrayBuffer[MarkovNode]()
   private val markovNet = ListBuffer[MarkovNode]()
-  private var pwtPOS: ProbabilityDBM = null
-  private var pttPOS: ProbabilityDBM = null
-  private var pttWP: ProbabilityDBM = null
+  private var pwtPOS: ProbabilityDBM = _
+  private var pttPOS: ProbabilityDBM = _
+  private var pttWP: ProbabilityDBM = _
 
   def tagPOS(sos: SetOfSentences): Sentence = {
     val eojeolSetArray = sos.getEojeolSetArray

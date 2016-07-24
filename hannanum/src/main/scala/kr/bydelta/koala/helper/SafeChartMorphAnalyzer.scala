@@ -13,16 +13,26 @@ import kaist.cilab.jhannanum.plugin.major.morphanalyzer.MorphAnalyzer
 import kaist.cilab.parser.berkeleyadaptation.Configuration
 import kr.bydelta.koala.hnn.Dictionary
 
-object SafeChartMorphAnalyzer {
+/**
+  * SafeChartMorphAnalyzer의 Companion object
+  */
+private[koala] object SafeChartMorphAnalyzer {
+  /** 사용자사전. **/
   val userDic: Trie = new Trie(Trie.DEFAULT_TRIE_BUF_SIZE_USER)
 }
 
-class SafeChartMorphAnalyzer extends MorphAnalyzer {
+/**
+  * 한나눔 ChartMorphAnalyzer를 개량한 클래스.
+  * - Scala에 맞게 수정.
+  * - 사용자사전을 동적으로 불러올 수 있게 수정.
+  * - 모델의 Path를 임시 폴더로 수정.
+  */
+private[koala] class SafeChartMorphAnalyzer extends MorphAnalyzer {
   private val tagSet: TagSet = new TagSet
-  private var analyzedDic: AnalyzedDic = null
-  private var chart: MorphemeChart = null
+  private var analyzedDic: AnalyzedDic = _
+  private var chart: MorphemeChart = _
   private var eojeolList = new util.LinkedList[Eojeol]()
-  private var postProc: PostProcessor = null
+  private var postProc: PostProcessor = _
 
   def getName: String = "MorphAnalyzer"
 

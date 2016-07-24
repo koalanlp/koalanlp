@@ -9,13 +9,15 @@ import org.snu.ids.ha.dic.{RawDicFileReader, SimpleDicFileReader, Dictionary => 
 import scala.collection.JavaConverters._
 
 /**
-  * Created by bydelta on 16. 7. 24.
+  * 꼬꼬마 사용자사전
   */
 object Dictionary extends CanUserDict {
+  /** 사용자사전 Reader **/
   val userdic = new UserDicReader
+  /** 사전 목록의 변화여부 **/
   var isDicChanged = false
 
-  def addUserDictionary(dict: (String, POSTag)*) {
+  override def addUserDictionary(dict: (String, POSTag)*) {
     if (dict.nonEmpty) {
       try {
         userdic ++=
@@ -30,7 +32,7 @@ object Dictionary extends CanUserDict {
     }
   }
 
-  def addUserDictionary(morph: String, tag: POSTag) {
+  override def addUserDictionary(morph: String, tag: POSTag) {
     if (morph.length > 0) {
       try {
         userdic +=(morph, Processor.KKMA originalPOSOf tag)
@@ -42,7 +44,10 @@ object Dictionary extends CanUserDict {
     }
   }
 
-  def reloadDic() {
+  /**
+    * 사전 다시읽기.
+    */
+  private[koala] def reloadDic() {
     if (isDicChanged) {
       userdic.reset()
       Dict.reload(

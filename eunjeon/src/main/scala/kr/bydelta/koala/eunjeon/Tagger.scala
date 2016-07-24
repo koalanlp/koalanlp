@@ -10,9 +10,12 @@ import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 /**
-  * Created by bydelta on 16. 7. 21.
+  * 은전한닢 통합분석기
   */
-class Tagger extends CanTag {
+class Tagger extends CanTag[Seq[Eojeol]] {
+  /**
+    * 은전한닢의 내장 Tokenizer.
+    */
   lazy val tokenizer: Tokenizer = {
     val lexiconDict = new LexiconDict().load()
     val connectionCostDict = new ConnectionCostDict().load()
@@ -23,16 +26,18 @@ class Tagger extends CanTag {
     tok
   }
 
-  @throws[Exception]
   override def tagSentence(text: String): Sentence =
-    parseResult(Eojeoler.build(tokenizer.parseText(text, dePreAnalysis = false)))
+    convert(tagSentenceRaw(text))
 
-  private def parseResult(seq: Seq[Eojeol]): Sentence =
+  override def tagSentenceRaw(text: String): Seq[Eojeol] =
+    Eojeoler.build(tokenizer.parseText(text, dePreAnalysis = false))
+
+  override private[koala] def convert(seq: Seq[Eojeol]): Sentence =
     new Sentence(
       seq.map {
         eojeol =>
           new Word(
-            originalWord = eojeol.surface,
+            surface = eojeol.surface,
             morphemes =
               eojeol.nodes.flatMap { node =>
                 val array = node.morpheme.feature
@@ -41,14 +46,14 @@ class Tagger extends CanTag {
 
                 if (tokenized == "*") {
                   Seq(
-                    new data.Morpheme(morpheme = node.morpheme.surface,
+                    new data.Morpheme(surface = node.morpheme.surface,
                       rawTag = compoundTag, processor = Processor.Eunjeon)
                   )
                 } else {
                   tokenized.split("\\+").map {
                     tok =>
                       val arr = tok.split("/")
-                      new data.Morpheme(morpheme = arr.head,
+                      new data.Morpheme(surface = arr.head,
                         rawTag = arr(1), processor = Processor.Eunjeon)
                   }
                 }
@@ -57,12 +62,21 @@ class Tagger extends CanTag {
       }
     )
 
-  @throws[Exception]
+
   override def tagParagraph(text: String): Seq[Sentence] = {
     val parsed = Eojeoler.build(tokenizer.parseText(text, dePreAnalysis = false))
-    splitSentences(parsed).map(parseResult)
+    splitSentences(parsed).map(convert)
   }
 
+  /**
+    * 분석결과를 토대로 문장을 분리함.
+    *
+    * @param para 분리할 문단.
+    * @param pos  현재 읽고있는 위치.
+    * @param open 현재까지 열려있는 묶음기호 Stack.
+    * @param acc  현재까지 분리된 문장들.
+    * @return 문장단위로 분리된 결과
+    */
   @tailrec
   private def splitSentences(para: Seq[Eojeol],
                              pos: Int = 0,
@@ -118,7 +132,10 @@ class Tagger extends CanTag {
     }
 }
 
-object Tagger {
+/**
+  * 은전한닢 Tagger의 Companion object.
+  */
+private[koala] object Tagger {
   private val quoteRegex = "(?U)[\'\"]{1}".r
 }
 

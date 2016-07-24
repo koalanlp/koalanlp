@@ -24,9 +24,9 @@ object TwtEunjeonKKMA {
         splitter.sentences(line).foreach {
           sent =>
             println("품사 부착...")
-            println(tagger.tagSentence(sent))
+            println(tagger.tagSentence(sent).singleLineString)
             println("의존 구문 분석...")
-            println(parser.parse(sent))
+            println(parser.parse(sent).treeString)
         }
       }
     } while (line.nonEmpty)

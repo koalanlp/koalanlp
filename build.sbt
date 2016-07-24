@@ -1,11 +1,18 @@
 import sbt.Keys._
+import sbtunidoc.Plugin.UnidocKeys._
 
 lazy val root = (project in file("."))
   .aggregate(core, kkma, hannanum, eunjeon, twitter, komoran)
+  .settings(unidocSettings: _*)
+  .settings(site.settings: _*)
+  .settings(ghpages.settings: _*)
   .settings(
     publishArtifact := false,
     publishLocal := {},
-    publish := {}
+    publish := {},
+    site.addMappingsToSiteDir(mappings in(ScalaUnidoc, packageDoc), "latest/api"),
+    git.remoteRepo := "git@github.com:nearbydelta/KoalaNLP.git",
+    unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples)
   ).settings(aggregate in update := true)
 lazy val core = (project in file("core")).settings(projectWithConfig("core"): _*)
 
@@ -67,7 +74,7 @@ lazy val samples = (project in file("samples"))
       ("kr.bydelta" %% "koalanlp-komoran" % ver) classifier "assembly"
     )
   )
-lazy val ver = "0.9"
+lazy val ver = "1.0"
 
 def projectWithConfig(module: String) =
   Seq(

@@ -6,7 +6,7 @@ import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.traits.CanUserDict
 
 /**
-  * Created by bydelta on 16. 7. 24.
+  * 트위터 분석기 사용자사전
   */
 object Dictionary extends CanUserDict {
   override def addUserDictionary(dict: (String, POSTag)*): Unit = {

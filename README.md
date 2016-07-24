@@ -2,7 +2,7 @@ KoalaNLP v0.9
 ==============
 (구) KoreanAnalyzer
 
-[![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.svg?v=103)](https://opensource.org/licenses/GPL-3.0/)  
+[![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.svg?v=103)](https://opensource.org/licenses/GPL-3.0/)
 [![GitHub version](https://badge.fury.io/gh/nearbydelta%2Fkoalanlp.svg)](https://badge.fury.io/gh/nearbydelta%2Fkoalanlp)
 [![Gitter](https://badges.gitter.im/nearbydelta/KoalaNLP.svg)](https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
@@ -41,7 +41,7 @@ KoalaNLP는 Scala 2.11.8에서 컴파일 되었으며, Scala 2.11+과 Java 8+을
 > Maven Repository 생성을 대기중이며, 2016년 7월 27일 이전에 승인될 것 같습니다.
 
 SBT를 사용하시는 경우, 다음과 같이 추가하시면 됩니다.
-```scala
+```sbt
 libraryDependencies += "kr.bydelta" %% "koalanlp-twitter" % "0.9"	//트위터 분석기의 경우
 libraryDependencies += "kr.bydelta" %% "koalanlp-eunjeon" % "0.9"	//은전한닢 분석기의 경우
 
@@ -68,7 +68,7 @@ Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 
 사용방법은 Scala를 기준으로 작성합니다.
 Java Wrapper가 추가되는 대로, 자바기준 구현을 올리겠습니다.
 
-아래에 대부분의 사항에 대해 기술하겠지만, 상세한 사항은 ~~[ScalaDoc](http://nearbydelta.github.io/KoalaNLP/api/#kr.bydelta.koala)을 참고하십시오.~~
+아래에 대부분의 사항에 대해 기술하겠지만, 상세한 사항은 ~~[ScalaDoc](http://nearbydelta.github.io/KoalaNLP/latest/api/#kr.bydelta.koala)을 참고하십시오.~~
 > Doc이 제대로 작성되어 있지 않아, 아직은 Access가 안됩니다.
 
 ## 문장 분리

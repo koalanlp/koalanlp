@@ -7,10 +7,13 @@ import kr.bydelta.koala.Processor
 import kr.bydelta.koala.traits.{CanExtractResource, CanUserDict}
 
 /**
-  * Created by bydelta on 16. 7. 24.
+  * 코모란 분석기 사용자사전
   */
 object Dictionary extends CanUserDict with CanExtractResource {
   override protected val modelName: String = "komoran"
+  /**
+    * 사용자사전을 저장할 파일의 위치.
+    */
   val userDict = new File(getExtractedPath, "koala.dict")
 
   override def addUserDictionary(dict: (String, POSTag)*): Unit = {

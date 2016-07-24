@@ -1,19 +1,24 @@
 package kr.bydelta.koala.kmr
 
+import java.util
+
 import kr.bydelta.koala.Processor
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.traits.CanTag
 import kr.co.shineware.nlp.komoran.core.analyzer.Komoran
+import kr.co.shineware.util.common.model.{Pair => KPair}
 
-import scala.annotation.tailrec
 import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 /**
-  * Created by bydelta on 16. 7. 22.
+  * 코모란 형태소분석기.
   */
-class Tagger extends CanTag {
+class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]]] {
+  /**
+    * 코모란 분석기 객체.
+    */
   lazy val komoran = {
     Dictionary.extractResource()
     val komoran = new Komoran(Dictionary.getExtractedPath)
@@ -23,36 +28,46 @@ class Tagger extends CanTag {
     komoran
   }
 
-  @throws[Exception]
   override def tagSentence(text: String): Sentence = {
-    new Sentence(parse(text))
+    convert(tagSentenceRaw(text))
   }
 
-  private def parse(text: String): mutable.Buffer[Word] = {
-    komoran.analyze(text).map {
-      word =>
-        val originalWord = word.map(_.getFirst).mkString
-        new Word(
-          originalWord = originalWord,
-          morphemes =
-            word.map {
-              pair =>
-                new Morpheme(
-                  morpheme = pair.getFirst,
-                  rawTag = pair.getSecond,
-                  processor = Processor.Komoran
-                )
-            }
-        )
-    }
-  }
+  override def tagSentenceRaw(text: String): util.List[util.List[KPair[String, String]]] =
+    komoran.analyze(text)
 
-  @throws[Exception]
+  override private[koala] def convert(result: util.List[util.List[KPair[String, String]]]): Sentence =
+    new Sentence(
+      result.map {
+        word =>
+          val originalWord = word.map(_.getFirst).mkString
+          new Word(
+            surface = originalWord,
+            morphemes =
+              word.map {
+                pair =>
+                  new Morpheme(
+                    surface = pair.getFirst,
+                    rawTag = pair.getSecond,
+                    processor = Processor.Komoran
+                  )
+              }
+          )
+      }
+    )
+
   override def tagParagraph(text: String): Seq[Sentence] = {
-    splitSentences(parse(text))
+    splitSentences(convert(tagSentenceRaw(text)).words)
   }
 
-  @tailrec
+  /**
+    * 분석결과를 토대로 문장을 분리함.
+    *
+    * @param para 분리할 문단.
+    * @param pos  현재 읽고있는 위치.
+    * @param open 현재까지 열려있는 묶음기호 Stack.
+    * @param acc  현재까지 분리된 문장들.
+    * @return 문장단위로 분리된 결과
+    */
   private def splitSentences(para: Seq[Word],
                              pos: Int = 0,
                              open: mutable.Stack[String] = mutable.Stack(),
@@ -63,9 +78,9 @@ class Tagger extends CanTag {
       val rawParen = para.indexWhere({
         e =>
           e.existsMorpheme("SS") ||
-            Tagger.openParenRegex.findFirstMatchIn(e.originalWord).isDefined ||
-            Tagger.closeParenRegex.findFirstMatchIn(e.originalWord).isDefined ||
-            Tagger.quoteRegex.findFirstMatchIn(e.originalWord).isDefined
+            Tagger.openParenRegex.findFirstMatchIn(e.surface).isDefined ||
+            Tagger.closeParenRegex.findFirstMatchIn(e.surface).isDefined ||
+            Tagger.quoteRegex.findFirstMatchIn(e.surface).isDefined
       }, pos)
 
       val endmark = if (rawEndmark == -1) para.length else rawEndmark
@@ -81,7 +96,7 @@ class Tagger extends CanTag {
           splitSentences(next, 0, open, acc)
         } else {
           val parenStr = para(paren)
-          val surface = parenStr.originalWord
+          val surface = parenStr.surface
           if (Tagger.closeParenRegex.findFirstMatchIn(surface).isEmpty) {
             open push surface
           }
@@ -93,7 +108,7 @@ class Tagger extends CanTag {
           acc
         } else {
           val parenStr = para(paren)
-          val surface = parenStr.originalWord
+          val surface = parenStr.surface
           if (Tagger.openParenRegex.findFirstMatchIn(surface).isDefined) {
             open push surface
           } else if (Tagger.closeParenRegex.findFirstMatchIn(surface).isDefined) {
@@ -109,7 +124,10 @@ class Tagger extends CanTag {
     }
 }
 
-object Tagger {
+/**
+  * 코모란 분석기의 Companion object.
+  */
+private[koala] object Tagger {
   private val quoteRegex = "(?U)[\'\"]{1}".r
   private val openParenRegex = "(?U)[\\(\\[\\{<〔〈《「『【‘“]{1}".r
   private val closeParenRegex = "(?U)[\\)\\]\\}>〕〉《」』】’”]{1}".r

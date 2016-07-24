@@ -1,21 +1,76 @@
 package kr.bydelta.koala.data
 
-import java.io.Serializable
+import scala.annotation.tailrec
+import scala.collection.JavaConverters._
+import scala.collection.mutable
+import scala.collection.mutable.ArrayBuffer
 
-@SerialVersionUID(4683667063955634926L)
-class Sentence(val words: Seq[Word]) extends Serializable with Iterable[Word] {
-  private[koala] var root: Int = -1
+/**
+  * 문장 Class
+  *
+  * @param words 문장에 포함되는 어절의 나열.
+  */
+class Sentence(val words: Seq[Word]) extends Iterable[Word] {
+  /**
+    * 의존 구문 분석 결과, 나타난 핵심어들.
+    */
+  val topLevels: ArrayBuffer[Word] = ArrayBuffer()
 
-  override final def size: Int = words.size
-
+  /**
+    * 문장의 첫 어절
+    *
+    * @return 문장의 첫 어절인 Word 객체.
+    */
   override final def head = words.head
 
+  /**
+    * 문장의 끝 어절
+    *
+    * @return 문장의 끝 어절인 Word 객체.
+    */
   override final def last = words.last
 
+  /**
+    * 문장을 이어붙여, 새로운 문장을 생성함.
+    *
+    * @param s 이어붙일 다른 문장 Sentence 객체
+    * @return 문장이 이어붙여진 새로운 Sentence 객체
+    */
+  def concat(s: Sentence) = ++(s)
+
+  /**
+    * 문장을 이어붙여, 새로운 문장을 생성함.
+    *
+    * @param s 이어붙일 다른 문장 Sentence 객체
+    * @return 문장이 이어붙여진 새로운 Sentence 객체
+    */
   def ++(s: Sentence) = new Sentence(this.words ++ s.words)
 
-  final def hasMorphemeOf(tag: String): Boolean = words.exists(_.existsMorpheme(tag))
+  /**
+    * 주어진 품사를 갖는 형태소가 존재하는지 확인.
+    * <br/>
+    * 예를 들어, N은 체언인지 확인하고, NP는 대명사인지 확인.
+    * 품사 표기는 [[https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing 여기]]
+    * 에서 확인
+    *
+    * @param tag 확인할 통합 품사 표기
+    * @return True: 존재하는 경우.
+    */
+  final def existsMorpheme(tag: String): Boolean = words.exists(_.existsMorpheme(tag))
 
+  /**
+    * 주어진 품사 표기의 Sequence를 포함하는지 확인.
+    * <br/>
+    * `Seq[Seq[POSTag.Value] ]`의 형태이며, 이는 품사가 어절을 구성하고^Seq[POSTag.Value]^,
+    * 어절이 문장을 구성한 형태^Seq[Seq[POSTag.Value] ]^를 따른 것임.
+    * <br/>
+    * Sequence가 *연속되지 않더라도* 확인함. 즉, "나/NP는/JKS 밥/NNG을/JKO 먹/VV고/EC,"라는 문장구조가 있다면,
+    * `Seq(Seq(POSTag.NP,POSTag.JKS),Seq(POSTag.VV))`는 중간 어절에 대응하는 품사의 Sequence가 없지만, 순서는 포함되므로,
+    * `true`를 반환함.
+    *
+    * @param tag 확인할 통합 품사 표기의 Sequence. `Seq[Seq[POSTag.Value] ]` 객체.
+    * @return True: 존재하는 경우
+    */
   final def matches(tag: Seq[Seq[String]]): Boolean =
     words.foldLeft(tag) {
       case (list, w) =>
@@ -23,40 +78,135 @@ class Sentence(val words: Seq[Word]) extends Serializable with Iterable[Word] {
         else list
     }.isEmpty
 
+  /**
+    * 체언^명사, 수사, 대명사^을 포함하는 어절들
+    *
+    * @return 체언을 포함하는 어절들의 Sequence
+    */
   final def nouns = words.filter(_.exists(_.isNoun))
 
+  /**
+    * 용언^동사, 형용사^을 포함하는 어절들
+    *
+    * @return 용언을 포함하는 어절들의 Sequence
+    */
   final def verbs = words.filter(_.exists(_.isVerb))
 
-  final def adjectives = words.filter(_.exists(_.isModifier))
+  /**
+    * 수식언^관형사, 부사^을 포함하는 어절들
+    *
+    * @return 수식언을 포함하는 어절들의 Sequence
+    */
+  final def modifiers = words.filter(_.exists(_.isModifier))
 
+  /**
+    * 주어진 어절의 위치를 찾는다.
+    *
+    * @param word 위치를 확인할 어절
+    * @return 어절의 위치.
+    */
   final def indexOf(word: Word): Int = words.indexOf(word)
 
-  final def get(index: Int): Word = apply(index)
+  /**
+    * 주어진 위치의 어절을 반환. Option[Word] 객체.
+    *
+    * @param index 어절의 위치.
+    * @return 어절이 있다면, Some(어절)을, 없다면 None.
+    */
+  final def apply(index: Int): Option[Word] =
+  if (index < 0 || index >= size) None
+  else Some(words(index))
 
-  final def apply(index: Int): Word = words(index)
+  /**
+    * 문장의 길이
+    *
+    * @return 문장의 길이
+    */
+  override final def size: Int = words.size
 
+  /**
+    * 주어진 위치의 어절을 반환. Word 객체.
+    *
+    * @param index 어절의 위치.
+    * @return 어절이 있다면, 어절을, 없다면 Exception.
+    */
+  final def get(index: Int): Word = words(index)
+
+  /**
+    * (Java) 어절을 문장의 순서대로 순회하는 iterator.
+    *
+    * @return 어절 순회 Iterator.
+    */
+  def jIterator = iterator.asJava
+
+  /**
+    * 어절을 문장의 순서대로 순회하는 iterator.
+    *
+    * @return 어절 순회 Iterator.
+    */
   def iterator: Iterator[Word] = words.iterator
 
+  /**
+    * (Java) 어절 목록. `java.util.List<Word>`
+    *
+    * @return 어절 목록.
+    */
+  def jWords = words.asJava
+
+  /**
+    * 구문분석과 품사분석의 결과를 String으로 변환.
+    *
+    * @return 본 객체의 정보를 담은 String.
+    */
   override def toString: String =
-    originalString() + "\n" +
-      words.zipWithIndex.map {
-        case (w, i) if i == root =>
-          w.toString + "[ROOT]"
-        case (w, _) =>
-          w.toString
-      }.mkString("\n")
-
-  final def originalString(delimiter: String = " "): String =
-    words.map(_.originalWord).mkString(delimiter)
-
-  def singleLineString: String =
+  surfaceString() + "\n" +
     words.map {
-      _.map {
-        morph =>
-          s"${morph.morpheme}/${morph.tag}"
-      }.mkString
-    }.mkString("  ")
+      w =>
+        w.toString + (if (topLevels.contains(w)) "[ROOT]" else "")
+    }.mkString("\n")
 
-  def rootWord: Word = words(root)
+  /**
+    * 띄어쓰기 된 문장을 반환.
+    *
+    * @param delimiter 어절 사이의 띄어쓰기 방식. 기본값 = 공백(" ")
+    * @return 띄어쓰기 된 문장.
+    */
+  final def surfaceString(delimiter: String = " "): String =
+  words.map(_.surface).mkString(delimiter)
+
+  /**
+    * 품사분석 결과를, 1행짜리 String으로 변환.
+    *
+    * @return 품사분석 결과를 담은 1행짜리 String.
+    */
+  def singleLineString: String =
+  words.map(_.singleLineString).mkString(" ")
+
+  /**
+    * 의존구문분석트리를 String형태로 그립니다.
+    *
+    * @return 트리 String.
+    */
+  def treeString: String =
+  if (topLevels.isEmpty) singleLineString
+  else {
+    val word = topLevels.head
+    val stack = mutable.Stack[(Word, Int)]()
+    stack pushAll topLevels.tail.map(_ -> 0)
+    treeString(word, 0, stack)
+  }
+
+  @tailrec
+  private def treeString(head: Word, depth: Int,
+                         stack: mutable.Stack[(Word, Int)] = mutable.Stack(),
+                         printed: ArrayBuffer[String] = ArrayBuffer()): String = {
+    printed += (" " * depth + s"+${head.depTag} : ${head.singleLineString} ... ${head.rawDepTag}")
+    stack pushAll head.dependents.map(_ -> (depth + 1))
+    if (stack.nonEmpty) {
+      val (nextHead, nextDepth) = stack.pop()
+      treeString(nextHead, nextDepth, stack, printed)
+    } else
+      printed.mkString("\n")
+  }
 }
 

@@ -5,9 +5,6 @@ import kr.bydelta.koala.kkma.{Dictionary, Parser, Tagger}
 
 import scala.io.StdIn
 
-/**
-  * Created by bydelta on 16. 7. 22.
-  */
 object KKMA {
   def main(args: Array[String]) {
     Dictionary.addUserDictionary("은전한닢" -> POS.NNG, "꼬꼬마" -> POS.NNG, "구글하" -> POS.VV)
@@ -23,6 +20,10 @@ object KKMA {
         tagger.tagParagraph(line).foreach {
           sent =>
             println(sent.singleLineString)
+            println()
+
+            parser.parse(sent)
+            println(sent.treeString)
             println()
         }
       }

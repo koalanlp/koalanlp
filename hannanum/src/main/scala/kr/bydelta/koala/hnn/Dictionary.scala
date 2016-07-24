@@ -7,19 +7,22 @@ import kr.bydelta.koala.traits.{CanExtractResource, CanUserDict}
 import scala.collection.mutable
 
 /**
-  * Created by bydelta on 16. 7. 24.
+  * 한나눔 사용자사전
   */
 object Dictionary extends CanUserDict with CanExtractResource {
   override protected val modelName: String = "hannanum"
+  /**
+    * 사용자사전에 등재되기 전의 리스트.
+    */
   val userDict = mutable.HashMap[String, String]()
 
-  def addUserDictionary(dict: (String, POSTag)*) {
+  override def addUserDictionary(dict: (String, POSTag)*) {
     userDict ++= dict.map {
       case (word, tag) => (word, Processor.Hannanum originalPOSOf tag)
     }
   }
 
-  def addUserDictionary(morph: String, tag: POSTag) {
+  override def addUserDictionary(morph: String, tag: POSTag) {
     userDict += morph -> (Processor.Hannanum originalPOSOf tag)
   }
 }

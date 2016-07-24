@@ -5,9 +5,6 @@ import kr.bydelta.koala.kmr.{Dictionary, Tagger}
 
 import scala.io.StdIn
 
-/**
-  * Created by bydelta on 16. 7. 22.
-  */
 object Komoran {
   def main(args: Array[String]) {
     Dictionary.addUserDictionary("은전한닢" -> POS.NNG, "꼬꼬마" -> POS.NNG, "구글하" -> POS.VV)

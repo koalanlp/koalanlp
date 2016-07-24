@@ -12,11 +12,11 @@ import org.snu.ids.ha.ma._
 
 import scala.collection.JavaConversions._
 
-object Tagger {
-  lazy val defaultTagger = new Tagger
-}
-
-final class Tagger extends CanTag {
+/**
+  * 꼬꼬마 형태소분석기.
+  */
+final class Tagger extends CanTag[Sentence] {
+  /** 꼬꼬마 형태소분석기 객체. **/
   private lazy val ma = {
     val ma = new MorphemeAnalyzer
     ma.createLogger(null)
@@ -24,22 +24,18 @@ final class Tagger extends CanTag {
     ma
   }
 
-  @throws[Exception]
-  def tagSentence(text: String): koala.data.Sentence = parseResult(analyzeSentenceRaw(text).head)
+  override def tagSentence(text: String): koala.data.Sentence = convert(tagParagraphRaw(text).head)
 
-  @throws[Exception]
-  def tagParagraph(text: String): Seq[koala.data.Sentence] = analyzeSentenceRaw(text).map(parseResult)
-
-  def parseResult(result: Sentence): koala.data.Sentence =
+  override private[koala] def convert(result: Sentence): koala.data.Sentence =
     new koala.data.Sentence(
       words =
         result.map {
           eojeol =>
             new Word(
-              originalWord = eojeol.getExp,
+              surface = eojeol.getExp,
               morphemes = eojeol.map {
                 morph => new koala.data.Morpheme(
-                  morpheme = morph.getString,
+                  surface = morph.getString,
                   rawTag = morph.getTag,
                   processor = Processor.KKMA
                 )
@@ -48,8 +44,13 @@ final class Tagger extends CanTag {
         }
     )
 
-  @throws[Exception]
-  private[koala] def analyzeSentenceRaw(text: String): Seq[Sentence] =
+  /**
+    * 변환되지않은, 분석결과를 반환.
+    *
+    * @param text 분석할 String.
+    * @return 원본 문장객체.
+    */
+  def tagParagraphRaw(text: String): Seq[Sentence] =
     ma.divideToSentences(
       ma.leaveJustBest(
         ma.postProcess(
@@ -59,6 +60,17 @@ final class Tagger extends CanTag {
         )
       )
     ).toSeq
+
+  override def tagParagraph(text: String): Seq[koala.data.Sentence] = tagParagraphRaw(text).map(convert)
+
+  /**
+    * 꼬꼬마는 문장단위의 분석결과가 없습니다.
+    *
+    * @param text 분석할 String.
+    * @return 원본 문장객체.
+    */
+  @deprecated
+  override def tagSentenceRaw(text: String): Sentence = null
 
   @throws[Throwable]
   override protected def finalize() {
