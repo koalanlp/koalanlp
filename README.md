@@ -13,6 +13,9 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 * Twitter: Twitter의 [한국어 분석기](https://github.com/twitter/twitter-korean-text)
 * Eunjeon: 은전한닢 프로젝트의 [SEunjeon(S은전)](https://bitbucket.org/eunjeon/seunjeon)
 
+KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록해주십시오.
+또한, 추가하고자 하는 새로운 프로젝트가 있으시면, Issue에 등록해주십시오.
+
 # SBT/Maven
 
 ## Packages
