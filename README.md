@@ -345,4 +345,3 @@ Sentence는 `Iterable[Word]`를 상속합니다.
 > 미국/NNG   /SY  국방부/NNG  가/JX   /SY  미국/NNG   /SY  미사일방어/NNP  망/NNG  (/SF  MD/SY  )/SF  의/NNG   /SY  핵심/NNG   /SY  무기체계/NNP  인/JX   /SY  사드/NNG  (/SF  THAAD/SY  )/SF  를/NNG   /SY  한국/NNG  에/JX   /SY  배치/NNG  하는/VV   /SY  방안/NNG  을/JX   /SY  검토/NNG  하고/JX   /SY  있다/VA  고/EF   /SY  </SF  월스트리트/NNG   /SY  저/MM  널/NNG  >/SF  이/NNG   /SY  28일/NR  (/SF  현지/NNP  시각/NNG  )/SF   /SY  보도했/VV  다/EF  ./SF
 
 사드는 정상 인식되었지만, 월스트리트 저널은 월스트리트, 저, 널로 인식되었습니다.
-
