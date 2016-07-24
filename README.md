@@ -2,6 +2,8 @@ KoalaNLP v0.9
 ==============
 (구) KoreanAnalyzer
 
+[![Gitter](https://badges.gitter.im/nearbydelta/KoalaNLP.svg)](https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 # 소개
 한국어 형태소 및 구문 분석기의 모음입니다.
 
