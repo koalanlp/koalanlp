@@ -2,6 +2,8 @@ KoalaNLP v0.9
 ==============
 (구) KoreanAnalyzer
 
+[![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.svg?v=103)](https://opensource.org/licenses/GPL-3.0/)  
+[![GitHub version](https://badge.fury.io/gh/nearbydelta%2Fkoalanlp.svg)](https://badge.fury.io/gh/nearbydelta%2Fkoalanlp)
 [![Gitter](https://badges.gitter.im/nearbydelta/KoalaNLP.svg)](https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # 소개
