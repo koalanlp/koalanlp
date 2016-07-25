@@ -67,22 +67,42 @@ class Word(val surface: String, val morphemes: collection.Seq[Morpheme]) extends
   /**
     * 주어진 품사 표기의 Sequence를 포함하는지 확인.
     * <br/>
-    * `Seq[POSTag.Value]`의 형태이며, 이는 품사가 어절을 구성한 형태를 따른 것임.
+    * `Seq[POSTag]`의 형태이며, 이는 품사가 어절을 구성한 형태를 따른 것임.
     * <br/>
     * Sequence가 *연속되지 않더라도* 확인함. 즉, "초/XP거대하/VAㄴ/ETM"이란 어절이 있다면,
-    * `Seq(POSTag.XP,POSTag.ETM)`는 중간 형태소에 대응하는 품사가 없지만, 순서는 포함되므로,
+    * `Seq(POS.XP,POS.ETM)`는 중간 형태소에 대응하는 품사가 없지만, 순서는 포함되므로,
     * `true`를 반환함.
     *
-    * @param tag 확인할 통합 품사 표기의 Sequence. `Seq[POSTag.Value]` 객체.
+    * @param tag 확인할 통합 품사 표기의 Sequence. `Seq[POSTag]` 객체.
     * @return True: 존재하는 경우
     */
   final def matches(tag: Seq[String]): Boolean =
-    tag.foldLeft(true) {
-      case (true, t) =>
-        morphemes.exists(_.hasTag(t))
-      case (false, _) =>
-        false
-    }
+  tag.foldLeft(true) {
+    case (true, t) =>
+      morphemes.exists(_.hasTag(t))
+    case (false, _) =>
+      false
+  }
+
+  /**
+    * (Java) 주어진 품사 표기의 Sequence를 포함하는지 확인.
+    * <br/>
+    * `POS$.Value[]`의 형태이며, 이는 품사가 어절을 구성한 형태를 따른 것임.
+    * <br/>
+    * Sequence가 *연속되지 않더라도* 확인함. 즉, "초/XP거대하/VAㄴ/ETM"이란 어절이 있다면,
+    * `{POS.XP(),POS.ETM()}`는 중간 형태소에 대응하는 품사가 없지만, 순서는 포함되므로,
+    * `true`를 반환함.
+    *
+    * @param tag 확인할 통합 품사 표기의 Sequence. `POS$.Value[]` 객체.
+    * @return True: 존재하는 경우
+    */
+  final def matches(tag: Array[String]): Boolean =
+  tag.foldLeft(true) {
+    case (true, t) =>
+      morphemes.exists(_.hasTag(t))
+    case (false, _) =>
+      false
+  }
 
   /**
     * 주어진 품사를 갖는 형태소가 존재하는지 확인.
