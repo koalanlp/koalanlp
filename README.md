@@ -36,9 +36,12 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 > "assembly" classifier가 지정되지 않으면, 각 분석기 라이브러리가 빠진 채로 dependency가 참조됩니다.
 
 ## Dependency 추가하기
-KoalaNLP는 Scala 2.11.8에서 컴파일 되었으며, Scala 2.11+과 Java 8+을 지원합니다.
-~~현재 최신 버전은 __1.0__입니다.~~
-> Maven Repository 생성을 대기중이며, 2016년 7월 27일 이전에 승인될 것 같습니다.
+KoalaNLP는 Scala 2.11.8에서 컴파일 되었으며, Scala 2.10+과 Java 7+을 지원합니다.
+
+> __NOTE:__
+> "koalanlp-eunjeon"의 경우, 의존하고 있는 "org.bitbucket.eunjeon" %% "seunjeon" 패키지가 Scala 2.11만을 지원하여, 2.10 버전을 지원하지 않습니다.
+
+현재 최신 버전은 __1.0__입니다.
 
 SBT를 사용하시는 경우, 다음과 같이 추가하시면 됩니다.
 ```sbt
