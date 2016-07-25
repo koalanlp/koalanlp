@@ -31,6 +31,11 @@ class Sentence(val words: Seq[Word]) extends Iterable[Word] {
   override final def last = words.last
 
   /**
+    * (Java)의존 구문 분석 결과, 나타난 핵심어들.
+    */
+  def jTopLevels = topLevels.asJava
+
+  /**
     * 문장을 이어붙여, 새로운 문장을 생성함.
     *
     * @param s 이어붙일 다른 문장 Sentence 객체
@@ -59,16 +64,31 @@ class Sentence(val words: Seq[Word]) extends Iterable[Word] {
   final def existsMorpheme(tag: String): Boolean = words.exists(_.existsMorpheme(tag))
 
   /**
+    * (Java) 주어진 품사 표기의 Sequence를 포함하는지 확인.
+    * <br/>
+    * `POS$.Value[][]`의 형태이며, 이는 품사가 어절을 구성하고^POS$.Value[]^,
+    * 어절이 문장을 구성한 형태^POS$.Value[][]^를 따른 것임.
+    * <br/>
+    * Sequence가 *연속되지 않더라도* 확인함. 즉, "나/NP는/JKS 밥/NNG을/JKO 먹/VV고/EC,"라는 문장구조가 있다면,
+    * `{{POSTag.NP,POSTag.JKS},{POSTag.VV}}`는 중간 어절에 대응하는 품사의 Sequence가 없지만, 순서는 포함되므로,
+    * `true`를 반환함.
+    *
+    * @param tag 확인할 통합 품사 표기의 Sequence. `POS$.Value[][]` 객체.
+    * @return True: 존재하는 경우
+    */
+  final def matches(tag: Array[Array[String]]): Boolean = matches(tag.map(_.toSeq).toSeq)
+
+  /**
     * 주어진 품사 표기의 Sequence를 포함하는지 확인.
     * <br/>
-    * `Seq[Seq[POSTag.Value] ]`의 형태이며, 이는 품사가 어절을 구성하고^Seq[POSTag.Value]^,
+    * `Seq[Seq[POSTag] ]`의 형태이며, 이는 품사가 어절을 구성하고^Seq[POSTag]^,
     * 어절이 문장을 구성한 형태^Seq[Seq[POSTag.Value] ]^를 따른 것임.
     * <br/>
     * Sequence가 *연속되지 않더라도* 확인함. 즉, "나/NP는/JKS 밥/NNG을/JKO 먹/VV고/EC,"라는 문장구조가 있다면,
-    * `Seq(Seq(POSTag.NP,POSTag.JKS),Seq(POSTag.VV))`는 중간 어절에 대응하는 품사의 Sequence가 없지만, 순서는 포함되므로,
+    * `Seq(Seq(POS.NP,POS.JKS),Seq(POS.VV))`는 중간 어절에 대응하는 품사의 Sequence가 없지만, 순서는 포함되므로,
     * `true`를 반환함.
     *
-    * @param tag 확인할 통합 품사 표기의 Sequence. `Seq[Seq[POSTag.Value] ]` 객체.
+    * @param tag 확인할 통합 품사 표기의 Sequence. `Seq[Seq[POSTag] ]` 객체.
     * @return True: 존재하는 경우
     */
   final def matches(tag: Seq[Seq[String]]): Boolean =
@@ -79,6 +99,13 @@ class Sentence(val words: Seq[Word]) extends Iterable[Word] {
     }.isEmpty
 
   /**
+    * (Java) 체언^명사, 수사, 대명사^을 포함하는 어절들
+    *
+    * @return 체언을 포함하는 어절들의 Sequence
+    */
+  final def jNouns = nouns.asJava
+
+  /**
     * 체언^명사, 수사, 대명사^을 포함하는 어절들
     *
     * @return 체언을 포함하는 어절들의 Sequence
@@ -86,11 +113,25 @@ class Sentence(val words: Seq[Word]) extends Iterable[Word] {
   final def nouns = words.filter(_.exists(_.isNoun))
 
   /**
+    * (Java) 용언^동사, 형용사^을 포함하는 어절들
+    *
+    * @return 용언을 포함하는 어절들의 Sequence
+    */
+  final def jVerbs = verbs.asJava
+
+  /**
     * 용언^동사, 형용사^을 포함하는 어절들
     *
     * @return 용언을 포함하는 어절들의 Sequence
     */
   final def verbs = words.filter(_.exists(_.isVerb))
+
+  /**
+    * (Java) 수식언^관형사, 부사^을 포함하는 어절들
+    *
+    * @return 수식언을 포함하는 어절들의 Sequence
+    */
+  final def jModifiers = modifiers.asJava
 
   /**
     * 수식언^관형사, 부사^을 포함하는 어절들
