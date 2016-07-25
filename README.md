@@ -65,11 +65,7 @@ Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 
 ```
 
 # 사용방법
-사용방법은 Scala를 기준으로 작성합니다.
-Java Wrapper가 추가되는 대로, 자바기준 구현을 올리겠습니다.
-
 아래에 대부분의 사항에 대해 기술하겠지만, 상세한 사항은 [ScalaDoc](http://nearbydelta.github.io/KoalaNLP/latest/api/#kr.bydelta.koala.package)을 참고하십시오.
-> Doc이 제대로 작성되어 있지 않아, 아직은 Access가 안됩니다.
 
 ## 문장 분리
 품사 태깅을 거치지 않은 문장 분리는, 한나눔과 트위터 분석기만 지원됩니다. 타 패키지의 경우 문장 분리 작업이 품사 태깅 이후에 이루어집니다.
@@ -88,15 +84,29 @@ val sentences: Seq[String] = sentSplit.sentences(paragraph)
 
 Implicit method 형태의 작업은 추후 지원 예정입니다.
 
+Java는 다음과 같습니다.
+```java
+import kr.bydelta.koala.twt.SentenceSplitter;
+import java.util.List;
+
+SentenceSplitter sentSplit = new SentenceSplitter();
+String paragraph = "누군가가 말했다. Python에는 KoNLPy가 있다. Java는 KoalaNLP가 있었다.";
+List<String> sentences = sentSplit.jSentences(paragraph);
+```
+
 ## 단순 품사 분석
 모든 패키지가 품사 분석을 지원합니다.
 
+> __Note:__ 
 > * 형태소 분석의 결과는 세종 말뭉치의 지침에 따라 통합되었으며, 통합 태그와 각 분석기 태그의 비교표는 [여기](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)에서 보실 수 있습니다.
+> * 은전한닢과 코모란 라이브러리는 문장분리기(Sentence splitter)를 지원하지 않아, Koala가 품사 분석 결과를 토대로 Heuristic을 사용하여 문장을 분리합니다. 때문에, 그 정확성이 떨어질 수 있습니다.
+> * 트위터의 경우 품사 태깅을 세부적으로 진행하지 않아, 통합 변경 과정에서 임의로 대응되므로(예: Noun → NNG), 통합 태그가 실제와 다를 수 있으나, 큰 무리는 없습니다.
 
 ```scala
 /* 패키지 명: 한나눔(hnn), 코모란(kmr), 꼬꼬마(kkma), 은전한닢(eunjeon), 트위터(twt) */
 // 예시에서는 은전한닢 분석기 활용
 import kr.bydelta.koala.eunjeon.Tagger
+import kr.bydelta.koala.Sentence
 
 val tagger = new Tagger
 
@@ -109,9 +119,22 @@ val paragraph = "누군가가 말했다. Python에는 KoNLPy가 있다. Scala는
 val sentences: Seq[Sentence] = tagger.tagParagraph(paragraph)
 ```
 
-> __Note:__ 
-> * 은전한닢과 코모란 라이브러리는 문장분리기(Sentence splitter)를 지원하지 않아, Koala가 품사 분석 결과를 토대로 Heuristic을 사용하여 문장을 분리합니다. 때문에, 그 정확성이 떨어질 수 있습니다.
-> * 트위터의 경우 품사 태깅을 세부적으로 진행하지 않아, 통합 변경 과정에서 임의로 대응되므로(예: Noun → NNG), 통합 태그가 실제와 다를 수 있으나, 큰 무리는 없습니다.
+Java는 다음과 같습니다.
+```java
+import kr.bydelta.koala.eunjeon.Tagger;
+import kr.bydelta.koala.Sentence;
+import java.util.List;
+
+Tagger tagger = new Tagger();
+
+/* 단일 문장 분석 */
+String sentence = "이것은 코알라 통합 품사분석기에서 은전한닢 분석기를 돌린 결과입니다.";
+Sentence analyzed = tagger.tagSentence(sentence);
+
+/* 문단 분석 */
+String paragraph = "누군가가 말했다. Python에는 KoNLPy가 있다. Scala는 KoalaNLP가 있었다.";
+List<Sentence> sentences = tagger.jTagParagraph(paragraph);
+```
 
 ## 단순 구문 분석
 의존 구문 분석은 한나눔과 꼬꼬마가 지원합니다. (타 패키지는 지원하지 않습니다)
@@ -122,27 +145,58 @@ val sentences: Seq[Sentence] = tagger.tagParagraph(paragraph)
 /* 패키지 명: 한나눔(hnn), 꼬꼬마(kkma) */
 // 예시에서는 꼬꼬마 구문 분석기 활용
 import kr.bydelta.koala.kkma.Parser
+import kr.bydelta.koala.Sentence
 
 val parser = new Parser
 val sentence = "이것은 코알라 통합 품사분석기에서 은전한닢 분석기를 돌린 결과입니다."
 val analyzed: Sentence = parser.parse(sentence)
 ```
 
+Java는 다음과 같습니다.
+```scala
+import kr.bydelta.koala.kkma.Parser;
+import kr.bydelta.koala.Sentence;
+
+Parser parser = new Parser();
+String sentence = "이것은 코알라 통합 품사분석기에서 은전한닢 분석기를 돌린 결과입니다.";
+Sentence analyzed = parser.parse(sentence);
+```
+
 ## 사용자 정의 사전
 모든 품사 분석기는 사용자 정의 사전을 등록할 수 있습니다. 단, 트위터 분석기의 경우 명사만 가능합니다.
 
+> __Experimental:__
 > * 사전에 등재되어도, 일부 라이브러리의 경우, 신규 추가된 단어의 우선순위가 낮아 적용되지 않을 수도 있습니다.
 
 ```scala
 /* 패키지 명: 한나눔(hnn), 코모란(kmr), 꼬꼬마(kkma), 은전한닢(eunjeon), 트위터(twt) */
 // 예시에서는 한나눔 사전에 추가
 import kr.bydelta.koala.hnn.Dictionary
-import kr.bydelta.koala.POSTag
+import kr.bydelta.koala.POS;
 
 Dictionary.addUserDictionary(
-  "설빙" -> POSTag.NNP, /* 고유명사 '설빙' 추가 */
-  "구글하" -> POSTag.VV /* 동사 '구글하다' 추가 */
+  "설빙" -> POS.NNP, /* 고유명사 '설빙' 추가 */
+  "구글하" -> POS.VV /* 동사 '구글하다' 추가 */
 )
+```
+
+Java는 다음과 같습니다.
+```java
+import kr.bydelta.koala.hnn.JavaDictionary;
+import kr.bydelta.koala.POS;
+import kr.bydelta.koala.POS$.Value;
+import java.util.LinkedList;
+
+LinkedList<String> morphemes = new LinkedList<>();
+LinkedList<POS$.Value> pos = new LinkedList<>();
+
+morphemes.add("설빙");
+pos.add(POSTag.NNP); /* 고유명사 '설빙' 추가 */
+
+morphemes.add("구글하");
+pos.add(POSTag.VV); /* 동사 '구글하다' 추가 */
+
+JavaDictionary.addUserDictionary(morphems, pos);
 ```
 
 ## 여러 패키지의 사용
@@ -164,44 +218,66 @@ val tagger = new Tagger
 val parser = new Parser
 
 val paragraph = "누군가가 말했다. Python에는 KoNLPy가 있다. Scala는 KoalaNLP가 있었다."
-val sentences = splitter.sentenceOf(paragraph)
+val sentences = splitter.sentences(paragraph)
 val tagged = sentences.map(tagger.tagSentence)
 val parsed = tagged.map(parser.parse)
 ```
 
+Java는 아래와 같습니다.
+```java
+import kr.bydelta.koala.twt.SentenceSplitter;
+import kr.bydelta.koala.eunjeon.Tagger;
+import kr.bydelta.koala.kkma.Parser;
+import kr.bydelta.koala.Sentence;
+
+SentenceSplitter splitter = new SentenceSplitter();
+Tagger tagger = new Tagger();
+Tagger parser = new Parser();
+
+String paragraph = "누군가가 말했다. Python에는 KoNLPy가 있다. Java는 KoalaNLP가 있었다.";
+List<String> sentences = splitter.jSentences(paragraph);
+for(String line : sentences){
+  Sentence tagged = tagger.tagSentence(line);
+  Sentence parsed = parser.parse(tagged);
+}
+```
+
 ## 자료 구조
+아래는 중심 자료 구조가 지원하는 주요 API 목록입니다.
+
 ### Class `Morpheme` (형태소)
-* String `morpheme` 형태소 
+* String `surface` 형태소 표면형
 * String `rawTag` 품사 분석을 진행한 분석기에서 부여한 품사 (통합 전)
 * koala.POSTag `tag` 통합 품사 
 * koala.Processor `processor` 품사 분석을 진행한 패키지
-* Boolean `isNoun`, `isVerb`, `isModifier`, `isJosa` 명사/동사/관형사/조사 여부
+* Boolean `isNoun`, `isVerb`, `isModifier`, `isJosa` 체언/용언/수식언/관계언 여부
 * Boolean `hasTag(tag:String)` 통합 품사가 tag로 제시한 해당 통합 품사의 하위 분류인지 확인
 * Boolean `hasRawTag(tag:String)` 원본 품사가 tag로 제시한 품사의 하위 분류인지 확인
 
 ### Class `Word` (어절)
 Word는 `Iterable[Morpheme]`을 상속합니다.
-* String `originalWord` 원본 어절 또는 복원된 어절
-* Seq[Morpheme] `morphemes` 어절에 포함된 형태소들
-* Seq[Word] `dependents` 현재 어절이 지배소(Dominant)인 의존소(Dependent) 목록. 즉, 현재 어절에 의존하는 어절의 목록.
+* String `surface` 원본 어절 또는 복원된 어절의 표면형
+* Seq[Morpheme] `morphemes`, java.util.List<Morpheme> `jMorphemes` 어절에 포함된 형태소들
+* Seq[Word] `dependents`, java.util.List<Word> `jDependents` 현재 어절이 지배소(Dominant)인 의존소(Dependent) 목록. 즉, 현재 어절에 의존하는 어절의 목록.
 * String `rawTag` 의존구문분석의 원본 결과. 현재 어절이 지배소와 가지는 관계. 즉, 현재 어절이 상위 어절과 가지는 관계의 이름.
 * koala.FunctionalTag `tag` 의존구문분석의 통합 결과.
-* Int `numOfMeaningful` 명사, 동사, 관형사 형태소의 수
-* Boolean `matches(seq: Seq[String])` 주어진 품사 목록을 순서대로 가지고 있는지 검사함.
+* Int `numOfMeaningful` 체언, 용언 형태소의 수
+* Boolean `matches(seq: Seq[String])`, `matches(POS$.Value[] arr)` 주어진 품사 목록을 순서대로 가지고 있는지 검사함.
 * Boolean `existsMorpheme(tag: String)` 주어진 품사를 가지고 있는지 검사함.
-* Morpheme `apply(index: Int)`, Option[Morpheme] `get(index: Int)` 주어진 위치의 형태소를 가져옴.
-* Morpheme `apply(tag: String)`, Option[Morpheme] `get(tag: String)` 주어진 품사의 형태소를 가져옴.
+* Morpheme `get(index: Int)`, Option[Morpheme] `apply(index: Int)` 주어진 위치의 형태소를 가져옴.
+* Morpheme `get(tag: String)`, Option[Morpheme] `apply(tag: String)` 주어진 품사의 형태소를 가져옴.
 * Morpheme `getNextOf(m: Morpheme)`, `getPrevOf(m: Morpheme)` 주어진 형태소의 다음 또는 이전 위치의 형태소를 가져옴.
 
 ### Class `Sentence` (문장)
 Sentence는 `Iterable[Word]`를 상속합니다.
-* Seq[Word] `words` 문장 내의 단어들
-* Word `rootWord` 의존구문분석에서 Root(뿌리)가 되는 단어, 즉, 핵심어.
-* Sentence `++(other: Sentence)` 문장을 이어붙여 새 문장을 구성함.
-* Boolean `matches(seq: Seq[Seq[String]])` 주어진 품사 목록의 단어 목록을 순서대로 가지고 있는지 검사함.
-* Seq[Word] `nouns`, `verbs`, `adjectives` 문장 내 명사, 동사, 관형사를 포함한 단어들
-* Word `apply(index: Int)`, Option[Word] `get(index: Int)` 주어진 위치의 단어를 가져옴.
-* String `originalString(delimiter: String = " ")` 띄어쓰기를 교정한 원본 문장을 구성하여 돌려줌.
+* Seq[Word] `words`, java.util.List<Word> `jWords` 문장 내의 단어들
+* Seq[Word] `topLevels`, java.util.List<Word> `jTopLevels` 의존구문분석에서 Root(뿌리)에 의존하는 단어, 즉, 핵심어들.
+* Sentence `++(other: Sentence)`, Sentence `concat(other: Sentence)` 문장을 이어붙여 새 문장을 구성함.
+* Boolean `existsMorpheme(tag: String)` 주어진 품사를 가지고 있는지 검사함.
+* Boolean `matches(seq: Seq[Seq[String]])`, `matches(POS$.Value[][] arr)` 주어진 품사 목록의 단어 목록을 순서대로 가지고 있는지 검사함.
+* Seq[Word] `nouns`, `verbs`, `modifiers` java.util.List<Word> `jNouns`, `jVerbs`, `jModifiers` 문장 내 체언, 용언, 수식언을 포함한 단어들
+* Word `get(index: Int)`, Option[Word] `apply(index: Int)` 주어진 위치의 단어를 가져옴.
+* String `surfaceString(delimiter: String = " ")` 띄어쓰기를 교정한 원본 문장을 구성하여 돌려줌.
 
 # License 조항
 이 프로젝트 자체(KoalaNLP-core)와 인터페이스 통합을 위한 코드는  *GPL v3*을 따르며,
