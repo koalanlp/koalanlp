@@ -19,6 +19,11 @@ import kr.bydelta.koala.hnn.Dictionary
 private[koala] object SafeChartMorphAnalyzer {
   /** 사용자사전. **/
   val userDic: Trie = new Trie(Trie.DEFAULT_TRIE_BUF_SIZE_USER)
+  private val tagSet: TagSet = new TagSet
+  private val connection: Connection = new Connection
+  private val connectionNot: ConnectionNot = new ConnectionNot
+  private var analyzedDic: AnalyzedDic = _
+  private var systemDic: Trie = _
 }
 
 /**
@@ -28,11 +33,9 @@ private[koala] object SafeChartMorphAnalyzer {
   * - 모델의 Path를 임시 폴더로 수정.
   */
 private[koala] class SafeChartMorphAnalyzer extends MorphAnalyzer {
-  private val tagSet: TagSet = new TagSet
-  private var analyzedDic: AnalyzedDic = _
-  private var chart: MorphemeChart = _
   private var eojeolList = new util.LinkedList[Eojeol]()
   private var postProc: PostProcessor = _
+  private var chart: MorphemeChart = _
 
   def getName: String = "MorphAnalyzer"
 
@@ -60,7 +63,7 @@ private[koala] class SafeChartMorphAnalyzer extends MorphAnalyzer {
 
   private def processEojeol(plainEojeol: String): Array[Eojeol] = {
     eojeolList.clear()
-    analyzedDic.get(plainEojeol) match {
+    SafeChartMorphAnalyzer.analyzedDic.get(plainEojeol) match {
       case analysis: String =>
         new Iterator[Eojeol] {
           val tokenizer = new StringTokenizer(analysis, "^")
@@ -99,26 +102,29 @@ private[koala] class SafeChartMorphAnalyzer extends MorphAnalyzer {
   @throws[Exception]
   def initialize(configFile: String, dummy: String) {
     val baseDir = Dictionary.getExtractedPath
-    val json: JSONReader = new JSONReader(configFile)
-    val fileDicSystem: String = baseDir + File.separator + json.getValue("dic_system")
-    val fileConnections: String = baseDir + File.separator + json.getValue("connections")
-    val fileConnectionsNot: String = baseDir + File.separator + json.getValue("connections_not")
-    val fileDicAnalyzed: String = baseDir + File.separator + json.getValue("dic_analyzed")
-    val fileTagSet: String = baseDir + File.separator + json.getValue("tagset")
-    tagSet.init(fileTagSet, TagSet.TAG_SET_KAIST)
-    val connection: Connection = new Connection
-    connection.init(fileConnections, tagSet.getTagCount, tagSet)
-    val connectionNot: ConnectionNot = new ConnectionNot
-    connectionNot.init(fileConnectionsNot, tagSet)
-    analyzedDic = new AnalyzedDic
-    analyzedDic.readDic(fileDicAnalyzed)
-    val systemDic: Trie = new Trie(Trie.DEFAULT_TRIE_BUF_SIZE_SYS)
-    systemDic.read_dic(fileDicSystem, tagSet)
+    if (SafeChartMorphAnalyzer.systemDic == null) {
+      val json: JSONReader = new JSONReader(configFile)
+      val fileDicSystem: String = baseDir + File.separator + json.getValue("dic_system")
+      val fileConnections: String = baseDir + File.separator + json.getValue("connections")
+      val fileConnectionsNot: String = baseDir + File.separator + json.getValue("connections_not")
+      val fileDicAnalyzed: String = baseDir + File.separator + json.getValue("dic_analyzed")
+      val fileTagSet: String = baseDir + File.separator + json.getValue("tagset")
+      SafeChartMorphAnalyzer.tagSet.init(fileTagSet, TagSet.TAG_SET_KAIST)
+      SafeChartMorphAnalyzer.connection.init(fileConnections, SafeChartMorphAnalyzer.tagSet.getTagCount,
+        SafeChartMorphAnalyzer.tagSet)
+      SafeChartMorphAnalyzer.connectionNot.init(fileConnectionsNot, SafeChartMorphAnalyzer.tagSet)
+      SafeChartMorphAnalyzer.analyzedDic = new AnalyzedDic
+      SafeChartMorphAnalyzer.analyzedDic.readDic(fileDicAnalyzed)
+      SafeChartMorphAnalyzer.systemDic = new Trie(Trie.DEFAULT_TRIE_BUF_SIZE_SYS)
+      SafeChartMorphAnalyzer.systemDic.read_dic(fileDicSystem, SafeChartMorphAnalyzer.tagSet)
+    }
+
     val numAutomata: NumberAutomata = new NumberAutomata
     val simti: Simti = new Simti
     simti.init()
     eojeolList = new util.LinkedList[Eojeol]()
-    chart = new MorphemeChart(tagSet, connection, systemDic,
+    chart = new MorphemeChart(SafeChartMorphAnalyzer.tagSet, SafeChartMorphAnalyzer.connection,
+      SafeChartMorphAnalyzer.systemDic,
       SafeChartMorphAnalyzer.userDic, numAutomata, simti, eojeolList)
     postProc = new PostProcessor
   }
@@ -128,7 +134,7 @@ private[koala] class SafeChartMorphAnalyzer extends MorphAnalyzer {
       case (morph, tag) =>
         val codes: Array[Char] = Code.toTripleArray(morph)
         val info = new SafeChartMorphAnalyzer.userDic.INFO
-        info.tag = tagSet.getTagID(tag)
+        info.tag = SafeChartMorphAnalyzer.tagSet.getTagID(tag)
         info.phoneme = TagSet.PHONEME_TYPE_ALL
         SafeChartMorphAnalyzer.userDic.store(codes, info)
     }

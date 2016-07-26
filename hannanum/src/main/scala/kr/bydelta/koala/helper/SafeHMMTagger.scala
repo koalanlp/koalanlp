@@ -13,6 +13,12 @@ import scala.annotation.tailrec
 import scala.collection.JavaConversions._
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
+private[koala] object SafeHMMTagger {
+  private var pwtPOS: ProbabilityDBM = _
+  private var pttPOS: ProbabilityDBM = _
+  private var pttWP: ProbabilityDBM = _
+}
+
 /**
   * 한나눔의 HMMTagger를 Scala에 맞게 개량한 버전.
   */
@@ -21,9 +27,6 @@ private[koala] class SafeHMMTagger extends PosTagger {
   private final val PCONSTANT = -20.0
   private val wordPts = ArrayBuffer[MarkovNode]()
   private val markovNet = ListBuffer[MarkovNode]()
-  private var pwtPOS: ProbabilityDBM = _
-  private var pttPOS: ProbabilityDBM = _
-  private var pttWP: ProbabilityDBM = _
 
   def tagPOS(sos: SetOfSentences): Sentence = {
     val eojeolSetArray = sos.getEojeolSetArray
@@ -60,28 +63,30 @@ private[koala] class SafeHMMTagger extends PosTagger {
     val baseDir = Dictionary.getExtractedPath
     wordPts.clear
     markovNet.clear
-    val json: JSONReader = new JSONReader(configFile)
-    val PWT_POS_TDBM_FILE: String = baseDir + File.separator + json.getValue("pwt.pos")
-    val PTT_POS_TDBM_FILE: String = baseDir + File.separator + json.getValue("ptt.pos")
-    val PTT_WP_TDBM_FILE: String = baseDir + File.separator + json.getValue("ptt.wp")
-    pwtPOS = new ProbabilityDBM(PWT_POS_TDBM_FILE)
-    pttWP = new ProbabilityDBM(PTT_WP_TDBM_FILE)
-    pttPOS = new ProbabilityDBM(PTT_POS_TDBM_FILE)
+    if (SafeHMMTagger.pttPOS == null) {
+      val json: JSONReader = new JSONReader(configFile)
+      val PWT_POS_TDBM_FILE: String = baseDir + File.separator + json.getValue("pwt.pos")
+      val PTT_POS_TDBM_FILE: String = baseDir + File.separator + json.getValue("ptt.pos")
+      val PTT_WP_TDBM_FILE: String = baseDir + File.separator + json.getValue("ptt.wp")
+      SafeHMMTagger.pwtPOS = new ProbabilityDBM(PWT_POS_TDBM_FILE)
+      SafeHMMTagger.pttWP = new ProbabilityDBM(PTT_WP_TDBM_FILE)
+      SafeHMMTagger.pttPOS = new ProbabilityDBM(PTT_POS_TDBM_FILE)
+    }
   }
 
   private def computeWT(eojeol: Eojeol): Double = {
     def getProb(tag: String = "bnk", morpheme: String = "", prevTag: String = "bnk") = {
-      val tbigram = pttPOS.get(s"$prevTag-$tag") match {
+      val tbigram = SafeHMMTagger.pttPOS.get(s"$prevTag-$tag") match {
         case arr: Array[Double] => arr(0)
         case _ => PCONSTANT
       }
-      val tunigram = pttPOS.get(tag) match {
+      val tunigram = SafeHMMTagger.pttPOS.get(tag) match {
         case arr: Array[Double] => arr(0)
         case _ => PCONSTANT
       }
       val lexicon =
         if (morpheme.isEmpty) 0
-        else pwtPOS.get(morpheme + "/" + tag) match {
+        else SafeHMMTagger.pwtPOS.get(morpheme + "/" + tag) match {
           case arr: Array[Double] => arr(0)
           case _ => PCONSTANT
         }
@@ -138,10 +143,10 @@ private[koala] class SafeHMMTagger extends PosTagger {
 
   private def updateProbability(prev: MarkovNode, curr: MarkovNode) {
     var P: Double = .0
-    val PTT = (pttWP.get(prev.tag + "-" + curr.tag) match {
+    val PTT = (SafeHMMTagger.pttWP.get(prev.tag + "-" + curr.tag) match {
       case arr: Array[Double] => arr(0)
       case _ => SF
-    }) - (pttWP.get(curr.tag) match {
+    }) - (SafeHMMTagger.pttWP.get(curr.tag) match {
       case arr: Array[Double] => arr(0)
       case _ => 0.0
     })

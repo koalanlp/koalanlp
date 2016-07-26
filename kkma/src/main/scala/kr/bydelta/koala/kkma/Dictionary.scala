@@ -48,20 +48,22 @@ object Dictionary extends CanUserDict {
     * 사전 다시읽기.
     */
   private[koala] def reloadDic() {
-    if (isDicChanged) {
-      userdic.reset()
-      Dict.reload(
-        Seq(
-          new SimpleDicFileReader("/dic/kcc.dic"),
-          new SimpleDicFileReader("/dic/noun.dic"),
-          new SimpleDicFileReader("/dic/person.dic"),
-          new RawDicFileReader("/dic/raw.dic"),
-          new SimpleDicFileReader("/dic/simple.dic"),
-          new SimpleDicFileReader("/dic/verb.dic"),
-          userdic
-        ).asJava
-      )
-      isDicChanged = false
+    this synchronized {
+      if (isDicChanged) {
+        userdic.reset()
+        Dict.reload(
+          Seq(
+            new SimpleDicFileReader("/dic/kcc.dic"),
+            new SimpleDicFileReader("/dic/noun.dic"),
+            new SimpleDicFileReader("/dic/person.dic"),
+            new RawDicFileReader("/dic/raw.dic"),
+            new SimpleDicFileReader("/dic/simple.dic"),
+            new SimpleDicFileReader("/dic/verb.dic"),
+            userdic
+          ).asJava
+        )
+        isDicChanged = false
+      }
     }
   }
 }

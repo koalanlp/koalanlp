@@ -40,7 +40,9 @@ trait CanExtractResource {
       val loader: ClassLoader = this.getClass.getClassLoader
       val zis = new ZipInputStream(loader.getResourceAsStream(s"$modelName.zip"))
       try {
-        unzipStream(zis)
+        this synchronized {
+          unzipStream(zis)
+        }
       } catch {
         case e: Exception => e.printStackTrace()
       } finally {

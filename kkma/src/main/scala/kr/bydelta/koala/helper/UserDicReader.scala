@@ -48,7 +48,7 @@ private[koala] class UserDicReader extends SimpleDicReader {
   }
 
   override def readLine: String = {
-    if (seek == morphemes.size) {
+    if (seek >= morphemes.size) {
       seek = 0
       null
     } else {

@@ -80,6 +80,7 @@ package object koala {
           case "SC" => POS.SP
           case "SSO" | "SSC" => POS.SS
           case "SL" | "SH" => POS.SL
+          case "UNKNOWN" => POS.UE
           case x => POS withName x
         }
 
@@ -181,8 +182,7 @@ package object koala {
           case POS.SP => "SC"
           case POS.XP => "XPN"
           case POS.XSM | POS.XSO => "XSN"
-          case POS.UN | POS.UE => "NNG"
-          case POS.UV => "VV"
+          case POS.UN | POS.UE | POS.UV => "UNKNOWN"
           case x => x.toString
         }
       case Processor.Twitter =>

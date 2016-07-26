@@ -17,12 +17,11 @@ class Tagger extends CanTag[Seq[Eojeol]] {
     * 은전한닢의 내장 Tokenizer.
     */
   lazy val tokenizer: Tokenizer = {
-    val lexiconDict = new LexiconDict().load()
-    val connectionCostDict = new ConnectionCostDict().load()
-    val tok = new Tokenizer(lexiconDict, connectionCostDict)
-    Dictionary.reloadDic()
-    if (Dictionary.nonEmpty)
+    val tok = new Tokenizer(Dictionary.lexiconDict, Dictionary.connectionCostDict)
+    if (Dictionary.nonEmpty) {
+      Dictionary.reloadDic()
       tok.setUserDict(Dictionary.userDict)
+    }
     tok
   }
 

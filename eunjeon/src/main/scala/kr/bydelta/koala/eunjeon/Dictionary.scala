@@ -3,22 +3,31 @@ package kr.bydelta.koala.eunjeon
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.Processor
 import kr.bydelta.koala.traits.CanUserDict
-import org.bitbucket.eunjeon.seunjeon.LexiconDict
+import org.bitbucket.eunjeon.seunjeon.{ConnectionCostDict, DictBuilder, LexiconDict, NngUtil}
 
 import scala.collection.mutable.ArrayBuffer
+import scala.io.Source
 
 /**
   * 은전한닢 사용자사전
   */
 object Dictionary extends CanUserDict {
   /**
+    * 사용자사전에 등재되기 전의 리스트.
+    */
+  private lazy val rawDict = ArrayBuffer[String]()
+  /**
+    * 은전한닢 어휘사전.
+    */
+  private[koala] val lexiconDict = new LexiconDict().load()
+  /**
+    * 은전한닢 연결성 사전.
+    */
+  private[koala] val connectionCostDict = new ConnectionCostDict().load()
+  /**
     * 은전한닢 사용자사전 객체
     */
   private[koala] val userDict = new LexiconDict()
-  /**
-    * 사용자사전에 등재되기 전의 리스트.
-    */
-  private val rawDict = ArrayBuffer[String]()
   /**
     * 사용자사전 변경여부.
     */
@@ -46,20 +55,10 @@ object Dictionary extends CanUserDict {
       case (word, tag) =>
         val lastchar = word.last
         if (isHangul(lastchar))
-          s"$word,,,,${Processor.Eunjeon originalPOSOf tag},*,${hasJongsung(lastchar)},$word,*,*,*,*"
+          s"$word,0,0,0,${Processor.Eunjeon originalPOSOf tag},*,${hasJongsung(lastchar)},$word,*,*,*,*"
         else
-          s"$word,,,,${Processor.Eunjeon originalPOSOf tag},*,*,$word,*,*,*,*"
+          s"$word,0,0,0,${Processor.Eunjeon originalPOSOf tag},*,*,$word,*,*,*,*"
     }
-    isDicChanged = true
-  }
-
-  override def addUserDictionary(word: String, tag: POSTag): Unit = {
-    val lastchar = word.last
-    rawDict +=
-      (if (isHangul(lastchar))
-        s"$word,,,,${Processor.Eunjeon originalPOSOf tag},*,${hasJongsung(lastchar)},$word,*,*,*,*"
-      else
-        s"$word,,,,${Processor.Eunjeon originalPOSOf tag},*,*,$word,*,*,*,*")
     isDicChanged = true
   }
 
@@ -93,5 +92,36 @@ object Dictionary extends CanUserDict {
     } else {
       false
     }
+  }
+
+  override def addUserDictionary(word: String, tag: POSTag): Unit = {
+    val lastchar = word.last
+    val oTag = Processor.Eunjeon originalPOSOf tag
+    rawDict +=
+      (if (isHangul(lastchar)) {
+        val jong = hasJongsung(lastchar)
+        s"$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
+      } else
+        s"$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*")
+    isDicChanged = true
+  }
+
+  private def getLeftId(tag: String = "NNG"): Short = {
+    val leftIdDefStream = classOf[NngUtil].getResourceAsStream(DictBuilder.LEFT_ID_DEF)
+    Source.fromInputStream(leftIdDefStream).getLines()
+      .map(_.split(" "))
+      .collectFirst {
+        case x if x(1).startsWith(s"$tag,*,") => x(0).toShort
+      }.get
+  }
+
+  private def getRightId(tag: String = "NNG", hasJongsung: String = "*"): Short = {
+    val rightIdDefStream = classOf[NngUtil].getResourceAsStream(DictBuilder.RIGHT_ID_DEF)
+
+    Source.fromInputStream(rightIdDefStream).getLines()
+      .map(_.split(" "))
+      .collectFirst {
+        case x if x(1).startsWith(s"$tag,*,$hasJongsung") => x(0).toShort
+      }.get
   }
 }

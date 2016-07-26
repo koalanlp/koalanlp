@@ -122,7 +122,7 @@ final class Tagger(useUnknownMorph: Boolean,
   @tailrec
   private def retrieveSentences(acc: ArrayBuffer[KSent] = ArrayBuffer()): ArrayBuffer[KSent] = {
     (try {
-      Some(workflow.getResultOfSentence(new Sentence(0, 0, true)))
+      Some(workflow.getResultOfSentence(new Sentence(0, 0, false)))
     } catch {
       case _: Throwable => None.asInstanceOf[Sentence]
     }) match {

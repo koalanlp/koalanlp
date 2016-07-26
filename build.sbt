@@ -4,23 +4,23 @@ import sbtunidoc.Plugin.UnidocKeys._
 lazy val root = (project in file("."))
   .aggregate(core, kkma, hannanum, eunjeon, twitter, komoran)
   .settings(unidocSettings: _*)
-  .settings(site.settings: _*)
-  .settings(ghpages.settings: _*)
   .settings(
     publishArtifact := false,
+    packagedArtifacts := Map.empty,
     publishLocal := {},
     publish := {},
-    site.addMappingsToSiteDir(mappings in(ScalaUnidoc, packageDoc), "latest/api"),
-    git.remoteRepo := "git@github.com:nearbydelta/KoalaNLP.git",
     unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples)
   ).settings(aggregate in update := true)
-lazy val core = (project in file("core")).settings(projectWithConfig("core"): _*)
+lazy val core = (project in file("core"))
+  .settings(projectWithConfig("core"): _*)
+  .settings(crossScalaVersions := Seq("2.10", "2.11"))
 
 resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
 
 resolvers ++= Seq(
   "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/"
 )
+
 lazy val kkma = (project in file("kkma"))
   .settings(projectWithConfig("kkma"): _*)
   .settings(
@@ -82,6 +82,14 @@ def projectWithConfig(module: String) =
     name := s"koalaNLP-$module",
     version := ver,
     scalaVersion := "2.11.8",
+    scalacOptions += "-target:jvm-1.7",
+    scalacOptions in Test ++= Seq("-Yrangepos"),
+    libraryDependencies += "org.specs2" %% "specs2-core" % "3.8.4" % "test",
+    dependencyOverrides ++= Set(
+      "org.scala-lang" % "scala-reflect" % "2.11.8",
+      "org.scala-lang.modules" %% "scala-xml" % "1.0.5"
+    ),
+    crossScalaVersions := Seq("2.10", "2.11"),
     homepage := Some(url("http://nearbydelta.github.io/KoalaNLP")),
     publishTo <<= version { v: String ⇒
       val nexus = "https://oss.sonatype.org/"
@@ -90,9 +98,10 @@ def projectWithConfig(module: String) =
       else
         Some("releases" at nexus + "service/local/staging/deploy/maven2")
     },
+    licenses := Seq("GPL v3" -> url("https://opensource.org/licenses/GPL-3.0/")),
     publishMavenStyle := true,
     publishArtifact in Test := false,
-    pomIncludeRepository := { x ⇒ false },
+    pomIncludeRepository := { _ ⇒ false },
     pomExtra :=
       <scm>
         <url>git@github.com:nearbydelta/KoalaNLP.git</url>
