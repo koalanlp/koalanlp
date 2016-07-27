@@ -1,8 +1,8 @@
-KoalaNLP v1.0
+KoalaNLP
 ==============
 (구) KoreanAnalyzer
 
-[![GitHub version](https://badge.fury.io/gh/nearbydelta%2Fkoalanlp.svg)](https://badge.fury.io/gh/nearbydelta%2Fkoalanlp)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-core_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-core_2.11)
 [![Gitter](https://badges.gitter.im/nearbydelta/KoalaNLP.svg)](https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.svg?v=103)](https://opensource.org/licenses/GPL-3.0/)
 
@@ -24,12 +24,15 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 
 ## Packages
 각 형태소 분석기는 별도의 패키지로 Maven Central에 등재되어 있습니다.
-* `koalanlp-core` : 통합 인터페이스의 정의가 등재된 중심 묶음입니다.
-* `koalanlp-hannanum` : 한나눔 분석기 패키지입니다. <sup>주1</sup>
-* `koalanlp-kkma` : 꼬꼬마 분석기 패키지입니다. <sup>주1</sup>
-* `koalanlp-komoran` : 코모란 분석기 패키지입니다. <sup>주1</sup>
-* `koalanlp-twitter` : 트위터 분석기 패키지입니다.
-* `koalanlp-eunjeon` : 은전한닢 분석기 패키지입니다.
+
+| 패키지명 | 버전 | 설명 |
+| -------- | ---- | ---- |
+| `koalanlp-core` | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-core_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-core_2.11) | 통합 인터페이스의 정의가 등재된 중심 묶음입니다. |
+| `koalanlp-hannanum` | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-hannanum_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-hannanum_2.11) | 한나눔 분석기 패키지입니다. <sup>주1</sup> |
+| `koalanlp-kkma` | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-kkma_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-kkma_2.11) | 꼬꼬마 분석기 패키지입니다. <sup>주1</sup> |
+| `koalanlp-komoran` | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-komoran_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-komoran_2.11) | 코모란 분석기 패키지입니다. <sup>주1</sup> |
+| `koalanlp-twitter` | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-twitter_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-twitter_2.11) | 트위터 분석기 패키지입니다. |
+| `koalanlp-eunjeon` | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-eunjeon_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-eunjeon_2.11) | 은전한닢 분석기 패키지입니다. |
 
 > <sup>주1</sup> 꼬꼬마, 한나눔, 코모란 분석기는 타 분석기와 달리 Maven repository에 등재되어 있지 않아, 원래는 수동으로 직접 추가하셔야 합니다.
 > 이 점이 불편하다는 것을 알기에, KoalaNLP는 assembly 형태로 해당 패키지를 포함하여 배포하고 있습니다. 포함된 패키지를 사용하려면, `assembly` classifier를 사용하십시오.
@@ -41,16 +44,14 @@ KoalaNLP는 Scala 2.11.8에서 컴파일 되었으며, Scala 2.10+과 Java 7+을
 > __NOTE:__
 > "koalanlp-eunjeon"의 경우, 의존하고 있는 "org.bitbucket.eunjeon" %% "seunjeon" 패키지가 Scala 2.11만을 지원하여, 2.10 버전을 지원하지 않습니다.
 
-현재 최신 버전은 __1.0__입니다.
-
 SBT를 사용하시는 경우, 다음과 같이 추가하시면 됩니다.
 ```sbt
-libraryDependencies += "kr.bydelta" %% "koalanlp-twitter" % "1.0"	//트위터 분석기의 경우
-libraryDependencies += "kr.bydelta" %% "koalanlp-eunjeon" % "1.0"	//은전한닢 분석기의 경우
+libraryDependencies += "kr.bydelta" %% "koalanlp-twitter" % "{VERSION}"	//트위터 분석기의 경우
+libraryDependencies += "kr.bydelta" %% "koalanlp-eunjeon" % "{VERSION}"	//은전한닢 분석기의 경우
 
-libraryDependencies += "kr.bydelta" %% "koalanlp-kkma" % "1.0" classifier "assembly"	//꼬꼬마 분석기의 경우
-libraryDependencies += "kr.bydelta" %% "koalanlp-komoran" % "1.0" classifier "assembly"	//코모란 분석기의 경우
-libraryDependencies += "kr.bydelta" %% "koalanlp-hannanum" % "1.0" classifier "assembly"	//한나눔 분석기의 경우
+libraryDependencies += "kr.bydelta" %% "koalanlp-kkma" % "{VERSION}" classifier "assembly"	//꼬꼬마 분석기의 경우
+libraryDependencies += "kr.bydelta" %% "koalanlp-komoran" % "{VERSION}" classifier "assembly"	//코모란 분석기의 경우
+libraryDependencies += "kr.bydelta" %% "koalanlp-hannanum" % "{VERSION}" classifier "assembly"	//한나눔 분석기의 경우
 ```
 
 Maven을 사용하시는 경우, 다음과 같습니다.
@@ -58,7 +59,7 @@ Maven을 사용하시는 경우, 다음과 같습니다.
 <dependency>
   <groupId>kr.bydelta</groupId>
   <artifactId>koalanlp-{TAGGER.PACK}_2.11</artifactId>
-  <version>1.0</version>
+  <version>{VERSION}</version>
 </dependency>
 ```
 
