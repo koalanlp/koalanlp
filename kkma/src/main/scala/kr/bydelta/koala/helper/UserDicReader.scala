@@ -15,7 +15,7 @@ private[koala] class UserDicReader extends SimpleDicReader {
   /**
     * 파일스트림 모사를 위한 현재위치 Marker.
     */
-  private var seek: Int = 0
+  private var iterator: Iterator[String] = _
 
   /**
     * 사전에 (형태소,품사)리스트를 추가.
@@ -40,20 +40,20 @@ private[koala] class UserDicReader extends SimpleDicReader {
 
   override def cleanup() {}
 
+  override def readLine: String = {
+    if (iterator == null)
+      reset()
+    if (!iterator.hasNext) {
+      null
+    } else {
+      iterator.next()
+    }
+  }
+
   /**
     * 위치 초기화. (반복읽기를 위함.)
     */
   def reset() = {
-    seek = 0
-  }
-
-  override def readLine: String = {
-    if (seek >= morphemes.size) {
-      seek = 0
-      null
-    } else {
-      seek += 1
-      morphemes(seek - 1)
-    }
+    iterator = morphemes.iterator
   }
 }

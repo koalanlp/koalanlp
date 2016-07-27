@@ -34,12 +34,12 @@ class TaggerSpec extends Specification {
 
       workflow.setPosTagger(new HMMTagger,
         basePath + File.separator + "conf" + File.separator + "HmmPosTagger.json")
-      workflow.activateWorkflow(false)
+      workflow.activateWorkflow(true)
       workflow
     }
   }
 
-  "EunjeonTagger" should {
+  "HannanumTagger" should {
     "tag a sentence" in {
       val sent = "포털의 '속초' 연관 검색어로 '포켓몬 고'가 올랐고, 속초시청이 관광객의 편의를 위해 예전에 만들었던 무료 와이파이존 지도는 순식간에 인기 게시물이 됐다."
       val tagged = new Tagger().tagSentence(sent)
@@ -88,17 +88,17 @@ class TaggerSpec extends Specification {
     }
 
     "supports dictionary" in {
-      val sent = "아햏햏, 2000년대에 유행한 통신은어로, 개벽이, 햏자 등의 여러 신조어를 유통시켰다."
+      val sent = "아햏햏은 2000년대에 유행한 통신은어로, 개벽이, 햏햏 등의 여러 신조어를 유통시켰다."
 
       val noUserDict = new Tagger().tagSentence(sent).singleLineString
 
-      Dictionary.userDict.size must_== 0
+      val prevEnd = Dictionary.userDic.search_end
 
-      Dictionary.addUserDictionary("아햏햏" -> POS.NNP, "개벽이" -> POS.NNP, "햏자" -> POS.NNG)
+      Dictionary.addUserDictionary("아햏햏" -> POS.IC, "개벽이" -> POS.NNG, "햏햏" -> POS.NNG)
 
       val dictApplied = new Tagger().tagSentence(sent).singleLineString
 
-      Dictionary.userDict.size must_== 3
+      Dictionary.userDic.search_end != prevEnd
 
       noUserDict must_!= dictApplied
     }

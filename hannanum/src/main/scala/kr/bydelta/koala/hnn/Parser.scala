@@ -16,7 +16,6 @@ import kr.bydelta.koala.traits.CanDepParse
   * 한나눔 통합 구문분석기
   */
 class Parser extends CanDepParse {
-  Configuration.hanBaseDir = Dictionary.getExtractedPath
   /**
     * 품사분석기
     */
@@ -31,15 +30,9 @@ class Parser extends CanDepParse {
   private lazy val conv: Converter = new Converter
 
   override def parse(sentence: String): Sentence = {
-    val taggedRaw = tagger.tagSentenceRaw(
-      sentence.replaceAll("\\(", "[").replaceAll("\\)", "]")
-    )
+    val taggedRaw = tagger.tagSentenceRaw(sentence)
     val tagged = tagger.convert(taggedRaw)
     convert(taggedRaw, tagged)
-  }
-
-  override def parse(sentence: Sentence): Sentence = {
-    convert(deParse(sentence), sentence)
   }
 
   /**
@@ -62,7 +55,10 @@ class Parser extends CanDepParse {
         } catch {
           case e: Exception =>
             if (node.getWordIdx != -1 && node.getWordIdx < sentence.size) {
-              sentence.topLevels += sentence.get(node.getWordIdx)
+              val thisWord = sentence.get(node.getWordIdx)
+              sentence.topLevels += thisWord
+              thisWord.rawDepTag = node.getdType
+              thisWord.depTag = Processor.Hannanum dependencyOf node.getdType
             }
         }
     }
@@ -83,6 +79,10 @@ class Parser extends CanDepParse {
           wrapper.parseForced(sentence)
         )
       ), 0, true)
+
+  override def parse(sentence: Sentence): Sentence = {
+    convert(deParse(sentence), sentence)
+  }
 
   /**
     * 통합분석기의 결과를 한나눔 문장객체로 복원.

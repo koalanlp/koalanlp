@@ -13,6 +13,9 @@ import scala.annotation.tailrec
 import scala.collection.JavaConversions._
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
+/**
+  * HMMTagger의 확률 저장공간.
+  */
 private[koala] object SafeHMMTagger {
   private var pwtPOS: ProbabilityDBM = _
   private var pttPOS: ProbabilityDBM = _
@@ -21,6 +24,8 @@ private[koala] object SafeHMMTagger {
 
 /**
   * 한나눔의 HMMTagger를 Scala에 맞게 개량한 버전.
+  *
+  * 원본의 Copyright: KAIST 한나눔 개발팀.
   */
 private[koala] class SafeHMMTagger extends PosTagger {
   private final val SF = -4.60517018598809136803598290936873

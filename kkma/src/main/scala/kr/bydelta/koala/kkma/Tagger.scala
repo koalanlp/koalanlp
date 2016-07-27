@@ -14,17 +14,21 @@ import scala.collection.JavaConversions._
 
 /**
   * 꼬꼬마 형태소분석기.
+  *
+  * @param logPath 꼬꼬마 형태소분석기의 log를 저장할 위치.
   */
-final class Tagger extends CanTag[Sentence] {
+final class Tagger(logPath: String = "kkma.log") extends CanTag[Sentence] {
   /** 꼬꼬마 형태소분석기 객체. **/
   private lazy val ma = {
-    val ma = new MorphemeAnalyzer
-    ma.createLogger(null)
     Dictionary.reloadDic()
+    val ma = new MorphemeAnalyzer
+    //    ma.createLogger(logPath)
     ma
   }
 
   override def tagSentence(text: String): koala.data.Sentence = convert(tagParagraphRaw(text).head)
+
+  override def tagParagraph(text: String): Seq[koala.data.Sentence] = tagParagraphRaw(text).map(convert)
 
   override private[koala] def convert(result: Sentence): koala.data.Sentence =
     new koala.data.Sentence(
@@ -54,14 +58,13 @@ final class Tagger extends CanTag[Sentence] {
     ma.divideToSentences(
       ma.leaveJustBest(
         ma.postProcess(
-          ma.analyze(
-            text.replaceAll("\\s*([^ㄱ-힣0-9A-Za-z,\\.!\\?\'\"]+)\\s*", " $1 ")
-          )
+          Dictionary synchronized
+            ma.analyze(
+              text
+            )
         )
       )
     ).toSeq
-
-  override def tagParagraph(text: String): Seq[koala.data.Sentence] = tagParagraphRaw(text).map(convert)
 
   /**
     * 꼬꼬마는 문장단위의 분석결과가 없습니다.
@@ -74,7 +77,7 @@ final class Tagger extends CanTag[Sentence] {
 
   @throws[Throwable]
   override protected def finalize() {
-    ma.closeLogger()
+    //    ma.closeLogger()
     super.finalize()
   }
 }

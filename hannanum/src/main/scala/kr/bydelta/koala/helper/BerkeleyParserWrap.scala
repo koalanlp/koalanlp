@@ -2,7 +2,6 @@ package kr.bydelta.koala.helper
 
 import java.io.File
 import java.util
-import java.util.StringTokenizer
 
 import edu.berkeley.nlp.PCFGLA._
 import edu.berkeley.nlp.syntax.Tree
@@ -11,11 +10,15 @@ import edu.berkeley.nlp.util.Numberer
 import kaist.cilab.jhannanum.common.communication.Sentence
 import kr.bydelta.koala.hnn.Dictionary
 
+import scala.collection.JavaConverters._
+
 /**
   * 한나눔 BerkeleyParserWrapper를 개량한 Class.
   * - Scala에 맞게 Logic 수정.
   * - 한나눔 품사분석결과에서 시작하도록 수정.
   * - 모델의 경로를 임시 디렉터리가 되도록 수정.
+  *
+  * 원본의 Copyright: KAIST 한나눔 개발팀.
   *
   * @param grammarName 문법의 유형.
   */
@@ -24,7 +27,7 @@ private[koala] class BerkeleyParserWrap(val grammarName: String) {
     val args: String = "-in " + grammarName
     val optParser: OptionParser = new OptionParser(classOf[GrammarTester.Options])
     val opts: GrammarTester.Options = optParser.parse(args.split(" "), true).asInstanceOf[GrammarTester.Options]
-    val inFileName: String = Dictionary.getExtractedPath + File.separator + opts.inFileName
+    val inFileName: String = Dictionary.extractResource() + File.separator + opts.inFileName
     System.out.println("Loading grammar from " + inFileName + ".")
     val finalLevel: Int = opts.finalLevel
     val viterbiParse: Boolean = opts.viterbi
@@ -47,19 +50,20 @@ private[koala] class BerkeleyParserWrap(val grammarName: String) {
   }
 
   def parseForced(data: Sentence): String = {
+    val testSentence =
+      try {
+        MorphemeAnalyzerWrap.getSpacedresult(data).asJava
+      } catch {
+        case e: Throwable =>
+          e.printStackTrace()
+          System.exit(1)
+          null.asInstanceOf
+      }
+
     var parsedTree: Tree[String] = null
     val posTags: Any = null
     val allowedStates = null.asInstanceOf[Array[Array[Array[Array[Boolean]]]]]
-    val tok: StringTokenizer = new StringTokenizer(
-      data.getEojeols.map(_.getMorphemes.mkString(" ")).mkString(" "), " ")
-    val testSentence = new util.LinkedList[String]()
-    var ret: String = null
-    while (tok.hasMoreElements) {
-      {
-        ret = tok.nextToken
-        testSentence add ret
-      }
-    }
+
     parsedTree = this.parser.getBestConstrainedParse(testSentence,
       posTags.asInstanceOf[util.List[String]], allowedStates)
     parsedTree = TreeAnnotations.unAnnotateTree(parsedTree, false)
