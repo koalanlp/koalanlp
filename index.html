@@ -20,11 +20,12 @@
 
     <section class="main-content">
       <h1>
-<a id="koalanlp-v10" class="anchor" href="#koalanlp-v10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>KoalaNLP v1.0</h1>
+<a id="koalanlp" class="anchor" href="#koalanlp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>KoalaNLP</h1>
 
 <p>(구) KoreanAnalyzer</p>
 
-<p><a href="https://badge.fury.io/gh/nearbydelta%2Fkoalanlp"><img src="https://badge.fury.io/gh/nearbydelta%2Fkoalanlp.svg" alt="GitHub version"></a>
+<p><a href="https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-core_2.11"><img src="https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-core_2.11/badge.svg" alt="Maven Central"></a>
+<a href="https://travis-ci.org/nearbydelta/KoalaNLP"><img src="https://travis-ci.org/nearbydelta/KoalaNLP.svg?branch=master" alt="Build Status"></a>
 <a href="https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/nearbydelta/KoalaNLP.svg" alt="Gitter"></a>
 <a href="https://opensource.org/licenses/GPL-3.0/"><img src="https://badges.frapsoft.com/os/gpl/gpl.svg?v=103" alt="GPL Licence"></a></p>
 
@@ -60,23 +61,50 @@
 
 <p>각 형태소 분석기는 별도의 패키지로 Maven Central에 등재되어 있습니다.</p>
 
-<ul>
-<li>
-<code>koalanlp-core</code> : 통합 인터페이스의 정의가 등재된 중심 묶음입니다.</li>
-<li>
-<code>koalanlp-hannanum</code> : 한나눔 분석기 패키지입니다. <sup>주1</sup>
-</li>
-<li>
-<code>koalanlp-kkma</code> : 꼬꼬마 분석기 패키지입니다. <sup>주1</sup>
-</li>
-<li>
-<code>koalanlp-komoran</code> : 코모란 분석기 패키지입니다. <sup>주1</sup>
-</li>
-<li>
-<code>koalanlp-twitter</code> : 트위터 분석기 패키지입니다.</li>
-<li>
-<code>koalanlp-eunjeon</code> : 은전한닢 분석기 패키지입니다.</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>패키지명</th>
+<th>버전</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>koalanlp-core</code></td>
+<td><a href="https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-core_2.11"><img src="https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-core_2.11/badge.svg" alt="Maven Central"></a></td>
+<td>통합 인터페이스의 정의가 등재된 중심 묶음입니다.</td>
+</tr>
+<tr>
+<td><code>koalanlp-hannanum</code></td>
+<td><a href="https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-hannanum_2.11"><img src="https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-hannanum_2.11/badge.svg" alt="Maven Central"></a></td>
+<td>한나눔 분석기 패키지입니다. <sup>주1</sup>
+</td>
+</tr>
+<tr>
+<td><code>koalanlp-kkma</code></td>
+<td><a href="https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-kkma_2.11"><img src="https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-kkma_2.11/badge.svg" alt="Maven Central"></a></td>
+<td>꼬꼬마 분석기 패키지입니다. <sup>주1</sup>
+</td>
+</tr>
+<tr>
+<td><code>koalanlp-komoran</code></td>
+<td><a href="https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-komoran_2.11"><img src="https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-komoran_2.11/badge.svg" alt="Maven Central"></a></td>
+<td>코모란 분석기 패키지입니다. <sup>주1</sup>
+</td>
+</tr>
+<tr>
+<td><code>koalanlp-twitter</code></td>
+<td><a href="https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-twitter_2.11"><img src="https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-twitter_2.11/badge.svg" alt="Maven Central"></a></td>
+<td>트위터 분석기 패키지입니다.</td>
+</tr>
+<tr>
+<td><code>koalanlp-eunjeon</code></td>
+<td><a href="https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-eunjeon_2.11"><img src="https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-eunjeon_2.11/badge.svg" alt="Maven Central"></a></td>
+<td>은전한닢 분석기 패키지입니다.</td>
+</tr>
+</tbody>
+</table>
 
 <blockquote>
 <p><sup>주1</sup> 꼬꼬마, 한나눔, 코모란 분석기는 타 분석기와 달리 Maven repository에 등재되어 있지 않아, 원래는 수동으로 직접 추가하셔야 합니다.
@@ -94,23 +122,21 @@
 "koalanlp-eunjeon"의 경우, 의존하고 있는 "org.bitbucket.eunjeon" %% "seunjeon" 패키지가 Scala 2.11만을 지원하여, 2.10 버전을 지원하지 않습니다.</p>
 </blockquote>
 
-<p>현재 최신 버전은 <strong>1.0</strong>입니다.</p>
-
 <p>SBT를 사용하시는 경우, 다음과 같이 추가하시면 됩니다.</p>
 
-<div class="highlight highlight-source-scala"><pre>libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>kr.bydelta<span class="pl-pds">"</span></span> <span class="pl-k">%%</span> <span class="pl-s"><span class="pl-pds">"</span>koalanlp-twitter<span class="pl-pds">"</span></span> <span class="pl-k">%</span> <span class="pl-s"><span class="pl-pds">"</span>1.0<span class="pl-pds">"</span></span>   <span class="pl-c">//트위터 분석기의 경우</span>
-libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>kr.bydelta<span class="pl-pds">"</span></span> <span class="pl-k">%%</span> <span class="pl-s"><span class="pl-pds">"</span>koalanlp-eunjeon<span class="pl-pds">"</span></span> <span class="pl-k">%</span> <span class="pl-s"><span class="pl-pds">"</span>1.0<span class="pl-pds">"</span></span>   <span class="pl-c">//은전한닢 분석기의 경우</span>
+<div class="highlight highlight-source-scala"><pre>libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>kr.bydelta<span class="pl-pds">"</span></span> <span class="pl-k">%%</span> <span class="pl-s"><span class="pl-pds">"</span>koalanlp-twitter<span class="pl-pds">"</span></span> <span class="pl-k">%</span> <span class="pl-s"><span class="pl-pds">"</span>{VERSION}<span class="pl-pds">"</span></span> <span class="pl-c">//트위터 분석기의 경우</span>
+libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>kr.bydelta<span class="pl-pds">"</span></span> <span class="pl-k">%%</span> <span class="pl-s"><span class="pl-pds">"</span>koalanlp-eunjeon<span class="pl-pds">"</span></span> <span class="pl-k">%</span> <span class="pl-s"><span class="pl-pds">"</span>{VERSION}<span class="pl-pds">"</span></span> <span class="pl-c">//은전한닢 분석기의 경우</span>
 
-libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>kr.bydelta<span class="pl-pds">"</span></span> <span class="pl-k">%%</span> <span class="pl-s"><span class="pl-pds">"</span>koalanlp-kkma<span class="pl-pds">"</span></span> <span class="pl-k">%</span> <span class="pl-s"><span class="pl-pds">"</span>1.0<span class="pl-pds">"</span></span> classifier <span class="pl-s"><span class="pl-pds">"</span>assembly<span class="pl-pds">"</span></span>    <span class="pl-c">//꼬꼬마 분석기의 경우</span>
-libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>kr.bydelta<span class="pl-pds">"</span></span> <span class="pl-k">%%</span> <span class="pl-s"><span class="pl-pds">"</span>koalanlp-komoran<span class="pl-pds">"</span></span> <span class="pl-k">%</span> <span class="pl-s"><span class="pl-pds">"</span>1.0<span class="pl-pds">"</span></span> classifier <span class="pl-s"><span class="pl-pds">"</span>assembly<span class="pl-pds">"</span></span> <span class="pl-c">//코모란 분석기의 경우</span>
-libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>kr.bydelta<span class="pl-pds">"</span></span> <span class="pl-k">%%</span> <span class="pl-s"><span class="pl-pds">"</span>koalanlp-hannanum<span class="pl-pds">"</span></span> <span class="pl-k">%</span> <span class="pl-s"><span class="pl-pds">"</span>1.0<span class="pl-pds">"</span></span> classifier <span class="pl-s"><span class="pl-pds">"</span>assembly<span class="pl-pds">"</span></span>    <span class="pl-c">//한나눔 분석기의 경우</span></pre></div>
+libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>kr.bydelta<span class="pl-pds">"</span></span> <span class="pl-k">%%</span> <span class="pl-s"><span class="pl-pds">"</span>koalanlp-kkma<span class="pl-pds">"</span></span> <span class="pl-k">%</span> <span class="pl-s"><span class="pl-pds">"</span>{VERSION}<span class="pl-pds">"</span></span> classifier <span class="pl-s"><span class="pl-pds">"</span>assembly<span class="pl-pds">"</span></span>  <span class="pl-c">//꼬꼬마 분석기의 경우</span>
+libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>kr.bydelta<span class="pl-pds">"</span></span> <span class="pl-k">%%</span> <span class="pl-s"><span class="pl-pds">"</span>koalanlp-komoran<span class="pl-pds">"</span></span> <span class="pl-k">%</span> <span class="pl-s"><span class="pl-pds">"</span>{VERSION}<span class="pl-pds">"</span></span> classifier <span class="pl-s"><span class="pl-pds">"</span>assembly<span class="pl-pds">"</span></span>   <span class="pl-c">//코모란 분석기의 경우</span>
+libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>kr.bydelta<span class="pl-pds">"</span></span> <span class="pl-k">%%</span> <span class="pl-s"><span class="pl-pds">"</span>koalanlp-hannanum<span class="pl-pds">"</span></span> <span class="pl-k">%</span> <span class="pl-s"><span class="pl-pds">"</span>{VERSION}<span class="pl-pds">"</span></span> classifier <span class="pl-s"><span class="pl-pds">"</span>assembly<span class="pl-pds">"</span></span>  <span class="pl-c">//한나눔 분석기의 경우</span></pre></div>
 
 <p>Maven을 사용하시는 경우, 다음과 같습니다.</p>
 
 <div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
   &lt;<span class="pl-ent">groupId</span>&gt;kr.bydelta&lt;/<span class="pl-ent">groupId</span>&gt;
   &lt;<span class="pl-ent">artifactId</span>&gt;koalanlp-{TAGGER.PACK}_2.11&lt;/<span class="pl-ent">artifactId</span>&gt;
-  &lt;<span class="pl-ent">version</span>&gt;1.0&lt;/<span class="pl-ent">version</span>&gt;
+  &lt;<span class="pl-ent">version</span>&gt;{VERSION}&lt;/<span class="pl-ent">version</span>&gt;
 &lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
 
 <p>Classifier를 추가하실 경우, <code>&lt;artifactId&gt;</code>다음 행에 다음 코드를 추가하세요.</p>
