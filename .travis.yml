@@ -3,4 +3,10 @@ scala:
   - 2.11.8
 jdk:
   - oraclejdk7
-sbt_args: -J-Xmx4g
+script:
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION core/test
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION eunjeon/test
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION komoran/test
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION kkma/test
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION twitter/test
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION hannanum/test
