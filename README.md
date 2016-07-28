@@ -3,6 +3,7 @@ KoalaNLP
 (구) KoreanAnalyzer
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-core_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-core_2.11)
+[![Build Status](https://travis-ci.org/nearbydelta/KoalaNLP.svg?branch=master)](https://travis-ci.org/nearbydelta/KoalaNLP)
 [![Gitter](https://badges.gitter.im/nearbydelta/KoalaNLP.svg)](https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.svg?v=103)](https://opensource.org/licenses/GPL-3.0/)
 
