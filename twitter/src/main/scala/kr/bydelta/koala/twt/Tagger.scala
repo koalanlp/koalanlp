@@ -25,17 +25,27 @@ class Tagger extends CanTag[Seq[KoreanToken]] {
       TwitterKoreanProcessor.normalize(text)
     )
 
-  override private[koala] def convert(result: Seq[KoreanToken]): Sentence =
+  override private[koala] def convert(result: Seq[KoreanToken]): Sentence = {
     new Sentence(
-      result.map {
-        tok =>
-          new Word(surface = tok.text,
-            morphemes = Seq(
-              new Morpheme(surface = tok.text, rawTag = tok.pos.toString, processor = Processor.Twitter)
-            )
+      new Iterator[Seq[KoreanToken]]{
+        val it = result.iterator
+
+        override def hasNext: Boolean = it.hasNext
+
+        override def next(): Seq[KoreanToken] = {
+          it.takeWhile(!_.text.matches("(?U)^\\s+$")).toSeq
+        }
+      }.map {
+        tokens =>
+          new Word(surface = tokens.map(_.text).mkString,
+            morphemes =
+              tokens.map{
+                tok => new Morpheme(surface = tok.text, rawTag = tok.pos.toString, processor = Processor.Twitter)
+              }
           )
-      }
+      }.toSeq
     )
+  }
 }
 
 

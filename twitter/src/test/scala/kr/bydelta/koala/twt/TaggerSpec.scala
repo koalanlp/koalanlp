@@ -15,8 +15,8 @@ class TaggerSpec extends Specification {
       val original = TwitterKoreanProcessor.tokenize(TwitterKoreanProcessor.normalize(sent))
 
       tagged.map(_.map(_.surface).mkString("+")).mkString(" ") must_==
-        original.map(_.text).mkString(" ")
-      tagged.map(_.surface).mkString must_== sent.replaceAll("\\s+", "")
+        original.map(_.text).mkString(" ").replaceAll("[ ]{2,}","##").replaceAll(" ", "+").replaceAll("##", " ")
+      tagged.map(_.surface.trim).mkString must_== sent.replaceAll("\\s+", "")
     }
 
     "be thread-safe" in {
@@ -47,7 +47,7 @@ class TaggerSpec extends Specification {
       val singlethreaded = sents.map {
         sent =>
           TwitterKoreanProcessor.tokenize(TwitterKoreanProcessor.normalize(sent))
-            .map(_.text).mkString(" ")
+            .map(_.text).mkString(" ").replaceAll("[ ]{2,}","##").replaceAll(" ", "+").replaceAll("##", " ")
       }.mkString("\n")
 
       multithreaded must_== singlethreaded
