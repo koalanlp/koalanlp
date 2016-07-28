@@ -8,9 +8,32 @@ import edu.berkeley.nlp.syntax.Tree
 import edu.berkeley.nlp.syntax.Trees.PennTreeRenderer
 import edu.berkeley.nlp.util.Numberer
 import kaist.cilab.jhannanum.common.communication.Sentence
+import kaist.cilab.parser.berkeleyadaptation.Configuration
 import kr.bydelta.koala.hnn.Dictionary
 
 import scala.collection.JavaConverters._
+
+private[koala] object BerkeleyParserWrap {
+  lazy val args: String = "-in " + Configuration.parserModel
+  lazy val opts = new OptionParser(classOf[GrammarTester.Options]).parse(args.split(" "), true).asInstanceOf[GrammarTester.Options]
+  lazy val finalLevel: Int = opts.finalLevel
+  lazy val viterbiParse: Boolean = opts.viterbi
+  lazy val doVariational: Boolean = false
+  lazy val useGoldPOS: Boolean = opts.useGoldPOS
+
+  lazy val inFileName: String = Dictionary.extractResource() + File.separator + opts.inFileName
+  lazy val pData = {
+    val p = ParserData.Load(inFileName)
+    Numberer.setNumberers(p.getNumbs)
+    p
+  }
+  lazy val grammar = {
+    val g = pData.getGrammar
+    g.splitRules()
+    g
+  }
+  lazy val lexicon = pData.getLexicon
+}
 
 /**
   * 한나눔 BerkeleyParserWrapper를 개량한 Class.
@@ -19,40 +42,23 @@ import scala.collection.JavaConverters._
   * - 모델의 경로를 임시 디렉터리가 되도록 수정.
   *
   * 원본의 Copyright: KAIST 한나눔 개발팀.
-  *
-  * @param grammarName 문법의 유형.
   */
 private[koala] class BerkeleyParserWrap(val grammarName: String) {
   val parser = {
-    val args: String = "-in " + grammarName
-    val optParser: OptionParser = new OptionParser(classOf[GrammarTester.Options])
-    val opts: GrammarTester.Options = optParser.parse(args.split(" "), true).asInstanceOf[GrammarTester.Options]
-    val inFileName: String = Dictionary.extractResource() + File.separator + opts.inFileName
-    System.out.println("Loading grammar from " + inFileName + ".")
-    val finalLevel: Int = opts.finalLevel
-    val viterbiParse: Boolean = opts.viterbi
-    val doVariational: Boolean = false
-    val useGoldPOS: Boolean = opts.useGoldPOS
-    val pData: ParserData = ParserData.Load(inFileName)
-    if (pData == null) {
-      System.out.println("Failed to load grammar from file" + inFileName + ".")
-      System.exit(1)
-    }
-    val grammar: Grammar = pData.getGrammar
-    grammar.splitRules()
-    val lexicon: Lexicon = pData.getLexicon
-    Numberer.setNumberers(pData.getNumbs)
-
-    val p = new CoarseToFineMaxRuleParser(grammar, lexicon, opts.unaryPenalty,
-      finalLevel, viterbiParse, false, false, opts.accurate, doVariational, useGoldPOS, true)
-    p.binarization = pData.getBinarization
+    val p = new CoarseToFineMaxRuleParser(BerkeleyParserWrap.grammar, BerkeleyParserWrap.lexicon,
+      BerkeleyParserWrap.opts.unaryPenalty, BerkeleyParserWrap.finalLevel,
+      BerkeleyParserWrap.viterbiParse, false, false, BerkeleyParserWrap.opts.accurate,
+      BerkeleyParserWrap.doVariational, BerkeleyParserWrap.useGoldPOS, true)
+    p.binarization = BerkeleyParserWrap.pData.getBinarization
     p
   }
 
   def parseForced(data: Sentence): String = {
     val testSentence =
       try {
-        MorphemeAnalyzerWrap.getSpacedresult(data).asJava
+        MorphemeAnalyzerWrap synchronized {
+          MorphemeAnalyzerWrap.getSpacedresult(data).asJava
+        }
       } catch {
         case e: Throwable =>
           e.printStackTrace()
@@ -61,11 +67,10 @@ private[koala] class BerkeleyParserWrap(val grammarName: String) {
       }
 
     var parsedTree: Tree[String] = null
-    val posTags: Any = null
+    val posTags = null.asInstanceOf[util.List[String]]
     val allowedStates = null.asInstanceOf[Array[Array[Array[Array[Boolean]]]]]
 
-    parsedTree = this.parser.getBestConstrainedParse(testSentence,
-      posTags.asInstanceOf[util.List[String]], allowedStates)
+    parsedTree = this.parser.getBestConstrainedParse(testSentence, posTags, allowedStates)
     parsedTree = TreeAnnotations.unAnnotateTree(parsedTree, false)
     PennTreeRenderer.render(parsedTree)
   }

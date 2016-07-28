@@ -13,6 +13,8 @@ import scala.collection.mutable.ArrayBuffer
   * Created by bydelta on 16. 7. 26.
   */
 class ParserSpec extends Specification {
+  sequential
+
   final def iterateTree(word: Seq[Word], parent: String,
                         buf: ArrayBuffer[String] = ArrayBuffer()): ArrayBuffer[String] = {
     word.foreach {
@@ -98,7 +100,7 @@ class ParserSpec extends Specification {
 
       val noUserDict = new Parser().parse(sent).treeString
 
-      Dictionary.addUserDictionary("아햏햏" -> POS.NNP, "개벽이" -> POS.NNP, "햏햏" -> POS.NNP)
+      Dictionary.addUserDictionary("아햏햏" -> POS.IC, "개벽이" -> POS.NNP, "햏햏" -> POS.NNG)
 
       val dictApplied = new Parser().parse(sent).treeString
 

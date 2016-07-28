@@ -16,6 +16,7 @@ import org.specs2.mutable._
   * Created by bydelta on 16. 7. 26.
   */
 class TaggerSpec extends Specification {
+  sequential
 
   val workflow = {
     Dictionary synchronized {
@@ -88,7 +89,7 @@ class TaggerSpec extends Specification {
     }
 
     "supports dictionary" in {
-      val sent = "아햏햏은 2000년대에 유행한 통신은어로, 개벽이, 햏햏 등의 여러 신조어를 유통시켰다."
+      val sent = "아햏햏, 2000년대에 유행한 통신은어로, 개벽이, 햏햏 등의 여러 신조어를 유통시켰다."
 
       val noUserDict = new Tagger().tagSentence(sent).singleLineString
 

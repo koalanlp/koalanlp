@@ -238,8 +238,10 @@ class Word(val surface: String, val morphemes: collection.Seq[Morpheme]) extends
     * @param rawTag 의존관계의 원본 명칭.
     */
   private[koala] final def addDependant(word: Word, tag: FunctionalTag, rawTag: String) {
-    word.depTag = tag
-    word.rawDepTag = rawTag
-    dependents += word
+    if (!dependents.contains(word)) {
+      word.depTag = tag
+      word.rawDepTag = rawTag
+      dependents += word
+    }
   }
 }

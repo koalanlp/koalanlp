@@ -74,7 +74,7 @@ lazy val samples = (project in file("samples"))
       ("kr.bydelta" %% "koalanlp-komoran" % ver) classifier "assembly"
     )
   )
-lazy val ver = "1.0"
+lazy val ver = "1.0.1"
 
 def projectWithConfig(module: String) =
   Seq(
@@ -91,6 +91,7 @@ def projectWithConfig(module: String) =
     ),
     crossScalaVersions := Seq("2.10", "2.11"),
     homepage := Some(url("http://nearbydelta.github.io/KoalaNLP")),
+    parallelExecution in Test := false,
     publishTo <<= version { v: String ⇒
       val nexus = "https://oss.sonatype.org/"
       if (v.trim.endsWith("SNAPSHOT"))

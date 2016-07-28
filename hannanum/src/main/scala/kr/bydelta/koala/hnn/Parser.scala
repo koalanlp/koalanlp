@@ -8,9 +8,11 @@ import kaist.cilab.parser.dependency.DTree
 import kaist.cilab.parser.psg2dg.Converter
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.Processor
-import kr.bydelta.koala.data.Sentence
+import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.helper.BerkeleyParserWrap
 import kr.bydelta.koala.traits.CanDepParse
+
+import scala.collection.JavaConversions._
 
 /**
   * 한나눔 통합 구문분석기
@@ -31,19 +33,41 @@ class Parser extends CanDepParse {
 
   override def parse(sentence: String): Sentence = {
     val taggedRaw = tagger.tagSentenceRaw(sentence)
-    val tagged = tagger.convert(taggedRaw)
-    convert(taggedRaw, tagged)
+    convert(taggedRaw)
   }
 
   /**
     * 의존관계분석을 수행하고, 그 결과를 변환.
     *
     * @param hSent    한나눔의 문장 객체.
-    * @param sentence 통합분석기의 문장 객체.
     * @return 의존관계분석이 포함된 결과.
     */
-  private def convert(hSent: HSent, sentence: Sentence): Sentence = {
-    val depTree: DTree = conv.convert(parseTreeOf(hSent))
+  private def convert(hSent: HSent): Sentence = {
+    val tree = parseTreeOf(hSent)
+    val depTree: DTree = conv.convert(tree)
+
+    val sentence = new Sentence(
+      words =
+        depTree.getNodeList.map {
+          node =>
+            val phrase = node.getCorrespondingPhrase
+
+            new Word(
+              surface = phrase.getStringContents,
+              morphemes =
+                phrase.getMyTerminals.map {
+                  term =>
+                    val word =
+                      if (term.getWord.matches("^.*\\-[LR]RB\\-.*$"))
+                        term.getWord.replaceAll("\\-LRB\\-", "(").replaceAll("\\-RRB\\-", ")")
+                      else
+                        term.getWord
+                    new Morpheme(surface = word, rawTag = term.getPOS, processor = Processor.Hannanum)
+                }
+            )
+        }
+    )
+
     depTree.getNodeList.foreach {
       node =>
         try {
@@ -76,12 +100,25 @@ class Parser extends CanDepParse {
     new ParseTree(
       sentence.getPlainEojeols.mkString(" "), conv.StringforDepformat(
         Converter.functionTagReForm(
-          wrapper.parseForced(sentence)
+          wrapper.parseForced(encodeParenthesis(sentence))
         )
       ), 0, true)
 
+  private def encodeParenthesis(sentence: HSent) = {
+    sentence.getEojeols.foreach {
+      e =>
+        val morphs = e.getMorphemes
+        morphs.zipWithIndex.foreach {
+          case (m, i) if m matches "^.*[\\(\\)]+.*$" =>
+            morphs.update(i, m.replaceAll("\\(", "-LRB-").replaceAll("\\)", "-RRB-"))
+          case _ =>
+        }
+    }
+    sentence
+  }
+
   override def parse(sentence: Sentence): Sentence = {
-    convert(deParse(sentence), sentence)
+    convert(deParse(sentence))
   }
 
   /**

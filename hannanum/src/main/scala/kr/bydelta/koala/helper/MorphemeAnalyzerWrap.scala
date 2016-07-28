@@ -44,7 +44,7 @@ object MorphemeAnalyzerWrap {
         while (eachAnal.hasMoreElements) {
           var tokIdx = eachAnal.nextToken
           while (tokIdx.indexOf('/') == -1) {
-            tokIdx = tokIdx + eachAnal.nextToken
+            tokIdx += eachAnal.nextToken
           }
 
           val t = new e.Token()
@@ -78,7 +78,7 @@ object MorphemeAnalyzerWrap {
         case ((prevOK, mergeIdx, merged), (tok, i)) =>
           if (tok.pos.startsWith(pos)) {
             if (prevOK) {
-              tok.word = e.tokenList(mergeIdx).word + tok.word
+              e.tokenList(mergeIdx).word += tok.word
               merged += true
               (true, mergeIdx, merged)
             } else {

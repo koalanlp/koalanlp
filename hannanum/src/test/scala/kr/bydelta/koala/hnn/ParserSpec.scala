@@ -12,6 +12,7 @@ import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.SentenceSegmen
 import kaist.cilab.parser.berkeleyadaptation.{BerkeleyParserWrapper, Configuration}
 import kaist.cilab.parser.corpusconverter.sejong2treebank.sejongtree.ParseTree
 import kaist.cilab.parser.psg2dg.Converter
+import kr.bydelta.koala.POS
 import kr.bydelta.koala.data.Word
 import org.specs2.mutable._
 
@@ -21,6 +22,8 @@ import scala.collection.mutable.ArrayBuffer
   * Created by bydelta on 16. 7. 26.
   */
 class ParserSpec extends Specification {
+  sequential
+
   val workflow = {
     Dictionary synchronized {
       Configuration.hanBaseDir = "./"
@@ -67,9 +70,9 @@ class ParserSpec extends Specification {
         val conv = new Converter
         val parseTree =
           new ParseTree(
-            sent, conv.StringforDepformat(
+            oSent.getPlainEojeols.mkString(" "), conv.StringforDepformat(
               Converter.functionTagReForm(
-                parser.parse(sent)
+                parser.parse(oSent.getPlainEojeols.mkString(" "))
               )
             ), 0, true)
         conv.convert(parseTree)
@@ -78,11 +81,10 @@ class ParserSpec extends Specification {
       val oNodes = original.getNodeList.map {
         node =>
           (try {
-            oSent.getPlainEojeols()(node.getHead.getWordIdx)
+            node.getHead.getCorrespondingPhrase.getStringContents
           } catch {
             case _: Throwable => "ROOT"
-          }) + "--" + node.getdType() + "-->" +
-            oSent.getPlainEojeols()(node.getWordIdx)
+          }) + "--" + node.getdType() + "-->" + node.getCorrespondingPhrase.getStringContents
       }.sorted.mkString("\n")
 
       iterateTree(tagged.topLevels, "ROOT").sorted.mkString("\n") must_== oNodes
@@ -123,11 +125,11 @@ class ParserSpec extends Specification {
     }
 
     "supports dictionary" in {
-      val sent = "아햏햏은 2000년대에 유행한 통신은어로, 개벽이, 햏햏 등의 여러 신조어를 유통시켰다."
+      val sent = "아햏, 2000년대에 유행한 통신은어로, 개벽이, 햏햏 등의 여러 신조어를 유통시켰다."
 
       val noUserDict = new Parser().parse(sent).treeString
 
-      Dictionary.addUserDictionary("아햏햏" -> POS.IC, "개벽이" -> POS.NNG, "햏햏" -> POS.NNG)
+      Dictionary.addUserDictionary("아햏" -> POS.IC, "개벽이" -> POS.NNG, "햏햏" -> POS.NNG)
 
       val dictApplied = new Parser().parse(sent).treeString
 
