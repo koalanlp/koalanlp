@@ -247,19 +247,14 @@ package object koala {
         }
       case Processor.KKMA =>
         tag match {
-          case "목적어" => FunctionalTag.Object
+          case "목적어" | "(주어,목적)대상" => FunctionalTag.Object
           case "주어" => FunctionalTag.Subject
-          case "부사어" => FunctionalTag.Adjunct
+          case "부사어" | "이유" => FunctionalTag.Adjunct
           case "보어" | "인용" => FunctionalTag.Complement
-          case "수식" | "명사구" | "이유" => FunctionalTag.Modifier
-          case "동일" => FunctionalTag.Conjunctive
+          case "수식" | "명사구" => FunctionalTag.Modifier
+          case "동일" "보조 연결" | "의존 연결" | "대등 연결" | "체언 연결" => FunctionalTag.Conjunctive
           case _ =>
-            if (tag.contains("연결"))
-              FunctionalTag.Conjunctive
-            else if (tag.contains("대상"))
-              FunctionalTag.Object
-            else
-              FunctionalTag.Conjunctive
+            FunctionalTag.Undefined
         }
       case _ =>
         throw new UnsupportedOperationException("의존구문분석은 KKMA와 Hannanum Processor만 제공합니다.")
