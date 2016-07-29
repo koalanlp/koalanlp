@@ -286,7 +286,7 @@ Sentence는 `Iterable[Word]`를 상속합니다.
 
 # License 조항
 이 프로젝트 자체(KoalaNLP-core)와 인터페이스 통합을 위한 코드는  *GPL v3*을 따르며,
-각 분석기의 License와 저작권은 각 프로젝트에서 지정한 바를 따릅니다.
+각 분석기의 License와 저작권은 각 프로젝트에서 지정한 바를 따릅니다. (`kr.bydelta.koala.helper` 하위에 새로 수정되어 등록된 Class/Object는 각 프로젝트의 결과물을 조금 수정한 판본이며, 저작권은 각 프로젝트에 귀속됩니다.)
 * Hannanum: GPL v3
 * KKMA: GPL v2 (GPL v2를 따르지 않더라도, 상업적 이용시 별도 협의 가능)
 * Komoran: GPL v2, 역컴파일 불가, 비상업적 용도 사용 가능, 상업적 용도 사용시 별도 협의 (3년미만의 10명 이하 사업장 자유)
@@ -303,76 +303,84 @@ Sentence는 `Iterable[Word]`를 상속합니다.
 
 ### 은전한닢
 ```text
-국토/NNG  부/NNG는/JX  시장/NNG  상황/NNG과/JKB  맞/VV지/EC  않/VX는/ETM  일률/NNG적/XSN이/VCPᆫ/ETM  규제/NNG를/JKO  탄력/NNG적/XSN으로/JKB  적용/NNG하/XSVᆯ/ETM  수/NNB  있/VV도록/EC  법/NNG  개정/NNG을/JKO  추진/NNG하/XSV는/ETM  것/NNB이/VCP  라고/EC  설명/NNG하/XSV지만/EC  ,/SP  투기/NNG  세력/NNG에/JKB  기대/VV는/ETM  부동/NNG산/NNG  부양/NNG책/NNG이/VCP  라는/ETM  비판/NNG이/JKS  일/VV고/EC  있/VX다/EF  ./SF
+국토/NNG 부/NNG+는/JX 시장/NNG 상황/NNG+과/JKB 맞/VV+지/EC 않/VX+는/ETM 일률/NNG+적/XSN+이/VCP+ᆫ/ETM 규제/NNG+를/JKO 탄력/NNG+적/XSN+으로/JKB 적용/NNG+하/XSV+ᆯ/ETM 수/NNB 있/VV+도록/EC 법/NNG 개정/NNG+을/JKO 추진/NNG+하/XSV+는/ETM 것/NNB+이/VCP 라고/EC 설명/NNG+하/XSV+지만/EC ,/SP 투기/NNG 세력/NNG+에/JKB 기대/VV+는/ETM 부동/NNG+산/NNG 부양/NNG+책/NNG+이/VCP 라는/ETM 비판/NNG+이/JKS 일/VV+고/EC 있/VX+다/EF ./SF
 ```
 은전한닢은 **국토부**의 국토와 부, **부동산**의 부동과 산, **부양책**의 부양과 책을 별개로 인식하였고, **것이 라고**, **부양책이 라는**과 같이, 띄어쓰기를 하였으며, 문장의 종결부호나 구분부호(**./SF ,/SP**)를 띄어쓰기 하였습니다. 품사 부착에는 큰 문제가 없어보입니다.
 
 ### 한나눔
 ```text
-국토/NNG부/NNG는/JX  시장/NNG  상황/NNG과/JC  맞/VV지/EC  않/VX는/ETM  일률/NNG적/NNG이/VCPㄴ/ETM  규제/NNG를/JKO  탄력/NNG적/NNG으로/JKB  적용/NNG하/XSVㄹ/ETM  수/NNB  있/VX도록/EC  법/NNG  개정/NNG을/JKO  추진/NNG하/XSV는/ETM  것/NNB이/VCP라/EF고/JKQ  설명/NNG하/XSV지/EC말/VXㄴ/ETM,/SP  투/NNB이/VCP기/ETN  세력/NNG에/JKB  기대/VV는/ETM  부동산/NNG  부양책/NNG이/VCP라/EF는/ETM  비판/NNG이/JKC  일/VV고/EC  있/VX다/EF  ./SF
+국토/NNG+부/NNG+는/JX 시장/NNG 상황/NNG+과/JC 맞/VV+지/EC 않/VX+는/ETM 일률/NNG+적/NNG+이/VCP+ㄴ/ETM 규제/NNG+를/JKO 탄력/NNG+적/NNG+으로/JKB 적용/NNG+하/XSV+ㄹ/ETM 수/NNB 있/VX+도록/EC 법/NNG 개정/NNG+을/JKO 추진/NNG+하/XSV+는/ETM 것/NNB+이/VCP+라/EF+고/JKQ 설명/NNG+하/XSV+지/EC+말/VX+ㄴ/ETM+,/SP 투/NNB+이/VCP+기/ETN 세력/NNG+에/JKB 기대/VV+는/ETM 부동산/NNG 부양책/NNG+이/VCP+라/EF+는/ETM 비판/NNG+이/JKC 일/VV+고/EC 있/VX+다/EF ./SF
 ```
 한나눔은 **국토부**의 국토와 부를 별개로 인식하였고, 문장 종결 부호(**./SF**)를 띄어 쓰기 하였습니다. **투기**라는 단어를 의존명사 **투** + 긍정지정사 **이-** + **명사형 전성어미** -기로 인식, "~라고 말하는 투기"의 투기로 인식하였습니다. 동사와 그 변형의 분석에 가장 자세합니다.
 
 ### 꼬꼬마
 ```text
-국토/NNG  부/NNG는/JX  시장/NNG  상황/NNG과/JKB  맞/VV지/EC  않/VX는/ETM  일률적/NNG이/VCPㄴ/ETM  규제/NNG를/JKO  탄력/NNG적/XSN으로/JKB  적용/NNG하/XSVㄹ/ETM  수/NNM  있/VV도록/EC  법/NNG  개정/NNG을/JKO  추진/NNG하/XSV는/ETM  것/NNM이/VCP라고/EC  설명/NNG하/XSV지만/EC,/SP  투기/NNG  세력/NNG에/JKB  기대/VV는/ETM  부동산/NNG  부양책/NNG이/VCP라는/ETM  비판/NNG이/JKS  일/VV고/EC  있/VX다/EF./SF
+국토/NNG 부/NNG+는/JX 시장/NNG 상황/NNG+과/JKB 맞/VV+지/EC 않/VX+는/ETM 일률적/NNG+이/VCP+ㄴ/ETM 규제/NNG+를/JKO 탄력/NNG+적/XSN+으로/JKB 적용/NNG+하/XSV+ㄹ/ETM 수/NNB 있/VV+도록/EC 법/NNG 개정/NNG+을/JKO 추진/NNG+하/XSV+는/ETM 것/NNB+이/VCP+라고/EC 설명/NNG+하/XSV+지만/EC+,/SP 투기/NNG 세력/NNG+에/JKB 기대/VV+는/ETM 부동산/NNG 부양책/NNG+이/VCP+라는/ETM 비판/NNG+이/JKS 일/VV+고/EC 있/VX+다/EF+./SF
 ```
-꼬꼬마는 **국토부**의 국토와 부를 별개로 인식하였고, 일반 의존명사 "수", "것"을 단위성 의존명사 **NNM**으로 잘못 인식하였습니다.
+꼬꼬마는 **국토부**의 국토와 부를 별개로 인식하였습니다.
 
 ### 코모란
 ```text
-국토/NNG부/NNG는/JX  시장/NNG  상황/NNG과/JC  맞/VV지/EC  않/VX는/ETM  일률/NNG적/XSN이/VCPㄴ/ETM  규제/NNG를/JKO  탄력/NNG적/XSN으로/JKB  적용/NNG하/XSVㄹ/ETM  수/NNB  있/VV도록/EC  법/NNG  개정/NNG을/JKO  추진/NNG하/XSV는/ETM  것/NNB이/VCP라고/EC  설명/NNG하/XSV지만/EC,/SP  투기/NNG  세력/NNG에/JKB  기대/NNG는/JX  부동산/NNG  부양책/NNG이/VCP라는/ETM  비판/NNG이/JKS  일/NNB이/VCP고/EC  있/VX다/EF./SF
+국토/NNG+부/NNG+는/JX 시장/NNG 상황/NNG+과/JC 맞/VV+지/EC 않/VX+는/ETM 일률/NNG+적/XSN+이/VCP+ㄴ/ETM 규제/NNG+를/JKO 탄력/NNG+적/XSN+으로/JKB 적용/NNG+하/XSV+ㄹ/ETM 수/NNB 있/VV+도록/EC 법/NNG 개정/NNG+을/JKO 추진/NNG+하/XSV+는/ETM 것/NNB+이/VCP+라고/EC 설명/NNG+하/XSV+지만/EC+,/SP 투기/NNG 세력/NNG+에/JKB 기대/NNG+는/JX 부동산/NNG 부양책/NNG+이/VCP+라는/ETM 비판/NNG+이/JKS 일/NNB+이/VCP+고/EC 있/VX+다/EF+./SF
 ```
 코모란은 **국토부**의 국토와 부를 별개로 인식하였고, 문장의 종결부호나 구분부호(**./SF ,/SP**)를 앞선 단어에 붙여 쓰기 하였습니다. "의견 따위가 나타나고"라는 뜻의 **일고**를 의존명사 일 + 긍정 지정사 이- + 접속조사 -고 와 분석, "~하는 일이고"의 "일이고"로 잘못 분석하였습니다.
 
 ### 트위터
 ```text
-국토부/NNP  는/JX   /SY  시장/NNG   /SY  상황/NNG  과/JX   /SY  맞지/VV   /SY  않는/VV   /SY  일률/NNG  적/XSO  인/JX   /SY  규제/NNG  를/JX   /SY  탄력/NNG  적/XSO  으로/JX   /SY  적용할/VV   /SY  수/NNG   /SY  있도/VA  록/EF   /SY  법/NNG   /SY  개정/NNG  을/JX   /SY  추진하는/VV   /SY  것/NNG  이라고/JX   /SY  설명하지/VV  만/EF  ,/SF   /SY  투기/NNG   /SY  세력/NNG  에/JX   /SY  기대는/VV   /SY  부동산/NNG   /SY  부양책/NNG  이라는/JX   /SY  비판/NNG  이/JX   /SY  일/NNG  고/JX   /SY  있다/VA  ./SF
+국토부/NNP+는/JX 시장/NNG 상황/NNG+과/JX 맞지/VV 않는/VV 일률/NNG+적/XSO+인/JX 규제/NNG+를/JX 탄력/NNG+적/XSO+으로/JX 적용할/VV 수/NNG 있도/VA+록/EF 법/NNG 개정/NNG+을/JX 추진하는/VV 것/NNG+이라고/JX 설명하지/VV+만/EF+,/SF 투기/NNG 세력/NNG+에/JX 기대는/VV 부동산/NNG 부양책/NNG+이라는/JX 비판/NNG+이/JX 일/NNG+고/JX 있다/VA+./SF
 ```
-트위터 분석기는 가장 넓은 범위로 분석, 품사 내부의 세부 구분이 나타나지 않으며, 어절 단위의 묶음을 지원하지 않습니다. 또한, 공백을 하나의 문자로 인식하는 것을 보실 수 있습니다.
+트위터 분석기는 가장 넓은 범위로 분석, 품사 내부의 세부 구분이 나타나지 않습니다. 어절 단위의 묶음은 KoalaNLP에서 공백 기준으로 묶은 것입니다.
 
 ## 문장 분리 성능 (따옴표 안에 여러 문장이 인용될 때)
-아래 문장은 겹따옴표("") 사이에 3개의 문장이 포함되어, 문장 분리에 까다로운 문장입니다. 문장 분리만을 보기 위해서, 어절, 형태소 구분은 유지하지만, 품사 구분은 생략합니다.
+아래 문장은 겹따옴표("") 사이에 3개의 문장이 포함되어, 문장 분리에 까다로운 문장입니다.
 
 > 집 앞에서 고추를 말리던 이숙희(가명·75) 할머니의 얼굴에는 웃음기가 없었다. "나라가 취로사업이라도 만들어주지 않으면 일이 없어. 섬이라서 어디 다른 데 나가서 일할 수도 없고." 가난에 익숙해진 연평도 사람들은 '정당'과 '은혜'라는 말을 즐겨 썼다.
 
 ### 은전한닢 (Koala 구현)
 ```text
-집  앞+에서  고추+를  말리+던  이숙희  (  가명  ·  75  )  할머니+의  얼굴+에+는  웃음+기+가  없+었+다  .
-"  나라+가  취로  사업+이  라도  만들+어  주+지  않+으면  일+이  없+어  .  섬+이  라서  어디  다른  데  나가+서  일+하+ᆯ  수+도  없+고  .  "  가난+에  익숙+하+아+지+ᆫ  연평+도  사람+들+은  '  정당  '  과  '  은혜  '  이+라는  말+을  즐기+어  쓰+었+다  .
+집/NNG 앞/NNG+에서/JKB 고추/NNG+를/JKO 말리/VV+던/ETM 이숙희/NNP (/SS 가명/NNG ·/SP 75/SN )/SS 할머니/NNG+의/JKG 얼굴/NNG+에/JKB+는/JX 웃음/NNG+기/NNG+가/JKS 없/VA+었/EP+다/EF ./SF
+
+"/SY 나라/NNG+가/JKS 취로/NNG 사업/NNG+이/VCP 라도/EC 만들/VV+어/EC 주/VX+지/EC 않/VX+으면/EC 일/NNG+이/JKS 없/VA+어/EF ./SF 섬/NNG+이/VCP 라서/EC 어디/NP 다른/MM 데/NNB 나가/VV+서/EC 일/NNG+하/XSV+ᆯ/ETM 수/NNB+도/JX 없/VA+고/EC ./SY "/SY 가난/NNG+에/JKB 익숙/XR+하/XSA+아/EC+지/VX+ᆫ/ETM 연평/NNG+도/NNG 사람/NNG+들/XSN+은/JX '/SY 정당/NNG '/SY 과/JC '/SY 은혜/NNG '/SY 이/VCP+라는/ETM 말/NNG+을/JKO 즐기/VV+어/EC 쓰/VV+었/EP+다/EF ./SF
 ```
 정상 분리입니다. 따옴표가 끝나는 부분에서 문제가 발생하지만, 이는 처리할 수 없는 부분입니다. ("~하였다."라고 말했다)라는 문장을 분리할 수 없기 때문입니다.
 
 ### 한나눔
 ```text
-집  앞+에서  고추+를  말+ㄹ+리+이+던  이숙희  (  가명  ·  75  )  할머니+의  얼굴+에+는  웃음+기+가  없+었+다  .
-"+나라+가  취로사업+이+라+도  만들+어+주+지  않+으면  일+이  없+어  .
-서+ㅁ+이+라서  어디  다른  데  나가+아  일+할  수+도  없+고  .+"
-가난+에  익숙해지+ㄴ  연평도  사람+들+은  '+정당+'과  '+은혜+'+라는  말+을  즐기+어  쓰+었+다  .
+집/NNG 앞/NNG+에서/JKB 고추/NNG+를/JKO 말/VX+ㄹ/ETM+리/NNB+이/VCP+던/ETM 이숙희(가명·75)/NNG 할머니/NNG+의/JKG 얼굴/NNG+에/JKB+는/JX 웃음/NNG+기/NNG+가/JKS 없/VA+었/EP+다/EF ./SF
+
+"/SS+나라/NNG+가/JKS 취로사업/NNG+이/VCP+라/EC+도/JX 만들/VV+어/EC+주/VX+지/EC 않/VX+으면/EC 일/NNG+이/JKC 없/VA+어/EC ./SF
+
+서/VV+ㅁ/ETN+이/VCP+라서/EC 어디/MAG 다른/MM 데/NNB 나가/VV+아/EC 일/NR+할/NNM 수/NNB+도/JX 없/VA+고/EC ./SF+"/SS
+
+가난/NNG+에/JKB 익숙해지/VV+ㄴ/ETM 연평도/NNG 사람/NNG+들/XSN+은/JX '/SS+정당/NNG+'/SS+과/JC '/SS+은혜/NNG+'/SS+라는/JKG 말/NNG+을/JKO 즐기/VV+어/EC 쓰/VV+었/EP+다/EF ./SF
 ```
 한나눔은 문장부호를 단어에 붙여쓰는 경향과, 동사를 우선하여 인식하려는 경향으로 인해서, 따옴표 안의 문장이 분리되었습니다. 다만 홑따옴표로 강조된 단어는 한 어절로 바르게 인식되었습니다.
 
 ### 꼬꼬마
 ```text
-집  앞+에서  고추+를  말리+더+ㄴ  이  숙희  (  가명  ·  75  )  할머니+의  얼굴+에+는  웃음기+가  없+었+다+.
-"  나라+가  취로  사업+이+라도  만들+어  주+지  않+으면  일+이  없+어+.  섬+이+라서  어디  다른  데  나가+서  일하+ㄹ  수+도  없+고+.+"  가난+에  익숙  해지+ㄴ  연평도  사람+들+은  '  정당+'  과  '  은혜+'  이+라는  말+을  즐기+어  쓰+었+다+.
+집/NNG 앞/NNG+에서/JKB 고추/NNG+를/JKO 말리/VV+더/EP+ㄴ/ETM 이/NNG 숙희/UN+(/SS 가명/NNG ·/SP+75/NR+)/SS 할머니/NNG+의/JKG 얼굴/NNG+에/JKB+는/JX 웃음기/NNG+가/JKS 없/VA+었/EP+다/EF+./SF
+
+"/SS 나라/NNG+가/JKS 취로/NNG 사업/NNG+이/VCP+라도/EC 만들/VV+어/EC 주/VX+지/EC 않/VX+으면/EC 일/NNG+이/JKS 없/VA+어/EC+./SF 섬/NNG+이/VCP+라서/EC 어디/NP 다른/MM 데/NNB 나가/VV+서/EC 일하/VV+ㄹ/ETM 수/NNB+도/JX 없/VA+고/EC+./SF+"/SS 가난/NNG+에/JKB 익숙/XR 해지/VV+ㄴ/ETM 연평도/NNP 사람/NNG+들/XSN+은/JX '/SS 정당/NNG+'/SS 과/NNG '/SS 은혜/NNG+'/SS 이/VCP+라는/ETM 말/NNG+을/JKO 즐기/VV+어/EC 쓰/VV+었/EP+다/EF+./SF
 ```
 꼬꼬마는 정상적으로 분리되었습니다.
 
 ### 코모란 (Koala 구현)
 ```text
-집  앞+에서  고추+를  말리+던  이+숙희+(+가명+·+75+)  할머니+의  얼굴+에+는  웃음기+가  없+었+다+.
-"+나라+가  취로사업이라도  만들+어+주+지  않+으면  일+이  없+어+.  섬+이+라서  어디  다른  데  나가+아서  일+하+ㄹ  수+도  없+시+고+.+"  가난+에  익숙+하+아+지+ㄴ  연평도  사람+들+은  '+정당+'+과  '+은혜+'+이+라는  말+을  즐기+어  쓰+었+다+.
+집/NNG 앞/NNG+에서/JKB 고추/NNG+를/JKO 말리/VV+던/ETM 이/MM+숙희/NNP+(/SS+가명/NNG+·/SP+75/SN+)/SS 할머니/NNG+의/JKG 얼굴/NNG+에/JKB+는/JX 웃음기/NNG+가/JKS 없/VA+었/EP+다/EF+./SF
+
+"/SS+나라/NNG+가/JKS 취로사업이라도/UE 만들/VV+어/EC+주/VX+지/EC 않/VX+으면/EC 일/NNG+이/JKS 없/VA+어/EF+./SF 섬/NNB+이/VCP+라서/EC 어디/NP 다른/MM 데/NNB 나가/VV+아서/EC 일/NNG+하/XSV+ㄹ/ETM 수/NNB+도/JX 없/VA+시/EP+고/EF+./SF+"/SS 가난/NNG+에/JKB 익숙/XR+하/XSA+아/EC+지/VX+ㄴ/ETM 연평도/NNP 사람/NNG+들/XSN+은/JX '/SS+정당/NNG+'/SS+과/JC '/SS+은혜/NNP+'/SS+이/VCP+라는/ETM 말/NNG+을/JKO 즐기/VV+어/EC 쓰/VV+었/EP+다/EF+./SF
 ```
 정상적으로 분리되었습니다.
 
 ### 트위터
-공백 문자는 _로 표시합니다.
 ```text
-집  _   앞  에서  _  고추  를  _  말리  던  _  이숙희  (  가명  ·  75  )  _  할머니  의  _  얼굴  에는  _  웃음  기  가  _  없었  다  .
-"  나라  가  _  취  로  사업  이라도  _  만들어  주  지  _  않으  면  _  일이  _  없어  .
-섬  이라서  _  어디  _  다른  _  데  _  나가서  _  일할  _  수도  _  없고  ."
-가난  에  _  익숙해진  _  연평도  _  사람  들  은  _  '  정당  '  과  _  '  은혜  '  라는  _  말  을  _  즐겨  _  썼  다  .
+집/NNG 앞/NNG+에서/JX 고추/NNG+를/JX 말리/VV+던/EF 이숙희/NNG+(/SF+가명/NNG+·/SF+75/NR+)/SF 할머니/NNG+의/JX 얼굴/NNG+에는/JX 웃음/NNG+기/NNG+가/JX 없었/VA+다/EF+./SF
+
+"/SF+나라/NNG+가/JX 취/NNP+로/JX+사업/NNG+이라도/JX 만들어/VV+주/EP+지/EF 않으/VV+면/EF 일이/NNG 없어/VA+./SF
+
+섬/NNG+이라서/JX 어디/NNG 다른/NNG 데/NNG 나가서/VV 일할/VV 수도/NNG 없고/VA+."/SF
+
+가난/NNG+에/JX 익숙해진/VV 연평도/NNG 사람/NNG+들/XSO+은/JX '/SF+정당/NNG+'/SF+과/NNG '/SF+은혜/NNG+'/SF+라는/JX 말/NNG+을/JX 즐겨/VV 썼/VV+다/EF+./SF
 ```
 트위터 분석기는 겹따옴표 내의 문장을 인용문으로 인식하지 않았습니다.
 
@@ -383,31 +391,31 @@ Sentence는 `Iterable[Word]`를 상속합니다.
 
 ### 은전한닢
 ```text
-포털/NNP의/JKG  '/SY  속초/NNP  '/SY  연관/NNG  검색/NNG어/NNG로/JKB  '/SY  포켓몬/NNP  고/NNG  '/SY  가/JKS  오르/VV았/EP고/EC  ,/SP  속초/NNG  시청/NNG이/JKS  관광/NNG객/NNG의/JKG  편의/NNG를/JKO  위하/VV아/EC  예전/NNG에/JKB  만들/VV었/EP던/ETM  무료/NNG  와이파이/NNP  존/NNP  지도/NNG는/JX  순식/NNG간/NNG에/JKB  인기/NNG  게시/NNG물/NNG이/JKS  되/VV었/EP다/EF  ./SF
+포털/NNP+의/JKG '/SY 속초/NNP '/SY 연관/NNG 검색/NNG+어/NNG+로/JKB '/SY 포켓몬/NNP 고/NNG '/SY 가/JKS 오르/VV+았/EP+고/EC ,/SP 속초/NNG 시청/NNG+이/JKS 관광/NNG+객/NNG+의/JKG 편의/NNG+를/JKO 위하/VV+아/EC 예전/NNG+에/JKB 만들/VV+었/EP+던/ETM 무료/NNG 와이파이/NNP 존/NNP 지도/NNG+는/JX 순식/NNG+간/NNG+에/JKB 인기/NNG 게시/NNG+물/NNG+이/JKS 되/VV+었/EP+다/EF ./SF
 ```
 속초, 포켓몬, 와이파이존 모두 명사구 또는 복합명사구로 정상 인식되었습니다.
 
 ### 한나눔
 ```text
-포털/NNG의/JKG  '/SS속/NNM초/XSN'/SS  연관/NNG  검색/NNG어로/NNG  '포켓몬/NNG  고/MM'/SS가/JKC  오르/VV아/EP고/EC,/SP  속초시청/NNG이/JKC  관광객/NNG의/JKG  편의/NNG를/JKO  위하/VV어/EC  예전/NNG에/JKB  만들/VV었/EP던/ETM  무료/NNG  와이파이존/NNG  지/NNB도/JX는/JX  순식간/NNG에/JKB  인기/NNG  게시/NNG물/NNG이/JKC  되/VV었/EP다/EF  ./SF
+포털/NNG+의/JKG '/SS+속/NNM+초/XSN+'/SS 연관/NNG 검색/NNG+어로/NNG '포켓몬/NNG 고/MM+'/SS+가/JKC 오르/VV+아/EP+고/EC+,/SP 속초시청/NNG+이/JKC 관광객/NNG+의/JKG 편의/NNG+를/JKO 위하/VV+어/EC 예전/NNG+에/JKB 만들/VV+었/EP+던/ETM 무료/NNG 와이파이존/NNG 지/NNB+도/JX+는/JX 순식간/NNG+에/JKB 인기/NNG 게시/NNG+물/NNG+이/JKC 되/VV+었/EP+다/EF ./SF
 ```
 속초는 분리되었으나, 속초시청은 하나로 인식되었으며, 포켓몬과 와이파이존은 명사로 인식되었습니다.
 
 ### 꼬꼬마
 ```text
-포털/NNG의/JKG  '/SS  속/NNG  초/NNM'/SS  연관/NNG  검색어/NNG로/JKB  '/SS  포켓/NNG  몬/MAG  고/NNG'/SS  가/VV아/EC  오르/VV았/EP고/EC,/SP  속초시/NNP청/XSN이/JKS  관광객/NNG의/JKG  편의/NNG를/JKO  위하/VV어/EC  예전/NNG에/JKB  만들/VV었/EP더/EPㄴ/ETM  무료/NNG  와이/NNG  파이/NNG  존/NNP  지도/NNG는/JX  순식간/NNG에/JKB  인기/NNG  게시물/NNG이/JKC  되/VV었/EP다/EF./SF
+포털/NNG+의/JKG '/SS 속/NNG 초/NNB+'/SS 연관/NNG 검색어/NNG+로/JKB '/SS 포켓/NNG 몬/MAG 고/NNG+'/SS 가/VV+아/EC 오르/VV+았/EP+고/EC+,/SP 속초시/NNP+청/XSN+이/JKS 관광객/NNG+의/JKG 편의/NNG+를/JKO 위하/VV+어/EC 예전/NNG+에/JKB 만들/VV+었/EP+더/EP+ㄴ/ETM 무료/NNG 와이/NNG 파이/NNG 존/NNP 지도/NNG+는/JX 순식간/NNG+에/JKB 인기/NNG 게시물/NNG+이/JKC 되/VV+었/EP+다/EF+./SF
 ```
-속초는 속, 초로 어절이 분리되었으며, 속초시청은 속초시+청(명사파생 접미사)으로 분리되었으며, 포켓몬은 포켓, 몬(관형사)으로 어절이 분리되고, 와이파이존은 와이, 파이, 존으로 분리되었습니다.
+속초는 속(일반명사)+초(의존명사)로 어절이 분리되었으며, 속초시청은 속초시+청(명사파생 접미사)으로 분리되었으며, 포켓몬은 포켓+몬(관형사)으로 어절이 분리되고, 와이파이존은 와이, 파이, 존으로 분리되었습니다.
 
 ### 코모란
 ```text
-포털/NNG의/JKG  '/SS속초/NNP'/SS  연관/NNG  검색어/NNG로/JKB  '포켓몬/UE  고/NNG'/SS가/JKS  오르/VV았/EP고/EC,/SP  속초/NNP시청/NNG이/JKS  관광객/NNG의/JKG  편의/NNG를/JKO  위하/VV아/EC  예전/NNG에/JKB  만들/VV었/EP던/ETM  무료/NNG  와이/NNG파이/NNG존/NNG  지도/NNG는/JX  순식간/NNG에/JKB  인기/NNG  게시물/NNG이/JKS  되/VV었/EP다/EF./SF
+포털/NNG+의/JKG '/SS+속초/NNP+'/SS 연관/NNG 검색어/NNG+로/JKB '포켓몬/UE 고/NNG+'/SS+가/JKS 오르/VV+았/EP+고/EC+,/SP 속초/NNP+시청/NNG+이/JKS 관광객/NNG+의/JKG 편의/NNG+를/JKO 위하/VV+아/EC 예전/NNG+에/JKB 만들/VV+었/EP+던/ETM 무료/NNG 와이/NNG+파이/NNG+존/NNG 지도/NNG+는/JX 순식간/NNG+에/JKB 인기/NNG 게시물/NNG+이/JKS 되/VV+었/EP+다/EF+./SF
 ```
 속초, 속초시청(속초+시청)은 정상 인식되었고, 포켓몬은 알 수 없는 단어로 정상 인식 되었지만, 와이파이존은 와이+파이+존으로 인식되었습니다.
 
 ### 트위터
 ```text
-포털/NNP  의/JX   /SY  '/SF  속초/NNG  '/SF   /SY  연관/NNG   /SY  검색어/NNG  로/JX   /SY  '/SF  포켓몬/NNG   /SY  고/NNG  '/SF  가/VV   /SY  올랐/VV  고/EF  ,/SF   /SY  속초/NNP  시청/NNG  이/JX   /SY  관광객/NNG  의/JX   /SY  편의/NNG  를/JX   /SY  위해/NNG   /SY  예전/NNG  에/JX   /SY  만들었/VV  던/EF   /SY  무료/NNG   /SY  와이파이존/NNG   /SY  지도/NNG  는/JX   /SY  순식간/NNG  에/JX   /SY  인기/NNG   /SY  게시/NNG  물이/NNG   /SY  됐/VV  다/EF  ./SF
+포털/NNP+의/JX '/SF+속초/NNG+'/SF 연관/NNG 검색어/NNG+로/JX '/SF+포켓몬/NNG 고/NNG+'/SF+가/VV 올랐/VV+고/EF+,/SF 속초/NNP+시청/NNG+이/JX 관광객/NNG+의/JX 편의/NNG+를/JX 위해/NNG 예전/NNG+에/JX 만들었/VV+던/EF 무료/NNG 와이파이존/NNG 지도/NNG+는/JX 순식간/NNG+에/JX 인기/NNG 게시/NNG+물이/NNG 됐/VV+다/EF+./SF
 ```
 속초, 속초 시청, 포켓몬, 와이파이존 모두 정상 인식되었습니다.
 
@@ -417,32 +425,33 @@ Sentence는 `Iterable[Word]`를 상속합니다.
 
 ### 은전한닢
 ```text
-미국/NNP  국방/NNG부/NNG가/JKS  미국/NNP  미사일/NNG  방어/NNG망/NNG  (/SS  MD/SL  )/SS  의/JKG  핵심/NNG  무기/NNG  체계/NNG이/VCPᆫ/ETM  사드/NNP  (/SS  THAAD/SL  )/SS  를/JKO  한국/NNP에/JKB  배치/NNG하/XSV는/ETM  방안/NNG을/JKO  검토/NNG하/XSV고/EC  있/VX다고/EC  </SY  월/NNG스트리트/NNP  저널/NNG  >/SY  이/JKS  28/SN  일/NNM  (/SS  현지/NNG  시각/NNG  )/SS  보도/NNG하/XSV았/EP다/EF  ./SF
+미국/NNP 국방/NNG+부/NNG+가/JKS 미국/NNP 미사일/NNG 방어/NNG+망/NNG (/SS MD/SL )/SS 의/JKG 핵심/NNG 무기/NNG 체계/NNG+이/VCP+ᆫ/ETM 사드/NNP (/SS THAAD/SL )/SS 를/JKO 한국/NNP+에/JKB 배치/NNG+하/XSV+는/ETM 방안/NNG+을/JKO 검토/NNG+하/XSV+고/EC 있/VX+다고/EC </SY 월/NNG+스트리트/NNP 저널/NNG >/SY 이/JKS 28/SN 일/NNM (/SS 현지/NNG 시각/NNG )/SS 보도/NNG+하/XSV+았/EP+다/EF ./SF
 ```
 사드는 정상인식되었으나, 월스트리트(월+스트리트) 저널은 일부 오류가 있습니다.
 
 ### 한나눔
 ```text
-미국/NNG  국방부/NNG가/JKS  미국/NNG  미사일/NNG방어망/NNG  (/SS  MD/SL  )/SS  의/NNG  핵심/NNG  무기체계/NNG이/VCPㄴ/ETM  사드/NNG  (/SS  THAAD/SL  )/SS  를/NNG  한국/NNG에/JKB  배치/NNG하/XSV는/ETM  방안/NNG을/JKO  검토/NNG하고/JC  있/VX다/EF고/JKQ  </SS  월스트리트/NNG  저널/NNG  >/SS  이/MM  28/NR일/NNM  (/SS  현지시각/NNG  )/SS  보도/NNG하/XSV었/EP다/EF  ./SF
+미국/NNG 국방부/NNG+가/JKS 미국/NNG 미사일방어망(MD)/NNG+의/JKG 핵심/NNG 무기체계/NNG+이/VCP+ㄴ/ETM 사드(THAAD)/NNG+를/JKO 한국/NNG+에/JKB 배치/NNG+하/XSV+는/ETM 방안/NNG+을/JKO 검토/NNG+하고/JC 있/VX+다/EF+고/JKQ </SS+월스트리트/NNG 저널/NNG+>/SS+이/JKC 28일(현지시각)/NNG 보도/NNG+하/XSV+었/EP+다/EF ./SF
 ```
-사드, 월스트리트 저널 모두 정상 인식되었습니다.
+사드, 월스트리트 저널 모두 정상 인식되었습니다. 특이한 것은, 사드, 미사일방어망의 영문 표현을 묶어 인식했다는 점입니다.
 
 ### 꼬꼬마
 ```text
-미국/NNP  국방부/NNG가/JKS  미국/NNP  미사일/NNG  방어망/NNG  (/SS  MD/SL  )/SS  의/NNG  핵심/NNG  무기/NNG체계/NNG이/VCPㄴ/ETM  사드/UN  (/SS  THAAD/SL  )/SS  를/JKO  한국/NNP에/JKB  배치/NNG하/XSV는/ETM  방안/NNG을/JKO  검토/NNG하/XSV고/EC  있/VX다고/EF
-</SS  월/NNG  스트리트/NNG  저널/NNG  >/SS  이/MM  28/NR일/NNM  (/SS  현지/NNG  시각/NNG  )/SS  보도/NNG하/XSV었/EP다/EF./SF
+미국/NNP 국방부/NNG+가/JKS 미국/NNP 미사일/NNG 방어망/NNG (/SS+MD/SL+)/SS 의/NNG 핵심/NNG 무기/NNG+체계/NNG+이/VCP+ㄴ/ETM 사드/UN (/SS+THAAD/SL )/SS+를/JKO 한국/NNG+에/JKB 배치/NNG+하/XSV+는/ETM 방안/NNG+을/JKO 검토/NNG+하/XSV+고/EC 있/VX+다고/EF
+
+</SS 월/NNG 스트리트/NNG 저널/NNG+>/SS 이/MM 28/NR+일/NNM+(/SS 현지/NNG 시각/NNG+)/SS 보도/NNG+하/XSV+었/EP+다/EF+./SF
 ```
-사드는 명사로 추정되는 알 수 없는 단어로 정상 처리되었지만, 월스트리트 저널은 월, 스트리트, 저널로 분리되어 인식되었습니다.
+사드는 명사로 추정되는 알 수 없는 단어로 정상 처리되었지만, 월스트리트 저널은 월, 스트리트, 저널로 분리되어 일부 문제가 있습니다.
 
 ### 코모란
 ```text
-미국/NNP  국방부/NNG가/JKS  미국/NNP  미사일/NNG방어망/NNG(/SSMD/SL)/SS의/JKG  핵심/NNG  무기/NNG체계/NNG이/VCPㄴ/ETM  사/NNG드/NNG(/SSTHAAD/SL)/SS를/JKO  한국/NNP에/JKB  배치/NNG하/XSV는/ETM  방안/NNG을/JKO  검토/NNG하/XSV고/EC  있/VV다고/EC  </SS월스트리트/NNP  저널/NNG>/SS이/MM  28/SN일/NNB(/SS현지/NNG시각/NNG)/SS  보도/NNG하/XSV았/EP다/EF./SF
+미국/NNP 국방부/NNG+가/JKS 미국/NNP 미사일/NNG+방어망/NNG+(/SS+MD/SL+)/SS+의/JKG 핵심/NNG 무기/NNG+체계/NNG+이/VCP+ㄴ/ETM 사/NNG+드/NNG+(/SS+THAAD/SL+)/SS+를/JKO 한국/NNP+에/JKB 배치/NNG+하/XSV+는/ETM 방안/NNG+을/JKO 검토/NNG+하/XSV+고/EC 있/VV+다고/EC </SS+월스트리트/NNP 저널/NNG+>/SS+이/MM 28/SN+일/NNB+(/SS+현지/NNG+시각/NNG+)/SS 보도/NNG+하/XSV+았/EP+다/EF+./SF
 ```
 사드는 사+드로 분리되어 인식되었고, 월스트리트 저널은 정상 인식되었습니다.
 
 ### 트위터
 ```text
-미국/NNG   /SY  국방부/NNG  가/JX   /SY  미국/NNG   /SY  미사일방어/NNP  망/NNG  (/SF  MD/SY  )/SF  의/NNG   /SY  핵심/NNG   /SY  무기체계/NNP  인/JX   /SY  사드/NNG  (/SF  THAAD/SY  )/SF  를/NNG   /SY  한국/NNG  에/JX   /SY  배치/NNG  하는/VV   /SY  방안/NNG  을/JX   /SY  검토/NNG  하고/JX   /SY  있다/VA  고/EF   /SY  </SF  월스트리트/NNG   /SY  저/MM  널/NNG  >/SF  이/NNG   /SY  28일/NR  (/SF  현지/NNP  시각/NNG  )/SF   /SY  보도했/VV  다/EF  ./SF
+미국/NNG 국방부/NNG+가/JX 미국/NNG 미사일방어/NNP+망/NNG+(/SF+MD/SY+)/SF+의/NNG 핵심/NNG 무기체계/NNP+인/JX 사드/NNG+(/SF+THAAD/SY+)/SF+를/NNG 한국/NNG+에/JX 배치/NNG+하는/VV 방안/NNG+을/JX 검토/NNG+하고/JX 있다/VA+고/EF </SF+월스트리트/NNG 저/MM+널/NNG+>/SF+이/NNG 28일/NR+(/SF+현지/NNP+시각/NNG+)/SF 보도했/VV+다/EF+./SF
 ```
 
 사드는 정상 인식되었지만, 월스트리트 저널은 월스트리트, 저, 널로 인식되었습니다.
