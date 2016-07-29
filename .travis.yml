@@ -4,9 +4,4 @@ scala:
 jdk:
   - oraclejdk7
 script:
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION core_2_11/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION eunjeon_2_11/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION komoran_2_11/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION kkma_2_11/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION twitter_2_11/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION hannanum_2_11/test
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION test
