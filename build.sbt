@@ -2,9 +2,7 @@ import sbt.Keys._
 import sbtunidoc.Plugin.UnidocKeys._
 
 lazy val root = (project in file("."))
-  .aggregate(core_2_11, core_2_10,
-    kkma_2_11, kkma_2_10, hannanum_2_11, hannanum_2_10, eunjeon,
-    twitter_2_11, twitter_2_10, komoran_2_11, komoran_2_10)
+  .aggregate(core, kkma, hannanum, twitter, komoran)
   .settings(unidocSettings: _*)
   .settings(
     publishArtifact := false,
@@ -15,9 +13,6 @@ lazy val root = (project in file("."))
   ).settings(aggregate in update := true)
 lazy val core = (project in file("core"))
   .settings(projectWithConfig("core"): _*)
-  .cross
-lazy val core_2_10 = core("2.10.4")
-lazy val core_2_11 = core("2.11.8")
 
 resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
 
@@ -34,9 +29,7 @@ lazy val kkma = (project in file("kkma"))
       val art = (artifact in(Compile, assembly)).value
       art.copy(`classifier` = Some("assembly"))
     },
-    addArtifact(artifact in(Compile, assembly), assembly)).cross
-lazy val kkma_2_10 = kkma("2.10.4").dependsOn(core_2_10)
-lazy val kkma_2_11 = kkma("2.11.8").dependsOn(core_2_11)
+    addArtifact(artifact in(Compile, assembly), assembly)).dependsOn(core)
 lazy val hannanum = (project in file("hannanum"))
   .settings(projectWithConfig("hannanum"): _*)
   .settings(
@@ -47,22 +40,19 @@ lazy val hannanum = (project in file("hannanum"))
       art.copy(`classifier` = Some("assembly"))
     },
     addArtifact(artifact in(Compile, assembly), assembly))
-  .cross
-lazy val hannanum_2_10 = hannanum("2.10.4").dependsOn(core_2_10)
-lazy val hannanum_2_11 = hannanum("2.11.8").dependsOn(core_2_11)
+  .dependsOn(core)
 lazy val eunjeon = (project in file("eunjeon"))
   .settings(projectWithConfig("eunjeon"): _*)
   .settings(
+    crossScalaVersions := Seq("2.11.8"),
     dependencyOverrides += "org.scala-lang" % "scala-reflect" % "2.11.8",
     libraryDependencies += "org.bitbucket.eunjeon" %% "seunjeon" % "1.1.0"
-  ).dependsOn(core_2_11)
+  ).dependsOn(core)
 lazy val twitter = (project in file("twitter"))
   .settings(projectWithConfig("twitter"): _*)
   .settings(
     libraryDependencies += "com.twitter.penguin" % "korean-text" % "4.4"
-  ).cross
-lazy val twitter_2_10 = twitter("2.10.4").dependsOn(core_2_10)
-lazy val twitter_2_11 = twitter("2.11.8").dependsOn(core_2_11)
+  ).dependsOn(core)
 lazy val komoran = (project in file("komoran"))
   .settings(projectWithConfig("komoran"): _*)
   .settings(
@@ -72,9 +62,7 @@ lazy val komoran = (project in file("komoran"))
       val art = (artifact in(Compile, assembly)).value
       art.copy(`classifier` = Some("assembly"))
     },
-    addArtifact(artifact in(Compile, assembly), assembly)).cross
-lazy val komoran_2_10 = komoran("2.10.4").dependsOn(core_2_10)
-lazy val komoran_2_11 = komoran("2.11.8").dependsOn(core_2_11)
+    addArtifact(artifact in(Compile, assembly), assembly)).dependsOn(core)
 lazy val samples = (project in file("samples"))
   .settings(projectWithConfig("samples"): _*)
   .settings(
@@ -95,14 +83,14 @@ def projectWithConfig(module: String) =
     name := s"koalaNLP-$module",
     version := ver,
     scalaVersion := "2.11.8",
+    crossScalaVersions := Seq("2.10.4", "2.11.8"),
     scalacOptions += "-target:jvm-1.7",
     scalacOptions in Test ++= Seq("-Yrangepos"),
     publishArtifact in Test := false,
     test in assembly := {},
     libraryDependencies += "org.specs2" %% "specs2-core" % "3.8.4" % "test",
     dependencyOverrides ++= Set(
-      "org.scala-lang" % "scala-reflect" % "2.11.8",
-      "org.scala-lang.modules" %% "scala-xml" % "1.0.5"
+      "org.scala-lang" % "scala-reflect" % "2.11.8"
     ),
     homepage := Some(url("http://nearbydelta.github.io/KoalaNLP")),
     parallelExecution in Test := false,
