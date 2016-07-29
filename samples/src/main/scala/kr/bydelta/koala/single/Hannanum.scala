@@ -22,8 +22,8 @@ object Hannanum {
             println(sent.singleLineString)
             println()
 
-            parser.parse(sent)
-            println(sent.treeString)
+            val newSent = parser.parse(sent)
+            println(newSent.treeString)
             println()
         }
       }

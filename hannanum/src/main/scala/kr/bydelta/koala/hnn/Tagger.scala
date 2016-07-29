@@ -12,7 +12,8 @@ import kr.bydelta.koala.data.{Morpheme, Word, Sentence => KSent}
 import kr.bydelta.koala.helper.{SafeChartMorphAnalyzer, SafeHMMTagger}
 import kr.bydelta.koala.traits.CanTag
 
-import scala.collection.JavaConversions._
+import scala.annotation.tailrec
+import scala.collection.mutable.ArrayBuffer
 
 /**
   * 한나눔 품사분석기.
@@ -55,11 +56,6 @@ final class Tagger extends CanTag[Sentence] {
     workflow.getResultOfSentence(new Sentence(0, 0, false))
   }
 
-  def tagParagraph(text: String): Seq[KSent] = {
-    workflow.analyze(text)
-    workflow.getResultOfDocument(new Sentence(0, 0, false)).map(convert)
-  }
-
   override private[koala] def convert(result: Sentence): KSent =
     new KSent(
       words =
@@ -76,9 +72,37 @@ final class Tagger extends CanTag[Sentence] {
         }
     )
 
+  def tagParagraph(text: String): Seq[KSent] = {
+    workflow.analyze(text)
+    retrieveSentences()
+  }
+
   @throws[Throwable]
   override protected def finalize() {
     workflow.close()
     super.finalize()
+  }
+
+  /**
+    * 문장결과를 읽어들임.
+    *
+    * @param acc 읽어들인 문장들이 누적되는 버퍼.
+    * @return 문장분리 결과.
+    */
+  @tailrec
+  private def retrieveSentences(acc: ArrayBuffer[KSent] = ArrayBuffer()): ArrayBuffer[KSent] = {
+    (try {
+      Some(workflow.getResultOfSentence(new Sentence(0, 0, false)))
+    } catch {
+      case _: Throwable => None.asInstanceOf[Sentence]
+    }) match {
+      case Some(sent: Sentence) if sent.getEojeols != null =>
+        acc += convert(sent)
+        if (!sent.isEndOfDocument)
+          retrieveSentences(acc)
+        else
+          acc
+      case _ => acc
+    }
   }
 }

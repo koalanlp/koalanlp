@@ -87,7 +87,7 @@ lazy val samples = (project in file("samples"))
       ("kr.bydelta" %% "koalanlp-komoran" % ver) classifier "assembly"
     )
   )
-lazy val ver = "1.0.2"
+lazy val ver = "1.0.4"
 
 def projectWithConfig(module: String) =
   Seq(

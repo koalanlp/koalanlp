@@ -34,9 +34,10 @@ object MorphemeAnalyzerWrap {
         e.origEojeol = tok.nextToken
 
         val analResult =
-          if (e.origEojeol.endsWith("에서"))
+          if (e.origEojeol.endsWith("에서")) {
+            tok.nextToken
             e.origEojeol.substring(0, e.origEojeol.length - 2) + "/ncn+에서/jco"
-          else
+          } else
             tok.nextToken.trim
 
         val eachAnal = new StringTokenizer(analResult, "+")
