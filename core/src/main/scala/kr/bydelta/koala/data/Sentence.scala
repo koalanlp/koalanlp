@@ -1,5 +1,7 @@
 package kr.bydelta.koala.data
 
+import kr.bydelta.koala.POS.POSTag
+
 import scala.annotation.tailrec
 import scala.collection.JavaConverters._
 import scala.collection.mutable
@@ -139,6 +141,38 @@ class Sentence(val words: Seq[Word]) extends Iterable[Word] {
     * @return 수식언을 포함하는 어절들의 Sequence
     */
   final def modifiers = words.filter(_.exists(_.isModifier))
+
+  /**
+    * 주어진 품사의 형태소가 포함된 어절을 모음.
+    *
+    * @param tag 확인할 품사.
+    * @return 주어진 품사를 포함하는 어절들의 Sequence
+    */
+  final def filter(tag: String): Seq[Word] = words.filter(_.existsMorpheme(tag))
+
+  /**
+    * 주어진 품사의 형태소가 포함된 어절을 모음.
+    *
+    * @param tag 확인할 품사.
+    * @return 주어진 품사를 포함하는 어절들의 Sequence
+    */
+  final def filter(tag: Seq[POSTag]): Seq[Word] = words.filter(_.existsMorpheme(tag))
+
+  /**
+    * 주어진 품사의 형태소가 포함되지 않은 어절을 모음.
+    *
+    * @param tag 확인할 품사.
+    * @return 주어진 품사를 포함하는 어절들의 Sequence
+    */
+  final def filterNot(tag: String): Seq[Word] = words.filter(!_.existsMorpheme(tag))
+
+  /**
+    * 주어진 품사의 형태소가 포함되지 않은 어절을 모음.
+    *
+    * @param tag 확인할 품사.
+    * @return 주어진 품사를 포함하는 어절들의 Sequence
+    */
+  final def filterNot(tag: Seq[POSTag]): Seq[Word] = words.filter(!_.existsMorpheme(tag))
 
   /**
     * 주어진 어절의 위치를 찾는다.

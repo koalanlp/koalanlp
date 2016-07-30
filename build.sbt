@@ -2,7 +2,7 @@ import sbt.Keys._
 import sbtunidoc.Plugin.UnidocKeys._
 
 lazy val root = (project in file("."))
-  .aggregate(core, kkma, hannanum, twitter, komoran)
+  .aggregate(core, kkma, hannanum, twitter, komoran, rest)
   .settings(unidocSettings: _*)
   .settings(
     publishArtifact := false,
@@ -29,7 +29,8 @@ lazy val kkma = (project in file("kkma"))
       val art = (artifact in(Compile, assembly)).value
       art.copy(`classifier` = Some("assembly"))
     },
-    addArtifact(artifact in(Compile, assembly), assembly)).dependsOn(core)
+    addArtifact(artifact in(Compile, assembly), assembly))
+  .dependsOn(core)
 lazy val hannanum = (project in file("hannanum"))
   .settings(projectWithConfig("hannanum"): _*)
   .settings(
@@ -75,6 +76,9 @@ lazy val samples = (project in file("samples"))
       ("kr.bydelta" %% "koalanlp-komoran" % ver) classifier "assembly"
     )
   )
+lazy val rest = (project in file("rest"))
+  .settings(projectWithConfig("rest"): _*)
+  .dependsOn(core)
 lazy val ver = "1.0.4"
 
 def projectWithConfig(module: String) =

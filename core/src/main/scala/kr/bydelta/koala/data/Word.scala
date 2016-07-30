@@ -6,6 +6,7 @@ package kr.bydelta.koala.data
 
 import kr.bydelta.koala.FunctionalTag
 import kr.bydelta.koala.FunctionalTag.FunctionalTag
+import kr.bydelta.koala.POS.POSTag
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable.ArrayBuffer
@@ -115,6 +116,17 @@ class Word(val surface: String, val morphemes: collection.Seq[Morpheme]) extends
     * @return True: 존재하는 경우.
     */
   final def existsMorpheme(tag: String) = morphemes.exists(_.hasTag(tag))
+
+  /**
+    * 주어진 품사를 갖는 형태소가 존재하는지 확인.
+    * <br/>
+    * 품사 표기는 [[https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing 여기]]
+    * 에서 확인
+    *
+    * @param tag 확인할 통합 품사 표기들
+    * @return True: 존재하는 경우.
+    */
+  final def existsMorpheme(tag: Seq[POSTag]) = morphemes.exists(_.hasTag(tag))
 
   /**
     * 주어진 위치의 형태소를 반환. Morpheme 객체.

@@ -1,5 +1,6 @@
 package kr.bydelta.koala.data
 
+import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.Processor.Processor
 
 /**
@@ -54,6 +55,17 @@ class Morpheme(val surface: String, val rawTag: String, var processor: Processor
     * @return True: 주어진 품사를 가질경우
     */
   final def hasTag(tag: String): Boolean = this.tag.toString.startsWith(tag)
+
+  /**
+    * 통합 품사가 주어진 품사 표기에 대응하는지 확인.
+    * <br/>
+    * 품사 표기는 [[https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing 여기]]
+    * 에서 확인
+    *
+    * @param tag 확인할 품사 표기 String
+    * @return True: 주어진 품사를 가질경우
+    */
+  final def hasTag(tag: Seq[POSTag]): Boolean = tag.contains(this.tag)
 
   /**
     * 원본 품사가 주어진 품사 표기에 대응하는지 확인.

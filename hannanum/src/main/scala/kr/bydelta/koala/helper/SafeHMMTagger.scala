@@ -132,6 +132,7 @@ private[koala] class SafeHMMTagger extends PosTagger {
     wordPts.sliding(2).foreach {
       case ArrayBuffer(prev, curr) =>
         traverse(prev, curr)
+      case _ =>
     }
 
     val eojeols = getEojeols(wordPts.last)

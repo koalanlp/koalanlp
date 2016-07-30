@@ -15,8 +15,9 @@ object Dictionary extends CanUserDict with CanExtractResource {
     * 사용자사전을 저장할 파일의 위치.
     */
   val userDict = new File(getExtractedPath, "koala.dict")
+  userDict.deleteOnExit()
 
-  override def addUserDictionary(dict: (String, POSTag)*): Unit = {
+  override def addUserDictionary(dict: (String, POSTag)*): Unit = Dictionary synchronized {
     userDict.getParentFile.mkdirs()
     val bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(userDict, true)))
     dict.foreach {
@@ -29,7 +30,7 @@ object Dictionary extends CanUserDict with CanExtractResource {
     bw.close()
   }
 
-  override def addUserDictionary(morph: String, tag: POSTag): Unit = {
+  override def addUserDictionary(morph: String, tag: POSTag): Unit = Dictionary synchronized {
     userDict.getParentFile.mkdirs()
     val bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(userDict, true)))
     bw.write(morph)
