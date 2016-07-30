@@ -15,7 +15,7 @@ object Dictionary extends CanUserDict {
   /**
     * 사용자사전에 등재되기 전의 리스트.
     */
-  private lazy val rawDict = ArrayBuffer[String]()
+  private[koala] lazy val rawDict = ArrayBuffer[String]()
   /**
     * 은전한닢 어휘사전.
     */

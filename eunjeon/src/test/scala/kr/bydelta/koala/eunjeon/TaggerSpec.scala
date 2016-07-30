@@ -69,9 +69,8 @@ class TaggerSpec extends Specification {
 
       val noUserDict = new Tagger().tagSentence(sent).singleLineString
 
-      Dictionary.nonEmpty must beFalse
-
-      Dictionary.userDict.termDict must beNull
+      if (!Dictionary.nonEmpty)
+        Dictionary.userDict.termDict must beNull
 
       Dictionary.addUserDictionary("아햏햏" -> POS.NNP, "개벽이" -> POS.NNP, "햏자" -> POS.NNG)
 
@@ -79,7 +78,7 @@ class TaggerSpec extends Specification {
 
       val dictApplied = new Tagger().tagSentence(sent).singleLineString
 
-      Dictionary.userDict.termDict.length must_== 3
+      Dictionary.userDict.termDict.length must_== Dictionary.rawDict.size
 
       noUserDict must_!= dictApplied
     }
