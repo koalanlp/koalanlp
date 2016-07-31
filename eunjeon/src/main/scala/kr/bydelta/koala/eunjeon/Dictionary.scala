@@ -43,7 +43,7 @@ object Dictionary extends CanUserDict {
   /**
     * 사용자사전을 다시 불러옴.
     */
-  def reloadDic(): Unit = {
+  def reloadDic(): Unit = Dictionary synchronized {
     if (isDicChanged) {
       userDict.loadFromIterator(rawDict.iterator)
       isDicChanged = false
@@ -61,18 +61,6 @@ object Dictionary extends CanUserDict {
         } else
           s"$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*"
     }
-    isDicChanged = true
-  }
-
-  override def addUserDictionary(word: String, tag: POSTag): Unit = {
-    val lastchar = word.last
-    val oTag = Processor.Eunjeon originalPOSOf tag
-    rawDict +=
-      (if (isHangul(lastchar)) {
-        val jong = hasJongsung(lastchar)
-        s"$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
-      } else
-        s"$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*")
     isDicChanged = true
   }
 
@@ -140,5 +128,17 @@ object Dictionary extends CanUserDict {
       .collectFirst {
         case x if x(1).startsWith(s"$tag,*,$hasJongsung") => x(0).toShort
       }.get
+  }
+
+  override def addUserDictionary(word: String, tag: POSTag): Unit = {
+    val lastchar = word.last
+    val oTag = Processor.Eunjeon originalPOSOf tag
+    rawDict +=
+      (if (isHangul(lastchar)) {
+        val jong = hasJongsung(lastchar)
+        s"$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
+      } else
+        s"$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*")
+    isDicChanged = true
   }
 }
