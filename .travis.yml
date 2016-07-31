@@ -12,3 +12,5 @@ script:
   - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION twitter/test
   - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION hannanum/test
   - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION rest/test
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
