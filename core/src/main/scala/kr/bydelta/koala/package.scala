@@ -102,7 +102,7 @@ package object koala {
           case "Suffix" => POS.XSO
           case "Punctuation" => POS.SF
           case "Unknown" => POS.UE
-          case "Foreign" => POS.SL
+          case "Foreign" | "Alpha" => POS.SL
           case _ => POS.SY
         }
       case Processor.Komoran =>
@@ -172,7 +172,7 @@ package object koala {
           case POS.SS => "SL"
           case POS.SL => "F"
           case POS.SN => "NNC"
-          case POS.SY | POS.XR | POS.UE => "SW"
+          case POS.SY | POS.XR | POS.UE => "SY"
           case x => x.toString
         }).toLowerCase
       case Processor.Eunjeon =>
