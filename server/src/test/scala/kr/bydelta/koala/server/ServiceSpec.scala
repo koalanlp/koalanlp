@@ -30,27 +30,43 @@ class ServiceSpec extends Specification {
     "generate correct tag response" in {
       val connection = MockConnection.server(
         server.getServiceInitializer(null).onConnect.asInstanceOf[(ServerContext) => HttpService])
-      val response = connection.typedHandler.handle(
+      val respPost = connection.typedHandler.handle(
         HttpRequest.post("/tag").withBody(HttpBody("나는 먹는다"))
+      )
+      val respGet = connection.typedHandler.handle(
+        HttpRequest.get("/tag").withBody(HttpBody("나는 먹는다"))
+      )
+      val respPut = connection.typedHandler.handle(
+        HttpRequest.put("/tag").withBody(HttpBody("나는 먹는다"))
       )
 
       val expectedOutput =
         """{"success":true,"data":[[{"word":"나는","in":[{"morph":"나","tag":"NP"},{"morph":"는","tag":"JX"}]},""" +
           """{"word":"먹는다","in":[{"morph":"먹","tag":"VV"},{"morph":"는","tag":"EP"},{"morph":"다","tag":"EF"}]}]]}"""
-      CallbackAwait.result(response, 1.minute).body.bytes.utf8String must_== expectedOutput
+      CallbackAwait.result(respPost, 1.minute).body.bytes.utf8String must_== expectedOutput
+      CallbackAwait.result(respGet, 1.minute).body.bytes.utf8String must_== expectedOutput
+      CallbackAwait.result(respPut, 1.minute).body.bytes.utf8String must_== expectedOutput
     }
 
     "generate correct parse response" in {
       val connection = MockConnection.server(
         server.getServiceInitializer(null).onConnect.asInstanceOf[(ServerContext) => HttpService])
-      val response = connection.typedHandler.handle(
+      val respPost = connection.typedHandler.handle(
         HttpRequest.post("/parse").withBody(HttpBody("나는 먹는다"))
+      )
+      val respGet = connection.typedHandler.handle(
+        HttpRequest.get("/parse").withBody(HttpBody("나는 먹는다"))
+      )
+      val respPut = connection.typedHandler.handle(
+        HttpRequest.put("/parse").withBody(HttpBody("나는 먹는다"))
       )
 
       val expectedOutput =
         """{"success":true,"data":[[{"word":"나는","depRel":"Object","rawDep":"(주어,목적)대상","children":[],"in":[{"morph":"나","tag":"NP"},{"morph":"는","tag":"JX"}]},""" +
           """{"word":"먹는다","depRel":"Conjunctive","rawDep":"연결","children":[0],"in":[{"morph":"먹","tag":"VV"},{"morph":"는","tag":"EP"},{"morph":"다","tag":"EF"}]}]]}"""
-      CallbackAwait.result(response, 1.minute).body.bytes.utf8String must_== expectedOutput
+      CallbackAwait.result(respPost, 1.minute).body.bytes.utf8String must_== expectedOutput
+      CallbackAwait.result(respGet, 1.minute).body.bytes.utf8String must_== expectedOutput
+      CallbackAwait.result(respPut, 1.minute).body.bytes.utf8String must_== expectedOutput
     }
 
     "provide dictionary's put action" in {

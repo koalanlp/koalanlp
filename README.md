@@ -280,16 +280,16 @@ KoalaNLP는, 개발자 여러분의 편의를 위해, `Server` Trait에 미리 `
 
 통신은 다음의 3가지 Path로 이루어집니다.
 
-| Path | 지원 Method | 요청 Body | 응답 Body |
-| ---- | ------ | ----------------- | ------------- |
-| `/tag` | GET, POST, PUT | String | Json Object<sup>주3</sup> |
-| `/parse` | GET, POST, PUT | String | Json Object<sup>주3</sup> |
-| `/dict` | POST, PUT | Json Array<sup>주4</sup> | Json Object<sup>주3</sup> |
+| Path     | 지원 Method     | 요청 Body | 응답 Body     |  설명                 |
+| -------- | -------------- | -------- | ------------- | -------------------- |
+| `/tag`   | GET, POST, PUT | String   | Json Object<sup>주3</sup> | 요청 본문에 전달된 문단에 품사를 답니다. |
+| `/parse` | GET, POST, PUT | String   | Json Object<sup>주3</sup> | 요청 본문에 전달된 문단의 각 문장마다 의존관계를 분석합니다. |
+| `/dict`  | POST, PUT      | Json Array<sup>주4</sup> | Json Object<sup>주3</sup> | 주어진 사전을 사용자사전에 추가합니다. |
 
 > <sup>주3</sup> 응답의 형태:
 > ```javascript
 > { "success": Boolean,   //성공여부,
->   "message": String,    //실패 시 서버 메시지,
+>   "message": String,    //[실패시] 서버 메시지,
 >   "data": [             //[Tag, Parse의 경우만] 문장 Array
 >    [                    //문장 1개의 어절 Array
 >     {"word": String,    //어절 표면형
