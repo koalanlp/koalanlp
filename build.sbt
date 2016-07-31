@@ -82,9 +82,8 @@ def projectWithConfig(module: String) =
   Seq(
     organization := "kr.bydelta",
     name := s"koalaNLP-$module",
-    version := "1.2.0",
+    version := "1.2.1",
     scalaVersion := "2.11.8",
-    crossScalaVersions := Seq("2.10.4", "2.11.8"),
     scalacOptions += "-target:jvm-1.7",
     scalacOptions in Test ++= Seq("-Yrangepos"),
     publishArtifact in Test := false,

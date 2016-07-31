@@ -29,7 +29,7 @@ class Tagger extends CanTag[Seq[Eojeol]] {
     convert(tagSentenceRaw(text))
 
   override def tagSentenceRaw(text: String): Seq[Eojeol] =
-    Eojeoler.build(tokenizer.parseText(text, dePreAnalysis = false))
+    Eojeoler.build(tokenizer.parseText(text, dePreAnalysis = true))
 
   override private[koala] def convert(seq: Seq[Eojeol]): Sentence =
     new Sentence(
