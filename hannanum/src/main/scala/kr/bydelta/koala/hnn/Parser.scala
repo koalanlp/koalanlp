@@ -6,7 +6,6 @@ import kaist.cilab.parser.berkeleyadaptation.Configuration
 import kaist.cilab.parser.corpusconverter.sejong2treebank.sejongtree.ParseTree
 import kaist.cilab.parser.dependency.DTree
 import kaist.cilab.parser.psg2dg.Converter
-import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.Processor
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.helper.BerkeleyParserWrap
@@ -137,14 +136,6 @@ class Parser extends CanDepParse {
     }.unzip
 
     new HSent(0, 0, true, plainEojeols.toArray, eojeols.toArray)
-  }
-
-  override def addUserDictionary(dict: (String, POSTag)*) {
-    Dictionary.addUserDictionary(dict: _*)
-  }
-
-  override def addUserDictionary(morph: String, tag: POSTag) {
-    Dictionary.addUserDictionary(morph, tag)
   }
 }
 

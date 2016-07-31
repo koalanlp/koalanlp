@@ -2,7 +2,7 @@ import sbt.Keys._
 import sbtunidoc.Plugin.UnidocKeys._
 
 lazy val root = (project in file("."))
-  .aggregate(core, kkma, hannanum, twitter, komoran, rest)
+  .aggregate(core, kkma, hannanum, twitter, komoran, server)
   .settings(unidocSettings: _*)
   .settings(
     publishArtifact := false,
@@ -66,26 +66,23 @@ lazy val komoran = (project in file("komoran"))
     addArtifact(artifact in(Compile, assembly), assembly)).dependsOn(core)
 lazy val samples = (project in file("samples"))
   .settings(projectWithConfig("samples"): _*)
+  .dependsOn(eunjeon, twitter, komoran, kkma, hannanum, server)
+lazy val server = (project in file("server"))
+  .settings(projectWithConfig("server"): _*)
   .settings(
     libraryDependencies ++= Seq(
-      "kr.bydelta" %% "koalanlp-core" % ver,
-      "kr.bydelta" %% "koalanlp-eunjeon" % ver,
-      "kr.bydelta" %% "koalanlp-hannanum" % ver classifier "assembly",
-      "kr.bydelta" %% "koalanlp-twitter" % ver,
-      "kr.bydelta" %% "koalanlp-kkma" % ver classifier "assembly",
-      ("kr.bydelta" %% "koalanlp-komoran" % ver) classifier "assembly"
+      "com.tumblr" %% "colossus" % "0.8.0",
+      "com.tumblr" %% "colossus-testkit" % "0.8.0" % "test",
+      "com.typesafe.play" %% "play-json" % "2.5.4"
     )
   )
-lazy val rest = (project in file("rest"))
-  .settings(projectWithConfig("rest"): _*)
-  .dependsOn(core)
-lazy val ver = "1.0.4"
+  .dependsOn(core, kkma % "test")
 
 def projectWithConfig(module: String) =
   Seq(
     organization := "kr.bydelta",
     name := s"koalaNLP-$module",
-    version := ver,
+    version := "1.2.0",
     scalaVersion := "2.11.8",
     crossScalaVersions := Seq("2.10.4", "2.11.8"),
     scalacOptions += "-target:jvm-1.7",

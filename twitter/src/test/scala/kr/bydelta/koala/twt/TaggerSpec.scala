@@ -60,7 +60,8 @@ class TaggerSpec extends Specification {
 
       val noUserDict = new Tagger().tagSentence(sent).singleLineString
 
-      Dictionary.addUserDictionary("아햏햏" -> POS.NNP, "개벽이" -> POS.NNP, "햏자" -> POS.NNG)
+      Dictionary.addUserDictionary("아햏햏" -> POS.NNP, "개벽이" -> POS.NNP)
+      Dictionary.addUserDictionary("햏자", POS.NNG)
 
       val dictApplied = new Tagger().tagSentence(sent).singleLineString
 

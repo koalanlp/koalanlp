@@ -1,6 +1,5 @@
 package kr.bydelta.koala.kkma
 
-import kr.bydelta.koala.POS._
 import kr.bydelta.koala.Processor
 import kr.bydelta.koala.data.{Sentence => KSent}
 import kr.bydelta.koala.traits.CanDepParse
@@ -91,13 +90,5 @@ class Parser extends CanDepParse {
         sent.add(new Eojeol(mexp))
     }
     sent
-  }
-
-  override def addUserDictionary(dict: (String, POSTag)*) {
-    Dictionary.addUserDictionary(dict: _*)
-  }
-
-  override def addUserDictionary(morph: String, tag: POSTag) {
-    Dictionary.addUserDictionary(morph, tag)
   }
 }

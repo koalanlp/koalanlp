@@ -251,8 +251,8 @@ package object koala {
           case "주어" => FunctionalTag.Subject
           case "부사어" | "이유" => FunctionalTag.Adjunct
           case "보어" | "인용" => FunctionalTag.Complement
-          case "수식" | "명사구" => FunctionalTag.Modifier
-          case "동일" | "보조 연결" | "의존 연결" | "대등 연결" | "체언 연결" => FunctionalTag.Conjunctive
+          case "수식" => FunctionalTag.Modifier
+          case "동일" | "보조 연결" | "의존 연결" | "대등 연결" | "체언 연결" | "연결" => FunctionalTag.Conjunctive
           case _ =>
             FunctionalTag.Undefined
         }

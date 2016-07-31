@@ -1,6 +1,7 @@
 package kr.bydelta.koala.hnn;
 
 import kr.bydelta.koala.POS$;
+import kr.bydelta.koala.traits.CanUserDict;
 
 import java.util.List;
 
@@ -17,6 +18,15 @@ public class JavaDictionary {
      * @param pos    형태소별 품사의 목록. POS.NNG(), POS.VV() 등.
      */
     public static void addUserDictionary(List<String> morphs, List<POS$.Value> pos) {
-        Dictionary$.MODULE$.jUserDictionary(morphs, pos);
+        get().jUserDictionary(morphs, pos);
+    }
+
+    /**
+     * Wrapper method for Scala Dictionary object
+     *
+     * @return Dictionary object
+     */
+    public static CanUserDict get() {
+        return Dictionary$.MODULE$;
     }
 }

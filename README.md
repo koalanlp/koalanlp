@@ -2,8 +2,9 @@ KoalaNLP
 ==============
 (구) KoreanAnalyzer
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-core_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-core_2.11)
+[![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core_2.11.svg?label=latest%20release)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core_2.11%22)
 [![Build Status](https://travis-ci.org/nearbydelta/KoalaNLP.svg?branch=master)](https://travis-ci.org/nearbydelta/KoalaNLP)
+[![codecov](https://codecov.io/gh/nearbydelta/KoalaNLP/branch/master/graph/badge.svg)](https://codecov.io/gh/nearbydelta/KoalaNLP)
 [![Gitter](https://badges.gitter.im/nearbydelta/KoalaNLP.svg)](https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.svg?v=103)](https://opensource.org/licenses/GPL-3.0/)
 
@@ -28,12 +29,12 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 
 | 패키지명 | 버전 | 설명 |
 | -------- | ---- | ---- |
-| `koalanlp-core` | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-core_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-core_2.11) | 통합 인터페이스의 정의가 등재된 중심 묶음입니다. |
-| `koalanlp-hannanum` | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-hannanum_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-hannanum_2.11) | 한나눔 분석기 패키지입니다. <sup>주1</sup> |
-| `koalanlp-kkma` | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-kkma_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-kkma_2.11) | 꼬꼬마 분석기 패키지입니다. <sup>주1</sup> |
-| `koalanlp-komoran` | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-komoran_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-komoran_2.11) | 코모란 분석기 패키지입니다. <sup>주1</sup> |
-| `koalanlp-twitter` | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-twitter_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-twitter_2.11) | 트위터 분석기 패키지입니다. |
-| `koalanlp-eunjeon` | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-eunjeon_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.bydelta/koalanlp-eunjeon_2.11) | 은전한닢 분석기 패키지입니다. |
+| `koalanlp-core` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core_2.11%22) | 통합 인터페이스의 정의가 등재된 중심 묶음입니다. |
+| `koalanlp-hannanum` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-hannanum_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-hannanum_2.11%22) | 한나눔 분석기 패키지입니다. <sup>주1</sup> |
+| `koalanlp-kkma` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kkma_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kkma_2.11%22) | 꼬꼬마 분석기 패키지입니다. <sup>주1</sup> |
+| `koalanlp-komoran` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-komoran_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-komoran_2.11%22) | 코모란 분석기 패키지입니다. <sup>주1</sup> |
+| `koalanlp-twitter` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-twitter_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-twitter_2.11%22) | 트위터 분석기 패키지입니다. |
+| `koalanlp-eunjeon` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-eunjeon_2.11%22) | 은전한닢 분석기 패키지입니다. |
 
 > <sup>주1</sup> 꼬꼬마, 한나눔, 코모란 분석기는 타 분석기와 달리 Maven repository에 등재되어 있지 않아, 원래는 수동으로 직접 추가하셔야 합니다.
 > 이 점이 불편하다는 것을 알기에, KoalaNLP는 assembly 형태로 해당 패키지를 포함하여 배포하고 있습니다. 포함된 패키지를 사용하려면, `assembly` classifier를 사용하십시오.
@@ -159,12 +160,12 @@ val analyzed: Sentence = parser.parse(sentence)
 
 Java는 다음과 같습니다.
 ```scala
-import kr.bydelta.koala.kkma.Parser;
-import kr.bydelta.koala.Sentence;
+import kr.bydelta.koala.kkma.Parser
+import kr.bydelta.koala.Sentence
 
-Parser parser = new Parser();
-String sentence = "이것은 코알라 통합 품사분석기에서 은전한닢 분석기를 돌린 결과입니다.";
-Sentence analyzed = parser.parse(sentence);
+Parser parser = new Parser()
+String sentence = "이것은 코알라 통합 품사분석기에서 은전한닢 분석기를 돌린 결과입니다."
+Sentence analyzed = parser.parse(sentence)
 ```
 
 ## 사용자 정의 사전
@@ -246,6 +247,67 @@ for(String line : sentences){
   Sentence parsed = parser.parse(tagged);
 }
 ```
+
+### HTTP 통신 Server
+아래와 같이 서버를 정의합니다.
+> __NOTE:__
+> Scala만 지원합니다.
+
+```scala
+import kr.bydelta.koala.server._
+import kr.bydelta.koala.kkma.{Dictionary, Parser, Tagger}
+
+object KKMAServer extends Server{
+  override val port: Int = 8080
+  override def getTagger = new Tagger
+  override def getParser = new Parser
+  override val dict = Dictionary
+}
+```
+
+KoalaNLP는, 개발자 여러분의 편의를 위해, `Server` Trait에 미리 `main`함수를 정의해 두었습니다.
+
+따라서, `Server`를 상속받은 `object`는 실행이 가능합니다. SBT를 사용하면 아래와 같이 서비스 실행이 가능합니다.
+
+```bash
+# sbt runMain KKMAServer
+```
+
+통신은 다음의 3가지 Path로 이루어집니다.
+
+| Path | 지원 Method | 요청 Body | 응답 Body |
+| ---- | ------ | ----------------- | ------------- |
+| `/tag` | GET, POST, PUT | String | Json Object<sup>주2</sup> |
+| `/parse` | GET, POST, PUT | String | Json Object<sup>주2</sup> |
+| `/dict` | POST, PUT | Json Array<sup>주3</sup> | Json Object<sup>주2</sup> |
+
+> <sup>주2</sup> 응답의 형태:
+> ```javascript
+> { "success": Boolean,   //성공여부,
+>   "message": String,    //실패 시 서버 메시지,
+>   "data": [             //[Tag, Parse의 경우만] 문장 Array
+>    [                    //문장 1개의 어절 Array
+>     {"word": String,    //어절 표면형
+>      "in": [            //어절의 형태소 Array
+>       {"morph": String, //형태소 표면형
+>        "tag": String    //통합품사
+>       }...
+>      ],
+>      "depTag": String,  //[Parse]. 지배소와의 관계(통합명칭) 
+>      "rawDep": String,  //[Parse]. 지배소와의 관계(원본)
+>      "child": [Int],    //[Parse]. 본 어절이 지배하는 의존소의 위치.
+>     }
+>    ]...
+>   ]
+> }
+> ```
+
+> <sup>주3</sup> 사전의 형태:
+> ```javascript
+> [{"morph": String,   //형태소 표면형
+>   "tag": String      //통합품사.
+>  }...]
+> ```
 
 ## 자료 구조
 아래는 중심 자료 구조가 지원하는 주요 API 목록입니다.

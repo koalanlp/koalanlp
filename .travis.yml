@@ -3,14 +3,9 @@ scala:
   - 2.11.8
 jdk:
   - oraclejdk7
-script:
+install:
   - cp -r ./hannanum/models/* ./
-  - sbt -J-Xmx4g ++2.11.8 eunjeon/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION core/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION komoran/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION kkma/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION twitter/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION hannanum/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION rest/test
+script:
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION clean coverage test coverageReport coverageAggregate
 after_success:
   - bash <(curl -s https://codecov.io/bash)

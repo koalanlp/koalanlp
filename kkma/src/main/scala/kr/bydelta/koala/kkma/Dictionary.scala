@@ -19,16 +19,11 @@ object Dictionary extends CanUserDict {
 
   override def addUserDictionary(dict: (String, POSTag)*) {
     if (dict.nonEmpty) {
-      try {
-        userdic ++=
-          dict.map {
-            case (word, integratedTag) => (word, Processor.KKMA originalPOSOf integratedTag)
-          }
-        isDicChanged = true
-      } catch {
-        case e: Exception =>
-          e.printStackTrace()
-      }
+      userdic ++=
+        dict.map {
+          case (word, integratedTag) => (word, Processor.KKMA originalPOSOf integratedTag)
+        }
+      isDicChanged = true
     }
   }
 

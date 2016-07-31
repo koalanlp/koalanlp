@@ -5,7 +5,7 @@ import kr.bydelta.koala.data.Sentence
 /**
   * 의존구문분석 Trait
   */
-trait CanDepParse extends CanUserDict {
+trait CanDepParse {
   /**
     * String 텍스트의 의존구문을 분석함.
     *

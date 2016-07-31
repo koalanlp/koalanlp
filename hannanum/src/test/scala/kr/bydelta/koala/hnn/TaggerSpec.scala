@@ -95,7 +95,9 @@ class TaggerSpec extends Specification {
 
       val prevEnd = Dictionary.userDic.search_end
 
-      Dictionary.addUserDictionary("아햏햏" -> POS.IC, "개벽이" -> POS.NNG, "햏햏" -> POS.NNG)
+      Dictionary.addUserDictionary("아햏햏" -> POS.IC, "개벽이" -> POS.NNG)
+
+      Dictionary.addUserDictionary("햏햏", POS.NNG)
 
       val dictApplied = new Tagger().tagSentence(sent).singleLineString
 
