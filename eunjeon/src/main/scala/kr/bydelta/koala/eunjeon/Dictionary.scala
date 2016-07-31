@@ -54,11 +54,25 @@ object Dictionary extends CanUserDict {
     rawDict ++= dict.map {
       case (word, tag) =>
         val lastchar = word.last
-        if (isHangul(lastchar))
-          s"$word,0,0,0,${Processor.Eunjeon originalPOSOf tag},*,${hasJongsung(lastchar)},$word,*,*,*,*"
-        else
-          s"$word,0,0,0,${Processor.Eunjeon originalPOSOf tag},*,*,$word,*,*,*,*"
+        val oTag = Processor.Eunjeon originalPOSOf tag
+        if (isHangul(lastchar)) {
+          val jong = hasJongsung(lastchar)
+          s"$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
+        } else
+          s"$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*"
     }
+    isDicChanged = true
+  }
+
+  override def addUserDictionary(word: String, tag: POSTag): Unit = {
+    val lastchar = word.last
+    val oTag = Processor.Eunjeon originalPOSOf tag
+    rawDict +=
+      (if (isHangul(lastchar)) {
+        val jong = hasJongsung(lastchar)
+        s"$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
+      } else
+        s"$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*")
     isDicChanged = true
   }
 
@@ -92,18 +106,6 @@ object Dictionary extends CanUserDict {
     } else {
       false
     }
-  }
-
-  override def addUserDictionary(word: String, tag: POSTag): Unit = {
-    val lastchar = word.last
-    val oTag = Processor.Eunjeon originalPOSOf tag
-    rawDict +=
-      (if (isHangul(lastchar)) {
-        val jong = hasJongsung(lastchar)
-        s"$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
-      } else
-        s"$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*")
-    isDicChanged = true
   }
 
   /**

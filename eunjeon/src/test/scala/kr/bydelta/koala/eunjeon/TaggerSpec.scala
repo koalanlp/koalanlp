@@ -72,7 +72,8 @@ class TaggerSpec extends Specification {
       if (!Dictionary.nonEmpty)
         Dictionary.userDict.termDict must beNull
 
-      Dictionary.addUserDictionary("아햏햏" -> POS.NNP, "개벽이" -> POS.NNP, "햏자" -> POS.NNG)
+      Dictionary.addUserDictionary("아햏햏" -> POS.NNP, "개벽이" -> POS.NNP)
+      Dictionary.addUserDictionary("햏자" -> POS.NNG)
 
       Dictionary.nonEmpty must beTrue
 
