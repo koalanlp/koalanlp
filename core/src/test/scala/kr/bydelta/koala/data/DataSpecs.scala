@@ -71,7 +71,7 @@ class DataSpecs extends Specification {
       sent.head.surface must_== "나는"
       sent.last.surface must_== "밥을"
       sent.nouns.map(_.surface) must containAllOf(Seq("나는", "밥을"))
-      sent.jVerbs must beEmpty
+      sent.jVerbs.size() must_== 0
       sent.matches(Seq(Seq("NN", "J"), Seq("N", "J"))) must beFalse
       sent.matches(Array(Array("NP", "J"), Array("N", "JCO"))) must beTrue
     }

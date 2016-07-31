@@ -2,7 +2,7 @@ package kr.bydelta.koala.hnn
 
 import java.io.File
 
-import kaist.cilab.jhannanum.common.communication.Sentence
+import kaist.cilab.jhannanum.common.communication.PlainSentence
 import kaist.cilab.jhannanum.common.workflow.Workflow
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.InformalSentenceFilter.InformalSentenceFilter
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.SentenceSegmentor.SentenceSegmentor
@@ -31,6 +31,6 @@ final class SentenceSplitter extends CanSplitSentence {
 
   override def sentences(text: String): Seq[String] = {
     workflow.analyze(text)
-    workflow.getResultOfDocument(new Sentence(0, 0, false)).map(_.toString)
+    workflow.getResultOfDocument(new PlainSentence(0, 0, false)).map(_.getSentence)
   }
 }
