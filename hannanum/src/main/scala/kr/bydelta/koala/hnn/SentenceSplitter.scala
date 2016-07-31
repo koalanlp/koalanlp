@@ -9,7 +9,8 @@ import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.SentenceSegmen
 import kr.bydelta.koala.data.{Sentence => KSent}
 import kr.bydelta.koala.traits.CanSplitSentence
 
-import scala.collection.JavaConversions._
+import scala.annotation.tailrec
+import scala.collection.mutable.ArrayBuffer
 
 /**
   * 한나눔 문장분리기
@@ -29,8 +30,31 @@ final class SentenceSplitter extends CanSplitSentence {
     workflow
   }
 
-  override def sentences(text: String): Seq[String] = {
+  override def sentences(text: String): Seq[String] = Dictionary synchronized {
     workflow.analyze(text)
-    workflow.getResultOfDocument(new PlainSentence(0, 0, false)).map(_.getSentence)
+    retrieveSentences()
+  }
+
+  /**
+    * 문장결과를 읽어들임.
+    *
+    * @param acc 읽어들인 문장들이 누적되는 버퍼.
+    * @return 문장분리 결과.
+    */
+  @tailrec
+  private def retrieveSentences(acc: ArrayBuffer[String] = ArrayBuffer()): ArrayBuffer[String] = {
+    (try {
+      Some(workflow.getResultOfSentence(new PlainSentence(0, 0, false)))
+    } catch {
+      case _: Throwable => None.asInstanceOf[PlainSentence]
+    }) match {
+      case Some(sent: PlainSentence) =>
+        acc += sent.getSentence
+        if (!sent.isEndOfDocument)
+          retrieveSentences(acc)
+        else
+          acc
+      case _ => acc
+    }
   }
 }

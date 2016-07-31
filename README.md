@@ -78,6 +78,7 @@ Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 
 
 ## 문장 분리
 품사 태깅을 거치지 않은 문장 분리는, 한나눔과 트위터 분석기만 지원됩니다. 타 패키지의 경우 문장 분리 작업이 품사 태깅 이후에 이루어집니다.
+> __NOTE:__
 > * 긴 문단의 경우, 문장 분리를 한나눔 또는 트위터로 작업한 다음 각 문장별로 태깅하는 것을 권합니다.
 > * 한나눔이 트위터보다 문장분리가 정확하지만, 반대로 무겁습니다.
 
@@ -148,7 +149,8 @@ List<Sentence> sentences = tagger.jTagParagraph(paragraph);
 ## 단순 구문 분석
 의존 구문 분석은 한나눔과 꼬꼬마가 지원합니다. (타 패키지는 지원하지 않습니다)
 
-> * 구문 분석의 결과는 세종 말뭉치의 지침에 따라 통합되었으며, 통합 태그와 각 분석기 태그의 비교표는 [여기](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)에서 보실 수 있습니다.
+> __NOTE:__
+> 구문 분석의 결과는 세종 말뭉치의 지침에 따라 통합되었으며, 통합 태그와 각 분석기 태그의 비교표는 [여기](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)에서 보실 수 있습니다.
 
 ```scala
 /* 패키지 명: 한나눔(hnn), 꼬꼬마(kkma) */
@@ -174,8 +176,8 @@ Sentence analyzed = parser.parse(sentence)
 ## 사용자 정의 사전
 모든 품사 분석기는 사용자 정의 사전을 등록할 수 있습니다. 단, 트위터 분석기의 경우 명사만 가능합니다.
 
-> __Experimental:__
-> * 사전에 등재되어도, 일부 라이브러리의 경우, 신규 추가된 단어의 우선순위가 낮아 적용되지 않을 수도 있습니다.
+> __Note:__
+> 사전에 등재되어도, 일부 라이브러리의 경우, 신규 추가된 단어의 우선순위가 낮아 적용되지 않을 수도 있습니다.
 
 ```scala
 /* 패키지 명: 한나눔(hnn), 코모란(kmr), 꼬꼬마(kkma), 은전한닢(eunjeon), 트위터(twt) */
@@ -210,8 +212,8 @@ JavaDictionary.addUserDictionary(morphems, pos);
 
 ## 여러 패키지의 사용
 통합 인터페이스는 여러 패키지간의 호환이 가능하게 설계되어 있습니다. 이론적으로는 타 패키지의 품사 분석 결과를 토대로 구문 분석이 가능합니다.
-> __Experimental__
-> * 본 분석의 결과는 검증되지 않았으며, 잘못된 분석에 대해서 KoalaNLP는 책임지지 않습니다.
+> __Note:__
+> * 본 분석의 결과는 검증되지 않았습니다.
 > * 신조어 등으로 인해 한나눔이나 꼬꼬마에서 품사 분석이 제대로 수행되지 않을 경우를 위한 기능입니다.
 > * 사용자 정의 사전은 `Tagger`와 `Parser`의 대상이 되는 패키지에 모두에 추가하여야 합니다.
 
@@ -251,7 +253,7 @@ for(String line : sentences){
 }
 ```
 
-### HTTP 통신 Server
+## HTTP 통신 Server
 아래와 같이 서버를 정의합니다.
 > __NOTE:__
 > Scala만 지원합니다.

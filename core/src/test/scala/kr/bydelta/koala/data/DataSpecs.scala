@@ -28,7 +28,7 @@ class DataSpecs extends Specification {
         surface = "밥을",
         morphemes = Seq(
           new Morpheme(surface = "밥", rawTag = "NNG", processor = Processor.KKMA),
-          new Morpheme(surface = "을", rawTag = "JCO", processor = Processor.KKMA)
+          new Morpheme(surface = "을", rawTag = "JKO", processor = Processor.KKMA)
         )
       )
 
@@ -36,14 +36,14 @@ class DataSpecs extends Specification {
       word.iterator.next must_== word.jIterator.next()
       word.iterator.hasNext must_== word.jIterator.hasNext
 
-      word.getPrevOf(word.get(1)) must_== word.head
-      word.getNextOf(word.get(0)) must_== word.last
+      word.getPrevOf(word.get(1)).get must_== word.head
+      word.getNextOf(word.get(0)).get must_== word.last
       word(3).isDefined must beFalse
       word.size must_== 2
 
       word.existsMorpheme(Seq(POS.NNP, POS.NNG)) must beTrue
       word.matches(Array("NNG", "JX")) must beFalse
-      word.matches(Seq("NNG", "JC")) must beTrue
+      word.matches(Seq("NNG", "JK")) must beTrue
     }
   }
 
@@ -62,7 +62,7 @@ class DataSpecs extends Specification {
             surface = "밥을",
             morphemes = Seq(
               new Morpheme(surface = "밥", rawTag = "NNG", processor = Processor.KKMA),
-              new Morpheme(surface = "을", rawTag = "JCO", processor = Processor.KKMA)
+              new Morpheme(surface = "을", rawTag = "JKO", processor = Processor.KKMA)
             )
           )
         )
@@ -73,7 +73,7 @@ class DataSpecs extends Specification {
       sent.nouns.map(_.surface) must containAllOf(Seq("나는", "밥을"))
       sent.jVerbs.size() must_== 0
       sent.matches(Seq(Seq("NN", "J"), Seq("N", "J"))) must beFalse
-      sent.matches(Array(Array("NP", "J"), Array("N", "JCO"))) must beTrue
+      sent.matches(Array(Array("NP", "J"), Array("N", "JKO"))) must beTrue
     }
   }
 }
