@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>POS - kr.bydelta.koala.POS</title>
@@ -9,6 +8,11 @@
           
       <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../index.html';
@@ -24,9 +28,15 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../../../lib/object_big.png" />
+        <img alt="Object" src="../../../lib/object_big.png" />
         <p id="owner"><a href="../../package.html" class="extype" name="kr">kr</a>.<a href="../package.html" class="extype" name="kr.bydelta">bydelta</a>.<a href="package.html" class="extype" name="kr.bydelta.koala">koala</a></p>
-        <h1>POS</h1>
+        <h1>POS</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="package.html" class="extype" name="kr.bydelta.koala">package koala</a>
+          </div></span></h3><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -53,7 +63,7 @@
               <ol>
                 
                 <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By inheritance</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
               </ol>
             </div>
         <div id="ancestors">
@@ -66,9 +76,8 @@
             <span class="filtertype"></span>
             <ol>
               <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show all</span></li>
+              <li class="showall in"><span>Show All</span></li>
             </ol>
-            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
           </div>
         <div id="visbl">
             <span class="filtertype">Visibility</span>
@@ -93,7 +102,11 @@
       <span class="symbol">
         <span class="name">POSTag</span><span class="result"> = <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@POSTag=kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">통합품사 타입 *</p>
     </li><li name="scala.Enumeration.Val" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ValextendsEnumeration.this.ValuewithSerializable"></a>
@@ -106,12 +119,13 @@
       <span class="symbol">
         <span class="name">Val</span><span class="result"> extends <span class="extype" name="scala.Enumeration.Value">Value</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@ValextendsEnumeration.this.ValuewithSerializable" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Enumeration</dd><dt>Annotations</dt><dd>
-                <span class="name">@SerialVersionUID</span><span class="args">(<span>
-      
-      <span class="symbol">-3501153230598116017L</span>
-    </span>)</span>
+                <span class="name">@SerialVersionUID</span><span class="args">()</span>
               
         </dd></dl></div>
     </li><li name="scala.Enumeration.Value" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
@@ -125,12 +139,13 @@
       <span class="symbol">
         <span class="name">Value</span><span class="result"> extends <span class="extype" name="scala.Ordered">Ordered</span>[<span class="extype" name="scala.Enumeration.Value">Value</span>] with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@ValueextendsOrdered[Enumeration.this.Value]withSerializable" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Enumeration</dd><dt>Annotations</dt><dd>
-                <span class="name">@SerialVersionUID</span><span class="args">(<span>
-      
-      <span class="symbol">7091335633555234129L</span>
-    </span>)</span>
+                <span class="name">@SerialVersionUID</span><span class="args">()</span>
               
         </dd></dl></div>
     </li><li name="scala.Enumeration.ValueSet" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -144,7 +159,11 @@
       <span class="symbol">
         <span class="name">ValueSet</span><span class="result"> extends <span class="extype" name="scala.collection.AbstractSet">AbstractSet</span>[<span class="extype" name="scala.Enumeration.Value">Value</span>] with <span class="extype" name="scala.collection.immutable.SortedSet">SortedSet</span>[<span class="extype" name="scala.Enumeration.Value">Value</span>] with <span class="extype" name="scala.collection.SortedSetLike">SortedSetLike</span>[<span class="extype" name="scala.Enumeration.Value">Value</span>, <span class="extype" name="scala.Enumeration.ValueSet">ValueSet</span>] with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@ValueSetextendsAbstractSet[Enumeration.this.Value]withSortedSet[Enumeration.this.Value]withSortedSetLike[Enumeration.this.Value,Enumeration.this.ValueSet]withSerializable" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
     </li></ol>
             </div>
@@ -154,19 +173,6 @@
         <div id="values" class="values members">
               <h3>Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="!=(x$1:AnyRef):Boolean"></a>
-      <a id="!=(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
@@ -177,8 +183,12 @@
       <span class="symbol">
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <a id="##():Int"></a>
@@ -190,22 +200,13 @@
       <span class="symbol">
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@##():Int" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="==(x$1:AnyRef):Boolean"></a>
-      <a id="==(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
@@ -216,8 +217,12 @@
       <span class="symbol">
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@==(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="kr.bydelta.koala.POS#EC" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="EC:kr.bydelta.koala.POS.Value"></a>
       <a id="EC:Value"></a>
@@ -229,7 +234,11 @@
       <span class="symbol">
         <span class="name">EC</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@EC:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt"><i>연결 어미</i>
 어간에 붙어 다음 말에 연결하는 구실을 하는 어미.</p><div class="fullcomment"><div class="comment cmt"><p><i>연결 어미</i>
 어간에 붙어 다음 말에 연결하는 구실을 하는 어미.
@@ -246,7 +255,11 @@
       <span class="symbol">
         <span class="name">EF</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@EF:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt"><i>종결 어미</i> :
 한 문장을 종결되게 하는 어말 어미.</p><div class="fullcomment"><div class="comment cmt"><p><i>종결 어미</i> :
 한 문장을 종결되게 하는 어말 어미.
@@ -263,7 +276,11 @@
       <span class="symbol">
         <span class="name">EP</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@EP:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt"><i>선어말 어미</i> :
 어말 어미 앞에 나타나는 어미.</p><div class="fullcomment"><div class="comment cmt"><p><i>선어말 어미</i> :
 어말 어미 앞에 나타나는 어미.
@@ -281,7 +298,11 @@
       <span class="symbol">
         <span class="name">ETM</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@ETM:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt"><i>관형형 전성어미</i>: 용언의 어간에 붙어 관형사의 기능을 수행하게 하는 어미.</p><div class="fullcomment"><div class="comment cmt"><p><i>관형형 전성어미</i>: 용언의 어간에 붙어 관형사의 기능을 수행하게 하는 어미. *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#ETN" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ETN:kr.bydelta.koala.POS.Value"></a>
@@ -294,7 +315,11 @@
       <span class="symbol">
         <span class="name">ETN</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@ETN:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt"><i>명사형 전성어미</i>: 용언의 어간에 붙어 명사의 기능을 수행하게 하는 어미.</p><div class="fullcomment"><div class="comment cmt"><p><i>명사형 전성어미</i>: 용언의 어간에 붙어 명사의 기능을 수행하게 하는 어미. *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#IC" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="IC:kr.bydelta.koala.POS.Value"></a>
@@ -307,7 +332,11 @@
       <span class="symbol">
         <span class="name">IC</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@IC:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[독립언] <i>감탄사</i> : 말하는 이의 본능적인 놀람이나 느낌, 부름, 응답 따위를 나타내는 말의 부류이다.</p><div class="fullcomment"><div class="comment cmt"><p>[독립언] <i>감탄사</i> : 말하는 이의 본능적인 놀람이나 느낌, 부름, 응답 따위를 나타내는 말의 부류이다. *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#JC" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="JC:kr.bydelta.koala.POS.Value"></a>
@@ -320,7 +349,11 @@
       <span class="symbol">
         <span class="name">JC</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@JC:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[관계언] <i>접속 조사</i> :
 둘 이상의 단어나 구 따위를 같은 자격으로 이어 주는 구실을 하는 조사.</p><div class="fullcomment"><div class="comment cmt"><p>[관계언] <i>접속 조사</i> :
 둘 이상의 단어나 구 따위를 같은 자격으로 이어 주는 구실을 하는 조사.
@@ -336,7 +369,11 @@
       <span class="symbol">
         <span class="name">JKB</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@JKB:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[관계언] <i>부사격 조사</i> : 문장 안에서, 체언이 부사어임을 보이는 조사.</p><div class="fullcomment"><div class="comment cmt"><p>[관계언] <i>부사격 조사</i> : 문장 안에서, 체언이 부사어임을 보이는 조사.
 ‘ 에4’, ‘에서2’, ‘(으)로’, ‘와/과’, ‘보다4’ 따위가 있다. *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#JKC" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -350,7 +387,11 @@
       <span class="symbol">
         <span class="name">JKC</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@JKC:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[관계언] <i>보격 조사</i> :
 문장 안에서, 체언이 보어임을 표시하는 격 조사.</p><div class="fullcomment"><div class="comment cmt"><p>[관계언] <i>보격 조사</i> :
 문장 안에서, 체언이 보어임을 표시하는 격 조사.
@@ -367,7 +408,11 @@
       <span class="symbol">
         <span class="name">JKG</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@JKG:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[관계언] <i>관형격 조사</i> : 문장 안에서, 앞에 오는 체언이 뒤에 오는 체언의 관형어임을 보이는 조사.</p><div class="fullcomment"><div class="comment cmt"><p>[관계언] <i>관형격 조사</i> : 문장 안에서, 앞에 오는 체언이 뒤에 오는 체언의 관형어임을 보이는 조사. *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#JKO" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="JKO:kr.bydelta.koala.POS.Value"></a>
@@ -380,7 +425,11 @@
       <span class="symbol">
         <span class="name">JKO</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@JKO:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[관계언] <i>목적격 조사</i> : 문장 안에서, 체언이 서술어의 목적어임을 표시하는 격 조사.</p><div class="fullcomment"><div class="comment cmt"><p>[관계언] <i>목적격 조사</i> : 문장 안에서, 체언이 서술어의 목적어임을 표시하는 격 조사. ‘을/를’이 있다. *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#JKQ" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="JKQ:kr.bydelta.koala.POS.Value"></a>
@@ -393,7 +442,11 @@
       <span class="symbol">
         <span class="name">JKQ</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@JKQ:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[관계언] <i>인용격 조사</i>: 앞의 말이 인용됨을 나타내는 조사.</p><div class="fullcomment"><div class="comment cmt"><p>[관계언] <i>인용격 조사</i>: 앞의 말이 인용됨을 나타내는 조사. *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#JKS" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="JKS:kr.bydelta.koala.POS.Value"></a>
@@ -406,7 +459,11 @@
       <span class="symbol">
         <span class="name">JKS</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@JKS:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[관계언] <i>주격 조사</i> :
 문장 안에서, 체언이 서술어의 주어임을 표시하는 격 조사.</p><div class="fullcomment"><div class="comment cmt"><p>[관계언] <i>주격 조사</i> :
 문장 안에서, 체언이 서술어의 주어임을 표시하는 격 조사. ‘이/가’, ‘께서’, ‘에서2’ 따위가 있다.
@@ -422,7 +479,11 @@
       <span class="symbol">
         <span class="name">JKV</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@JKV:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[관계언] <i>호격 조사</i> :
 문장 안에서, 체언이 부름의 자리에 놓이게 하여 독립어가 되게 하는 조사.</p><div class="fullcomment"><div class="comment cmt"><p>[관계언] <i>호격 조사</i> :
 문장 안에서, 체언이 부름의 자리에 놓이게 하여 독립어가 되게 하는 조사.
@@ -438,7 +499,11 @@
       <span class="symbol">
         <span class="name">JX</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@JX:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[관계언] <i>보조사</i> :
 체언, 부사, 활용 어미 따위에 붙어서 어떤 특별한 의미를 더해 주는 조사.</p><div class="fullcomment"><div class="comment cmt"><p>[관계언] <i>보조사</i> :
 체언, 부사, 활용 어미 따위에 붙어서 어떤 특별한 의미를 더해 주는 조사.
@@ -455,7 +520,11 @@
       <span class="symbol">
         <span class="name">MAG</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@MAG:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[수식언] <i>부사</i> : 용언 또는 다른 말 앞에 놓여 그 뜻을 분명하게 하는 품사.</p><div class="fullcomment"><div class="comment cmt"><p>[수식언] <i>부사</i> : 용언 또는 다른 말 앞에 놓여 그 뜻을 분명하게 하는 품사. *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#MAJ" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="MAJ:kr.bydelta.koala.POS.Value"></a>
@@ -468,7 +537,11 @@
       <span class="symbol">
         <span class="name">MAJ</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@MAJ:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[수식언] <i>접속부사</i> : 앞의 체언이나 문장의 뜻을 뒤의 체언이나 문장에 이어 주면서 뒤의 말을 꾸며 주는 부사.</p><div class="fullcomment"><div class="comment cmt"><p>[수식언] <i>접속부사</i> : 앞의 체언이나 문장의 뜻을 뒤의 체언이나 문장에 이어 주면서 뒤의 말을 꾸며 주는 부사.
 ‘ 그러나’, ‘그런데’, ‘그리고’, ‘하지만’ 따위가 있다.
 </p></div></div>
@@ -483,7 +556,11 @@
       <span class="symbol">
         <span class="name">MM</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@MM:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[수식언] <i>관형사</i> : 체언 앞에 놓여서, 그 체언의 내용을 자세히 꾸며 주는 품사.</p><div class="fullcomment"><div class="comment cmt"><p>[수식언] <i>관형사</i> : 체언 앞에 놓여서, 그 체언의 내용을 자세히 꾸며 주는 품사. *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#NNB" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="NNB:kr.bydelta.koala.POS.Value"></a>
@@ -496,7 +573,11 @@
       <span class="symbol">
         <span class="name">NNB</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@NNB:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[체언] <i>일반 의존명사</i> : 의미가 형식적이어서 다른 말 아래에 기대어 쓰이는 명사.</p><div class="fullcomment"><div class="comment cmt"><p>[체언] <i>일반 의존명사</i> : 의미가 형식적이어서 다른 말 아래에 기대어 쓰이는 명사.
 ‘것1’, ‘따름1’, ‘뿐1’, ‘데1’ 따위가 있다.
 </p></div></div>
@@ -511,7 +592,11 @@
       <span class="symbol">
         <span class="name">NNG</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@NNG:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[체언] <i>일반명사</i>: 일반 개념을 표시하는 명사.</p><div class="fullcomment"><div class="comment cmt"><p>[체언] <i>일반명사</i>: 일반 개념을 표시하는 명사. *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#NNM" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="NNM:kr.bydelta.koala.POS.Value"></a>
@@ -524,7 +609,11 @@
       <span class="symbol">
         <span class="name">NNM</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@NNM:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[체언] <i>단위성 의존명사</i> : 수효나 분량 따위의 단위를 나타내는 의존 명사.</p><div class="fullcomment"><div class="comment cmt"><p>[체언] <i>단위성 의존명사</i> : 수효나 분량 따위의 단위를 나타내는 의존 명사.
 ‘쌀 한 말, 쇠고기 한 근, 굴비 한 두름, 북어 한 쾌, 고무신 한 켤레, 광목 한 필’에서 ‘말3’, ‘근3’, ‘두름1’, ‘쾌1’, ‘켤레2’, ‘필2’
 </p></div></div>
@@ -539,7 +628,11 @@
       <span class="symbol">
         <span class="name">NNP</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@NNP:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[체언] <i>고유명사</i> : 낱낱의 특정한 사물이나 사람을 다른 것들과 구별하여 부르기 위하여 고유의 기호를 붙인 이름.</p><div class="fullcomment"><div class="comment cmt"><p>[체언] <i>고유명사</i> : 낱낱의 특정한 사물이나 사람을 다른 것들과 구별하여 부르기 위하여 고유의 기호를 붙인 이름. *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#NP" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="NP:kr.bydelta.koala.POS.Value"></a>
@@ -552,7 +645,11 @@
       <span class="symbol">
         <span class="name">NP</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@NP:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[체언] <i>대명사</i> : 사람이나 사물의 이름을 대신 나타내는 말.</p><div class="fullcomment"><div class="comment cmt"><p>[체언] <i>대명사</i> : 사람이나 사물의 이름을 대신 나타내는 말. 또는 그런 말들을 지칭하는 품사 *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#NR" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="NR:kr.bydelta.koala.POS.Value"></a>
@@ -565,7 +662,11 @@
       <span class="symbol">
         <span class="name">NR</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@NR:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[체언] <i>수사</i> : 사물의 수량이나 순서를 나타내는 품사.</p><div class="fullcomment"><div class="comment cmt"><p>[체언] <i>수사</i> : 사물의 수량이나 순서를 나타내는 품사. 양수사와 서수사가 있다. *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#SE" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SE:kr.bydelta.koala.POS.Value"></a>
@@ -578,7 +679,11 @@
       <span class="symbol">
         <span class="name">SE</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@SE:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">생략기호: 줄임표 *</p>
     </li><li name="kr.bydelta.koala.POS#SF" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SF:kr.bydelta.koala.POS.Value"></a>
@@ -591,7 +696,11 @@
       <span class="symbol">
         <span class="name">SF</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@SF:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">종결기호: 마침/물음/느낌표 *</p>
     </li><li name="kr.bydelta.koala.POS#SL" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SL:kr.bydelta.koala.POS.Value"></a>
@@ -604,7 +713,11 @@
       <span class="symbol">
         <span class="name">SL</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@SL:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">외국어/한자 *</p>
     </li><li name="kr.bydelta.koala.POS#SN" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SN:kr.bydelta.koala.POS.Value"></a>
@@ -617,7 +730,11 @@
       <span class="symbol">
         <span class="name">SN</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@SN:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">숫자 *</p>
     </li><li name="kr.bydelta.koala.POS#SP" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SP:kr.bydelta.koala.POS.Value"></a>
@@ -630,7 +747,11 @@
       <span class="symbol">
         <span class="name">SP</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@SP:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">연결기호: 쉼표/가운뎃점/빗금 *</p>
     </li><li name="kr.bydelta.koala.POS#SS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SS:kr.bydelta.koala.POS.Value"></a>
@@ -643,7 +764,11 @@
       <span class="symbol">
         <span class="name">SS</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@SS:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">묶음기호: 괄호/묶음표/따옴표 *</p>
     </li><li name="kr.bydelta.koala.POS#SY" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SY:kr.bydelta.koala.POS.Value"></a>
@@ -656,7 +781,11 @@
       <span class="symbol">
         <span class="name">SY</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@SY:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">기타기호 *</p>
     </li><li name="kr.bydelta.koala.POS#UE" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="UE:kr.bydelta.koala.POS.Value"></a>
@@ -669,7 +798,11 @@
       <span class="symbol">
         <span class="name">UE</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@UE:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">분석 불능 범주 *</p>
     </li><li name="kr.bydelta.koala.POS#UN" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="UN:kr.bydelta.koala.POS.Value"></a>
@@ -682,7 +815,11 @@
       <span class="symbol">
         <span class="name">UN</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@UN:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">명사 추정 범주 *</p>
     </li><li name="kr.bydelta.koala.POS#UV" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="UV:kr.bydelta.koala.POS.Value"></a>
@@ -695,7 +832,11 @@
       <span class="symbol">
         <span class="name">UV</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@UV:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">동사 추정 범주 *</p>
     </li><li name="kr.bydelta.koala.POS#VA" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="VA:kr.bydelta.koala.POS.Value"></a>
@@ -708,7 +849,11 @@
       <span class="symbol">
         <span class="name">VA</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@VA:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[용언] <i>형용사</i> : 사물의 성질이나 상태를 나타내는 품사.</p><div class="fullcomment"><div class="comment cmt"><p>[용언] <i>형용사</i> : 사물의 성질이나 상태를 나타내는 품사. *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#VCN" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="VCN:kr.bydelta.koala.POS.Value"></a>
@@ -721,7 +866,11 @@
       <span class="symbol">
         <span class="name">VCN</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@VCN:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[용언] <i>부정지정사(아니다)</i>: 무엇이 무엇이 아니라고 지정하는 단어.</p><div class="fullcomment"><div class="comment cmt"><p>[용언] <i>부정지정사(아니다)</i>: 무엇이 무엇이 아니라고 지정하는 단어. (아니다) *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#VCP" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="VCP:kr.bydelta.koala.POS.Value"></a>
@@ -734,7 +883,11 @@
       <span class="symbol">
         <span class="name">VCP</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@VCP:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[용언] <i>긍정지정사(이다)</i>: 무엇이 무엇이라고 지정하는 단어.</p><div class="fullcomment"><div class="comment cmt"><p>[용언] <i>긍정지정사(이다)</i>: 무엇이 무엇이라고 지정하는 단어. (이다) *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#VV" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="VV:kr.bydelta.koala.POS.Value"></a>
@@ -747,7 +900,11 @@
       <span class="symbol">
         <span class="name">VV</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@VV:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[용언] <i>동사</i> : 사물의 동작이나 작용을 나타내는 품사.</p><div class="fullcomment"><div class="comment cmt"><p>[용언] <i>동사</i> : 사물의 동작이나 작용을 나타내는 품사. *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#VX" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="VX:kr.bydelta.koala.POS.Value"></a>
@@ -760,7 +917,11 @@
       <span class="symbol">
         <span class="name">VX</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@VX:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt">[용언] <i>보조용언</i> : 본용언과 연결되어 그것의 뜻을 보충하는 역할을 하는 용언.</p><div class="fullcomment"><div class="comment cmt"><p>[용언] <i>보조용언</i> : 본용언과 연결되어 그것의 뜻을 보충하는 역할을 하는 용언. 보조 동사, 보조 형용사가 있다.
 ‘ 가지고 싶다’의 ‘싶다’, ‘먹어 보다’의 ‘보다1’ 따위이다.
 </p></div></div>
@@ -775,7 +936,11 @@
       <span class="symbol">
         <span class="name">Value</span><span class="params">(<span name="i">i: <span class="extype" name="scala.Int">Int</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@Value(i:Int,name:String):Enumeration.this.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
     </li><li name="scala.Enumeration#Value" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Value(name:String):Enumeration.this.Value"></a>
@@ -788,7 +953,11 @@
       <span class="symbol">
         <span class="name">Value</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@Value(name:String):Enumeration.this.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
     </li><li name="scala.Enumeration#Value" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Value(i:Int):Enumeration.this.Value"></a>
@@ -801,7 +970,11 @@
       <span class="symbol">
         <span class="name">Value</span><span class="params">(<span name="i">i: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@Value(i:Int):Enumeration.this.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
     </li><li name="scala.Enumeration#Value" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Value:Enumeration.this.Value"></a>
@@ -814,7 +987,11 @@
       <span class="symbol">
         <span class="name">Value</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@Value:Enumeration.this.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
     </li><li name="kr.bydelta.koala.POS#XP" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="XP:kr.bydelta.koala.POS.Value"></a>
@@ -827,7 +1004,11 @@
       <span class="symbol">
         <span class="name">XP</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@XP:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt"><i>접두사</i> : 파생어를 만드는 접사로, 어근이나 단어의 앞에 붙어 새로운 단어가 되게 하는 말.</p><div class="fullcomment"><div class="comment cmt"><p><i>접두사</i> : 파생어를 만드는 접사로, 어근이나 단어의 앞에 붙어 새로운 단어가 되게 하는 말. *</p></div></div>
     </li><li name="kr.bydelta.koala.POS#XR" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="XR:kr.bydelta.koala.POS.Value"></a>
@@ -840,7 +1021,11 @@
       <span class="symbol">
         <span class="name">XR</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@XR:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt"><i>어근</i> :
 단어를 분석할 때, 실질적 의미를 나타내는 중심이 되는 부분.</p><div class="fullcomment"><div class="comment cmt"><p><i>어근</i> :
 단어를 분석할 때, 실질적 의미를 나타내는 중심이 되는 부분. ‘덮개’의 ‘덮-’, ‘어른스럽다’의 ‘어른1’ 따위이다.
@@ -856,7 +1041,11 @@
       <span class="symbol">
         <span class="name">XSA</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@XSA:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt"><i>형용사 파생 접미사</i>:
 파생어를 만드는 접사로, 어근이나 단어의 뒤에 붙어 새로운 형용사가 되게 하는 말.</p>
     </li><li name="kr.bydelta.koala.POS#XSM" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
@@ -870,7 +1059,11 @@
       <span class="symbol">
         <span class="name">XSM</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@XSM:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt"><i>부사 파생 접미사</i>:
 파생어를 만드는 접사로, 어근이나 단어의 뒤에 붙어 새로운 부사가 되게 하는 말.</p>
     </li><li name="kr.bydelta.koala.POS#XSN" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
@@ -884,7 +1077,11 @@
       <span class="symbol">
         <span class="name">XSN</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@XSN:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt"><i>명사 파생 접미사</i>:
 파생어를 만드는 접사로, 어근이나 단어의 뒤에 붙어 새로운 명사가 되게 하는 말.</p>
     </li><li name="kr.bydelta.koala.POS#XSO" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
@@ -898,7 +1095,11 @@
       <span class="symbol">
         <span class="name">XSO</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@XSO:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt"><i>기타 접미사</i>:
 파생어를 만드는 접사로, 어근이나 단어의 뒤에 붙어 새로운 단어가 되게 하는 말.</p>
     </li><li name="kr.bydelta.koala.POS#XSV" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
@@ -912,7 +1113,11 @@
       <span class="symbol">
         <span class="name">XSV</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@XSV:kr.bydelta.koala.POS.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <p class="shortcomment cmt"><i>동사 파생 접미사</i>:
 파생어를 만드는 접사로, 어근이나 단어의 뒤에 붙어 새로운 동사가 되게 하는 말.</p>
     </li><li name="scala.Enumeration#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -926,7 +1131,11 @@
       <span class="symbol">
         <span class="name">apply</span><span class="params">(<span name="x">x: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@apply(x:Int):Enumeration.this.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
@@ -939,7 +1148,11 @@
       <span class="symbol">
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
@@ -952,7 +1165,11 @@
       <span class="symbol">
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@clone():Object" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -971,7 +1188,11 @@
       <span class="symbol">
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="equals(x$1:Any):Boolean"></a>
@@ -984,7 +1205,11 @@
       <span class="symbol">
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
@@ -997,7 +1222,11 @@
       <span class="symbol">
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@finalize():Unit" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -1016,7 +1245,11 @@
       <span class="symbol">
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@getClass():Class[_]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
@@ -1029,7 +1262,11 @@
       <span class="symbol">
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@hashCode():Int" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -1042,7 +1279,11 @@
       <span class="symbol">
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="scala.Enumeration#maxId" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="maxId:Int"></a>
@@ -1055,7 +1296,11 @@
       <span class="symbol">
         <span class="name">maxId</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@maxId:Int" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
@@ -1068,7 +1313,11 @@
       <span class="symbol">
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.Enumeration#nextId" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="nextId:Int"></a>
@@ -1081,7 +1330,11 @@
       <span class="symbol">
         <span class="name">nextId</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@nextId:Int" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
     </li><li name="scala.Enumeration#nextName" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="nextName:Iterator[String]"></a>
@@ -1094,7 +1347,11 @@
       <span class="symbol">
         <span class="name">nextName</span><span class="result">: <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@nextName:Iterator[String]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
     </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
@@ -1107,7 +1364,11 @@
       <span class="symbol">
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@notify():Unit" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
@@ -1120,7 +1381,11 @@
       <span class="symbol">
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@notifyAll():Unit" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.Enumeration#readResolve" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="readResolve():AnyRef"></a>
@@ -1133,7 +1398,11 @@
       <span class="symbol">
         <span class="name">readResolve</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@readResolve():AnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
@@ -1146,7 +1415,11 @@
       <span class="symbol">
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.Enumeration#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
@@ -1159,7 +1432,11 @@
       <span class="symbol">
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@toString():String" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Enumeration → AnyRef → Any</dd></dl></div>
     </li><li name="scala.Enumeration#values" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="values:Enumeration.this.ValueSet"></a>
@@ -1172,7 +1449,11 @@
       <span class="symbol">
         <span class="name">values</span><span class="result">: <a href="#ValueSetextendsAbstractSet[Enumeration.this.Value]withSortedSet[Enumeration.this.Value]withSortedSetLike[Enumeration.this.Value,Enumeration.this.ValueSet]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.ValueSet">ValueSet</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@values:Enumeration.this.ValueSet" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
@@ -1185,7 +1466,11 @@
       <span class="symbol">
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@wait():Unit" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -1204,7 +1489,11 @@
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -1223,7 +1512,11 @@
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@wait(x$1:Long):Unit" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -1242,7 +1535,11 @@
       <span class="symbol">
         <span class="name">withName</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">Value</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kr.bydelta.koala.POS$@withName(s:String):Enumeration.this.Value" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Enumeration</dd></dl></div>
     </li></ol>
             </div>
@@ -1279,6 +1576,7 @@
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../lib/template.js"></script>
+
+
     </body>
       </html>
