@@ -106,6 +106,13 @@ object Dictionary extends CanUserDict {
     isDicChanged = true
   }
 
+  /**
+    * (Code modified from Seunjeon package)
+    * Left ID 부여
+    *
+    * @param tag Left ID를 찾을 Tag
+    * @return Left ID
+    */
   private def getLeftId(tag: String = "NNG"): Short = {
     val leftIdDefStream = classOf[NngUtil].getResourceAsStream(DictBuilder.LEFT_ID_DEF)
     Source.fromInputStream(leftIdDefStream).getLines()
@@ -115,6 +122,14 @@ object Dictionary extends CanUserDict {
       }.get
   }
 
+  /**
+    * (Code modified from Seunjeon package)
+    * Right ID 부여
+    *
+    * @param tag         Right ID를 찾을 Tag
+    * @param hasJongsung 종성이 있으면 "T", 없으면 "F", 해당없는 문자는 "*"
+    * @return Right ID
+    */
   private def getRightId(tag: String = "NNG", hasJongsung: String = "*"): Short = {
     val rightIdDefStream = classOf[NngUtil].getResourceAsStream(DictBuilder.RIGHT_ID_DEF)
 

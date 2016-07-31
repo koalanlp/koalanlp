@@ -6,6 +6,14 @@ jdk:
 install:
   - cp -r ./hannanum/models/* ./
 script:
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION clean coverage test coverageReport coverageAggregate
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION clean
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION core/coverage core/test
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION eunjeon/coverage eunjeon/test
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION kkma/coverage kkma/test
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION hannanum/coverage hannanum/test
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION komoran/coverage komoran/test
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION twitter/coverage twitter/test
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION server/coverage server/test
+  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverageReport coverageAggregate
 after_success:
   - bash <(curl -s https://codecov.io/bash)

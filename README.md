@@ -35,14 +35,14 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 | `koalanlp-komoran` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-komoran_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-komoran_2.11%22) | 7+ | 2.10+ | 코모란 분석기 패키지입니다. <sup>주1</sup> |
 | `koalanlp-twitter` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-twitter_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-twitter_2.11%22) | 7+ | 2.10+ | 트위터 분석기 패키지입니다. |
 | `koalanlp-eunjeon` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-eunjeon_2.11%22) | 7+ | **2.11+**<sup>주2</sup> | 은전한닢 분석기 패키지입니다. |
-| `koalanlp-server` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-server_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-server_2.11%22) | 7+ | **2.11+**<sup>주2</sup> | HTTP 서비스 구성을 위한 패키지입니다. |
+| `koalanlp-server` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-server_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-server_2.11%22) | **8+**<sup>주2</sup> | **2.11+**<sup>주2</sup> | HTTP 서비스 구성을 위한 패키지입니다. |
 
 > <sup>주1</sup> 꼬꼬마, 한나눔, 코모란 분석기는 타 분석기와 달리 Maven repository에 등재되어 있지 않아, 원래는 수동으로 직접 추가하셔야 합니다.
 > 이 점이 불편하다는 것을 알기에, KoalaNLP는 assembly 형태로 해당 패키지를 포함하여 배포하고 있습니다. 포함된 패키지를 사용하려면, `assembly` classifier를 사용하십시오.
 > "assembly" classifier가 지정되지 않으면, 각 분석기 라이브러리가 빠진 채로 dependency가 참조됩니다.
 >
 > <sup>주2</sup>
-> 의존하고 있는 일부 패키지가 Scala 2.11만을 지원하여, 2.10 버전을 지원하지 않습니다.
+> 의존하고 있는 일부 패키지가 Scala 2.10, Java 7을 지원하지 않아, 더 높은 버전만 사용 가능 합니다.
 
 ## Dependency 추가하기
 KoalaNLP는 Scala 2.11.8에서 컴파일 되었으며, Scala 2.10+과 Java 7+을 지원합니다.
