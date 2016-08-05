@@ -6,7 +6,7 @@ import kr.bydelta.koala.Processor
 import kr.bydelta.koala.data.Morpheme
 
 /**
-  * Created by bydelta on 16. 8. 5.
+  * KryoSerializer object for Morpheme class
   */
 object MorphemeSerializer extends Serializer[Morpheme] {
 

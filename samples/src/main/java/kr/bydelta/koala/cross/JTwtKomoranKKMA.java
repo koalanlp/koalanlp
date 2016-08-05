@@ -8,6 +8,7 @@ import kr.bydelta.koala.twt.SentenceSplitter;
 import java.util.List;
 import java.util.Scanner;
 
+@SuppressWarnings("WeakerAccess")
 public class JTwtKomoranKKMA {
 
     public static void main(String[] args) {

@@ -10,6 +10,7 @@ import java.util.List;
  * <p>
  * POS$.Value 클래스는, POS.EC()와 같이 입력하면 생성됩니다.
  */
+@SuppressWarnings("WeakerAccess")
 public class JavaDictionary {
     /**
      * 사용자 정의 사전을 입력합니다.
@@ -17,6 +18,7 @@ public class JavaDictionary {
      * @param morphs 입력할 형태소의 목록.
      * @param pos    형태소별 품사의 목록. POS.NNG(), POS.VV() 등.
      */
+    @SuppressWarnings("unused")
     public static void addUserDictionary(List<String> morphs, List<POS$.Value> pos) {
         get().jUserDictionary(morphs, pos);
     }
@@ -26,6 +28,7 @@ public class JavaDictionary {
      *
      * @return Dictionary object
      */
+    @SuppressWarnings("SameReturnValue")
     public static CanUserDict get() {
         return Dictionary$.MODULE$;
     }

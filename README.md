@@ -35,6 +35,7 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 | `koalanlp-komoran` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-komoran_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-komoran_2.11%22) | 7+ | 2.10+ | 코모란 분석기 패키지입니다. <sup>주1</sup> |
 | `koalanlp-twitter` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-twitter_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-twitter_2.11%22) | 7+ | 2.10+ | 트위터 분석기 패키지입니다. |
 | `koalanlp-eunjeon` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-eunjeon_2.11%22) | 7+ | **2.11+**<sup>주2</sup> | 은전한닢 분석기 패키지입니다. |
+| `koalanlp-kryo` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kryo_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kryo_2.11%22) | 7+ | 2.10+ | Kryo Serialization을 지원하기 위한 패키지입니다. |
 | `koalanlp-server` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-server_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-server_2.11%22) | **8+**<sup>주2</sup> | **2.11+**<sup>주2</sup> | HTTP 서비스 구성을 위한 패키지입니다. |
 
 > <sup>주1</sup> 꼬꼬마, 한나눔, 코모란 분석기는 타 분석기와 달리 Maven repository에 등재되어 있지 않아, 원래는 수동으로 직접 추가하셔야 합니다.
@@ -56,6 +57,7 @@ libraryDependencies += "kr.bydelta" %% "koalanlp-kkma" % "{VERSION}" classifier 
 libraryDependencies += "kr.bydelta" %% "koalanlp-komoran" % "{VERSION}" classifier "assembly"	//코모란 분석기의 경우
 libraryDependencies += "kr.bydelta" %% "koalanlp-hannanum" % "{VERSION}" classifier "assembly"	//한나눔 분석기의 경우
 
+libraryDependencies += "kr.bydelta" %% "koalanlp-kryo" % "{VERSION}" // Kryo Serialization
 libraryDependencies += "kr.bydelta" %% "koalanlp-server" % "{VERSION}" // HTTP 서비스
 ```
 
@@ -164,13 +166,13 @@ val analyzed: Sentence = parser.parse(sentence)
 ```
 
 Java는 다음과 같습니다.
-```scala
-import kr.bydelta.koala.kkma.Parser
-import kr.bydelta.koala.Sentence
+```java
+import kr.bydelta.koala.kkma.Parser;
+import kr.bydelta.koala.Sentence;
 
-Parser parser = new Parser()
-String sentence = "이것은 코알라 통합 품사분석기에서 은전한닢 분석기를 돌린 결과입니다."
-Sentence analyzed = parser.parse(sentence)
+Parser parser = new Parser();
+String sentence = "이것은 코알라 통합 품사분석기에서 은전한닢 분석기를 돌린 결과입니다.";
+Sentence analyzed = parser.parse(sentence);
 ```
 
 ## 사용자 정의 사전
@@ -183,7 +185,7 @@ Sentence analyzed = parser.parse(sentence)
 /* 패키지 명: 한나눔(hnn), 코모란(kmr), 꼬꼬마(kkma), 은전한닢(eunjeon), 트위터(twt) */
 // 예시에서는 한나눔 사전에 추가
 import kr.bydelta.koala.hnn.Dictionary
-import kr.bydelta.koala.POS;
+import kr.bydelta.koala.POS
 
 Dictionary.addUserDictionary(
   "설빙" -> POS.NNP, /* 고유명사 '설빙' 추가 */
@@ -208,6 +210,9 @@ morphemes.add("구글하");
 pos.add(POSTag.VV); /* 동사 '구글하다' 추가 */
 
 JavaDictionary.addUserDictionary(morphems, pos);
+
+// 또는, 아래와 같이 사용할 수 있습니다.
+Dictionary.jAddUserDictionary(morphemes, pos);
 ```
 
 ## 여러 패키지의 사용
@@ -313,6 +318,96 @@ KoalaNLP는, 개발자 여러분의 편의를 위해, `Server` Trait에 미리 `
 >   "tag": String      //통합품사.
 >  }...]
 > ```
+
+## 결과의 저장
+`koalanlp-kryo` 묶음이 필요합니다.
+```scala
+import kr.bydelta.koala.data.Sentence
+import kr.bydelta.koala.kryo._
+import com.twitter.chill.{Input, Output}
+import java.io.{FileOutputStream, FileInputStream}  
+
+/** ... Parsing ... **/
+val file = new File("target.path")
+val parsed = parser.parse(sent)
+val kryo = KryoWrap.kryo
+
+/** Procedure for Saving **/
+val output = new Output(new FileOutputStream(file))
+kryo.writeObject(output, parsed)
+output.close()
+
+/** Procedure for Loading **/
+val input = new Input(new FileInputStream(file))
+val sentence = kryo.readObject(input, classOf[Sentence])
+input.close()
+```
+
+Java는 다음과 같습니다.
+```java
+import kr.bydelta.koala.data.Sentence;
+import kr.bydelta.koala.kryo.*;
+import com.twitter.chill.*;
+import java.io.*;  
+
+/* ... Parsing ... */
+File file = new File("target.path");
+Sentence parsed = parser.parse(sent);
+Kryo kryo = KryoWrap.kryo();
+
+/* Procedure for Saving */
+Output output = new Output(new FileOutputStream(file));
+kryo.writeObject(output, parsed);
+output.close();
+
+/* Procedure for Loading */
+Input input = new Input(new FileInputStream(file));
+Sentence sentence = kryo.readObject(input, classOf[Sentence]);
+input.close();
+```
+
+사용자정의 사전은 다음과 같이 저장합니다.
+```scala
+import kr.bydelta.koala.kryo._
+import kr.bydelta.koala.kkma.Dictionary
+
+/** Save dictionary **/
+Dictionary >> new File("dictionary.path")
+/** The following is equivalent.
+ Dictionary saveTo new File("dictionary.path")
+ * Or you can write into an outputStream
+ Dictionary >> outputStream
+ **/
+ 
+/** Load dictionary **/
+Dictionary << new File("dictionary.path")
+/** The following is equivalent.
+ Dictionary readFrom new File("dictionary.path")
+ * Or you can read from an inputStream
+ Dictionary << inputStream
+ **/
+```
+
+Java는 다음과 같습니다.
+```java
+import kr.bydelta.koala.kryo.DictionaryStream;
+import kr.bydelta.koala.kkma.JavaDictionary;
+
+DictionaryStream stream = 
+  new DictionaryStream(JavaDictionary.get());
+
+/* Save dictionary */
+stream.saveTo(new File("dictionary.path"));
+/* Or you can write into an outputStream
+stream.saveTo(outputStream)
+ */
+ 
+/* Load dictionary */
+stream.readFrom(new File("dictionary.path"))
+/* Or you can read from an inputStream
+stream.readFrom(inputStream)
+ */
+```
 
 ## 자료 구조
 아래는 중심 자료 구조가 지원하는 주요 API 목록입니다.

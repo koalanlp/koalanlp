@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="kkma" external.linked.project.path="$MODULE_DIR$/../../kkma" external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../../kkma/target/scala-2.11/classes" />
+    <output-test url="file://$MODULE_DIR$/../../kkma/target/scala-2.11/test-classes" />
+    <content url="file://$MODULE_DIR$/../../kkma">
+      <sourceFolder url="file://$MODULE_DIR$/../../kkma/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../kkma/src/main/scala" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../kkma/src/main/scala-2.11" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../kkma/target/scala-2.11/src_managed/main" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../kkma/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../kkma/src/test/scala" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../kkma/src/test/scala-2.11" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../kkma/target/scala-2.11/src_managed/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../kkma/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../kkma/target/scala-2.11/resource_managed/main" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../kkma/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../kkma/target/scala-2.11/resource_managed/test" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/../../kkma/target" />
+      <excludeFolder url="file://$MODULE_DIR$/../../kkma/target/resolution-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/../../kkma/target/scala-2.10" />
+      <excludeFolder url="file://$MODULE_DIR$/../../kkma/target/streams" />
+      <excludeFolder url="file://$MODULE_DIR$/../../kkma/target/test-reports" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="core" exported="" />
+    <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.8:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang:scala-reflect:2.11.8:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.5:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scalaz:scalaz-concurrent_2.11:7.2.3:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scalaz:scalaz-core_2.11:7.2.3:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scalaz:scalaz-effect_2.11:7.2.3:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-codata_2.11:3.8.4:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-common_2.11:3.8.4:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-core_2.11:3.8.4:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-matcher_2.11:3.8.4:jar" level="project" />
+    <orderEntry type="module-library">
+      <library name="SBT: unmanaged-jars">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../kkma/lib/KKMA-2.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" scope="PROVIDED" name="SBT: org.scoverage:scalac-scoverage-plugin_2.11:1.1.1:jar" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="SBT: org.scoverage:scalac-scoverage-runtime_2.11:1.1.1:jar" level="project" />
+  </component>
+</module>

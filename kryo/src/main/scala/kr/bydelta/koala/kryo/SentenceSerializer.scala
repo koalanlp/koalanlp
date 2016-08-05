@@ -5,7 +5,7 @@ import com.esotericsoftware.kryo.{Kryo, Serializer}
 import kr.bydelta.koala.data.{Sentence, Word}
 
 /**
-  * Created by bydelta on 16. 8. 5.
+  * KryoSerializer object for Sentence class
   */
 object SentenceSerializer extends Serializer[Sentence] {
   override def write(kryo: Kryo, output: Output, value: Sentence): Unit = {

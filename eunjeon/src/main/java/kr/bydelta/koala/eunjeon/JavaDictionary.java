@@ -26,6 +26,7 @@ public class JavaDictionary {
      *
      * @return Dictionary object
      */
+    @SuppressWarnings({"WeakerAccess", "SameReturnValue"})
     public static CanUserDict get() {
         return Dictionary$.MODULE$;
     }

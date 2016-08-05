@@ -5,7 +5,7 @@ import java.io.{File, FileInputStream, FileOutputStream}
 import com.twitter.chill.{Input, Output}
 import kr.bydelta.koala.POS
 import kr.bydelta.koala.data.Sentence
-import kr.bydelta.koala.kkma.{Dictionary, Parser}
+import kr.bydelta.koala.kkma.{Dictionary, JavaDictionary, Parser}
 import org.specs2.execute.Result
 import org.specs2.mutable.Specification
 
@@ -63,6 +63,27 @@ object KryoSpec extends Specification {
 
       Dictionary.userdic.morphemes.size must_== 0
       Dictionary << tmpFile
+
+      Dictionary.userdic.morphemes must contain("힐스테이트/NNP")
+    }
+  }
+
+  "DictionaryStream" should {
+    "save and load dictionary" in {
+      Dictionary.userdic.morphemes.clear()
+      Dictionary.userdic.reset()
+
+      Dictionary.addUserDictionary("힐스테이트", POS.NNP)
+
+      val tmpFile = new File(System.getProperty("java.io.tmpdir"), "test-java.dic")
+      val dicStream = new DictionaryStream(JavaDictionary.get)
+      dicStream saveTo tmpFile
+
+      Dictionary.userdic.morphemes.clear()
+      Dictionary.userdic.reset()
+
+      Dictionary.userdic.morphemes.size must_== 0
+      dicStream readFrom tmpFile
 
       Dictionary.userdic.morphemes must contain("힐스테이트/NNP")
     }

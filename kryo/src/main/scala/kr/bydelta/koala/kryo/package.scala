@@ -2,24 +2,34 @@ package kr.bydelta.koala
 
 import java.io._
 
-import com.twitter.chill.{Input, Output, ScalaKryoInstantiator}
+import com.twitter.chill.{Input => In, Output => Out}
 import kr.bydelta.koala.traits.CanUserDict
 
 /**
-  * Created by bydelta on 16. 8. 5.
+  * package for Kryo serialization support
   */
 package object kryo {
 
+  /**
+    * Implicit class for dictionary I/O function.
+    *
+    * @param dict Dictionary object for I/O
+    */
   implicit class DictionaryIO(dict: CanUserDict) {
+    /**
+      * Save this dictionary to given stream.
+      *
+      * @param stream Target stream
+      */
     def saveTo(stream: OutputStream): Unit = >>(stream)
 
-    def saveTo(file: File): Unit = >>(file)
-
-    def >>(file: File, append: Boolean = false): Unit = >>(new FileOutputStream(file, append))
-
+    /**
+      * Save this dictionary to given stream
+      *
+      * @param stream Target stream
+      */
     def >>(stream: OutputStream): Unit = {
-      val kryo = KryoWrap.kryo
-      val output = new Output(stream)
+      val output = new Out(stream)
 
       val list = dict.items
       output.writeInt(list.size)
@@ -33,11 +43,49 @@ package object kryo {
       output.close()
     }
 
+    /**
+      * Save this dictionary to given file.
+      *
+      * @param file Target file
+      */
+    def saveTo(file: File): Unit = >>(file)
+
+    /**
+      * Save this dictionary to given file.
+      *
+      * @param file   Target file.
+      * @param append True if append dictionary onto that file. (default: false)
+      */
+    def >>(file: File, append: Boolean = false): Unit = >>(new FileOutputStream(file, append))
+
+    /**
+      * Read the dictionary from given stream
+      *
+      * @param stream Source stream
+      */
     def readFrom(stream: InputStream): Unit = <<(stream)
 
+    /**
+      * Read the dictionary from given file
+      *
+      * @param file Source file.
+      */
+    def readFrom(file: File): Unit = <<(file)
+
+    /**
+      * Read the dictionary from given file
+      *
+      * @param file Source file.
+      */
+    def <<(file: File): Unit = <<(new FileInputStream(file))
+
+    /**
+      * Read the dictionary from given stream
+      *
+      * @param stream Source stream
+      */
     def <<(stream: InputStream): Unit = {
-      val kryo = new ScalaKryoInstantiator().newKryo()
-      val input = new Input(stream)
+      val input = new In(stream)
 
       val sz = input.readInt
       val items = (0 until sz).map {
@@ -50,10 +98,6 @@ package object kryo {
       input.close()
       dict.addUserDictionary(items: _*)
     }
-
-    def readFrom(file: File): Unit = <<(file)
-
-    def <<(file: File): Unit = <<(new FileInputStream(file))
   }
 
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaCompilerConfiguration">
+    <profile name="SBT 1" modules="koalanlp,koalanlp,proj,root,root,root" />
+    <profile name="SBT 2" modules="core-2_10,core-2_11,hannanum-2_10,hannanum-2_11,kkma-2_10,kkma-2_11,komoran-2_10,komoran-2_11,twitter-2_10,twitter-2_11,learner,rest,core,eunjeon,hannanum,kkma,core,eunjeon,hannanum,kkma,komoran,kryo,samples,server,twitter">
+      <parameters>
+        <parameter value="-target:jvm-1.7" />
+      </parameters>
+    </profile>
+  </component>
+</project>

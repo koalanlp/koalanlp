@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+@SuppressWarnings("WeakerAccess")
 public class JEunjeon {
     public static void main(String[] args) {
         /* 사용자정의사전 사용법 */

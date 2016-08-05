@@ -6,7 +6,7 @@ import kr.bydelta.koala.FunctionalTag
 import kr.bydelta.koala.data.{Morpheme, Word}
 
 /**
-  * Created by bydelta on 16. 8. 5.
+  * KryoSerializer object for Word class
   */
 object WordSerializer extends Serializer[Word] {
   override def write(kryo: Kryo, output: Output, value: Word): Unit = {

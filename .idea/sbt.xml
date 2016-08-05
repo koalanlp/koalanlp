@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaSbtSettings">
+    <option name="linkedExternalProjectsSettings">
+      <SbtProjectSettings>
+        <option name="createEmptyContentRootDirectories" value="true" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/project" />
+            <option value="$PROJECT_DIR$/eunjeon" />
+            <option value="$PROJECT_DIR$/eunjeon/project" />
+            <option value="$PROJECT_DIR$/hannanum" />
+            <option value="$PROJECT_DIR$/hannanum/project" />
+            <option value="$PROJECT_DIR$/kkma" />
+            <option value="$PROJECT_DIR$/kkma/project" />
+            <option value="$PROJECT_DIR$/komoran" />
+            <option value="$PROJECT_DIR$/komoran/project" />
+            <option value="$PROJECT_DIR$/kryo" />
+            <option value="$PROJECT_DIR$/kryo/project" />
+            <option value="$PROJECT_DIR$/project" />
+            <option value="$PROJECT_DIR$/samples" />
+            <option value="$PROJECT_DIR$/samples/project" />
+            <option value="$PROJECT_DIR$/server" />
+            <option value="$PROJECT_DIR$/server/project" />
+            <option value="$PROJECT_DIR$/twitter" />
+            <option value="$PROJECT_DIR$/twitter/project" />
+          </set>
+        </option>
+        <option name="sbtVersion" value="0.13.8" />
+        <option name="useAutoImport" value="true" />
+        <option name="useOurOwnAutoImport" value="true" />
+      </SbtProjectSettings>
+    </option>
+  </component>
+</project>
