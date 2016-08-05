@@ -1,0 +1,8 @@
+coverage:
+  notify:
+    gitter:
+      default:
+        url: "https://webhooks.gitter.im/e/7a35c1e62a0f6466f75d"
+        threshold: 2
+        branches:
+          - master
