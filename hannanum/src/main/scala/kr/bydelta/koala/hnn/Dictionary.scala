@@ -6,10 +6,11 @@ import kaist.cilab.jhannanum.common.JSONReader
 import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.datastructure.{TagSet, Trie}
 import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.resource.{AnalyzedDic, Connection, ConnectionNot, NumberAutomata}
 import kr.bydelta.koala.POS.POSTag
-import kr.bydelta.koala.Processor
+import kr.bydelta.koala._
 import kr.bydelta.koala.traits.{CanExtractResource, CanUserDict}
 
 import scala.collection.mutable
+import scala.io.Source
 
 /**
   * 한나눔 사용자사전
@@ -29,24 +30,26 @@ object Dictionary extends CanUserDict with CanExtractResource {
   private[koala] var analyzedDic: AnalyzedDic = _
   private[koala] var systemDic: Trie = _
 
+  private var usrDicPath: String = _
+
   override def addUserDictionary(dict: (String, POSTag)*) {
     userDict ++= dict.map {
-      case (word, tag) => (word, Processor.Hannanum originalPOSOf tag)
+      case (word, tag) => (word, tagToHNN(tag))
     }
   }
 
   override def addUserDictionary(morph: String, tag: POSTag) {
-    userDict += morph -> (Processor.Hannanum originalPOSOf tag)
+    userDict += morph -> tagToHNN(tag)
   }
 
   def loadDictionary(configFile: String) =
     this synchronized {
       val baseDir = Dictionary.getExtractedPath
       val json: JSONReader = new JSONReader(configFile)
-      val fileDicUser = baseDir + File.separator + json.getValue("dic_user")
+      usrDicPath = baseDir + File.separator + json.getValue("dic_user")
 
       if (userDict.nonEmpty) {
-        val file = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(fileDicUser), true)))
+        val file = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(usrDicPath), true)))
         userDict.foreach {
           case (morph, tag) =>
             file.write(morph)
@@ -58,7 +61,7 @@ object Dictionary extends CanUserDict with CanExtractResource {
         userDict.clear()
 
         userDic.search_end = 0
-        userDic.read_dic(fileDicUser, tagSet)
+        userDic.read_dic(usrDicPath, tagSet)
       }
 
       if (systemDic == null) {
@@ -76,4 +79,13 @@ object Dictionary extends CanUserDict with CanExtractResource {
         systemDic.read_dic(fileDicSystem, tagSet)
       }
     }
+
+  override def items: Seq[(String, POSTag)] =
+    (Source.fromFile(usrDicPath).getLines().map {
+      line =>
+        val segs = line.split('\t')
+        segs(0) -> fromHNNTag(segs(1))
+    } ++ userDict.map {
+      case (surf, tag) => surf -> fromHNNTag(tag)
+    }).toSeq
 }

@@ -1,7 +1,7 @@
 package kr.bydelta.koala.eunjeon
 
 import kr.bydelta.koala.POS.POSTag
-import kr.bydelta.koala.Processor
+import kr.bydelta.koala._
 import kr.bydelta.koala.traits.CanUserDict
 import org.bitbucket.eunjeon.seunjeon.{ConnectionCostDict, DictBuilder, LexiconDict, NngUtil}
 
@@ -54,7 +54,7 @@ object Dictionary extends CanUserDict {
     rawDict ++= dict.map {
       case (word, tag) =>
         val lastchar = word.last
-        val oTag = Processor.Eunjeon originalPOSOf tag
+        val oTag = tagToEunjeon(tag)
         if (isHangul(lastchar)) {
           val jong = hasJongsung(lastchar)
           s"$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
@@ -132,7 +132,7 @@ object Dictionary extends CanUserDict {
 
   override def addUserDictionary(word: String, tag: POSTag): Unit = {
     val lastchar = word.last
-    val oTag = Processor.Eunjeon originalPOSOf tag
+    val oTag = tagToEunjeon(tag)
     rawDict +=
       (if (isHangul(lastchar)) {
         val jong = hasJongsung(lastchar)
@@ -141,4 +141,11 @@ object Dictionary extends CanUserDict {
         s"$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*")
     isDicChanged = true
   }
+
+  override def items: Seq[(String, POSTag)] =
+    rawDict.map {
+      line =>
+        val segs = line.split(",")
+        segs(0) -> fromEunjeonTag(segs(4))
+    }
 }

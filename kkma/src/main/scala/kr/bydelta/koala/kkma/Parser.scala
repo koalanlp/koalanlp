@@ -1,6 +1,6 @@
 package kr.bydelta.koala.kkma
 
-import kr.bydelta.koala.Processor
+import kr.bydelta.koala._
 import kr.bydelta.koala.data.{Sentence => KSent}
 import kr.bydelta.koala.traits.CanDepParse
 import org.snu.ids.ha.ma.{Eojeol, MCandidate, MExpression, Sentence}
@@ -55,13 +55,13 @@ class Parser extends CanDepParse {
           val thisWord = tagged.get(to)
           val headWord = tagged.get(from)
           val rawTag = e.getRelation
-          val tag = Processor.KKMA dependencyOf rawTag
+          val tag = KKMAdepTag(rawTag)
           headWord.addDependant(thisWord, tag, rawTag)
         } else if (to != -1) {
           val thisWord = tagged.get(to)
           tagged.topLevels += thisWord
           thisWord.rawDepTag = e.getRelation
-          thisWord.depTag = Processor.KKMA dependencyOf e.getRelation
+          thisWord.depTag = KKMAdepTag(e.getRelation)
         }
     }
     tagged
@@ -82,10 +82,10 @@ class Parser extends CanDepParse {
     result.foreach {
       word =>
         val mexp = new MExpression(word.surface,
-          new MCandidate(word.head.surface, Processor.KKMA originalPOSOf word.head.tag))
+          new MCandidate(word.head.surface, tagToKKMA(word.head.tag)))
         word.tail.foreach {
           morph =>
-            mexp.add(new MCandidate(morph.surface, Processor.KKMA originalPOSOf morph.tag))
+            mexp.add(new MCandidate(morph.surface, tagToKKMA(morph.tag)))
         }
         sent.add(new Eojeol(mexp))
     }

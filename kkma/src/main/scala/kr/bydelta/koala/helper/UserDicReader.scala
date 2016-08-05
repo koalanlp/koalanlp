@@ -7,11 +7,11 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * 꼬꼬마 사용자사전을 실시간으로 반영하기 위한 Reader.
   */
-private[koala] class UserDicReader extends SimpleDicReader {
+private[koala] class UserDicReader extends SimpleDicReader with Iterator[String] {
   /**
     * 형태소 리스트.
     */
-  private val morphemes = ArrayBuffer[String]()
+  private[koala] val morphemes = ArrayBuffer[String]()
   /**
     * 파일스트림 모사를 위한 현재위치 Marker.
     */
@@ -39,6 +39,10 @@ private[koala] class UserDicReader extends SimpleDicReader {
   }
 
   override def cleanup() {}
+
+  override def hasNext = iterator.hasNext
+
+  override def next(): String = readLine
 
   override def readLine: String = {
     if (iterator == null)

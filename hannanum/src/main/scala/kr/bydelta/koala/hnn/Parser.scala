@@ -6,7 +6,7 @@ import kaist.cilab.parser.berkeleyadaptation.Configuration
 import kaist.cilab.parser.corpusconverter.sejong2treebank.sejongtree.ParseTree
 import kaist.cilab.parser.dependency.DTree
 import kaist.cilab.parser.psg2dg.Converter
-import kr.bydelta.koala.Processor
+import kr.bydelta.koala._
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.helper.BerkeleyParserWrap
 import kr.bydelta.koala.traits.CanDepParse
@@ -73,7 +73,7 @@ class Parser extends CanDepParse {
           val thisWord = sentence.get(node.getWordIdx)
           val headWord = sentence.get(node.getHead.getWordIdx)
           val rawTag = node.getdType
-          val tag = Processor.Hannanum dependencyOf rawTag
+          val tag = HNNdepTag(rawTag)
           headWord.addDependant(thisWord, tag, rawTag)
         } catch {
           case e: Exception =>
@@ -81,7 +81,7 @@ class Parser extends CanDepParse {
               val thisWord = sentence.get(node.getWordIdx)
               sentence.topLevels += thisWord
               thisWord.rawDepTag = node.getdType
-              thisWord.depTag = Processor.Hannanum dependencyOf node.getdType
+              thisWord.depTag = HNNdepTag(node.getdType)
             }
         }
     }
@@ -130,7 +130,7 @@ class Parser extends CanDepParse {
     val (plainEojeols, eojeols) = result.words.map {
       word =>
         val (morphs, tags) = word.morphemes.map {
-          m => (m.surface, Processor.Hannanum originalPOSOf m.tag)
+          m => (m.surface, tagToHNN(m.tag))
         }.unzip
         (word.surface, new Eojeol(morphs.toArray, tags.toArray))
     }.unzip

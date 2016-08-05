@@ -1,7 +1,7 @@
 package kr.bydelta.koala.kkma
 
 import kr.bydelta.koala.POS.POSTag
-import kr.bydelta.koala.Processor
+import kr.bydelta.koala._
 import kr.bydelta.koala.helper.UserDicReader
 import kr.bydelta.koala.traits.CanUserDict
 import org.snu.ids.ha.dic.{RawDicFileReader, SimpleDicFileReader, Dictionary => Dict}
@@ -21,7 +21,7 @@ object Dictionary extends CanUserDict {
     if (dict.nonEmpty) {
       userdic ++=
         dict.map {
-          case (word, integratedTag) => (word, Processor.KKMA originalPOSOf integratedTag)
+          case (word, integratedTag) => (word, tagToKKMA(integratedTag))
         }
       isDicChanged = true
     }
@@ -30,13 +30,22 @@ object Dictionary extends CanUserDict {
   override def addUserDictionary(morph: String, tag: POSTag) {
     if (morph.length > 0) {
       try {
-        userdic +=(morph, Processor.KKMA originalPOSOf tag)
+        userdic += (morph, tagToKKMA(tag))
         isDicChanged = true
       } catch {
         case e: Exception =>
           e.printStackTrace()
       }
     }
+  }
+
+  override def items: Seq[(String, POSTag)] = this synchronized {
+    userdic.reset()
+    userdic.map {
+      line =>
+        val segs = line.split('/')
+        segs(0) -> fromKKMATag(segs(1))
+    }.toSeq
   }
 
   /**

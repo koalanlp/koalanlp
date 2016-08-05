@@ -31,4 +31,11 @@ trait CanUserDict {
     */
   def jUserDictionary(morphs: java.util.List[String], tags: java.util.List[POSTag]) =
   addUserDictionary(morphs.zip(tags): _*)
+
+  /**
+    * 사용자 사전에 등재된 모든 Item을 불러옵니다.
+    *
+    * @return (형태소, 통합품사)의 Sequence.
+    */
+  def items: Seq[(String, POSTag)]
 }

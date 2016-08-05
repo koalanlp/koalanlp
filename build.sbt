@@ -77,12 +77,18 @@ lazy val server = (project in file("server"))
     )
   )
   .dependsOn(core, kkma % "test")
+lazy val kryo = (project in file("kryo"))
+  .settings(projectWithConfig("kryo"))
+  .settings(
+    libraryDependencies += "com.twitter" %% "chill" % "0.8.0"
+  )
+  .dependsOn(core, kkma % "test")
 
 def projectWithConfig(module: String) =
   Seq(
     organization := "kr.bydelta",
     name := s"koalaNLP-$module",
-    version := "1.2.2",
+    version := "1.3.0",
     scalaVersion := "2.11.8",
     scalacOptions += "-target:jvm-1.7",
     scalacOptions in Test ++= Seq("-Yrangepos"),
