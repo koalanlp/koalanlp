@@ -121,6 +121,13 @@
 <td>은전한닢 분석기 패키지입니다.</td>
 </tr>
 <tr>
+<td><code>koalanlp-kryo</code></td>
+<td><a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kryo_2.11%22"><img src="https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kryo_2.11.svg?label=latest" alt="Version"></a></td>
+<td>7+</td>
+<td>2.10+</td>
+<td>Kryo Serialization을 지원하기 위한 패키지입니다.</td>
+</tr>
+<tr>
 <td><code>koalanlp-server</code></td>
 <td><a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-server_2.11%22"><img src="https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-server_2.11.svg?label=latest" alt="Version"></a></td>
 <td>
@@ -157,6 +164,7 @@ libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span
 libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>kr.bydelta<span class="pl-pds">"</span></span> <span class="pl-k">%%</span> <span class="pl-s"><span class="pl-pds">"</span>koalanlp-komoran<span class="pl-pds">"</span></span> <span class="pl-k">%</span> <span class="pl-s"><span class="pl-pds">"</span>{VERSION}<span class="pl-pds">"</span></span> classifier <span class="pl-s"><span class="pl-pds">"</span>assembly<span class="pl-pds">"</span></span>   <span class="pl-c">//코모란 분석기의 경우</span>
 libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>kr.bydelta<span class="pl-pds">"</span></span> <span class="pl-k">%%</span> <span class="pl-s"><span class="pl-pds">"</span>koalanlp-hannanum<span class="pl-pds">"</span></span> <span class="pl-k">%</span> <span class="pl-s"><span class="pl-pds">"</span>{VERSION}<span class="pl-pds">"</span></span> classifier <span class="pl-s"><span class="pl-pds">"</span>assembly<span class="pl-pds">"</span></span>  <span class="pl-c">//한나눔 분석기의 경우</span>
 
+libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>kr.bydelta<span class="pl-pds">"</span></span> <span class="pl-k">%%</span> <span class="pl-s"><span class="pl-pds">"</span>koalanlp-kryo<span class="pl-pds">"</span></span> <span class="pl-k">%</span> <span class="pl-s"><span class="pl-pds">"</span>{VERSION}<span class="pl-pds">"</span></span> <span class="pl-c">// Kryo Serialization</span>
 libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>kr.bydelta<span class="pl-pds">"</span></span> <span class="pl-k">%%</span> <span class="pl-s"><span class="pl-pds">"</span>koalanlp-server<span class="pl-pds">"</span></span> <span class="pl-k">%</span> <span class="pl-s"><span class="pl-pds">"</span>{VERSION}<span class="pl-pds">"</span></span> <span class="pl-c">// HTTP 서비스</span></pre></div>
 
 <p>Maven을 사용하시는 경우, 다음과 같습니다.</p>
@@ -276,17 +284,17 @@ libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span
 
 <p>Java는 다음과 같습니다.</p>
 
-<div class="highlight highlight-source-scala"><pre><span class="pl-k">import</span> <span class="pl-v">kr.bydelta.koala.kkma.</span><span class="pl-v">Parser</span>
-<span class="pl-k">import</span> <span class="pl-v">kr.bydelta.koala.</span><span class="pl-v">Sentence</span>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">import</span> <span class="pl-smi">kr.bydelta.koala.kkma.Parser</span>;
+<span class="pl-k">import</span> <span class="pl-smi">kr.bydelta.koala.Sentence</span>;
 
-<span class="pl-en">Parser</span> parser <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Parser</span>()
-<span class="pl-k">String</span> sentence <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>이것은 코알라 통합 품사분석기에서 은전한닢 분석기를 돌린 결과입니다.<span class="pl-pds">"</span></span>
-<span class="pl-en">Sentence</span> analyzed <span class="pl-k">=</span> parser.parse(sentence)</pre></div>
+<span class="pl-smi">Parser</span> parser <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Parser</span>();
+<span class="pl-smi">String</span> sentence <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>이것은 코알라 통합 품사분석기에서 은전한닢 분석기를 돌린 결과입니다.<span class="pl-pds">"</span></span>;
+<span class="pl-smi">Sentence</span> analyzed <span class="pl-k">=</span> parser<span class="pl-k">.</span>parse(sentence);</pre></div>
 
 <h2>
 <a id="사용자-정의-사전" class="anchor" href="#%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EC%9D%98-%EC%82%AC%EC%A0%84" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>사용자 정의 사전</h2>
 
-<p>모든 품사 분석기는 사용자 정의 사전을 등록할 수 있습니다. 단, 트위터 분석기의 경우 명사만 가능합니다.</p>
+<p>모든 품사 분석기는 사용자 정의 사전을 등록할 수 있습니다.</p>
 
 <blockquote>
 <p><strong>Note:</strong>
@@ -296,7 +304,7 @@ libraryDependencies <span class="pl-k">+</span><span class="pl-k">=</span> <span
 <div class="highlight highlight-source-scala"><pre><span class="pl-c">/* 패키지 명: 한나눔(hnn), 코모란(kmr), 꼬꼬마(kkma), 은전한닢(eunjeon), 트위터(twt) */</span>
 <span class="pl-c">// 예시에서는 한나눔 사전에 추가</span>
 <span class="pl-k">import</span> <span class="pl-v">kr.bydelta.koala.hnn.</span><span class="pl-v">Dictionary</span>
-<span class="pl-k">import</span> <span class="pl-v">kr.bydelta.koala.</span><span class="pl-v">POS</span>;
+<span class="pl-k">import</span> <span class="pl-v">kr.bydelta.koala.</span><span class="pl-v">POS</span>
 
 <span class="pl-en">Dictionary</span>.addUserDictionary(
   <span class="pl-s"><span class="pl-pds">"</span>설빙<span class="pl-pds">"</span></span> <span class="pl-k">-</span><span class="pl-k">&gt;</span> <span class="pl-en">POS</span>.<span class="pl-en">NNP</span>, <span class="pl-c">/* 고유명사 '설빙' 추가 */</span>
@@ -319,7 +327,10 @@ pos<span class="pl-k">.</span>add(<span class="pl-smi">POSTag</span><span class=
 morphemes<span class="pl-k">.</span>add(<span class="pl-s"><span class="pl-pds">"</span>구글하<span class="pl-pds">"</span></span>);
 pos<span class="pl-k">.</span>add(<span class="pl-smi">POSTag</span><span class="pl-c1"><span class="pl-k">.</span>VV</span>); <span class="pl-c">/* 동사 '구글하다' 추가 */</span>
 
-<span class="pl-smi">JavaDictionary</span><span class="pl-k">.</span>addUserDictionary(morphems, pos);</pre></div>
+<span class="pl-smi">JavaDictionary</span><span class="pl-k">.</span>addUserDictionary(morphems, pos);
+
+<span class="pl-c">// 또는, 아래와 같이 사용할 수 있습니다.</span>
+<span class="pl-smi">Dictionary</span><span class="pl-k">.</span>jAddUserDictionary(morphemes, pos);</pre></div>
 
 <h2>
 <a id="여러-패키지의-사용" class="anchor" href="#%EC%97%AC%EB%9F%AC-%ED%8C%A8%ED%82%A4%EC%A7%80%EC%9D%98-%EC%82%AC%EC%9A%A9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>여러 패키지의 사용</h2>
@@ -404,6 +415,7 @@ Scala만 지원합니다.</p>
 <th>지원 Method</th>
 <th>요청 Body</th>
 <th>응답 Body</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
@@ -413,6 +425,7 @@ Scala만 지원합니다.</p>
 <td>String</td>
 <td>Json Object<sup>주3</sup>
 </td>
+<td>요청 본문에 전달된 문단에 품사를 답니다.</td>
 </tr>
 <tr>
 <td><code>/parse</code></td>
@@ -420,6 +433,7 @@ Scala만 지원합니다.</p>
 <td>String</td>
 <td>Json Object<sup>주3</sup>
 </td>
+<td>요청 본문에 전달된 문단의 각 문장마다 의존관계를 분석합니다.</td>
 </tr>
 <tr>
 <td><code>/dict</code></td>
@@ -428,6 +442,7 @@ Scala만 지원합니다.</p>
 </td>
 <td>Json Object<sup>주3</sup>
 </td>
+<td>주어진 사전을 사용자사전에 추가합니다.</td>
 </tr>
 </tbody>
 </table>
@@ -436,7 +451,7 @@ Scala만 지원합니다.</p>
 <p><sup>주3</sup> 응답의 형태:</p>
 
 <div class="highlight highlight-source-js"><pre>{ <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-c1">Boolean</span>,   <span class="pl-c">//성공여부,</span>
-  <span class="pl-s"><span class="pl-pds">"</span>message<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-c1">String</span>,    <span class="pl-c">//실패 시 서버 메시지,</span>
+  <span class="pl-s"><span class="pl-pds">"</span>message<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-c1">String</span>,    <span class="pl-c">//[실패시] 서버 메시지,</span>
   <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span><span class="pl-k">:</span> [             <span class="pl-c">//[Tag, Parse의 경우만] 문장 Array</span>
    [                    <span class="pl-c">//문장 1개의 어절 Array</span>
     {<span class="pl-s"><span class="pl-pds">"</span>word<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-c1">String</span>,    <span class="pl-c">//어절 표면형</span>
@@ -459,6 +474,94 @@ Scala만 지원합니다.</p>
   <span class="pl-s"><span class="pl-pds">"</span>tag<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-c1">String</span>      <span class="pl-c">//통합품사.</span>
  }<span class="pl-k">...</span>]</pre></div>
 </blockquote>
+
+<h2>
+<a id="결과의-저장" class="anchor" href="#%EA%B2%B0%EA%B3%BC%EC%9D%98-%EC%A0%80%EC%9E%A5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>결과의 저장</h2>
+
+<p><code>koalanlp-kryo</code> 묶음이 필요합니다.</p>
+
+<div class="highlight highlight-source-scala"><pre><span class="pl-k">import</span> <span class="pl-v">kr.bydelta.koala.data.</span><span class="pl-v">Sentence</span>
+<span class="pl-k">import</span> <span class="pl-v">kr.bydelta.koala.kryo.</span><span class="pl-v">_</span>
+<span class="pl-k">import</span> <span class="pl-v">com.twitter.chill.</span>{<span class="pl-v">Input</span>, <span class="pl-v">Output</span>}
+<span class="pl-k">import</span> <span class="pl-v">java.io.</span>{<span class="pl-v">FileOutputStream</span>, <span class="pl-v">FileInputStream</span>}  
+
+<span class="pl-c">/** ... Parsing ... **/</span>
+<span class="pl-k">val</span> <span class="pl-en">file</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">File</span>(<span class="pl-s"><span class="pl-pds">"</span>target.path<span class="pl-pds">"</span></span>)
+<span class="pl-k">val</span> <span class="pl-en">parsed</span> <span class="pl-k">=</span> parser.parse(sent)
+<span class="pl-k">val</span> <span class="pl-en">kryo</span> <span class="pl-k">=</span> <span class="pl-en">KryoWrap</span>.kryo
+
+<span class="pl-c">/** Procedure for Saving **/</span>
+<span class="pl-k">val</span> <span class="pl-en">output</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Output</span>(<span class="pl-k">new</span> <span class="pl-en">FileOutputStream</span>(file))
+kryo.writeObject(output, parsed)
+output.close()
+
+<span class="pl-c">/** Procedure for Loading **/</span>
+<span class="pl-k">val</span> <span class="pl-en">input</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Input</span>(<span class="pl-k">new</span> <span class="pl-en">FileInputStream</span>(file))
+<span class="pl-k">val</span> <span class="pl-en">sentence</span> <span class="pl-k">=</span> kryo.readObject(input, <span class="pl-c1">classOf</span>[<span class="pl-en">Sentence</span>])
+input.close()</pre></div>
+
+<p>Java는 다음과 같습니다.</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">import</span> <span class="pl-smi">kr.bydelta.koala.data.Sentence</span>;
+<span class="pl-k">import</span> <span class="pl-smi">kr.bydelta.koala.kryo.*</span>;
+<span class="pl-k">import</span> <span class="pl-smi">com.twitter.chill.*</span>;
+<span class="pl-k">import</span> <span class="pl-smi">java.io.*</span>;  
+
+<span class="pl-c">/* ... Parsing ... */</span>
+<span class="pl-smi">File</span> file <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">File</span>(<span class="pl-s"><span class="pl-pds">"</span>target.path<span class="pl-pds">"</span></span>);
+<span class="pl-smi">Sentence</span> parsed <span class="pl-k">=</span> parser<span class="pl-k">.</span>parse(sent);
+<span class="pl-smi">Kryo</span> kryo <span class="pl-k">=</span> <span class="pl-smi">KryoWrap</span><span class="pl-k">.</span>kryo();
+
+<span class="pl-c">/* Procedure for Saving */</span>
+<span class="pl-smi">Output</span> output <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Output</span>(<span class="pl-k">new</span> <span class="pl-smi">FileOutputStream</span>(file));
+kryo<span class="pl-k">.</span>writeObject(output, parsed);
+output<span class="pl-k">.</span>close();
+
+<span class="pl-c">/* Procedure for Loading */</span>
+<span class="pl-smi">Input</span> input <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Input</span>(<span class="pl-k">new</span> <span class="pl-smi">FileInputStream</span>(file));
+<span class="pl-smi">Sentence</span> sentence <span class="pl-k">=</span> kryo<span class="pl-k">.</span>readObject(input, classOf[<span class="pl-smi">Sentence</span>]);
+input<span class="pl-k">.</span>close();</pre></div>
+
+<p>사용자정의 사전은 다음과 같이 저장합니다.</p>
+
+<div class="highlight highlight-source-scala"><pre><span class="pl-k">import</span> <span class="pl-v">kr.bydelta.koala.kryo.</span><span class="pl-v">_</span>
+<span class="pl-k">import</span> <span class="pl-v">kr.bydelta.koala.kkma.</span><span class="pl-v">Dictionary</span>
+
+<span class="pl-c">/** Save dictionary **/</span>
+<span class="pl-en">Dictionary</span> <span class="pl-k">&gt;&gt;</span> <span class="pl-k">new</span> <span class="pl-en">File</span>(<span class="pl-s"><span class="pl-pds">"</span>dictionary.path<span class="pl-pds">"</span></span>)
+<span class="pl-c">/** The following is equivalent.</span>
+<span class="pl-c"> Dictionary saveTo new File("dictionary.path")</span>
+<span class="pl-c"> * Or you can write into an outputStream</span>
+<span class="pl-c"> Dictionary &gt;&gt; outputStream</span>
+<span class="pl-c"> **/</span>
+
+<span class="pl-c">/** Load dictionary **/</span>
+<span class="pl-en">Dictionary</span> <span class="pl-k">&lt;&lt;</span> <span class="pl-k">new</span> <span class="pl-en">File</span>(<span class="pl-s"><span class="pl-pds">"</span>dictionary.path<span class="pl-pds">"</span></span>)
+<span class="pl-c">/** The following is equivalent.</span>
+<span class="pl-c"> Dictionary readFrom new File("dictionary.path")</span>
+<span class="pl-c"> * Or you can read from an inputStream</span>
+<span class="pl-c"> Dictionary &lt;&lt; inputStream</span>
+<span class="pl-c"> **/</span></pre></div>
+
+<p>Java는 다음과 같습니다.</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">import</span> <span class="pl-smi">kr.bydelta.koala.kryo.DictionaryStream</span>;
+<span class="pl-k">import</span> <span class="pl-smi">kr.bydelta.koala.kkma.JavaDictionary</span>;
+
+<span class="pl-smi">DictionaryStream</span> stream <span class="pl-k">=</span> 
+  <span class="pl-k">new</span> <span class="pl-smi">DictionaryStream</span>(<span class="pl-smi">JavaDictionary</span><span class="pl-k">.</span>get());
+
+<span class="pl-c">/* Save dictionary */</span>
+stream<span class="pl-k">.</span>saveTo(<span class="pl-k">new</span> <span class="pl-smi">File</span>(<span class="pl-s"><span class="pl-pds">"</span>dictionary.path<span class="pl-pds">"</span></span>));
+<span class="pl-c">/* Or you can write into an outputStream</span>
+<span class="pl-c">stream.saveTo(outputStream)</span>
+<span class="pl-c"> */</span>
+
+<span class="pl-c">/* Load dictionary */</span>
+stream<span class="pl-k">.</span>readFrom(<span class="pl-k">new</span> <span class="pl-smi">File</span>(<span class="pl-s"><span class="pl-pds">"</span>dictionary.path<span class="pl-pds">"</span></span>))
+<span class="pl-c">/* Or you can read from an inputStream</span>
+<span class="pl-c">stream.readFrom(inputStream)</span>
+<span class="pl-c"> */</span></pre></div>
 
 <h2>
 <a id="자료-구조" class="anchor" href="#%EC%9E%90%EB%A3%8C-%EA%B5%AC%EC%A1%B0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>자료 구조</h2>
