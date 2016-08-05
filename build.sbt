@@ -2,7 +2,7 @@ import sbt.Keys._
 import sbtunidoc.Plugin.UnidocKeys._
 
 lazy val root = (project in file("."))
-  .aggregate(core, kkma, hannanum, twitter, komoran, eunjeon, server)
+  .aggregate(core, kkma, hannanum, twitter, komoran, eunjeon, server, kryo)
   .settings(unidocSettings: _*)
   .settings(
     publishArtifact := false,
