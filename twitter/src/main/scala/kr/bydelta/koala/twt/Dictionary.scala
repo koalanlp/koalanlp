@@ -17,13 +17,30 @@ object Dictionary extends CanUserDict {
     userDict ++= dict
     dict.groupBy(x => KoreanPos withName tagToTwt(x._2)).foreach {
       case (twtTag, seq) =>
-        KoreanDictionaryProvider.addWordsToDictionary(twtTag, seq.map(_._1))
+        add(twtTag, seq.map(_._1))
     }
+  }
+
+  /**
+    * Add morphemes
+    *
+    * @param tag   POS Tag
+    * @param morph Morpheme sequence.
+    */
+  private def add(tag: KoreanPos.KoreanPos, morph: Seq[String]) =
+  tag match {
+    case KoreanPos.Noun | KoreanPos.Determiner | KoreanPos.Exclamation | KoreanPos.Josa | KoreanPos.Eomi |
+         KoreanPos.PreEomi | KoreanPos.Conjunction | KoreanPos.NounPrefix | KoreanPos.VerbPrefix |
+         KoreanPos.Suffix | KoreanPos.Adverb =>
+      KoreanDictionaryProvider.addWordsToDictionary(tag, morph)
+    case KoreanPos.Verb | KoreanPos.Adjective =>
+    case _ =>
+      KoreanDictionaryProvider.addWordsToDictionary(KoreanPos.Noun, morph)
   }
 
   override def addUserDictionary(morph: String, tag: POSTag): Unit = {
     userDict += morph -> tag
-    KoreanDictionaryProvider.addWordsToDictionary(KoreanPos withName tagToTwt(tag), Seq(morph))
+    add(KoreanPos withName tagToTwt(tag), Seq(morph))
   }
 
   /**
