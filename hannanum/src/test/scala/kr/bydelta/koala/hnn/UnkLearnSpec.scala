@@ -1,6 +1,6 @@
 package kr.bydelta.koala.hnn
 
-import kr.bydelta.koala.util.UnknownWordLearner
+import kr.bydelta.koala.util.WordLearner
 import org.specs2.mutable.Specification
 
 /**
@@ -33,11 +33,11 @@ class UnkLearnSpec extends Specification {
 
   "UnknownWordLearner" should {
     Dictionary.extractResource()
-    val learner = new UnknownWordLearner(getTagger, Dictionary)
+    val learner = new WordLearner(getTagger, Dictionary)
 
     "extract all nouns" in {
-      val level0 = learner.extractNouns(text, minOccurrence = 0, minVariations = 0)
-      val level2 = learner.extractNouns(text, minOccurrence = 1, minVariations = 1)
+      val level0 = learner.extractNouns(text.toIterator, minOccurrence = 0, minVariations = 0)
+      val level2 = learner.extractNouns(text.toIterator, minOccurrence = 1, minVariations = 1)
 
       level0.size must be_>(level2.size)
       level0 must not(containAnyOf(Seq("알려졌다", "협의하기로")))
@@ -47,7 +47,7 @@ class UnkLearnSpec extends Specification {
 
     "learn all nouns" in {
       val prevEnd = Dictionary.userDict.size
-      learner.learn(text, minOccurrence = 0, minVariations = 0)
+      learner.learn(text.toIterator, minOccurrence = 0, minVariations = 0)
       Dictionary.userDict.size must be_>(prevEnd)
     }
   }

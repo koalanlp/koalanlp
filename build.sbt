@@ -47,12 +47,12 @@ lazy val eunjeon = (project in file("eunjeon"))
   .settings(
     crossScalaVersions := Seq("2.11.8"),
     dependencyOverrides += "org.scala-lang" % "scala-reflect" % "2.11.8",
-    libraryDependencies += "org.bitbucket.eunjeon" %% "seunjeon" % "1.1.0"
+    libraryDependencies += "org.bitbucket.eunjeon" %% "seunjeon" % "1.1.+"
   ).dependsOn(core)
 lazy val twitter = (project in file("twitter"))
   .settings(projectWithConfig("twitter"): _*)
   .settings(
-    libraryDependencies += "com.twitter.penguin" % "korean-text" % "4.4"
+    libraryDependencies += "com.twitter.penguin" % "korean-text" % "4.+"
   ).dependsOn(core)
 lazy val komoran = (project in file("komoran"))
   .settings(projectWithConfig("komoran"): _*)
@@ -71,16 +71,16 @@ lazy val server = (project in file("server"))
   .settings(projectWithConfig("server"): _*)
   .settings(
     libraryDependencies ++= Seq(
-      "com.tumblr" %% "colossus" % "0.8.0",
-      "com.tumblr" %% "colossus-testkit" % "0.8.0" % "test",
-      "com.typesafe.play" %% "play-json" % "2.5.4"
+      "com.tumblr" %% "colossus" % "0.8.+",
+      "com.tumblr" %% "colossus-testkit" % "0.8.+" % "test",
+      "com.typesafe.play" %% "play-json" % "2.5.+"
     )
   )
   .dependsOn(core, kkma % "test")
 lazy val kryo = (project in file("kryo"))
   .settings(projectWithConfig("kryo"))
   .settings(
-    libraryDependencies += "com.twitter" %% "chill" % "0.8.0"
+    libraryDependencies += "com.twitter" %% "chill" % "0.8.+"
   )
   .dependsOn(core, kkma % "test")
 
@@ -88,13 +88,13 @@ def projectWithConfig(module: String) =
   Seq(
     organization := "kr.bydelta",
     name := s"koalaNLP-$module",
-    version := "1.3.0",
+    version := "1.3.1",
     scalaVersion := "2.11.8",
     scalacOptions += "-target:jvm-1.7",
     scalacOptions in Test ++= Seq("-Yrangepos"),
     publishArtifact in Test := false,
     test in assembly := {},
-    libraryDependencies += "org.specs2" %% "specs2-core" % "3.8.4" % "test",
+    libraryDependencies += "org.specs2" %% "specs2-core" % "3.8.+" % "test",
     dependencyOverrides ++= Set(
       "org.scala-lang" % "scala-reflect" % "2.11.8"
     ),

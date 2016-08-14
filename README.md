@@ -215,6 +215,34 @@ JavaDictionary.addUserDictionary(morphems, pos);
 Dictionary.jAddUserDictionary(morphemes, pos);
 ```
 
+또한 아래와 같이, 고유명사를 말뭉치로부터 학습할 수 있습니다.
+> 고유명사가 아닌, 다른 품사의 자동학습기능은 아직 지원하지 않습니다.
+```scala
+import kr.bydelta.koala.kkma.{Tagger, Dictionary}
+import kr.bydelta.koala.util.WordLearner
+
+val corpora: Iterator[String] = ... /* 말뭉치 Text의 Iterator */
+val learner = new WordLearner(new Tagger, Dictionary)
+/*
+ * 최소 10번 반복등장하고, 서로 다른 조사가 최소 3개 이상 부착되어 활용된 단어를 학습합니다.
+ */
+learner.learn(corpora, minOccurrence = 10, minVariations = 3)
+```
+
+Java는 아래와 같습니다.
+```java
+import kr.bydelta.koala.kkma.Tagger
+import kr.bydelta.koala.kkma.JavaDictionary
+import kr.bydelta.koala.util.JavaWordLearner
+
+Iterator<String> corpora = ... /* 말뭉치 Text의 Iterator */
+JavaWordLearner learner = new JavaWordLearner(new Tagger, JavaDictionary.get()))
+/*
+ * 최소 10번 반복등장하고, 서로 다른 조사가 최소 3개 이상 부착되어 활용된 단어를 학습합니다.
+ */
+learner.learn(corpora, 10, 3)
+```
+
 ## 여러 패키지의 사용
 통합 인터페이스는 여러 패키지간의 호환이 가능하게 설계되어 있습니다. 이론적으로는 타 패키지의 품사 분석 결과를 토대로 구문 분석이 가능합니다.
 > __Note:__

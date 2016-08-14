@@ -1,6 +1,6 @@
 package kr.bydelta.koala.twt
 
-import kr.bydelta.koala.util.UnknownWordLearner
+import kr.bydelta.koala.util.WordLearner
 import org.specs2.mutable.Specification
 
 /**
@@ -32,11 +32,11 @@ class UnkLearnSpec extends Specification {
   def getTagger = new Tagger
 
   "UnknownWordLearner" should {
-    val learner = new UnknownWordLearner(getTagger, Dictionary)
+    val learner = new WordLearner(getTagger, Dictionary)
 
     "extract all nouns" in {
-      val level0 = learner.extractNouns(text, minOccurrence = 0, minVariations = 0)
-      val level2 = learner.extractNouns(text, minOccurrence = 1, minVariations = 1)
+      val level0 = learner.extractNouns(text.toIterator, minOccurrence = 0, minVariations = 0)
+      val level2 = learner.extractNouns(text.toIterator, minOccurrence = 1, minVariations = 1)
 
       level0.size must be_>(level2.size)
       level0 must not(containAnyOf(Seq("알려졌다", "협의하기로")))
@@ -48,7 +48,7 @@ class UnkLearnSpec extends Specification {
       val tagger1 = getTagger
       val beforeLearn = text.map(s => tagger1.tagSentence(s).singleLineString).mkString("\n")
 
-      learner.learn(text, minOccurrence = 0, minVariations = 0)
+      learner.learn(text.toIterator, minOccurrence = 0, minVariations = 0)
 
       val tagger2 = getTagger
       val afterLearn = text.map(s => tagger2.tagSentence(s).singleLineString).mkString("\n")
