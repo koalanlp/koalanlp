@@ -43,8 +43,6 @@ class ParserSpec extends Specification {
       workflow.setPosTagger(new HMMTagger,
         basePath + File.separator + "conf" + File.separator + "HmmPosTagger.json")
       workflow.activateWorkflow(true)
-
-      println("workflow loaded")
       workflow
     }
   }
@@ -63,7 +61,6 @@ class ParserSpec extends Specification {
   "HannanumParser" should {
     "handle empty sentence" in {
       val sent = new Parser().parse("")
-      println(sent)
       sent.words must beEmpty
     }
 
@@ -71,7 +68,6 @@ class ParserSpec extends Specification {
       val sent = "포털의 '속초' 연관 검색어로 '포켓몬 고'가 올랐고, 속초시청이 관광객의 편의를 위해 예전에 만들었던 무료 와이파이존 지도는 순식간에 인기 게시물이 됐다."
       val tagged = new Parser().parse(sent)
       val parser = new BerkeleyParserWrapper(Configuration.parserModel)
-      println(tagged)
 
       workflow.analyze(sent)
       val oSent = workflow.getResultOfSentence(new Sentence(0, 0, true))

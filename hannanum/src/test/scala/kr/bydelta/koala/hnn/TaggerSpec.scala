@@ -38,14 +38,13 @@ class TaggerSpec extends Specification {
       workflow.setPosTagger(new HMMTagger,
         basePath + File.separator + "conf" + File.separator + "HmmPosTagger.json")
       workflow.activateWorkflow(true)
-      println("workflow loaded t")
       workflow
     }
   }
 
   "HannanumTagger" should {
     "handle empty sentence" in {
-      val sent = new Tagger().tagSentence("")
+      val sent = new Tagger().tagSentence(" ")
       sent.words must beEmpty
     }
 

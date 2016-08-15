@@ -30,7 +30,9 @@ final class SentenceSplitter extends CanSplitSentence {
     workflow
   }
 
-  override def sentences(text: String): Seq[String] = Dictionary synchronized {
+  override def sentences(text: String): Seq[String] =
+    if (text.trim.isEmpty) Seq()
+    else {
     workflow.analyze(text)
     retrieveSentences()
   }

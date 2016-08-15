@@ -51,7 +51,9 @@ final class Tagger extends CanTag[Sentence] {
     convert(tagSentenceRaw(text))
   }
 
-  override def tagSentenceRaw(text: String): Sentence = {
+  override def tagSentenceRaw(text: String): Sentence =
+    if (text.trim.isEmpty) new Sentence(0, 0, true, Array(), Array())
+    else {
     workflow.analyze(text)
     workflow.getResultOfSentence(new Sentence(0, 0, false))
   }
@@ -72,7 +74,9 @@ final class Tagger extends CanTag[Sentence] {
         }
     )
 
-  def tagParagraph(text: String): Seq[KSent] = {
+  def tagParagraph(text: String): Seq[KSent] =
+    if (text.trim.isEmpty) Seq()
+    else {
     workflow.analyze(text)
     retrieveSentences()
   }

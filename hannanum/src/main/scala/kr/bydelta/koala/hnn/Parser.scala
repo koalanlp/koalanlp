@@ -35,13 +35,19 @@ class Parser extends CanDepParse {
     convert(taggedRaw)
   }
 
+  override def parse(sentence: Sentence): Sentence = {
+    convert(deParse(sentence))
+  }
+
   /**
     * 의존관계분석을 수행하고, 그 결과를 변환.
     *
     * @param hSent    한나눔의 문장 객체.
     * @return 의존관계분석이 포함된 결과.
     */
-  private def convert(hSent: HSent): Sentence = {
+  private def convert(hSent: HSent): Sentence =
+  if (hSent.getEojeols.isEmpty) new Sentence(Seq())
+  else {
     val tree = parseTreeOf(hSent)
     val depTree: DTree = conv.convert(tree)
 
@@ -96,6 +102,8 @@ class Parser extends CanDepParse {
     * @return 의존관계트리.
     */
   private def parseTreeOf(sentence: HSent): ParseTree =
+  if (sentence.getEojeols.isEmpty) new ParseTree("", "", 0, true)
+  else
     new ParseTree(
       sentence.getPlainEojeols.mkString(" "), conv.StringforDepformat(
         Converter.functionTagReForm(
@@ -114,10 +122,6 @@ class Parser extends CanDepParse {
         }
     }
     sentence
-  }
-
-  override def parse(sentence: Sentence): Sentence = {
-    convert(deParse(sentence))
   }
 
   /**
