@@ -9,6 +9,7 @@ import kaist.cilab.jhannanum.plugin.major.postagger.impl.HMMTagger
 import kaist.cilab.jhannanum.plugin.supplement.MorphemeProcessor.UnknownMorphProcessor.UnknownProcessor
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.InformalSentenceFilter.InformalSentenceFilter
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.SentenceSegmentor.SentenceSegmentor
+import kaist.cilab.parser.berkeleyadaptation.Configuration
 import kr.bydelta.koala.POS
 import org.specs2.mutable._
 
@@ -19,9 +20,10 @@ class TaggerSpec extends Specification {
   sequential
 
   val workflow = {
-    Dictionary synchronized {
+    Configuration.hanBaseDir synchronized {
+      Configuration.hanBaseDir = "./"
       val workflow = new Workflow
-      val basePath = Dictionary.extractResource()
+      val basePath = "./"
 
       workflow.appendPlainTextProcessor(new SentenceSegmentor,
         basePath + File.separator + "conf" + File.separator + "SentenceSegment.json")
@@ -36,6 +38,7 @@ class TaggerSpec extends Specification {
       workflow.setPosTagger(new HMMTagger,
         basePath + File.separator + "conf" + File.separator + "HmmPosTagger.json")
       workflow.activateWorkflow(true)
+      println("workflow loaded t")
       workflow
     }
   }

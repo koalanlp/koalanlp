@@ -2,7 +2,7 @@ package kr.bydelta.koala.hnn
 
 import java.io.{BufferedWriter, File, FileOutputStream, OutputStreamWriter}
 
-import kaist.cilab.jhannanum.common.{Code, JSONReader}
+import kaist.cilab.jhannanum.common.Code
 import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.datastructure.{TagSet, Trie}
 import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.resource.{AnalyzedDic, Connection, ConnectionNot, NumberAutomata}
 import kr.bydelta.koala.POS.POSTag
@@ -17,40 +17,38 @@ import scala.io.Source
   * 한나눔 사용자사전
   */
 object Dictionary extends CanCompileDict with CanExtractResource {
-  private lazy val json: JSONReader = new JSONReader(extractResource() + File.separator + "conf"
-    + File.separator + "ChartMorphAnalyzer.json")
-  private[koala] lazy val tagSet: TagSet = {
+  extractResource()
+  private[koala] val tagSet: TagSet = {
     val tagSet = new TagSet
-    val fileTagSet: String = extractResource() + File.separator + json.getValue("tagset")
+    val fileTagSet: String = getExtractedPath + File.separator + "data/kE/tag_set.txt"
     tagSet.init(fileTagSet, TagSet.TAG_SET_KAIST)
     tagSet
   }
-  private[koala] lazy val connection: Connection = {
+  private[koala] val connection: Connection = {
     val connection = new Connection
-    val fileConnections: String = extractResource() + File.separator + json.getValue("connections")
+    val fileConnections: String = getExtractedPath + File.separator + "data/kE/connections.txt"
     connection.init(fileConnections, tagSet.getTagCount, tagSet)
     connection
   }
-  private[koala] lazy val connectionNot: ConnectionNot = {
+  private[koala] val connectionNot: ConnectionNot = {
     val connectionNot = new ConnectionNot
-    val fileConnectionsNot: String = extractResource() + File.separator + json.getValue("connections_not")
+    val fileConnectionsNot: String = getExtractedPath + File.separator + "data/kE/connections_not.txt"
     connectionNot.init(fileConnectionsNot, tagSet)
     connectionNot
   }
-  private[koala] lazy val analyzedDic: AnalyzedDic = {
-    val fileDicAnalyzed: String = extractResource() + File.separator + json.getValue("dic_analyzed")
+  private[koala] val analyzedDic: AnalyzedDic = {
+    val fileDicAnalyzed: String = getExtractedPath + File.separator + "data/kE/dic_analyzed.txt"
     val analyzedDic = new AnalyzedDic
     analyzedDic.readDic(fileDicAnalyzed)
     analyzedDic
   }
-  private[koala] lazy val systemDic: Trie = {
-    val fileDicSystem: String = extractResource() + File.separator + json.getValue("dic_system")
+  private[koala] val systemDic: Trie = {
+    val fileDicSystem: String = getExtractedPath + File.separator + "data/kE/dic_system.txt"
     val systemDic = new Trie(Trie.DEFAULT_TRIE_BUF_SIZE_SYS)
     systemDic.read_dic(fileDicSystem, tagSet)
     systemDic
   }
-  private lazy val usrDicPath: String = extractResource() + File.separator + json.getValue("dic_user")
-  override protected val modelName: String = "hannanum"
+  private val usrDicPath: String = getExtractedPath + File.separator + "data/kE/dic_user.txt"
   /**
     * 사용자사전에 등재되기 전의 리스트.
     */
@@ -117,4 +115,6 @@ object Dictionary extends CanCompileDict with CanExtractResource {
         userDic.read_dic(usrDicPath, tagSet)
       }
     }
+
+  override protected def modelName: String = "hannanum"
 }

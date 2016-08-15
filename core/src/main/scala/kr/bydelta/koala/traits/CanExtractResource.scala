@@ -12,10 +12,6 @@ trait CanExtractResource {
     */
   private lazy val TMP = new File(System.getProperty("java.io.tmpdir"), modelName)
   /**
-    * 모델의 명칭.
-    */
-  protected val modelName: String
-  /**
     * 초기화(압축해제) 여부 Flag
     */
   private var initialized: Boolean = false
@@ -26,6 +22,11 @@ trait CanExtractResource {
     * @return 임시 디렉터리의 절대경로 String.
     */
   def getExtractedPath = TMP.getAbsolutePath
+
+  /**
+    * 모델의 명칭.
+    */
+  protected def modelName: String
 
   /**
     * 압축해제 작업

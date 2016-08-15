@@ -66,7 +66,7 @@ object Dictionary extends CanCompileDict {
     * 사전 다시읽기.
     */
   private[koala] def reloadDic() {
-    this synchronized {
+    userdic synchronized {
       if (isDicChanged) {
         userdic.reset()
         Dict.reload(

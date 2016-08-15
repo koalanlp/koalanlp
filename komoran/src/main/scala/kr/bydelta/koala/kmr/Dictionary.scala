@@ -24,12 +24,14 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     tbl.load(getExtractedPath + File.separator + "pos.table")
     tbl
   }
-  userDict.deleteOnExit()
-  override protected val modelName: String = "komoran"
   /**
     * 사용자사전을 저장할 파일의 위치.
     */
-  val userDict = new File(getExtractedPath, "koala.dict")
+  val userDict = {
+    val file = new File(getExtractedPath, "koala.dict")
+    file.deleteOnExit()
+    file
+  }
 
   override def addUserDictionary(dict: (String, POSTag)*): Unit = Dictionary synchronized {
     userDict.getParentFile.mkdirs()
@@ -63,7 +65,10 @@ object Dictionary extends CanCompileDict with CanExtractResource {
 
   override def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean = {
     val oTag = posTag.map(x => table.getId(tagToKomoran(x)))
-    dic.get(word).exists(p => oTag.contains(p.getFirst))
+    val found = dic.get(word)
+    found != null && found.exists(p => oTag.contains(p.getFirst))
     // TODO effective user dictionary search.
   }
+
+  override protected def modelName: String = "komoran"
 }
