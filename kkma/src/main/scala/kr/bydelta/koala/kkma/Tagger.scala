@@ -26,7 +26,11 @@ final class Tagger(logPath: String = "kkma.log") extends CanTag[Sentence] {
     ma
   }
 
-  override def tagSentence(text: String): koala.data.Sentence = convert(tagParagraphRaw(text).head)
+  override def tagSentence(text: String): koala.data.Sentence =
+    tagParagraphRaw(text).headOption match {
+      case Some(x) => convert(x)
+      case _ => new koala.data.Sentence(Seq())
+    }
 
   override private[koala] def convert(result: Sentence): koala.data.Sentence =
     new koala.data.Sentence(

@@ -24,7 +24,8 @@ class SimpleWordLearner(override val targets: CanCompileDict*)
             extractJosa(word) match {
               case Some((root, josa)) if root.nonEmpty =>
                 val rootWord =
-                  if (DEPS_CALL contains root.last) root.drop(1)
+                  if (DEPS_CALL contains root.last) root.dropRight(1)
+                  else if (DEPS_CALL_LONG contains root.takeRight(2)) root.dropRight(2)
                   else root
                 if (rootWord.length > 1) {
                   val josamap = map.getOrElseUpdate(rootWord, mutable.HashMap())

@@ -18,11 +18,15 @@ trait CanLearnWord[S, J] {
   /** 조사 목록 (단음절, 앞단어 종결 무관) **/
   protected final val JOSA_SINGLE_ALL = Seq('의', '에', '도', '서')
   /** 조사 목록 (다음절, 앞단어 종결 무관.) **/
-  protected final val JOSA_LONG_ALL = Seq("에게", "에서")
+  protected final val JOSA_LONG_ALL = Seq("에게", "에서", "과의", "에의", "에도", "서도")
   /** 조사 목록 (다음절, 앞단어 종성 종결) **/
-  protected final val JOSA_LONG_JONG = Seq("으로")
-  /** 호칭으로 붙는 의존 명사 목록 **/
-  protected final val DEPS_CALL = Seq('씨', '님')
+  protected final val JOSA_LONG_JONG = Seq("으로", "와의")
+  /** 조사 목록 (다음절, 앞단어 중성 종결) **/
+  protected final val JOSA_LONG_NONE = Seq("과의")
+  /** 호칭으로 붙는 의존 명사 및 명사형 전성어미 목록 (단음절) **/
+  protected final val DEPS_CALL = Seq('씨', '님', '임')
+  /** 호칭으로 붙는 의존 명사 및 명사형 전성어미 목록 (다음절) **/
+  protected final val DEPS_CALL_LONG = Seq("하기", "되기")
   /** Type conversion from J to S **/
   protected val converter: J => S
   /**
@@ -75,9 +79,11 @@ trait CanLearnWord[S, J] {
   else {
     val ch = word.last
     val lastTwo = word.takeRight(2)
+    val isThirdJong = hasJongsung(word.applyOrElse(word.length - 3, _ => '가'))
     if (isHangul(ch) && word.length > 1) {
       if (JOSA_LONG_ALL contains lastTwo) Some(word.splitAt(word.length - 2))
-      else if (JOSA_LONG_JONG contains lastTwo) Some(word.splitAt(word.length - 2))
+      else if (isThirdJong && JOSA_LONG_JONG.contains(lastTwo)) Some(word.splitAt(word.length - 2))
+      else if (!isThirdJong && JOSA_LONG_NONE.contains(lastTwo)) Some(word.splitAt(word.length - 2))
       else if (JOSA_SINGLE_ALL contains ch)
         Some(word.splitAt(word.length - 1))
       else {

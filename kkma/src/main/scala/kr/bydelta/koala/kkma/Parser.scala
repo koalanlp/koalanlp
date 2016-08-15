@@ -17,10 +17,17 @@ class Parser extends CanDepParse {
   /** 형태소분석기 **/
   lazy val tagger = new Tagger
 
-  override def parse(sentence: String): KSent = {
-    val rawSentence: Sentence = tagger.tagParagraphRaw(sentence).head
-    val tagged = tagger.convert(rawSentence)
-    parseRaw(rawSentence, tagged)
+  override def parse(sentence: String): KSent =
+    tagger.tagParagraphRaw(sentence).headOption match {
+      case Some(rawSentence) =>
+        val tagged = tagger.convert(rawSentence)
+        parseRaw(rawSentence, tagged)
+      case _ =>
+        new KSent(Seq())
+    }
+
+  override def parse(sentence: KSent): KSent = {
+    parseRaw(deParse(sentence), sentence)
   }
 
   /**
@@ -65,10 +72,6 @@ class Parser extends CanDepParse {
         }
     }
     tagged
-  }
-
-  override def parse(sentence: KSent): KSent = {
-    parseRaw(deParse(sentence), sentence)
   }
 
   /**
