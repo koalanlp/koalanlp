@@ -79,7 +79,7 @@ trait CanLearnWord[S, J] {
   else {
     val ch = word.last
     val lastTwo = word.takeRight(2)
-    val isThirdJong = hasJongsung(word.applyOrElse(word.length - 3, _ => '가'))
+    val isThirdJong = hasJongsung(word.applyOrElse(word.length - 3, (_: Int) => '가'))
     if (isHangul(ch) && word.length > 1) {
       if (JOSA_LONG_ALL contains lastTwo) Some(word.splitAt(word.length - 2))
       else if (isThirdJong && JOSA_LONG_JONG.contains(lastTwo)) Some(word.splitAt(word.length - 2))
