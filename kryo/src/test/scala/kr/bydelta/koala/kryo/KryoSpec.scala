@@ -85,7 +85,7 @@ object KryoSpec extends Specification {
       Dictionary.userdic.morphemes.size must_== 0
       dicStream readFrom tmpFile
 
-      Dictionary.userdic.morphemes must contain("힐스테이트/NNP")
+      Dictionary.items must contain("힐스테이트" -> POS.NNP)
     }
   }
 }
