@@ -19,6 +19,37 @@ import scala.io.Source
 object Dictionary extends CanCompileDict with CanExtractResource {
   private lazy val json: JSONReader = new JSONReader(extractResource() + File.separator + "conf"
     + File.separator + "ChartMorphAnalyzer.json")
+  private[koala] lazy val tagSet: TagSet = {
+    val tagSet = new TagSet
+    val fileTagSet: String = extractResource() + File.separator + json.getValue("tagset")
+    tagSet.init(fileTagSet, TagSet.TAG_SET_KAIST)
+    tagSet
+  }
+  private[koala] lazy val connection: Connection = {
+    val connection = new Connection
+    val fileConnections: String = extractResource() + File.separator + json.getValue("connections")
+    connection.init(fileConnections, tagSet.getTagCount, tagSet)
+    connection
+  }
+  private[koala] lazy val connectionNot: ConnectionNot = {
+    val connectionNot = new ConnectionNot
+    val fileConnectionsNot: String = extractResource() + File.separator + json.getValue("connections_not")
+    connectionNot.init(fileConnectionsNot, tagSet)
+    connectionNot
+  }
+  private[koala] lazy val analyzedDic: AnalyzedDic = {
+    val fileDicAnalyzed: String = extractResource() + File.separator + json.getValue("dic_analyzed")
+    val analyzedDic = new AnalyzedDic
+    analyzedDic.readDic(fileDicAnalyzed)
+    analyzedDic
+  }
+  private[koala] lazy val systemDic: Trie = {
+    val fileDicSystem: String = extractResource() + File.separator + json.getValue("dic_system")
+    val systemDic = new Trie(Trie.DEFAULT_TRIE_BUF_SIZE_SYS)
+    systemDic.read_dic(fileDicSystem, tagSet)
+    systemDic
+  }
+  private lazy val usrDicPath: String = extractResource() + File.separator + json.getValue("dic_user")
   override protected val modelName: String = "hannanum"
   /**
     * 사용자사전에 등재되기 전의 리스트.
@@ -26,13 +57,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
   private[koala] val userDict = mutable.HashMap[String, String]()
   /** 사용자사전. **/
   private[koala] val userDic: Trie = new Trie(Trie.DEFAULT_TRIE_BUF_SIZE_USER)
-  private[koala] val tagSet: TagSet = new TagSet
-  private[koala] val connection: Connection = new Connection
-  private[koala] val connectionNot: ConnectionNot = new ConnectionNot
   private[koala] val numAutomata: NumberAutomata = new NumberAutomata
-  private[koala] var analyzedDic: AnalyzedDic = _
-  private[koala] var systemDic: Trie = _
-  private var usrDicPath: String = _
 
   override def addUserDictionary(dict: (String, POSTag)*) {
     userDict ++= dict.map {
@@ -62,15 +87,17 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     loadDictionary()
 
     val oTag = posTag.map(x => tagSet.getTagID(tagToHNN(x)))
-    systemDic.fetch(Code.toTripleArray(word)).info_list.exists(x => oTag.contains(x.tag)) ||
-      userDic.fetch(Code.toTripleArray(word)).info_list.exists(x => oTag.contains(x.tag))
+    fetchFrom(word, systemDic, oTag) || fetchFrom(word, userDic, oTag)
+  }
+
+  private def fetchFrom(word: String, dict: Trie, oTag: Set[Int]) = {
+    val morph = dict.fetch(Code.toTripleArray(word))
+    if (morph == null) false
+    else morph.info_list.exists(x => oTag.contains(x.tag))
   }
 
   def loadDictionary() =
-    this synchronized {
-      val baseDir = Dictionary.extractResource()
-      usrDicPath = baseDir + File.separator + json.getValue("dic_user")
-
+    userDict synchronized {
       if (userDict.nonEmpty) {
         val file = new File(usrDicPath)
         file.deleteOnExit()
@@ -88,21 +115,6 @@ object Dictionary extends CanCompileDict with CanExtractResource {
 
         userDic.search_end = 0
         userDic.read_dic(usrDicPath, tagSet)
-      }
-
-      if (systemDic == null) {
-        val fileDicSystem: String = baseDir + File.separator + json.getValue("dic_system")
-        val fileConnections: String = baseDir + File.separator + json.getValue("connections")
-        val fileConnectionsNot: String = baseDir + File.separator + json.getValue("connections_not")
-        val fileDicAnalyzed: String = baseDir + File.separator + json.getValue("dic_analyzed")
-        val fileTagSet: String = baseDir + File.separator + json.getValue("tagset")
-        tagSet.init(fileTagSet, TagSet.TAG_SET_KAIST)
-        connection.init(fileConnections, tagSet.getTagCount, tagSet)
-        connectionNot.init(fileConnectionsNot, tagSet)
-        analyzedDic = new AnalyzedDic
-        analyzedDic.readDic(fileDicAnalyzed)
-        systemDic = new Trie(Trie.DEFAULT_TRIE_BUF_SIZE_SYS)
-        systemDic.read_dic(fileDicSystem, tagSet)
       }
     }
 }

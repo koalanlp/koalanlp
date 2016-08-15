@@ -33,20 +33,22 @@ trait CanExtractResource {
     * @return 압축해제된 임시 디렉터리의 절대경로
     */
   protected[koala] def extractResource() = {
-    if (!initialized) {
-      initialized = true
-      TMP.mkdirs()
+    TMP synchronized {
+      if (!initialized) {
+        initialized = true
+        TMP.mkdirs()
 
-      val loader: ClassLoader = this.getClass.getClassLoader
-      val zis = new ZipInputStream(loader.getResourceAsStream(s"$modelName.zip"))
-      try {
-        this synchronized {
-          unzipStream(zis)
+        val loader: ClassLoader = this.getClass.getClassLoader
+        val zis = new ZipInputStream(loader.getResourceAsStream(s"$modelName.zip"))
+        try {
+          this synchronized {
+            unzipStream(zis)
+          }
+        } catch {
+          case e: Exception => e.printStackTrace()
+        } finally {
+          zis.close()
         }
-      } catch {
-        case e: Exception => e.printStackTrace()
-      } finally {
-        zis.close()
       }
     }
 
