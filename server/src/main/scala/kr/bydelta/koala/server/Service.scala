@@ -7,7 +7,7 @@ import colossus.protocols.http.{Http, HttpRequest, HttpResponse, HttpService}
 import colossus.service.Callback
 import colossus.service.Protocol.PartialHandler
 import kr.bydelta.koala.POS
-import kr.bydelta.koala.traits.{CanDepParse, CanTag, CanUserDict}
+import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}
 import play.api.libs.json.{JsArray, JsObject, Json}
 
 /**
@@ -21,7 +21,7 @@ import play.api.libs.json.{JsArray, JsObject, Json}
 class Service(context: ServerContext,
               val tagger: CanTag[_],
               val parser: CanDepParse,
-              val dict: CanUserDict) extends HttpService(context) {
+              val dict: CanCompileDict) extends HttpService(context) {
 
   override def handle: PartialHandler[Http] = {
     /* Handle Put on /dict, with body [{"morph":"형태소","tag":"품사}...] */

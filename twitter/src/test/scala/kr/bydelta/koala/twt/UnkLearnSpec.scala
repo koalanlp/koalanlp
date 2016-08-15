@@ -1,7 +1,9 @@
 package kr.bydelta.koala.twt
 
-import kr.bydelta.koala.util.WordLearner
+import kr.bydelta.koala.util.{BasicWordLearner, SimpleWordLearner}
 import org.specs2.mutable.Specification
+
+import scala.collection.JavaConverters._
 
 /**
   * Created by bydelta on 16. 7. 30.
@@ -31,12 +33,26 @@ class UnkLearnSpec extends Specification {
 
   def getTagger = new Tagger
 
-  "UnknownWordLearner" should {
-    val learner = new WordLearner(getTagger, Dictionary)
+  "BasicWordLearner" should {
+    val learner = new BasicWordLearner(getTagger, Dictionary)
 
     "extract all nouns" in {
-      val level0 = learner.extractNouns(text.toIterator, minOccurrence = 0, minVariations = 0)
-      val level2 = learner.extractNouns(text.toIterator, minOccurrence = 1, minVariations = 1)
+      val level0 = learner.extractNouns(text.toIterator, minOccurrence = 1, minVariations = 1)
+      val level2 = learner.extractNouns(text.toIterator, minOccurrence = 2, minVariations = 2)
+
+      level0.size must be_>(level2.size)
+      level0 must not(containAnyOf(Seq("알려졌다", "협의하기로")))
+      level0 must containAllOf(Seq("새정치연합", "특검후보추천위"))
+      level2 must contain("새정치연합")
+    }
+  }
+
+  "SimpleWordLearner" should {
+    val learner = new SimpleWordLearner(Dictionary)
+
+    "extract all nouns" in {
+      val level0 = learner.extractNouns(text.toIterator, minOccurrence = 1, minVariations = 1)
+      val level2 = learner.extractNouns(text.toIterator, minOccurrence = 2, minVariations = 2)
 
       level0.size must be_>(level2.size)
       level0 must not(containAnyOf(Seq("알려졌다", "협의하기로")))
@@ -48,7 +64,7 @@ class UnkLearnSpec extends Specification {
       val tagger1 = getTagger
       val beforeLearn = text.map(s => tagger1.tagSentence(s).singleLineString).mkString("\n")
 
-      learner.learn(text.toIterator, minOccurrence = 0, minVariations = 0)
+      learner.jLearn(text.toIterator.asJava, minOccurrence = 1, minVariations = 1)
 
       val tagger2 = getTagger
       val afterLearn = text.map(s => tagger2.tagSentence(s).singleLineString).mkString("\n")

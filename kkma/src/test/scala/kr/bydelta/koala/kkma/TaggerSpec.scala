@@ -13,6 +13,11 @@ class TaggerSpec extends Specification {
   sequential
 
   "KKMATagger" should {
+    "handle empty sentence" in {
+      val sent = new Tagger().tagSentence("")
+      sent.words must beEmpty
+    }
+
     "tag a sentence" in {
       val sent = "포털의 '속초' 연관 검색어로 '포켓몬 고'가 올랐고, 속초시청이 관광객의 편의를 위해 예전에 만들었던 무료 와이파이존 지도는 순식간에 인기 게시물이 됐다."
       val tagged = new Tagger().tagSentence(sent)

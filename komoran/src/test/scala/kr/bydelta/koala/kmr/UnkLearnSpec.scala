@@ -1,7 +1,9 @@
 package kr.bydelta.koala.kmr
 
-import kr.bydelta.koala.util.WordLearner
+import kr.bydelta.koala.util.{BasicWordLearner, SimpleWordLearner}
 import org.specs2.mutable.Specification
+
+import scala.collection.JavaConverters._
 
 /**
   * Created by bydelta on 16. 7. 30.
@@ -18,13 +20,13 @@ class UnkLearnSpec extends Specification {
 
   def getTagger = new Tagger
 
-  "UnknownWordLearner" should {
+  "BasicWordLearner" should {
     Dictionary.extractResource()
-    val learner = new WordLearner(getTagger, Dictionary)
+    val learner = new BasicWordLearner(getTagger, Dictionary)
 
     "extract all nouns" in {
-      val level0 = learner.extractNouns(text.toIterator, minOccurrence = 0, minVariations = 0)
-      val level2 = learner.extractNouns(text.toIterator, minOccurrence = 1, minVariations = 1)
+      val level0 = learner.extractNouns(text.toIterator, minOccurrence = 1, minVariations = 1)
+      val level2 = learner.extractNouns(text.toIterator, minOccurrence = 2, minVariations = 2)
 
       level0.size must be_>(level2.size)
       level0 must not(containAnyOf(Seq("관계자들", "위반했")))
@@ -36,7 +38,35 @@ class UnkLearnSpec extends Specification {
       val tagger1 = getTagger
       val beforeLearn = text.map(s => tagger1.tagSentence(s).singleLineString).mkString("\n")
 
-      learner.learn(text.toIterator, minOccurrence = 0, minVariations = 0)
+      learner.learn(text.toIterator, minOccurrence = 1, minVariations = 1)
+
+      val tagger2 = getTagger
+      val afterLearn = text.map(s => tagger2.tagSentence(s).singleLineString).mkString("\n")
+
+      beforeLearn must_!= afterLearn
+    }
+  }
+
+  "SimpleWordLearner" should {
+    Dictionary.userDict.delete()
+
+    val learner = new SimpleWordLearner(Dictionary)
+
+    "extract all nouns" in {
+      val level0 = learner.extractNouns(text.toIterator, minOccurrence = 1, minVariations = 1)
+      val level2 = learner.extractNouns(text.toIterator, minOccurrence = 2, minVariations = 2)
+
+      level0.size must be_>(level2.size)
+      level0 must not(containAnyOf(Seq("관계자들", "위반했")))
+      level0 must containAllOf(Seq("현대차그룹", "법무팀"))
+      level2 must contain("법무팀")
+    }
+
+    "learn all nouns" in {
+      val tagger1 = getTagger
+      val beforeLearn = text.map(s => tagger1.tagSentence(s).singleLineString).mkString("\n")
+
+      learner.jLearn(text.toIterator.asJava, minOccurrence = 1, minVariations = 1)
 
       val tagger2 = getTagger
       val afterLearn = text.map(s => tagger2.tagSentence(s).singleLineString).mkString("\n")

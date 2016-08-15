@@ -313,6 +313,7 @@ package object koala {
       case "SO" | "SW" => POS.SY
       case "OL" | "OH" => POS.SL
       case "ON" => POS.SN
+      case "EMO" => POS.SY //Emoticons
       case x => POS withName x
     }
   }

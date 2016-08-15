@@ -88,7 +88,7 @@ private[koala] class SafeChartMorphAnalyzer extends MorphAnalyzer {
 
   @throws[Exception]
   def initialize(configFile: String, dummy: String) {
-    Dictionary.loadDictionary(configFile)
+    Dictionary.loadDictionary()
 
     val simti: Simti = new Simti
     simti.init()

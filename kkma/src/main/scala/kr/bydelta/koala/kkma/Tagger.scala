@@ -28,8 +28,6 @@ final class Tagger(logPath: String = "kkma.log") extends CanTag[Sentence] {
 
   override def tagSentence(text: String): koala.data.Sentence = convert(tagParagraphRaw(text).head)
 
-  override def tagParagraph(text: String): Seq[koala.data.Sentence] = tagParagraphRaw(text).map(convert)
-
   override private[koala] def convert(result: Sentence): koala.data.Sentence =
     new koala.data.Sentence(
       words =
@@ -55,6 +53,9 @@ final class Tagger(logPath: String = "kkma.log") extends CanTag[Sentence] {
     * @return 원본 문장객체.
     */
   def tagParagraphRaw(text: String): Seq[Sentence] =
+  if (text.trim.isEmpty)
+    Seq()
+  else
     ma.divideToSentences(
       ma.leaveJustBest(
         ma.postProcess(
@@ -63,8 +64,10 @@ final class Tagger(logPath: String = "kkma.log") extends CanTag[Sentence] {
               text
             )
         )
-      )
+        )
     ).toSeq
+
+  override def tagParagraph(text: String): Seq[koala.data.Sentence] = tagParagraphRaw(text).map(convert)
 
   /**
     * 꼬꼬마는 문장단위의 분석결과가 없습니다.

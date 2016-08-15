@@ -217,12 +217,13 @@ Dictionary.jAddUserDictionary(morphemes, pos);
 
 또한 아래와 같이, 고유명사를 말뭉치로부터 학습할 수 있습니다.
 > 고유명사가 아닌, 다른 품사의 자동학습기능은 아직 지원하지 않습니다.
+
 ```scala
 import kr.bydelta.koala.kkma.{Tagger, Dictionary}
-import kr.bydelta.koala.util.WordLearner
+import kr.bydelta.koala.util.BasicWordLearner
 
 val corpora: Iterator[String] = ... /* 말뭉치 Text의 Iterator */
-val learner = new WordLearner(new Tagger, Dictionary)
+val learner = new BasicWordLearner(new Tagger, Dictionary)
 /*
  * 최소 10번 반복등장하고, 서로 다른 조사가 최소 3개 이상 부착되어 활용된 단어를 학습합니다.
  */
@@ -233,10 +234,10 @@ Java는 아래와 같습니다.
 ```java
 import kr.bydelta.koala.kkma.Tagger
 import kr.bydelta.koala.kkma.JavaDictionary
-import kr.bydelta.koala.util.JavaWordLearner
+import kr.bydelta.koala.util.BasicWordLearner
 
 Iterator<String> corpora = ... /* 말뭉치 Text의 Iterator */
-JavaWordLearner learner = new JavaWordLearner(new Tagger, JavaDictionary.get()))
+BasicWordLearner learner = new BasicWordLearner(new Tagger, JavaDictionary.get()))
 /*
  * 최소 10번 반복등장하고, 서로 다른 조사가 최소 3개 이상 부착되어 활용된 단어를 학습합니다.
  */
@@ -308,7 +309,7 @@ KoalaNLP는, 개발자 여러분의 편의를 위해, `Server` Trait에 미리 `
 따라서, `Server`를 상속받은 `object`는 실행이 가능합니다. SBT를 사용하면 아래와 같이 서비스 실행이 가능합니다.
 
 ```bash
-# sbt runMain KKMAServer
+sbt runMain KKMAServer
 ```
 
 통신은 다음의 3가지 Path로 이루어집니다.

@@ -4,7 +4,7 @@ import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import kr.bydelta.koala.POS;
 import kr.bydelta.koala.POS$;
-import kr.bydelta.koala.traits.CanUserDict;
+import kr.bydelta.koala.traits.CanCompileDict;
 import scala.Tuple2;
 import scala.collection.JavaConversions;
 
@@ -20,14 +20,14 @@ public class DictionaryStream {
     /**
      * Dictionary instance
      */
-    private CanUserDict dict;
+    private CanCompileDict dict;
 
     /**
      * Create IOStream from dictionary
      *
      * @param dict target dictionary
      */
-    public DictionaryStream(CanUserDict dict) {
+    public DictionaryStream(CanCompileDict dict) {
         this.dict = dict;
     }
 

@@ -2,7 +2,7 @@ package kr.bydelta.koala.eunjeon
 
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala._
-import kr.bydelta.koala.traits.CanUserDict
+import kr.bydelta.koala.traits.CanCompileDict
 import org.bitbucket.eunjeon.seunjeon.{ConnectionCostDict, DictBuilder, LexiconDict, NngUtil}
 
 import scala.collection.mutable.ArrayBuffer
@@ -11,7 +11,7 @@ import scala.io.Source
 /**
   * 은전한닢 사용자사전
   */
-object Dictionary extends CanUserDict {
+object Dictionary extends CanCompileDict {
   /**
     * 사용자사전에 등재되기 전의 리스트.
     */
@@ -27,7 +27,7 @@ object Dictionary extends CanUserDict {
   /**
     * 은전한닢 사용자사전 객체
     */
-  private[koala] val userDict = new LexiconDict()
+  private[koala] val userDict = new LexiconDict().loadFromIterator(Iterator())
   /**
     * 사용자사전 변경여부.
     */
@@ -39,16 +39,6 @@ object Dictionary extends CanUserDict {
     * @return True: 항목이 있을 때.
     */
   def nonEmpty = rawDict.nonEmpty
-
-  /**
-    * 사용자사전을 다시 불러옴.
-    */
-  def reloadDic(): Unit = Dictionary synchronized {
-    if (isDicChanged) {
-      userDict.loadFromIterator(rawDict.iterator)
-      isDicChanged = false
-    }
-  }
 
   override def addUserDictionary(dict: (String, POSTag)*): Unit = {
     rawDict ++= dict.map {
@@ -148,4 +138,27 @@ object Dictionary extends CanUserDict {
         val segs = line.split(",")
         segs(0) -> fromEunjeonTag(segs(4))
     }
+
+  override def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean = {
+    reloadDic()
+    val oTag = posTag.map(tagToEunjeon)
+
+    lexiconDict.commonPrefixSearch(word).exists {
+      m =>
+        m.surface == word && oTag.contains(m.feature.head) && m.feature.last == "*"
+    } || userDict.commonPrefixSearch(word).exists {
+      m =>
+        m.surface == word && oTag.contains(m.feature.head) && m.feature.last == "*"
+    }
+  }
+
+  /**
+    * 사용자사전을 다시 불러옴.
+    */
+  def reloadDic(): Unit = Dictionary synchronized {
+    if (isDicChanged) {
+      userDict.loadFromIterator(rawDict.iterator)
+      isDicChanged = false
+    }
+  }
 }

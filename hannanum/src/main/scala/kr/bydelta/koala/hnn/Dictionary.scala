@@ -2,20 +2,23 @@ package kr.bydelta.koala.hnn
 
 import java.io.{BufferedWriter, File, FileOutputStream, OutputStreamWriter}
 
-import kaist.cilab.jhannanum.common.JSONReader
+import kaist.cilab.jhannanum.common.{Code, JSONReader}
 import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.datastructure.{TagSet, Trie}
 import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.resource.{AnalyzedDic, Connection, ConnectionNot, NumberAutomata}
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala._
-import kr.bydelta.koala.traits.{CanExtractResource, CanUserDict}
+import kr.bydelta.koala.traits.{CanCompileDict, CanExtractResource}
 
+import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.io.Source
 
 /**
   * 한나눔 사용자사전
   */
-object Dictionary extends CanUserDict with CanExtractResource {
+object Dictionary extends CanCompileDict with CanExtractResource {
+  private lazy val json: JSONReader = new JSONReader(getExtractedPath + File.separator + "conf"
+    + File.separator + "ChartMorphAnalyzer.json")
   override protected val modelName: String = "hannanum"
   /**
     * 사용자사전에 등재되기 전의 리스트.
@@ -29,7 +32,6 @@ object Dictionary extends CanUserDict with CanExtractResource {
   private[koala] val numAutomata: NumberAutomata = new NumberAutomata
   private[koala] var analyzedDic: AnalyzedDic = _
   private[koala] var systemDic: Trie = _
-
   private var usrDicPath: String = _
 
   override def addUserDictionary(dict: (String, POSTag)*) {
@@ -42,10 +44,31 @@ object Dictionary extends CanUserDict with CanExtractResource {
     userDict += morph -> tagToHNN(tag)
   }
 
-  def loadDictionary(configFile: String) =
+  override def items: Seq[(String, POSTag)] = {
+    val fileDict =
+      if (usrDicPath != null)
+        Source.fromFile(usrDicPath).getLines().map {
+          line =>
+            val segs = line.split('\t')
+            segs(0) -> fromHNNTag(segs(1))
+        }.toSeq
+      else Seq()
+    fileDict ++ userDict.map {
+      case (surf, tag) => surf -> fromHNNTag(tag)
+    }.toSeq
+  }
+
+  override def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean = {
+    loadDictionary()
+
+    val oTag = posTag.map(x => tagSet.getTagID(tagToHNN(x)))
+    systemDic.fetch(Code.toTripleArray(word)).info_list.exists(x => oTag.contains(x.tag)) ||
+      userDic.fetch(Code.toTripleArray(word)).info_list.exists(x => oTag.contains(x.tag))
+  }
+
+  def loadDictionary() =
     this synchronized {
       val baseDir = Dictionary.getExtractedPath
-      val json: JSONReader = new JSONReader(configFile)
       usrDicPath = baseDir + File.separator + json.getValue("dic_user")
 
       if (userDict.nonEmpty) {
@@ -79,13 +102,4 @@ object Dictionary extends CanUserDict with CanExtractResource {
         systemDic.read_dic(fileDicSystem, tagSet)
       }
     }
-
-  override def items: Seq[(String, POSTag)] =
-    (Source.fromFile(usrDicPath).getLines().map {
-      line =>
-        val segs = line.split('\t')
-        segs(0) -> fromHNNTag(segs(1))
-    } ++ userDict.map {
-      case (surf, tag) => surf -> fromHNNTag(tag)
-    }).toSeq
 }

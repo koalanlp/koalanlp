@@ -3,7 +3,7 @@ package kr.bydelta.koala.server
 import akka.actor.ActorSystem
 import colossus._
 import colossus.core.{WorkerRef, Server => CServer}
-import kr.bydelta.koala.traits.{CanDepParse, CanTag, CanUserDict}
+import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}
 
 /**
   * Trait for server.
@@ -18,7 +18,7 @@ trait Server {
     *
     * @return Dictionary object
     */
-  implicit val dict: CanUserDict
+  implicit val dict: CanCompileDict
   /**
     * Generator function for tagger
     */

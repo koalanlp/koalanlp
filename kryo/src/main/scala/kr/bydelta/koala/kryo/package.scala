@@ -3,7 +3,7 @@ package kr.bydelta.koala
 import java.io._
 
 import com.twitter.chill.{Input => In, Output => Out}
-import kr.bydelta.koala.traits.CanUserDict
+import kr.bydelta.koala.traits.CanCompileDict
 
 /**
   * package for Kryo serialization support
@@ -15,7 +15,7 @@ package object kryo {
     *
     * @param dict Dictionary object for I/O
     */
-  implicit class DictionaryIO(dict: CanUserDict) {
+  implicit class DictionaryIO(dict: CanCompileDict) {
     /**
       * Save this dictionary to given stream.
       *

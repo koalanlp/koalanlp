@@ -6,7 +6,7 @@ import colossus.protocols.http.{HttpBody, HttpRequest, HttpService}
 import colossus.service._
 import colossus.testkit._
 import kr.bydelta.koala.kkma.{Dictionary, Parser, Tagger}
-import kr.bydelta.koala.traits.{CanDepParse, CanTag, CanUserDict}
+import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}
 import org.specs2.mutable._
 
 import scala.concurrent.duration._
@@ -19,7 +19,7 @@ class ServiceSpec extends Specification {
   implicit val callbackExec: CallbackExecutor = FakeIOSystem.testExecutor
   val server = new Server {
     override val port: Int = 8080
-    override val dict: CanUserDict = Dictionary
+    override val dict: CanCompileDict = Dictionary
 
     override def getTagger: CanTag[_] = new Tagger
 

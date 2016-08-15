@@ -1,7 +1,7 @@
 package kr.bydelta.koala.server
 
 import colossus.core.{Initializer, ServerConnectionHandler, ServerContext, WorkerRef}
-import kr.bydelta.koala.traits.{CanDepParse, CanTag, CanUserDict}
+import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}
 
 /**
   * Initializer class for Service Providers
@@ -14,7 +14,7 @@ import kr.bydelta.koala.traits.{CanDepParse, CanTag, CanUserDict}
 class ServiceInitializer(worker: WorkerRef)
                         (implicit val getTagger: () => CanTag[_],
                          implicit val getParser: () => CanDepParse,
-                         implicit val dict: CanUserDict) extends Initializer(worker) {
+                         implicit val dict: CanCompileDict) extends Initializer(worker) {
   /**
     * Generated Tagger (of this thread)
     */

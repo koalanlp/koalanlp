@@ -1,7 +1,7 @@
 package kr.bydelta.koala.kkma;
 
 import kr.bydelta.koala.POS$;
-import kr.bydelta.koala.traits.CanUserDict;
+import kr.bydelta.koala.traits.CanCompileDict;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class JavaDictionary {
      * @return Dictionary object
      */
     @SuppressWarnings("SameReturnValue")
-    public static CanUserDict get() {
+    public static CanCompileDict get() {
         return Dictionary$.MODULE$;
     }
 }
