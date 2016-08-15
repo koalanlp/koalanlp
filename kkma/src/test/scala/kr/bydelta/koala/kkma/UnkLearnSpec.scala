@@ -34,7 +34,7 @@ class UnkLearnSpec extends Specification {
   def getTagger = new Tagger
 
   "BasicWordLearner" should {
-    val learner = new BasicWordLearner(getTagger, Dictionary)
+    lazy val learner = new BasicWordLearner(getTagger, Dictionary)
 
     "extract all nouns" in {
       val level0 = learner.extractNouns(text.toIterator, minOccurrence = 1, minVariations = 1)
@@ -60,12 +60,14 @@ class UnkLearnSpec extends Specification {
   }
 
   "SimpleWordLearner" should {
-    Dictionary.isDicChanged = true
-    Dictionary.userdic.morphemes.clear()
-    Dictionary.userdic.reset()
-    Dictionary.reloadDic()
+    lazy val learner = {
+      Dictionary.isDicChanged = true
+      Dictionary.userdic.morphemes.clear()
+      Dictionary.userdic.reset()
+      Dictionary.reloadDic()
 
-    val learner = new SimpleWordLearner(Dictionary)
+      new SimpleWordLearner(Dictionary)
+    }
 
     "extract all nouns" in {
       val level0 = learner.extractNouns(text.toIterator, minOccurrence = 1, minVariations = 1)
