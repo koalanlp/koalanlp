@@ -31,7 +31,7 @@ object Dictionary extends CanCompileDict {
   /**
     * 사용자사전 변경여부.
     */
-  private var isDicChanged = false
+  private[koala] var isDicChanged = false
 
   /**
     * 사전에 항목이 있는지 확인.

@@ -60,8 +60,10 @@ class UnkLearnSpec extends Specification {
   }
 
   "SimpleWordLearner" should {
-    Dictionary.userdic.reset()
+    Dictionary.isDicChanged = true
     Dictionary.userdic.morphemes.clear()
+    Dictionary.userdic.reset()
+    Dictionary.reloadDic()
 
     val learner = new SimpleWordLearner(Dictionary)
 

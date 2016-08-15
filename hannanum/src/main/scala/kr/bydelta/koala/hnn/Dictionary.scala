@@ -17,7 +17,7 @@ import scala.io.Source
   * 한나눔 사용자사전
   */
 object Dictionary extends CanCompileDict with CanExtractResource {
-  private lazy val json: JSONReader = new JSONReader(getExtractedPath + File.separator + "conf"
+  private lazy val json: JSONReader = new JSONReader(extractResource() + File.separator + "conf"
     + File.separator + "ChartMorphAnalyzer.json")
   override protected val modelName: String = "hannanum"
   /**
@@ -68,19 +68,22 @@ object Dictionary extends CanCompileDict with CanExtractResource {
 
   def loadDictionary() =
     this synchronized {
-      val baseDir = Dictionary.getExtractedPath
+      val baseDir = Dictionary.extractResource()
       usrDicPath = baseDir + File.separator + json.getValue("dic_user")
 
       if (userDict.nonEmpty) {
-        val file = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(usrDicPath), true)))
+        val file = new File(usrDicPath)
+        file.deleteOnExit()
+
+        val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)))
         userDict.foreach {
           case (morph, tag) =>
-            file.write(morph)
-            file.write('\t')
-            file.write(tag)
-            file.newLine()
+            writer.write(morph)
+            writer.write('\t')
+            writer.write(tag)
+            writer.newLine()
         }
-        file.close()
+        writer.close()
         userDict.clear()
 
         userDic.search_end = 0
