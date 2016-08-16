@@ -18,6 +18,8 @@ script:
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverageReport coverageAggregate
 after_success:
 - bash <(curl -s https://codecov.io/bash)
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION unidoc
+- bash ./ghdoc.sh
 notifications:
   webhooks:
     urls:
@@ -25,3 +27,6 @@ notifications:
     on_success: change
     on_failure: always
     on_start: never
+env:
+  global:
+    secure: AkBpLcw9W+k5qlBqRWdtfZndic5kZ2VwP0HrtVRu0CYdJ2vqLdsjkjuQQXbNqGX4t9iuDe5nS/O5vnE6u9qHSDFB/xdMuhe7W8rRoF9d6L9tV1ruR++GHOCvCYtNd6ckJQk3L/t6ANwwVdpd5TpfnYpPOd/g/oqLTic8n4KumMP3cPfZpzIij5EvQS9sQftAUz+r8PNvbAmjXy1Cw3Y0z+Umryov6mcoOgmZY88AY/mIrxyy5N7dlil37r8v2Fj5GgCqn+PWzd6UoUYWnZgwRQEz2PMepo9uQ3rT1gPAhIrsKcXzE+WYMfoUu1xFZbBRsCRjNM20SdJUVpwA6n9d5YwCpNytzOq3+8M9yfAuE/zmEH91ggqhXWHP0hHBZT17LxU+G0cT+ACyGBjUocCozCU0Gs3CvOCIuQZQ6FDBm5d5aY7SCsc/H6xSLmVy4xJHeCsLXak5ItBBcho2FViu3AhaP8hHtFf+Rs1hs2Tt8f5G/4KoyXflXWNdQ8nIAT2P7PKk16OgUYQzTYg3+CdVqb+7DZJYFlejLudB69qM90auy92F3NcqyJqlsavx1IZIHwOMNmThFgytrHe8pInxx/r/oFFs/BBKC83xPQRBr0uRbvkbFKfjg3kpfiwCo7Lt9ntZVQhV9Jfm+4Lp/dZgVx6a1gQ4TfQyyEDkdqW2k6o=
