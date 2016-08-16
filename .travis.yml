@@ -1,27 +1,32 @@
 language: scala
 scala:
-  - 2.11.8
+- 2.11.8
 jdk:
-  - oraclejdk8
+- oraclejdk8
 install:
-  - cp -r ./hannanum/models/* ./
+- cp -r ./hannanum/models/* ./
 script:
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION clean
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage core/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage server/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage kryo/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage eunjeon/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage kkma/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage komoran/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage twitter/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage hannanum/test
-  - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverageReport coverageAggregate
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION clean
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage core/test
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage server/test
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage kryo/test
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage eunjeon/test
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage kkma/test
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage komoran/test
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage twitter/test
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage hannanum/test
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverageReport coverageAggregate
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash)
+- "[[ $TRAVIS_BRANCH == \"master\" ]] && { sbt publish; };"
 notifications:
   webhooks:
     urls:
-      - https://webhooks.gitter.im/e/4145719c054cb2b715b3
-    on_success: change  # options: [always|never|change] default: always
-    on_failure: always  # options: [always|never|change] default: always
-    on_start: never     # options: [always|never|change] default: always
+    - https://webhooks.gitter.im/e/4145719c054cb2b715b3
+    on_success: change
+    on_failure: always
+    on_start: never
+env:
+  global:
+  - secure: Aes/fInqZ58R2+lboB/rEFMUrS9CcX4wG5JWPGqfdw9I3suVx2+VP6+X7x/OzW15nvS4ggSiZn/tQulglv6MrkOC5g6tpfqHm8riMVwLzCkEEB1pq6A4nUbkfPIAk5itZ57OugJGoVigwyNQo0FhPyJSvjG4kI4O4y5yPwdbp/c9QcavhafcUltzgmmPgzkmh1ncrVtioF+DgCHNAhvH4HJMg6WH1M7zVe1LTVBB11QF8WMAN2IMzY/euUvjjUmlv+Ann3uaVSR6/LzBNMe+cApaOAm1KcgL9XY5tnXrO6qPFhm3IaFq0/l6bo3/T9Aeu+QectmWX865BDZAC27n6U/ePrQZFY7/6CTN3BWnqaF9uKJY7bJHr77hShIH37H1u3mFLZUJJkrMs32tF4iQq87XcTO8h2g1hIpwC5AjgGHvt7YR7hrvLUELi9ha7xheEuktS/LT6wHv2rv2rQQDMRAifPMaRdm1NIYNij5KzD0hLBMcX+oG18WCfLOSnY7CsFSAf4YxjwbP+jpGc+HyUgPm37fkFWbjAdNdpu6qPVnR1JgnRYaJ8rAbZmgoYE7lysQE8kueHxvUCbP5zzz9OYjDz5oV0033agsH9SsewBsQNtAnXFSgN2PbQGlo+uOAah5p0sbb4UECE90Yy+7a5QjGyboM3Cr/5WUcsTluS2w=
+  - secure: kjeCAxKc2Raj0VNGRPjQGPHuXVF4d0e209Wwn0ymoDQ1lC3nliyGOrMQaJqZvfUhQpmMD1/LOE2MQqb5HEslPEcVMqbuK0jSOiTGW/8KI/nFa3CyXu13gFrgzMjgsfnMroLBxOhxtHnzMWkVL40PrBtatNDdIqioDZRLTNq0aHeSb6Rv6vB9W6fL7VaxtaAlOboNiOttgdHwXaL7+m/ZCKOg3Uy3cRjkeVso0PVPc6aYtP1gUX/Izingk7rLtWccIrsCNUqG6xfrwCfJH7/z8Wj53DA5n2/G9lnuZDSt7hxQ7/xvJBm4ATNzLZRtFramjVUdmX79+Y2MWJ37+JUT56846az+S1Es1U+5pS+APTbfd7dk8zEevlpS7uMg2vl1EiJKsvppTOhxuit4qP/7tEE56hEhKNRpcPU0P/hdy+YvwaludtYyKJ80240iV/SQIIwSwJilZT1shWRLgioOVf6HIO57d6U74lFRCagLUTpJdlt8T2VWxZnJHxu7Wpo3pY8AgcVFoc7pzoNFv24bYSewCQAigP0wGSVDg0wSahGrCwQTRBz8D43/YZe2dpcwZeYhSYuvG+tJKw4pos25/Y3AIUfcTtnWHUH+Qvr3kYeXOZg83Hu/X0nLjyHRnKvL2c7K35P3YzoPNYkuwQlj/ZX5BC+MNnNQbXceEubBqwY=

@@ -11,8 +11,6 @@ lazy val root = (project in file("."))
     publish := {},
     unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples)
   ).settings(aggregate in update := true)
-lazy val core = (project in file("core"))
-  .settings(projectWithConfig("core"): _*)
 
 resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
 
@@ -20,6 +18,19 @@ resolvers ++= Seq(
   "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/"
 )
 
+(for {
+  username <- Option(System.getenv().get("SONATYPE_USERNAME"))
+  password <- Option(System.getenv().get("SONATYPE_PASSWORD"))
+} yield
+  credentials += Credentials(
+    "Sonatype Nexus Repository Manager",
+    "oss.sonatype.org",
+    username,
+    password)
+  ).getOrElse(credentials ++= Seq())
+
+lazy val core = (project in file("core"))
+  .settings(projectWithConfig("core"): _*)
 lazy val kkma = (project in file("kkma"))
   .settings(projectWithConfig("kkma"): _*)
   .settings(
@@ -88,7 +99,7 @@ def projectWithConfig(module: String) =
   Seq(
     organization := "kr.bydelta",
     name := s"koalaNLP-$module",
-    version := "1.3.2",
+    version := "1.3.2-SNAPSHOT",
     scalaVersion := "2.11.8",
     scalacOptions += "-target:jvm-1.7",
     scalacOptions in Test ++= Seq("-Yrangepos"),
