@@ -18,7 +18,7 @@ script:
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverageReport coverageAggregate
 after_success:
 - bash <(curl -s https://codecov.io/bash)
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION unidoc
+- sbt unidoc
 - bash ./ghdoc.sh
 notifications:
   webhooks:

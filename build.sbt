@@ -18,6 +18,8 @@ resolvers ++= Seq(
   "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/"
 )
 
+sonatypeProfileName := "kr.bydelta"
+
 lazy val core = (project in file("core"))
   .settings(projectWithConfig("core"): _*)
 lazy val kkma = (project in file("kkma"))
