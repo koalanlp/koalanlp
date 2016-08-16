@@ -18,11 +18,6 @@ resolvers ++= Seq(
   "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/"
 )
 
-credentials ++= (for {
-  username <- Option(System.getenv().get("SONATYPE_USERNAME"))
-  password <- Option(System.getenv().get("SONATYPE_PASSWORD"))
-} yield Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password)).toSeq
-
 lazy val core = (project in file("core"))
   .settings(projectWithConfig("core"): _*)
 lazy val kkma = (project in file("kkma"))
@@ -93,7 +88,7 @@ def projectWithConfig(module: String) =
   Seq(
     organization := "kr.bydelta",
     name := s"koalaNLP-$module",
-    version := "1.3.2-SNAPSHOT",
+    version := "1.3.3",
     scalaVersion := "2.11.8",
     scalacOptions += "-target:jvm-1.7",
     scalacOptions in Test ++= Seq("-Yrangepos"),
