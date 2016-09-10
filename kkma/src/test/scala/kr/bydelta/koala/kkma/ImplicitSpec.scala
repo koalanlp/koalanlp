@@ -19,7 +19,7 @@ class ImplicitSpec extends Specification {
     }
 
     "tag a sentence" in {
-      "고급진 오므라이스를 원한다면, 데미글라스를 올려보아요.".toTagged must_== tagger.tagSentence("")
+      "고급진 오므라이스를 원한다면, 데미글라스를 올려보아요.".toTagged must_== tagger.tagSentence("고급진 오므라이스를 원한다면, 데미글라스를 올려보아요.")
     }
 
     "parse a sentence" in {
