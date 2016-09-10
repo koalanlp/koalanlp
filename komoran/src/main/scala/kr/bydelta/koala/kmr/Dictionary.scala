@@ -63,7 +63,8 @@ object Dictionary extends CanCompileDict with CanExtractResource {
   override def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean = {
     val oTag = posTag.map(x => table.getId(tagToKomoran(x)))
     val found = dic.get(word)
-    (found != null && found.exists(p => oTag.contains(p.getFirst))) || items.contains(word -> posTag)
+    (found != null && found.exists(p => oTag.contains(p.getFirst))) ||
+      items.exists(x => x._1 == word && posTag.contains(x._2))
   }
 
   override def items: Set[(String, POSTag)] = userBuffer synchronized {

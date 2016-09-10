@@ -77,7 +77,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
 
   override def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean = {
     val oTag = posTag.map(x => tagSet.getTagID(tagToHNN(x)))
-    fetchFrom(word, systemDic, oTag) || items.contains(word -> posTag)
+    fetchFrom(word, systemDic, oTag) || items.exists(x => x._1 == word && posTag.contains(x._2))
   }
 
   override def items: Set[(String, POSTag)] = {

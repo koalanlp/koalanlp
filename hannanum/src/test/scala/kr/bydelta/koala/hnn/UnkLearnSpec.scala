@@ -48,16 +48,16 @@ class UnkLearnSpec extends Specification {
     }
 
     "learn all nouns" in {
-      val prevEnd = Dictionary.userDict.size
+      val prevEnd = Dictionary.items.size
       learner.learn(text.toIterator, minOccurrence = 1, minVariations = 1)
-      Dictionary.userDict.size must be_>(prevEnd)
+      Dictionary.items.size must be_>(prevEnd)
     }
   }
 
 
   "SimpleWordLearner" should {
     lazy val learner = {
-      Dictionary.userDict.clear()
+      Dictionary.usrBuffer = Set()
       new SimpleWordLearner(Dictionary)
     }
 
@@ -72,9 +72,9 @@ class UnkLearnSpec extends Specification {
     }
 
     "learn all nouns" in {
-      val prevEnd = Dictionary.userDict.size
+      val prevEnd = Dictionary.items.size
       learner.jLearn(text.toIterator.asJava, minOccurrence = 1, minVariations = 1)
-      Dictionary.userDict.size must be_>(prevEnd)
+      Dictionary.items.size must be_>(prevEnd)
     }
   }
 }
