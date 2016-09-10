@@ -14,7 +14,7 @@ trait CanCompileDict {
     *
     * @param dict 추가할 (표면형,품사)의 순서쌍.
     */
-  def addUserDictionary(dict: (String, POSTag)*)
+  def addUserDictionary(dict: (String, POSTag)*): Unit
 
   /**
     * 사용자 사전에, 표면형과 그 품사를 추가.
@@ -22,7 +22,7 @@ trait CanCompileDict {
     * @param morph 표면형.
     * @param tag   품사.
     */
-  def addUserDictionary(morph: String, tag: POSTag) = addUserDictionary(morph -> tag)
+  def addUserDictionary(morph: String, tag: POSTag): Unit = addUserDictionary(morph -> tag)
 
   /**
     * (Java) 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.
