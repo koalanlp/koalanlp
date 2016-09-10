@@ -16,6 +16,18 @@ object Dictionary extends CanCompileDict {
     * 사용자사전에 등재되기 전의 리스트.
     */
   private[koala] lazy val rawDict = ArrayBuffer[String]()
+  private lazy val rightIDMap =
+    Source.fromInputStream(classOf[NngUtil].getResourceAsStream(DictBuilder.RIGHT_ID_DEF)).getLines()
+      .map { line =>
+        val splitted = line.split(" ")
+        splitted(1).replaceAll("^([^,]+,[^,]+,[^,]+),.*", "$1") -> splitted.head.toShort
+      }.toMap
+  private lazy val leftIDMap =
+    Source.fromInputStream(classOf[NngUtil].getResourceAsStream(DictBuilder.LEFT_ID_DEF)).getLines()
+      .map { line =>
+        val splitted = line.split(" ")
+        splitted(1).replaceAll("^([^,]+,[^,]+),.*", "$1") -> splitted.head.toShort
+      }.toMap
   /**
     * 은전한닢 어휘사전.
     */
@@ -51,6 +63,18 @@ object Dictionary extends CanCompileDict {
         } else
           s"$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*"
     }
+    isDicChanged = true
+  }
+
+  override def addUserDictionary(word: String, tag: POSTag): Unit = {
+    val lastchar = word.last
+    val oTag = tagToEunjeon(tag)
+    rawDict +=
+      (if (isHangul(lastchar)) {
+        val jong = hasJongsung(lastchar)
+        s"$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
+      } else
+        s"$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*")
     isDicChanged = true
   }
 
@@ -94,12 +118,10 @@ object Dictionary extends CanCompileDict {
     * @return Left ID
     */
   private def getLeftId(tag: String = "NNG"): Short = {
-    val leftIdDefStream = classOf[NngUtil].getResourceAsStream(DictBuilder.LEFT_ID_DEF)
-    Source.fromInputStream(leftIdDefStream).getLines()
-      .map(_.split(" "))
-      .collectFirst {
-        case x if x(1).startsWith(s"$tag,*,") => x(0).toShort
-      }.get
+    leftIDMap.get(s"$tag,*") match {
+      case Some(id) => id
+      case None => leftIDMap.filterKeys(_.startsWith(tag)).values.max
+    }
   }
 
   /**
@@ -111,25 +133,10 @@ object Dictionary extends CanCompileDict {
     * @return Right ID
     */
   private def getRightId(tag: String = "NNG", hasJongsung: String = "*"): Short = {
-    val rightIdDefStream = classOf[NngUtil].getResourceAsStream(DictBuilder.RIGHT_ID_DEF)
-
-    Source.fromInputStream(rightIdDefStream).getLines()
-      .map(_.split(" "))
-      .collectFirst {
-        case x if x(1).startsWith(s"$tag,*,$hasJongsung") => x(0).toShort
-      }.get
-  }
-
-  override def addUserDictionary(word: String, tag: POSTag): Unit = {
-    val lastchar = word.last
-    val oTag = tagToEunjeon(tag)
-    rawDict +=
-      (if (isHangul(lastchar)) {
-        val jong = hasJongsung(lastchar)
-        s"$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
-      } else
-        s"$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*")
-    isDicChanged = true
+    rightIDMap.get(s"$tag,*,$hasJongsung") match {
+      case Some(id) => id
+      case None => rightIDMap.filterKeys(_.startsWith(tag)).values.max
+    }
   }
 
   override def items: Seq[(String, POSTag)] =

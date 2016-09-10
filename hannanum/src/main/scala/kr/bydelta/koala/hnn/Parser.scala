@@ -76,7 +76,11 @@ class Parser extends CanDepParse {
         val rawTag = node.getdType
         val tag = HNNdepTag(rawTag)
         val thisWord = node.getWordIdx
-        val headWord = sentence.applyOrElse(node.getHead.getWordIdx, (_: Int) => sentence.root)
+        val headWord = try {
+          sentence(node.getHead.getWordIdx)
+        } catch {
+          case _: Throwable => sentence.root
+        }
         headWord.addDependant(thisWord, tag, rawTag)
     }
 

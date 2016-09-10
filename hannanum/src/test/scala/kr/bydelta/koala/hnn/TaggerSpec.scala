@@ -110,9 +110,9 @@ class TaggerSpec extends Specification {
 
       Dictionary.userDic.search_end != prevEnd
 
-      Dictionary.items must containAllOf(Seq("아햏햏" -> POS.IC, "개벽이" -> POS.NNG, "햏자" -> POS.NNG))
+      Dictionary.items must containAllOf(Seq("아햏햏" -> POS.IC, "개벽이" -> POS.NNG, "햏햏" -> POS.NNG))
 
-      Dictionary.contains("햏자") must beTrue
+      Dictionary.contains("햏햏") must beTrue
 
       noUserDict must_!= dictApplied
     }

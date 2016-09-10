@@ -73,11 +73,11 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
                              acc: ArrayBuffer[Sentence] = ArrayBuffer()): Seq[Sentence] =
     if (para.isEmpty) acc
     else {
-      import POS._
-      val rawEndmark = para.indexWhere(_.exists(SF), pos)
+      import kr.bydelta.koala.Implicit._
+      val rawEndmark = para.indexWhere(_.exists(POS.SF), pos)
       val rawParen = para.indexWhere({
         e =>
-          e.exists(SS) ||
+          e.exists(POS.SS) ||
             Tagger.openParenRegex.findFirstMatchIn(e.surface).isDefined ||
             Tagger.closeParenRegex.findFirstMatchIn(e.surface).isDefined ||
             Tagger.quoteRegex.findFirstMatchIn(e.surface).isDefined
