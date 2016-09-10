@@ -63,39 +63,53 @@
       <a id="Morpheme:Morpheme"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
+        <span class="modifier">final </span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
         <a href="Morpheme.html"><span class="name">Morpheme</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <p class="comment cmt">형태소 class
+      <p class="comment cmt">형태소 class / Morpheme class
+</p>
+    </li><li name="kr.bydelta.koala.data.Relationship" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RelationshipextendsAnyRef"></a>
+      <a id="Relationship:Relationship"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Relationship.html"><span class="name">Relationship</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Dependency Relationship container class
 </p>
     </li><li name="kr.bydelta.koala.data.Sentence" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="SentenceextendsIterable[kr.bydelta.koala.data.Word]"></a>
+      <a id="SentenceextendsIndexedSeq[kr.bydelta.koala.data.Word]withIndexedSeqLike[kr.bydelta.koala.data.Word,kr.bydelta.koala.data.Sentence]"></a>
       <a id="Sentence:Sentence"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
+        <span class="modifier">final </span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="Sentence.html"><span class="name">Sentence</span></a><span class="result"> extends <span class="extype" name="scala.Iterable">Iterable</span>[<a href="Word.html" class="extype" name="kr.bydelta.koala.data.Word">Word</a>]</span>
+        <a href="Sentence.html"><span class="name">Sentence</span></a><span class="result"> extends <span class="extype" name="scala.IndexedSeq">IndexedSeq</span>[<a href="Word.html" class="extype" name="kr.bydelta.koala.data.Word">Word</a>] with <span class="extype" name="scala.collection.IndexedSeqLike">IndexedSeqLike</span>[<a href="Word.html" class="extype" name="kr.bydelta.koala.data.Word">Word</a>, <a href="Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
       </span>
       </h4>
-      <p class="comment cmt">문장 Class
+      <p class="comment cmt">문장 Class / Sentence Class
 </p>
     </li><li name="kr.bydelta.koala.data.Word" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="WordextendsIterable[kr.bydelta.koala.data.Morpheme]"></a>
+      <a id="WordextendsIndexedSeq[kr.bydelta.koala.data.Morpheme]withIndexedSeqLike[kr.bydelta.koala.data.Morpheme,kr.bydelta.koala.data.Word]"></a>
       <a id="Word:Word"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
+        <span class="modifier">final </span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="Word.html"><span class="name">Word</span></a><span class="result"> extends <span class="extype" name="scala.Iterable">Iterable</span>[<a href="Morpheme.html" class="extype" name="kr.bydelta.koala.data.Morpheme">Morpheme</a>]</span>
+        <a href="Word.html"><span class="name">Word</span></a><span class="result"> extends <span class="extype" name="scala.IndexedSeq">IndexedSeq</span>[<a href="Morpheme.html" class="extype" name="kr.bydelta.koala.data.Morpheme">Morpheme</a>] with <span class="extype" name="scala.collection.IndexedSeqLike">IndexedSeqLike</span>[<a href="Morpheme.html" class="extype" name="kr.bydelta.koala.data.Morpheme">Morpheme</a>, <a href="Word.html" class="extype" name="kr.bydelta.koala.data.Word">Word</a>]</span>
       </span>
       </h4>
       <p class="comment cmt">어절 Class
@@ -105,7 +119,65 @@
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="kr.bydelta.koala.data.Morpheme" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Morpheme"></a>
+      <a id="Morpheme:Morpheme"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Morpheme$.html"><span class="name">Morpheme</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Companion object for Morpheme class.</p>
+    </li><li name="kr.bydelta.koala.data.Relationship" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Relationship"></a>
+      <a id="Relationship:Relationship"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Relationship$.html"><span class="name">Relationship</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Companion object for Relationship
+</p>
+    </li><li name="kr.bydelta.koala.data.Sentence" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Sentence"></a>
+      <a id="Sentence:Sentence"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Sentence$.html"><span class="name">Sentence</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Companion object for Sentence
+</p>
+    </li><li name="kr.bydelta.koala.data.Word" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Word"></a>
+      <a id="Word:Word"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Word$.html"><span class="name">Word</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Companion object for Word
+</p>
+    </li></ol>
+            </div>
 
         
 

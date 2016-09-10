@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Dictionary - kr.bydelta.koala.kkma.Dictionary</title>
-          <meta name="description" content="Dictionary - kr.bydelta.koala.kkma.Dictionary" />
-          <meta name="keywords" content="Dictionary kr.bydelta.koala.kkma.Dictionary" />
+          <title>Relationship - kr.bydelta.koala.data.Relationship</title>
+          <meta name="description" content="Relationship - kr.bydelta.koala.data.Relationship" />
+          <meta name="keywords" content="Relationship kr.bydelta.koala.data.Relationship" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../index.html';
-            var hash = 'kr.bydelta.koala.kkma.Dictionary$';
+            var hash = 'kr.bydelta.koala.data.Relationship';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -22,27 +22,27 @@
    	  </script>
     
         </head>
-        <body class="value">
+        <body class="type">
       <div id="definition">
-        <img src="../../../../lib/object_big.png" />
-        <p id="owner"><a href="../../../package.html" class="extype" name="kr">kr</a>.<a href="../../package.html" class="extype" name="kr.bydelta">bydelta</a>.<a href="../package.html" class="extype" name="kr.bydelta.koala">koala</a>.<a href="package.html" class="extype" name="kr.bydelta.koala.kkma">kkma</a></p>
-        <h1>Dictionary</h1>
+        <a href="Relationship$.html" title="Go to companion"><img src="../../../../lib/class_to_object_big.png" /></a>
+        <p id="owner"><a href="../../../package.html" class="extype" name="kr">kr</a>.<a href="../../package.html" class="extype" name="kr.bydelta">bydelta</a>.<a href="../package.html" class="extype" name="kr.bydelta.koala">koala</a>.<a href="package.html" class="extype" name="kr.bydelta.koala.data">data</a></p>
+        <h1><a href="Relationship$.html" title="Go to companion">Relationship</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
+        <span class="modifier">final </span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">Dictionary</span><span class="result"> extends <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></span>
+        <span class="name">Relationship</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>꼬꼬마 사용자사전
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Dependency Relationship container class
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -60,7 +60,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="kr.bydelta.koala.kkma.Dictionary"><span>Dictionary</span></li><li class="in" name="kr.bydelta.koala.traits.CanCompileDict"><span>CanCompileDict</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="kr.bydelta.koala.data.Relationship"><span>Relationship</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -151,36 +151,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="kr.bydelta.koala.kkma.Dictionary#addUserDictionary" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addUserDictionary(dict:(String,kr.bydelta.koala.POS.POSTag)*):Unit"></a>
-      <a id="addUserDictionary((String,POSTag)*):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">addUserDictionary</span><span class="params">(<span name="dict">dict: (<span class="extype" name="scala.Predef.String">String</span>, <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>)*</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.</p><div class="fullcomment"><div class="comment cmt"><p>사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.
-</p></div><dl class="paramcmts block"><dt class="param">dict</dt><dd class="cmt"><p>추가할 (표면형,품사)의 순서쌍.
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.kkma.Dictionary">Dictionary</a> → <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
-    </li><li name="kr.bydelta.koala.traits.CanCompileDict#addUserDictionary" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addUserDictionary(morph:String,tag:kr.bydelta.koala.POS.POSTag):Unit"></a>
-      <a id="addUserDictionary(String,POSTag):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">addUserDictionary</span><span class="params">(<span name="morph">morph: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tag">tag: <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">사용자 사전에, 표면형과 그 품사를 추가.</p><div class="fullcomment"><div class="comment cmt"><p>사용자 사전에, 표면형과 그 품사를 추가.
-</p></div><dl class="paramcmts block"><dt class="param">morph</dt><dd class="cmt"><p>표면형.</p></dd><dt class="param">tag</dt><dd class="cmt"><p>품사.
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -213,21 +183,6 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="kr.bydelta.koala.kkma.Dictionary#contains" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="contains(word:String,posTag:Set[kr.bydelta.koala.POS.POSTag]):Boolean"></a>
-      <a id="contains(String,Set[POSTag]):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">contains</span><span class="params">(<span name="word">word: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="posTag">posTag: <span class="extype" name="scala.Predef.Set">Set</span>[<a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>] = <span class="symbol"><span class="name"><a href="../../../package.html">Set(POS.NNP, POS.NNG)</a></span></span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">사전에 등재되어 있는지 확인합니다.</p><div class="fullcomment"><div class="comment cmt"><p>사전에 등재되어 있는지 확인합니다.
-</p></div><dl class="paramcmts block"><dt class="param">word</dt><dd class="cmt"><p>확인할 형태소</p></dd><dt class="param">posTag</dt><dd class="cmt"><p>품사들(기본값: NNP 고유명사, NNG 일반명사)
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.kkma.Dictionary">Dictionary</a> → <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -241,8 +196,8 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="equals(x$1:Any):Boolean"></a>
+    </li><li name="kr.bydelta.koala.data.Relationship#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(obj:Any):Boolean"></a>
       <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -250,10 +205,10 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">equals</span><span class="params">(<span name="obj">obj: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.data.Relationship">Relationship</a> → AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -286,7 +241,7 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="kr.bydelta.koala.data.Relationship#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -298,20 +253,20 @@
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="kr.bydelta.koala.kkma.Dictionary#isDicChanged" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="isDicChanged:Boolean"></a>
-      <a id="isDicChanged:Boolean"></a>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.data.Relationship">Relationship</a> → AnyRef → Any</dd></dl></div>
+    </li><li name="kr.bydelta.koala.data.Relationship#head" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="head:Int"></a>
+      <a id="head:Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">var</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">isDicChanged</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">head</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">사전 목록의 변화여부 *</p>
+      <p class="shortcomment cmt">Index of head word (within Sentence)</p>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -325,36 +280,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="kr.bydelta.koala.kkma.Dictionary#items" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="items:Set[(String,kr.bydelta.koala.POS.POSTag)]"></a>
-      <a id="items:Set[(String,POSTag)]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">items</span><span class="result">: <span class="extype" name="scala.Predef.Set">Set</span>[(<span class="extype" name="scala.Predef.String">String</span>, <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>)]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">사용자 사전에 등재된 모든 Item을 불러옵니다.</p><div class="fullcomment"><div class="comment cmt"><p>사용자 사전에 등재된 모든 Item을 불러옵니다.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>(형태소, 통합품사)의 Sequence.
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.kkma.Dictionary">Dictionary</a> → <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
-    </li><li name="kr.bydelta.koala.traits.CanCompileDict#jUserDictionary" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="jUserDictionary(morphs:java.util.List[String],tags:java.util.List[kr.bydelta.koala.POS.POSTag]):Unit"></a>
-      <a id="jUserDictionary(List[String],List[POSTag]):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">jUserDictionary</span><span class="params">(<span name="morphs">morphs: <span class="extype" name="java.util.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="tags">tags: <span class="extype" name="java.util.List">List</span>[<a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">(Java) 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.</p><div class="fullcomment"><div class="comment cmt"><p>(Java) 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.
-</p></div><dl class="paramcmts block"><dt class="param">morphs</dt><dd class="cmt"><p>추가할 단어의 표면형의 목록.</p></dd><dt class="param">tags</dt><dd class="cmt"><p>추가할 단어의 품사의 목록.
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -394,6 +319,32 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="kr.bydelta.koala.data.Relationship#rawRel" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="rawRel:String"></a>
+      <a id="rawRel:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">rawRel</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Relation name (Not-normalized, original)</p>
+    </li><li name="kr.bydelta.koala.data.Relationship#relation" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="relation:kr.bydelta.koala.FunctionalTag.FunctionalTag"></a>
+      <a id="relation:FunctionalTag.FunctionalTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">relation</span><span class="result">: <a href="../FunctionalTag$.html#FunctionalTag=kr.bydelta.koala.FunctionalTag.Value" class="extmbr" name="kr.bydelta.koala.FunctionalTag.FunctionalTag">FunctionalTag.FunctionalTag</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Relation name (Normalized)</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -407,7 +358,21 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="kr.bydelta.koala.data.Relationship#target" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="target:Int"></a>
+      <a id="target:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">target</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Index of target word (within Sentence)
+</p>
+    </li><li name="kr.bydelta.koala.data.Relationship#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <a id="toString():String"></a>
       <h4 class="signature">
@@ -416,23 +381,10 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="kr.bydelta.koala.kkma.Dictionary#userdic" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="userdic:kr.bydelta.koala.helper.UserDicReader"></a>
-      <a id="userdic:UserDicReader"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">userdic</span><span class="result">: <span class="extype" name="kr.bydelta.koala.helper.UserDicReader">UserDicReader</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">사용자사전 Reader *</p>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.data.Relationship">Relationship</a> → AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -499,9 +451,7 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="kr.bydelta.koala.traits.CanCompileDict">
-              <h3>Inherited from <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></h3>
-            </div><div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>

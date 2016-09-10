@@ -152,21 +152,6 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="kr.bydelta.koala.hnn.Dictionary#addUserDictionary" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addUserDictionary(morph:String,tag:kr.bydelta.koala.POS.POSTag):Unit"></a>
-      <a id="addUserDictionary(String,POSTag):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">addUserDictionary</span><span class="params">(<span name="morph">morph: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tag">tag: <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">사용자 사전에, 표면형과 그 품사를 추가.</p><div class="fullcomment"><div class="comment cmt"><p>사용자 사전에, 표면형과 그 품사를 추가.
-</p></div><dl class="paramcmts block"><dt class="param">morph</dt><dd class="cmt"><p>표면형.</p></dd><dt class="param">tag</dt><dd class="cmt"><p>품사.
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.hnn.Dictionary">Dictionary</a> → <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
-    </li><li name="kr.bydelta.koala.hnn.Dictionary#addUserDictionary" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="addUserDictionary(dict:(String,kr.bydelta.koala.POS.POSTag)*):Unit"></a>
       <a id="addUserDictionary((String,POSTag)*):Unit"></a>
       <h4 class="signature">
@@ -180,6 +165,21 @@
       </h4>
       <p class="shortcomment cmt">사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.</p><div class="fullcomment"><div class="comment cmt"><p>사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.
 </p></div><dl class="paramcmts block"><dt class="param">dict</dt><dd class="cmt"><p>추가할 (표면형,품사)의 순서쌍.
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.hnn.Dictionary">Dictionary</a> → <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
+    </li><li name="kr.bydelta.koala.hnn.Dictionary#addUserDictionary" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addUserDictionary(morph:String,tag:kr.bydelta.koala.POS.POSTag):Unit"></a>
+      <a id="addUserDictionary(String,POSTag):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">addUserDictionary</span><span class="params">(<span name="morph">morph: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tag">tag: <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">사용자 사전에, 표면형과 그 품사를 추가.</p><div class="fullcomment"><div class="comment cmt"><p>사용자 사전에, 표면형과 그 품사를 추가.
+</p></div><dl class="paramcmts block"><dt class="param">morph</dt><dd class="cmt"><p>표면형.</p></dd><dt class="param">tag</dt><dd class="cmt"><p>품사.
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.hnn.Dictionary">Dictionary</a> → <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
@@ -344,15 +344,15 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="kr.bydelta.koala.hnn.Dictionary#items" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="items:Seq[(String,kr.bydelta.koala.POS.POSTag)]"></a>
-      <a id="items:Seq[(String,POSTag)]"></a>
+      <a id="items:Set[(String,kr.bydelta.koala.POS.POSTag)]"></a>
+      <a id="items:Set[(String,POSTag)]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">items</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[(<span class="extype" name="scala.Predef.String">String</span>, <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>)]</span>
+        <span class="name">items</span><span class="result">: <span class="extype" name="scala.Predef.Set">Set</span>[(<span class="extype" name="scala.Predef.String">String</span>, <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>)]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">사용자 사전에 등재된 모든 Item을 불러옵니다.</p><div class="fullcomment"><div class="comment cmt"><p>사용자 사전에 등재된 모든 Item을 불러옵니다.

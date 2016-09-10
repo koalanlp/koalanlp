@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Dictionary - kr.bydelta.koala.kkma.Dictionary</title>
-          <meta name="description" content="Dictionary - kr.bydelta.koala.kkma.Dictionary" />
-          <meta name="keywords" content="Dictionary kr.bydelta.koala.kkma.Dictionary" />
+          <title>Sentence - kr.bydelta.koala.data.Sentence</title>
+          <meta name="description" content="Sentence - kr.bydelta.koala.data.Sentence" />
+          <meta name="keywords" content="Sentence kr.bydelta.koala.data.Sentence" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../index.html';
-            var hash = 'kr.bydelta.koala.kkma.Dictionary$';
+            var hash = 'kr.bydelta.koala.data.Sentence$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -24,9 +24,9 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../../../../lib/object_big.png" />
-        <p id="owner"><a href="../../../package.html" class="extype" name="kr">kr</a>.<a href="../../package.html" class="extype" name="kr.bydelta">bydelta</a>.<a href="../package.html" class="extype" name="kr.bydelta.koala">koala</a>.<a href="package.html" class="extype" name="kr.bydelta.koala.kkma">kkma</a></p>
-        <h1>Dictionary</h1>
+        <a href="Sentence.html" title="Go to companion"><img src="../../../../lib/object_to_class_big.png" /></a>
+        <p id="owner"><a href="../../../package.html" class="extype" name="kr">kr</a>.<a href="../../package.html" class="extype" name="kr.bydelta">bydelta</a>.<a href="../package.html" class="extype" name="kr.bydelta.koala">koala</a>.<a href="package.html" class="extype" name="kr.bydelta.koala.data">data</a></p>
+        <h1><a href="Sentence.html" title="Go to companion">Sentence</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -35,14 +35,14 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">Dictionary</span><span class="result"> extends <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></span>
+        <span class="name">Sentence</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>꼬꼬마 사용자사전
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Companion object for Sentence
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -60,7 +60,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="kr.bydelta.koala.kkma.Dictionary"><span>Dictionary</span></li><li class="in" name="kr.bydelta.koala.traits.CanCompileDict"><span>CanCompileDict</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="kr.bydelta.koala.data.Sentence"><span>Sentence</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -151,36 +151,21 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="kr.bydelta.koala.kkma.Dictionary#addUserDictionary" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addUserDictionary(dict:(String,kr.bydelta.koala.POS.POSTag)*):Unit"></a>
-      <a id="addUserDictionary((String,POSTag)*):Unit"></a>
+    </li><li name="kr.bydelta.koala.data.Sentence#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(words:Seq[kr.bydelta.koala.data.Word]):kr.bydelta.koala.data.Sentence"></a>
+      <a id="apply(Seq[Word]):Sentence"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">addUserDictionary</span><span class="params">(<span name="dict">dict: (<span class="extype" name="scala.Predef.String">String</span>, <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>)*</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">apply</span><span class="params">(<span name="words">words: <span class="extype" name="scala.collection.Seq">Seq</span>[<a href="Word.html" class="extype" name="kr.bydelta.koala.data.Word">Word</a>]</span>)</span><span class="result">: <a href="Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.</p><div class="fullcomment"><div class="comment cmt"><p>사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.
-</p></div><dl class="paramcmts block"><dt class="param">dict</dt><dd class="cmt"><p>추가할 (표면형,품사)의 순서쌍.
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.kkma.Dictionary">Dictionary</a> → <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
-    </li><li name="kr.bydelta.koala.traits.CanCompileDict#addUserDictionary" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addUserDictionary(morph:String,tag:kr.bydelta.koala.POS.POSTag):Unit"></a>
-      <a id="addUserDictionary(String,POSTag):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">addUserDictionary</span><span class="params">(<span name="morph">morph: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tag">tag: <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">사용자 사전에, 표면형과 그 품사를 추가.</p><div class="fullcomment"><div class="comment cmt"><p>사용자 사전에, 표면형과 그 품사를 추가.
-</p></div><dl class="paramcmts block"><dt class="param">morph</dt><dd class="cmt"><p>표면형.</p></dd><dt class="param">tag</dt><dd class="cmt"><p>품사.
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
+      <p class="shortcomment cmt">Create a sentence.</p><div class="fullcomment"><div class="comment cmt"><p>Create a sentence.
+</p></div><dl class="paramcmts block"><dt class="param">words</dt><dd class="cmt"><p>Word sequence.</p></dd><dt>returns</dt><dd class="cmt"><p>a new Sentence.
+</p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -194,6 +179,21 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="kr.bydelta.koala.data.Sentence#canBuildFrom" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="canBuildFrom:scala.collection.generic.CanBuildFrom[kr.bydelta.koala.data.Sentence,kr.bydelta.koala.data.Word,kr.bydelta.koala.data.Sentence]"></a>
+      <a id="canBuildFrom:CanBuildFrom[Sentence,Word,Sentence]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">canBuildFrom</span><span class="result">: <span class="extype" name="scala.collection.generic.CanBuildFrom">CanBuildFrom</span>[<a href="Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>, <a href="Word.html" class="extype" name="kr.bydelta.koala.data.Word">Word</a>, <a href="Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Builder factory for any sentence.</p><div class="fullcomment"><div class="comment cmt"><p>Builder factory for any sentence.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Builder factory instance.
+</p></dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -213,21 +213,6 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="kr.bydelta.koala.kkma.Dictionary#contains" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="contains(word:String,posTag:Set[kr.bydelta.koala.POS.POSTag]):Boolean"></a>
-      <a id="contains(String,Set[POSTag]):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">contains</span><span class="params">(<span name="word">word: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="posTag">posTag: <span class="extype" name="scala.Predef.Set">Set</span>[<a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>] = <span class="symbol"><span class="name"><a href="../../../package.html">Set(POS.NNP, POS.NNG)</a></span></span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">사전에 등재되어 있는지 확인합니다.</p><div class="fullcomment"><div class="comment cmt"><p>사전에 등재되어 있는지 확인합니다.
-</p></div><dl class="paramcmts block"><dt class="param">word</dt><dd class="cmt"><p>확인할 형태소</p></dd><dt class="param">posTag</dt><dd class="cmt"><p>품사들(기본값: NNP 고유명사, NNG 일반명사)
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.kkma.Dictionary">Dictionary</a> → <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -299,19 +284,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="kr.bydelta.koala.kkma.Dictionary#isDicChanged" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="isDicChanged:Boolean"></a>
-      <a id="isDicChanged:Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">var</span>
-      </span>
-      <span class="symbol">
-        <span class="name">isDicChanged</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">사전 목록의 변화여부 *</p>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -325,36 +297,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="kr.bydelta.koala.kkma.Dictionary#items" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="items:Set[(String,kr.bydelta.koala.POS.POSTag)]"></a>
-      <a id="items:Set[(String,POSTag)]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">items</span><span class="result">: <span class="extype" name="scala.Predef.Set">Set</span>[(<span class="extype" name="scala.Predef.String">String</span>, <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>)]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">사용자 사전에 등재된 모든 Item을 불러옵니다.</p><div class="fullcomment"><div class="comment cmt"><p>사용자 사전에 등재된 모든 Item을 불러옵니다.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>(형태소, 통합품사)의 Sequence.
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.kkma.Dictionary">Dictionary</a> → <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
-    </li><li name="kr.bydelta.koala.traits.CanCompileDict#jUserDictionary" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="jUserDictionary(morphs:java.util.List[String],tags:java.util.List[kr.bydelta.koala.POS.POSTag]):Unit"></a>
-      <a id="jUserDictionary(List[String],List[POSTag]):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">jUserDictionary</span><span class="params">(<span name="morphs">morphs: <span class="extype" name="java.util.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="tags">tags: <span class="extype" name="java.util.List">List</span>[<a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">(Java) 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.</p><div class="fullcomment"><div class="comment cmt"><p>(Java) 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.
-</p></div><dl class="paramcmts block"><dt class="param">morphs</dt><dd class="cmt"><p>추가할 단어의 표면형의 목록.</p></dd><dt class="param">tags</dt><dd class="cmt"><p>추가할 단어의 품사의 목록.
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -420,19 +362,28 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="kr.bydelta.koala.kkma.Dictionary#userdic" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="userdic:kr.bydelta.koala.helper.UserDicReader"></a>
-      <a id="userdic:UserDicReader"></a>
+    </li><li name="kr.bydelta.koala.data.Sentence#unapplySeq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="unapplySeq(target:kr.bydelta.koala.data.Sentence):Option[Seq[kr.bydelta.koala.data.Word]]"></a>
+      <a id="unapplySeq(Sentence):Option[Seq[Word]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">val</span>
+        <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">userdic</span><span class="result">: <span class="extype" name="kr.bydelta.koala.helper.UserDicReader">UserDicReader</span></span>
+        <span class="name">unapplySeq</span><span class="params">(<span name="target">target: <a href="Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Seq">Seq</span>[<a href="Word.html" class="extype" name="kr.bydelta.koala.data.Word">Word</a>]]</span>
       </span>
       </h4>
-      <p class="shortcomment cmt">사용자사전 Reader *</p>
+      <p class="shortcomment cmt">Extractor for the sentences.</p><div class="fullcomment"><div class="comment cmt"><p>Extractor for the sentences.
+</p></div><dl class="paramcmts block"><dt class="param">target</dt><dd class="cmt"><p>Sentence to be matched</p></dd><dt>returns</dt><dd class="cmt"><p>Some(word sequence)
+</p></dd></dl><dl class="attributes block"> <dt>Note</dt><dd><span class="cmt"><p>&quot;Extractor&quot; is for pattern matching. That is, a sentence <code>s</code> can be matched as:
+<pre>
+      s match { case Sentence(word1, word2, _*) => ... }
+</pre>
+      or can be matched as:
+<pre>
+      s match { case Sentence(wordseq @ _*) => ... }
+</pre></p></span></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -499,9 +450,7 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="kr.bydelta.koala.traits.CanCompileDict">
-              <h3>Inherited from <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></h3>
-            </div><div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>

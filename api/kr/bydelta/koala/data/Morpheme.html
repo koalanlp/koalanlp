@@ -24,14 +24,14 @@
         </head>
         <body class="type">
       <div id="definition">
-        <img src="../../../../lib/class_big.png" />
+        <a href="Morpheme$.html" title="Go to companion"><img src="../../../../lib/class_to_object_big.png" /></a>
         <p id="owner"><a href="../../../package.html" class="extype" name="kr">kr</a>.<a href="../../package.html" class="extype" name="kr.bydelta">bydelta</a>.<a href="../package.html" class="extype" name="kr.bydelta.koala">koala</a>.<a href="package.html" class="extype" name="kr.bydelta.koala.data">data</a></p>
-        <h1>Morpheme</h1>
+        <h1><a href="Morpheme$.html" title="Go to companion">Morpheme</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
+        <span class="modifier">final </span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>형태소 class
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>형태소 class / Morpheme class
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
@@ -78,24 +78,7 @@
 
       <div id="template">
         <div id="allMembers">
-        <div id="constructors" class="members">
-              <h3>Instance Constructors</h3>
-              <ol><li name="kr.bydelta.koala.data.Morpheme#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(surface:String,rawTag:String,processor:kr.bydelta.koala.Processor.Processor):kr.bydelta.koala.data.Morpheme"></a>
-      <a id="&lt;init&gt;:Morpheme"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">new</span>
-      </span>
-      <span class="symbol">
-        <span class="name">Morpheme</span><span class="params">(<span name="surface">surface: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="rawTag">rawTag: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="processor">processor: <a href="../Processor$.html#Processor=kr.bydelta.koala.Processor.Value" class="extmbr" name="kr.bydelta.koala.Processor.Processor">Processor.Processor</a></span>)</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">surface</dt><dd class="cmt"><p>형태소 표면형 String</p></dd><dt class="param">rawTag</dt><dd class="cmt"><p>원본 형태소 분석기의 품사 String</p></dd><dt class="param">processor</dt><dd class="cmt"><p>형태소 분석을 실시한 분석기
-</p></dd></dl></div>
-    </li></ol>
-            </div>
+        
 
         
 
@@ -225,9 +208,7 @@
         <span class="name">equals</span><span class="params">(<span name="obj">obj: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">두 객체가 같은지 비교.</p><div class="fullcomment"><div class="comment cmt"><p>두 객체가 같은지 비교.
-</p></div><dl class="paramcmts block"><dt class="param">obj</dt><dd class="cmt"><p>비교할 객체.</p></dd><dt>returns</dt><dd class="cmt"><p>True: 같은 경우.
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.data.Morpheme">Morpheme</a> → AnyRef → Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.data.Morpheme">Morpheme</a> → AnyRef → Any</dd></dl></div>
     </li><li name="kr.bydelta.koala.data.Morpheme#equalsWithoutTag" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="equalsWithoutTag(another:kr.bydelta.koala.data.Morpheme):Boolean"></a>
       <a id="equalsWithoutTag(Morpheme):Boolean"></a>
@@ -240,8 +221,8 @@
         <span class="name">equalsWithoutTag</span><span class="params">(<span name="another">another: <a href="" class="extype" name="kr.bydelta.koala.data.Morpheme">Morpheme</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">타 형태소 객체와 형태소의 표면형이 같은지 비교함.</p><div class="fullcomment"><div class="comment cmt"><p>타 형태소 객체와 형태소의 표면형이 같은지 비교함.
-</p></div><dl class="paramcmts block"><dt class="param">another</dt><dd class="cmt"><p>비교할 형태소 객체</p></dd><dt>returns</dt><dd class="cmt"><p>True: 표면형이 같은 경우
+      <p class="shortcomment cmt">타 형태소 객체와 형태소의 표면형이 같은지 비교함.</p><div class="fullcomment"><div class="comment cmt"><p>타 형태소 객체와 형태소의 표면형이 같은지 비교함.</p><p>Compare surface form with other morpheme instance.
+</p></div><dl class="paramcmts block"><dt class="param">another</dt><dd class="cmt"><p>비교할 형태소 객체 / Morpheme instance to be compared</p></dd><dt>returns</dt><dd class="cmt"><p>True: 표면형이 같은 경우
 </p></dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
@@ -280,7 +261,7 @@
       <a id="hasRawTag(String):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
@@ -298,7 +279,7 @@
       <a id="hasTag(Seq[POSTag]):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
@@ -316,7 +297,7 @@
       <a id="hasTag(String):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
@@ -330,7 +311,7 @@
 에서 확인
 </p></div><dl class="paramcmts block"><dt class="param">tag</dt><dd class="cmt"><p>확인할 품사 표기 String</p></dd><dt>returns</dt><dd class="cmt"><p>True: 주어진 품사를 가질경우
 </p></dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="kr.bydelta.koala.data.Morpheme#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
       <h4 class="signature">
@@ -342,7 +323,22 @@
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.data.Morpheme">Morpheme</a> → AnyRef → Any</dd></dl></div>
+    </li><li name="kr.bydelta.koala.data.Morpheme#id" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="id:Int"></a>
+      <a id="id:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">id</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Index of this morpheme in the word.</p><div class="fullcomment"><div class="comment cmt"><p>Index of this morpheme in the word.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>index
+</p></dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -361,14 +357,14 @@
       <a id="isJosa:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
         <span class="name">isJosa</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">관계언<sup>조사</sup> 형태소인지 확인.</p><div class="fullcomment"><div class="comment cmt"><p>관계언<sup>조사</sup> 형태소인지 확인.
+      <p class="shortcomment cmt">관계언<sup>조사</sup> 형태소인지 확인.</p><div class="fullcomment"><div class="comment cmt"><p>관계언<sup>조사</sup> 형태소인지 확인.</p><p>Check whether this morpheme is a Postposition
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>True : 관계언 형태소일 경우.
 </p></dd></dl></div>
     </li><li name="kr.bydelta.koala.data.Morpheme#isModifier" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -376,14 +372,14 @@
       <a id="isModifier:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
         <span class="name">isModifier</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">수식언<sup>관형사, 부사</sup> 형태소인지 확인.</p><div class="fullcomment"><div class="comment cmt"><p>수식언<sup>관형사, 부사</sup> 형태소인지 확인.
+      <p class="shortcomment cmt">수식언<sup>관형사, 부사</sup> 형태소인지 확인.</p><div class="fullcomment"><div class="comment cmt"><p>수식언<sup>관형사, 부사</sup> 형태소인지 확인.</p><p>Check whether this morpheme is a Modifier (Determiner, Adverb)
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>True : 수식언 형태소일 경우.
 </p></dd></dl></div>
     </li><li name="kr.bydelta.koala.data.Morpheme#isNoun" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -391,29 +387,29 @@
       <a id="isNoun:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
         <span class="name">isNoun</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">체언<sup>명사, 수사, 대명사</sup> 형태소인지 확인.</p><div class="fullcomment"><div class="comment cmt"><p>체언<sup>명사, 수사, 대명사</sup> 형태소인지 확인.
+      <p class="shortcomment cmt">체언<sup>명사, 수사, 대명사</sup> 형태소인지 확인.</p><div class="fullcomment"><div class="comment cmt"><p>체언<sup>명사, 수사, 대명사</sup> 형태소인지 확인.</p><p>Check whether this morpheme is a Noun (Noun, Cardinal/Ordinal, Pronoun)
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>True : 체언 형태소일 경우.
 </p></dd></dl></div>
-    </li><li name="kr.bydelta.koala.data.Morpheme#isVerb" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="isVerb:Boolean"></a>
-      <a id="isVerb:Boolean"></a>
+    </li><li name="kr.bydelta.koala.data.Morpheme#isPredicate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isPredicate:Boolean"></a>
+      <a id="isPredicate:Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">isVerb</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">isPredicate</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">용언<sup>동사, 형용사</sup> 형태소인지 확인.</p><div class="fullcomment"><div class="comment cmt"><p>용언<sup>동사, 형용사</sup> 형태소인지 확인.
+      <p class="shortcomment cmt">용언<sup>동사, 형용사</sup> 형태소인지 확인.</p><div class="fullcomment"><div class="comment cmt"><p>용언<sup>동사, 형용사</sup> 형태소인지 확인.</p><p>Check whether this morpheme is a Predicate (Verb, Adjective)
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>True : 용언 형태소일 경우.
 </p></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -455,20 +451,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="kr.bydelta.koala.data.Morpheme#processor" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="processor:kr.bydelta.koala.Processor.Processor"></a>
-      <a id="processor:Processor.Processor"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">var</span>
-      </span>
-      <span class="symbol">
-        <span class="name">processor</span><span class="result">: <a href="../Processor$.html#Processor=kr.bydelta.koala.Processor.Value" class="extmbr" name="kr.bydelta.koala.Processor.Processor">Processor.Processor</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">형태소 분석을 실시한 분석기
-</p>
     </li><li name="kr.bydelta.koala.data.Morpheme#rawTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="rawTag:String"></a>
       <a id="rawTag:String"></a>
@@ -481,7 +463,7 @@
         <span class="name">rawTag</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">원본 형태소 분석기의 품사 String</p>
+      <p class="shortcomment cmt">원본 형태소 분석기의 품사 String / POS Tag, produced by the original tagger.</p>
     </li><li name="kr.bydelta.koala.data.Morpheme#surface" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="surface:String"></a>
       <a id="surface:String"></a>
@@ -494,7 +476,7 @@
         <span class="name">surface</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">형태소 표면형 String</p>
+      <p class="shortcomment cmt">형태소 표면형 String / Surface form of the morpheme</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -509,19 +491,18 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="kr.bydelta.koala.data.Morpheme#tag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="tag:kr.bydelta.koala.POS.Value"></a>
-      <a id="tag:POS.Value"></a>
+      <a id="tag:kr.bydelta.koala.POS.POSTag"></a>
+      <a id="tag:POSTag"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">tag</span><span class="result">: <a href="../POS$.html#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">POS.Value</a></span>
+        <span class="name">tag</span><span class="result">: <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">통합 품사
-</p>
+      <p class="shortcomment cmt">통합 품사 / POS Tag, induced by Koala.</p>
     </li><li name="kr.bydelta.koala.data.Morpheme#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <a id="toString():String"></a>
@@ -534,10 +515,7 @@
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">String형태로 변환
-</p><div class="fullcomment"><div class="comment cmt"><p>String형태로 변환
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>&quot;표면형/통합품사표기(원본품사표기)&quot;형태의 String
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.data.Morpheme">Morpheme</a> → AnyRef → Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.data.Morpheme">Morpheme</a> → AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>

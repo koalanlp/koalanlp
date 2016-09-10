@@ -2,17 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>TagConversion - kr.bydelta.koala.TagConversion</title>
-          <meta name="description" content="TagConversion - kr.bydelta.koala.TagConversion" />
-          <meta name="keywords" content="TagConversion kr.bydelta.koala.TagConversion" />
+          <title>Relationship - kr.bydelta.koala.data.Relationship</title>
+          <meta name="description" content="Relationship - kr.bydelta.koala.data.Relationship" />
+          <meta name="keywords" content="Relationship kr.bydelta.koala.data.Relationship" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
-      <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
-      <link href="../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
       <script type="text/javascript">
          if(top === self) {
-            var url = '../../../index.html';
-            var hash = 'kr.bydelta.koala.package$$TagConversion';
+            var url = '../../../../index.html';
+            var hash = 'kr.bydelta.koala.data.Relationship$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -22,24 +22,24 @@
    	  </script>
     
         </head>
-        <body class="type">
+        <body class="value">
       <div id="definition">
-        <img src="../../../lib/class_big.png" />
-        <p id="owner"><a href="../../package.html" class="extype" name="kr">kr</a>.<a href="../package.html" class="extype" name="kr.bydelta">bydelta</a>.<a href="package.html" class="extype" name="kr.bydelta.koala">koala</a></p>
-        <h1>TagConversion</h1>
+        <a href="Relationship.html" title="Go to companion"><img src="../../../../lib/object_to_class_big.png" /></a>
+        <p id="owner"><a href="../../../package.html" class="extype" name="kr">kr</a>.<a href="../../package.html" class="extype" name="kr.bydelta">bydelta</a>.<a href="../package.html" class="extype" name="kr.bydelta.koala">koala</a>.<a href="package.html" class="extype" name="kr.bydelta.koala.data">data</a></p>
+        <h1><a href="Relationship.html" title="Go to companion">Relationship</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">class</span>
+        <span class="modifier"></span>
+        <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">TagConversion</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name">Relationship</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>품사표기간 변환을 위한 암시적 Class.
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Companion object for Relationship
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
@@ -60,7 +60,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="kr.bydelta.koala.TagConversion"><span>TagConversion</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="kr.bydelta.koala.data.Relationship"><span>Relationship</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -78,24 +78,7 @@
 
       <div id="template">
         <div id="allMembers">
-        <div id="constructors" class="members">
-              <h3>Instance Constructors</h3>
-              <ol><li name="kr.bydelta.koala.TagConversion#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(proc:kr.bydelta.koala.Processor.Value):kr.bydelta.koala.package.TagConversion"></a>
-      <a id="&lt;init&gt;:TagConversion"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">new</span>
-      </span>
-      <span class="symbol">
-        <span class="name">TagConversion</span><span class="params">(<span name="proc">proc: <a href="Processor$.html#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.Processor.Value">Processor.Value</a></span>)</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">proc</dt><dd class="cmt"><p>품사변환의 대상이 되는 분석기.
-</p></dd></dl></div>
-    </li></ol>
-            </div>
+        
 
         
 
@@ -168,6 +151,22 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="kr.bydelta.koala.data.Relationship#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(head:Int,rel:kr.bydelta.koala.FunctionalTag.FunctionalTag,rawRel:String,target:Int):kr.bydelta.koala.data.Relationship"></a>
+      <a id="apply(Int,FunctionalTag.FunctionalTag,String,Int):Relationship"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="params">(<span name="head">head: <span class="extype" name="scala.Int">Int</span></span>, <span name="rel">rel: <a href="../FunctionalTag$.html#FunctionalTag=kr.bydelta.koala.FunctionalTag.Value" class="extmbr" name="kr.bydelta.koala.FunctionalTag.FunctionalTag">FunctionalTag.FunctionalTag</a></span>, <span name="rawRel">rawRel: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="target">target: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="Relationship.html" class="extype" name="kr.bydelta.koala.data.Relationship">Relationship</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Create new relationship
+</p><div class="fullcomment"><div class="comment cmt"><p>Create new relationship
+</p></div><dl class="paramcmts block"><dt class="param">head</dt><dd class="cmt"><p>Index of head word</p></dd><dt class="param">rel</dt><dd class="cmt"><p>Normalized relationship</p></dd><dt class="param">rawRel</dt><dd class="cmt"><p>Raw name for the relationship</p></dd><dt class="param">target</dt><dd class="cmt"><p>Index of target word</p></dd><dt>returns</dt><dd class="cmt"><p>A new relationship
+</p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -193,7 +192,7 @@
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
@@ -238,7 +237,7 @@
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="symbol">classOf[java.lang.Throwable]</span>
@@ -271,21 +270,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="kr.bydelta.koala.TagConversion#integratedPOSOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="integratedPOSOf(tag:String):kr.bydelta.koala.POS.Value"></a>
-      <a id="integratedPOSOf(String):POS.Value"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">integratedPOSOf</span><span class="params">(<span name="tag">tag: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="POS$.html#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">POS.Value</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">통합품사로 변환.</p><div class="fullcomment"><div class="comment cmt"><p>통합품사로 변환.
-</p></div><dl class="paramcmts block"><dt class="param">tag</dt><dd class="cmt"><p>통합품사로 변환할 원본표기.</p></dd><dt>returns</dt><dd class="cmt"><p>변환된 통합품사.
-</p></dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -338,34 +322,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="kr.bydelta.koala.TagConversion#originalPOSOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="originalPOSOf(tag:kr.bydelta.koala.POS.Value):String"></a>
-      <a id="originalPOSOf(POS.Value):String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">originalPOSOf</span><span class="params">(<span name="tag">tag: <a href="POS$.html#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.POS.Value">POS.Value</a></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">원본품사로 변환.</p><div class="fullcomment"><div class="comment cmt"><p>원본품사로 변환.
-</p></div><dl class="paramcmts block"><dt class="param">tag</dt><dd class="cmt"><p>원본품사로 변환할 통합표기.</p></dd><dt>returns</dt><dd class="cmt"><p>변환된 품사.
-</p></dd></dl></div>
-    </li><li name="kr.bydelta.koala.TagConversion#proc" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="proc:kr.bydelta.koala.Processor.Value"></a>
-      <a id="proc:Processor.Value"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">proc</span><span class="result">: <a href="Processor$.html#ValueextendsOrdered[Enumeration.this.Value]withSerializable" class="extmbr" name="kr.bydelta.koala.Processor.Value">Processor.Value</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">품사변환의 대상이 되는 분석기.</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -392,6 +348,25 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="kr.bydelta.koala.data.Relationship#unapply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="unapply(arg:kr.bydelta.koala.data.Relationship):Option[(Int,kr.bydelta.koala.FunctionalTag.FunctionalTag,Int)]"></a>
+      <a id="unapply(Relationship):Option[(Int,FunctionalTag.FunctionalTag,Int)]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">unapply</span><span class="params">(<span name="arg">arg: <a href="Relationship.html" class="extype" name="kr.bydelta.koala.data.Relationship">Relationship</a></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[(<span class="extype" name="scala.Int">Int</span>, <a href="../FunctionalTag$.html#FunctionalTag=kr.bydelta.koala.FunctionalTag.Value" class="extmbr" name="kr.bydelta.koala.FunctionalTag.FunctionalTag">FunctionalTag.FunctionalTag</a>, <span class="extype" name="scala.Int">Int</span>)]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Extractor for relationship
+</p><div class="fullcomment"><div class="comment cmt"><p>Extractor for relationship
+</p></div><dl class="paramcmts block"><dt class="param">arg</dt><dd class="cmt"><p>Target relation</p></dd><dt>returns</dt><dd class="cmt"><p>Some(head Index, relationship, target Index)
+</p></dd></dl><dl class="attributes block"> <dt>Note</dt><dd><span class="cmt"><p>&quot;Extractor&quot; is for pattern matching. That is, a Relationship <code>r</code> can be matched as:
+<pre>
+      r match { case Relationship(head, rel, target) => ... }
+</pre></p></span></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -478,6 +453,6 @@
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../lib/template.js"></script>
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../../lib/template.js"></script>
     </body>
       </html>
