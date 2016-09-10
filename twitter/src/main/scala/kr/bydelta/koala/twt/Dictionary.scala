@@ -5,13 +5,11 @@ import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.traits.CanCompileDict
 import kr.bydelta.koala.{POS, tagToTwt}
 
-import scala.collection.mutable.ListBuffer
-
 /**
   * 트위터 분석기 사용자사전
   */
 object Dictionary extends CanCompileDict {
-  private val userDict = ListBuffer[(String, POSTag)]()
+  private var userDict = Set[(String, POSTag)]()
 
   override def addUserDictionary(dict: (String, POSTag)*): Unit = {
     userDict ++= dict
@@ -19,11 +17,6 @@ object Dictionary extends CanCompileDict {
       case (twtTag, seq) =>
         add(twtTag, seq.map(_._1))
     }
-  }
-
-  override def addUserDictionary(morph: String, tag: POSTag): Unit = {
-    userDict += morph -> tag
-    add(KoreanPos withName tagToTwt(tag), Seq(morph))
   }
 
   /**
@@ -48,7 +41,7 @@ object Dictionary extends CanCompileDict {
     *
     * @return (형태소, 통합품사)의 Sequence.
     */
-  override def items: Seq[(String, POSTag)] = userDict
+  override def items: Set[(String, POSTag)] = userDict
 
   /**
     * 현재 사용중인 패키지의 사전에 등재되어 있는지 확인합니다.

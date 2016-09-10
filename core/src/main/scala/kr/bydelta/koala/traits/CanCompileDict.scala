@@ -22,7 +22,7 @@ trait CanCompileDict {
     * @param morph 표면형.
     * @param tag   품사.
     */
-  def addUserDictionary(morph: String, tag: POSTag)
+  def addUserDictionary(morph: String, tag: POSTag) = addUserDictionary(morph -> tag)
 
   /**
     * (Java) 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.
@@ -38,7 +38,7 @@ trait CanCompileDict {
     *
     * @return (형태소, 통합품사)의 Sequence.
     */
-  def items: Seq[(String, POSTag)]
+  def items: Set[(String, POSTag)]
 
   /**
     * 사전에 등재되어 있는지 확인합니다.

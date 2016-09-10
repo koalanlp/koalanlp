@@ -343,8 +343,8 @@ sbt runMain KKMAServer
 >       }...
 >     ]
 >   }...]
-> }a
-> ```a
+> }
+> ```
 
 > <sup>주4</sup> 사전의 형태:
 > ```javascript

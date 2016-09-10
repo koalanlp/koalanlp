@@ -29,9 +29,14 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     */
   val userDict = {
     val file = new File(getExtractedPath, "koala.dict")
+    file.createNewFile()
     file.deleteOnExit()
     file
   }
+
+  private var userLastUpdated = 0l
+
+  private var userBuffer = Set[(String, POSTag)]()
 
   override def addUserDictionary(dict: (String, POSTag)*): Unit = Dictionary synchronized {
     userDict.getParentFile.mkdirs()
@@ -56,18 +61,23 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     bw.close()
   }
 
-  override def items: Seq[(String, POSTag)] =
-    Source.fromFile(userDict).getLines().map {
-      line =>
-        val segs = line.split('\t')
-        segs(0) -> fromKomoranTag(segs(1))
-    }.toSeq
-
   override def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean = {
     val oTag = posTag.map(x => table.getId(tagToKomoran(x)))
     val found = dic.get(word)
-    found != null && found.exists(p => oTag.contains(p.getFirst))
-    // TODO effective user dictionary search.
+    (found != null && found.exists(p => oTag.contains(p.getFirst))) || items.contains(word -> posTag)
+  }
+
+  override def items: Set[(String, POSTag)] = userBuffer synchronized {
+    if (userLastUpdated < userDict.lastModified()) {
+      userLastUpdated = userDict.lastModified()
+      userBuffer ++= Source.fromFile(userDict).getLines().map {
+        line =>
+          val segs = line.split('\t')
+          segs(0) -> fromKomoranTag(segs(1))
+      }
+    }
+
+    userBuffer
   }
 
   override protected def modelName: String = "komoran"

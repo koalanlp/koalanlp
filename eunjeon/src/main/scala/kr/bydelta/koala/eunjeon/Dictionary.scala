@@ -5,17 +5,12 @@ import kr.bydelta.koala._
 import kr.bydelta.koala.traits.CanCompileDict
 import org.bitbucket.eunjeon.seunjeon.{ConnectionCostDict, DictBuilder, LexiconDict, NngUtil}
 
-import scala.collection.mutable.ArrayBuffer
 import scala.io.Source
 
 /**
   * 은전한닢 사용자사전
   */
 object Dictionary extends CanCompileDict {
-  /**
-    * 사용자사전에 등재되기 전의 리스트.
-    */
-  private[koala] lazy val rawDict = ArrayBuffer[String]()
   private lazy val rightIDMap =
     Source.fromInputStream(classOf[NngUtil].getResourceAsStream(DictBuilder.RIGHT_ID_DEF)).getLines()
       .map { line =>
@@ -41,6 +36,10 @@ object Dictionary extends CanCompileDict {
     */
   private[koala] val userDict = new LexiconDict().loadFromIterator(Iterator())
   /**
+    * 사용자사전에 등재되기 전의 리스트.
+    */
+  private[koala] var rawDict = Set[String]()
+  /**
     * 사용자사전 변경여부.
     */
   private[koala] var isDicChanged = false
@@ -63,18 +62,6 @@ object Dictionary extends CanCompileDict {
         } else
           s"$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*"
     }
-    isDicChanged = true
-  }
-
-  override def addUserDictionary(word: String, tag: POSTag): Unit = {
-    val lastchar = word.last
-    val oTag = tagToEunjeon(tag)
-    rawDict +=
-      (if (isHangul(lastchar)) {
-        val jong = hasJongsung(lastchar)
-        s"$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
-      } else
-        s"$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*")
     isDicChanged = true
   }
 
@@ -139,7 +126,7 @@ object Dictionary extends CanCompileDict {
     }
   }
 
-  override def items: Seq[(String, POSTag)] =
+  override def items: Set[(String, POSTag)] =
     rawDict.map {
       line =>
         val segs = line.split(",")

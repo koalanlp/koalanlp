@@ -10,7 +10,6 @@ import kr.bydelta.koala._
 import kr.bydelta.koala.traits.{CanCompileDict, CanExtractResource}
 
 import scala.collection.JavaConversions._
-import scala.collection.mutable
 import scala.io.Source
 
 /**
@@ -48,44 +47,50 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     systemDic.read_dic(fileDicSystem, tagSet)
     systemDic
   }
-  private lazy val usrDicPath: String = getExtractedPath + File.separator + "data/kE/dic_user.txt"
-  /**
-    * 사용자사전에 등재되기 전의 리스트.
-    */
-  private[koala] lazy val userDict = mutable.HashMap[String, String]()
+  private lazy val usrDicPath: File = {
+    val f = new File(getExtractedPath + File.separator + "data/kE/dic_user.txt")
+    f.createNewFile()
+    f.deleteOnExit()
+    f
+  }
   /** 사용자사전. **/
   private[koala] lazy val userDic: Trie = new Trie(Trie.DEFAULT_TRIE_BUF_SIZE_USER)
   private[koala] lazy val numAutomata: NumberAutomata = new NumberAutomata
-
-  override def addUserDictionary(dict: (String, POSTag)*) {
-    userDict ++= dict.map {
-      case (word, tag) => (word, tagToHNN(tag))
-    }
-  }
+  private[koala] var usrBuffer = Set[(String, POSTag)]()
+  private var dicLastUpdate, mapLastUpdate = 0l
 
   override def addUserDictionary(morph: String, tag: POSTag) {
-    userDict += morph -> tagToHNN(tag)
+    addUserDictionary(morph -> tag)
   }
 
-  override def items: Seq[(String, POSTag)] = {
-    val fileDict =
-      if (usrDicPath != null)
-        Source.fromFile(usrDicPath).getLines().map {
-          line =>
-            val segs = line.split('\t')
-            segs(0) -> fromHNNTag(segs(1))
-        }.toSeq
-      else Seq()
-    fileDict ++ userDict.map {
-      case (surf, tag) => surf -> fromHNNTag(tag)
-    }.toSeq
+  override def addUserDictionary(dict: (String, POSTag)*) {
+    val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(usrDicPath, true)))
+    dict.foreach {
+      case (morph, tag) =>
+        writer.write(morph)
+        writer.write('\t')
+        writer.write(tagToHNN(tag))
+        writer.newLine()
+    }
+    writer.close()
   }
 
   override def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean = {
-    loadDictionary()
-
     val oTag = posTag.map(x => tagSet.getTagID(tagToHNN(x)))
-    fetchFrom(word, systemDic, oTag) || fetchFrom(word, userDic, oTag)
+    fetchFrom(word, systemDic, oTag) || items.contains(word -> posTag)
+  }
+
+  override def items: Set[(String, POSTag)] = {
+    if (mapLastUpdate < usrDicPath.lastModified()) {
+      mapLastUpdate = usrDicPath.lastModified()
+      usrBuffer ++= Source.fromFile(usrDicPath).getLines().toStream.map {
+        line =>
+          val segs = line.split('\t')
+          segs(0) -> fromHNNTag(segs(1))
+      }
+    }
+
+    usrBuffer
   }
 
   private def fetchFrom(word: String, dict: Trie, oTag: Set[Int]) = {
@@ -95,24 +100,11 @@ object Dictionary extends CanCompileDict with CanExtractResource {
   }
 
   def loadDictionary() =
-    userDict synchronized {
-      if (userDict.nonEmpty) {
-        val file = new File(usrDicPath)
-        file.deleteOnExit()
-
-        val writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)))
-        userDict.foreach {
-          case (morph, tag) =>
-            writer.write(morph)
-            writer.write('\t')
-            writer.write(tag)
-            writer.newLine()
-        }
-        writer.close()
-        userDict.clear()
-
+    userDic synchronized {
+      if (dicLastUpdate < usrDicPath.lastModified()) {
+        dicLastUpdate = usrDicPath.lastModified()
         userDic.search_end = 0
-        userDic.read_dic(usrDicPath, tagSet)
+        userDic.read_dic(usrDicPath.getAbsolutePath, tagSet)
       }
     }
 

@@ -28,31 +28,19 @@ object Dictionary extends CanCompileDict {
     if (dict.nonEmpty) {
       userdic ++=
         dict.map {
-          case (word, integratedTag) => (word, tagToKKMA(integratedTag))
+          case (word, integratedTag) if word.nonEmpty => (word, tagToKKMA(integratedTag))
         }
       isDicChanged = true
     }
   }
 
-  override def addUserDictionary(morph: String, tag: POSTag) {
-    if (morph.length > 0) {
-      try {
-        userdic += (morph, tagToKKMA(tag))
-        isDicChanged = true
-      } catch {
-        case e: Exception =>
-          e.printStackTrace()
-      }
-    }
-  }
-
-  override def items: Seq[(String, POSTag)] = this synchronized {
+  override def items: Set[(String, POSTag)] = this synchronized {
     userdic.reset()
     userdic.map {
       line =>
         val segs = line.split('/')
         segs(0) -> fromKKMATag(segs(1))
-    }.toSeq
+    }.toSet
   }
 
   override def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean = {
