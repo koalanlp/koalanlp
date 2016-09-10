@@ -136,13 +136,6 @@ final class Sentence private(val words: Vector[Word])
     */
   def jIterator = iterator.asJava
 
-  /**
-    * (Java) 어절 목록. `java.util.List<Word>`
-    *
-    * @return 어절 목록.
-    */
-  def jWords = words.asJava
-
   override def toString: String =
   surfaceString() + "\n" +
     words.map {

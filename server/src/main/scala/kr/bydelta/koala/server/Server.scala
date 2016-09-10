@@ -42,6 +42,7 @@ trait Server {
     */
   def getParser: CanDepParse
 
+  // $COVERAGE-OFF$
   /**
     * Main method for execution
     *
@@ -53,6 +54,8 @@ trait Server {
 
     CServer.start("taggerServer", port)(getServiceInitializer)
   }
+
+  // $COVERAGE-ON$
 
   /**
     * Get Service Initializer

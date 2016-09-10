@@ -4,6 +4,8 @@ import kr.bydelta.koala._
 import org.specs2.execute.Result
 import org.specs2.mutable.Specification
 
+import scala.collection.JavaConverters._
+
 /**
   * Created by bydelta on 16. 7. 31.
   */
@@ -14,8 +16,8 @@ class DataSpecs extends Specification {
       val morph2 = Morpheme("밥", "ncn", fromHNNTag("ncn"))
       val morph3 = Morpheme("밥", "NNG", fromEunjeonTag("NNG"))
 
-      morph1 must_!= morph2
-      morph2 must_== morph3
+      (morph1 == morph2) must beFalse
+      (morph2 == morph3) must beTrue
       morph2.hashCode must_== morph3.hashCode
       morph1.isModifier must beFalse
       morph1.isNoun must beTrue
@@ -42,12 +44,14 @@ class DataSpecs extends Specification {
         )
       )
 
-      word.iterator.next must_== word.jIterator.next()
-      word.iterator.next must_== word.jIterator.next()
+      (word.iterator.next == word.jIterator.next()) must beTrue
+      (word.iterator.next == word.jIterator.next()) must beTrue
       word.iterator.hasNext must_== word.jIterator.hasNext
 
       word(0).surface must_== "밥"
+      word.head.id must_== 0
       word.last.surface must_== "을"
+      word.last.id must_== 1
       word(3) must throwAn[IndexOutOfBoundsException]
       word.length must_== 2
 
@@ -57,6 +61,8 @@ class DataSpecs extends Specification {
       import Implicit._
       val filtered = word.filter(POS.JKO)
       filtered must beAnInstanceOf[Word]
+
+      (word ++ word) must beAnInstanceOf[Word]
     }
   }
 
@@ -81,11 +87,17 @@ class DataSpecs extends Specification {
         )
       )
 
+      sent.head.id must_== 0
+      sent.last.id must_== 1
       sent(0).surface must_== "나는"
       sent.last.surface must_== "밥을"
       sent.nouns.map(_.surface) must containAllOf(Seq("나는", "밥을"))
+      sent.nouns must containTheSameElementsAs(sent.jNouns.asScala)
       sent.jVerbs.size() must_== 0
       sent.jModifiers.size() must_== 0
+
+      (sent canEqual sent.head) must beFalse
+      (sent canEqual Vector[Word]()) must beFalse
 
       sent.matches(Seq(Seq("NN", "J"), Seq("N", "J"))) must beFalse
       sent.matches(Array(Array("NP", "J"), Array("N", "JKO"))) must beTrue
@@ -94,6 +106,10 @@ class DataSpecs extends Specification {
       val filtered = sent.filter(Seq(POS.JX, POS.JC))
       filtered must beAnInstanceOf[Sentence]
       filtered.size must_== 1
+
+      val filtered2 = sent.filter(POS.JX)
+      filtered2 must beAnInstanceOf[Sentence]
+      filtered2 must containTheSameElementsAs(filtered)
 
       val concated = sent ++ sent
       concated must beAnInstanceOf[Sentence]
