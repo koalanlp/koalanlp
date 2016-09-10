@@ -41,8 +41,8 @@ class ServiceSpec extends Specification {
       )
 
       val expectedOutput =
-        """{"success":true,"data":[[{"word":"나는","in":[{"morph":"나","tag":"NP"},{"morph":"는","tag":"JX"}]},""" +
-          """{"word":"먹는다","in":[{"morph":"먹","tag":"VV"},{"morph":"는","tag":"EP"},{"morph":"다","tag":"EF"}]}]]}"""
+        """{"success":true,"data":[{"words":[{"word":"나는","in":[{"morph":"나","tag":"NP"},{"morph":"는","tag":"JX"}]},""" +
+          """{"word":"먹는다","in":[{"morph":"먹","tag":"VV"},{"morph":"는","tag":"EP"},{"morph":"다","tag":"EF"}]}]}]}"""
       CallbackAwait.result(respPost, 1.minute).body.bytes.utf8String must_== expectedOutput
       CallbackAwait.result(respGet, 1.minute).body.bytes.utf8String must_== expectedOutput
       CallbackAwait.result(respPut, 1.minute).body.bytes.utf8String must_== expectedOutput
@@ -62,8 +62,8 @@ class ServiceSpec extends Specification {
       )
 
       val expectedOutput =
-        """{"success":true,"data":[[{"word":"나는","depRel":"Object","rawDep":"(주어,목적)대상","children":[],"in":[{"morph":"나","tag":"NP"},{"morph":"는","tag":"JX"}]},""" +
-          """{"word":"먹는다","depRel":"Conjunctive","rawDep":"연결","children":[0],"in":[{"morph":"먹","tag":"VV"},{"morph":"는","tag":"EP"},{"morph":"다","tag":"EF"}]}]]}"""
+        """{"success":true,"data":[{"root":[{"rel":"Conjunctive","rawRel":"연결","childID":1}],"words":[{"word":"나는","children":[],"in":[{"morph":"나","tag":"NP"},{"morph":"는","tag":"JX"}]},""" +
+          """{"word":"먹는다","children":[{"rel":"Object","rawRel":"(주어,목적)대상","childID":0}],"in":[{"morph":"먹","tag":"VV"},{"morph":"는","tag":"EP"},{"morph":"다","tag":"EF"}]}]}]}"""
       CallbackAwait.result(respPost, 1.minute).body.bytes.utf8String must_== expectedOutput
       CallbackAwait.result(respGet, 1.minute).body.bytes.utf8String must_== expectedOutput
       CallbackAwait.result(respPut, 1.minute).body.bytes.utf8String must_== expectedOutput
@@ -78,8 +78,37 @@ class ServiceSpec extends Specification {
 
       CallbackAwait.result(response, 1.minute).body.bytes.utf8String must_== """{"success":true}"""
       Dictionary.isDicChanged must beTrue
+
+      val response2 = connection.typedHandler.handle(
+        HttpRequest.post("/dict").withBody(HttpBody("""[{"morph":"취존","tag":"NNP"}]"""))
+      )
+
+      CallbackAwait.result(response2, 1.minute).body.bytes.utf8String must_== """{"success":true}"""
+      Dictionary.isDicChanged must beTrue
       Dictionary.userdic.reset()
+
       Dictionary.userdic.readLine() must_== "개취/NNP"
+      Dictionary.userdic.readLine() must_== "취존/NNP"
+    }
+
+    "handle illegal access" in {
+      val connection = MockConnection.server(
+        server.getServiceInitializer(null).onConnect.asInstanceOf[(ServerContext) => HttpService])
+      val response = connection.typedHandler.handle(
+        HttpRequest.put("/index")
+      )
+
+      CallbackAwait.result(response, 1.minute).body.bytes.utf8String must be startingWith """{"success":false"""
+    }
+
+    "handle malformed JSON" in {
+      val connection = MockConnection.server(
+        server.getServiceInitializer(null).onConnect.asInstanceOf[(ServerContext) => HttpService])
+
+      CallbackAwait.result(connection.typedHandler.handle(
+        HttpRequest.put("/dict").withBody(HttpBody("["))
+      ), 1.minute).body.bytes.utf8String must be startingWith
+        """{"success":false"""
     }
   }
 }

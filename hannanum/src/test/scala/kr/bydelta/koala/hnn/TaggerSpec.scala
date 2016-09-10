@@ -102,13 +102,17 @@ class TaggerSpec extends Specification {
 
       val prevEnd = Dictionary.userDic.search_end
 
-      Dictionary.addUserDictionary("아햏햏" -> POS.IC, "개벽이" -> POS.NNG)
+      Dictionary.addUserDictionary("아햏햏" -> POS.IC, "개벽이" -> POS.NNG, "Hwawei" -> POS.NNP)
 
       Dictionary.addUserDictionary("햏햏", POS.NNG)
 
       val dictApplied = new Tagger().tagSentence(sent).singleLineString
 
       Dictionary.userDic.search_end != prevEnd
+
+      Dictionary.items must containAllOf(Seq("아햏햏" -> POS.IC, "개벽이" -> POS.NNG, "햏자" -> POS.NNG))
+
+      Dictionary.contains("햏자") must beTrue
 
       noUserDict must_!= dictApplied
     }

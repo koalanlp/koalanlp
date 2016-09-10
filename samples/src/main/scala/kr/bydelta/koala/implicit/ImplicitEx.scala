@@ -1,4 +1,4 @@
-package kr.bydelta.koala.cross
+package kr.bydelta.koala.`implicit`
 
 import kr.bydelta.koala.eunjeon.Tagger
 import kr.bydelta.koala.kkma.Parser
@@ -7,13 +7,14 @@ import kr.bydelta.koala.twt.SentenceSplitter
 import scala.io.StdIn
 
 /**
-  * Created by bydelta on 16. 7. 24.
+  * Created by bydelta on 16. 9. 10.
   */
-object TwtEunjeonKKMA {
+object ImplicitEx {
   def main(args: Array[String]) {
-    val splitter = new SentenceSplitter
-    val tagger = new Tagger
-    val parser = new Parser
+    import kr.bydelta.koala.Implicit._
+    implicit val splitter = new SentenceSplitter
+    implicit val tagger = new Tagger
+    implicit val parser = new Parser
 
     var line = ""
     do {
@@ -21,13 +22,13 @@ object TwtEunjeonKKMA {
       line = StdIn.readLine()
       if (line.nonEmpty) {
         println("문장 분리...")
-        splitter.sentences(line).foreach {
+        line.sentences.foreach {
           sent =>
             println("품사 부착...")
-            val tagged = tagger.tagSentence(sent)
+            val tagged = sent.toTagged
             println(tagged.singleLineString)
             println("의존 구문 분석...")
-            println(parser.parse(tagged).treeString)
+            println(tagged.toParsed.treeString)
         }
       }
     } while (line.nonEmpty)

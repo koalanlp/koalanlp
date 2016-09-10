@@ -70,6 +70,10 @@ class TaggerSpec extends Specification {
 
       val dictApplied = new Tagger().tagSentence(sent).singleLineString
 
+      Dictionary.items must containAllOf(Seq("아햏햏" -> POS.NNP, "개벽이" -> POS.NNP, "햏자" -> POS.NNG))
+
+      Dictionary.contains("햏자") must beTrue
+
       noUserDict must_!= dictApplied
     }
   }

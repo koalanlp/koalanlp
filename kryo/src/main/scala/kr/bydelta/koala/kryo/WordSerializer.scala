@@ -2,8 +2,7 @@ package kr.bydelta.koala.kryo
 
 import com.esotericsoftware.kryo.io.{Input, Output}
 import com.esotericsoftware.kryo.{Kryo, Serializer}
-import kr.bydelta.koala.FunctionalTag
-import kr.bydelta.koala.data.{Morpheme, Word}
+import kr.bydelta.koala.data.{Morpheme, Relationship, Word}
 
 /**
   * KryoSerializer object for Word class
@@ -13,8 +12,6 @@ object WordSerializer extends Serializer[Word] {
     output.writeString(value.surface)
     output.writeInt(value.size)
     value.morphemes.foreach(kryo.writeObject(output, _))
-    output.writeString(value.rawDepTag)
-    output.writeInt(value.depTag.id)
     output.writeInt(value.dependents.size)
     value.dependents.foreach(kryo.writeObject(output, _))
   }
@@ -26,14 +23,11 @@ object WordSerializer extends Serializer[Word] {
       _ => kryo.readObject(input, classOf[Morpheme])
     }
 
-    val word = new Word(surface = surface, morphemes = morphs)
-    word.rawDepTag = input.readString
-    word.depTag = FunctionalTag(input.readInt)
+    val word = Word(surface, morphs)
     val szDeps = input.readInt
-    (0 until szDeps).foreach {
-      _ =>
-        word.dependents += kryo.readObject(input, `type`)
-    }
+    word.deps = (0 until szDeps).map {
+      _ => kryo.readObject(input, classOf[Relationship])
+    }.toSet
 
     word
   }

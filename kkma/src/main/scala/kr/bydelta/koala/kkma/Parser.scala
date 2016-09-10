@@ -23,7 +23,7 @@ class Parser extends CanDepParse {
         val tagged = tagger.convert(rawSentence)
         parseRaw(rawSentence, tagged)
       case _ =>
-        new KSent(Seq())
+        KSent(Seq())
     }
 
   override def parse(sentence: KSent): KSent = {
@@ -58,18 +58,12 @@ class Parser extends CanDepParse {
             case null => -1
             case x => morphIdxs.indexOf(x.getStartIndex)
           }
-        if (from != -1 && to != -1) {
-          val thisWord = tagged.get(to)
-          val headWord = tagged.get(from)
-          val rawTag = e.getRelation
-          val tag = KKMAdepTag(rawTag)
-          headWord.addDependant(thisWord, tag, rawTag)
-        } else if (to != -1) {
-          val thisWord = tagged.get(to)
-          tagged.topLevels += thisWord
-          thisWord.rawDepTag = e.getRelation
-          thisWord.depTag = KKMAdepTag(e.getRelation)
-        }
+
+        val thisWord = to
+        val headWord = tagged.applyOrElse(from, (_: Int) => tagged.root)
+        val rawTag = e.getRelation
+        val tag = KKMAdepTag(rawTag)
+        headWord.addDependant(thisWord, tag, rawTag)
     }
     tagged
   }

@@ -2,7 +2,7 @@ package kr.bydelta.koala.eunjeon
 
 import kr.bydelta.koala.data.{Sentence, Word}
 import kr.bydelta.koala.traits.CanTag
-import kr.bydelta.koala.{Processor, data}
+import kr.bydelta.koala.{data, fromEunjeonTag}
 import org.bitbucket.eunjeon.seunjeon._
 
 import scala.annotation.tailrec
@@ -32,31 +32,28 @@ class Tagger extends CanTag[Seq[Eojeol]] {
     Eojeoler.build(tokenizer.parseText(text, dePreAnalysis = true))
 
   override private[koala] def convert(seq: Seq[Eojeol]): Sentence =
-    new Sentence(
+    Sentence(
       seq.map {
         eojeol =>
-          new Word(
-            surface = eojeol.surface,
-            morphemes =
-              eojeol.nodes.flatMap { node =>
-                val array = node.morpheme.feature
-                val compoundTag = array.head
-                val tokenized = array.last
+          Word(
+            eojeol.surface,
+            eojeol.nodes.flatMap { node =>
+              val array = node.morpheme.feature
+              val compoundTag = array.head
+              val tokenized = array.last
 
-                if (tokenized == "*") {
-                  Seq(
-                    new data.Morpheme(surface = node.morpheme.surface,
-                      rawTag = compoundTag, processor = Processor.Eunjeon)
-                  )
-                } else {
-                  tokenized.split("\\+").map {
-                    tok =>
-                      val arr = tok.split("/")
-                      new data.Morpheme(surface = arr.head,
-                        rawTag = arr(1), processor = Processor.Eunjeon)
-                  }
+              if (tokenized == "*") {
+                Seq(
+                  data.Morpheme(node.morpheme.surface, compoundTag, fromEunjeonTag(compoundTag))
+                )
+              } else {
+                tokenized.split("\\+").map {
+                  tok =>
+                    val arr = tok.split("/")
+                    data.Morpheme(arr.head, arr(1), fromEunjeonTag(arr(1)))
                 }
               }
+            }
           )
       }
     )

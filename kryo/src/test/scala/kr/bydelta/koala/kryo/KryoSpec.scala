@@ -6,7 +6,6 @@ import com.twitter.chill.{Input, Output}
 import kr.bydelta.koala.POS
 import kr.bydelta.koala.data.Sentence
 import kr.bydelta.koala.kkma.{Dictionary, JavaDictionary, Parser}
-import org.specs2.execute.Result
 import org.specs2.mutable.Specification
 
 /**
@@ -35,21 +34,10 @@ object KryoSpec extends Specification {
       sent.singleLineString must_== sent2.singleLineString
       sent.treeString must_== sent2.treeString
 
-      sent.indexOf(sent.topLevels.head) must_== sent2.indexOf(sent2.topLevels.head)
-      Result.unit {
-        sent.topLevels.zip(sent2.topLevels).foreach {
-          case (left, right) =>
-            left must_== right
-            if (left.dependents.isEmpty)
-              right.dependents must beEmpty
-            else
-              left.dependents.zip(right.dependents).foreach {
-                case (l, r) =>
-                  l must_== r
-                  sent.indexOf(l) must_== sent2.indexOf(r)
-              }
-        }
-      }
+      val sorted1 = sent.root.dependents.toSeq
+      val sorted2 = sent2.root.dependents.toSeq
+      sent.indexOf(sorted1.map(_.toString).sorted.mkString("\n")) must_==
+        sent2.indexOf(sorted2.map(_.toString).sorted.mkString("\n"))
     }
   }
 

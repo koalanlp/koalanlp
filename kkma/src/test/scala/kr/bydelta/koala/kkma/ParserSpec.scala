@@ -1,7 +1,7 @@
 package kr.bydelta.koala.kkma
 
 import kr.bydelta.koala.POS
-import kr.bydelta.koala.data.Word
+import kr.bydelta.koala.data.{Relationship, Sentence}
 import org.snu.ids.ha.ma.MorphemeAnalyzer
 import org.snu.ids.ha.sp.{ParseTreeNode, Parser => KParser}
 import org.specs2.mutable._
@@ -15,13 +15,14 @@ import scala.collection.mutable.ArrayBuffer
 class ParserSpec extends Specification {
   sequential
 
-  final def iterateTree(word: Seq[Word], parent: String,
+  final def iterateTree(word: Set[Relationship], parent: String, sentence: Sentence,
                         buf: ArrayBuffer[String] = ArrayBuffer()): ArrayBuffer[String] = {
     word.foreach {
       w =>
-        val rawTag = w.rawDepTag
-        buf += (parent + "--" + rawTag + "-->" + w.surface)
-        iterateTree(w.dependents, w.surface, buf)
+        val rawTag = w.rawRel
+        val target = sentence(w.target)
+        buf += (parent + "--" + rawTag + "-->" + target.surface)
+        iterateTree(target.dependents, target.surface, sentence, buf)
     }
     buf
   }
@@ -52,7 +53,7 @@ class ParserSpec extends Specification {
         e => getEojeolText(oNodes.get(e.getFromId)) + "--" + e.getRelation + "-->" + getEojeolText(oNodes.get(e.getToId))
       }.sorted.mkString("\n")
 
-      iterateTree(tagged.topLevels, "ROOT").sorted.mkString("\n") must_== oEdges
+      iterateTree(tagged.root.dependents, "ROOT", tagged).sorted.mkString("\n") must_== oEdges
     }
 
     "be thread-safe" in {
@@ -78,7 +79,7 @@ class ParserSpec extends Specification {
       val multithreaded = sents.par.map {
         sent =>
           val parsed = new Parser().parse(sent)
-          iterateTree(parsed.topLevels, "ROOT").sorted.mkString("\n")
+          iterateTree(parsed.root.dependents, "ROOT", parsed).sorted.mkString("\n")
       }.seq.mkString("\n")
 
       val kkpa = new KParser

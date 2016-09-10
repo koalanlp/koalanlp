@@ -5,8 +5,8 @@ package kr.bydelta.koala.kkma
   */
 
 import kr.bydelta.koala
-import kr.bydelta.koala.Processor
 import kr.bydelta.koala.data.Word
+import kr.bydelta.koala.fromKKMATag
 import kr.bydelta.koala.traits.CanTag
 import org.snu.ids.ha.ma._
 
@@ -29,25 +29,26 @@ final class Tagger(logPath: String = "kkma.log") extends CanTag[Sentence] {
   override def tagSentence(text: String): koala.data.Sentence =
     tagParagraphRaw(text).headOption match {
       case Some(x) => convert(x)
-      case _ => new koala.data.Sentence(Seq())
+      case _ => koala.data.Sentence(Seq())
     }
 
+  override def tagParagraph(text: String): Seq[koala.data.Sentence] = tagParagraphRaw(text).map(convert)
+
   override private[koala] def convert(result: Sentence): koala.data.Sentence =
-    new koala.data.Sentence(
-      words =
-        result.map {
-          eojeol =>
-            new Word(
-              surface = eojeol.getExp,
-              morphemes = eojeol.map {
-                morph => new koala.data.Morpheme(
-                  surface = morph.getString,
-                  rawTag = morph.getTag,
-                  processor = Processor.KKMA
-                )
-              }
-            )
-        }
+    koala.data.Sentence(
+      result.map {
+        eojeol =>
+          Word(
+            eojeol.getExp,
+            eojeol.map {
+              morph => koala.data.Morpheme(
+                morph.getString,
+                morph.getTag,
+                fromKKMATag(morph.getTag)
+              )
+            }
+          )
+      }
     )
 
   /**
@@ -70,8 +71,6 @@ final class Tagger(logPath: String = "kkma.log") extends CanTag[Sentence] {
         )
         )
     ).toSeq
-
-  override def tagParagraph(text: String): Seq[koala.data.Sentence] = tagParagraphRaw(text).map(convert)
 
   /**
     * 꼬꼬마는 문장단위의 분석결과가 없습니다.

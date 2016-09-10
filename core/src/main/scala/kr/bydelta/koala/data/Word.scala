@@ -4,12 +4,12 @@ package kr.bydelta.koala.data
   * Created by bydelta on 16. 7. 20.
   */
 
-import kr.bydelta.koala.FunctionalTag
 import kr.bydelta.koala.FunctionalTag.FunctionalTag
-import kr.bydelta.koala.POS.POSTag
 
 import scala.collection.JavaConverters._
+import scala.collection.generic.CanBuildFrom
 import scala.collection.mutable.ArrayBuffer
+import scala.collection.{IndexedSeqLike, mutable}
 
 /**
   * 어절 Class
@@ -17,53 +17,44 @@ import scala.collection.mutable.ArrayBuffer
   * @param surface   어절의 표면형 String.
   * @param morphemes 어절에 포함된 형태소의 목록 Seq[Morpheme].
   */
-class Word(val surface: String, val morphemes: collection.Seq[Morpheme]) extends Iterable[Morpheme] {
+final class Word private(val surface: String, val morphemes: Vector[Morpheme])
+  extends IndexedSeq[Morpheme] with IndexedSeqLike[Morpheme, Word] {
+
+  /**
+    * Index of this word
+    */
+  private[koala] var index: Int = -1
   /**
     * 현재 어절에 의존하는 의존소의 목록. 즉, 현재 어절의 핵심 의미를 보조하거나, 보강하는 단어들.
     */
-  val dependents = ArrayBuffer[Word]()
-  /**
-    * 현재 어절에 포함된, 체언 또는 용언의 수
-    */
-  val numOfMeaningful: Int = morphemes.count {
-    m => m.isNoun || m.isVerb
+  private[koala] var deps = Set[Relationship]()
+
+  morphemes.zipWithIndex.par.foreach {
+    case (m, mid) => m.index = mid
   }
-  /**
-    * 의존관계 분석기가 생성한 원본 관계명칭.
-    */
-  var rawDepTag: String = _
-  /**
-    * 통합, 표준화된 관계명칭.
-    */
-  var depTag: FunctionalTag = FunctionalTag.Undefined
+
+  override def length: Int = morphemes.length
+
+  override def apply(idx: Int): Morpheme = morphemes(idx)
 
   /**
-    * 어절의 첫번째 형태소.
-    *
-    * @return 첫 형태소 Morpheme 객체
+    * 현재 어절에 의존하는 의존소의 목록. 즉, 현재 어절의 핵심 의미를 보조하거나, 보강하는 단어들.
     */
-  override final def head = morphemes.head
-
-  /**
-    * 어절의 마지막 형태소.
-    *
-    * @return 끝 형태소 Morpheme 객체
-    */
-  override final def last = morphemes.last
+  def dependents = deps
 
   /**
     * (Java) 현재 어절에 의존하는 의존소의 목록. 즉, 현재 어절의 핵심 의미를 보조하거나, 보강하는 단어들.
     *
     * @return 의존소 목록 `java.util.List<Word>`
     */
-  def jDependents = dependents.asJava
+  def jDependents = deps.asJava
 
   /**
     * (Java) 현재 어절에 포함된 형태소의 목록
     *
     * @return 형태소 목록 `java.util.List<Morpheme>`
     */
-  def jMorphemes = morphemes.asJava
+  def jMorphemes = this.asJava
 
   /**
     * 주어진 품사 표기의 Sequence를 포함하는지 확인.
@@ -77,10 +68,10 @@ class Word(val surface: String, val morphemes: collection.Seq[Morpheme]) extends
     * @param tag 확인할 통합 품사 표기의 Sequence. `Seq[POSTag]` 객체.
     * @return True: 존재하는 경우
     */
-  final def matches(tag: Seq[String]): Boolean =
+  def matches(tag: Seq[String]): Boolean =
   tag.foldLeft(true) {
     case (true, t) =>
-      morphemes.exists(_.hasTag(t))
+      this.exists(_.hasTag(t))
     case (false, _) =>
       false
   }
@@ -97,100 +88,12 @@ class Word(val surface: String, val morphemes: collection.Seq[Morpheme]) extends
     * @param tag 확인할 통합 품사 표기의 Sequence. `POS$.Value[]` 객체.
     * @return True: 존재하는 경우
     */
-  final def matches(tag: Array[String]): Boolean =
+  def matches(tag: Array[String]): Boolean =
   tag.foldLeft(true) {
     case (true, t) =>
-      morphemes.exists(_.hasTag(t))
+      this.exists(_.hasTag(t))
     case (false, _) =>
       false
-  }
-
-  /**
-    * 주어진 품사를 갖는 형태소가 존재하는지 확인.
-    * <br/>
-    * 예를 들어, N은 체언인지 확인하고, NP는 대명사인지 확인.
-    * 품사 표기는 [[https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing 여기]]
-    * 에서 확인
-    *
-    * @param tag 확인할 통합 품사 표기
-    * @return True: 존재하는 경우.
-    */
-  final def existsMorpheme(tag: String) = morphemes.exists(_.hasTag(tag))
-
-  /**
-    * 주어진 품사를 갖는 형태소가 존재하는지 확인.
-    * <br/>
-    * 품사 표기는 [[https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing 여기]]
-    * 에서 확인
-    *
-    * @param tag 확인할 통합 품사 표기들
-    * @return True: 존재하는 경우.
-    */
-  final def existsMorpheme(tag: Seq[POSTag]) = morphemes.exists(_.hasTag(tag))
-
-  /**
-    * 주어진 위치의 형태소를 반환. Morpheme 객체.
-    *
-    * @param index 형태소의 위치.
-    * @return 형태소가 있다면, 형태소를, 없다면 Exception.
-    */
-  final def get(index: Int): Morpheme = morphemes(index)
-
-  /**
-    * 주어진 위치의 형태소를 반환. Option[Morpheme] 객체.
-    *
-    * @param index 형태소의 위치.
-    * @return 형태소가 있다면, Some(형태소)를, 없다면 None.
-    */
-  final def apply(index: Int): Option[Morpheme] =
-  if (index < 0 || index >= size) None
-  else Some(morphemes(index))
-
-  /**
-    * 어절에 포함된 형태소의 수.
-    *
-    * @return 형태소의 수.
-    */
-  override final def size: Int = morphemes.size
-
-  /**
-    * 주어진 품사의 형태소를 반환. Morpheme 객체.
-    *
-    * @param tag 형태소의 품사
-    * @return 형태소가 있다면, 형태소를, 없다면 Exception.
-    */
-  final def get(tag: String): Morpheme = apply(tag).get
-
-  /**
-    * 주어진 품사의 형태소를 반환. Option[Morpheme] 객체.
-    *
-    * @param tag 형태소의 품사.
-    * @return 형태소가 있다면, Some(형태소)를, 없다면 None.
-    */
-  final def apply(tag: String): Option[Morpheme] = morphemes.find(_.hasTag(tag))
-
-  /**
-    * 주어진 형태소의 다음 형태소를 반환.
-    *
-    * @param m 다음 형태소를 가져올 형태소 객체.
-    * @return 형태소가 있다면, Some(형태소)를, 없다면 None.
-    */
-  final def getNextOf(m: Morpheme): Option[Morpheme] = {
-    val index = morphemes.indexOf(m) + 1
-    if (index < morphemes.size) Some(morphemes(index))
-    else None
-  }
-
-  /**
-    * 주어진 형태소의 이전 형태소를 반환.
-    *
-    * @param m 이전 형태소를 가져올 형태소 객체.
-    * @return 형태소가 있다면, Some(형태소)를, 없다면 None.
-    */
-  final def getPrevOf(m: Morpheme): Option[Morpheme] = {
-    val index: Int = morphemes.indexOf(m) - 1
-    if (index > -1) Some(morphemes(index))
-    else None
   }
 
   /**
@@ -201,20 +104,27 @@ class Word(val surface: String, val morphemes: collection.Seq[Morpheme]) extends
     */
   def equalsWithoutTag(another: Word): Boolean = another.surface == this.surface
 
+  override def equals(that: Any): Boolean = that match {
+    case w: Word if w.id == this.id => super.equals(w)
+    case _ => false
+  }
+
+  override def canEqual(that: Any): Boolean = that.isInstanceOf[Word]
+
   /**
     * 구문분석과 품사분석의 결과를 String으로 변환.
     *
     * @return 본 객체의 정보를 담은 String.
     */
   override def toString: String = {
-    val prefix = s"$surface\t= " + morphemes.mkString("")
-    if (dependents.isEmpty) prefix
-    else {
-      prefix + "\n\t의존관계:" + dependents.map {
-        w =>
-          s"${w.surface}(${w.depTag}/${w.rawDepTag})"
-      }.mkString(" ")
-    }
+    s"$surface\t= " + morphemes.mkString("") +
+      (if (deps.isEmpty) ""
+      else {
+        "\n\t의존관계:" + deps.map {
+          case Relationship(_, tag, target) =>
+            s"--[$tag]--> $target"
+        }.mkString(" ")
+      })
   }
 
   /**
@@ -223,9 +133,9 @@ class Word(val surface: String, val morphemes: collection.Seq[Morpheme]) extends
     * @return 품사분석 결과를 담은 1행짜리 String.
     */
   def singleLineString: String =
-  morphemes.map {
-    morph =>
-      s"${morph.surface}/${morph.tag}"
+  this.map {
+    case Morpheme(surf, tag) =>
+      s"$surf/$tag"
   }.mkString("+")
 
   /**
@@ -235,12 +145,15 @@ class Word(val surface: String, val morphemes: collection.Seq[Morpheme]) extends
     */
   def jIterator = iterator.asJava
 
+  override protected[this] def newBuilder: mutable.Builder[Morpheme, Word] =
+    new ArrayBuffer[Morpheme] mapResult Word.applySeq(id, surface)
+
   /**
-    * 형태소를 문장의 순서대로 순회하는 iterator.
+    * Index of this word within the sentence.
     *
-    * @return 형태소 순회 Iterator.
+    * @return index
     */
-  def iterator: Iterator[Morpheme] = morphemes.iterator
+  def id = index
 
   /**
     * 어절에 의존하는 새로운 의존소 추가.
@@ -249,11 +162,127 @@ class Word(val surface: String, val morphemes: collection.Seq[Morpheme]) extends
     * @param tag    의존관계의 유형.
     * @param rawTag 의존관계의 원본 명칭.
     */
-  private[koala] final def addDependant(word: Word, tag: FunctionalTag, rawTag: String) {
-    if (!dependents.contains(word)) {
-      word.depTag = tag
-      word.rawDepTag = rawTag
-      dependents += word
-    }
+  private[koala] def addDependant(word: Int, tag: FunctionalTag, rawTag: String) {
+    deps += Relationship(id, tag, rawTag, word)
   }
+}
+
+/**
+  * Companion object for Word
+  */
+object Word{
+  /**
+    * Create new word from given information
+    *
+    * @param surface   Surface string
+    * @param morphemes Sequence of morphemes
+    * @return A new word
+    */
+  def apply(surface: String, morphemes: collection.Seq[Morpheme]) =
+  applySeq(-1, surface)(morphemes)
+
+  /**
+    * Extract surface form and morphemes for case-matching.
+    *
+    * @note "Extractor" is for pattern matching. That is, a word `w` can be matched as:
+    *       <pre>
+    *       w match { case Word(surface, morpheme1, morpheme2, _*) => ... }
+    *       </pre>
+    *       or can be matched as:
+    *       <pre>
+    *       w match { case Word(surface, morphemes @ _*) => ... }
+    *       </pre>
+    * @param arg A Word to be matched
+    * @return Some(Surface form, morpheme list)
+    */
+  def unapplySeq(arg: Word): Option[(String, Seq[Morpheme])] = Some(arg.surface, arg.morphemes)
+
+  /**
+    * Builder factory for any word
+    *
+    * @return Builder factory
+    */
+  implicit def canBuildFrom: CanBuildFrom[Word, Morpheme, Word] =
+  new CanBuildFrom[Word, Morpheme, Word] {
+    override def apply(from: Word): mutable.Builder[Morpheme, Word] =
+      new ArrayBuffer[Morpheme] mapResult applySeq(from.id, from.surface)
+
+    override def apply(): mutable.Builder[Morpheme, Word] =
+      throw new UnsupportedOperationException
+  }
+
+  /**
+    * Create empty word (for root)
+    *
+    * @return Empty word
+    */
+  private[koala] def apply() = applySeq(-1, "")(Seq.empty)
+
+  /**
+    * Generate word from given information
+    *
+    * @param id        Index within the sentence
+    * @param surface   Surface string
+    * @param morphemes Sequence of morphemes
+    * @return A new word
+    */
+  private def applySeq(id: Int, surface: String)(morphemes: collection.Seq[Morpheme]) = {
+    val w = new Word(surface, morphemes.toVector)
+    w.index = id
+    w
+  }
+}
+
+/**
+  * Dependency Relationship container class
+  *
+  * @param head     Index of head word (within Sentence)
+  * @param relation Relation name (Normalized)
+  * @param rawRel   Relation name (Not-normalized, original)
+  * @param target   Index of target word (within Sentence)
+  */
+final class Relationship private(val head: Int,
+                                 val relation: FunctionalTag, val rawRel: String,
+                                 val target: Int) {
+
+  override def equals(obj: scala.Any): Boolean =
+    obj match {
+      case Relationship(h, r, t) => this.head == h && this.relation == r && this.target == t
+      case _ => false
+    }
+
+  override def hashCode(): Int =
+    ((41 + head.hashCode()) * 41 + relation.hashCode()) * 41 + target.hashCode()
+
+  override def toString: String = s"Rel:$relation (ID:$head → ID:$target)"
+}
+
+/**
+  * Companion object for Relationship
+  */
+object Relationship {
+  /**
+    * Create new relationship
+    *
+    * @param head   Index of head word
+    * @param rel    Normalized relationship
+    * @param rawRel Raw name for the relationship
+    * @param target Index of target word
+    * @return A new relationship
+    */
+  def apply(head: Int, rel: FunctionalTag, rawRel: String, target: Int) =
+  new Relationship(head, rel, rawRel, target)
+
+  /**
+    * Extractor for relationship
+    *
+    * @note "Extractor" is for pattern matching. That is, a Relationship `r` can be matched as:
+    *       <pre>
+    *       r match { case Relationship(head, rel, target) => ... }
+    *       </pre>
+    * @param arg Target relation
+    * @return Some(head Index, relationship, target Index)
+    */
+  def unapply(arg: Relationship): Option[(Int, FunctionalTag, Int)] =
+  Some(arg.head, arg.relation, arg.target)
 }

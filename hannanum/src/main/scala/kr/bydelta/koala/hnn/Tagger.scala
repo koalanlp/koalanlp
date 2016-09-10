@@ -7,8 +7,8 @@ import kaist.cilab.jhannanum.common.workflow.Workflow
 import kaist.cilab.jhannanum.plugin.supplement.MorphemeProcessor.UnknownMorphProcessor.UnknownProcessor
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.InformalSentenceFilter.InformalSentenceFilter
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.SentenceSegmentor.SentenceSegmentor
-import kr.bydelta.koala.Processor
 import kr.bydelta.koala.data.{Morpheme, Word, Sentence => KSent}
+import kr.bydelta.koala.fromHNNTag
 import kr.bydelta.koala.helper.{SafeChartMorphAnalyzer, SafeHMMTagger}
 import kr.bydelta.koala.traits.CanTag
 
@@ -59,19 +59,17 @@ final class Tagger extends CanTag[Sentence] {
   }
 
   override private[koala] def convert(result: Sentence): KSent =
-    new KSent(
-      words =
-        result.getEojeols.zip(result.getPlainEojeols).map {
-          case (eojeol, plain) =>
-            new Word(
-              surface = plain,
-              morphemes =
-                eojeol.getMorphemes.zip(eojeol.getTags).map {
-                  case (morph, tag) =>
-                    new Morpheme(surface = morph, rawTag = tag, processor = Processor.Hannanum)
-                }
-            )
-        }
+    KSent(
+      result.getEojeols.view.zip(result.getPlainEojeols.view).map {
+        case (eojeol, plain) =>
+          Word(
+            plain,
+            eojeol.getMorphemes.view.zip(eojeol.getTags.view).map {
+              case (morph, tag) =>
+                Morpheme(morph, tag, fromHNNTag(tag))
+            }
+          )
+      }
     )
 
   def tagParagraph(text: String): Seq[KSent] =

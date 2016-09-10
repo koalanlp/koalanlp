@@ -1,7 +1,7 @@
 package kr.bydelta.koala.kryo
 
 import com.twitter.chill.ScalaKryoInstantiator
-import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
+import kr.bydelta.koala.data.{Morpheme, Relationship, Sentence, Word}
 
 /**
   * An Kryo Instantiator using ScalaKryoInstantiator.
@@ -19,6 +19,7 @@ object KryoWrap {
     k.addDefaultSerializer(classOf[Morpheme], MorphemeSerializer)
     k.addDefaultSerializer(classOf[Word], WordSerializer)
     k.addDefaultSerializer(classOf[Sentence], SentenceSerializer)
+    k.addDefaultSerializer(classOf[Relationship], RelationSerializer)
     k
   }
 }

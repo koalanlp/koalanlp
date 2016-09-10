@@ -13,7 +13,7 @@ import kaist.cilab.parser.berkeleyadaptation.{BerkeleyParserWrapper, Configurati
 import kaist.cilab.parser.corpusconverter.sejong2treebank.sejongtree.ParseTree
 import kaist.cilab.parser.psg2dg.Converter
 import kr.bydelta.koala.POS
-import kr.bydelta.koala.data.Word
+import kr.bydelta.koala.data.Relationship
 import org.specs2.mutable._
 
 import scala.collection.mutable.ArrayBuffer
@@ -47,13 +47,14 @@ class ParserSpec extends Specification {
     }
   }
 
-  final def iterateTree(word: Seq[Word], parent: String,
+  final def iterateTree(word: Set[Relationship], parent: String, sentence: kr.bydelta.koala.data.Sentence,
                         buf: ArrayBuffer[String] = ArrayBuffer()): ArrayBuffer[String] = {
     word.foreach {
       w =>
-        val rawTag = w.rawDepTag
-        buf += (parent + "--" + rawTag + "-->" + w.surface)
-        iterateTree(w.dependents, w.surface, buf)
+        val rawTag = w.rawRel
+        val target = sentence(w.target)
+        buf += (parent + "--" + rawTag + "-->" + target.surface)
+        iterateTree(target.dependents, target.surface, sentence, buf)
     }
     buf
   }
@@ -92,7 +93,7 @@ class ParserSpec extends Specification {
           }) + "--" + node.getdType() + "-->" + node.getCorrespondingPhrase.getStringContents
       }.sorted.mkString("\n")
 
-      iterateTree(tagged.topLevels, "ROOT").sorted.mkString("\n") must_== oNodes
+      iterateTree(tagged.root.dependents, "ROOT", tagged).sorted.mkString("\n") must_== oNodes
     }
 
     "be thread-safe" in {

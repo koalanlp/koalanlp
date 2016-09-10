@@ -46,50 +46,38 @@ class Parser extends CanDepParse {
     * @return 의존관계분석이 포함된 결과.
     */
   private def convert(hSent: HSent): Sentence =
-  if (hSent.getEojeols.isEmpty) new Sentence(Seq())
+  if (hSent.getEojeols.isEmpty) Sentence(Seq())
   else {
     val tree = parseTreeOf(hSent)
     val depTree: DTree = conv.convert(tree)
 
-    val sentence = new Sentence(
-      words =
-        depTree.getNodeList.map {
-          node =>
-            val phrase = node.getCorrespondingPhrase
+    val sentence = Sentence(
+      depTree.getNodeList.map {
+        node =>
+          val phrase = node.getCorrespondingPhrase
 
-            new Word(
-              surface = phrase.getStringContents,
-              morphemes =
-                phrase.getMyTerminals.map {
-                  term =>
-                    val word =
-                      if (term.getWord.matches("^.*\\-[LR]RB\\-.*$"))
-                        term.getWord.replaceAll("\\-LRB\\-", "(").replaceAll("\\-RRB\\-", ")")
-                      else
-                        term.getWord
-                    new Morpheme(surface = word, rawTag = term.getPOS, processor = Processor.Hannanum)
-                }
-            )
-        }
+          Word(
+            phrase.getStringContents,
+            phrase.getMyTerminals.map {
+              term =>
+                val word =
+                  if (term.getWord.matches("^.*\\-[LR]RB\\-.*$"))
+                    term.getWord.replaceAll("\\-LRB\\-", "(").replaceAll("\\-RRB\\-", ")")
+                  else
+                    term.getWord
+                Morpheme(word, term.getPOS, fromHNNTag(term.getPOS))
+            }
+          )
+      }
     )
 
     depTree.getNodeList.foreach {
       node =>
-        try {
-          val thisWord = sentence.get(node.getWordIdx)
-          val headWord = sentence.get(node.getHead.getWordIdx)
-          val rawTag = node.getdType
-          val tag = HNNdepTag(rawTag)
-          headWord.addDependant(thisWord, tag, rawTag)
-        } catch {
-          case e: Exception =>
-            if (node.getWordIdx != -1 && node.getWordIdx < sentence.size) {
-              val thisWord = sentence.get(node.getWordIdx)
-              sentence.topLevels += thisWord
-              thisWord.rawDepTag = node.getdType
-              thisWord.depTag = HNNdepTag(node.getdType)
-            }
-        }
+        val rawTag = node.getdType
+        val tag = HNNdepTag(rawTag)
+        val thisWord = node.getWordIdx
+        val headWord = sentence.applyOrElse(node.getHead.getWordIdx, (_: Int) => sentence.root)
+        headWord.addDependant(thisWord, tag, rawTag)
     }
 
     sentence

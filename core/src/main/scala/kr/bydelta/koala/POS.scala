@@ -155,5 +155,60 @@ object POS extends Enumeration {
   val SN = Value
 
 
+  /**
+    * 체언인지 확인한다
+    *
+    * @return 체언인 경우 True
+    */
+  def isNoun: POSTag => Boolean = Set(NNG, NNP, NNB, NNM, NR, NP)
+
+  /**
+    * 용언인지 확인한다
+    *
+    * @return 용언인 경우 True
+    */
+  def isPredicate: POSTag => Boolean = Set(VV, VA, VX, VCP, VCN)
+
+  /**
+    * 수식언인지 확인한다
+    *
+    * @return 수식언인 경우 True
+    */
+  def isModifier: POSTag => Boolean = Set(MM, MAG, MAJ)
+
+  /**
+    * 관계언(조사)인지 확인한다
+    *
+    * @return 관계언인 경우 True
+    */
+  def isPostposition: POSTag => Boolean = Set(JKS, JKC, JKG, JKO, JKB, JKV, JKQ, JC, JX)
+
+  /**
+    * 어미인지 확인한다
+    *
+    * @return 어미인 경우 True
+    */
+  def isEnding: POSTag => Boolean = Set(EP, EF, EC, ETN, ETM)
+
+  /**
+    * 접사인지 확인한다
+    *
+    * @return 접사인 경우 True
+    */
+  def isAffix: POSTag => Boolean = Set(XP, XSN, XSV, XSM, XSN, XSO, XR)
+
+  /**
+    * 기호인지 확인한다
+    *
+    * @return 기호인 경우 True
+    */
+  def isSymbol: POSTag => Boolean = Set(SF, SP, SS, SE, SY)
+
+  /**
+    * 미확인 단어인지 확인한다
+    *
+    * @return 미확인 단어인 경우 True
+    */
+  def isUnknown: POSTag => Boolean = Set(UN, UV, UE)
 }
 

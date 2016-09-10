@@ -2,8 +2,8 @@ package kr.bydelta.koala.twt
 
 import com.twitter.penguin.korean.TwitterKoreanProcessor
 import com.twitter.penguin.korean.tokenizer.KoreanTokenizer.KoreanToken
-import kr.bydelta.koala.Processor
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
+import kr.bydelta.koala.fromTwtTag
 import kr.bydelta.koala.traits.CanTag
 
 /**
@@ -26,7 +26,7 @@ class Tagger extends CanTag[Seq[KoreanToken]] {
     )
 
   override private[koala] def convert(result: Seq[KoreanToken]): Sentence = {
-    new Sentence(
+    Sentence(
       new Iterator[Seq[KoreanToken]]{
         val it = result.iterator
 
@@ -37,11 +37,10 @@ class Tagger extends CanTag[Seq[KoreanToken]] {
         }
       }.map {
         tokens =>
-          new Word(surface = tokens.map(_.text).mkString,
-            morphemes =
-              tokens.map{
-                tok => new Morpheme(surface = tok.text, rawTag = tok.pos.toString, processor = Processor.Twitter)
-              }
+          Word(tokens.map(_.text).mkString,
+            tokens.map {
+              tok => Morpheme(tok.text, tok.pos.toString, fromTwtTag(tok.pos.toString))
+            }
           )
       }.toSeq
     )

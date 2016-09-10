@@ -7,6 +7,7 @@ import colossus.protocols.http.{Http, HttpRequest, HttpResponse, HttpService}
 import colossus.service.Callback
 import colossus.service.Protocol.PartialHandler
 import kr.bydelta.koala.POS
+import kr.bydelta.koala.data.{Morpheme, Relationship}
 import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}
 import play.api.libs.json.{JsArray, JsObject, Json}
 
@@ -60,26 +61,39 @@ class Service(context: ServerContext,
               sentence =>
                 val newSent = parser.parse(sentence)
 
-                JsArray(
+                Json.obj(
+                  "root" -> newSent.root.dependents.map {
+                    case r@Relationship(_, fTag, target) =>
+                      Json.obj(
+                        "rel" -> fTag,
+                        "rawRel" -> r.rawRel,
+                        "childID" -> target
+                      )
+                  },
+                  "words" -> JsArray(
                   newSent.map {
                     word =>
                       Json.obj(
                         "word" -> word.surface,
-                        "depRel" -> word.depTag,
-                        "rawDep" -> word.rawDepTag,
                         "children" -> word.dependents.map {
-                          depW => newSent.indexOf(depW)
+                          case r@Relationship(_, fTag, target) =>
+                            Json.obj(
+                              "rel" -> fTag,
+                              "rawRel" -> r.rawRel,
+                              "childID" -> target
+                            )
                         },
                         "in" -> JsArray(
                           word.map {
-                            m => Json.obj(
-                              "morph" -> m.surface,
-                              "tag" -> m.tag.toString
+                            case Morpheme(surf, tag) => Json.obj(
+                              "morph" -> surf,
+                              "tag" -> tag
                             )
-                          }.toSeq
+                          }
                         )
                       )
-                  }.toSeq
+                  }
+                  )
                 )
             }
           )
@@ -110,21 +124,23 @@ class Service(context: ServerContext,
           JsArray(
             para.map {
               sentence =>
-                JsArray(
-                  sentence.map {
-                    word =>
-                      Json.obj(
-                        "word" -> word.surface,
-                        "in" -> JsArray(
-                          word.map {
-                            m => Json.obj(
-                              "morph" -> m.surface,
-                              "tag" -> m.tag.toString
-                            )
-                          }.toSeq
+                Json.obj(
+                  "words" -> JsArray(
+                    sentence.map {
+                      word =>
+                        Json.obj(
+                          "word" -> word.surface,
+                          "in" -> JsArray(
+                            word.map {
+                              case Morpheme(surf, tag) => Json.obj(
+                                "morph" -> surf,
+                                "tag" -> tag
+                              )
+                            }
+                          )
                         )
-                      )
-                  }.toSeq
+                    }
+                  )
                 )
             }
           )

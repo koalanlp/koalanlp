@@ -2,9 +2,9 @@ package kr.bydelta.koala.kmr
 
 import java.util
 
-import kr.bydelta.koala.Processor
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.traits.CanTag
+import kr.bydelta.koala.{POS, fromKomoranTag}
 import kr.co.shineware.nlp.komoran.core.analyzer.Komoran
 import kr.co.shineware.util.common.model.{Pair => KPair}
 
@@ -36,21 +36,20 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
     komoran.analyze(text)
 
   override private[koala] def convert(result: util.List[util.List[KPair[String, String]]]): Sentence =
-    new Sentence(
+    Sentence(
       result.map {
         word =>
           val originalWord = word.map(_.getFirst).mkString
-          new Word(
-            surface = originalWord,
-            morphemes =
-              word.map {
-                pair =>
-                  new Morpheme(
-                    surface = pair.getFirst,
-                    rawTag = pair.getSecond,
-                    processor = Processor.Komoran
-                  )
-              }
+          Word(
+            originalWord,
+            word.map {
+              pair =>
+                Morpheme(
+                  pair.getFirst,
+                  pair.getSecond,
+                  fromKomoranTag(pair.getSecond)
+                )
+            }
           )
       }
     )
@@ -74,10 +73,11 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
                              acc: ArrayBuffer[Sentence] = ArrayBuffer()): Seq[Sentence] =
     if (para.isEmpty) acc
     else {
-      val rawEndmark = para.indexWhere(_.existsMorpheme("SF"), pos)
+      import POS._
+      val rawEndmark = para.indexWhere(_.exists(SF), pos)
       val rawParen = para.indexWhere({
         e =>
-          e.existsMorpheme("SS") ||
+          e.exists(SS) ||
             Tagger.openParenRegex.findFirstMatchIn(e.surface).isDefined ||
             Tagger.closeParenRegex.findFirstMatchIn(e.surface).isDefined ||
             Tagger.quoteRegex.findFirstMatchIn(e.surface).isDefined
@@ -87,12 +87,12 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
       val paren = if (rawParen == -1) para.length else rawParen
 
       if (endmark == paren && paren == para.length) {
-        acc += new Sentence(para)
+        acc += Sentence(para)
         acc
       } else if (open.isEmpty) {
         if (endmark < paren) {
           val (sent, next) = para.splitAt(endmark + 1)
-          acc += new Sentence(sent)
+          acc += Sentence(sent)
           splitSentences(next, 0, open, acc)
         } else {
           val parenStr = para(paren)
@@ -104,7 +104,7 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
         }
       } else {
         if (paren == para.length) {
-          acc += new Sentence(para)
+          acc += Sentence(para)
           acc
         } else {
           val parenStr = para(paren)
