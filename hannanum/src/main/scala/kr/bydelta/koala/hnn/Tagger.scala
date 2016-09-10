@@ -41,11 +41,7 @@ final class Tagger extends CanTag[Sentence] {
     workflow
   }
   /** 한나눔 형태소분석기 (사용자사전 개량형) **/
-  private lazy val analyzer = {
-    val analyzer = new SafeChartMorphAnalyzer
-    analyzer.addMorphemes(Dictionary.userDict)
-    analyzer
-  }
+  private lazy val analyzer = new SafeChartMorphAnalyzer
 
   def tagSentence(text: String): KSent = {
     convert(tagSentenceRaw(text))

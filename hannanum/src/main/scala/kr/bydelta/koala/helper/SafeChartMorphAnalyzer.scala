@@ -3,9 +3,8 @@ package kr.bydelta.koala.helper
 import java.util
 import java.util.StringTokenizer
 
+import kaist.cilab.jhannanum.common.Eojeol
 import kaist.cilab.jhannanum.common.communication.{PlainSentence, SetOfSentences}
-import kaist.cilab.jhannanum.common.{Code, Eojeol}
-import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.datastructure.TagSet
 import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.{MorphemeChart, PostProcessor, Simti}
 import kaist.cilab.jhannanum.plugin.major.morphanalyzer.MorphAnalyzer
 import kaist.cilab.parser.berkeleyadaptation.Configuration
@@ -96,16 +95,5 @@ private[koala] class SafeChartMorphAnalyzer extends MorphAnalyzer {
     chart = new MorphemeChart(Dictionary.tagSet, Dictionary.connection,
       Dictionary.systemDic, Dictionary.userDic, Dictionary.numAutomata, simti, eojeolList)
     postProc = new PostProcessor
-  }
-
-  def addMorphemes(pairs: collection.Map[String, String]) {
-    pairs.foreach {
-      case (morph, tag) =>
-        val codes: Array[Char] = Code.toTripleArray(morph)
-        val info = new Dictionary.userDic.INFO
-        info.tag = Dictionary.tagSet.getTagID(tag)
-        info.phoneme = TagSet.PHONEME_TYPE_ALL
-        Dictionary.userDic.store(codes, info)
-    }
   }
 }

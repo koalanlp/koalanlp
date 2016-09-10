@@ -14,6 +14,15 @@ import scala.io.Source
   * 코모란 분석기 사용자사전
   */
 object Dictionary extends CanCompileDict with CanExtractResource {
+  /**
+    * 사용자사전을 저장할 파일의 위치.
+    */
+  lazy val userDict = {
+    val file = new File(getExtractedPath, "koala.dict")
+    file.createNewFile()
+    file.deleteOnExit()
+    file
+  }
   private lazy val dic = {
     val obs = new Observation
     obs.load(getExtractedPath + File.separator + "observation.model")
@@ -24,16 +33,6 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     tbl.load(getExtractedPath + File.separator + "pos.table")
     tbl
   }
-  /**
-    * 사용자사전을 저장할 파일의 위치.
-    */
-  val userDict = {
-    val file = new File(getExtractedPath, "koala.dict")
-    file.createNewFile()
-    file.deleteOnExit()
-    file
-  }
-
   private var userLastUpdated = 0l
 
   private var userBuffer = Set[(String, POSTag)]()

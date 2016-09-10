@@ -10,7 +10,7 @@ import scala.collection.JavaConversions;
 
 import java.io.*;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.Set;
 
 /**
  * class for dictionary I/O function.
@@ -49,7 +49,7 @@ public class DictionaryStream {
     public void saveTo(OutputStream stream) {
         Output output = new Output(stream);
 
-        List<Tuple2<String, POS$.Value>> list = JavaConversions.seqAsJavaList(dict.items());
+        Set<Tuple2<String, POS$.Value>> list = JavaConversions.setAsJavaSet(dict.items());
         output.writeInt(list.size());
 
         for (Tuple2<String, POS$.Value> item : list) {

@@ -61,7 +61,7 @@ class UnkLearnSpec extends Specification {
 
   "SimpleWordLearner" should {
     lazy val learner = {
-      Dictionary.rawDict.clear()
+      Dictionary.rawDict = Set()
       Dictionary.isDicChanged = true
       Dictionary.reloadDic()
       new SimpleWordLearner(Dictionary)
