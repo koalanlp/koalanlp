@@ -3,8 +3,6 @@ package kr.bydelta.koala.hnn
 import kr.bydelta.koala.util.{BasicWordLearner, SimpleWordLearner}
 import org.specs2.mutable.Specification
 
-import scala.collection.JavaConverters._
-
 /**
   * Created by bydelta on 16. 7. 30.
   */
@@ -69,12 +67,6 @@ class UnkLearnSpec extends Specification {
       level0 must not(containAnyOf(Seq("알려졌다", "협의하기")))
       level0 must containAllOf(Seq("새정치민주연합", "특검후보추천위"))
       level2 must contain("새정치민주연합")
-    }
-
-    "learn all nouns" in {
-      val prevEnd = Dictionary.items.size
-      learner.jLearn(text.toIterator.asJava, minOccurrence = 1, minVariations = 1)
-      Dictionary.items.size must be_>(prevEnd)
     }
   }
 }
