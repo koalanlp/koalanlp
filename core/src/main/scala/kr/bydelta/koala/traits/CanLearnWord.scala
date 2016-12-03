@@ -1,6 +1,6 @@
 package kr.bydelta.koala.traits
 
-import kr.bydelta.koala.POS
+import kr.bydelta.koala.{KoreanStringExtension, POS, Particle}
 
 /**
   * 품사분석기가 분석하지 못한 신조어, 전문용어 등을 확인하여 추가하는 작업을 할 수 있는 Trait.
@@ -11,21 +11,62 @@ import kr.bydelta.koala.POS
 trait CanLearnWord[S, J] {
   /** 인식되지 않은 단어의 품사 **/
   protected final val UNKNOWN_TAGS = Seq(POS.UE, POS.UN)
-  /** 조사 목록 (단음절, 앞단어 종성 종결) **/
-  protected final val JOSA_SINGLE_JONG = Seq('이', '을', '과', '은')
-  /** 조사 목록 (단음절, 앞단어 중성 종결) **/
-  protected final val JOSA_SINGLE_NONE = Seq('가', '를', '와', '는', '로')
-  /** 조사 목록 (단음절, 앞단어 종결 무관) **/
-  protected final val JOSA_SINGLE_ALL = Seq('의', '에', '도', '서')
-  /** 조사 목록 (다음절, 앞단어 종결 무관.) **/
-  protected final val JOSA_LONG_ALL = Seq("에게", "에서", "과의", "에의", "에도", "서도")
-  /** 조사 목록 (다음절, 앞단어 종성 종결) **/
-  protected final val JOSA_LONG_JONG = Seq("으로", "와의")
-  /** 조사 목록 (다음절, 앞단어 중성 종결) **/
-  protected final val JOSA_LONG_NONE = Seq("과의")
-  /** 호칭으로 붙는 의존 명사 및 명사형 전성어미 목록 (단음절) **/
-  protected final val DEPS_CALL = Seq('씨', '님', '임')
-  /** 호칭으로 붙는 의존 명사 및 명사형 전성어미 목록 (다음절) **/
+  /** 고려하는 조사 목록 (단음절, 앞단어 중성 종결) **/
+  protected final val JOSA_LIST = Seq(
+    Particle("께서", allowJungsung = true, allowJongsung = true, posType = POS.JKS),
+    Particle("에서", allowJungsung = true, allowJongsung = true, posType = POS.JKS),
+    Particle("에서", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
+    Particle("에게", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
+    Particle("로서", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
+    Particle("로써", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
+    Particle("으로", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
+    Particle("보다", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
+    Particle("라고", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
+    Particle("부터", allowJungsung = true, allowJongsung = true, posType = POS.JX),
+    Particle("이", allowJongsung = true, posType = POS.JKS),
+    Particle("가", allowJungsung = true, posType = POS.JKS),
+    Particle("의", allowJungsung = true, allowJongsung = true, posType = POS.JKG),
+    Particle("을", allowJongsung = true, posType = POS.JKO),
+    Particle("를", allowJungsung = true, posType = POS.JKO),
+    Particle("이", allowJongsung = true, posType = POS.JKC),
+    Particle("가", allowJungsung = true, posType = POS.JKC),
+    Particle("에", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
+    Particle("로", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
+    Particle("와", allowJungsung = true, posType = POS.JKB),
+    Particle("과", allowJongsung = true, posType = POS.JKB),
+    Particle("라", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
+    Particle("와", allowJungsung = true, posType = POS.JC),
+    Particle("과", allowJongsung = true, posType = POS.JC),
+    Particle("은", allowJungsung = true, posType = POS.JX),
+    Particle("는", allowJongsung = true, posType = POS.JX),
+    Particle("도", allowJungsung = true, allowJongsung = true, posType = POS.JX),
+    Particle("씨", allowJungsung = true, allowJongsung = true, posType = POS.NNB),
+    Particle("님", allowJungsung = true, allowJongsung = true, posType = POS.NNB),
+    Particle("임", allowJungsung = true, allowJongsung = true, posType = POS.ETN),
+    Particle("함", allowJungsung = true, allowJongsung = true, posType = POS.ETN),
+    Particle("됨", allowJungsung = true, allowJongsung = true, posType = POS.ETN),
+    Particle("하기", allowJungsung = true, allowJongsung = true, posType = POS.ETN),
+    Particle("되기", allowJungsung = true, allowJongsung = true, posType = POS.ETN)
+  )
+
+  /**
+    * 뒷 품사에 따라, 그 앞에 올 수 없는 품사들
+    */
+  protected final val JOSA_IMPOSSIBLE = Map(
+    POS.JC -> Set(POS.JX, POS.JKS, POS.JKO, POS.JKB, POS.JKC, POS.JKG),
+    POS.JX -> Set.empty[POS.POSTag],
+    POS.JKS -> Set(POS.JKO, POS.JKB, POS.JKC, POS.JKG),
+    POS.JKO -> Set(POS.JKS, POS.JKB, POS.JKC, POS.JKG),
+    POS.JKB -> Set(POS.JKO, POS.JKS, POS.JKC, POS.JKG),
+    POS.JKC -> Set(POS.JKO, POS.JKB, POS.JKS, POS.JKG),
+    POS.JKG -> Set(POS.JKO, POS.JKB, POS.JKS, POS.JKC),
+    POS.NNB -> Set(POS.ETN, POS.JC, POS.JX, POS.JKS, POS.JKO, POS.JKB, POS.JKC, POS.JKG),
+    POS.ETN -> Set(POS.NNB, POS.JC, POS.JX, POS.JKS, POS.JKO, POS.JKB, POS.JKC, POS.JKG)
+  )
+
+  /** 호칭에 붙는 의존 명사 및 명사형 전성어미 목록 (단음절) **/
+  protected final val DEPS_CALL = Seq('씨', '님', '임', '들')
+  /** 호칭에 붙는 의존 명사 및 명사형 전성어미 목록 (다음절) **/
   protected final val DEPS_CALL_LONG = Seq("하기", "되기")
   /** Type conversion from J to S **/
   protected val converter: J => S
@@ -75,52 +116,57 @@ trait CanLearnWord[S, J] {
     * @return (단어 원형, 조사)
     */
   protected def extractJosa(word: String): Option[(String, String)] =
+  getStructure(word) match {
+    case Some((w, Particle(josa, p, _, _))) if p != POS.ETN && p != POS.NNB => Some(w, josa)
+    case _ => None
+  }
+
+  /**
+    * 조사가 가장 길게 연결 될 수 있는 구조를 찾는다.
+    *
+    * @param word 구조를 찾을 단어.
+    * @param prev 이 단어에 붙었던 조사
+    * @return Option(단어, 조사)
+    */
+  private def getStructure(word: String, prev: Option[Particle] = None): Option[(String, Particle)] =
   if (word.isEmpty) None
   else {
-    val ch = word.last
-    val lastTwo = word.takeRight(2)
-    val isThirdJong = hasJongsung(word.applyOrElse(word.length - 3, (_: Int) => '가'))
-    if (isHangul(ch) && word.length > 1) {
-      if (JOSA_LONG_ALL contains lastTwo) Some(word.splitAt(word.length - 2))
-      else if (isThirdJong && JOSA_LONG_JONG.contains(lastTwo)) Some(word.splitAt(word.length - 2))
-      else if (!isThirdJong && JOSA_LONG_NONE.contains(lastTwo)) Some(word.splitAt(word.length - 2))
-      else if (JOSA_SINGLE_ALL contains ch)
-        Some(word.splitAt(word.length - 1))
-      else {
-        val secondLast = word(word.length - 2)
-        val isJong = hasJongsung(secondLast)
-        if (isJong && JOSA_SINGLE_JONG.contains(ch))
-          Some(word.splitAt(word.length - 1))
-        else if (!isJong && JOSA_SINGLE_NONE.contains(ch))
-          Some(word.splitAt(word.length - 1))
-        else
-          None
+    if (word.endsWithHangul) {
+      val candidates = JOSA_LIST.filter {
+        case Particle(m, j, _, _) if word.length > m.length && word.endsWith(m) =>
+          if (prev.isDefined && j != POS.JX && j != POS.JC && prev.get.posType != j) {
+            !JOSA_IMPOSSIBLE(prev.get.posType).contains(j)
+          } else if (prev.isEmpty)
+            true
+          else
+            false
+        case _ => false
+      }.map {
+        case j@Particle(m, _, _, _) =>
+          val subword = word.dropRight(m.length)
+          val endsWithJongsung = subword.endsWithJongsung
+
+          if ((endsWithJongsung && j.allowJongsung) || (!endsWithJongsung && j.allowJungsung)) {
+            getStructure(subword, Some(j))
+          } else None
+        case _ => None
+      }.filter(_.isDefined)
+
+      if (candidates.isEmpty) {
+        prev match {
+          case None => None
+          case Some(j@Particle(m, p, _, _)) => Some(word, j)
+        }
+      } else {
+        candidates.minBy(_.get._1.length)
       }
-    } else None
+    } else {
+      prev match {
+        case None => None
+        case Some(j@Particle(m, _, _, _)) => Some(word, j)
+      }
+    }
   }
-
-  /**
-    * (Code modified from Seunjeon package)
-    * 종성이 있는지 확인.
-    *
-    * @param ch 종성이 있는지 확인할 글자.
-    * @return 종성이 있다면, true
-    */
-  private def hasJongsung(ch: Char) = {
-    ((ch - 0xAC00) % 0x001C) != 0
-  }
-
-  /**
-    * (Code modified from Seunjeon package)
-    * 한글 문자인지 확인.
-    *
-    * @param ch 확인할 글자.
-    * @return True: 한글일 경우.
-    */
-  private def isHangul(ch: Char): Boolean = {
-    (0x0AC00 <= ch && ch <= 0xD7A3) || (0x1100 <= ch && ch <= 0x11FF) || (0x3130 <= ch && ch <= 0x318F)
-  }
-
 }
 
 

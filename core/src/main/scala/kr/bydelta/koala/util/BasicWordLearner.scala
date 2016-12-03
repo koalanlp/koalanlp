@@ -1,5 +1,6 @@
 package kr.bydelta.koala.util
 
+import kr.bydelta.koala.KoreanStringExtension
 import kr.bydelta.koala.traits.{CanCompileDict, CanLearnWord, CanTag}
 
 import scala.collection.JavaConverters._
@@ -25,7 +26,7 @@ class BasicWordLearner(protected val tagger: CanTag[_], override protected val t
           w.morphemes.forall(m => m.isNoun || m.isJosa)
         }.map(w => w.surface.replaceAll("[^가-힣]+", "") -> w.count(_.isNoun))
 
-        para.replaceAll("(?U)[^가-힣\\s]+", " ").split("(?U)\\s+").toSeq
+        para.splitNonHangul
           .filter(word => words.exists(w => word.endsWith(w._1) && (word.length > w._1.length || w._2 > 1)))
           .foreach { word =>
             extractJosa(word) match {

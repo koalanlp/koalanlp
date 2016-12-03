@@ -2,6 +2,7 @@ package kr.bydelta.koala.util
 
 import java.util
 
+import kr.bydelta.koala.KoreanStringExtension
 import kr.bydelta.koala.traits.{CanCompileDict, CanLearnWord}
 
 import scala.collection.JavaConverters._
@@ -19,7 +20,7 @@ class SimpleWordLearner(override val targets: CanCompileDict*)
                             minOccurrence: Int = 100, minVariations: Int = 3): Stream[String] = {
     corpora.toStream.foldLeft(mutable.HashMap[String, mutable.HashMap[String, Int]]()) {
       case (map, para) =>
-        para.replaceAll("(?U)[^가-힣\\s]+", " ").split("(?U)\\s+").toSeq
+        para.splitNonHangul
           .foreach { word =>
             extractJosa(word) match {
               case Some((root, josa)) if root.nonEmpty =>

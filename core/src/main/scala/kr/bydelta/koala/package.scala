@@ -317,4 +317,43 @@ package object koala {
       case x => POS withName x
     }
   }
+
+  /**
+    * 한국어를 구성하는 문자열의 연산.
+    *
+    * @param word 검사할 문자열.
+    */
+  implicit class KoreanStringExtension(word: String) {
+    /**
+      * (Code modified from Seunjeon package)
+      * 종성으로 끝나는지 확인.
+      *
+      * @return 종성으로 끝난다면, true를, 없다면 false를 반환.
+      */
+    def endsWithJongsung = {
+      ((word.last - 0xAC00) % 0x001C) != 0
+    }
+
+
+    /**
+      * (Code modified from Seunjeon package)
+      * 한글 문자로 끝나는 지 확인.
+      *
+      * @return True: 종료 문자가 한글일 경우.
+      */
+    def endsWithHangul = {
+      val ch = word.last
+      ((0x0AC00 <= ch && ch <= 0xD7A3)
+        || (0x1100 <= ch && ch <= 0x11FF)
+        || (0x3130 <= ch && ch <= 0x318F))
+    }
+
+    def splitNonHangul = {
+      word.replaceAll("(?U)([^가-힣\\s]+)", " $1").trim.split("(?U)\\s+").toSeq
+    }
+  }
+
+  case class Particle(morpheme: String, posType: POS.POSTag, allowJongsung: Boolean = false, allowJungsung: Boolean = false) {
+    def endsWithJongsung = morpheme.endsWithJongsung
+  }
 }

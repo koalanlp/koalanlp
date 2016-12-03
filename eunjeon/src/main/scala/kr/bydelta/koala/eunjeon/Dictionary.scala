@@ -54,47 +54,14 @@ object Dictionary extends CanCompileDict {
   override def addUserDictionary(dict: (String, POSTag)*): Unit = {
     rawDict ++= dict.map {
       case (word, tag) =>
-        val lastchar = word.last
         val oTag = tagToEunjeon(tag)
-        if (isHangul(lastchar)) {
-          val jong = hasJongsung(lastchar)
+        if (word.endsWithHangul) {
+          val jong = if (word.endsWithJongsung) "T" else "F"
           s"$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
         } else
           s"$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*"
     }
     isDicChanged = true
-  }
-
-  /**
-    * (Code modified from Seunjeon package)
-    * 종성이 있는지 확인.
-    *
-    * @param ch 종성이 있는지 확인할 글자.
-    * @return 종성이 있다면, "T"를, 없다면 "F"를 반환.
-    */
-  private def hasJongsung(ch: Char) = {
-    if (((ch - 0xAC00) % 0x001C) == 0) {
-      "F"
-    } else {
-      "T"
-    }
-  }
-
-  /**
-    * (Code modified from Seunjeon package)
-    * 한글 문자인지 확인.
-    *
-    * @param ch 확인할 글자.
-    * @return True: 한글일 경우.
-    */
-  private def isHangul(ch: Char): Boolean = {
-    if ((0x0AC00 <= ch && ch <= 0xD7A3)
-      || (0x1100 <= ch && ch <= 0x11FF)
-      || (0x3130 <= ch && ch <= 0x318F)) {
-      true
-    } else {
-      false
-    }
   }
 
   /**
