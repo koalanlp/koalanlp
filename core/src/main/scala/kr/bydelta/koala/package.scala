@@ -348,8 +348,8 @@ package object koala {
         || (0x3130 <= ch && ch <= 0x318F))
     }
 
-    def splitNonHangul = {
-      word.replaceAll("(?U)([^가-힣\\s]+)", " $1").trim.split("(?U)\\s+").toSeq
+    def filterNonHangul = {
+      word.replaceAll("(?U)[^가-힣\\s]+", " ").trim.split("(?U)\\s+").toSeq
     }
   }
 

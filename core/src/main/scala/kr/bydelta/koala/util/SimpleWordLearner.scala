@@ -20,7 +20,7 @@ class SimpleWordLearner(override val targets: CanCompileDict*)
                             minOccurrence: Int = 100, minVariations: Int = 3): Stream[String] = {
     corpora.toStream.foldLeft(mutable.HashMap[String, mutable.HashMap[String, Int]]()) {
       case (map, para) =>
-        para.splitNonHangul
+        para.filterNonHangul
           .foreach { word =>
             extractJosa(word) match {
               case Some((root, josa)) if root.nonEmpty =>

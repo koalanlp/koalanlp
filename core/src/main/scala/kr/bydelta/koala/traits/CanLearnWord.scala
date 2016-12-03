@@ -13,13 +13,15 @@ trait CanLearnWord[S, J] {
   protected final val UNKNOWN_TAGS = Seq(POS.UE, POS.UN)
   /** 고려하는 조사 목록 (단음절, 앞단어 중성 종결) **/
   protected final val JOSA_LIST = Seq(
+    Particle("으로서", allowJongsung = true, posType = POS.JKB),
+    Particle("으로써", allowJongsung = true, posType = POS.JKB),
     Particle("께서", allowJungsung = true, allowJongsung = true, posType = POS.JKS),
     Particle("에서", allowJungsung = true, allowJongsung = true, posType = POS.JKS),
     Particle("에서", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
     Particle("에게", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
-    Particle("로서", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
-    Particle("로써", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
-    Particle("으로", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
+    Particle("로서", allowJungsung = true, posType = POS.JKB),
+    Particle("로써", allowJungsung = true, posType = POS.JKB),
+    Particle("으로", allowJongsung = true, posType = POS.JKB),
     Particle("보다", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
     Particle("라고", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
     Particle("부터", allowJungsung = true, allowJongsung = true, posType = POS.JX),
@@ -31,14 +33,14 @@ trait CanLearnWord[S, J] {
     Particle("이", allowJongsung = true, posType = POS.JKC),
     Particle("가", allowJungsung = true, posType = POS.JKC),
     Particle("에", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
-    Particle("로", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
+    Particle("로", allowJungsung = true, posType = POS.JKB),
     Particle("와", allowJungsung = true, posType = POS.JKB),
     Particle("과", allowJongsung = true, posType = POS.JKB),
     Particle("라", allowJungsung = true, allowJongsung = true, posType = POS.JKB),
     Particle("와", allowJungsung = true, posType = POS.JC),
     Particle("과", allowJongsung = true, posType = POS.JC),
-    Particle("은", allowJungsung = true, posType = POS.JX),
-    Particle("는", allowJongsung = true, posType = POS.JX),
+    Particle("은", allowJongsung = true, posType = POS.JX),
+    Particle("는", allowJungsung = true, posType = POS.JX),
     Particle("도", allowJungsung = true, allowJongsung = true, posType = POS.JX),
     Particle("씨", allowJungsung = true, allowJongsung = true, posType = POS.NNB),
     Particle("님", allowJungsung = true, allowJongsung = true, posType = POS.NNB),
@@ -55,10 +57,10 @@ trait CanLearnWord[S, J] {
   protected final val JOSA_IMPOSSIBLE = Map(
     POS.JC -> Set(POS.JX, POS.JKS, POS.JKO, POS.JKB, POS.JKC, POS.JKG),
     POS.JX -> Set.empty[POS.POSTag],
-    POS.JKS -> Set(POS.JKO, POS.JKB, POS.JKC, POS.JKG),
-    POS.JKO -> Set(POS.JKS, POS.JKB, POS.JKC, POS.JKG),
-    POS.JKB -> Set(POS.JKO, POS.JKS, POS.JKC, POS.JKG),
-    POS.JKC -> Set(POS.JKO, POS.JKB, POS.JKS, POS.JKG),
+    POS.JKS -> Set(POS.JKO, POS.JKB, POS.JKC, POS.JKG, POS.JC),
+    POS.JKO -> Set(POS.JKS, POS.JKB, POS.JKC, POS.JKG, POS.JC),
+    POS.JKB -> Set(POS.JKO, POS.JKS, POS.JKC, POS.JKG, POS.JC),
+    POS.JKC -> Set(POS.JKO, POS.JKB, POS.JKS, POS.JKG, POS.JC),
     POS.JKG -> Set(POS.JKO, POS.JKB, POS.JKS, POS.JKC),
     POS.NNB -> Set(POS.ETN, POS.JC, POS.JX, POS.JKS, POS.JKO, POS.JKB, POS.JKC, POS.JKG),
     POS.ETN -> Set(POS.NNB, POS.JC, POS.JX, POS.JKS, POS.JKO, POS.JKB, POS.JKC, POS.JKG)
@@ -117,7 +119,7 @@ trait CanLearnWord[S, J] {
     */
   protected def extractJosa(word: String): Option[(String, String)] =
   getStructure(word) match {
-    case Some((w, Particle(josa, p, _, _))) if p != POS.ETN && p != POS.NNB => Some(w, josa)
+    case s@Some((w, Particle(josa, p, _, _))) if p != POS.ETN && p != POS.NNB => Some(w, josa)
     case _ => None
   }
 
@@ -134,7 +136,7 @@ trait CanLearnWord[S, J] {
     if (word.endsWithHangul) {
       val candidates = JOSA_LIST.filter {
         case Particle(m, j, _, _) if word.length > m.length && word.endsWith(m) =>
-          if (prev.isDefined && j != POS.JX && j != POS.JC && prev.get.posType != j) {
+          if (prev.isDefined && j != POS.JX && prev.get.posType != j) {
             !JOSA_IMPOSSIBLE(prev.get.posType).contains(j)
           } else if (prev.isEmpty)
             true
@@ -147,7 +149,10 @@ trait CanLearnWord[S, J] {
           val endsWithJongsung = subword.endsWithJongsung
 
           if ((endsWithJongsung && j.allowJongsung) || (!endsWithJongsung && j.allowJungsung)) {
-            getStructure(subword, Some(j))
+            getStructure(subword, Some(j)) match {
+              case None => Some(word, j)
+              case s@Some((_, _)) => s
+            }
           } else None
         case _ => None
       }.filter(_.isDefined)
