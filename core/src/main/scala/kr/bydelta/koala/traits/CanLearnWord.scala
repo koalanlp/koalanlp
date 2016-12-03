@@ -1,6 +1,17 @@
 package kr.bydelta.koala.traits
 
-import kr.bydelta.koala.{KoreanStringExtension, POS, Particle}
+import kr.bydelta.koala.{KoreanStringExtension, POS}
+
+/**
+  * Case Class of morpheme particle (For CanLearnWord)
+  *
+  * @param morpheme      Morpheme string
+  * @param posType       POS tag for this morpheme
+  * @param allowJongsung Does this allow jongsung on the last character of the word?
+  * @param allowJungsung Does this allow jungsung on the last character of the word?
+  */
+protected[koala] case class Particle(morpheme: String, posType: POS.POSTag,
+                                     allowJongsung: Boolean = false, allowJungsung: Boolean = false)
 
 /**
   * 품사분석기가 분석하지 못한 신조어, 전문용어 등을 확인하여 추가하는 작업을 할 수 있는 Trait.
@@ -119,7 +130,7 @@ trait CanLearnWord[S, J] {
     */
   protected def extractJosa(word: String): Option[(String, String)] =
   getStructure(word) match {
-    case s@Some((w, Particle(josa, p, _, _))) if p != POS.ETN && p != POS.NNB => Some(w, josa)
+    case Some((w, Particle(josa, p, _, _))) if p != POS.ETN && p != POS.NNB => Some(w -> josa)
     case _ => None
   }
 
@@ -150,7 +161,7 @@ trait CanLearnWord[S, J] {
 
           if ((endsWithJongsung && j.allowJongsung) || (!endsWithJongsung && j.allowJungsung)) {
             getStructure(subword, Some(j)) match {
-              case None => Some(word, j)
+              case None => Some(word -> j)
               case s@Some((_, _)) => s
             }
           } else None
@@ -160,7 +171,7 @@ trait CanLearnWord[S, J] {
       if (candidates.isEmpty) {
         prev match {
           case None => None
-          case Some(j@Particle(m, p, _, _)) => Some(word, j)
+          case Some(j) => Some(word -> j)
         }
       } else {
         candidates.minBy(_.get._1.length)
@@ -168,7 +179,7 @@ trait CanLearnWord[S, J] {
     } else {
       prev match {
         case None => None
-        case Some(j@Particle(m, _, _, _)) => Some(word, j)
+        case Some(j) => Some(word -> j)
       }
     }
   }

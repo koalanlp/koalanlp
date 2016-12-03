@@ -352,8 +352,4 @@ package object koala {
       word.replaceAll("(?U)[^가-힣\\s]+", " ").trim.split("(?U)\\s+").toSeq
     }
   }
-
-  case class Particle(morpheme: String, posType: POS.POSTag, allowJongsung: Boolean = false, allowJungsung: Boolean = false) {
-    def endsWithJongsung = morpheme.endsWithJongsung
-  }
 }
