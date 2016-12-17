@@ -37,7 +37,8 @@ class SimpleWordLearner(override val targets: CanCompileDict*)
           }
         map
     }.toStream.filter {
-      case (word, josaMap) if josaMap.size >= minVariations && josaMap.values.sum >= minOccurrence =>
+      case (word, josaMap) if josaMap.contains("") && josaMap.size >= minVariations &&
+        josaMap.values.sum >= minOccurrence =>
         !targets.head.contains(word)
       case _ => false
     }.map(_._1)

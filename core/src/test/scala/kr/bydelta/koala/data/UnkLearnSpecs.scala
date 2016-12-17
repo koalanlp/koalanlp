@@ -22,6 +22,7 @@ class UnkLearnSpecs extends Specification {
       learner.splitWord("새정치민주연합은") must be_==(Some("새정치민주연합" -> "은"))
       learner.splitWord("특검후보추천위는") must be_==(Some("특검후보추천위" -> "는"))
       learner.splitWord("최순실을") must be_==(Some("최순실" -> "을"))
+      learner.splitWord("최순실") must be_==(Some("최순실" -> ""))
       learner.splitWord("특검후보추천위를") must be_==(Some("특검후보추천위" -> "를"))
       learner.splitWord("새정치민주연합의") must be_==(Some("새정치민주연합" -> "의"))
       learner.splitWord("여야와") must be_==(Some("여야" -> "와"))
@@ -35,7 +36,7 @@ class UnkLearnSpecs extends Specification {
       learner.splitWord("시대와의") must be_==(Some("시대" -> "와"))
       learner.splitWord("시대에서는") must be_==(Some("시대" -> "에서"))
       learner.splitWord("대표님은") must be_==(None)
-      learner.splitWord("대표") must be_==(None)
+      learner.splitWord("대표") must be_==(Some("대표" -> ""))
     }
   }
 }

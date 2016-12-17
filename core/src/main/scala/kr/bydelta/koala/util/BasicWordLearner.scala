@@ -44,7 +44,8 @@ class BasicWordLearner(protected val tagger: CanTag[_], override protected val t
           }
         map
     }.toStream.collect {
-      case (word, josaMap) if josaMap.values.sum >= minOccurrence && josaMap.size >= minVariations =>
+      case (word, josaMap) if josaMap.contains("") && josaMap.values.sum >= minOccurrence &&
+        josaMap.size >= minVariations =>
         word
     }
   }
