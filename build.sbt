@@ -20,7 +20,7 @@ resolvers ++= Seq(
 
 sonatypeProfileName := "kr.bydelta"
 
-coverageExcludedPackages := "helper\\..*"
+coverageExcludedPackages := ".*\\.helper\\..*"
 
 lazy val core = (project in file("core"))
   .settings(projectWithConfig("core"): _*)

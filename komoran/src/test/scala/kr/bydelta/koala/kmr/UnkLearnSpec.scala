@@ -13,7 +13,7 @@ class UnkLearnSpec extends Specification {
 
   protected val text =
     """세월호 참사(4월 16일)가 발생한 지 167일 만인 30일 세월호 특별법이 극적으로 타결됐다.
-      |새누리당의 이완구, 새정치민주연합의 박영선 원내대표는 이날 국회 운영위원장실에서 5개항을 담은 합의문을 작성했다.
+      |새누리당 이완구, 새정치민주연합 박영선 원내대표는 이날 국회 운영위원장실에서 5개항을 담은 합의문을 작성했다.
       |최대 쟁점이었던 세월호 특별검사 추천권은 특검 후보군 4명을 여야 합의로 추천하되 유족이 추천 과정에 참여할지는 추후 논의하기로 했다.
       |'2차 합의안'을 기본틀로 해 일부 조항을 추가한 것이다.
       |2차 합의안에선 7명으로 구성된 특검후보추천위원 중 여당 쪽에서 2명을 추천하는 과정에서 유족의 사전 동의를 받도록 했다.
@@ -43,7 +43,7 @@ class UnkLearnSpec extends Specification {
 
       level0.size must be_>(level2.size)
       level0 must not(containAnyOf(Seq("알려졌다", "협의하기")))
-      level0 must containAllOf(Seq("원내대표", "특검후보추천위"))
+      level0 must containAllOf(Seq("박영선", "특검후보추천위원"))
     }
 
     "learn all nouns" in {
@@ -63,16 +63,6 @@ class UnkLearnSpec extends Specification {
     lazy val learner = {
       Dictionary.userDict.delete()
       new SimpleWordLearner(Dictionary)
-    }
-
-    "extract all nouns" in {
-      val level0 = learner.extractNouns(text.toIterator, minOccurrence = 1, minVariations = 1)
-      val level2 = learner.extractNouns(text.toIterator, minOccurrence = 2, minVariations = 2)
-
-      level0.size must be_>(level2.size)
-      level0 must not(containAnyOf(Seq("알려졌다", "협의하기")))
-      level0 must containAllOf(Seq("새정치민주연합", "특검후보추천위"))
-      level2 must contain("새정치민주연합")
     }
 
     "learn all nouns" in {

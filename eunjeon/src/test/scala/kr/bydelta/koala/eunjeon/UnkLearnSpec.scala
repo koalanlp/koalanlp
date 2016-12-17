@@ -41,8 +41,8 @@ class UnkLearnSpec extends Specification {
       val level2 = learner.extractNouns(text.toIterator, minOccurrence = 2, minVariations = 2)
 
       level0.size must be_>(level2.size)
-      level0 must not(containAnyOf(Seq("알려졌다", "협의하기")))
-      level0 must containAllOf(Seq("새정치민주연합", "새누리당", "특검후보추천위원"))
+      level0 must not(containAnyOf(Seq("협의하기")))
+      level0 must containAllOf(Seq("새정치민주연합", "특검후보추천위원"))
       level2 must contain("새정치민주연합")
     }
 
@@ -72,7 +72,7 @@ class UnkLearnSpec extends Specification {
       val level2 = learner.extractNouns(text.toIterator, minOccurrence = 2, minVariations = 2)
 
       level0.size must be_>(level2.size)
-      level0 must not(containAnyOf(Seq("알려졌다", "협의하기")))
+      level0 must not(containAnyOf(Seq("협의하기")))
       level0 must containAllOf(Seq("새정치민주연합", "새누리당", "특검후보추천위원"))
       level2 must contain("새정치민주연합")
     }

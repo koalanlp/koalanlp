@@ -26,7 +26,7 @@ trait CanLearnWord[S, J] {
   /**
     * 고려하는 조사 목록의 최대 수량. (minVariation의 최댓값)
     */
-  final val JOSA_COUNT_MAX = Math.max(
+  lazy final val JOSA_COUNT_MAX = Math.max(
     JOSA_LIST.filter(x => x.allowJungsung && !JOSA_FAKE.contains(x.posType)).map(_.morpheme).distinct.size,
     JOSA_LIST.filter(x => x.allowJongsung && !JOSA_FAKE.contains(x.posType)).map(_.morpheme).distinct.size
   )
@@ -35,7 +35,7 @@ trait CanLearnWord[S, J] {
     *
     * 이/가/께서/에서(주격), 의(관형격), 을/를(목적격), 이/가(보격), 와/과(접속격), 은/는/도(보조사)
     */
-  final val JOSA_COUNT_MAJOR = Math.min(
+  lazy final val JOSA_COUNT_MAJOR = Math.min(
     JOSA_LIST.filter(x => x.allowJungsung && JOSA_MAJOR.contains(x.posType)).map(_.morpheme).distinct.size,
     JOSA_LIST.filter(x => x.allowJongsung && JOSA_MAJOR.contains(x.posType)).map(_.morpheme).distinct.size
   )
@@ -91,14 +91,14 @@ trait CanLearnWord[S, J] {
     allow ++ call.flatMap {
       case t@Particle(x, _, _, _, _, _) =>
         val isEndJong = x.endsWithJongsung
-        allow.filter(_.allowCall).map {
+        allow.filter(_.allowCall).collect {
           case Particle(p, _, ajo, aju, _, _) if (ajo && isEndJong) || (aju && !isEndJong) =>
             t.copy(morpheme = x + p)
         }
     } ++ verbToNoun.flatMap {
       case t@Particle(x, _, _, _, _, _) =>
         val isEndJong = x.endsWithJongsung
-        allow.filter(_.allowETN).map {
+        allow.filter(_.allowETN).collect {
           case Particle(p, _, ajo, aju, _, _) if (ajo && isEndJong) || (aju && !isEndJong) =>
             t.copy(morpheme = x + p)
         }
