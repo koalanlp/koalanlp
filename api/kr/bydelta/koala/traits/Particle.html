@@ -35,12 +35,12 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">Particle</span><span class="params">(<span name="morpheme">morpheme: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="posType">posType: <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a></span>, <span name="allowJongsung">allowJongsung: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>, <span name="allowJungsung">allowJungsung: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">Particle</span><span class="params">(<span name="morpheme">morpheme: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="posType">posType: <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a></span>, <span name="allowJongsung">allowJongsung: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>, <span name="allowJungsung">allowJungsung: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>, <span name="allowCall">allowCall: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>, <span name="allowETN">allowETN: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Case Class of morpheme particle (For CanLearnWord)
-</p></div><dl class="paramcmts block"><dt class="param">morpheme</dt><dd class="cmt"><p>Morpheme string</p></dd><dt class="param">posType</dt><dd class="cmt"><p>POS tag for this morpheme</p></dd><dt class="param">allowJongsung</dt><dd class="cmt"><p>Does this allow jongsung on the last character of the word?</p></dd><dt class="param">allowJungsung</dt><dd class="cmt"><p>Does this allow jungsung on the last character of the word?
+</p></div><dl class="paramcmts block"><dt class="param">morpheme</dt><dd class="cmt"><p>Morpheme string</p></dd><dt class="param">posType</dt><dd class="cmt"><p>POS tag for this morpheme</p></dd><dt class="param">allowJongsung</dt><dd class="cmt"><p>Does this allow jongsung on the last character of the word?</p></dd><dt class="param">allowJungsung</dt><dd class="cmt"><p>Does this allow jungsung on the last character of the word?</p></dd><dt class="param">allowCall</dt><dd class="cmt"><p>Does this allow NNG word?</p></dd><dt class="param">allowETN</dt><dd class="cmt"><p>Does this allow ETN pos tag?
 </p></dd></dl><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../package.html" class="extype" name="kr.bydelta.koala">kr.bydelta.koala</a>] </dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
@@ -82,7 +82,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="kr.bydelta.koala.traits.Particle#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(morpheme:String,posType:kr.bydelta.koala.POS.POSTag,allowJongsung:Boolean,allowJungsung:Boolean):kr.bydelta.koala.traits.Particle"></a>
+      <a id="&lt;init&gt;(morpheme:String,posType:kr.bydelta.koala.POS.POSTag,allowJongsung:Boolean,allowJungsung:Boolean,allowCall:Boolean,allowETN:Boolean):kr.bydelta.koala.traits.Particle"></a>
       <a id="&lt;init&gt;:Particle"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -90,10 +90,10 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">Particle</span><span class="params">(<span name="morpheme">morpheme: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="posType">posType: <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a></span>, <span name="allowJongsung">allowJongsung: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>, <span name="allowJungsung">allowJungsung: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span>
+        <span class="name">Particle</span><span class="params">(<span name="morpheme">morpheme: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="posType">posType: <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a></span>, <span name="allowJongsung">allowJongsung: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>, <span name="allowJungsung">allowJungsung: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>, <span name="allowCall">allowCall: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>, <span name="allowETN">allowETN: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span>
       </span>
       </h4>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">morpheme</dt><dd class="cmt"><p>Morpheme string</p></dd><dt class="param">posType</dt><dd class="cmt"><p>POS tag for this morpheme</p></dd><dt class="param">allowJongsung</dt><dd class="cmt"><p>Does this allow jongsung on the last character of the word?</p></dd><dt class="param">allowJungsung</dt><dd class="cmt"><p>Does this allow jungsung on the last character of the word?
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">morpheme</dt><dd class="cmt"><p>Morpheme string</p></dd><dt class="param">posType</dt><dd class="cmt"><p>POS tag for this morpheme</p></dd><dt class="param">allowJongsung</dt><dd class="cmt"><p>Does this allow jongsung on the last character of the word?</p></dd><dt class="param">allowJungsung</dt><dd class="cmt"><p>Does this allow jungsung on the last character of the word?</p></dd><dt class="param">allowCall</dt><dd class="cmt"><p>Does this allow NNG word?</p></dd><dt class="param">allowETN</dt><dd class="cmt"><p>Does this allow ETN pos tag?
 </p></dd></dl></div>
     </li></ol>
             </div>
@@ -169,6 +169,33 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="kr.bydelta.koala.traits.Particle#allowCall" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="allowCall:Boolean"></a>
+      <a id="allowCall:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">allowCall</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Does this allow NNG word?</p>
+    </li><li name="kr.bydelta.koala.traits.Particle#allowETN" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="allowETN:Boolean"></a>
+      <a id="allowETN:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">allowETN</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Does this allow ETN pos tag?
+</p>
     </li><li name="kr.bydelta.koala.traits.Particle#allowJongsung" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="allowJongsung:Boolean"></a>
       <a id="allowJongsung:Boolean"></a>
@@ -194,8 +221,7 @@
         <span class="name">allowJungsung</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Does this allow jungsung on the last character of the word?
-</p>
+      <p class="shortcomment cmt">Does this allow jungsung on the last character of the word?</p>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>

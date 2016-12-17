@@ -193,6 +193,34 @@
       </span>
       </h4>
       <p class="shortcomment cmt">호칭에 붙는 의존 명사 및 명사형 전성어미 목록 (다음절) *</p><div class="fullcomment"><div class="comment cmt"><p>호칭에 붙는 의존 명사 및 명사형 전성어미 목록 (다음절) *</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="../traits/CanLearnWord.html" class="extype" name="kr.bydelta.koala.traits.CanLearnWord">CanLearnWord</a></dd></dl></div>
+    </li><li name="kr.bydelta.koala.traits.CanLearnWord#JOSA_COUNT_MAJOR" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="JOSA_COUNT_MAJOR:Int"></a>
+      <a id="JOSA_COUNT_MAJOR:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">lazy val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">JOSA_COUNT_MAJOR</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">주요 조사의 최소숫자.</p><div class="fullcomment"><div class="comment cmt"><p>주요 조사의 최소숫자.</p><p>이/가/께서/에서(주격), 의(관형격), 을/를(목적격), 이/가(보격), 와/과(접속격), 은/는/도(보조사)
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../traits/CanLearnWord.html" class="extype" name="kr.bydelta.koala.traits.CanLearnWord">CanLearnWord</a></dd></dl></div>
+    </li><li name="kr.bydelta.koala.traits.CanLearnWord#JOSA_COUNT_MAX" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="JOSA_COUNT_MAX:Int"></a>
+      <a id="JOSA_COUNT_MAX:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">lazy val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">JOSA_COUNT_MAX</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">고려하는 조사 목록의 최대 수량.</p><div class="fullcomment"><div class="comment cmt"><p>고려하는 조사 목록의 최대 수량. (minVariation의 최댓값)
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../traits/CanLearnWord.html" class="extype" name="kr.bydelta.koala.traits.CanLearnWord">CanLearnWord</a></dd></dl></div>
     </li><li name="kr.bydelta.koala.traits.CanLearnWord#JOSA_IMPOSSIBLE" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="JOSA_IMPOSSIBLE:scala.collection.immutable.Map[kr.bydelta.koala.POS.Value,scala.collection.immutable.Set[kr.bydelta.koala.POS.POSTag]]"></a>
       <a id="JOSA_IMPOSSIBLE:Map[POS.Value,Set[POSTag]]"></a>
@@ -423,7 +451,7 @@
       </h4>
       <p class="shortcomment cmt">품사분석기가 분석하지 못한 신조어, 전문용어 등을 확인하여 추가
 </p><div class="fullcomment"><div class="comment cmt"><p>품사분석기가 분석하지 못한 신조어, 전문용어 등을 확인하여 추가
-</p></div><dl class="paramcmts block"><dt class="param">corpora</dt><dd class="cmt"><p>새로운 단어를 발굴할 말뭉치.</p></dd><dt class="param">minOccurrence</dt><dd class="cmt"><p>단어 등록을 위한, 최소 출현 횟수. (기본값 10회)</p></dd><dt class="param">minVariations</dt><dd class="cmt"><p>단어 등록을 위한, 최소 활용(변형) 횟수. (기본값 2회) 용언의 경우는 활용형의 변화를, 체언의 경우는 조사의 변화를 파악함.
+</p></div><dl class="paramcmts block"><dt class="param">corpora</dt><dd class="cmt"><p>새로운 단어를 발굴할 말뭉치.</p></dd><dt class="param">minOccurrence</dt><dd class="cmt"><p>단어 등록을 위한, 최소 출현 횟수. (기본값 10회, 반드시 <a href="#JOSA_COUNT_MAX:Int" class="extmbr" name="kr.bydelta.koala.util.SimpleWordLearner#JOSA_COUNT_MAX">JOSA_COUNT_MAX</a> 이하이어야 함.)</p></dd><dt class="param">minVariations</dt><dd class="cmt"><p>단어 등록을 위한, 최소 활용(변형) 횟수. (기본값 2회) 용언의 경우는 활용형의 변화를, 체언의 경우는 조사의 변화를 파악함.
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../traits/CanLearnWord.html" class="extype" name="kr.bydelta.koala.traits.CanLearnWord">CanLearnWord</a></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
