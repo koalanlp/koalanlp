@@ -1,5 +1,6 @@
 package kr.bydelta.koala.traits
 
+import kr.bydelta.koala.data.Morpheme
 import kr.bydelta.koala.{KoreanStringExtension, POS}
 
 /**
@@ -23,6 +24,113 @@ protected[koala] case class Particle(morpheme: String, posType: POS.POSTag,
   * @tparam J List Type for corpora in Java
   */
 trait CanLearnWord[S, J] {
+  /** Type conversion from J to S **/
+  protected val converter: J => S
+  /**
+    * 신조어 등을 등록할 사용자사전들.
+    */
+  protected val targets: Seq[CanCompileDict]
+
+  /**
+    * 품사분석기가 분석하지 못한 신조어, 전문용어 등을 파악.
+    *
+    * @param corpora       새로운 단어를 발굴할 말뭉치.
+    * @param minOccurrence 단어 등록을 위한, 최소 출현 횟수. (기본값 10회)
+    * @param minVariations 단어 등록을 위한, 최소 활용(변형) 횟수. (기본값 [[CanLearnWord.JOSA_COUNT_MAJOR]]회) 용언의 경우는 활용형의 변화를, 체언의 경우는 조사의 변화를 파악함.
+    * @return 새로운 단어와 그 품사의 Sequence.
+    */
+  def extractNouns(corpora: S, minOccurrence: Int = 10,
+                   minVariations: Int = CanLearnWord.JOSA_COUNT_MAJOR): Stream[String]
+
+  /**
+    * (Java) 품사분석기가 분석하지 못한 신조어, 전문용어 등을 확인하여 추가
+    *
+    * @param corpora       새로운 단어를 발굴할 말뭉치.
+    * @param minOccurrence 단어 등록을 위한, 최소 출현 횟수. (기본값 10회)
+    * @param minVariations 단어 등록을 위한, 최소 활용(변형) 횟수. (기본값 [[CanLearnWord.JOSA_COUNT_MAJOR]]회) 용언의 경우는 활용형의 변화를, 체언의 경우는 조사의 변화를 파악함.
+    */
+  def jLearn(corpora: J, minOccurrence: Int = 10,
+             minVariations: Int = CanLearnWord.JOSA_COUNT_MAJOR): Unit =
+  learn(converter(corpora), minOccurrence, minVariations)
+
+  /**
+    * 품사분석기가 분석하지 못한 신조어, 전문용어 등을 확인하여 추가
+    *
+    * @param corpora       새로운 단어를 발굴할 말뭉치.
+    * @param minOccurrence 단어 등록을 위한, 최소 출현 횟수. (기본값 10회)
+    * @param minVariations 단어 등록을 위한, 최소 활용(변형) 횟수. (기본값 [[CanLearnWord.JOSA_COUNT_MAJOR]]회, 반드시 [[CanLearnWord.JOSA_COUNT_MAX]] 이하이어야 함.) 용언의 경우는 활용형의 변화를, 체언의 경우는 조사의 변화를 파악함.
+    */
+  def learn(corpora: S, minOccurrence: Int = 10,
+            minVariations: Int = CanLearnWord.JOSA_COUNT_MAJOR): Unit = {
+    val minVar: Int =
+      if (minVariations > CanLearnWord.JOSA_COUNT_MAX) CanLearnWord.JOSA_COUNT_MAX
+      else minVariations
+
+    extractNouns(corpora, minOccurrence, minVar).map(_ -> POS.NNP).sliding(100, 100).foreach {
+      set =>
+        targets.par.foreach(_.addUserDictionary(set: _*))
+    }
+  }
+
+  /**
+    * 단어의 원형과 조사를 Heuristic으로 분리.
+    *
+    * @param word 분리할 어절.
+    * @return (단어 원형, 조사)
+    */
+  protected def extractJosa(word: String): Option[(String, String)] =
+  getStructure(word) match {
+    case (w, Some(Particle(josa, p, _, _, _, _))) if p != POS.ETN && p != POS.NNB => Some(w -> josa)
+    case (w, None) => Some(w -> "")
+    case _ => None
+  }
+
+  /**
+    * 조사가 가장 길게 연결 될 수 있는 구조를 찾는다.
+    *
+    * @param word 구조를 찾을 단어.
+    * @param prev 이 단어에 붙었던 조사
+    * @return Option(단어, 조사)
+    */
+  private def getStructure(word: String, prev: Option[Particle] = None): (String, Option[Particle]) =
+  if (word.isEmpty) (word, None)
+  else {
+    if (word.endsWithHangul) {
+      val candidates = CanLearnWord.JOSA_LIST.filter {
+        case Particle(m, j, _, _, _, _) if word.length > m.length && word.endsWith(m) =>
+          if (prev.isDefined && j != POS.JX && prev.get.posType != j) {
+            !CanLearnWord.JOSA_IMPOSSIBLE(prev.get.posType).contains(j)
+          } else if (prev.isEmpty)
+            true
+          else
+            false
+        case _ => false
+      }.map {
+        case j@Particle(m, _, _, _, _, _) =>
+          val subword = word.dropRight(m.length)
+          val endsWithJongsung = subword.endsWithJongsung
+
+          if ((endsWithJongsung && j.allowJongsung) || (!endsWithJongsung && j.allowJungsung)) {
+            getStructure(subword, Some(j)) match {
+              case (_, None) => word -> Some(j)
+              case s@(_, _) => s
+            }
+          } else (word, None)
+        case _ => (word, None)
+      }.filter(_._2.isDefined)
+
+      if (candidates.isEmpty) {
+        word -> prev
+      } else {
+        candidates.minBy(_._1.length)
+      }
+    } else {
+      word -> prev
+    }
+  }
+}
+
+object CanLearnWord {
   /**
     * 고려하는 조사 목록의 최대 수량. (minVariation의 최댓값)
     */
@@ -39,8 +147,6 @@ trait CanLearnWord[S, J] {
     JOSA_LIST.filter(x => x.allowJungsung && JOSA_MAJOR.contains(x.posType)).map(_.morpheme).distinct.size,
     JOSA_LIST.filter(x => x.allowJongsung && JOSA_MAJOR.contains(x.posType)).map(_.morpheme).distinct.size
   )
-  /** 인식되지 않은 단어의 품사 **/
-  protected final val UNKNOWN_TAGS = Seq(POS.UE, POS.UN)
   /** 고려하는 조사 목록 (단음절, 앞단어 중성 종결) **/
   protected final val JOSA_LIST = {
     val allow = Seq(
@@ -77,7 +183,8 @@ trait CanLearnWord[S, J] {
 
     val call = Seq(
       Particle("씨", allowJungsung = true, allowJongsung = true, posType = POS.NNB),
-      Particle("님", allowJungsung = true, allowJongsung = true, posType = POS.NNB)
+      Particle("님", allowJungsung = true, allowJongsung = true, posType = POS.NNB),
+      Particle("들", allowJungsung = true, allowJongsung = true, posType = POS.NNB)
     )
 
     val verbToNoun = Seq(
@@ -119,110 +226,15 @@ trait CanLearnWord[S, J] {
     POS.ETN -> Set(POS.NNB, POS.JC, POS.JX, POS.JKS, POS.JKO, POS.JKB, POS.JKC, POS.JKG)
   )
   /** 호칭에 붙는 의존 명사 및 명사형 전성어미 목록 (단음절) **/
-  protected final val DEPS_CALL = Seq('씨', '님', '임', '들')
+  protected[koala] final val DEPS_CALL = Seq('씨', '님', '임', '들')
   /** 호칭에 붙는 의존 명사 및 명사형 전성어미 목록 (다음절) **/
-  protected final val DEPS_CALL_LONG = Seq("하기", "되기")
+  protected[koala] final val DEPS_CALL_LONG = Seq("하기", "되기")
+  protected[koala] final val ALLOWED_ENDING = Set(
+    POS.NNG, POS.NNP, POS.UN, POS.UE, POS.UV, POS.NR, POS.SL, POS.SN
+  )
+  protected[koala] final val DENIED_MORPS = (m: Morpheme) => {
+    m.isJosa || POS.isEnding(m.tag) || POS.isAffix(m.tag)
+  }
   private final val JOSA_MAJOR = Set(POS.JKS, POS.JKG, POS.JKO, POS.JKC, POS.JC, POS.JX)
   private final val JOSA_FAKE = Set(POS.NNB, POS.ETN)
-  /** Type conversion from J to S **/
-  protected val converter: J => S
-  /**
-    * 신조어 등을 등록할 사용자사전들.
-    */
-  protected val targets: Seq[CanCompileDict]
-
-  /**
-    * 품사분석기가 분석하지 못한 신조어, 전문용어 등을 파악.
-    *
-    * @param corpora       새로운 단어를 발굴할 말뭉치.
-    * @param minOccurrence 단어 등록을 위한, 최소 출현 횟수. (기본값 10회)
-    * @param minVariations 단어 등록을 위한, 최소 활용(변형) 횟수. (기본값 2회) 용언의 경우는 활용형의 변화를, 체언의 경우는 조사의 변화를 파악함.
-    * @return 새로운 단어와 그 품사의 Sequence.
-    */
-  def extractNouns(corpora: S, minOccurrence: Int = 10, minVariations: Int = 2): Stream[String]
-
-  /**
-    * (Java) 품사분석기가 분석하지 못한 신조어, 전문용어 등을 확인하여 추가
-    *
-    * @param corpora       새로운 단어를 발굴할 말뭉치.
-    * @param minOccurrence 단어 등록을 위한, 최소 출현 횟수. (기본값 10회)
-    * @param minVariations 단어 등록을 위한, 최소 활용(변형) 횟수. (기본값 2회) 용언의 경우는 활용형의 변화를, 체언의 경우는 조사의 변화를 파악함.
-    */
-  def jLearn(corpora: J, minOccurrence: Int = 10, minVariations: Int = 2): Unit =
-  learn(converter(corpora), minOccurrence, minVariations)
-
-  /**
-    * 품사분석기가 분석하지 못한 신조어, 전문용어 등을 확인하여 추가
-    *
-    * @param corpora       새로운 단어를 발굴할 말뭉치.
-    * @param minOccurrence 단어 등록을 위한, 최소 출현 횟수. (기본값 10회, 반드시 [[JOSA_COUNT_MAX]] 이하이어야 함.)
-    * @param minVariations 단어 등록을 위한, 최소 활용(변형) 횟수. (기본값 2회) 용언의 경우는 활용형의 변화를, 체언의 경우는 조사의 변화를 파악함.
-    */
-  def learn(corpora: S, minOccurrence: Int = 10, minVariations: Int = 2): Unit = {
-    val minVar: Int = if (minVariations > JOSA_COUNT_MAX) JOSA_COUNT_MAX else minVariations
-
-    extractNouns(corpora, minOccurrence, minVar).map(_ -> POS.NNP).sliding(100, 100).foreach {
-      set =>
-        targets.par.foreach(_.addUserDictionary(set: _*))
-    }
-  }
-
-  /**
-    * 단어의 원형과 조사를 Heuristic으로 분리.
-    *
-    * @param word 분리할 어절.
-    * @return (단어 원형, 조사)
-    */
-  protected def extractJosa(word: String): Option[(String, String)] =
-  getStructure(word) match {
-    case (w, Some(Particle(josa, p, _, _, _, _))) if p != POS.ETN && p != POS.NNB => Some(w -> josa)
-    case (w, None) => Some(w -> "")
-    case _ => None
-  }
-
-  /**
-    * 조사가 가장 길게 연결 될 수 있는 구조를 찾는다.
-    *
-    * @param word 구조를 찾을 단어.
-    * @param prev 이 단어에 붙었던 조사
-    * @return Option(단어, 조사)
-    */
-  private def getStructure(word: String, prev: Option[Particle] = None): (String, Option[Particle]) =
-  if (word.isEmpty) (word, None)
-  else {
-    if (word.endsWithHangul) {
-      val candidates = JOSA_LIST.filter {
-        case Particle(m, j, _, _, _, _) if word.length > m.length && word.endsWith(m) =>
-          if (prev.isDefined && j != POS.JX && prev.get.posType != j) {
-            !JOSA_IMPOSSIBLE(prev.get.posType).contains(j)
-          } else if (prev.isEmpty)
-            true
-          else
-            false
-        case _ => false
-      }.map {
-        case j@Particle(m, _, _, _, _, _) =>
-          val subword = word.dropRight(m.length)
-          val endsWithJongsung = subword.endsWithJongsung
-
-          if ((endsWithJongsung && j.allowJongsung) || (!endsWithJongsung && j.allowJungsung)) {
-            getStructure(subword, Some(j)) match {
-              case (_, None) => word -> Some(j)
-              case s@(_, _) => s
-            }
-          } else (word, None)
-        case _ => (word, None)
-      }.filter(_._2.isDefined)
-
-      if (candidates.isEmpty) {
-        word -> prev
-      } else {
-        candidates.minBy(_._1.length)
-      }
-    } else {
-      word -> prev
-    }
-  }
 }
-
-

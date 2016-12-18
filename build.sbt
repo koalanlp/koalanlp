@@ -20,8 +20,6 @@ resolvers ++= Seq(
 
 sonatypeProfileName := "kr.bydelta"
 
-coverageExcludedPackages := ".*\\.helper\\..*"
-
 lazy val core = (project in file("core"))
   .settings(projectWithConfig("core"): _*)
 lazy val kkma = (project in file("kkma"))
@@ -92,11 +90,12 @@ def projectWithConfig(module: String) =
   Seq(
     organization := "kr.bydelta",
     name := s"koalaNLP-$module",
-    version := "1.4.1",
+    version := "1.4.3",
     scalaVersion := "2.11.8",
     scalacOptions += "-target:jvm-1.7",
     scalacOptions in Test ++= Seq("-Yrangepos"),
     publishArtifact in Test := false,
+    coverageExcludedPackages := "kr\\.bydelta\\.koala\\..*\\.helper\\..*",
     test in assembly := {},
     libraryDependencies += "org.specs2" %% "specs2-core" % "3.8.+" % "test",
     dependencyOverrides ++= Set(

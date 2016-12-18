@@ -1,5 +1,7 @@
 package kr.bydelta.koala.eunjeon
 
+import java.rmi.UnexpectedException
+
 import kr.bydelta.koala.data.{Sentence, Word}
 import kr.bydelta.koala.traits.CanTag
 import kr.bydelta.koala.{data, fromEunjeonTag}
@@ -29,7 +31,9 @@ class Tagger extends CanTag[Seq[Eojeol]] {
     convert(tagSentenceRaw(text))
 
   override def tagSentenceRaw(text: String): Seq[Eojeol] =
-    Eojeoler.build(tokenizer.parseText(text, dePreAnalysis = true))
+    Eojeoler.build(tokenizer.parseText(
+      text.replace('/', '／').replace('+', '＋').replace('*', '＊'),
+      dePreAnalysis = true))
 
   override private[koala] def convert(seq: Seq[Eojeol]): Sentence =
     Sentence(
@@ -42,15 +46,26 @@ class Tagger extends CanTag[Seq[Eojeol]] {
               val compoundTag = array.head
               val tokenized = array.last
 
-              if (tokenized == "*") {
+              if (array.length == 1) {
+                Seq(
+                  data.Morpheme(node.morpheme.surface, compoundTag, fromEunjeonTag(compoundTag))
+                )
+              } else if (tokenized == "*") {
                 Seq(
                   data.Morpheme(node.morpheme.surface, compoundTag, fromEunjeonTag(compoundTag))
                 )
               } else {
                 tokenized.split("\\+").map {
                   tok =>
-                    val arr = tok.split("/")
-                    data.Morpheme(arr.head, arr(1), fromEunjeonTag(arr(1)))
+                    try {
+                      val arr = tok.split("/")
+                      data.Morpheme(arr.head, arr(1), fromEunjeonTag(arr(1)))
+                    } catch {
+                      case e: Throwable =>
+                        throw new UnexpectedException(s"[ERROR: ${e.getClass.getCanonicalName}] " +
+                          s"Current word : $tokenized in $array in ${node.morpheme.surface}" +
+                          s"\n ${e.getMessage}")
+                    }
                 }
               }
             }

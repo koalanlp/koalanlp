@@ -1,11 +1,24 @@
 package kr.bydelta
 
+import scala.annotation.tailrec
+
 /**
   * <h3>통합 Scala 한국어 분석기, Koala</h3>
   *
   * <p>각 Package의 Parser와 Tagger를 참조하세요.</p>
   */
 package object koala {
+
+  protected[koala] final val ALPHA_PRON = Seq(
+    "에이치", "더블유", "에이", "에프", "아이", "제이", "케이",
+    "에스", "브이", "엑스", "와이", "제트", "비", "씨", "디",
+    "이", "지", "엘", "엠", "엔", "오", "피", "큐", "알",
+    "티", "유"
+  )
+  protected[koala] final val ALPHA_PRON_ORDER = Seq(
+    'H', 'W', 'A', 'F', 'I', 'J', 'K', 'S', 'V', 'X', 'Y', 'Z',
+    'B', 'C', 'D', 'E', 'G', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'T', 'U'
+  )
 
   /**
     * 통합 의존구문분석표기로 변경.
@@ -317,6 +330,33 @@ package object koala {
       case x => POS withName x
     }
   }
+
+  @tailrec
+  final def pronounceAlphabet(x: String, acc: String = ""): String =
+    if (x.isEmpty) acc
+    else {
+      pronounceAlphabet(x.tail, acc + ALPHA_PRON(ALPHA_PRON_ORDER.indexOf(x.head)))
+    }
+
+  @tailrec
+  final def writeAlphabet(x: String, acc: String = ""): String =
+    if (x.isEmpty) acc
+    else {
+      ALPHA_PRON.indexWhere(x.startsWith) match {
+        case -1 => acc + x
+        case ind => writeAlphabet(x.substring(ALPHA_PRON(ind).length), acc + ALPHA_PRON_ORDER(ind))
+      }
+    }
+
+  @tailrec
+  final def isAlphabetPronounced(word: String): Boolean =
+    if (word.isEmpty) true
+    else {
+      ALPHA_PRON.find(word.startsWith) match {
+        case Some(p) => isAlphabetPronounced(word.substring(p.length))
+        case None => false
+      }
+    }
 
   /**
     * 한국어를 구성하는 문자열의 연산.
