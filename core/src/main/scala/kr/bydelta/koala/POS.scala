@@ -198,6 +198,13 @@ object POS extends Enumeration {
   def isAffix: POSTag => Boolean = Set(XP, XSN, XSV, XSM, XSN, XSO, XR)
 
   /**
+    * 접미사인지 확인한다
+    *
+    * @return 접사인 경우 True
+    */
+  def isSuffix: POSTag => Boolean = Set(XSN, XSV, XSM, XSN, XSO)
+
+  /**
     * 기호인지 확인한다
     *
     * @return 기호인 경우 True

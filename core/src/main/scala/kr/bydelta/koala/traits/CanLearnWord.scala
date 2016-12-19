@@ -233,7 +233,7 @@ object CanLearnWord {
     POS.NNG, POS.NNP, POS.UN, POS.UE, POS.UV, POS.NR, POS.SL, POS.SN
   )
   protected[koala] final val DENIED_MORPS = (m: Morpheme) => {
-    m.isJosa || POS.isEnding(m.tag) || POS.isAffix(m.tag)
+    m.isJosa || POS.isEnding(m.tag) || POS.isSuffix(m.tag) || m.tag == POS.XR
   }
   private final val JOSA_MAJOR = Set(POS.JKS, POS.JKG, POS.JKO, POS.JKC, POS.JC, POS.JX)
   private final val JOSA_FAKE = Set(POS.NNB, POS.ETN)

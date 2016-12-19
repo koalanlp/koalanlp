@@ -25,18 +25,18 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="core" exported="" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-matcher_2.11:3.8.6-20161209163125-607148b:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-core_2.11:3.8.6-20161209163125-607148b:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-common_2.11:3.8.6-20161209163125-607148b:jar" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="SBT: org.scoverage:scalac-scoverage-runtime_2.11:1.1.1:jar" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="SBT: org.scoverage:scalac-scoverage-plugin_2.11:1.1.1:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.5:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang:scala-reflect:2.11.8:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.8:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.twitter:twitter-text:1.11.1:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.twitter.penguin:korean-text:4.4.4:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scalaz:scalaz-core_2.11:7.2.7:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scalaz:scalaz-effect_2.11:7.2.7:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scalaz:scalaz-core_2.11:7.2.7:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.twitter.penguin:korean-text:4.4.4:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.twitter:twitter-text:1.11.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.8:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang:scala-reflect:2.11.8:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.5:jar" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="SBT: org.scoverage:scalac-scoverage-plugin_2.11:1.1.1:jar" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="SBT: org.scoverage:scalac-scoverage-runtime_2.11:1.1.1:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-common_2.11:3.8.6-20161209163125-607148b:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-core_2.11:3.8.6-20161209163125-607148b:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-matcher_2.11:3.8.6-20161209163125-607148b:jar" level="project" />
   </component>
 </module>
