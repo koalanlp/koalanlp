@@ -32,7 +32,7 @@ lazy val kkma = (project in file("kkma"))
       art.copy(`classifier` = Some("assembly"))
     },
     addArtifact(artifact in(Compile, assembly), assembly))
-  .dependsOn(core)
+  .dependsOn(core % "test->test;compile->compile")
 lazy val hannanum = (project in file("hannanum"))
   .settings(projectWithConfig("hannanum"): _*)
   .settings(
@@ -43,19 +43,19 @@ lazy val hannanum = (project in file("hannanum"))
       art.copy(`classifier` = Some("assembly"))
     },
     addArtifact(artifact in(Compile, assembly), assembly))
-  .dependsOn(core)
+  .dependsOn(core % "test->test;compile->compile")
 lazy val eunjeon = (project in file("eunjeon"))
   .settings(projectWithConfig("eunjeon"): _*)
   .settings(
     crossScalaVersions := Seq("2.11.8"),
     dependencyOverrides += "org.scala-lang" % "scala-reflect" % "2.11.8",
     libraryDependencies += "org.bitbucket.eunjeon" %% "seunjeon" % "1.1.+"
-  ).dependsOn(core)
+  ).dependsOn(core % "test->test;compile->compile")
 lazy val twitter = (project in file("twitter"))
   .settings(projectWithConfig("twitter"): _*)
   .settings(
     libraryDependencies += "com.twitter.penguin" % "korean-text" % "4.+"
-  ).dependsOn(core)
+  ).dependsOn(core % "test->test;compile->compile")
 lazy val komoran = (project in file("komoran"))
   .settings(projectWithConfig("komoran"): _*)
   .settings(
@@ -65,7 +65,8 @@ lazy val komoran = (project in file("komoran"))
       val art = (artifact in(Compile, assembly)).value
       art.copy(`classifier` = Some("assembly"))
     },
-    addArtifact(artifact in(Compile, assembly), assembly)).dependsOn(core)
+    addArtifact(artifact in(Compile, assembly), assembly))
+  .dependsOn(core % "test->test;compile->compile")
 lazy val samples = (project in file("samples"))
   .settings(projectWithConfig("samples"): _*)
   .dependsOn(eunjeon, twitter, komoran, kkma, hannanum, server)
