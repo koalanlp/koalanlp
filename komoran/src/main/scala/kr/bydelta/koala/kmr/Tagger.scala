@@ -28,12 +28,12 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
     komoran
   }
 
-  override def tagSentence(text: String): Sentence = {
-    convert(tagSentenceRaw(text))
-  }
-
   override def tagSentenceRaw(text: String): util.List[util.List[KPair[String, String]]] =
     komoran.analyze(text)
+
+  override def tagParagraph(text: String): Seq[Sentence] = {
+    splitSentences(convert(tagSentenceRaw(text)).words)
+  }
 
   override private[koala] def convert(result: util.List[util.List[KPair[String, String]]]): Sentence =
     Sentence(
@@ -53,10 +53,6 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
           )
       }
     )
-
-  override def tagParagraph(text: String): Seq[Sentence] = {
-    splitSentences(convert(tagSentenceRaw(text)).words)
-  }
 
   /**
     * 분석결과를 토대로 문장을 분리함.

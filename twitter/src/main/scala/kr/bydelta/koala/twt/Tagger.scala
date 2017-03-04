@@ -1,7 +1,5 @@
 package kr.bydelta.koala.twt
 
-import com.twitter.penguin.korean.TwitterKoreanProcessor
-import com.twitter.penguin.korean.tokenizer.KoreanTokenizer.KoreanToken
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.fromTwtTag
 import kr.bydelta.koala.traits.CanTag
@@ -11,18 +9,15 @@ import kr.bydelta.koala.traits.CanTag
   */
 class Tagger extends CanTag[Seq[KoreanToken]] {
   override def tagParagraph(text: String): Seq[Sentence] = {
-    TwitterKoreanProcessor.splitSentences(text).map {
+    OpenKoreanTextProcessor.splitSentences(text).map {
       sent =>
         tagSentence(sent.text)
     }
   }
 
-  override def tagSentence(text: String): Sentence =
-    convert(tagSentenceRaw(text))
-
   override def tagSentenceRaw(text: String): Seq[KoreanToken] =
-    TwitterKoreanProcessor.tokenize(
-      TwitterKoreanProcessor.normalize(text)
+    OpenKoreanTextProcessor.tokenize(
+      OpenKoreanTextProcessor.normalize(text)
     )
 
   override private[koala] def convert(result: Seq[KoreanToken]): Sentence = {

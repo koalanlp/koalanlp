@@ -9,7 +9,9 @@ import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala._
 import kr.bydelta.koala.traits.{CanCompileDict, CanExtractResource}
 
+import scala.annotation.tailrec
 import scala.collection.JavaConversions._
+import scala.collection.mutable
 import scala.io.Source
 
 /**
@@ -107,6 +109,34 @@ object Dictionary extends CanCompileDict with CanExtractResource {
         userDic.read_dic(usrDicPath.getAbsolutePath, tagSet)
       }
     }
+
+  override def baseEntriesOf(f: (POSTag) => Boolean): Iterator[String] = {
+    val targetIDs = POS.values.filter(f).map(x => tagSet.getTagID(tagToHNN(x)))
+    type TNode = Trie#TNODE
+
+    @tailrec
+    def iterate(stack: mutable.Stack[(Array[Char], TNode)],
+                acc: Seq[String] = Seq.empty): Seq[String] =
+      if (stack.isEmpty) acc
+      else {
+        val (prefix, top) = stack.pop()
+        val word = if (top.key != null) prefix :+ top.key else prefix
+        val value = top.info_list
+
+        val newSeq = if (value != null && value.exists(x => targetIDs.contains(x.tag))) {
+          Code.toString(word) +: acc
+        } else acc
+
+        if (top.child_size > 0) {
+          val children = top.child_idx until (top.child_idx + top.child_size)
+          stack.pushAll(children.map(id => word -> systemDic.get_node(id)))
+        }
+
+        iterate(stack, newSeq)
+      }
+
+    iterate(mutable.Stack(Array.empty[Char] -> systemDic.node_head)).toIterator
+  }
 
   override protected def modelName: String = "hannanum"
 }

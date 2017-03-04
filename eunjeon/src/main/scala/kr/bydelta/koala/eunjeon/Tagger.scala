@@ -1,10 +1,7 @@
 package kr.bydelta.koala.eunjeon
 
-import java.rmi.UnexpectedException
-
 import kr.bydelta.koala.data.{Sentence, Word}
 import kr.bydelta.koala.traits.CanTag
-import kr.bydelta.koala.{data, fromEunjeonTag}
 import org.bitbucket.eunjeon.seunjeon._
 
 import scala.annotation.tailrec
@@ -27,13 +24,15 @@ class Tagger extends CanTag[Seq[Eojeol]] {
     tok
   }
 
-  override def tagSentence(text: String): Sentence =
-    convert(tagSentenceRaw(text))
-
   override def tagSentenceRaw(text: String): Seq[Eojeol] =
     Eojeoler.build(tokenizer.parseText(
       text.replace('/', '／').replace('+', '＋').replace('*', '＊'),
       dePreAnalysis = true))
+
+  override def tagParagraph(text: String): Seq[Sentence] = {
+    val parsed = Eojeoler.build(tokenizer.parseText(text, dePreAnalysis = false))
+    splitSentences(parsed).map(convert)
+  }
 
   override private[koala] def convert(seq: Seq[Eojeol]): Sentence =
     Sentence(
@@ -41,43 +40,10 @@ class Tagger extends CanTag[Seq[Eojeol]] {
         eojeol =>
           Word(
             eojeol.surface,
-            eojeol.nodes.flatMap { node =>
-              val array = node.morpheme.feature
-              val compoundTag = array.head
-              val tokenized = array.last
-
-              if (array.length == 1) {
-                Seq(
-                  data.Morpheme(node.morpheme.surface, compoundTag, fromEunjeonTag(compoundTag))
-                )
-              } else if (tokenized == "*") {
-                Seq(
-                  data.Morpheme(node.morpheme.surface, compoundTag, fromEunjeonTag(compoundTag))
-                )
-              } else {
-                tokenized.split("\\+").map {
-                  tok =>
-                    try {
-                      val arr = tok.split("/")
-                      data.Morpheme(arr.head, arr(1), fromEunjeonTag(arr(1)))
-                    } catch {
-                      case e: Throwable =>
-                        throw new UnexpectedException(s"[ERROR: ${e.getClass.getCanonicalName}] " +
-                          s"Current word : $tokenized in $array in ${node.morpheme.surface}" +
-                          s"\n ${e.getMessage}")
-                    }
-                }
-              }
-            }
+            eojeol.nodes.flatMap(node => Dictionary.convertMorpheme(node.morpheme))
           )
       }
     )
-
-
-  override def tagParagraph(text: String): Seq[Sentence] = {
-    val parsed = Eojeoler.build(tokenizer.parseText(text, dePreAnalysis = false))
-    splitSentences(parsed).map(convert)
-  }
 
   /**
     * 분석결과를 토대로 문장을 분리함.

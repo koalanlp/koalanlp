@@ -41,6 +41,14 @@ trait CanCompileDict {
   def items: Set[(String, POSTag)]
 
   /**
+    * 원본 사전에 등재된 항목 중에서, 지정된 형태소의 항목만을 가져옵니다. (복합 품사 결합 형태는 제외)
+    *
+    * @param filter 가져올 품사인지 판단하는 함수.
+    * @return 형태소의 Iterator.
+    */
+  def baseEntriesOf(filter: POSTag => Boolean): Iterator[String]
+
+  /**
     * 사전에 등재되어 있는지 확인합니다.
     *
     * @param word   확인할 형태소

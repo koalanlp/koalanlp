@@ -15,9 +15,10 @@ import scala.collection.JavaConverters._
 object Dictionary extends CanCompileDict {
   /** 원본사전의 어휘목록 **/
   private lazy val systemDic = Dict.getInstance.getAsList.asScala.flatMap {
-    _.map(m => m.getTag -> m.getExp)
+    _.map(m => m.getTag -> m.getExp) // (품사, 표현식)으로 변환.
   }.groupBy(_._1).mapValues {
-    _.map(_._2).toSet
+    // 품사로 묶음.
+    _.map(_._2).toSet // 각 묶음단위로 표현식 집합 구성.
   }
   /** 사용자사전 Reader **/
   val userdic = new UserDicReader
@@ -48,6 +49,10 @@ object Dictionary extends CanCompileDict {
     val dictLines = oTag.map(word + "/" + _)
     systemDic.filterKeys(oTag.contains).exists(_._2.contains(word)) ||
       userdic.morphemes.exists(x => dictLines.contains(x))
+  }
+
+  override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[String] = {
+    systemDic.filterKeys(tag => tag != null && filter(fromKKMATag(tag))).iterator.flatMap(_._2)
   }
 
   /**

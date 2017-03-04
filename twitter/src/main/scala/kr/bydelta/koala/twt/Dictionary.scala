@@ -1,9 +1,8 @@
 package kr.bydelta.koala.twt
 
-import com.twitter.penguin.korean.util.{KoreanDictionaryProvider, KoreanPos}
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.traits.CanCompileDict
-import kr.bydelta.koala.{POS, tagToTwt}
+import kr.bydelta.koala.{POS, fromTwtTag, tagToTwt}
 
 /**
   * 트위터 분석기 사용자사전
@@ -52,5 +51,14 @@ object Dictionary extends CanCompileDict {
   override def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean = {
     val oTag = posTag.map(x => KoreanPos.withName(tagToTwt(x)))
     KoreanDictionaryProvider.koreanDictionary.filterKeys(x => oTag.contains(x)).exists(_._2.contains(word))
+  }
+
+  override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[String] = {
+    KoreanDictionaryProvider.koreanDictionary.filterKeys(x => filter(fromTwtTag(x.toString)))
+      .iterator.flatMap(_._2.iterator().asScala.map {
+      case x: String => x
+      case x: Array[Char] => new String(x)
+      case x => x.toString
+    })
   }
 }

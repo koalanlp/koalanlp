@@ -20,6 +20,8 @@
             <option value="$PROJECT_DIR$/komoran/project" />
             <option value="$PROJECT_DIR$/kryo" />
             <option value="$PROJECT_DIR$/kryo/project" />
+            <option value="$PROJECT_DIR$/model" />
+            <option value="$PROJECT_DIR$/model/project" />
             <option value="$PROJECT_DIR$/project" />
             <option value="$PROJECT_DIR$/samples" />
             <option value="$PROJECT_DIR$/samples/project" />
@@ -29,7 +31,7 @@
             <option value="$PROJECT_DIR$/twitter/project" />
           </set>
         </option>
-        <option name="sbtVersion" value="0.13.8" />
+        <option name="sbtVersion" value="0.13.13" />
         <option name="useAutoImport" value="true" />
         <option name="useOurOwnAutoImport" value="true" />
       </SbtProjectSettings>

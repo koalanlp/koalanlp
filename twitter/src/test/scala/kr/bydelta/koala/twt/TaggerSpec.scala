@@ -1,6 +1,5 @@
 package kr.bydelta.koala.twt
 
-import com.twitter.penguin.korean.TwitterKoreanProcessor
 import kr.bydelta.koala.POS
 import org.specs2.mutable._
 
@@ -19,7 +18,7 @@ class TaggerSpec extends Specification {
     "tag a sentence" in {
       val sent = "포털의 '속초' 연관 검색어로 '포켓몬 고'가 올랐고, 속초시청이 관광객의 편의를 위해 예전에 만들었던 무료 와이파이존 지도는 순식간에 인기 게시물이 됐다."
       val tagged = new Tagger().tagSentence(sent)
-      val original = TwitterKoreanProcessor.tokenize(TwitterKoreanProcessor.normalize(sent))
+      val original = OpenKoreanTextProcessor.tokenize(OpenKoreanTextProcessor.normalize(sent))
 
       tagged.map(_.map(_.surface).mkString("+")).mkString(" ") must_==
         original.map(_.text).mkString(" ").replaceAll("[ ]{2,}","##").replaceAll(" ", "+").replaceAll("##", " ")
@@ -53,7 +52,7 @@ class TaggerSpec extends Specification {
 
       val singlethreaded = sents.map {
         sent =>
-          TwitterKoreanProcessor.tokenize(TwitterKoreanProcessor.normalize(sent))
+          OpenKoreanTextProcessor.tokenize(OpenKoreanTextProcessor.normalize(sent))
             .map(_.text).mkString(" ").replaceAll("[ ]{2,}","##").replaceAll(" ", "+").replaceAll("##", " ")
       }.mkString("\n")
 

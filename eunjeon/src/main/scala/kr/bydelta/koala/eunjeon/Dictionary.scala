@@ -3,7 +3,7 @@ package kr.bydelta.koala.eunjeon
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala._
 import kr.bydelta.koala.traits.CanCompileDict
-import org.bitbucket.eunjeon.seunjeon.{ConnectionCostDict, DictBuilder, LexiconDict, NngUtil}
+import org.bitbucket.eunjeon.seunjeon._
 
 import scala.io.Source
 
@@ -120,6 +120,39 @@ object Dictionary extends CanCompileDict {
     if (isDicChanged) {
       userDict.loadFromIterator(rawDict.iterator)
       isDicChanged = false
+    }
+  }
+
+  override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[String] = {
+    lexiconDict.termDict.toIterator.flatMap(m => {
+      val converted = convertMorpheme(m)
+      if (converted.length == 1 && filter(converted.head.tag)) {
+        Some(converted.head.surface)
+      } else {
+        None
+      }
+    })
+  }
+
+  def convertMorpheme(m: Morpheme): Seq[data.Morpheme] = {
+    val array = m.feature
+    val compoundTag = array.head
+    val tokenized = array.last
+
+    if (array.length == 1) {
+      Seq(
+        data.Morpheme(m.surface, compoundTag, fromEunjeonTag(compoundTag))
+      )
+    } else if (tokenized == "*") {
+      Seq(
+        data.Morpheme(m.surface, compoundTag, fromEunjeonTag(compoundTag))
+      )
+    } else {
+      tokenized.split("\\+").map {
+        tok =>
+          val arr = tok.split("/")
+          data.Morpheme(arr.head, arr(1), fromEunjeonTag(arr(1)))
+      }
     }
   }
 }

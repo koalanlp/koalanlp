@@ -1,8 +1,9 @@
 package kr.bydelta.koala.eunjeon
 
-import kr.bydelta.koala.traits.CanCompileDict
-import kr.bydelta.koala.util.{BasicWordLearner, BasicWordLearnerSpecs, SimpleWordLearner}
+import kr.bydelta.koala.data.BasicWordLearnerSpecs
+import kr.bydelta.koala.util.SimpleWordLearner
 import org.bitbucket.eunjeon.seunjeon.Eojeol
+import org.specs2.execute.Result
 import org.specs2.mutable.Specification
 
 import scala.collection.JavaConverters._
@@ -22,10 +23,10 @@ class UnkLearnSpec extends Specification with BasicWordLearnerSpecs[scala.Seq[Eo
     }
 
     "extract all nouns" in {
-      val level0 = learner.extractNouns(text.toIterator, minOccurrence = 1, minVariations = 1)
-      val level2 = learner.extractNouns(text.toIterator, minOccurrence = 2, minVariations = 2)
+      val level0 = learner.extractNouns(text.toIterator, minOccurrence = 2, minVariations = 2)
+      val level2 = learner.extractNouns(text.toIterator, minOccurrence = 5, minVariations = 3)
 
-      level0.size must be_>(level2.size)
+      level0.size must be_>=(level2.size)
       level0 must not(containAnyOf(EXCLUDED_SET))
       level0 must containAllOf(INCLUDED_SET)
       level2 must containAllOf(INCLUDED_SET_2)
@@ -48,28 +49,35 @@ class UnkLearnSpec extends Specification with BasicWordLearnerSpecs[scala.Seq[Eo
   override def getDict = Dictionary
 
   "BasicWordLearner" should {
-    "extract all nouns" in {
-      val level0 = learner.extractNouns(text.toIterator, minOccurrence = 1, minVariations = 1)
-      val level2 = learner.extractNouns(text.toIterator, minOccurrence = 2, minVariations = 2)
+    var lv0Empty = false
 
-      level0.size must be_>(level2.size)
+    "extract all nouns" in {
+      val level0 = learner.extractNouns(text.toIterator, minOccurrence = 2, minVariations = 2)
+      val level2 = learner.extractNouns(text.toIterator, minOccurrence = 5, minVariations = 3)
+
+      lv0Empty = level0.isEmpty
+      level0.size must be_>=(level2.size)
       level0 must not(containAnyOf(EXCLUDED_SET))
       level0 must containAllOf(INC_1._1)
-      level0 must not(containAllOf(INC_1._2))
+      level0 must not(containAnyOf(INC_1._2))
       level2 must containAllOf(INC_2._1)
-      level2 must not(containAllOf(INC_2._2))
+      level2 must not(containAnyOf(INC_2._2))
     }
 
     "learn all nouns" in {
-      val tagger1 = getTagger
-      val beforeLearn = text.map(s => tagger1.tagSentence(s).singleLineString).mkString("\n")
+      Result.unit {
+        if (!lv0Empty) {
+          val tagger1 = getTagger
+          val beforeLearn = text.map(s => tagger1.tagSentence(s).singleLineString).mkString("\n")
 
-      learner.jLearn(text.toIterator.asJava, minOccurrence = 1, minVariations = 1)
+          learner.jLearn(text.toIterator.asJava, minOccurrence = 1, minVariations = 1)
 
-      val tagger2 = getTagger
-      val afterLearn = text.map(s => tagger2.tagSentence(s).singleLineString).mkString("\n")
+          val tagger2 = getTagger
+          val afterLearn = text.map(s => tagger2.tagSentence(s).singleLineString).mkString("\n")
 
-      beforeLearn must_!= afterLearn
+          beforeLearn must_!= afterLearn
+        }
+      }
     }
   }
 }

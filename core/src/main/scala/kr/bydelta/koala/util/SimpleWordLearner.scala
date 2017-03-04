@@ -18,9 +18,11 @@ class SimpleWordLearner(override protected val targets: CanCompileDict*)
   override def extractNouns(corpora: Iterator[String],
                             minOccurrence: Int = 100,
                             minVariations: Int = CanLearnWord.JOSA_COUNT_MAJOR): Stream[String] = {
+    val impossibleEndings = readImpossibleEnding()
+
     corpora.toStream.foldLeft(mutable.HashMap[String, mutable.HashMap[String, Int]]()) {
       case (map, para) =>
-        para.replaceAll("(?U)\\s+[^가-힣\\s]+\\s+", " ").replaceAll("(?U)\\p{Punct}+", " ").trim
+        para.replaceAll("(?U)\\s+[^가-힣\\s]+\\s+", " ").replaceAll("(?U)[\\p{Punct}<>\\[\\]\\(\\)]+", " ").trim
           .split("(?U)\\s+").toSeq
           .foreach { word =>
             extractJosa(word) match {
@@ -29,7 +31,7 @@ class SimpleWordLearner(override protected val targets: CanCompileDict*)
                   if (CanLearnWord.DEPS_CALL contains root.last) root.dropRight(1)
                   else if (CanLearnWord.DEPS_CALL_LONG contains root.takeRight(2)) root.dropRight(2)
                   else root
-                if (rootWord.length > 1) {
+                if (rootWord.length > 1 && !impossibleEndings.contains(rootWord.last)) {
                   val josamap = map.getOrElseUpdate(rootWord, mutable.HashMap())
                   josamap(josa) = josamap.getOrElse(josa, 0) + 1
                 }
@@ -38,8 +40,7 @@ class SimpleWordLearner(override protected val targets: CanCompileDict*)
           }
         map
     }.toStream.filter {
-      case (word, josaMap) if josaMap.contains("") && josaMap.size >= minVariations &&
-        josaMap.values.sum >= minOccurrence =>
+      case (word, josaMap) if josaMap.size >= minVariations && josaMap.values.sum >= minOccurrence =>
         !targets.head.contains(word)
       case _ => false
     }.map(_._1)

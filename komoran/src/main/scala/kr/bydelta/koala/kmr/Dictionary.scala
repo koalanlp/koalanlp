@@ -5,9 +5,13 @@ import java.io.{BufferedWriter, File, FileOutputStream, OutputStreamWriter}
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala._
 import kr.bydelta.koala.traits.{CanCompileDict, CanExtractResource}
+import kr.co.shineware.ds.trie.model.TrieNode
 import kr.co.shineware.nlp.komoran.modeler.model.{Observation, PosTable}
+import kr.co.shineware.util.common.model.{Pair => KPair}
 
+import scala.annotation.tailrec
 import scala.collection.JavaConversions._
+import scala.collection.mutable
 import scala.io.Source
 
 /**
@@ -23,12 +27,14 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     file.deleteOnExit()
     file
   }
-  private lazy val dic = {
+  //private lazy
+  val dic = {
     val obs = new Observation
     obs.load(getExtractedPath + File.separator + "observation.model")
     obs.getTrieDictionary
   }
-  private lazy val table = {
+  //private lazy
+  val table = {
     val tbl = new PosTable
     tbl.load(getExtractedPath + File.separator + "pos.table")
     tbl
@@ -78,6 +84,34 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     }
 
     userBuffer
+  }
+
+  override def baseEntriesOf(f: (POSTag) => Boolean): Iterator[String] = {
+    type TNode = TrieNode[java.util.List[KPair[Integer, java.lang.Double]]]
+    val targetIDs = POS.values.filter(f).map(p => table.getId(tagToKomoran(p)))
+
+    @tailrec
+    def iterate(stack: mutable.Stack[(String, TNode)],
+                acc: Seq[String] = Seq.empty): Seq[String] =
+      if (stack.isEmpty) acc
+      else {
+        val (prefix, top) = stack.pop()
+        val word = if (top.getKey == null) prefix else prefix + top.getKey.charValue()
+        val value = top.getValue
+
+        val newSeq = if (value != null && value.exists(x => targetIDs.contains(x.getFirst))) {
+          word +: acc
+        } else acc
+
+        val children = top.getChildren
+        if (children != null) {
+          stack.pushAll(children.map(word -> _))
+        }
+
+        iterate(stack, newSeq)
+      }
+
+    iterate(mutable.Stack("" -> dic.getRoot)).toIterator
   }
 
   override protected def modelName: String = "komoran"

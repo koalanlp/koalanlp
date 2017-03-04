@@ -43,15 +43,24 @@ final class Tagger extends CanTag[Sentence] {
   /** 한나눔 형태소분석기 (사용자사전 개량형) **/
   private lazy val analyzer = new SafeChartMorphAnalyzer
 
-  def tagSentence(text: String): KSent = {
-    convert(tagSentenceRaw(text))
-  }
-
   override def tagSentenceRaw(text: String): Sentence =
     if (text.trim.isEmpty) new Sentence(0, 0, true, Array(), Array())
     else {
     workflow.analyze(text)
     workflow.getResultOfSentence(new Sentence(0, 0, false))
+  }
+
+  def tagParagraph(text: String): Seq[KSent] =
+    if (text.trim.isEmpty) Seq()
+    else {
+      workflow.analyze(text)
+      retrieveSentences()
+    }
+
+  @throws[Throwable]
+  override protected def finalize() {
+    workflow.close()
+    super.finalize()
   }
 
   override private[koala] def convert(result: Sentence): KSent =
@@ -67,19 +76,6 @@ final class Tagger extends CanTag[Sentence] {
           )
       }
     )
-
-  def tagParagraph(text: String): Seq[KSent] =
-    if (text.trim.isEmpty) Seq()
-    else {
-    workflow.analyze(text)
-    retrieveSentences()
-  }
-
-  @throws[Throwable]
-  override protected def finalize() {
-    workflow.close()
-    super.finalize()
-  }
 
   /**
     * 문장결과를 읽어들임.

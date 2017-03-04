@@ -1,6 +1,5 @@
 package kr.bydelta.koala.twt
 
-import com.twitter.penguin.korean.TwitterKoreanProcessor
 import kr.bydelta.koala.traits.CanSplitSentence
 
 /**
@@ -8,7 +7,7 @@ import kr.bydelta.koala.traits.CanSplitSentence
   */
 class SentenceSplitter extends CanSplitSentence {
   override def sentences(text: String): Seq[String] =
-    TwitterKoreanProcessor.splitSentences(text).map(_.text)
+    OpenKoreanTextProcessor.splitSentences(text).map(_.text)
 }
 
 

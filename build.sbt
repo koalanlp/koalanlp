@@ -47,14 +47,14 @@ lazy val hannanum = (project in file("hannanum"))
 lazy val eunjeon = (project in file("eunjeon"))
   .settings(projectWithConfig("eunjeon"): _*)
   .settings(
-    crossScalaVersions := Seq("2.11.8"),
-    dependencyOverrides += "org.scala-lang" % "scala-reflect" % "2.11.8",
-    libraryDependencies += "org.bitbucket.eunjeon" %% "seunjeon" % "1.1.+"
+    libraryDependencies += "org.bitbucket.eunjeon" %% "seunjeon" % "[1.1.0,)"
   ).dependsOn(core % "test->test;compile->compile")
 lazy val twitter = (project in file("twitter"))
   .settings(projectWithConfig("twitter"): _*)
   .settings(
-    libraryDependencies += "com.twitter.penguin" % "korean-text" % "4.+"
+    libraryDependencies ++= Seq(
+      "org.openkoreantext" % "open-korean-text" % "latest.integration"
+    )
   ).dependsOn(core % "test->test;compile->compile")
 lazy val komoran = (project in file("komoran"))
   .settings(projectWithConfig("komoran"): _*)
@@ -74,18 +74,23 @@ lazy val server = (project in file("server"))
   .settings(projectWithConfig("server"): _*)
   .settings(
     libraryDependencies ++= Seq(
-      "com.tumblr" %% "colossus" % "0.8.+",
-      "com.tumblr" %% "colossus-testkit" % "0.8.+" % "test",
-      "com.typesafe.play" %% "play-json" % "2.5.+"
+      "com.tumblr" %% "colossus" % "latest.integration",
+      "com.tumblr" %% "colossus-testkit" % "latest.integration" % "test",
+      "com.typesafe.play" %% "play-json" % "latest.integration"
     )
   )
   .dependsOn(core, kkma % "test")
 lazy val kryo = (project in file("kryo"))
   .settings(projectWithConfig("kryo"))
   .settings(
-    libraryDependencies += "com.twitter" %% "chill" % "0.8.+"
+    libraryDependencies += "com.twitter" %% "chill" % "latest.integration"
   )
   .dependsOn(core, kkma % "test")
+lazy val model = (project in file("model"))
+  .settings(projectWithConfig("model"))
+  .settings(
+    libraryDependencies += "cc.factorie" %% "factorie" % "latest.integration"
+  ).dependsOn(core)
 
 def projectWithConfig(module: String) =
   Seq(
@@ -95,22 +100,23 @@ def projectWithConfig(module: String) =
     scalaVersion := "2.11.8",
     scalacOptions += "-target:jvm-1.7",
     scalacOptions in Test ++= Seq("-Yrangepos"),
+    crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.1"),
     publishArtifact in Test := false,
     coverageExcludedPackages := "kr\\.bydelta\\.koala\\..*\\.helper\\..*",
     test in assembly := {},
-    libraryDependencies += "org.specs2" %% "specs2-core" % "3.8.+" % "test",
+    libraryDependencies += "org.specs2" %% "specs2-core" % "latest.integration" % "test",
     dependencyOverrides ++= Set(
-      "org.scala-lang" % "scala-reflect" % "2.11.8"
+      "org.scala-lang.modules" %% "scala-xml" % "1.0.5"
     ),
     homepage := Some(url("http://nearbydelta.github.io/KoalaNLP")),
     parallelExecution in Test := false,
-    publishTo <<= version { v: String ⇒
+    publishTo := (version { v: String ⇒
       val nexus = "https://oss.sonatype.org/"
       if (v.trim.endsWith("SNAPSHOT"))
         Some("snapshots" at nexus + "content/repositories/snapshots")
       else
         Some("releases" at nexus + "service/local/staging/deploy/maven2")
-    },
+    }).value,
     licenses := Seq("GPL v3" -> url("https://opensource.org/licenses/GPL-3.0/")),
     publishMavenStyle := true,
     publishArtifact in Test := false,

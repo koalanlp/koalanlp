@@ -16,7 +16,7 @@ trait CanTag[S] {
     * @param text 품사분석을 시행할 문장 String
     * @return 품사분석 결과를 포함한 Sentence 객체
     */
-  def tagSentence(text: String): Sentence
+  def tagSentence(text: String): Sentence = convert(tagSentenceRaw(text))
 
   /**
     * 주어진 String 문단을 분석하여 품사를 부착함.

@@ -26,8 +26,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.10.4:jar" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="SBT: org.scoverage:scalac-scoverage-runtime_2.10:1.1.1:jar" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="SBT: org.scoverage:scalac-scoverage-plugin_2.10:1.1.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.10.6:jar" level="project" />
   </component>
 </module>

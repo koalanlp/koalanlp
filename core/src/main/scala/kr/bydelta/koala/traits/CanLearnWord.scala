@@ -32,6 +32,32 @@ trait CanLearnWord[S, J] {
   protected val targets: Seq[CanCompileDict]
 
   /**
+    * 불가능한 종결형태를 수집.
+    *
+    * @return 불가능한 종결형태의 집합.
+    */
+  def readImpossibleEnding(): Set[Char] = {
+    val impset = targets.head.baseEntriesOf(p => POS.isEnding(p) || POS.isModifier(p) || POS.isPredicate(p))
+      .filter(_.matches("[가-힣]$")).map(_.last)
+      .toStream.groupBy(x => x).mapValues(_.length)
+    val impsum = impset.values.sum.toDouble
+    val impall = impset.mapValues(_ / impsum)
+    val impKeys = impset.keySet
+
+    val nounset = targets.head.baseEntriesOf(POS.isNoun)
+      .filter(x => impKeys.contains(x.last)).map(_.last)
+      .toStream.groupBy(x => x).mapValues(_.length)
+    val nounsum = nounset.values.sum.toDouble
+    val nounall = nounset.mapValues(_ / nounsum)
+
+    val set = impall.collect {
+      case (ch, p) if p > nounall.getOrElse(ch, 0.0) => ch
+    }.toSet
+
+    set
+  }
+
+  /**
     * 품사분석기가 분석하지 못한 신조어, 전문용어 등을 파악.
     *
     * @param corpora       새로운 단어를 발굴할 말뭉치.
@@ -79,11 +105,13 @@ trait CanLearnWord[S, J] {
     * @return (단어 원형, 조사)
     */
   protected def extractJosa(word: String): Option[(String, String)] =
-  getStructure(word) match {
-    case (w, Some(Particle(josa, p, _, _, _, _))) if p != POS.ETN && p != POS.NNB => Some(w -> josa)
-    case (w, None) => Some(w -> "")
-    case _ => None
-  }
+  if (word.matches("^[0-9]+.*$")) None
+  else
+    getStructure(word) match {
+      case (w, Some(Particle(josa, p, _, _, _, _))) if p != POS.ETN && p != POS.NNB => Some(w -> josa)
+      case (w, None) => Some(w -> "")
+      case _ => None
+    }
 
   /**
     * 조사가 가장 길게 연결 될 수 있는 구조를 찾는다.
