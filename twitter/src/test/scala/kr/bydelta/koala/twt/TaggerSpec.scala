@@ -1,6 +1,7 @@
 package kr.bydelta.koala.twt
 
 import kr.bydelta.koala.POS
+import org.openkoreantext.processor.OpenKoreanTextProcessor
 import org.specs2.mutable._
 
 /**

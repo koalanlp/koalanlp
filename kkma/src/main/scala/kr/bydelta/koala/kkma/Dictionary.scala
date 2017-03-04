@@ -51,8 +51,9 @@ object Dictionary extends CanCompileDict {
       userdic.morphemes.exists(x => dictLines.contains(x))
   }
 
-  override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[String] = {
-    systemDic.filterKeys(tag => tag != null && filter(fromKKMATag(tag))).iterator.flatMap(_._2)
+  override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[(String, POSTag)] = {
+    systemDic.filterKeys(tag => tag != null && filter(fromKKMATag(tag)))
+      .iterator.flatMap(s => s._2.map(_ -> fromKKMATag(s._1)))
   }
 
   /**

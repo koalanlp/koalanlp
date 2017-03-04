@@ -3,6 +3,9 @@ package kr.bydelta.koala.twt
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.traits.CanCompileDict
 import kr.bydelta.koala.{POS, fromTwtTag, tagToTwt}
+import org.openkoreantext.processor.util.{KoreanDictionaryProvider, KoreanPos}
+
+import scala.collection.JavaConverters._
 
 /**
   * 트위터 분석기 사용자사전
@@ -53,12 +56,12 @@ object Dictionary extends CanCompileDict {
     KoreanDictionaryProvider.koreanDictionary.filterKeys(x => oTag.contains(x)).exists(_._2.contains(word))
   }
 
-  override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[String] = {
+  override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[(String, POSTag)] = {
     KoreanDictionaryProvider.koreanDictionary.filterKeys(x => filter(fromTwtTag(x.toString)))
-      .iterator.flatMap(_._2.iterator().asScala.map {
-      case x: String => x
-      case x: Array[Char] => new String(x)
-      case x => x.toString
+      .iterator.flatMap(s => s._2.iterator().asScala.map {
+      case x: String => x -> fromTwtTag(s._1.toString)
+      case x: Array[Char] => new String(x) -> fromTwtTag(s._1.toString)
+      case x => x.toString -> fromTwtTag(s._1.toString)
     })
   }
 }

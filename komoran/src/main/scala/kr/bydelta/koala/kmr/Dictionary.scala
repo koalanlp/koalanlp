@@ -86,13 +86,13 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     userBuffer
   }
 
-  override def baseEntriesOf(f: (POSTag) => Boolean): Iterator[String] = {
+  override def baseEntriesOf(f: (POSTag) => Boolean): Iterator[(String, POSTag)] = {
     type TNode = TrieNode[java.util.List[KPair[Integer, java.lang.Double]]]
     val targetIDs = POS.values.filter(f).map(p => table.getId(tagToKomoran(p)))
 
     @tailrec
     def iterate(stack: mutable.Stack[(String, TNode)],
-                acc: Seq[String] = Seq.empty): Seq[String] =
+                acc: Seq[(String, POSTag)] = Seq.empty): Seq[(String, POSTag)] =
       if (stack.isEmpty) acc
       else {
         val (prefix, top) = stack.pop()
@@ -100,7 +100,8 @@ object Dictionary extends CanCompileDict with CanExtractResource {
         val value = top.getValue
 
         val newSeq = if (value != null && value.exists(x => targetIDs.contains(x.getFirst))) {
-          word +: acc
+          value.filter(x => targetIDs.contains(x.getFirst))
+            .map(x => word -> fromKomoranTag(table.getPos(x.getFirst))) ++: acc
         } else acc
 
         val children = top.getChildren

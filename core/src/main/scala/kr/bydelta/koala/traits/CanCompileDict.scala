@@ -44,9 +44,9 @@ trait CanCompileDict {
     * 원본 사전에 등재된 항목 중에서, 지정된 형태소의 항목만을 가져옵니다. (복합 품사 결합 형태는 제외)
     *
     * @param filter 가져올 품사인지 판단하는 함수.
-    * @return 형태소의 Iterator.
+    * @return (형태소, 품사)의 Iterator.
     */
-  def baseEntriesOf(filter: POSTag => Boolean): Iterator[String]
+  def baseEntriesOf(filter: POSTag => Boolean): Iterator[(String, POSTag)]
 
   /**
     * 사전에 등재되어 있는지 확인합니다.
@@ -55,4 +55,19 @@ trait CanCompileDict {
     * @param posTag 품사들(기본값: NNP 고유명사, NNG 일반명사)
     */
   def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean
+
+  /**
+    * 다른 사전을 참조하여, 선택된 사전에 없는 단어를 사용자사전으로 추가합니다.
+    *
+    * @param dict   참조할 사전
+    * @param filter 추가할 품사를 지정하는 함수.
+    * @return 선택된 사전.
+    */
+  def importFrom(dict: CanCompileDict, filter: POSTag => Boolean = POS.isNoun) {
+    dict.baseEntriesOf(filter).collect {
+      case (word, tag) if !this.contains(word, Set(tag)) => (word, tag)
+    }.sliding(100, 100).foreach {
+      seq => this.addUserDictionary(seq: _*)
+    }
+  }
 }

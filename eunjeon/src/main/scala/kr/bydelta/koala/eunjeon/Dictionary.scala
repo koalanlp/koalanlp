@@ -123,11 +123,11 @@ object Dictionary extends CanCompileDict {
     }
   }
 
-  override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[String] = {
+  override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[(String, POSTag)] = {
     lexiconDict.termDict.toIterator.flatMap(m => {
       val converted = convertMorpheme(m)
       if (converted.length == 1 && filter(converted.head.tag)) {
-        Some(converted.head.surface)
+        Some(converted.head.surface -> converted.head.tag)
       } else {
         None
       }

@@ -110,21 +110,23 @@ object Dictionary extends CanCompileDict with CanExtractResource {
       }
     }
 
-  override def baseEntriesOf(f: (POSTag) => Boolean): Iterator[String] = {
+  override def baseEntriesOf(f: (POSTag) => Boolean): Iterator[(String, POSTag)] = {
     val targetIDs = POS.values.filter(f).map(x => tagSet.getTagID(tagToHNN(x)))
     type TNode = Trie#TNODE
 
     @tailrec
     def iterate(stack: mutable.Stack[(Array[Char], TNode)],
-                acc: Seq[String] = Seq.empty): Seq[String] =
+                acc: Seq[(String, POSTag)] = Seq.empty): Seq[(String, POSTag)] =
       if (stack.isEmpty) acc
       else {
         val (prefix, top) = stack.pop()
-        val word = if (top.key != null) prefix :+ top.key else prefix
+        val word = prefix :+ top.key
         val value = top.info_list
 
         val newSeq = if (value != null && value.exists(x => targetIDs.contains(x.tag))) {
-          Code.toString(word) +: acc
+          val wordstr = Code.toString(word)
+          value.filter(x => targetIDs.contains(x.tag))
+            .map(x => wordstr -> fromHNNTag(tagSet.getTagName(x.tag))) ++: acc
         } else acc
 
         if (top.child_size > 0) {

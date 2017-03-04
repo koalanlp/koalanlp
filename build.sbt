@@ -17,6 +17,12 @@ resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
 resolvers ++= Seq(
   "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/"
 )
+concurrentRestrictions in Global := Seq(
+  Tags.limit(Tags.CPU, 2),
+  Tags.limit(Tags.Network, 10),
+  Tags.limit(Tags.Test, 1),
+  Tags.limitAll(15)
+)
 
 sonatypeProfileName := "kr.bydelta"
 
@@ -85,7 +91,7 @@ lazy val kryo = (project in file("kryo"))
   .settings(
     libraryDependencies += "com.twitter" %% "chill" % "latest.integration"
   )
-  .dependsOn(core, kkma % "test")
+  .dependsOn(core, kkma % "test", twitter % "test")
 lazy val model = (project in file("model"))
   .settings(projectWithConfig("model"))
   .settings(
@@ -96,7 +102,7 @@ def projectWithConfig(module: String) =
   Seq(
     organization := "kr.bydelta",
     name := s"koalaNLP-$module",
-    version := "1.4.3",
+    version := "1.5.0",
     scalaVersion := "2.11.8",
     scalacOptions += "-target:jvm-1.7",
     scalacOptions in Test ++= Seq("-Yrangepos"),
@@ -110,13 +116,13 @@ def projectWithConfig(module: String) =
     ),
     homepage := Some(url("http://nearbydelta.github.io/KoalaNLP")),
     parallelExecution in Test := false,
-    publishTo := (version { v: String ⇒
+    publishTo := version { v: String ⇒
       val nexus = "https://oss.sonatype.org/"
       if (v.trim.endsWith("SNAPSHOT"))
         Some("snapshots" at nexus + "content/repositories/snapshots")
       else
         Some("releases" at nexus + "service/local/staging/deploy/maven2")
-    }).value,
+    }.value,
     licenses := Seq("GPL v3" -> url("https://opensource.org/licenses/GPL-3.0/")),
     publishMavenStyle := true,
     publishArtifact in Test := false,

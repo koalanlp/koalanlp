@@ -3,6 +3,8 @@ package kr.bydelta.koala.twt
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.fromTwtTag
 import kr.bydelta.koala.traits.CanTag
+import org.openkoreantext.processor.OpenKoreanTextProcessor
+import org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken
 
 /**
   * 트위터 품사분석기.

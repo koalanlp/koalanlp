@@ -1,6 +1,7 @@
 package kr.bydelta.koala.twt
 
 import kr.bydelta.koala.data.BasicWordLearnerSpecs
+import org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken
 import org.specs2.execute.Result
 import org.specs2.mutable.Specification
 

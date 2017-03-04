@@ -19,21 +19,22 @@
       <excludeFolder url="file://$MODULE_DIR$/../../core/target" />
       <excludeFolder url="file://$MODULE_DIR$/../../core/target/resolution-cache" />
       <excludeFolder url="file://$MODULE_DIR$/../../core/target/scala-2.10" />
+      <excludeFolder url="file://$MODULE_DIR$/../../core/target/scala-2.12" />
       <excludeFolder url="file://$MODULE_DIR$/../../core/target/streams" />
       <excludeFolder url="file://$MODULE_DIR$/../../core/target/test-reports" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.8:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-matcher_2.11:3.8-20160508184712-f62fb45:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-core_2.11:3.8-20160508184712-f62fb45:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-common_2.11:3.8-20160508184712-f62fb45:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-codata_2.11:3.8-20160508184712-f62fb45:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scalaz:scalaz-effect_2.11:7.2.0:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scalaz:scalaz-core_2.11:7.2.0:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scalaz:scalaz-concurrent_2.11:7.2.0:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang:scala-reflect:2.11.8:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.5:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang:scala-reflect:2.11.8:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scalaz:scalaz-concurrent_2.11:7.2.0:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scalaz:scalaz-core_2.11:7.2.0:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scalaz:scalaz-effect_2.11:7.2.0:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-codata_2.11:3.8-20160508184712-f62fb45:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-common_2.11:3.8-20160508184712-f62fb45:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-core_2.11:3.8-20160508184712-f62fb45:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-matcher_2.11:3.8-20160508184712-f62fb45:jar" level="project" />
   </component>
 </module>

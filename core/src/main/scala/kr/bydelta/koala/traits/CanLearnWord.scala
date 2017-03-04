@@ -38,14 +38,14 @@ trait CanLearnWord[S, J] {
     */
   def readImpossibleEnding(): Set[Char] = {
     val impset = targets.head.baseEntriesOf(p => POS.isEnding(p) || POS.isModifier(p) || POS.isPredicate(p))
-      .filter(_.matches("[가-힣]$")).map(_.last)
+      .map(_._1).filter(_.matches("[가-힣]$")).map(_.last)
       .toStream.groupBy(x => x).mapValues(_.length)
     val impsum = impset.values.sum.toDouble
     val impall = impset.mapValues(_ / impsum)
     val impKeys = impset.keySet
 
     val nounset = targets.head.baseEntriesOf(POS.isNoun)
-      .filter(x => impKeys.contains(x.last)).map(_.last)
+      .map(_._1).filter(x => impKeys.contains(x.last)).map(_.last)
       .toStream.groupBy(x => x).mapValues(_.length)
     val nounsum = nounset.values.sum.toDouble
     val nounall = nounset.mapValues(_ / nounsum)
