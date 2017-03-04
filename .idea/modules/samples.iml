@@ -24,6 +24,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.8:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.tumblr:colossus_2.11:0.8.3:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.tumblr:colossus-metrics_2.11:0.8.3:jar" level="project" />
     <orderEntry type="library" name="SBT: org.openkoreantext:open-korean-text:1.1:jar" level="project" />
     <orderEntry type="library" name="SBT: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.5:jar" level="project" />
     <orderEntry type="library" name="SBT: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.8.5:jar" level="project" />
@@ -71,8 +73,6 @@
     <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-common_2.11:3.8-20160508184712-f62fb45:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-core_2.11:3.8-20160508184712-f62fb45:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.specs2:specs2-matcher_2.11:3.8-20160508184712-f62fb45:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.tumblr:colossus-metrics_2.11:0.9.0-RC2:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.tumblr:colossus_2.11:0.9.0-RC2:jar" level="project" />
     <orderEntry type="library" name="SBT: com.typesafe.play:play-functional_2.11:2.6.0-M4:jar" level="project" />
     <orderEntry type="library" name="SBT: com.typesafe.play:play-json_2.11:2.6.0-M4:jar" level="project" />
     <orderEntry type="library" name="SBT: joda-time:joda-time:2.9.6:jar" level="project" />

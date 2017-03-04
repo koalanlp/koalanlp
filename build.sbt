@@ -80,8 +80,8 @@ lazy val server = (project in file("server"))
   .settings(projectWithConfig("server"): _*)
   .settings(
     libraryDependencies ++= Seq(
-      "com.tumblr" %% "colossus" % "latest.integration",
-      "com.tumblr" %% "colossus-testkit" % "latest.integration" % "test",
+      "com.tumblr" %% "colossus" % "0.8.3",
+      "com.tumblr" %% "colossus-testkit" % "0.8.3" % "test",
       "com.typesafe.play" %% "play-json" % "latest.integration"
     )
   )

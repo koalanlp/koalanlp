@@ -14,7 +14,7 @@ object DictionaryImportSpec extends Specification {
   "Dictionaries" should {
     "import other dictionary (nouns)" in {
       TDict.items.size must_== 0
-      TDict.importFrom(KDict)
+      TDict.importFrom(KDict, fastAppend = true)
       TDict.items.size must be_>(0)
     }
     "import other dictionary (verbs)" in {

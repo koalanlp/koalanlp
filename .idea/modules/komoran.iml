@@ -19,6 +19,7 @@
       <excludeFolder url="file://$MODULE_DIR$/../../komoran/target" />
       <excludeFolder url="file://$MODULE_DIR$/../../komoran/target/resolution-cache" />
       <excludeFolder url="file://$MODULE_DIR$/../../komoran/target/scala-2.10" />
+      <excludeFolder url="file://$MODULE_DIR$/../../komoran/target/scala-2.12" />
       <excludeFolder url="file://$MODULE_DIR$/../../komoran/target/streams" />
       <excludeFolder url="file://$MODULE_DIR$/../../komoran/target/test-reports" />
     </content>

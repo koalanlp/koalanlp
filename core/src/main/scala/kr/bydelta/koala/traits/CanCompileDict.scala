@@ -59,14 +59,16 @@ trait CanCompileDict {
   /**
     * 다른 사전을 참조하여, 선택된 사전에 없는 단어를 사용자사전으로 추가합니다.
     *
-    * @param dict   참조할 사전
-    * @param filter 추가할 품사를 지정하는 함수.
-    * @return 선택된 사전.
+    * @param dict       참조할 사전
+    * @param filter     추가할 품사를 지정하는 함수.
+    * @param fastAppend 선택된 사전에 존재하는지를 검사하지 않고, 빠르게 추가하고자 할 때
     */
-  def importFrom(dict: CanCompileDict, filter: POSTag => Boolean = POS.isNoun) {
-    dict.baseEntriesOf(filter).collect {
+  def importFrom(dict: CanCompileDict, filter: POSTag => Boolean = POS.isNoun, fastAppend: Boolean = false) {
+    val entries = dict.baseEntriesOf(filter)
+    (if (fastAppend) entries
+    else entries.collect {
       case (word, tag) if !this.contains(word, Set(tag)) => (word, tag)
-    }.sliding(100, 100).foreach {
+    }).sliding(100, 100).foreach {
       seq => this.addUserDictionary(seq: _*)
     }
   }
