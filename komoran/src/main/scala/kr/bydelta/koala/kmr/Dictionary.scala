@@ -13,6 +13,7 @@ import scala.annotation.tailrec
 import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.io.Source
+import scala.util.Random
 
 /**
   * 코모란 분석기 사용자사전
@@ -102,6 +103,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
       if (stack.isEmpty) acc
       else {
         val (prefix, top) = stack.pop()
+        if (Random.nextDouble() < 0.01) println(prefix)
         val word = if (top.getKey == null) prefix else prefix + top.getKey.charValue()
         val value = top.getValue
 

@@ -11,6 +11,8 @@ import scala.collection.JavaConverters._
   * Created by bydelta on 16. 7. 30.
   */
 class UnkLearnSpec extends Specification with BasicWordLearnerSpecs[Sentence] {
+  sequential
+
   override def getTagger = new Tagger
   override def getDict = Dictionary
 
@@ -36,7 +38,7 @@ class UnkLearnSpec extends Specification with BasicWordLearnerSpecs[Sentence] {
           val tagger1 = getTagger
           val beforeLearn = text.map(s => tagger1.tagSentence(s).singleLineString).mkString("\n")
 
-          learner.jLearn(text.toIterator.asJava, minOccurrence = 1, minVariations = 1)
+          learner.jLearn(text.toIterator.asJava, minOccurrence = 2, minVariations = 2)
 
           val tagger2 = getTagger
           val afterLearn = text.map(s => tagger2.tagSentence(s).singleLineString).mkString("\n")

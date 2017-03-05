@@ -6,7 +6,7 @@ jdk:
 install:
 - cp -r ./hannanum/models/* ./
 script:
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION clean
+- sbt -J-Xmx4g clean
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage core/test
 - sbt -J-Xmx4g ++2.11.8 coverage server/test
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage kryo/test
@@ -15,7 +15,7 @@ script:
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage komoran/test
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage twitter/test
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage hannanum/test
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverageReport coverageAggregate
+- sbt -J-Xmx4g coverageReport coverageAggregate
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 - sbt unidoc

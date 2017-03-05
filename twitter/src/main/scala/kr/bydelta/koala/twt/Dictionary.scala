@@ -51,9 +51,13 @@ object Dictionary extends CanCompileDict {
     word.groupBy(w => KoreanPos.withName(tagToTwt(w._2))).iterator.flatMap {
       case (tag, words) =>
         val tagDic =
-          if (tag == KoreanPos.ProperNoun) KoreanDictionaryProvider.properNouns
-          else KoreanDictionaryProvider.koreanDictionary(tag)
-        words.filter(w => tagDic.contains(w._1))
+          if (tag == KoreanPos.ProperNoun) Some(KoreanDictionaryProvider.properNouns)
+          else KoreanDictionaryProvider.koreanDictionary.get(tag)
+
+        if (tagDic.isDefined)
+          words.filter(w => tagDic.get.contains(w._1))
+        else
+          Seq.empty
     }.toSeq
   }
 
