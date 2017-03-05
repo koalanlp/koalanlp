@@ -27,14 +27,12 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     file.deleteOnExit()
     file
   }
-  //private lazy
-  val dic = {
+  private lazy val dic = {
     val obs = new Observation
     obs.load(getExtractedPath + File.separator + "observation.model")
     obs.getTrieDictionary
   }
-  //private lazy
-  val table = {
+  private lazy val table = {
     val tbl = new PosTable
     tbl.load(getExtractedPath + File.separator + "pos.table")
     tbl

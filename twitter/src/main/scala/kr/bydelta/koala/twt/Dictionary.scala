@@ -50,7 +50,9 @@ object Dictionary extends CanCompileDict {
   override def getNotExists(dummy: Boolean, word: (String, POSTag)*): Seq[(String, POSTag)] = {
     word.groupBy(w => KoreanPos.withName(tagToTwt(w._2))).iterator.flatMap {
       case (tag, words) =>
-        val tagDic = KoreanDictionaryProvider.koreanDictionary(tag)
+        val tagDic =
+          if (tag == KoreanPos.ProperNoun) KoreanDictionaryProvider.properNouns
+          else KoreanDictionaryProvider.koreanDictionary(tag)
         words.filter(w => tagDic.contains(w._1))
     }.toSeq
   }
