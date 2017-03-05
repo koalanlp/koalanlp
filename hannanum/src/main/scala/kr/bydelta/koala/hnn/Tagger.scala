@@ -19,7 +19,6 @@ import scala.collection.mutable.ArrayBuffer
   * 한나눔 품사분석기.
   */
 final class Tagger extends CanTag[Sentence] {
-
   /** 한나눔 품사분석 Workflow **/
   private lazy val workflow = {
     val workflow = new Workflow
@@ -42,19 +41,36 @@ final class Tagger extends CanTag[Sentence] {
   }
   /** 한나눔 형태소분석기 (사용자사전 개량형) **/
   private lazy val analyzer = new SafeChartMorphAnalyzer
+  private[this] val logger = org.log4s.getLogger
 
   override def tagSentenceRaw(text: String): Sentence =
     if (text.trim.isEmpty) new Sentence(0, 0, true, Array(), Array())
     else {
-    workflow.analyze(text)
-    workflow.getResultOfSentence(new Sentence(0, 0, false))
+      try {
+        Dictionary synchronized {
+          workflow.analyze(text)
+          workflow.getResultOfSentence(new Sentence(0, 0, false))
+        }
+      } catch {
+        case e: Throwable =>
+          logger.error(e)("Sentence Tagging failed.")
+          throw e
+      }
   }
 
   def tagParagraph(text: String): Seq[KSent] =
     if (text.trim.isEmpty) Seq()
     else {
-      workflow.analyze(text)
-      retrieveSentences()
+      try {
+        Dictionary.synchronized {
+          workflow.analyze(text)
+          retrieveSentences()
+        }
+      } catch {
+        case e: Throwable =>
+          logger.error(e)("Paragraph Tagging failed.")
+          throw e
+      }
     }
 
   @throws[Throwable]
