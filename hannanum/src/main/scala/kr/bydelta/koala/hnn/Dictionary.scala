@@ -13,7 +13,6 @@ import scala.annotation.tailrec
 import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.io.Source
-import scala.util.Random
 
 /**
   * 한나눔 사용자사전
@@ -72,24 +71,27 @@ object Dictionary extends CanCompileDict with CanExtractResource {
       case (morph, tag) =>
         writer.write(morph)
         writer.write('\t')
-        writer.write(tagToHNN(tag))
+        writer.write(tagToHNN(tag).toLowerCase)
         writer.newLine()
     }
     writer.close()
   }
 
   override def getNotExists(onlySystemDic: Boolean, word: (String, POSTag)*): Seq[(String, POSTag)] = {
-    val (user, system) =
+    val (_, system) =
       if (onlySystemDic) (Seq.empty[(String, POSTag)], word)
-      else word.partition(items.contains)
-    user ++: system.groupBy(_._1).iterator.flatMap {
+      else word.partition(items.contains) // filter out existing morphemes!
+
+    system.groupBy(_._1).iterator.flatMap {
       case (w, tags) =>
         val morph = systemDic.fetch(Code.toTripleArray(w))
-        if (morph == null) Seq.empty
+
+        // filter out existing morphemes!
+        if (morph == null) tags // The case of not found.
         else {
           val found = morph.info_list.map(_.tag)
-          tags.filter {
-            case (_, t) => found.contains(tagSet.getTagID(tagToHNN(t)))
+          tags.filterNot {
+            case (_, t) => found.contains(tagSet.getTagID(tagToHNN(t).toLowerCase))
           }
         }
     }.toSeq
@@ -118,7 +120,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     }
 
   override def baseEntriesOf(f: (POSTag) => Boolean): Iterator[(String, POSTag)] = {
-    val targetIDs = POS.values.filter(f).map(x => tagSet.getTagID(tagToHNN(x)))
+    val targetIDs = POS.values.filter(f).map(x => tagSet.getTagID(tagToHNN(x).toLowerCase))
     type TNode = Trie#TNODE
 
     @tailrec
@@ -127,7 +129,6 @@ object Dictionary extends CanCompileDict with CanExtractResource {
       if (stack.isEmpty) acc
       else {
         val (prefix, top) = stack.pop()
-        if (Random.nextDouble() < 0.01) println(prefix)
         val word = prefix :+ top.key
         val value = top.info_list
 

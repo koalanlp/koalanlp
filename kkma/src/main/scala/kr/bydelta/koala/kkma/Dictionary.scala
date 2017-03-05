@@ -47,12 +47,15 @@ object Dictionary extends CanCompileDict {
     val converted = word.map {
       case tup@(w, t) => (w, tup, tagToKKMA(t))
     }
-    val (user, system) =
+
+    // Filter out existing morphemes!
+    val (_, system) =
       if (onlySystemDic) (Seq.empty[(String, (String, POSTag), String)], converted)
       else converted.partition(w => userdic.morphemes.contains(s"${w._1}/${w._3}"))
-    user.map(_._2) ++: system.groupBy(_._1).iterator.flatMap {
+    system.groupBy(_._1).iterator.flatMap {
       case (w, tags) =>
-        tags.filter {
+        // Filter out existing morphemes!
+        tags.filterNot {
           t =>
             val mexp = Dict.getInstance.getMExpression(w)
             mexp != null && mexp.map(_.getTag).contains(t._3)

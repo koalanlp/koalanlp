@@ -359,6 +359,48 @@ package object koala {
     }
 
   /**
+    * 한국어를 구성하는 문자의 연산.
+    *
+    * @param char 검사할 문자.
+    */
+  implicit class KoreanCharacterExtension(ch: Char) {
+    /**
+      * (Code modified from Seunjeon package)
+      * 종성으로 끝나는지 확인.
+      *
+      * @return 종성으로 끝난다면, true를, 없다면 false를 반환.
+      */
+    def endsWithJongsung = getJongsungCode != 0
+
+    /**
+      * (Code modified from Seunjeon package)
+      * 종성 종료 코드
+      *
+      * @return 종성으로 끝난다면, 해당 위치를, 없다면 0을 반환.
+      */
+    def getJongsungCode = (ch - 0xAC00) % 0x001C
+
+    /**
+      * (Code modified from Seunjeon package)
+      * 한글 문자로 끝나는 지 확인.
+      *
+      * @return True: 종료 문자가 한글일 경우.
+      */
+    def isHangul = {
+      ((0x0AC00 <= ch && ch <= 0xD7A3)
+        || (0x1100 <= ch && ch <= 0x11FF)
+        || (0x3130 <= ch && ch <= 0x318F))
+    }
+
+    /**
+      * 완성된 문자의 범위인지 확인.
+      *
+      * @return True: 완성된 문자일 경우.
+      */
+    def isCompleteHangul = 0x0AC00 <= ch && ch <= 0xD7A3
+  }
+
+  /**
     * 한국어를 구성하는 문자열의 연산.
     *
     * @param word 검사할 문자열.
@@ -370,10 +412,7 @@ package object koala {
       *
       * @return 종성으로 끝난다면, true를, 없다면 false를 반환.
       */
-    def endsWithJongsung = {
-      ((word.last - 0xAC00) % 0x001C) != 0
-    }
-
+    def endsWithJongsung = word.last.endsWithJongsung
 
     /**
       * (Code modified from Seunjeon package)
@@ -381,12 +420,7 @@ package object koala {
       *
       * @return True: 종료 문자가 한글일 경우.
       */
-    def endsWithHangul = {
-      val ch = word.last
-      ((0x0AC00 <= ch && ch <= 0xD7A3)
-        || (0x1100 <= ch && ch <= 0x11FF)
-        || (0x3130 <= ch && ch <= 0x318F))
-    }
+    def endsWithHangul = word.last.isHangul
 
     def filterNonHangul = {
       word.replaceAll("(?U)[^가-힣\\s]+", " ").trim.split("(?U)\\s+").toSeq

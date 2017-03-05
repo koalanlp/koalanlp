@@ -109,13 +109,14 @@ object Dictionary extends CanCompileDict {
           else lexiconDict.commonPrefixSearch(w) ++ userDict.commonPrefixSearch(w)
           ).filter(m => m.surface == w && m.feature.last == "*")
 
+        // Filter out existing morphemes!
         if (searched.nonEmpty) {
           val found = searched.map(_.feature.head)
-          tags.filter {
+          tags.filterNot {
             case (_, tag) =>
               found.contains(tagToEunjeon(tag))
           }
-        } else Seq.empty
+        } else tags // The case of not found
     }.toSeq
   }
 

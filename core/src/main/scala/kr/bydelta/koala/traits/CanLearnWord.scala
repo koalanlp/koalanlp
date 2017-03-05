@@ -40,7 +40,7 @@ trait CanLearnWord[S, J] {
   def readImpossibleEnding(): Set[Char] = {
     logger info "Reading ending characters of 'Ending', 'Modifier' and 'Predicate(Verb/Adj)'"
     val impset = targets.head.baseEntriesOf(p => POS.isEnding(p) || POS.isModifier(p) || POS.isPredicate(p))
-      .map(_._1).filter(_.matches("[가-힣]$")).map(_.last)
+      .map(_._1).filter(_.endsWithHangul).map(_.last)
       .toStream.groupBy(x => x).mapValues(_.length)
     val impsum = impset.values.sum.toDouble
     val impall = impset.mapValues(_ / impsum)

@@ -13,7 +13,6 @@ import scala.annotation.tailrec
 import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.io.Source
-import scala.util.Random
 
 /**
   * 코모란 분석기 사용자사전
@@ -38,8 +37,10 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     tbl.load(getExtractedPath + File.separator + "pos.table")
     tbl
   }
+  val ChoSung = Array('ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ')
+  val JungSung = Array('ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ')
+  val JongSung = Array('\u0000', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ')
   private var userLastUpdated = 0l
-
   private var userBuffer = Set[(String, POSTag)]()
 
   override def addUserDictionary(dict: (String, POSTag)*): Unit = Dictionary synchronized {
@@ -66,16 +67,19 @@ object Dictionary extends CanCompileDict with CanExtractResource {
   }
 
   override def getNotExists(onlySystemDic: Boolean, word: (String, POSTag)*): Seq[(String, POSTag)] = {
-    val (user, system) =
+    // Filter out existing morphemes!
+    val (_, system) =
       if (onlySystemDic) (Seq.empty[(String, POSTag)], word)
       else word.partition(items.contains)
-    user ++: system.groupBy(_._1).iterator.flatMap {
+    system.groupBy(_._1).iterator.flatMap {
       case (w, tags) =>
         val searched = dic.get(w)
-        if (searched == null) Seq.empty
+
+        // Filter out existing morphemes!
+        if (searched == null) tags // For the case of not found.
         else {
           val found = searched.map(_.getFirst)
-          tags.filter(t => found.contains(table.getId(tagToKomoran(t._2))))
+          tags.filterNot(t => found.contains(table.getId(tagToKomoran(t._2))))
         }
     }.toSeq
   }
@@ -97,19 +101,60 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     type TNode = TrieNode[java.util.List[KPair[Integer, java.lang.Double]]]
     val targetIDs = POS.values.filter(f).map(p => table.getId(tagToKomoran(p)))
 
+    def reunionKorean(seq: Seq[Char], acc: Seq[Char] = Seq.empty): String =
+      if (seq.isEmpty) new String(acc.reverse.toArray)
+      else {
+        val char = seq.head
+        val newAcc =
+          if (!char.isHangul) {
+            // 한글이 아닐 때.
+            char +: acc
+          } else if (JungSung.contains(char)) {
+            // 지금 문자가 중성일때. 앞문자는 비었거나, 완성문자이거나, 초성이거나, 불완전한 글자임.
+            if (acc.isEmpty || !ChoSung.contains(acc.head)) {
+              // 앞에 아무것도 없거나, 초성만 있지 않을때.
+              if (acc.isEmpty || !acc.head.isCompleteHangul || !acc.head.endsWithJongsung) {
+                // 앞에 아무것도 없거나, 완성문자가 아니거나(초성문자 제외), 종성으로 끝나지 않을 때.
+                char +: acc
+              } else {
+                // 종성으로 끝나는 완전한 문자.
+                val chosung = ChoSung.indexOf(JongSung(acc.head.getJongsungCode))
+                val newFrontChar = (acc.head - acc.head.getJongsungCode).toChar
+                val newChar: Char = ('가' + chosung * 588 + JungSung.indexOf(char) * 28 + 0).toChar
+                newChar +: newFrontChar +: acc.tail
+              }
+            } else {
+              // 앞에 초성만 있었을때.
+              val chosung = ChoSung.indexOf(acc.head)
+              val newChar: Char = ('가' + chosung * 588 + JungSung.indexOf(char) * 28 + 0).toChar
+              newChar +: acc.tail
+            }
+          } else {
+            if (acc.isEmpty || !acc.head.isCompleteHangul || acc.head.endsWithJongsung) {
+              // 앞에 아무것도 없거나, 불완전하거나, 종성으로 이미 끝났을때.
+              char +: acc
+            } else {
+              // 종성으로 끝나지않은, 완전한 문자.
+              val newChar: Char = (acc.head + JongSung.indexOf(char)).toChar
+              newChar +: acc.tail
+            }
+          }
+        reunionKorean(seq.tail, newAcc)
+      }
+
     @tailrec
-    def iterate(stack: mutable.Stack[(String, TNode)],
+    def iterate(stack: mutable.Stack[(Seq[Char], TNode)],
                 acc: Seq[(String, POSTag)] = Seq.empty): Seq[(String, POSTag)] =
       if (stack.isEmpty) acc
       else {
         val (prefix, top) = stack.pop()
-        if (Random.nextDouble() < 0.01) println(prefix)
-        val word = if (top.getKey == null) prefix else prefix + top.getKey.charValue()
+        val word = if (top.getKey == null) prefix else prefix :+ top.getKey.charValue()
         val value = top.getValue
 
         val newSeq = if (value != null && value.exists(x => targetIDs.contains(x.getFirst))) {
+          val wordstr = reunionKorean(word)
           value.filter(x => targetIDs.contains(x.getFirst))
-            .map(x => word -> fromKomoranTag(table.getPos(x.getFirst))) ++: acc
+            .map(x => wordstr -> fromKomoranTag(table.getPos(x.getFirst))) ++: acc
         } else acc
 
         val children = top.getChildren
@@ -120,7 +165,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
         iterate(stack, newSeq)
       }
 
-    iterate(mutable.Stack("" -> dic.getRoot)).toIterator
+    iterate(mutable.Stack(Seq.empty[Char] -> dic.getRoot)).toIterator
   }
 
   override protected def modelName: String = "komoran"

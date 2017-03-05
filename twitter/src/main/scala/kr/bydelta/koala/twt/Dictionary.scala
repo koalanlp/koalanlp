@@ -33,6 +33,8 @@ object Dictionary extends CanCompileDict {
          KoreanPos.PreEomi | KoreanPos.Conjunction | KoreanPos.NounPrefix | KoreanPos.VerbPrefix |
          KoreanPos.Suffix | KoreanPos.Adverb =>
       KoreanDictionaryProvider.addWordsToDictionary(tag, morph)
+    case KoreanPos.ProperNoun =>
+      morph.foreach(KoreanDictionaryProvider.properNouns.add)
     case KoreanPos.Verb | KoreanPos.Adjective =>
     case _ =>
       KoreanDictionaryProvider.addWordsToDictionary(KoreanPos.Noun, morph)
@@ -54,10 +56,11 @@ object Dictionary extends CanCompileDict {
           if (tag == KoreanPos.ProperNoun) Some(KoreanDictionaryProvider.properNouns)
           else KoreanDictionaryProvider.koreanDictionary.get(tag)
 
+        // Filter out existing morphemes!
         if (tagDic.isDefined)
-          words.filter(w => tagDic.get.contains(w._1))
+          words.filterNot(w => tagDic.get.contains(w._1))
         else
-          Seq.empty
+          words // for the case of not found!
     }.toSeq
   }
 
