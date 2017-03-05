@@ -43,6 +43,10 @@ object KryoSpec extends Specification {
 
   "KryoSerializer" should {
     "save and load dictionary" in {
+      // Clean up
+      Dictionary.userdic.morphemes.clear()
+      Dictionary.userdic.reset()
+
       Dictionary.addUserDictionary("힐스테이트", POS.NNP)
 
       val tmpFile = new File(System.getProperty("java.io.tmpdir"), "test.dic")
