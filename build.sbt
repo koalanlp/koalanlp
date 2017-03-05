@@ -28,6 +28,12 @@ sonatypeProfileName := "kr.bydelta"
 
 lazy val core = (project in file("core"))
   .settings(projectWithConfig("core"): _*)
+  .settings(
+    libraryDependencies ++= Seq(
+      "org.log4s" %% "log4s" % "latest.integration",
+      "org.slf4j" % "slf4j-simple" % "latest.integration"
+    )
+  )
 lazy val kkma = (project in file("kkma"))
   .settings(projectWithConfig("kkma"): _*)
   .settings(

@@ -204,10 +204,10 @@ LinkedList<String> morphemes = new LinkedList<>();
 LinkedList<POS$.Value> pos = new LinkedList<>();
 
 morphemes.add("설빙");
-pos.add(POSTag.NNP); /* 고유명사 '설빙' 추가 */
+pos.add(POS.NNP()); /* 고유명사 '설빙' 추가 */
 
 morphemes.add("구글하");
-pos.add(POSTag.VV); /* 동사 '구글하다' 추가 */
+pos.add(POS.VV()); /* 동사 '구글하다' 추가 */
 
 JavaDictionary.addUserDictionary(morphems, pos);
 
@@ -215,7 +215,27 @@ JavaDictionary.addUserDictionary(morphems, pos);
 Dictionary.jAddUserDictionary(morphemes, pos);
 ```
 
-또한 아래와 같이, 고유명사를 말뭉치로부터 학습할 수 있습니다.
+또한, 다른 사전의 항목을 불러올 수 있습니다.
+```scala
+import kr.bydelta.koala.kkma.Dictionary
+import kr.bydelta.koala.eunjeon.Dictionary
+import kr.bydelta.koala.POS
+
+eunjeon.Dictionary.importFrom(kkma.Dictionary, filter = POS.isNoun, fastAppend = false)
+```
+
+Java는 아래와 같이 사용할 수 있습니다.
+```java
+import kr.bydelta.koala.kkma.JavaDictionary;
+import kr.bydelta.koala.eunjeon.JavaDictionary;
+import kr.bydelta.koala.POS;
+
+// Java 8+, with lambda expression
+eunjeon.JavaDictionary.get().importFrom(kkma.JavaDictionary.get(), 
+    (POS$.Value p) -> POS.isNoun(p), false);
+```
+
+아래와 같이, 고유명사를 말뭉치로부터 학습할 수 있습니다.
 > 고유명사가 아닌, 다른 품사의 자동학습기능은 아직 지원하지 않습니다.
 
 ```scala

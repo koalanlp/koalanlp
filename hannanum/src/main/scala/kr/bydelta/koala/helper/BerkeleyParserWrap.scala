@@ -52,6 +52,7 @@ private[koala] class BerkeleyParserWrap(val grammarName: String) {
     p.binarization = BerkeleyParserWrap.pData.getBinarization
     p
   }
+  private[this] val logger = org.log4s.getLogger
 
   def parseForced(data: Sentence): String = {
     val testSentence =
@@ -61,7 +62,7 @@ private[koala] class BerkeleyParserWrap(val grammarName: String) {
         }
       } catch {
         case e: Throwable =>
-          e.printStackTrace()
+          logger.error(e)("Synchronized Parsing Failed")
           System.exit(1)
           null.asInstanceOf
       }

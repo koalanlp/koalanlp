@@ -14,12 +14,11 @@ import scala.collection.JavaConverters._
   */
 object Dictionary extends CanCompileDict {
   /** 원본사전의 어휘목록 **/
-  private lazy val systemDic = Dict.getInstance.getAsList.asScala.flatMap {
-    _.map(m => m.getTag -> m.getExp) // (품사, 표현식)으로 변환.
-  }.groupBy(_._1).mapValues {
-    // 품사로 묶음.
-    _.map(_._2).toSet // 각 묶음단위로 표현식 집합 구성.
-  }
+  private lazy val systemDicByTag = Dict.getInstance.getAsList.asScala.flatMap {
+    _.filter(_.getTag != null)
+      .map(m => fromKKMATag(m.getTag) -> m.getExp) // (품사, 표현식)으로 변환.
+  }.groupBy(_._1).mapValues(_.map(_.swap))
+
   /** 사용자사전 Reader **/
   val userdic = new UserDicReader
   /** 사전 목록의 변화여부 **/
@@ -44,16 +43,25 @@ object Dictionary extends CanCompileDict {
     }.toSet
   }
 
-  override def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean = {
-    val oTag = posTag.map(tagToKKMA)
-    val dictLines = oTag.map(word + "/" + _)
-    systemDic.filterKeys(oTag.contains).exists(_._2.contains(word)) ||
-      userdic.morphemes.exists(x => dictLines.contains(x))
+  override def getNotExists(onlySystemDic: Boolean, word: (String, POSTag)*): Seq[(String, POSTag)] = {
+    val converted = word.map {
+      case tup@(w, t) => (w, tup, tagToKKMA(t))
+    }
+    val (user, system) =
+      if (onlySystemDic) (Seq.empty[(String, (String, POSTag), String)], converted)
+      else converted.partition(w => userdic.morphemes.contains(s"${w._1}/${w._3}"))
+    user.map(_._2) ++: system.groupBy(_._1).iterator.flatMap {
+      case (w, tags) =>
+        tags.filter {
+          t =>
+            val mexp = Dict.getInstance.getMExpression(w)
+            mexp != null && mexp.map(_.getTag).contains(t._3)
+        }.map(_._2)
+    }.toSeq
   }
 
   override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[(String, POSTag)] = {
-    systemDic.filterKeys(tag => tag != null && filter(fromKKMATag(tag)))
-      .iterator.flatMap(s => s._2.map(_ -> fromKKMATag(s._1)))
+    systemDicByTag.filterKeys(filter).iterator.flatMap(_._2)
   }
 
   /**

@@ -100,17 +100,23 @@ object Dictionary extends CanCompileDict {
         segs(0) -> fromEunjeonTag(segs(4))
     }
 
-  override def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean = {
+  override def getNotExists(onlySystemDic: Boolean, word: (String, POSTag)*): Seq[(String, POSTag)] = {
     reloadDic()
-    val oTag = posTag.map(tagToEunjeon)
+    word.groupBy(_._1).iterator.flatMap {
+      case (w, tags) =>
+        val searched = (
+          if (onlySystemDic) lexiconDict.commonPrefixSearch(w)
+          else lexiconDict.commonPrefixSearch(w) ++ userDict.commonPrefixSearch(w)
+          ).filter(m => m.surface == w && m.feature.last == "*")
 
-    lexiconDict.commonPrefixSearch(word).exists {
-      m =>
-        m.surface == word && oTag.contains(m.feature.head) && m.feature.last == "*"
-    } || userDict.commonPrefixSearch(word).exists {
-      m =>
-        m.surface == word && oTag.contains(m.feature.head) && m.feature.last == "*"
-    }
+        if (searched.nonEmpty) {
+          val found = searched.map(_.feature.head)
+          tags.filter {
+            case (_, tag) =>
+              found.contains(tagToEunjeon(tag))
+          }
+        } else Seq.empty
+    }.toSeq
   }
 
   /**

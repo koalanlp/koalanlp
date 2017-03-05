@@ -10,7 +10,8 @@ trait CanExtractResource {
   /**
     * 압축해제할 임시 디렉터리.
     */
-  private lazy val TMP = new File(System.getProperty("java.io.tmpdir"), modelName)
+  private lazy val TMP = new File(System.getProperty("java.io.tmpdir"), s"koalanlp-$modelName")
+  private[this] val logger = org.log4s.getLogger
   /**
     * 초기화(압축해제) 여부 Flag
     */
@@ -38,6 +39,7 @@ trait CanExtractResource {
       if (!initialized) {
         initialized = true
         TMP.mkdirs()
+        logger info s"Extracting dictionary resources to $TMP."
 
         val loader: ClassLoader = this.getClass.getClassLoader
         val zis = new ZipInputStream(loader.getResourceAsStream(s"$modelName.zip"))
@@ -46,10 +48,13 @@ trait CanExtractResource {
             unzipStream(zis)
           }
         } catch {
-          case e: Exception => e.printStackTrace()
+          case e: Exception =>
+            logger.error(e)("Extraction failed.")
         } finally {
           zis.close()
         }
+
+        logger info s"Extraction finished."
       }
     }
 
@@ -65,6 +70,8 @@ trait CanExtractResource {
     val entry = zis.getNextEntry
     if (entry != null) {
       val targetFile: File = new File(TMP, entry.getName)
+      targetFile.deleteOnExit()
+
       if (entry.isDirectory) {
         targetFile.mkdirs
       } else {

@@ -27,6 +27,7 @@ trait Server {
     * Generator function for parser
     */
   implicit val parserGenerator = () => this.getParser
+  private[this] val logger = org.log4s.getLogger
 
   /**
     * Tagger generator
@@ -53,6 +54,7 @@ trait Server {
     implicit val io = IOSystem()
 
     CServer.start("taggerServer", port)(getServiceInitializer)
+    logger info "Server initialized"
   }
 
   // $COVERAGE-ON$

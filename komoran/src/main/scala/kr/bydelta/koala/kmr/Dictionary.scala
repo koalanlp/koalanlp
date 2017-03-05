@@ -66,11 +66,19 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     bw.close()
   }
 
-  override def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean = {
-    val oTag = posTag.map(x => table.getId(tagToKomoran(x)))
-    val found = dic.get(word)
-    (found != null && found.exists(p => oTag.contains(p.getFirst))) ||
-      items.exists(x => x._1 == word && posTag.contains(x._2))
+  override def getNotExists(onlySystemDic: Boolean, word: (String, POSTag)*): Seq[(String, POSTag)] = {
+    val (user, system) =
+      if (onlySystemDic) (Seq.empty[(String, POSTag)], word)
+      else word.partition(items.contains)
+    user ++: system.groupBy(_._1).iterator.flatMap {
+      case (w, tags) =>
+        val searched = dic.get(w)
+        if (searched == null) Seq.empty
+        else {
+          val found = searched.map(_.getFirst)
+          tags.filter(t => found.contains(table.getId(tagToKomoran(t._2))))
+        }
+    }.toSeq
   }
 
   override def items: Set[(String, POSTag)] = userBuffer synchronized {

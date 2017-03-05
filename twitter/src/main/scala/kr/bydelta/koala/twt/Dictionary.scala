@@ -2,7 +2,7 @@ package kr.bydelta.koala.twt
 
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.traits.CanCompileDict
-import kr.bydelta.koala.{POS, fromTwtTag, tagToTwt}
+import kr.bydelta.koala.{fromTwtTag, tagToTwt}
 import org.openkoreantext.processor.util.{KoreanDictionaryProvider, KoreanPos}
 
 import scala.collection.JavaConverters._
@@ -38,22 +38,21 @@ object Dictionary extends CanCompileDict {
       KoreanDictionaryProvider.addWordsToDictionary(KoreanPos.Noun, morph)
   }
 
-  /**
-    * 사용자 사전에 등재된 모든 Item을 불러옵니다.
-    *
-    * @return (형태소, 통합품사)의 Sequence.
-    */
   override def items: Set[(String, POSTag)] = userDict
 
   /**
-    * 현재 사용중인 패키지의 사전에 등재되어 있는지 확인합니다.
+    * 사전에 등재되어 있는지 확인하고, 사전에 없는단어만 반환합니다.
     *
-    * @param word   확인할 형태소
-    * @param posTag 품사(기본값: NNP 고유명사)
+    * @param dummy (제공하지 않는 기능.)
+    * @param word  확인할 (형태소, 품사)들.
+    * @return 사전에 없는 단어들.
     */
-  override def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean = {
-    val oTag = posTag.map(x => KoreanPos.withName(tagToTwt(x)))
-    KoreanDictionaryProvider.koreanDictionary.filterKeys(x => oTag.contains(x)).exists(_._2.contains(word))
+  override def getNotExists(dummy: Boolean, word: (String, POSTag)*): Seq[(String, POSTag)] = {
+    word.groupBy(w => KoreanPos.withName(tagToTwt(w._2))).iterator.flatMap {
+      case (tag, words) =>
+        val tagDic = KoreanDictionaryProvider.koreanDictionary(tag)
+        words.filter(w => tagDic.contains(w._1))
+    }.toSeq
   }
 
   override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[(String, POSTag)] = {

@@ -9,6 +9,7 @@ import scala.collection.JavaConversions._
   * 사용자 사전추가 기능을 위한 Trait.
   */
 trait CanCompileDict {
+  private[this] val logger = org.log4s.getLogger
   /**
     * 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.
     *
@@ -54,22 +55,39 @@ trait CanCompileDict {
     * @param word   확인할 형태소
     * @param posTag 품사들(기본값: NNP 고유명사, NNG 일반명사)
     */
-  def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean
+  def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean = {
+    getNotExists(false, posTag.map(word -> _).toSeq: _*).length < posTag.size
+  }
+
+  /**
+    * 사전에 등재되어 있는지 확인하고, 사전에 없는단어만 반환합니다.
+    *
+    * @param onlySystemDic 시스템 사전에서만 검색할지 결정합니다.
+    * @param word          확인할 (형태소, 품사)들.
+    * @return 사전에 없는 단어들.
+    */
+  def getNotExists(onlySystemDic: Boolean, word: (String, POSTag)*): Seq[(String, POSTag)]
 
   /**
     * 다른 사전을 참조하여, 선택된 사전에 없는 단어를 사용자사전으로 추가합니다.
     *
     * @param dict       참조할 사전
     * @param filter     추가할 품사를 지정하는 함수.
-    * @param fastAppend 선택된 사전에 존재하는지를 검사하지 않고, 빠르게 추가하고자 할 때
+    * @param fastAppend 선택된 사전에 존재하는지를 검사하지 않고, 빠르게 추가하고자 할 때 (기본값 false)
     */
   def importFrom(dict: CanCompileDict, filter: POSTag => Boolean = POS.isNoun, fastAppend: Boolean = false) {
     val entries = dict.baseEntriesOf(filter)
-    (if (fastAppend) entries
-    else entries.collect {
-      case (word, tag) if !this.contains(word, Set(tag)) => (word, tag)
-    }).sliding(100, 100).foreach {
-      seq => this.addUserDictionary(seq: _*)
+
+    logger info s"Start to import dictionary: ${dict.getClass.getPackage} → ${this.getClass.getPackage}"
+    val total = entries.sliding(10000, 10000).foldLeft(0) {
+      case (count, raw) =>
+        val seq = if (fastAppend) raw else getNotExists(true, raw: _*)
+        this.addUserDictionary(seq: _*)
+        val next = count + seq.length
+        logger info s"$next word(s) imported (In Progress)"
+        next
     }
+
+    logger info s"Import finished. ($total words)"
   }
 }

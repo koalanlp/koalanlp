@@ -30,6 +30,7 @@ trait CanLearnWord[S, J] {
     * 신조어 등을 등록할 사용자사전들.
     */
   protected val targets: Seq[CanCompileDict]
+  private[this] val logger = org.log4s.getLogger
 
   /**
     * 불가능한 종결형태를 수집.
@@ -37,22 +38,27 @@ trait CanLearnWord[S, J] {
     * @return 불가능한 종결형태의 집합.
     */
   def readImpossibleEnding(): Set[Char] = {
+    logger info "Reading ending characters of 'Ending', 'Modifier' and 'Predicate(Verb/Adj)'"
     val impset = targets.head.baseEntriesOf(p => POS.isEnding(p) || POS.isModifier(p) || POS.isPredicate(p))
       .map(_._1).filter(_.matches("[가-힣]$")).map(_.last)
       .toStream.groupBy(x => x).mapValues(_.length)
     val impsum = impset.values.sum.toDouble
     val impall = impset.mapValues(_ / impsum)
     val impKeys = impset.keySet
+    logger info s"Total ${impKeys.size} characters are collected for less-possible noun endings."
 
+    logger info "Reading ending characters of 'Noun'"
     val nounset = targets.head.baseEntriesOf(POS.isNoun)
       .map(_._1).filter(x => impKeys.contains(x.last)).map(_.last)
       .toStream.groupBy(x => x).mapValues(_.length)
     val nounsum = nounset.values.sum.toDouble
     val nounall = nounset.mapValues(_ / nounsum)
+    logger info s"Total ${nounall.size} characters are collected for highly-possible noun endings."
 
     val set = impall.collect {
       case (ch, p) if p > nounall.getOrElse(ch, 0.0) => ch
     }.toSet
+    logger info s"Returning ${set.size} characters for impossible endings."
 
     set
   }
@@ -91,11 +97,18 @@ trait CanLearnWord[S, J] {
     val minVar: Int =
       if (minVariations > CanLearnWord.JOSA_COUNT_MAX) CanLearnWord.JOSA_COUNT_MAX
       else minVariations
+    logger info s"Learning from corpora, with criteria: minOccurrence ≥ $minOccurrence, minVariations ≥ $minVar"
 
-    extractNouns(corpora, minOccurrence, minVar).map(_ -> POS.NNP).sliding(100, 100).foreach {
-      set =>
+    val total = extractNouns(corpora, minOccurrence, minVar).map(_ -> POS.NNP).sliding(100, 100).foldLeft(0) {
+      case (count, set) =>
         targets.par.foreach(_.addUserDictionary(set: _*))
+        val newcount = count + set.length
+        logger info s"$newcount words are identified (In Progress)"
+
+        newcount
     }
+
+    logger info s"Learning finished ($total words)"
   }
 
   /**

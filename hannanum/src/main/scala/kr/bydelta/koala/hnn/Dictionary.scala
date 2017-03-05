@@ -77,9 +77,21 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     writer.close()
   }
 
-  override def contains(word: String, posTag: Set[POSTag] = Set(POS.NNP, POS.NNG)): Boolean = {
-    val oTag = posTag.map(x => tagSet.getTagID(tagToHNN(x)))
-    fetchFrom(word, systemDic, oTag) || items.exists(x => x._1 == word && posTag.contains(x._2))
+  override def getNotExists(onlySystemDic: Boolean, word: (String, POSTag)*): Seq[(String, POSTag)] = {
+    val (user, system) =
+      if (onlySystemDic) (Seq.empty[(String, POSTag)], word)
+      else word.partition(items.contains)
+    user ++: system.groupBy(_._1).iterator.flatMap {
+      case (w, tags) =>
+        val morph = systemDic.fetch(Code.toTripleArray(w))
+        if (morph == null) Seq.empty
+        else {
+          val found = morph.info_list.map(_.tag)
+          tags.filter {
+            case (_, t) => found.contains(tagSet.getTagID(tagToHNN(t)))
+          }
+        }
+    }.toSeq
   }
 
   override def items: Set[(String, POSTag)] = {
@@ -93,12 +105,6 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     }
 
     usrBuffer
-  }
-
-  private def fetchFrom(word: String, dict: Trie, oTag: Set[Int]) = {
-    val morph = dict.fetch(Code.toTripleArray(word))
-    if (morph == null) false
-    else morph.info_list.exists(x => oTag.contains(x.tag))
   }
 
   def loadDictionary() =

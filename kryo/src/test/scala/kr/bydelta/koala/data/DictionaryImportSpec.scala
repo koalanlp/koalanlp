@@ -1,7 +1,7 @@
-package kr.bydelta.koala.kryo
+package kr.bydelta.koala.data
 
 import kr.bydelta.koala.POS
-import kr.bydelta.koala.kkma.{Dictionary => KDict}
+import kr.bydelta.koala.kkma.{Dictionary => KDict, Tagger => KTagger}
 import kr.bydelta.koala.twt.{Dictionary => TDict}
 import org.specs2.mutable.Specification
 
@@ -14,12 +14,13 @@ object DictionaryImportSpec extends Specification {
   "Dictionaries" should {
     "import other dictionary (nouns)" in {
       TDict.items.size must_== 0
-      TDict.importFrom(KDict, fastAppend = true)
+      TDict.importFrom(KDict)
       TDict.items.size must be_>(0)
     }
-    "import other dictionary (verbs)" in {
+
+    "import other dictionary (noun & verb)" in {
       val prevSize = KDict.userdic.morphemes.size
-      KDict.importFrom(TDict, POS.isPredicate)
+      KDict.importFrom(TDict, p => POS.isPredicate(p) || POS.isNoun(p), fastAppend = false)
       KDict.userdic.morphemes.size must be_>(prevSize)
     }
   }
