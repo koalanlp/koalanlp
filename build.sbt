@@ -17,12 +17,15 @@ resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
 resolvers ++= Seq(
   "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/"
 )
-concurrentRestrictions in Global := Seq(
-  Tags.limit(Tags.CPU, 2),
-  Tags.limit(Tags.Network, 10),
-  Tags.limit(Tags.Test, 1),
-  Tags.limitAll(15)
-)
+
+testGrouping in Test := (definedTests in Test map { tests =>
+  val sortedTests = tests map {
+    test => new Tests.Group(test.name, Seq(test), Tests.InProcess)
+  } sortBy (_.name.toLowerCase) flatMap {
+    _.tests
+  }
+  Seq(new Tests.Group("Tests", sortedTests, Tests.InProcess))
+}).value
 
 sonatypeProfileName := "kr.bydelta"
 

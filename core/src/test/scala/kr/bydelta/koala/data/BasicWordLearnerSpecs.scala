@@ -19,7 +19,7 @@ trait BasicWordLearnerSpecs[X] {
       !morphs.exists(CanLearnWord.DENIED_MORPS) && !isAlphabetPronounced(word)
   })
   final val EXCLUDED_SET: Seq[String] = Seq("등장하는", "요격하는")
-  final val INCLUDED_SET: Seq[String] = Seq("출시국가", "속초시청", "미사일방어", "엠디", "국방부", "와이파이존", "월스트리트", "사드")
+  final val INCLUDED_SET: Seq[String] = Seq("속초시청", "미사일방어", "엠디", "국방부", "와이파이존", "월스트리트", "사드")
     .filterNot(x => getDict.contains(x))
   final val INCLUDED_SET_2: Seq[String] = Seq("국방부", "월스트리트", "와이파이존", "사드")
     .filterNot(x => getDict.contains(x))
