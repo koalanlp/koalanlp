@@ -16,7 +16,7 @@ script:
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage komoran/test
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage twitter/test
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage hannanum/test
-- sbt -J-Xmx4g coverageReport coverageAggregate
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverageReport coverageAggregate
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 - sbt ++$TRAVIS_SCALA_VERSION unidoc
