@@ -7,8 +7,8 @@ install:
 - cp -r ./hannanum/models/* ./
 script:
 - sbt -J-Xmx4g clean
+- sbt -J-Xmx4g ++2.11.8 server/test
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage core/test
-- sbt -J-Xmx4g ++2.11.8 coverage server/test
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage kryo/test
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *Tagger*"
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *Unknown*"
@@ -19,7 +19,7 @@ script:
 - sbt -J-Xmx4g coverageReport coverageAggregate
 after_success:
 - bash <(curl -s https://codecov.io/bash)
-- sbt unidoc
+- sbt ++$TRAVIS_SCALA_VERSION unidoc
 - bash ./ghdoc.sh
 notifications:
   webhooks:

@@ -9,7 +9,7 @@ git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/nearbydelta/K
 # Commit and Push the Changes
 cd gh-pages
 git rm -rf ./api/*
-mv $WD/target/scala-2.10/unidoc $HOME/gh-pages/api
+mv $WD/target/scala-2.11/unidoc $HOME/gh-pages/api
 git add -f ./api
 git commit -m "Lastest javadoc on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to gh-pages"
 git push -fq origin gh-pages > /dev/null

@@ -36,6 +36,13 @@ final class Sentence private(val words: Vector[Word])
   def jTopLevels = topLevels.asJava
 
   /**
+    * 의존 구문 분석 결과, 나타난 핵심어들.
+    *
+    * Head words for this sentence.
+    */
+  def topLevels = root.dependents
+
+  /**
     * (Java) 주어진 품사 표기의 Sequence를 포함하는지 확인.
     *
     * <br/>
@@ -140,15 +147,8 @@ final class Sentence private(val words: Vector[Word])
   surfaceString() + "\n" +
     words.map {
       w =>
-        w.toString + (if (topLevels.exists(_.target == w)) "[ROOT]" else "")
+        w.toString + (if (topLevels.exists(_.target == w.index)) "[ROOT]" else "")
     }.mkString("\n")
-
-  /**
-    * 의존 구문 분석 결과, 나타난 핵심어들.
-    *
-    * Head words for this sentence.
-    */
-  def topLevels = root.dependents
 
   /**
     * 띄어쓰기 된 문장을 반환.
