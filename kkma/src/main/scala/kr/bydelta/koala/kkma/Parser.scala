@@ -6,7 +6,7 @@ import kr.bydelta.koala.traits.CanDepParse
 import org.snu.ids.ha.ma.{Eojeol, MCandidate, MExpression, Sentence}
 import org.snu.ids.ha.sp.{Parser => KParser}
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 
 /**
   * 꼬꼬마 의존구문분석기.
@@ -26,10 +26,6 @@ class Parser extends CanDepParse {
         KSent(Seq())
     }
 
-  override def parse(sentence: KSent): KSent = {
-    parseRaw(deParse(sentence), sentence)
-  }
-
   /**
     * 꼬꼬마 형태소분석 결과를 토대로 의존구문분석 진행
     *
@@ -38,15 +34,15 @@ class Parser extends CanDepParse {
     * @return 분석된 결과 (통합 문장).
     */
   private def parseRaw(rawSentence: Sentence, tagged: KSent): KSent = {
-    rawSentence.zipWithIndex.foreach {
+    rawSentence.asScala.zipWithIndex.foreach {
       case (e, idx) => e.getFirstMorp.setIndex(idx)
     }
-    val morphIdxs = rawSentence.indices
+    val morphIdxs = rawSentence.asScala.indices
     val parse = parser.parse(rawSentence)
     val edgeList = parse.getEdgeList
     val nodeList = parse.getNodeList
 
-    edgeList.foreach {
+    edgeList.asScala.foreach {
       e =>
         val from: Int =
           nodeList.get(e.getFromId).getEojeol match {
@@ -66,6 +62,10 @@ class Parser extends CanDepParse {
         headWord.addDependant(thisWord, tag, rawTag)
     }
     tagged
+  }
+
+  override def parse(sentence: KSent): KSent = {
+    parseRaw(deParse(sentence), sentence)
   }
 
   /**

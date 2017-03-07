@@ -4,6 +4,8 @@ import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.traits.{CanDepParse, CanSplitSentence, CanTag}
 
+import scala.language.implicitConversions
+
 /**
   * Object for implicit conversions.
   */

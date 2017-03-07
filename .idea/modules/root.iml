@@ -20,6 +20,7 @@
       <excludeFolder url="file://$MODULE_DIR$/../../target" />
       <excludeFolder url="file://$MODULE_DIR$/../../target/resolution-cache" />
       <excludeFolder url="file://$MODULE_DIR$/../../target/scala-2.11" />
+      <excludeFolder url="file://$MODULE_DIR$/../../target/scala-2.12" />
       <excludeFolder url="file://$MODULE_DIR$/../../target/site" />
       <excludeFolder url="file://$MODULE_DIR$/../../target/specs2-reports" />
       <excludeFolder url="file://$MODULE_DIR$/../../target/streams" />

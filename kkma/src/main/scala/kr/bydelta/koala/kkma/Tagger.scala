@@ -10,7 +10,7 @@ import kr.bydelta.koala.fromKKMATag
 import kr.bydelta.koala.traits.CanTag
 import org.snu.ids.ha.ma._
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 
 /**
   * 꼬꼬마 형태소분석기.
@@ -32,15 +32,13 @@ final class Tagger(logPath: String = "kkma.log") extends CanTag[Sentence] {
       case _ => koala.data.Sentence(Seq())
     }
 
-  override def tagParagraph(text: String): Seq[koala.data.Sentence] = tagParagraphRaw(text).map(convert)
-
   override private[koala] def convert(result: Sentence): koala.data.Sentence =
     koala.data.Sentence(
-      result.map {
+      result.asScala.map {
         eojeol =>
           Word(
             eojeol.getExp,
-            eojeol.map {
+            eojeol.asScala.map {
               morph => koala.data.Morpheme(
                 morph.getString,
                 morph.getTag,
@@ -70,16 +68,11 @@ final class Tagger(logPath: String = "kkma.log") extends CanTag[Sentence] {
             )
         )
         )
-    ).toSeq
+    ).asScala
 
-  /**
-    * 꼬꼬마는 문장단위의 분석결과가 없습니다.
-    *
-    * @param text 분석할 String.
-    * @return 원본 문장객체.
-    */
-  @deprecated
-  override def tagSentenceRaw(text: String): Sentence = null
+  override def tagParagraph(text: String): Seq[koala.data.Sentence] = tagParagraphRaw(text).map(convert)
+
+  override def tagSentenceRaw(text: String): Sentence = tagParagraphRaw(text).head
 
   @throws[Throwable]
   override protected def finalize() {

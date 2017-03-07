@@ -9,7 +9,8 @@ script:
 - sbt -J-Xmx4g server/test
 - sbt -J-Xmx4g clean
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage core/test
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage kryo/test
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kryo/test *.data.*"
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kryo/test *.kryo.*"
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *Tagger*"
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *Learn*"
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage kkma/test

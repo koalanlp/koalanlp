@@ -6,7 +6,6 @@ import kr.bydelta.koala.helper.UserDicReader
 import kr.bydelta.koala.traits.CanCompileDict
 import org.snu.ids.ha.dic.{RawDicFileReader, SimpleDicFileReader, Dictionary => Dict}
 
-import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 
 /**
@@ -15,7 +14,7 @@ import scala.collection.JavaConverters._
 object Dictionary extends CanCompileDict {
   /** 원본사전의 어휘목록 **/
   private lazy val systemDicByTag = Dict.getInstance.getAsList.asScala.flatMap {
-    _.filter(_.getTag != null)
+    _.asScala.filter(_.getTag != null)
       .map(m => fromKKMATag(m.getTag) -> m.getExp) // (품사, 표현식)으로 변환.
   }.groupBy(_._1).mapValues(_.map(_.swap))
 
@@ -58,7 +57,7 @@ object Dictionary extends CanCompileDict {
         tags.filterNot {
           t =>
             val mexp = Dict.getInstance.getMExpression(w)
-            mexp != null && mexp.map(_.getTag).contains(t._3)
+            mexp != null && mexp.asScala.map(_.getTag).contains(t._3)
         }.map(_._2)
     }.toSeq
   }
