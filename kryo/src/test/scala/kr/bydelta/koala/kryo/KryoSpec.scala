@@ -22,7 +22,7 @@ object KryoSpec extends Specification {
 
       val sent = parser.parse(text)
 
-      val tmpFile = new File(System.getProperty("java.io.tmpdir"), "test.dic")
+      val tmpFile = new File(System.getProperty("java.io.tmpdir"), "test.sent")
       val output = new Output(new FileOutputStream(tmpFile))
       kryo.writeObject(output, sent)
       output.close()

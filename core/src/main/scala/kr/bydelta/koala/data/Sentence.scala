@@ -192,7 +192,7 @@ final class Sentence private(val words: Vector[Word])
 
     if (newStack.nonEmpty) {
       val (nextHead, nextDepth) = newStack.head
-      treeString(nextHead, nextDepth, newStack, printed)
+      treeString(nextHead, nextDepth, newStack.tail, printed)
     } else
       printed.mkString("\n")
   }

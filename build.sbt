@@ -83,7 +83,7 @@ lazy val server = (project in file("server"))
     libraryDependencies ++= Seq(
       "com.tumblr" %% "colossus" % "0.8.3",
       "com.tumblr" %% "colossus-testkit" % "0.8.3" % "test",
-      "com.typesafe.play" %% "play-json" % "[2.6.0,)"
+      "com.typesafe.play" %% "play-json" % "[2.4,)"
     )
   )
   .dependsOn(core, kkma % "test")
@@ -105,7 +105,7 @@ def projectWithConfig(module: String) =
     name := s"koalaNLP-$module",
     version := "1.5.0",
     scalaVersion := "2.11.8",
-    scalacOptions ++= Seq("-target:jvm-1.8", "-deprecation", "-unchecked", "-feature"),
+    scalacOptions ++= Seq("-target:jvm-1.7", "-deprecation", "-unchecked", "-feature"),
     scalacOptions in Test ++= Seq("-Yrangepos"),
     crossScalaVersions := Seq("2.11.8", "2.12.1"),
     publishArtifact in Test := false,

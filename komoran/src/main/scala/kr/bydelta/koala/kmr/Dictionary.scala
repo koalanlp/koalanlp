@@ -11,7 +11,6 @@ import kr.co.shineware.util.common.model.{Pair => KPair}
 
 import scala.annotation.tailrec
 import scala.collection.JavaConversions._
-import scala.collection.mutable
 import scala.io.Source
 
 /**
@@ -143,11 +142,13 @@ object Dictionary extends CanCompileDict with CanExtractResource {
       }
 
     @tailrec
-    def iterate(stack: mutable.Stack[(Seq[Char], TNode)],
+    def iterate(stack: List[(Seq[Char], TNode)],
                 acc: Seq[(String, POSTag)] = Seq.empty): Seq[(String, POSTag)] =
       if (stack.isEmpty) acc
       else {
-        val (prefix, top) = stack.pop()
+        val (prefix, top) = stack.head
+        var nStack = stack.tail
+
         val word = if (top.getKey == null) prefix else prefix :+ top.getKey.charValue()
         val value = top.getValue
 
@@ -159,13 +160,13 @@ object Dictionary extends CanCompileDict with CanExtractResource {
 
         val children = top.getChildren
         if (children != null) {
-          stack.pushAll(children.map(word -> _))
+          nStack ++:= children.map(word -> _)
         }
 
-        iterate(stack, newSeq)
+        iterate(nStack, newSeq)
       }
 
-    iterate(mutable.Stack(Seq.empty[Char] -> dic.getRoot)).toIterator
+    iterate(List(Seq.empty[Char] -> dic.getRoot)).toIterator
   }
 
   override protected def modelName: String = "komoran"

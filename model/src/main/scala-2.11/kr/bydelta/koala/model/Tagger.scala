@@ -7,7 +7,6 @@ import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.traits.CanTag
 
 import scala.annotation.tailrec
-import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -97,7 +96,7 @@ class Tagger(private val crf: CRFModel, private val irregulars: Map[String, Stri
     */
   private def splitSentences(para: Seq[Word],
                              pos: Int = 0,
-                             open: mutable.Stack[String] = mutable.Stack(),
+                             open: List[String] = List(),
                              acc: ArrayBuffer[Sentence] = ArrayBuffer()): Seq[Sentence] =
   if (para.isEmpty) acc
   else {
@@ -124,10 +123,11 @@ class Tagger(private val crf: CRFModel, private val irregulars: Map[String, Stri
       } else {
         val parenStr = para(paren)
         val surface = parenStr.surface
+        var nOpen = open
         if (Tagger.closeParenRegex.findFirstMatchIn(surface).isEmpty) {
-          open push surface
+          nOpen +:= surface
         }
-        splitSentences(para, paren + 1, open, acc)
+        splitSentences(para, paren + 1, nOpen, acc)
       }
     } else {
       if (paren == para.length) {
@@ -136,16 +136,17 @@ class Tagger(private val crf: CRFModel, private val irregulars: Map[String, Stri
       } else {
         val parenStr = para(paren)
         val surface = parenStr.surface
+        var nOpen = open
         if (Tagger.openParenRegex.findFirstMatchIn(surface).isDefined) {
-          open push surface
+          nOpen +:= surface
         } else if (Tagger.closeParenRegex.findFirstMatchIn(surface).isDefined) {
-          open.pop
+          nOpen = nOpen.tail
         } else {
-          val top = open.top
-          if (surface == top) open.pop()
-          else open push surface
+          val top = nOpen.head
+          if (surface == top) nOpen = nOpen.tail
+          else nOpen +:= surface
         }
-        splitSentences(para, paren + 1, open, acc)
+        splitSentences(para, paren + 1, nOpen, acc)
       }
     }
   }

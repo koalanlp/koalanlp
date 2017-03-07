@@ -7,12 +7,12 @@
         <parameter value="-target:jvm-1.7" />
       </parameters>
     </profile>
-    <profile name="SBT 4" modules="core,eunjeon,hannanum,kkma,komoran,kryo,model,samples,server,twitter">
+    <profile name="SBT 3" modules="core,eunjeon,hannanum,kkma,komoran,kryo,model,samples,server,twitter">
       <option name="deprecationWarnings" value="true" />
       <option name="uncheckedWarnings" value="true" />
       <option name="featureWarnings" value="true" />
       <parameters>
-        <parameter value="-target:jvm-1.8" />
+        <parameter value="-target:jvm-1.7" />
       </parameters>
     </profile>
   </component>

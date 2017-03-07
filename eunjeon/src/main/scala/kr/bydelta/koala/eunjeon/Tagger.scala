@@ -5,7 +5,6 @@ import kr.bydelta.koala.traits.CanTag
 import org.bitbucket.eunjeon.seunjeon._
 
 import scala.annotation.tailrec
-import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -57,7 +56,7 @@ class Tagger extends CanTag[Seq[Eojeol]] {
   @tailrec
   private def splitSentences(para: Seq[Eojeol],
                              pos: Int = 0,
-                             open: mutable.Stack[String] = mutable.Stack(),
+                             open: List[String] = List(),
                              acc: ArrayBuffer[Seq[Eojeol]] = ArrayBuffer()): Seq[Seq[Eojeol]] =
     if (para.isEmpty) acc
     else {
@@ -81,10 +80,11 @@ class Tagger extends CanTag[Seq[Eojeol]] {
           splitSentences(next, 0, open, acc)
         } else {
           val parenStr = para(paren)
+          var nOpen = open
           if (!parenStr.nodes.last.morpheme.feature.head.equals("SSC")) {
-            open push parenStr.surface
+            nOpen +:= parenStr.surface
           }
-          splitSentences(para, paren + 1, open, acc)
+          splitSentences(para, paren + 1, nOpen, acc)
         }
       } else {
         if (paren == para.length) {
@@ -94,16 +94,17 @@ class Tagger extends CanTag[Seq[Eojeol]] {
           val parenStr = para(paren)
           val surface = parenStr.surface
           val tag = parenStr.nodes.last.morpheme.feature.head
+          var nOpen = open
           if (tag.equals("SSO")) {
-            open push surface
+            nOpen +:= surface
           } else if (tag.equals("SSC")) {
-            open.pop
+            nOpen = nOpen.tail
           } else {
-            val top = open.top
-            if (surface == top) open.pop()
-            else open push surface
+            val top = nOpen.head
+            if (surface == top) nOpen = nOpen.tail
+            else nOpen +:= surface
           }
-          splitSentences(para, paren + 1, open, acc)
+          splitSentences(para, paren + 1, nOpen, acc)
         }
       }
     }

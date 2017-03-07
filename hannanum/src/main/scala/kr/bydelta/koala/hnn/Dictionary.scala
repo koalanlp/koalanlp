@@ -11,7 +11,6 @@ import kr.bydelta.koala.traits.{CanCompileDict, CanExtractResource}
 
 import scala.annotation.tailrec
 import scala.collection.JavaConversions._
-import scala.collection.mutable
 import scala.io.Source
 
 /**
@@ -124,11 +123,13 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     type TNode = Trie#TNODE
 
     @tailrec
-    def iterate(stack: mutable.Stack[(Array[Char], TNode)],
+    def iterate(stack: List[(Array[Char], TNode)],
                 acc: Seq[(String, POSTag)] = Seq.empty): Seq[(String, POSTag)] =
       if (stack.isEmpty) acc
       else {
-        val (prefix, top) = stack.pop()
+        val (prefix, top) = stack.head
+        var nStack = stack.tail
+
         val word = prefix :+ top.key
         val value = top.info_list
 
@@ -140,13 +141,13 @@ object Dictionary extends CanCompileDict with CanExtractResource {
 
         if (top.child_size > 0) {
           val children = top.child_idx until (top.child_idx + top.child_size)
-          stack.pushAll(children.map(id => word -> systemDic.get_node(id)))
+          nStack ++:= children.map(id => word -> systemDic.get_node(id))
         }
 
-        iterate(stack, newSeq)
+        iterate(nStack, newSeq)
       }
 
-    iterate(mutable.Stack(Array.empty[Char] -> systemDic.node_head)).toIterator
+    iterate(List(Array.empty[Char] -> systemDic.node_head)).toIterator
   }
 
   override protected def modelName: String = "hannanum"
