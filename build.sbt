@@ -18,23 +18,14 @@ resolvers ++= Seq(
   "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/"
 )
 
-testGrouping in Test := (definedTests in Test map { tests =>
-  val sortedTests = tests map {
-    test => new Tests.Group(test.name, Seq(test), Tests.InProcess)
-  } sortBy (_.name.toLowerCase) flatMap {
-    _.tests
-  }
-  Seq(new Tests.Group("Tests", sortedTests, Tests.InProcess))
-}).value
-
 sonatypeProfileName := "kr.bydelta"
 
 lazy val core = (project in file("core"))
   .settings(projectWithConfig("core"): _*)
   .settings(
     libraryDependencies ++= Seq(
-      "org.log4s" %% "log4s" % "latest.integration",
-      "org.slf4j" % "slf4j-simple" % "latest.integration"
+      "org.log4s" %% "log4s" % "[1.3.4,)",
+      "org.slf4j" % "slf4j-simple" % "[1.7.24,)"
     )
   )
 lazy val kkma = (project in file("kkma"))
@@ -68,7 +59,7 @@ lazy val twitter = (project in file("twitter"))
   .settings(projectWithConfig("twitter"): _*)
   .settings(
     libraryDependencies ++= Seq(
-      "org.openkoreantext" % "open-korean-text" % "latest.integration"
+      "org.openkoreantext" % "open-korean-text" % "[1.1,)"
     )
   ).dependsOn(core % "test->test;compile->compile")
 lazy val komoran = (project in file("komoran"))
@@ -92,20 +83,20 @@ lazy val server = (project in file("server"))
     libraryDependencies ++= Seq(
       "com.tumblr" %% "colossus" % "0.8.3",
       "com.tumblr" %% "colossus-testkit" % "0.8.3" % "test",
-      "com.typesafe.play" %% "play-json" % "latest.integration"
+      "com.typesafe.play" %% "play-json" % "[2.6.0,)"
     )
   )
   .dependsOn(core, kkma % "test")
 lazy val kryo = (project in file("kryo"))
   .settings(projectWithConfig("kryo"))
   .settings(
-    libraryDependencies += "com.twitter" %% "chill" % "latest.integration"
+    libraryDependencies += "com.twitter" %% "chill" % "[0.9.2,)"
   )
   .dependsOn(core, kkma % "test", twitter % "test")
 lazy val model = (project in file("model"))
   .settings(projectWithConfig("model"))
   .settings(
-    libraryDependencies += "cc.factorie" %% "factorie" % "latest.integration"
+    libraryDependencies += "cc.factorie" %% "factorie" % "[1.2,)"
   ).dependsOn(core)
 
 def projectWithConfig(module: String) =
@@ -120,7 +111,7 @@ def projectWithConfig(module: String) =
     publishArtifact in Test := false,
     coverageExcludedPackages := ".*\\.helper\\..*",
     test in assembly := {},
-    libraryDependencies += "org.specs2" %% "specs2-core" % "latest.integration" % "test",
+    libraryDependencies += "org.specs2" %% "specs2-core" % "[3.8,)" % "test",
     homepage := Some(url("http://nearbydelta.github.io/KoalaNLP")),
     parallelExecution in Test := false,
     publishTo := version { v: String ⇒
