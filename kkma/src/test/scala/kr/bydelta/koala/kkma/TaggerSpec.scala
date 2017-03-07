@@ -4,7 +4,7 @@ import kr.bydelta.koala.POS
 import org.snu.ids.ha.ma.MorphemeAnalyzer
 import org.specs2.mutable._
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 
 /**
   * Created by bydelta on 16. 7. 26.
@@ -24,11 +24,11 @@ class TaggerSpec extends Specification {
       val kkma = new MorphemeAnalyzer
 
       val original = kkma.divideToSentences(kkma.leaveJustBest(
-        kkma.postProcess(kkma.analyze(sent)))).head
+        kkma.postProcess(kkma.analyze(sent)))).asScala.head
 
       tagged.map(_.map(_.surface).mkString("+")).mkString(" ") must_==
-        original.map(_.map(_.getString).mkString("+")).mkString(" ")
-      tagged.surfaceString(" ") must_== original.map(_.getExp).mkString(" ")
+        original.asScala.map(_.asScala.map(_.getString).mkString("+")).mkString(" ")
+      tagged.surfaceString(" ") must_== original.asScala.map(_.getExp).mkString(" ")
       tagged.map(_.surface).mkString must_== sent.replaceAll("\\s+", "")
     }
 
@@ -61,8 +61,8 @@ class TaggerSpec extends Specification {
       val singlethreaded = sents.map {
         sent =>
           kkma.divideToSentences(kkma.leaveJustBest(
-            kkma.postProcess(kkma.analyze(sent)))).head
-            .map(_.map(_.getString).mkString("+")).mkString(" ")
+            kkma.postProcess(kkma.analyze(sent)))).asScala.head
+            .asScala.map(_.asScala.map(_.getString).mkString("+")).mkString(" ")
       }.mkString("\n")
 
       multithreaded must_== singlethreaded

@@ -6,7 +6,7 @@ import org.snu.ids.ha.ma.MorphemeAnalyzer
 import org.snu.ids.ha.sp.{ParseTreeNode, Parser => KParser}
 import org.specs2.mutable._
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -45,11 +45,11 @@ class ParserSpec extends Specification {
 
       val original = kkpa.parse(
         kkma.divideToSentences(kkma.leaveJustBest(
-          kkma.postProcess(kkma.analyze(sent)))).head
+          kkma.postProcess(kkma.analyze(sent)))).asScala.head
       )
 
       val oNodes = original.getNodeList
-      val oEdges = original.getEdgeList.map {
+      val oEdges = original.getEdgeList.asScala.map {
         e => getEojeolText(oNodes.get(e.getFromId)) + "--" + e.getRelation + "-->" + getEojeolText(oNodes.get(e.getToId))
       }.sorted.mkString("\n")
 
@@ -89,11 +89,11 @@ class ParserSpec extends Specification {
         sent =>
           val original = kkpa.parse(
             kkma.divideToSentences(kkma.leaveJustBest(
-              kkma.postProcess(kkma.analyze(sent)))).head
+              kkma.postProcess(kkma.analyze(sent)))).asScala.head
           )
 
           val oNodes = original.getNodeList
-          original.getEdgeList.map {
+          original.getEdgeList.asScala.map {
             e => getEojeolText(oNodes.get(e.getFromId)) + "--" + e.getRelation + "-->" + getEojeolText(oNodes.get(e.getToId))
           }.sorted.mkString("\n")
       }.mkString("\n")
