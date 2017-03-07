@@ -3,6 +3,8 @@ package kr.bydelta.koala.data
 import kr.bydelta.koala.traits.{CanCompileDict, CanLearnWord}
 import org.specs2.mutable.Specification
 
+import scala.language.reflectiveCalls
+
 /**
   * Created by bydelta on 16. 7. 31.
   */

@@ -5,7 +5,6 @@ import org.specs2.execute.Result
 import org.specs2.mutable.Specification
 
 import scala.collection.JavaConverters._
-import scala.language.reflectiveCalls
 
 /**
   * Created by bydelta on 16. 7. 31.
