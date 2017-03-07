@@ -36,13 +36,6 @@ final class Sentence private(val words: Vector[Word])
   def jTopLevels = topLevels.asJava
 
   /**
-    * 의존 구문 분석 결과, 나타난 핵심어들.
-    *
-    * Head words for this sentence.
-    */
-  def topLevels = root.dependents
-
-  /**
     * (Java) 주어진 품사 표기의 Sequence를 포함하는지 확인.
     *
     * <br/>
@@ -151,6 +144,13 @@ final class Sentence private(val words: Vector[Word])
     }.mkString("\n")
 
   /**
+    * 의존 구문 분석 결과, 나타난 핵심어들.
+    *
+    * Head words for this sentence.
+    */
+  def topLevels = root.dependents
+
+  /**
     * 띄어쓰기 된 문장을 반환.
     *
     * @param delimiter 어절 사이의 띄어쓰기 방식. 기본값 = 공백(" ")
@@ -176,25 +176,23 @@ final class Sentence private(val words: Vector[Word])
   if (topLevels.isEmpty) singleLineString
   else {
     val word = topLevels.head
-    val stack = mutable.Stack[(Relationship, Int)]()
-    stack pushAll topLevels.tail.map(_ -> 0)
-    treeString(word, 0, stack)
+    treeString(word, 0, topLevels.tail.map(_ -> 0).toList)
   }
 
   override protected[this] def newBuilder: mutable.Builder[Word, Sentence] = Sentence.newBuilder
 
   @tailrec
   private def treeString(rel: Relationship, depth: Int,
-                         stack: mutable.Stack[(Relationship, Int)] = mutable.Stack(),
+                         stack: List[(Relationship, Int)] = List(),
                          printed: ArrayBuffer[String] = ArrayBuffer()): String = {
     printed += (" " * depth + s"+${rel.relation} : ${this (rel.target).singleLineString} ... ${rel.rawRel}")
 
     val nextDepth = depth + 1
-    stack pushAll this (rel.target).dependents.map(_ -> nextDepth)
+    val newStack = stack ++ apply(rel.target).dependents.map(_ -> nextDepth)
 
-    if (stack.nonEmpty) {
-      val (nextHead, nextDepth) = stack.pop()
-      treeString(nextHead, nextDepth, stack, printed)
+    if (newStack.nonEmpty) {
+      val (nextHead, nextDepth) = newStack.head
+      treeString(nextHead, nextDepth, newStack, printed)
     } else
       printed.mkString("\n")
   }
