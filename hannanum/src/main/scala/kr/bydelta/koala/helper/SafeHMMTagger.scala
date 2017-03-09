@@ -10,7 +10,7 @@ import kaist.cilab.parser.berkeleyadaptation.Configuration
 import kr.bydelta.koala.hnn.Dictionary
 
 import scala.annotation.tailrec
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 /**
@@ -37,16 +37,16 @@ private[koala] class SafeHMMTagger extends PosTagger {
     val eojeolSetArray = sos.getEojeolSetArray
     reset()
 
-    eojeolSetArray.foreach {
+    eojeolSetArray.asScala.foreach {
       _.foldLeft(None.asInstanceOf[Option[MarkovNode]]) {
         case (opt, e) =>
           val now_tag: String = PhraseTag.getPhraseTag(e.getTags)
           val probability: Double = computeWT(e)
           val node: MarkovNode = new MarkovNode(e, now_tag, probability)
-          markovNet.add(node)
+          markovNet += node
           opt match {
-            case Some(prev) => prev.sibling_$eq(node)
-            case None => wordPts.add(node)
+            case Some(prev) => prev.sibling = node
+            case None => wordPts += node
           }
           Some(node)
       }

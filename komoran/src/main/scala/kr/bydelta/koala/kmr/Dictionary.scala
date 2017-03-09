@@ -10,7 +10,7 @@ import kr.co.shineware.nlp.komoran.modeler.model.{Observation, PosTable}
 import kr.co.shineware.util.common.model.{Pair => KPair}
 
 import scala.annotation.tailrec
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import scala.io.Source
 
 /**
@@ -77,7 +77,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
         // Filter out existing morphemes!
         if (searched == null) tags // For the case of not found.
         else {
-          val found = searched.map(_.getFirst)
+          val found = searched.asScala.map(_.getFirst)
           tags.filterNot(t => found.contains(table.getId(tagToKomoran(t._2))))
         }
     }.toSeq
@@ -150,7 +150,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
         var nStack = stack.tail
 
         val word = if (top.getKey == null) prefix else prefix :+ top.getKey.charValue()
-        val value = top.getValue
+        val value = top.getValue.asScala
 
         val newSeq = if (value != null && value.exists(x => targetIDs.contains(x.getFirst))) {
           val wordstr = reunionKorean(word)

@@ -4,7 +4,7 @@ import kr.bydelta.koala.POS
 import kr.co.shineware.nlp.komoran.core.analyzer.Komoran
 import org.specs2.mutable._
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 
 /**
   * Created by bydelta on 16. 7. 26.
@@ -27,7 +27,7 @@ class TaggerSpec extends Specification {
       val original = komoran.analyze(sent)
 
       tagged.map(_.map(_.surface).mkString("+")).mkString(" ") must_==
-        original.map(_.map(_.getFirst).mkString("+")).mkString(" ")
+        original.asScala.map(_.asScala.map(_.getFirst).mkString("+")).mkString(" ")
     }
 
     "be thread-safe" in {
@@ -59,7 +59,7 @@ class TaggerSpec extends Specification {
       val komoran = new Komoran(Dictionary.getExtractedPath)
       val singlethreaded = sents.map {
         sent =>
-          komoran.analyze(sent).map(_.map(_.getFirst).mkString("+")).mkString(" ")
+          komoran.analyze(sent).asScala.map(_.asScala.map(_.getFirst).mkString("+")).mkString(" ")
       }.mkString("\n")
 
       multithreaded must_== singlethreaded

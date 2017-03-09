@@ -8,7 +8,7 @@ import kr.bydelta.koala.{POS, fromKomoranTag}
 import kr.co.shineware.nlp.komoran.core.analyzer.Komoran
 import kr.co.shineware.util.common.model.{Pair => KPair}
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -36,12 +36,13 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
 
   override private[koala] def convert(result: util.List[util.List[KPair[String, String]]]): Sentence =
     Sentence(
-      result.map {
+      result.asScala.map {
         word =>
-          val originalWord = word.map(_.getFirst).mkString
+          val wAsScala = word.asScala
+          val originalWord = wAsScala.map(_.getFirst).mkString
           Word(
             originalWord,
-            word.map {
+            wAsScala.map {
               pair =>
                 Morpheme(
                   pair.getFirst,

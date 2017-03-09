@@ -10,7 +10,7 @@ import kr.bydelta.koala._
 import kr.bydelta.koala.traits.{CanCompileDict, CanExtractResource}
 
 import scala.annotation.tailrec
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import scala.io.Source
 
 /**
@@ -88,7 +88,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
         // filter out existing morphemes!
         if (morph == null) tags // The case of not found.
         else {
-          val found = morph.info_list.map(_.tag)
+          val found = morph.info_list.asScala.map(_.tag)
           tags.filterNot {
             case (_, t) => found.contains(tagSet.getTagID(tagToHNN(t).toLowerCase))
           }
@@ -131,7 +131,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
         var nStack = stack.tail
 
         val word = prefix :+ top.key
-        val value = top.info_list
+        val value = top.info_list.asScala
 
         val newSeq = if (value != null && value.exists(x => targetIDs.contains(x.tag))) {
           val wordstr = Code.toString(word)

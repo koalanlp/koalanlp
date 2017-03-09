@@ -11,7 +11,7 @@ import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.helper.BerkeleyParserWrap
 import kr.bydelta.koala.traits.CanDepParse
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 
 /**
   * 한나눔 통합 구문분석기
@@ -58,7 +58,7 @@ class Parser extends CanDepParse {
 
           Word(
             phrase.getStringContents,
-            phrase.getMyTerminals.map {
+            phrase.getMyTerminals.asScala.map {
               term =>
                 val word =
                   if (term.getWord.matches("^.*\\-[LR]RB\\-.*$"))
