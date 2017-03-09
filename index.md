@@ -16,8 +16,10 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 * Hannanum: KAIST의 [한나눔 형태소 분석기](http://kldp.net/projects/hannanum/)와 [NLP_HUB 구문분석기](http://semanticweb.kaist.ac.kr/home/index.php/NLP_HUB)
 * KKMA: 서울대의 [꼬꼬마 형태소/구문 분석기](http://kkma.snu.ac.kr/documents/index.jsp)
 * Komoran: Shineware의 [코모란 v2.4](http://shineware.tistory.com/entry/KOMORAN-ver-24)
-* Twitter: Twitter의 [한국어 분석기](https://github.com/twitter/twitter-korean-text)
+* Twitter: OpenKoreanText의 [오픈 소스 한국어 처리기](http://openkoreantext.org) (구 Twitter 한국어 분석기)<sup>주1</sup>
 * Eunjeon: 은전한닢 프로젝트의 [SEunjeon(S은전)](https://bitbucket.org/eunjeon/seunjeon)
+
+> <sup>주1</sup> 이전 코드와의 연속성을 위해서, OpenKoreanText의 패키지 명칭은 twitter로 유지합니다.
 
 KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록해주십시오.
 또한, 추가하고자 하는 새로운 프로젝트가 있으시면, Issue에 등록해주십시오.
@@ -30,19 +32,19 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 | 패키지명 | 버전 | Java | Scala| 설명 |
 | -------- | ---- | ---- | ---- |---- |
 | `koalanlp-core` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core_2.11%22) | 7+ | 2.10+ | 통합 인터페이스의 정의가 등재된 중심 묶음입니다. |
-| `koalanlp-hannanum` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-hannanum_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-hannanum_2.11%22) | 7+ | 2.10+ | 한나눔 분석기 패키지입니다. <sup>주1</sup> |
-| `koalanlp-kkma` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kkma_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kkma_2.11%22) | 7+ | 2.10+ | 꼬꼬마 분석기 패키지입니다. <sup>주1</sup> |
-| `koalanlp-komoran` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-komoran_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-komoran_2.11%22) | 7+ | 2.10+ | 코모란 분석기 패키지입니다. <sup>주1</sup> |
-| `koalanlp-twitter` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-twitter_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-twitter_2.11%22) | 7+ | 2.10+ | 트위터 분석기 패키지입니다. |
-| `koalanlp-eunjeon` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-eunjeon_2.11%22) | 7+ | **2.11+**<sup>주2</sup> | 은전한닢 분석기 패키지입니다. |
+| `koalanlp-hannanum` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-hannanum_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-hannanum_2.11%22) | 7+ | 2.10+ | 한나눔 분석기 패키지입니다. <sup>주2</sup> |
+| `koalanlp-kkma` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kkma_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kkma_2.11%22) | 7+ | 2.10+ | 꼬꼬마 분석기 패키지입니다. <sup>주2</sup> |
+| `koalanlp-komoran` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-komoran_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-komoran_2.11%22) | 7+ | 2.10+ | 코모란 분석기 패키지입니다. <sup>주2</sup> |
+| `koalanlp-twitter` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-twitter_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-twitter_2.11%22) | **8+**<sup>주3</sup> | **2.12+**<sup>주3</sup> | 트위터(OpenKoreanText) 분석기 패키지입니다. |
+| `koalanlp-eunjeon` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-eunjeon_2.11%22) | 7+ | **2.11+**<sup>주3</sup> | 은전한닢 분석기 패키지입니다. |
 | `koalanlp-kryo` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kryo_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kryo_2.11%22) | 7+ | 2.10+ | Kryo Serialization을 지원하기 위한 패키지입니다. |
-| `koalanlp-server` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-server_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-server_2.11%22) | **8+**<sup>주2</sup> | **2.11+**<sup>주2</sup> | HTTP 서비스 구성을 위한 패키지입니다. |
+| `koalanlp-server` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-server_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-server_2.11%22) | **8+**<sup>주3</sup> | **2.11+**<sup>주3</sup> | HTTP 서비스 구성을 위한 패키지입니다. |
 
-> <sup>주1</sup> 꼬꼬마, 한나눔, 코모란 분석기는 타 분석기와 달리 Maven repository에 등재되어 있지 않아, 원래는 수동으로 직접 추가하셔야 합니다.
+> <sup>주2</sup> 꼬꼬마, 한나눔, 코모란 분석기는 타 분석기와 달리 Maven repository에 등재되어 있지 않아, 원래는 수동으로 직접 추가하셔야 합니다.
 > 이 점이 불편하다는 것을 알기에, KoalaNLP는 assembly 형태로 해당 패키지를 포함하여 배포하고 있습니다. 포함된 패키지를 사용하려면, `assembly` classifier를 사용하십시오.
 > "assembly" classifier가 지정되지 않으면, 각 분석기 라이브러리가 빠진 채로 dependency가 참조됩니다.
 >
-> <sup>주2</sup>
+> <sup>주3</sup>
 > 의존하고 있는 일부 패키지가 Scala 2.10, Java 7을 지원하지 않아, 더 높은 버전만 사용 가능 합니다.
 
 ## Dependency 추가하기
@@ -79,10 +81,10 @@ Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 
 아래에 대부분의 사항에 대해 기술하겠지만, 상세한 사항은 [ScalaDoc](http://nearbydelta.github.io/KoalaNLP/api/#kr.bydelta.koala.package)을 참고하십시오.
 
 ## 문장 분리
-품사 태깅을 거치지 않은 문장 분리는, 한나눔과 트위터 분석기만 지원됩니다. 타 패키지의 경우 문장 분리 작업이 품사 태깅 이후에 이루어집니다.
+품사 태깅을 거치지 않은 문장 분리는, 한나눔과 트위터(OpenKoreanText) 분석기만 지원됩니다. 타 패키지의 경우 문장 분리 작업이 품사 태깅 이후에 이루어집니다.
 > __NOTE:__
-> * 긴 문단의 경우, 문장 분리를 한나눔 또는 트위터로 작업한 다음 각 문장별로 태깅하는 것을 권합니다.
-> * 한나눔이 트위터보다 문장분리가 정확하지만, 반대로 무겁습니다.
+> * 긴 문단의 경우, 문장 분리를 한나눔 또는 트위터(OpenKoreanText)로 작업한 다음 각 문장별로 태깅하는 것을 권합니다.
+> * 한나눔이 트위터(OpenKoreanText)보다 문장분리가 정확하지만, 반대로 무겁습니다.
 
 ```scala
 /* 패키지 명: 한나눔(hnn), 트위터(twt) */
@@ -110,7 +112,7 @@ List<String> sentences = sentSplit.jSentences(paragraph);
 > __Note:__ 
 > * 형태소 분석의 결과는 세종 말뭉치의 지침에 따라 통합되었으며, 통합 태그와 각 분석기 태그의 비교표는 [여기](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)에서 보실 수 있습니다.
 > * 은전한닢과 코모란 라이브러리는 문장분리기(Sentence splitter)를 지원하지 않아, Koala가 품사 분석 결과를 토대로 Heuristic을 사용하여 문장을 분리합니다. 때문에, 그 정확성이 떨어질 수 있습니다.
-> * 트위터의 경우 품사 태깅을 세부적으로 진행하지 않아, 통합 변경 과정에서 임의로 대응되므로(예: Noun → NNG), 통합 태그가 실제와 다를 수 있으나, 큰 무리는 없습니다.
+> * 트위터(OpenKoreanText)의 경우 품사 태깅을 세부적으로 진행하지 않아, 통합 변경 과정에서 임의로 대응되므로(예: Noun → NNG), 통합 태그가 실제와 다를 수 있으나, 큰 무리는 없습니다.
 
 ```scala
 /* 패키지 명: 한나눔(hnn), 코모란(kmr), 꼬꼬마(kkma), 은전한닢(eunjeon), 트위터(twt) */
@@ -174,7 +176,7 @@ Sentence analyzed = parser.parse(sentence);
 ```
 
 ## 사용자 정의 사전
-모든 품사 분석기는 사용자 정의 사전을 등록할 수 있습니다. 단, 트위터는 동사나 형용사와 같이, 어근에 어미가 붙어 활용되는 단어는 등록이 불가능합니다.
+모든 품사 분석기는 사용자 정의 사전을 등록할 수 있습니다. 단, 트위터(OpenKoreanText)는 동사나 형용사와 같이, 어근에 어미가 붙어 활용되는 단어는 등록이 불가능합니다.
 
 > __Note:__
 > 사전에 등재되어도, 일부 라이브러리의 경우, 신규 추가된 단어의 우선순위가 낮아 적용되지 않을 수도 있습니다.
@@ -202,10 +204,10 @@ LinkedList<String> morphemes = new LinkedList<>();
 LinkedList<POS$.Value> pos = new LinkedList<>();
 
 morphemes.add("설빙");
-pos.add(POSTag.NNP); /* 고유명사 '설빙' 추가 */
+pos.add(POS.NNP()); /* 고유명사 '설빙' 추가 */
 
 morphemes.add("구글하");
-pos.add(POSTag.VV); /* 동사 '구글하다' 추가 */
+pos.add(POS.VV()); /* 동사 '구글하다' 추가 */
 
 JavaDictionary.addUserDictionary(morphems, pos);
 
@@ -213,7 +215,27 @@ JavaDictionary.addUserDictionary(morphems, pos);
 Dictionary.jAddUserDictionary(morphemes, pos);
 ```
 
-또한 아래와 같이, 고유명사를 말뭉치로부터 학습할 수 있습니다.
+또한, 다른 사전의 항목을 불러올 수 있습니다.
+```scala
+import kr.bydelta.koala.kkma.Dictionary
+import kr.bydelta.koala.eunjeon.Dictionary
+import kr.bydelta.koala.POS
+
+eunjeon.Dictionary.importFrom(kkma.Dictionary, filter = POS.isNoun, fastAppend = false)
+```
+
+Java는 아래와 같이 사용할 수 있습니다.
+```java
+import kr.bydelta.koala.kkma.JavaDictionary;
+import kr.bydelta.koala.eunjeon.JavaDictionary;
+import kr.bydelta.koala.POS;
+
+// Java 8+, with lambda expression
+eunjeon.JavaDictionary.get().importFrom(kkma.JavaDictionary.get(), 
+    (POS$.Value p) -> POS.isNoun(p), false);
+```
+
+아래와 같이, 고유명사를 말뭉치로부터 학습할 수 있습니다.
 > 고유명사가 아닌, 다른 품사의 자동학습기능은 아직 지원하지 않습니다.
 
 ```scala
@@ -573,11 +595,11 @@ Sentence는 `IndexedSeq[Word]`와 `IndexedSeqLike[Word, Sentence]`를 상속합�
 ```
 코모란은 **국토부**의 국토와 부를 별개로 인식하였고, 문장의 종결부호나 구분부호(**./SF ,/SP**)를 앞선 단어에 붙여 쓰기 하였습니다. "의견 따위가 나타나고"라는 뜻의 **일고**를 의존명사 일 + 긍정 지정사 이- + 접속조사 -고 와 분석, "~하는 일이고"의 "일이고"로 잘못 분석하였습니다.
 
-### 트위터
+### 트위터(OpenKoreanText)
 ```text
 국토부/NNP+는/JX 시장/NNG 상황/NNG+과/JX 맞지/VV 않는/VV 일률/NNG+적/XSO+인/JX 규제/NNG+를/JX 탄력/NNG+적/XSO+으로/JX 적용할/VV 수/NNG 있도/VA+록/EF 법/NNG 개정/NNG+을/JX 추진하는/VV 것/NNG+이라고/JX 설명하지/VV+만/EF+,/SF 투기/NNG 세력/NNG+에/JX 기대는/VV 부동산/NNG 부양책/NNG+이라는/JX 비판/NNG+이/JX 일/NNG+고/JX 있다/VA+./SF
 ```
-트위터 분석기는 가장 넓은 범위로 분석, 품사 내부의 세부 구분이 나타나지 않습니다. 어절 단위의 묶음은 KoalaNLP에서 공백 기준으로 묶은 것입니다.
+OpenKoreanText 분석기는 가장 넓은 범위로 분석, 품사 내부의 세부 구분이 나타나지 않습니다. 어절 단위의 묶음은 KoalaNLP에서 공백 기준으로 묶은 것입니다.
 
 ## 문장 분리 성능 (따옴표 안에 여러 문장이 인용될 때)
 아래 문장은 겹따옴표("") 사이에 3개의 문장이 포함되어, 문장 분리에 까다로운 문장입니다.
@@ -620,7 +642,7 @@ Sentence는 `IndexedSeq[Word]`와 `IndexedSeqLike[Word, Sentence]`를 상속합�
 ```
 정상적으로 분리되었습니다.
 
-### 트위터
+### 트위터(OpenKoreanText)
 ```text
 집/NNG 앞/NNG+에서/JX 고추/NNG+를/JX 말리/VV+던/EF 이숙희/NNG+(/SF+가명/NNG+·/SF+75/NR+)/SF 할머니/NNG+의/JX 얼굴/NNG+에는/JX 웃음/NNG+기/NNG+가/JX 없었/VA+다/EF+./SF
 
@@ -630,7 +652,7 @@ Sentence는 `IndexedSeq[Word]`와 `IndexedSeqLike[Word, Sentence]`를 상속합�
 
 가난/NNG+에/JX 익숙해진/VV 연평도/NNG 사람/NNG+들/XSO+은/JX '/SF+정당/NNG+'/SF+과/NNG '/SF+은혜/NNG+'/SF+라는/JX 말/NNG+을/JX 즐겨/VV 썼/VV+다/EF+./SF
 ```
-트위터 분석기는 겹따옴표 내의 문장을 인용문으로 인식하지 않았습니다.
+OpenKoreanText 분석기는 겹따옴표 내의 문장을 인용문으로 인식하지 않았습니다.
 
 ## 사전에 없는 단어 1
 아래는 사전에 없을 법한 단어인 **포켓몬**과 **와이파이존**이 있고, 지명인 **속초**가 등장하는 문장입니다.
@@ -661,7 +683,7 @@ Sentence는 `IndexedSeq[Word]`와 `IndexedSeqLike[Word, Sentence]`를 상속합�
 ```
 속초, 속초시청(속초+시청)은 정상 인식되었고, 포켓몬은 알 수 없는 단어로 정상 인식 되었지만, 와이파이존은 와이+파이+존으로 인식되었습니다.
 
-### 트위터
+### 트위터(OpenKoreanText)
 ```text
 포털/NNP+의/JX '/SF+속초/NNG+'/SF 연관/NNG 검색어/NNG+로/JX '/SF+포켓몬/NNG 고/NNG+'/SF+가/VV 올랐/VV+고/EF+,/SF 속초/NNP+시청/NNG+이/JX 관광객/NNG+의/JX 편의/NNG+를/JX 위해/NNG 예전/NNG+에/JX 만들었/VV+던/EF 무료/NNG 와이파이존/NNG 지도/NNG+는/JX 순식간/NNG+에/JX 인기/NNG 게시/NNG+물이/NNG 됐/VV+다/EF+./SF
 ```
@@ -697,7 +719,7 @@ Sentence는 `IndexedSeq[Word]`와 `IndexedSeqLike[Word, Sentence]`를 상속합�
 ```
 사드는 사+드로 분리되어 인식되었고, 월스트리트 저널은 정상 인식되었습니다.
 
-### 트위터
+### 트위터(OpenKoreanText)
 ```text
 미국/NNG 국방부/NNG+가/JX 미국/NNG 미사일방어/NNP+망/NNG+(/SF+MD/SY+)/SF+의/NNG 핵심/NNG 무기체계/NNP+인/JX 사드/NNG+(/SF+THAAD/SY+)/SF+를/NNG 한국/NNG+에/JX 배치/NNG+하는/VV 방안/NNG+을/JX 검토/NNG+하고/JX 있다/VA+고/EF </SF+월스트리트/NNG 저/MM+널/NNG+>/SF+이/NNG 28일/NR+(/SF+현지/NNP+시각/NNG+)/SF 보도했/VV+다/EF+./SF
 ```
