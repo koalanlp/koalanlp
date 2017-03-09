@@ -27,7 +27,7 @@ script:
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 - sbt ++$TRAVIS_SCALA_VERSION unidoc
-- bash ./ghdoc.sh
+- bash ./ghdoc.sh $TRAVIS_SCALA_VERSION
 notifications:
   webhooks:
     urls:
