@@ -22,7 +22,10 @@ trait CanExtractResource {
     *
     * @return 임시 디렉터리의 절대경로 String.
     */
-  def getExtractedPath = TMP.getAbsolutePath
+  def getExtractedPath = {
+    TMP.mkdirs()
+    TMP.getAbsolutePath
+  }
 
   /**
     * 모델의 명칭.
