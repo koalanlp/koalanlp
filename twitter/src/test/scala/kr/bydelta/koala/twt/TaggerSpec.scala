@@ -76,5 +76,18 @@ class TaggerSpec extends Specification {
 
       noUserDict must_!= dictApplied
     }
+
+    "tag paragraph" in {
+      val sent = "포털의 '속초' 연관 검색어로 '포켓몬 고'가 올랐다. 속초시청이 관광객의 편의를 위해 예전에 만들었던 무료 와이파이존 지도는 순식간에 인기 게시물이 됐다."
+      val sents = Seq("포털의 '속초' 연관 검색어로 '포켓몬 고'가 올랐다.",
+        "속초시청이 관광객의 편의를 위해 예전에 만들었던 무료 와이파이존 지도는 순식간에 인기 게시물이 됐다.")
+      val tagger = new Tagger
+      val splits = tagger.tagParagraph(sent)
+      val sentMap = sents.map(tagger.tagSentence)
+
+      splits.length must_== 2
+      splits.head mustEqual sentMap.head
+      splits.last mustEqual sentMap.last
+    }
   }
 }
