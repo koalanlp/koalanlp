@@ -4,7 +4,7 @@ import java.util
 
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.traits.CanTag
-import kr.bydelta.koala.util.reunionKorean
+import kr.bydelta.koala.util.{reduceVerbApply, reunionKorean}
 import kr.bydelta.koala.{POS, fromKomoranTag}
 import kr.co.shineware.nlp.komoran.core.analyzer.Komoran
 import kr.co.shineware.util.common.model.{Pair => KPair}
@@ -21,7 +21,7 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
     */
   lazy val komoran = {
     Dictionary.extractResource()
-    val komoran = new Komoran(Dictionary.getExtractedPath)
+    val komoran = new Komoran(Dictionary.extractResource())
 
     if (Dictionary.userDict.exists())
       komoran.setUserDic(Dictionary.userDict.getAbsolutePath)
@@ -40,7 +40,18 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
       result.asScala.map {
         word =>
           val wAsScala = word.asScala
-          val originalWord = reunionKorean(wAsScala.map(_.getFirst).mkString.toSeq)
+          val originalWord =
+            if (wAsScala.exists(_.getSecond.startsWith("V"))) {
+              val (verb, rest) = wAsScala.splitAt(wAsScala.indexWhere(_.getSecond.startsWith("V")) + 1)
+              reunionKorean(reduceVerbApply(
+                verb.map(_.getFirst).mkString.toSeq,
+                fromKomoranTag(verb.last.getSecond) == POS.VV,
+                rest.map(_.getFirst).mkString.toSeq
+              ))
+            } else {
+              reunionKorean(wAsScala.map(_.getFirst).mkString.toSeq)
+            }
+
           Word(
             originalWord,
             wAsScala.map {
@@ -66,7 +77,7 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
     */
   private def splitSentences(para: Seq[Word],
                              pos: Int = 0,
-                             open: List[String] = List(),
+                             open: List[Char] = List(),
                              acc: ArrayBuffer[Sentence] = ArrayBuffer()): Seq[Sentence] =
     if (para.isEmpty) acc
     else {
@@ -74,14 +85,17 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
       val rawEndmark = para.indexWhere(_.exists(POS.SF), pos)
       val rawParen = para.indexWhere({
         e =>
-          e.exists(POS.SS) ||
+          (e.exists(POS.SS) ||
             Tagger.openParenRegex.findFirstMatchIn(e.surface).isDefined ||
             Tagger.closeParenRegex.findFirstMatchIn(e.surface).isDefined ||
-            Tagger.quoteRegex.findFirstMatchIn(e.surface).isDefined
+            Tagger.quoteRegex.findFirstMatchIn(e.surface).isDefined) &&
+            Tagger.matchRegex.findFirstIn(e.surface).isEmpty
       }, pos)
 
       val endmark = if (rawEndmark == -1) para.length else rawEndmark
       val paren = if (rawParen == -1) para.length else rawParen
+
+      println(para.length, endmark, paren, open, pos)
 
       if (endmark == paren && paren == para.length) {
         acc += Sentence(para)
@@ -93,10 +107,10 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
           splitSentences(next, 0, open, acc)
         } else {
           val parenStr = para(paren)
-          val surface = parenStr.surface
+          val surface = Tagger.filterRegex.replaceAllIn(parenStr.surface, "")
           var nOpen = open
           if (Tagger.closeParenRegex.findFirstMatchIn(surface).isEmpty) {
-            nOpen +:= surface
+            nOpen ++:= surface.toSeq
           }
           splitSentences(para, paren + 1, nOpen, acc)
         }
@@ -106,16 +120,16 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
           acc
         } else {
           val parenStr = para(paren)
-          val surface = parenStr.surface
+          val surface = Tagger.filterRegex.replaceAllIn(parenStr.surface, "")
           var nOpen = open
           if (Tagger.openParenRegex.findFirstMatchIn(surface).isDefined) {
-            nOpen +:= surface
+            nOpen ++:= surface.toSeq
           } else if (Tagger.closeParenRegex.findFirstMatchIn(surface).isDefined) {
             nOpen = nOpen.tail
           } else {
             val top = nOpen.head
-            if (surface == top) nOpen = nOpen.tail
-            else nOpen +:= surface
+            if (surface.last == top) nOpen = nOpen.tail
+            else nOpen ++:= surface.toSeq
           }
           splitSentences(para, paren + 1, nOpen, acc)
         }
@@ -129,6 +143,9 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
 private[koala] object Tagger {
   private val quoteRegex = "(?U)[\'\"]{1}".r
   private val openParenRegex = "(?U)[\\(\\[\\{<〔〈《「『【‘“]{1}".r
-  private val closeParenRegex = "(?U)[\\)\\]\\}>〕〉《」』】’”]{1}".r
+  private val closeParenRegex = "(?U)[\\)\\]\\}>〕〉》」』】’”]{1}".r
+  private val matchRegex = ("(?U)(\'[^\']*\'|\"[^\"]*\"|\\([^\\(\\)]*\\)|\\[[^\\[\\]]*\\]|\\{[^\\{\\}]*\\}|" +
+    "<[^<>]*>|〔[^〔〕]*〕|〈[^〈〉]*〉|《[^《》]*》|「[^「」]*」|『[^『』]*』|【[^【】]*】|‘[^‘’]*’|“[^“”]*”)").r
+  private val filterRegex = "(?U)[^\'\"\\(\\[\\{<〔〈《「『【‘“\\)\\]\\}>〕〉》」』】’”]+".r
 }
 

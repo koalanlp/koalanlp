@@ -23,7 +23,7 @@ class TaggerSpec extends Specification {
       val tagged = new Tagger().tagSentence(sent)
 
       Dictionary.extractResource()
-      val komoran = new Komoran(Dictionary.getExtractedPath)
+      val komoran = new Komoran(Dictionary.extractResource())
       val original = komoran.analyze(sent)
 
       tagged.map(_.map(_.surface).mkString("+")).mkString(" ") must_==
@@ -56,7 +56,7 @@ class TaggerSpec extends Specification {
       }.seq.mkString("\n")
 
       Dictionary.extractResource()
-      val komoran = new Komoran(Dictionary.getExtractedPath)
+      val komoran = new Komoran(Dictionary.extractResource())
       val singlethreaded = sents.map {
         sent =>
           komoran.analyze(sent).asScala.map(_.asScala.map(_.getFirst).mkString("+")).mkString(" ")
@@ -82,6 +82,16 @@ class TaggerSpec extends Specification {
 
       Dictionary.userDict.length() must be_>(prevLen)
       noUserDict must_!= dictApplied
+    }
+
+    "match sentence split spec" in {
+      val sent = "집 앞에서 고추를 말리던 이숙희(가명·75) 할머니의 얼굴에는 웃음기가 없었다. \"나라가 취로사업이라도 만들어주지 않으면 일이 없어. 섬이라서 어디 다른 데 나가서 일할 수도 없고.\" 가난에 익숙해진 연평도 사람들은 '정당'과 '은혜'라는 말을 즐겨 썼다."
+      val sents = Seq("집 앞에서 고추를 말리던 이숙희(가명·75) 할머니의 얼굴에는 웃음기가 없었다.",
+        "\"나라가 취로사업이라도 만들어주지 않으면 일이 없어. 섬이라서 어디 다른 데 나가서 일할 수도 없고.\" 가난에 익숙해진 연평도 사람들은 '정당'과 '은혜'라는 말을 즐겨 썼다.")
+      val tagger = new Tagger
+      val splits = tagger.tagParagraph(sent)
+
+      splits.length must_== 2
     }
 
     "tag paragraph" in {

@@ -211,11 +211,87 @@ class DataSpecs extends Specification {
             val str = code.map(x => reconstructKorean(x._1, x._2, x._3)).mkString
 
             str.endsWithJongsung mustEqual str.last.endsWithJongsung
-            str.last.getJongsungCode mustEqual (code.last._3 > 0)
+            str.last.endsWithJongsung mustEqual (code.last._3 > 0)
 
             str.head.getChosungCode mustEqual code.head._1
             str.head.getJungsungCode mustEqual code.head._2
             str.head.getJongsungCode mustEqual code.head._3
+        }
+      }
+    }
+
+    "reduce verb application correctly" in {
+      val map =
+        Seq(("깨닫", "아", true, "깨달아"),
+          ("붇", "어나다", true, "불어나다"),
+          ("눋", "어", true, "눌어"),
+          ("믿", "어", true, "믿어"),
+          ("묻", "어", true, "물어"),
+          ("구르", "어", true, "굴러"),
+          ("모르", "아", true, "몰라"),
+          ("벼르", "어", true, "별러"),
+          ("마르", "아", true, "말라"),
+          ("무르", "어", true, "물러"),
+          ("누르", "어", true, "눌러"),
+          ("다르", "아", true, "달라"),
+          ("사르", "아", true, "살라"),
+          ("바르", "아", true, "발라"),
+          ("가르", "아", true, "갈라"),
+          ("나르", "아", true, "날라"),
+          ("자르", "아", true, "잘라"),
+          ("아니꼽", "어", false, "아니꼬워"),
+          ("무덥", "어", false, "무더워"),
+          ("우습", "어", false, "우스워"),
+          ("줍", "어", true, "주워"),
+          ("더럽", "어", false, "더러워"),
+          ("무섭", "어", false, "무서워"),
+          ("귀엽", "어", false, "귀여워"),
+          ("안쓰럽", "어", false, "안쓰러워"),
+          ("아름답", "어", false, "아름다워"),
+          ("잡", "아", true, "잡아"),
+          ("뽑", "아", true, "뽑아"),
+          ("곱", "아", false, "고와"),
+          ("돕", "아", true, "도와"),
+          ("뽑", "아", true, "뽑아"),
+          ("씹", "어", true, "씹어"),
+          ("업", "어", true, "업어"),
+          ("입", "어", true, "입어"),
+          ("잡", "아", true, "잡아"),
+          ("접", "아", true, "접어"),
+          ("좁", "아", false, "좁아"),
+          ("낫", "아", true, "나아"),
+          ("긋", "아", true, "그어"),
+          ("벗", "아", true, "벗어"),
+          ("솟", "아", true, "솟아"),
+          ("씻", "아", true, "씻어"),
+          ("뺏", "어", true, "뺏어"),
+          ("푸", "어", true, "퍼"),
+          ("끄", "아", true, "꺼"),
+          ("들", "아", true, "들어"),
+          ("가", "아라", true, "가거라"),
+          ("삼가", "아라", true, "삼가거라"),
+          ("들어가", "아라", true, "들어가거라"),
+          ("오", "아라", true, "오너라"),
+          ("돌아오", "아라", true, "돌아오너라"),
+          ("푸르", "어", false, "푸르러"),
+          ("하", "았다", true, "하였다"),
+          ("영원하", "아", true, "영원하여"),
+          ("파랗", "으면", false, "파라면"),
+          ("동그랗", "은", false, "동그란"),
+          ("파랗", "았다", false, "파랬다"),
+          ("파랗", "을", false, "파랄"),
+          ("그렇", "아", false, "그래"),
+          ("시퍼렇", "었다", false, "시퍼렜다"),
+          ("그렇", "네", false, "그렇네"),
+          ("파랗", "네", false, "파랗네"),
+          ("노랗", "네", false, "노랗네"),
+          ("좋", "아", false, "좋아"),
+          ("낳", "아", true, "낳아"))
+
+      Result.unit {
+        map.foreach {
+          case (verb, rest, isVerb, result) =>
+            util.reduceVerbApply(verb.toSeq, isVerb, rest.toSeq).mkString mustEqual result
         }
       }
     }

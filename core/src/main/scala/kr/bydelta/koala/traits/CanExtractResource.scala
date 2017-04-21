@@ -18,16 +18,6 @@ trait CanExtractResource {
   private var initialized: Boolean = false
 
   /**
-    * 압축해제된 임시 디렉터리의 위치.
-    *
-    * @return 임시 디렉터리의 절대경로 String.
-    */
-  def getExtractedPath = {
-    TMP.mkdirs()
-    TMP.getAbsolutePath
-  }
-
-  /**
     * 모델의 명칭.
     */
   protected def modelName: String
@@ -62,6 +52,16 @@ trait CanExtractResource {
     }
 
     getExtractedPath
+  }
+
+  /**
+    * 압축해제된 임시 디렉터리의 위치.
+    *
+    * @return 임시 디렉터리의 절대경로 String.
+    */
+  private def getExtractedPath = {
+    TMP.mkdirs()
+    TMP.getAbsolutePath
   }
 
   /**

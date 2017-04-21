@@ -86,16 +86,6 @@ class TaggerSpec extends Specification {
       noUserDict must_!= dictApplied
     }
 
-    "match sentence split spec" in {
-      val sent = "집 앞에서 고추를 말리던 이숙희(가명·75) 할머니의 얼굴에는 웃음기가 없었다. \"나라가 취로사업이라도 만들어주지 않으면 일이 없어. 섬이라서 어디 다른 데 나가서 일할 수도 없고.\" 가난에 익숙해진 연평도 사람들은 '정당'과 '은혜'라는 말을 즐겨 썼다."
-      val sents = Seq("집 앞에서 고추를 말리던 이숙희(가명·75) 할머니의 얼굴에는 웃음기가 없었다.",
-        "\"나라가 취로사업이라도 만들어주지 않으면 일이 없어. 섬이라서 어디 다른 데 나가서 일할 수도 없고.\" 가난에 익숙해진 연평도 사람들은 '정당'과 '은혜'라는 말을 즐겨 썼다.")
-      val tagger = new Tagger
-      val splits = tagger.tagParagraph(sent)
-
-      splits.length must_== 2
-    }
-
     "tag paragraph" in {
       val sent = "포털의 '속초' 연관 검색어로 '포켓몬 고'가 올랐다. 속초시청이 관광객의 편의를 위해 예전에 만들었던 무료 와이파이존 지도는 순식간에 인기 게시물이 됐다."
       val sents = Seq("포털의 '속초' 연관 검색어로 '포켓몬 고'가 올랐다.",

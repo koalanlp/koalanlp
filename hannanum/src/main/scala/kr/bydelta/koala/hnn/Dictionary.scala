@@ -17,39 +17,38 @@ import scala.io.Source
   * 한나눔 사용자사전
   */
 object Dictionary extends CanCompileDict with CanExtractResource {
-  extractResource()
   private[koala] lazy val tagSet: TagSet = {
     val tagSet = new TagSet
-    val fileTagSet: String = getExtractedPath + File.separator + "data/kE/tag_set.txt"
+    val fileTagSet: String = extractResource() + File.separator + "data/kE/tag_set.txt"
     tagSet.init(fileTagSet, TagSet.TAG_SET_KAIST)
     tagSet
   }
   private[koala] lazy val connection: Connection = {
     val connection = new Connection
-    val fileConnections: String = getExtractedPath + File.separator + "data/kE/connections.txt"
+    val fileConnections: String = extractResource() + File.separator + "data/kE/connections.txt"
     connection.init(fileConnections, tagSet.getTagCount, tagSet)
     connection
   }
   private[koala] lazy val connectionNot: ConnectionNot = {
     val connectionNot = new ConnectionNot
-    val fileConnectionsNot: String = getExtractedPath + File.separator + "data/kE/connections_not.txt"
+    val fileConnectionsNot: String = extractResource() + File.separator + "data/kE/connections_not.txt"
     connectionNot.init(fileConnectionsNot, tagSet)
     connectionNot
   }
   private[koala] lazy val analyzedDic: AnalyzedDic = {
-    val fileDicAnalyzed: String = getExtractedPath + File.separator + "data/kE/dic_analyzed.txt"
+    val fileDicAnalyzed: String = extractResource() + File.separator + "data/kE/dic_analyzed.txt"
     val analyzedDic = new AnalyzedDic
     analyzedDic.readDic(fileDicAnalyzed)
     analyzedDic
   }
   private[koala] lazy val systemDic: Trie = {
-    val fileDicSystem: String = getExtractedPath + File.separator + "data/kE/dic_system.txt"
+    val fileDicSystem: String = extractResource() + File.separator + "data/kE/dic_system.txt"
     val systemDic = new Trie(Trie.DEFAULT_TRIE_BUF_SIZE_SYS)
     systemDic.read_dic(fileDicSystem, tagSet)
     systemDic
   }
   private lazy val usrDicPath: File = {
-    val f = new File(getExtractedPath + File.separator + "data/kE/dic_user.txt")
+    val f = new File(extractResource() + File.separator + "data/kE/dic_user.txt")
     f.createNewFile()
     f.deleteOnExit()
     f

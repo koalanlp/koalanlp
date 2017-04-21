@@ -65,7 +65,7 @@ private[koala] class SafeHMMTagger extends PosTagger {
 
   @throws[Exception]
   def initialize(configFile: String, _dummy: String) {
-    val baseDir = Dictionary.getExtractedPath
+    val baseDir = Dictionary.extractResource()
     wordPts.clear
     markovNet.clear
     if (SafeHMMTagger.pttPOS == null) {

@@ -21,19 +21,19 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     * 사용자사전을 저장할 파일의 위치.
     */
   lazy val userDict = {
-    val file = new File(getExtractedPath, "koala.dict")
+    val file = new File(extractResource(), "koala.dict")
     file.createNewFile()
     file.deleteOnExit()
     file
   }
   private lazy val dic = {
     val obs = new Observation
-    obs.load(getExtractedPath + File.separator + "observation.model")
+    obs.load(extractResource() + File.separator + "observation.model")
     obs.getTrieDictionary
   }
   private lazy val table = {
     val tbl = new PosTable
-    tbl.load(getExtractedPath + File.separator + "pos.table")
+    tbl.load(extractResource() + File.separator + "pos.table")
     tbl
   }
 
@@ -107,9 +107,9 @@ object Dictionary extends CanCompileDict with CanExtractResource {
         var nStack = stack.tail
 
         val word = if (top.getKey == null) prefix else prefix :+ top.getKey.charValue()
-        val value = top.getValue.asScala
+        val value = if (top.getValue != null) top.getValue.asScala else Seq()
 
-        val newSeq = if (value != null && value.exists(x => targetIDs.contains(x.getFirst))) {
+        val newSeq = if (value != null && value.exists(x => x != null && targetIDs.contains(x.getFirst))) {
           val wordstr = util.reunionKorean(word)
           value.filter(x => targetIDs.contains(x.getFirst))
             .map(x => wordstr -> fromKomoranTag(table.getPos(x.getFirst))) ++: acc

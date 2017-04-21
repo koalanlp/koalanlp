@@ -420,6 +420,17 @@ package object koala {
     }
 
     /**
+      * (Code modified from Seunjeon package)
+      * 한글의 불완전 문자인지 확인
+      *
+      * @return True: 종료 문자가 한글일 경우.
+      */
+    def isIncompleteHangul = {
+      ((0x1100 <= ch && ch <= 0x11FF)
+        || (0x3130 <= ch && ch <= 0x318F))
+    }
+
+    /**
       * 완성된 문자의 범위인지 확인.
       *
       * @return True: 완성된 문자일 경우.
