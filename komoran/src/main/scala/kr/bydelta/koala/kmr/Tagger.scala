@@ -4,6 +4,7 @@ import java.util
 
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.traits.CanTag
+import kr.bydelta.koala.util.reunionKorean
 import kr.bydelta.koala.{POS, fromKomoranTag}
 import kr.co.shineware.nlp.komoran.core.analyzer.Komoran
 import kr.co.shineware.util.common.model.{Pair => KPair}
@@ -39,7 +40,7 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
       result.asScala.map {
         word =>
           val wAsScala = word.asScala
-          val originalWord = wAsScala.map(_.getFirst).mkString
+          val originalWord = reunionKorean(wAsScala.map(_.getFirst).mkString.toSeq)
           Word(
             originalWord,
             wAsScala.map {

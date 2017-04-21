@@ -14,7 +14,7 @@ import scala.collection.mutable.ArrayBuffer
   *
   * 원본의 Copyright: KAIST 한나눔 개발팀.
   */
-object MorphemeAnalyzerWrap {
+private[koala] object MorphemeAnalyzerWrap {
   @throws[Exception]
   def getSpacedresult(in: Sentence): Seq[String] =
     this.getAnalysisResult(in).flatMap(_.tokenList.map(_.word))

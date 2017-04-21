@@ -9,6 +9,14 @@ import scala.annotation.tailrec
   */
 package object koala {
 
+  /** '가' 위치 **/
+  final val HANGUL_START: Int = '가'
+  /** '힣' 위치 **/
+  final val HANGUL_END: Int = '힣'
+  /** 종성 범위 **/
+  final val JONGSUNG_RANGE = 0x001C
+  /** 중성 범위 **/
+  final val JUNGSUNG_RANGE = 0x024C
   protected[koala] final val ALPHA_PRON = Seq(
     "에이치", "더블유", "에이", "에프", "아이", "제이", "케이",
     "에스", "브이", "엑스", "와이", "제트", "비", "씨", "디",
@@ -358,10 +366,13 @@ package object koala {
       }
     }
 
+  def reconstructKorean(cho: Int = 11, jung: Int = 0, jong: Int = 0): Char =
+    (HANGUL_START + cho * JUNGSUNG_RANGE + jung * JONGSUNG_RANGE + jong).toChar
+
   /**
     * 한국어를 구성하는 문자의 연산.
     *
-    * @param char 검사할 문자.
+    * @param ch 검사할 문자.
     */
   implicit class KoreanCharacterExtension(ch: Char) {
     /**
@@ -378,7 +389,23 @@ package object koala {
       *
       * @return 종성으로 끝난다면, 해당 위치를, 없다면 0을 반환.
       */
-    def getJongsungCode = (ch - 0xAC00) % 0x001C
+    def getJongsungCode = (ch - HANGUL_START) % JONGSUNG_RANGE
+
+    /**
+      * (Code modified from Seunjeon package)
+      * 중성 종료 코드
+      *
+      * @return 중성으로 끝난다면, 해당 위치를, 없다면 0을 반환.
+      */
+    def getJungsungCode = (ch - HANGUL_START) % JUNGSUNG_RANGE / JONGSUNG_RANGE
+
+    /**
+      * (Code modified from Seunjeon package)
+      * 초성 종료 코드
+      *
+      * @return 초성으로 끝난다면, 해당 위치를, 없다면 0을 반환.
+      */
+    def getChosungCode = (ch - HANGUL_START) / JUNGSUNG_RANGE
 
     /**
       * (Code modified from Seunjeon package)
@@ -387,7 +414,7 @@ package object koala {
       * @return True: 종료 문자가 한글일 경우.
       */
     def isHangul = {
-      ((0x0AC00 <= ch && ch <= 0xD7A3)
+      ((HANGUL_START <= ch && ch <= HANGUL_END)
         || (0x1100 <= ch && ch <= 0x11FF)
         || (0x3130 <= ch && ch <= 0x318F))
     }
@@ -397,7 +424,7 @@ package object koala {
       *
       * @return True: 완성된 문자일 경우.
       */
-    def isCompleteHangul = 0x0AC00 <= ch && ch <= 0xD7A3
+    def isCompleteHangul = HANGUL_START <= ch && ch <= HANGUL_END
   }
 
   /**

@@ -5,6 +5,7 @@ import org.specs2.execute.Result
 import org.specs2.mutable.Specification
 
 import scala.collection.JavaConverters._
+import scala.util.Random
 
 /**
   * Created by bydelta on 16. 7. 31.
@@ -192,6 +193,28 @@ class DataSpecs extends Specification {
                   }
                 }
             }
+        }
+      }
+    }
+  }
+
+  "KoreanCharacterExtension" should {
+    "give the same result with KoreanStringExtension" in {
+      reconstructKorean('한'.getChosungCode, '걱'.getJungsungCode, '물'.getJongsungCode) mustEqual '헐'
+
+      Result.unit {
+        (1 to 50).foreach {
+          _ =>
+            val code = (1 to 4).map(_ => (Random.nextInt(18),
+              Random.nextInt(20), Random.nextInt(28)))
+            val str = code.map(x => reconstructKorean(x._1, x._2, x._3)).mkString
+
+            str.endsWithJongsung mustEqual str.last.endsWithJongsung
+            str.last.getJongsungCode mustEqual (code.last._3 > 0)
+
+            str.head.getChosungCode mustEqual code.head._1
+            str.head.getJungsungCode mustEqual code.head._2
+            str.head.getJongsungCode mustEqual code.head._3
         }
       }
     }

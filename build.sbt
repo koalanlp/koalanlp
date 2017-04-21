@@ -96,7 +96,9 @@ lazy val kryo = (project in file("kryo"))
 lazy val model = (project in file("model"))
   .settings(projectWithConfig("model"))
   .settings(
-    libraryDependencies += "cc.factorie" %% "factorie" % "[1.2,)"
+    libraryDependencies ++= Seq(
+      "org.tensorflow" % "tensorflow" % "latest.integration"
+    )
   ).dependsOn(core)
 
 def projectWithConfig(module: String) =
