@@ -95,8 +95,6 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
       val endmark = if (rawEndmark == -1) para.length else rawEndmark
       val paren = if (rawParen == -1) para.length else rawParen
 
-      println(para.length, endmark, paren, open, pos)
-
       if (endmark == paren && paren == para.length) {
         acc += Sentence(para)
         acc
