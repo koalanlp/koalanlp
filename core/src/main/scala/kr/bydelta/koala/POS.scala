@@ -104,8 +104,10 @@ object POS extends Enumeration {
   /** ''관형형 전성어미'': 용언의 어간에 붙어 관형사의 기능을 수행하게 하는 어미. **/
   val ETM = Value
 
-  /** ''접두사'' : 파생어를 만드는 접사로, 어근이나 단어의 앞에 붙어 새로운 단어가 되게 하는 말. **/
-  val XP = Value
+  /** ''체언 접두사'' : 파생어를 만드는 접사로, 어근이나 단어의 앞에 붙어 새로운 단어가 되게 하는 말. **/
+  val XPN = Value
+  /** ''용언 접두사'' : 파생어를 만드는 접사로, 어근이나 단어의 앞에 붙어 새로운 단어가 되게 하는 말. **/
+  val XPV = Value
   /** ''명사 파생 접미사'':
     * 파생어를 만드는 접사로, 어근이나 단어의 뒤에 붙어 새로운 명사가 되게 하는 말.
     * */
@@ -195,7 +197,7 @@ object POS extends Enumeration {
     *
     * @return 접사인 경우 True
     */
-  def isAffix: POSTag => Boolean = Set(XP, XSN, XSV, XSM, XSN, XSO, XR)
+  def isAffix: POSTag => Boolean = Set(XPN, XPV, XSN, XSV, XSM, XSN, XSO, XR)
 
   /**
     * 접미사인지 확인한다

@@ -68,8 +68,8 @@ package object koala {
   def tagToKomoran(tag: _root_.kr.bydelta.koala.POS.Value): String = {
     tag match {
       case POS.NNM => "NNB"
-      case POS.XP => "XPN"
       case POS.XSM | POS.XSO => "XSN"
+      case POS.XPV => "XR"
       case POS.SY => "SW"
       case POS.UN | POS.UV | POS.UE => "NA"
       case _ => tag.toString
@@ -102,7 +102,8 @@ package object koala {
       case POS.EP => "PreEomi"
       case POS.EF | POS.EC |
            POS.ETM | POS.ETN => "Eomi"
-      case POS.XP => "NounPrefix"
+      case POS.XPN => "NounPrefix"
+      case POS.XPV => "VerbPrefix"
       case POS.XSA | POS.XSM |
            POS.XSN | POS.XSO | POS.XSV => "Suffix"
       case POS.SF => "Punctuation"
@@ -124,7 +125,7 @@ package object koala {
       case POS.NNM => "NNBC"
       case POS.SS => "SSO"
       case POS.SP => "SC"
-      case POS.XP => "XPN"
+      case POS.XPV => "XR"
       case POS.XSM | POS.XSO => "XSN"
       case POS.UN | POS.UE | POS.UV => "UNKNOWN"
       case x => x.toString
@@ -170,6 +171,7 @@ package object koala {
       case POS.SL => "F"
       case POS.SN => "NNC"
       case POS.SY | POS.XR | POS.UE => "SY"
+      case POS.XPN | POS.XPV => "XP"
       case x => x.toString
     }).toLowerCase
   }
@@ -191,7 +193,6 @@ package object koala {
       case POS.EF => "EFN"
       case POS.EC => "ECE"
       case POS.ETM => "ETD"
-      case POS.XP => "XPN"
       case POS.SY => "SW"
       case POS.SL => "OL"
       case POS.SN => "ON"
@@ -207,7 +208,6 @@ package object koala {
     */
   def fromKomoranTag(tag: String): POS.Value = {
     tag match {
-      case "XPN" => POS.XP
       case "SW" | "SO" => POS.SY
       case "NA" => POS.UE
       case "SL" | "SH" => POS.SL
@@ -235,7 +235,8 @@ package object koala {
       case "Conjunction" => POS.JC
       case "PreEomi" => POS.EP
       case "Eomi" => POS.EF
-      case "NounPrefix" | "VerbPrefix" => POS.XP
+      case "NounPrefix" => POS.XPN
+      case "VerbPrefix" => POS.XPV
       case "Suffix" => POS.XSO
       case "Punctuation" => POS.SF
       case "Unknown" => POS.UE
@@ -253,7 +254,6 @@ package object koala {
   def fromEunjeonTag(tag: String): POS.Value = {
     tag.toUpperCase match {
       case "NNBC" => POS.NNM
-      case "XPN" => POS.XP
       case "SC" => POS.SP
       case "SSO" | "SSC" => POS.SS
       case "SL" | "SH" => POS.SL
@@ -294,6 +294,7 @@ package object koala {
       case "jct" | "jcj" => POS.JC
       case "jxc" | "jxf" => POS.JX
       case x if x startsWith "ec" => POS.EC
+      case "xp" => POS.XPN
       case x if x startsWith "xsn" => POS.XSN
       case x if x startsWith "xsv" => POS.XSV
       case x if x startsWith "xsm" => POS.XSA
@@ -322,7 +323,6 @@ package object koala {
       case x if x startsWith "EF" => POS.EF
       case x if x startsWith "EC" => POS.EC
       case "ETD" => POS.ETM
-      case "XPN" | "XPV" => POS.XP
       case "SO" | "SW" => POS.SY
       case "OL" | "OH" => POS.SL
       case "ON" => POS.SN
@@ -361,7 +361,7 @@ package object koala {
   /**
     * 한국어를 구성하는 문자의 연산.
     *
-    * @param char 검사할 문자.
+    * @param ch 검사할 문자.
     */
   implicit class KoreanCharacterExtension(ch: Char) {
     /**

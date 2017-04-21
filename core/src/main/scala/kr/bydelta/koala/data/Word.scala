@@ -54,8 +54,8 @@ final class Word private(val surface: String, val morphemes: Vector[Morpheme])
     * <br/>
     * `Seq[POSTag]`의 형태이며, 이는 품사가 어절을 구성한 형태를 따른 것임.
     * <br/>
-    * Sequence가 *연속되지 않더라도* 확인함. 즉, "초/XP거대하/VAㄴ/ETM"이란 어절이 있다면,
-    * `Seq(POS.XP,POS.ETM)`는 중간 형태소에 대응하는 품사가 없지만, 순서는 포함되므로,
+    * Sequence가 *연속되지 않더라도* 확인함. 즉, "초/XPN거대하/VAㄴ/ETM"이란 어절이 있다면,
+    * `Seq(POS.XPN,POS.ETM)`는 중간 형태소에 대응하는 품사가 없지만, 순서는 포함되므로,
     * `true`를 반환함.
     *
     * @param tag 확인할 통합 품사 표기의 Sequence. `Seq[POSTag]` 객체.
@@ -74,8 +74,8 @@ final class Word private(val surface: String, val morphemes: Vector[Morpheme])
     * <br/>
     * `POS$.Value[]`의 형태이며, 이는 품사가 어절을 구성한 형태를 따른 것임.
     * <br/>
-    * Sequence가 *연속되지 않더라도* 확인함. 즉, "초/XP거대하/VAㄴ/ETM"이란 어절이 있다면,
-    * `{POS.XP(),POS.ETM()}`는 중간 형태소에 대응하는 품사가 없지만, 순서는 포함되므로,
+    * Sequence가 *연속되지 않더라도* 확인함. 즉, "초/XPN거대하/VAㄴ/ETM"이란 어절이 있다면,
+    * `{POS.XPN(),POS.ETM()}`는 중간 형태소에 대응하는 품사가 없지만, 순서는 포함되므로,
     * `true`를 반환함.
     *
     * @param tag 확인할 통합 품사 표기의 Sequence. `POS$.Value[]` 객체.
@@ -175,20 +175,6 @@ object Word{
   applySeq(-1, surface)(morphemes)
 
   /**
-    * Generate word from given information
-    *
-    * @param id        Index within the sentence
-    * @param surface   Surface string
-    * @param morphemes Sequence of morphemes
-    * @return A new word
-    */
-  private def applySeq(id: Int, surface: String)(morphemes: collection.Seq[Morpheme]) = {
-    val w = new Word(surface, morphemes.toVector)
-    w.index = id
-    w
-  }
-
-  /**
     * Extract surface form and morphemes for case-matching.
     *
     * @note "Extractor" is for pattern matching. That is, a word `w` can be matched as:
@@ -224,6 +210,20 @@ object Word{
     * @return Empty word
     */
   private[koala] def apply() = applySeq(-1, "")(Seq.empty)
+
+  /**
+    * Generate word from given information
+    *
+    * @param id        Index within the sentence
+    * @param surface   Surface string
+    * @param morphemes Sequence of morphemes
+    * @return A new word
+    */
+  private def applySeq(id: Int, surface: String)(morphemes: collection.Seq[Morpheme]) = {
+    val w = new Word(surface, morphemes.toVector)
+    w.index = id
+    w
+  }
 }
 
 /**
