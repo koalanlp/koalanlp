@@ -1848,8 +1848,8 @@
 <br/>
 <code>POS$.Value[]</code>의 형태이며, 이는 품사가 어절을 구성한 형태를 따른 것임.
 <br/>
-Sequence가 *연속되지 않더라도* 확인함. 즉, &quot;초/XP거대하/VAㄴ/ETM&quot;이란 어절이 있다면,
-<code>{POS.XP(),POS.ETM()}</code>는 중간 형태소에 대응하는 품사가 없지만, 순서는 포함되므로,
+Sequence가 *연속되지 않더라도* 확인함. 즉, &quot;초/XPN거대하/VAㄴ/ETM&quot;이란 어절이 있다면,
+<code>{POS.XPN(),POS.ETM()}</code>는 중간 형태소에 대응하는 품사가 없지만, 순서는 포함되므로,
 <code>true</code>를 반환함.
 </p></div><dl class="paramcmts block"><dt class="param">tag</dt><dd class="cmt"><p>확인할 통합 품사 표기의 Sequence. <code>POS$.Value[]</code> 객체.</p></dd><dt>returns</dt><dd class="cmt"><p>True: 존재하는 경우</p></dd></dl></div>
     </li><li name="kr.bydelta.koala.data.Word#matches" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -1871,8 +1871,8 @@ Sequence가 *연속되지 않더라도* 확인함. 즉, &quot;초/XP거대하/VA
 <br/>
 <code>Seq[POSTag]</code>의 형태이며, 이는 품사가 어절을 구성한 형태를 따른 것임.
 <br/>
-Sequence가 *연속되지 않더라도* 확인함. 즉, &quot;초/XP거대하/VAㄴ/ETM&quot;이란 어절이 있다면,
-<code>Seq(POS.XP,POS.ETM)</code>는 중간 형태소에 대응하는 품사가 없지만, 순서는 포함되므로,
+Sequence가 *연속되지 않더라도* 확인함. 즉, &quot;초/XPN거대하/VAㄴ/ETM&quot;이란 어절이 있다면,
+<code>Seq(POS.XPN,POS.ETM)</code>는 중간 형태소에 대응하는 품사가 없지만, 순서는 포함되므로,
 <code>true</code>를 반환함.
 </p></div><dl class="paramcmts block"><dt class="param">tag</dt><dd class="cmt"><p>확인할 통합 품사 표기의 Sequence. <code>Seq[POSTag]</code> 객체.</p></dd><dt>returns</dt><dd class="cmt"><p>True: 존재하는 경우</p></dd></dl></div>
     </li><li name="scala.collection.TraversableOnce#max" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">

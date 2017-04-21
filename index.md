@@ -2,7 +2,7 @@ KoalaNLP
 ==============
 (구) KoreanAnalyzer
 
-[![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core_2.11.svg?label=latest%20release)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core_2.11%22)
+[![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core_2.12.svg?label=latest%20release)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core_2.12%22)
 [![Build Status](https://travis-ci.org/nearbydelta/KoalaNLP.svg?branch=master)](https://travis-ci.org/nearbydelta/KoalaNLP)
 [![codecov](https://codecov.io/gh/nearbydelta/KoalaNLP/branch/master/graph/badge.svg)](https://codecov.io/gh/nearbydelta/KoalaNLP)
 [![Gitter](https://badges.gitter.im/nearbydelta/KoalaNLP.svg)](https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
@@ -33,13 +33,13 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 
 | 패키지명 | 버전 | Java | Scala| 설명 |
 | -------- | ---- | ---- | ---- |---- |
-| `koalanlp-core` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core_2.11%22) | 8+ | 2.10+ | 통합 인터페이스의 정의가 등재된 중심 묶음입니다. |
-| `koalanlp-hannanum` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-hannanum_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-hannanum_2.11%22) | 8+ | 2.10+ | 한나눔 분석기 패키지입니다. <sup>2</sup> |
-| `koalanlp-kkma` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kkma_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kkma_2.11%22) | 8+ | 2.10+ | 꼬꼬마 분석기 패키지입니다. <sup>2</sup> |
-| `koalanlp-komoran` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-komoran_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-komoran_2.11%22) | 8+ | 2.10+ | 코모란 분석기 패키지입니다. <sup>2</sup> |
-| `koalanlp-twitter` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-twitter_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-twitter_2.11%22) | 8+ | **2.12+**<sup>3</sup> | 트위터(OpenKoreanText) 분석기 패키지입니다. |
-| `koalanlp-eunjeon` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-eunjeon_2.11%22) | 8+ | **2.11+**<sup>3</sup> | 은전한닢 분석기 패키지입니다. |
-| `koalanlp-kryo` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kryo_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kryo_2.11%22) | 8+ | 2.10+ | Kryo Serialization을 지원하기 위한 패키지입니다. |
+| `koalanlp-core` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core_2.12.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core_2.12%22) | 8+ | 2.10+ | 통합 인터페이스의 정의가 등재된 중심 묶음입니다. |
+| `koalanlp-hannanum` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-hannanum_2.12.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-hannanum_2.12%22) | 8+ | 2.10+ | 한나눔 분석기 패키지입니다. <sup>2</sup> |
+| `koalanlp-kkma` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kkma_2.12.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kkma_2.12%22) | 8+ | 2.10+ | 꼬꼬마 분석기 패키지입니다. <sup>2</sup> |
+| `koalanlp-komoran` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-komoran_2.12.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-komoran_2.12%22) | 8+ | 2.10+ | 코모란 분석기 패키지입니다. <sup>2</sup> |
+| `koalanlp-twitter` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-twitter_2.12.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-twitter_2.12%22) | 8+ | **2.12+**<sup>3</sup> | 트위터(OpenKoreanText) 분석기 패키지입니다. |
+| `koalanlp-eunjeon` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon_2.12.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-eunjeon_2.12%22) | 8+ | **2.11+**<sup>3</sup> | 은전한닢 분석기 패키지입니다. |
+| `koalanlp-kryo` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kryo_2.12.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kryo_2.12%22) | 8+ | 2.10+ | Kryo Serialization을 지원하기 위한 패키지입니다. |
 | `koalanlp-server` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-server_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-server_2.11%22) | 8+ | **2.10 - 2.11**<sup>3</sup> | HTTP 서비스 구성을 위한 패키지입니다. |
 
 > <sup>주2</sup> 꼬꼬마, 한나눔, 코모란 분석기는 타 분석기와 달리 Maven repository에 등재되어 있지 않아, 원래는 수동으로 직접 추가하셔야 합니다.
@@ -69,7 +69,7 @@ Maven을 사용하시는 경우, 다음과 같습니다.
 ```xml
 <dependency>
   <groupId>kr.bydelta</groupId>
-  <artifactId>koalanlp-{TAGGER.PACK}_2.11</artifactId>
+  <artifactId>koalanlp-{TAGGER.PACK}_2.12</artifactId>
   <version>{VERSION}</version>
 </dependency>
 ```
