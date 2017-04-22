@@ -2,13 +2,15 @@ KoalaNLP
 ==============
 (구) KoreanAnalyzer
 
-[![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core_2.12.svg?label=latest%20release)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core_2.12%22)
-[![Build Status](https://travis-ci.org/nearbydelta/KoalaNLP.svg?branch=master)](https://travis-ci.org/nearbydelta/KoalaNLP)
-[![codecov](https://codecov.io/gh/nearbydelta/KoalaNLP/branch/master/graph/badge.svg)](https://codecov.io/gh/nearbydelta/KoalaNLP)
-[![Gitter](https://badges.gitter.im/nearbydelta/KoalaNLP.svg)](https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.svg?v=103)](https://opensource.org/licenses/GPL-3.0/)
+[![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core_2.12.svg?style=flat-square&label=release)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core_2.12%22)
+[![Build Status](https://img.shields.io/travis/nearbydelta/KoalaNLP.svg?style=flat-square&branch=master)](https://travis-ci.org/nearbydelta/KoalaNLP)
+[![codecov](https://img.shields.io/codecov/c/github/nearbydelta/KoalaNLP.svg?style=flat-square)](https://codecov.io/gh/nearbydelta/KoalaNLP)
+[![GPL Licence](https://img.shields.io/github/license/nearbydelta/KoalaNLP.svg?style=flat-square)](https://opensource.org/licenses/GPL-3.0/)
 
-[ScalaDoc 바로가기](http://nearbydelta.github.io/KoalaNLP/api/kr/bydelta/koala/index.html)
+[![ScalaDoc](http://javadoc-badge.appspot.com/kr.bydelta/koalanlp-core_2.12.svg?label=scaladoc)](http://nearbydelta.github.io/KoalaNLP/api/scala/kr/bydelta/koala/index.html)
+[![JavaDoc](http://javadoc-badge.appspot.com/kr.bydelta/koalanlp-core_2.12.svg?label=javadoc)](http://nearbydelta.github.io/KoalaNLP/api/java/kr/bydelta/koala/index.html)
+[![분석기별 품사비교표](https://img.shields.io/badge/%ED%92%88%EC%82%AC-%EB%B9%84%EA%B5%90%ED%91%9C-blue.svg?style=flat-square)](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)
+[![Gitter](https://img.shields.io/gitter/room/nearbydelta/KoalaNLP.svg?style=flat-square)](https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # 소개
 한국어 형태소 및 구문 분석기의 모음입니다.
@@ -33,14 +35,14 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 
 | 패키지명 | 버전 | Java | Scala| 설명 |
 | -------- | ---- | ---- | ---- |---- |
-| `koalanlp-core` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core_2.12.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core_2.12%22) | 8+ | 2.10+ | 통합 인터페이스의 정의가 등재된 중심 묶음입니다. |
-| `koalanlp-hannanum` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-hannanum_2.12.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-hannanum_2.12%22) | 8+ | 2.10+ | 한나눔 분석기 패키지입니다. <sup>2</sup> |
-| `koalanlp-kkma` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kkma_2.12.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kkma_2.12%22) | 8+ | 2.10+ | 꼬꼬마 분석기 패키지입니다. <sup>2</sup> |
-| `koalanlp-komoran` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-komoran_2.12.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-komoran_2.12%22) | 8+ | 2.10+ | 코모란 분석기 패키지입니다. <sup>2</sup> |
-| `koalanlp-twitter` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-twitter_2.12.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-twitter_2.12%22) | 8+ | **2.12+**<sup>3</sup> | 트위터(OpenKoreanText) 분석기 패키지입니다. |
-| `koalanlp-eunjeon` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon_2.12.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-eunjeon_2.12%22) | 8+ | **2.11+**<sup>3</sup> | 은전한닢 분석기 패키지입니다. |
-| `koalanlp-kryo` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kryo_2.12.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kryo_2.12%22) | 8+ | 2.10+ | Kryo Serialization을 지원하기 위한 패키지입니다. |
-| `koalanlp-server` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-server_2.11.svg?label=latest)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-server_2.11%22) | 8+ | **2.10 - 2.11**<sup>3</sup> | HTTP 서비스 구성을 위한 패키지입니다. |
+| `koalanlp-core` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core_2.12%22) | 8+ | 2.10+ | 통합 인터페이스의 정의가 등재된 중심 묶음입니다. |
+| `koalanlp-hannanum` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-hannanum_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-hannanum_2.12%22) | 8+ | 2.10+ | 한나눔 분석기 패키지입니다. <sup>2</sup> |
+| `koalanlp-kkma` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kkma_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kkma_2.12%22) | 8+ | 2.10+ | 꼬꼬마 분석기 패키지입니다. <sup>2</sup> |
+| `koalanlp-komoran` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-komoran_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-komoran_2.12%22) | 8+ | 2.10+ | 코모란 분석기 패키지입니다. <sup>2</sup> |
+| `koalanlp-twitter` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-twitter_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-twitter_2.12%22) | 8+ | **2.12+**<sup>3</sup> | 트위터(OpenKoreanText) 분석기 패키지입니다. |
+| `koalanlp-eunjeon` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-eunjeon_2.12%22) | 8+ | **2.11+**<sup>3</sup> | 은전한닢 분석기 패키지입니다. |
+| `koalanlp-kryo` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kryo_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kryo_2.12%22) | 8+ | 2.10+ | Kryo Serialization을 지원하기 위한 패키지입니다. |
+| `koalanlp-server` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-server_2.11.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-server_2.11%22) | 8+ | **2.10 - 2.11**<sup>3</sup> | HTTP 서비스 구성을 위한 패키지입니다. |
 
 > <sup>주2</sup> 꼬꼬마, 한나눔, 코모란 분석기는 타 분석기와 달리 Maven repository에 등재되어 있지 않아, 원래는 수동으로 직접 추가하셔야 합니다.
 > 이 점이 불편하다는 것을 알기에, KoalaNLP는 assembly 형태로 해당 패키지를 포함하여 배포하고 있습니다. 포함된 패키지를 사용하려면, `assembly` classifier를 사용하십시오.
@@ -53,24 +55,26 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 KoalaNLP는 Scala 2.12.1에서 컴파일 되었으며, Scala 2.10+과 Java 8+을 지원합니다.
 
 SBT를 사용하시는 경우, 다음과 같이 추가하시면 됩니다.
+(버전은 Latest Release 기준입니다. SNAPSHOT을 사용하시려면, `latest.integration`을 사용하세요.)
 ```sbt
-libraryDependencies += "kr.bydelta" %% "koalanlp-twitter" % "{VERSION}"	//트위터 분석기의 경우
-libraryDependencies += "kr.bydelta" %% "koalanlp-eunjeon" % "{VERSION}"	//은전한닢 분석기의 경우
+libraryDependencies += "kr.bydelta" %% "koalanlp-twitter" % "latest.release"	//트위터 분석기의 경우
+libraryDependencies += "kr.bydelta" %% "koalanlp-eunjeon" % "latest.release"	//은전한닢 분석기의 경우
 
-libraryDependencies += "kr.bydelta" %% "koalanlp-kkma" % "{VERSION}" classifier "assembly"	//꼬꼬마 분석기의 경우
-libraryDependencies += "kr.bydelta" %% "koalanlp-komoran" % "{VERSION}" classifier "assembly"	//코모란 분석기의 경우
-libraryDependencies += "kr.bydelta" %% "koalanlp-hannanum" % "{VERSION}" classifier "assembly"	//한나눔 분석기의 경우
+libraryDependencies += "kr.bydelta" %% "koalanlp-kkma" % "latest.release" classifier "assembly"	//꼬꼬마 분석기의 경우
+libraryDependencies += "kr.bydelta" %% "koalanlp-komoran" % "latest.release" classifier "assembly"	//코모란 분석기의 경우
+libraryDependencies += "kr.bydelta" %% "koalanlp-hannanum" % "latest.release" classifier "assembly"	//한나눔 분석기의 경우
 
-libraryDependencies += "kr.bydelta" %% "koalanlp-kryo" % "{VERSION}" // Kryo Serialization
-libraryDependencies += "kr.bydelta" %% "koalanlp-server" % "{VERSION}" // HTTP 서비스
+libraryDependencies += "kr.bydelta" %% "koalanlp-kryo" % "latest.release" // Kryo Serialization
+libraryDependencies += "kr.bydelta" %% "koalanlp-server" % "latest.release" // HTTP 서비스
 ```
 
 Maven을 사용하시는 경우, 다음과 같습니다.
+(버전은 Latest Release 기준입니다. SNAPSHOT을 사용하시려면, `LATEST`를 사용하세요.)
 ```xml
 <dependency>
   <groupId>kr.bydelta</groupId>
   <artifactId>koalanlp-{TAGGER.PACK}_2.12</artifactId>
-  <version>{VERSION}</version>
+  <version>RELEASE</version>
 </dependency>
 ```
 
@@ -80,7 +84,7 @@ Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 
 ```
 
 # 사용방법
-아래에 대부분의 사항에 대해 기술하겠지만, 상세한 사항은 [ScalaDoc](http://nearbydelta.github.io/KoalaNLP/api/kr/bydelta/koala/index.html)을 참고하십시오.
+아래에 대부분의 사항에 대해 기술하겠지만, 상세한 사항은 [![ScalaDoc](http://javadoc-badge.appspot.com/kr.bydelta/koalanlp-core_2.12.svg?label=scaladoc&style=flat-square)](http://nearbydelta.github.io/KoalaNLP/api/scala/kr/bydelta/koala/index.html)을 참고하십시오.
 
 ## 문장 분리
 품사 태깅을 거치지 않은 문장 분리는, 한나눔과 트위터(OpenKoreanText) 분석기만 지원됩니다. 타 패키지의 경우 문장 분리 작업이 품사 태깅 이후에 이루어집니다.
@@ -112,7 +116,7 @@ List<String> sentences = sentSplit.jSentences(paragraph);
 모든 패키지가 품사 분석을 지원합니다.
 
 > __Note:__ 
-> * 형태소 분석의 결과는 세종 말뭉치의 지침에 따라 통합되었으며, 통합 태그와 각 분석기 태그의 비교표는 [여기](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)에서 보실 수 있습니다.
+> * 형태소 분석의 결과는 세종 말뭉치의 지침에 따라 통합되었으며, 통합 태그와 각 분석기 태그의 비교표는 [![분석기별 품사비교표](https://img.shields.io/badge/%ED%92%88%EC%82%AC-%EB%B9%84%EA%B5%90%ED%91%9C-blue.svg?style=flat-square)](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)에서 보실 수 있습니다.
 > * 은전한닢과 코모란 라이브러리는 문장분리기(Sentence splitter)를 지원하지 않아, Koala가 품사 분석 결과를 토대로 Heuristic을 사용하여 문장을 분리합니다. 때문에, 그 정확성이 떨어질 수 있습니다.
 > * 트위터(OpenKoreanText)의 경우 품사 태깅을 세부적으로 진행하지 않아, 통합 변경 과정에서 임의로 대응되므로(예: Noun → NNG), 통합 태그가 실제와 다를 수 있으나, 큰 무리는 없습니다.
 
@@ -154,7 +158,7 @@ List<Sentence> sentences = tagger.jTagParagraph(paragraph);
 의존 구문 분석은 한나눔과 꼬꼬마가 지원합니다. (타 패키지는 지원하지 않습니다)
 
 > __NOTE:__
-> 구문 분석의 결과는 세종 말뭉치의 지침에 따라 통합되었으며, 통합 태그와 각 분석기 태그의 비교표는 [여기](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)에서 보실 수 있습니다.
+> 구문 분석의 결과는 세종 말뭉치의 지침에 따라 통합되었으며, 통합 태그와 각 분석기 태그의 비교표는 [![분석기별 품사비교표](https://img.shields.io/badge/%ED%92%88%EC%82%AC-%EB%B9%84%EA%B5%90%ED%91%9C-blue.svg?style=flat-square)](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)에서 보실 수 있습니다.
 
 ```scala
 /* 패키지 명: 한나눔(hnn), 꼬꼬마(kkma) */
