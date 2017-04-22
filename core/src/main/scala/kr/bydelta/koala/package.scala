@@ -215,11 +215,11 @@ package object koala {
     * @return 변환된 통합품사.
     */
   def fromKomoranTag(tag: String): POS.Value = {
-    tag match {
+    tag.toUpperCase match {
       case "SW" | "SO" => POS.SY
       case "NA" => POS.UE
       case "SL" | "SH" => POS.SL
-      case _ => POS withName tag
+      case x => POS withName x
     }
   }
 
@@ -277,7 +277,7 @@ package object koala {
     * @return 변환된 통합품사.
     */
   def fromHNNTag(tag: String): POS.Value = {
-    tag match {
+    tag.toLowerCase match {
       case x if x startsWith "nc" => POS.NNG
       case x if x startsWith "nq" => POS.NNP
       case "nbn" | "nbs" => POS.NNB
