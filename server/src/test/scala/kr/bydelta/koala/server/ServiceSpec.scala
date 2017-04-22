@@ -2,7 +2,8 @@ package kr.bydelta.koala.server
 
 import akka.actor.ActorSystem
 import colossus.core.ServerContext
-import colossus.protocols.http.{HttpBody, HttpRequest, HttpService}
+import colossus.protocols.http.server.RequestHandler
+import colossus.protocols.http.{HttpBody, HttpRequest}
 import colossus.service._
 import colossus.testkit._
 import kr.bydelta.koala.kkma.{Dictionary, Parser, Tagger}
@@ -29,14 +30,14 @@ class ServiceSpec extends Specification {
   "TaggerService" should {
     "generate correct tag response" in {
       val connection = MockConnection.server(
-        server.getServiceInitializer(null).onConnect.asInstanceOf[(ServerContext) => HttpService])
-      val respPost = connection.typedHandler.handle(
+        server.getServiceInitializer(null).onConnect.asInstanceOf[(ServerContext) => RequestHandler])
+      val respPost = connection.typedHandler.handleRequest(
         HttpRequest.post("/tag").withBody(HttpBody("나는 먹는다"))
       )
-      val respGet = connection.typedHandler.handle(
+      val respGet = connection.typedHandler.handleRequest(
         HttpRequest.get("/tag").withBody(HttpBody("나는 먹는다"))
       )
-      val respPut = connection.typedHandler.handle(
+      val respPut = connection.typedHandler.handleRequest(
         HttpRequest.put("/tag").withBody(HttpBody("나는 먹는다"))
       )
 
@@ -50,14 +51,14 @@ class ServiceSpec extends Specification {
 
     "generate correct parse response" in {
       val connection = MockConnection.server(
-        server.getServiceInitializer(null).onConnect.asInstanceOf[(ServerContext) => HttpService])
-      val respPost = connection.typedHandler.handle(
+        server.getServiceInitializer(null).onConnect.asInstanceOf[(ServerContext) => RequestHandler])
+      val respPost = connection.typedHandler.handleRequest(
         HttpRequest.post("/parse").withBody(HttpBody("나는 먹는다"))
       )
-      val respGet = connection.typedHandler.handle(
+      val respGet = connection.typedHandler.handleRequest(
         HttpRequest.get("/parse").withBody(HttpBody("나는 먹는다"))
       )
-      val respPut = connection.typedHandler.handle(
+      val respPut = connection.typedHandler.handleRequest(
         HttpRequest.put("/parse").withBody(HttpBody("나는 먹는다"))
       )
 
@@ -71,15 +72,15 @@ class ServiceSpec extends Specification {
 
     "provide dictionary's put action" in {
       val connection = MockConnection.server(
-        server.getServiceInitializer(null).onConnect.asInstanceOf[(ServerContext) => HttpService])
-      val response = connection.typedHandler.handle(
+        server.getServiceInitializer(null).onConnect.asInstanceOf[(ServerContext) => RequestHandler])
+      val response = connection.typedHandler.handleRequest(
         HttpRequest.put("/dict").withBody(HttpBody("""[{"morph":"개취","tag":"NNP"}]"""))
       )
 
       CallbackAwait.result(response, 1.minute).body.bytes.utf8String must_== """{"success":true}"""
       Dictionary.isDicChanged must beTrue
 
-      val response2 = connection.typedHandler.handle(
+      val response2 = connection.typedHandler.handleRequest(
         HttpRequest.post("/dict").withBody(HttpBody("""[{"morph":"취존","tag":"NNP"}]"""))
       )
 
@@ -93,8 +94,8 @@ class ServiceSpec extends Specification {
 
     "handle illegal access" in {
       val connection = MockConnection.server(
-        server.getServiceInitializer(null).onConnect.asInstanceOf[(ServerContext) => HttpService])
-      val response = connection.typedHandler.handle(
+        server.getServiceInitializer(null).onConnect.asInstanceOf[(ServerContext) => RequestHandler])
+      val response = connection.typedHandler.handleRequest(
         HttpRequest.put("/index")
       )
 
@@ -103,9 +104,9 @@ class ServiceSpec extends Specification {
 
     "handle malformed JSON" in {
       val connection = MockConnection.server(
-        server.getServiceInitializer(null).onConnect.asInstanceOf[(ServerContext) => HttpService])
+        server.getServiceInitializer(null).onConnect.asInstanceOf[(ServerContext) => RequestHandler])
 
-      CallbackAwait.result(connection.typedHandler.handle(
+      CallbackAwait.result(connection.typedHandler.handleRequest(
         HttpRequest.put("/dict").withBody(HttpBody("["))
       ), 1.minute).body.bytes.utf8String must be startingWith
         """{"success":false"""

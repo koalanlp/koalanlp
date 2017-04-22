@@ -42,5 +42,7 @@
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang:scala-reflect:2.11.8:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.5:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.slf4j:slf4j-api:1.8.0-alpha1:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.slf4j:slf4j-simple:1.8.0-alpha1:jar" level="project" />
   </component>
 </module>
