@@ -2,6 +2,7 @@ package kr.bydelta.koala.server
 
 import akka.actor.ActorSystem
 import colossus._
+import colossus.core.ServerRef
 import colossus.protocols.http.server.HttpServer
 import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}
 
@@ -53,9 +54,17 @@ trait Server {
     implicit val actorSystem = ActorSystem()
     implicit val io = IOSystem()
 
-    HttpServer.basic("taggerServer", port, context => new Service(context, getTagger, getParser, dict))
-    logger info "Server initialized"
+    logger info "Server initializing"
+    getHttpServerRef
   }
 
   // $COVERAGE-ON$
+  /**
+    * Return a server instance.
+    *
+    * @param io IOSystem (implicit)
+    * @return Reference of a ServerRef Instance
+    */
+  def getHttpServerRef(implicit io: IOSystem): ServerRef =
+  HttpServer.basic("taggerServer", port, context => new Service(context, getTagger, getParser, dict))
 }
