@@ -9,7 +9,7 @@ lazy val root = (project in file("."))
     publishLocal := {},
     publish := {},
     unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples, model, server),
-    unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples, model, server)
+    unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples, model)
   ).settings(aggregate in update := true)
 lazy val core = (project in file("core"))
   .enablePlugins(GenJavadocPlugin)
@@ -17,7 +17,7 @@ lazy val core = (project in file("core"))
   .settings(
     libraryDependencies ++= Seq(
       "org.log4s" %% "log4s" % "latest.release",
-      "org.slf4j" % "slf4j-simple" % "latest.release" % "provided"
+      "org.slf4j" % "slf4j-simple" % "latest.release" % "test"
     )
   )
 

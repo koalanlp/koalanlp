@@ -2,7 +2,8 @@ package kr.bydelta.koala.server
 
 import akka.actor.ActorSystem
 import colossus._
-import colossus.core.{WorkerRef, Server => CServer}
+import colossus.core.InitContext
+import colossus.core.server.{Server => CServer}
 import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}
 
 /**
@@ -65,5 +66,5 @@ trait Server {
     * @param worker Worker Reference of Colossus
     * @return Service Initializer instance
     */
-  def getServiceInitializer(worker: WorkerRef) = new ServiceInitializer(worker)
+  def getServiceInitializer(worker: InitContext) = new ServiceInitializer(worker)
 }

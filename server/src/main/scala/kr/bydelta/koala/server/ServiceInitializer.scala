@@ -1,6 +1,7 @@
 package kr.bydelta.koala.server
 
-import colossus.core.{Initializer, ServerConnectionHandler, ServerContext, WorkerRef}
+import colossus.core._
+import colossus.protocols.http.server.Initializer
 import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}
 
 /**
@@ -11,7 +12,7 @@ import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}
   * @param getParser A non-ary funciton that generates Parser
   * @param dict      A dictionary singleton object.
   */
-class ServiceInitializer(worker: WorkerRef)
+class ServiceInitializer(worker: InitContext)
                         (implicit val getTagger: () => CanTag[_],
                          implicit val getParser: () => CanDepParse,
                          implicit val dict: CanCompileDict) extends Initializer(worker) {
@@ -24,6 +25,6 @@ class ServiceInitializer(worker: WorkerRef)
     */
   lazy val parser = getParser()
 
-  override def onConnect: (ServerContext) => ServerConnectionHandler =
+  override def onConnect =
     context => new Service(context, tagger, parser, dict)
 }
