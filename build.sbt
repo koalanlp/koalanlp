@@ -9,7 +9,7 @@ lazy val root = (project in file("."))
     publishLocal := {},
     publish := {},
     unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples, model, server),
-    unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples, model)
+    unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples, model, server)
   ).settings(aggregate in update := true)
 lazy val core = (project in file("core"))
   .enablePlugins(GenJavadocPlugin)
@@ -149,8 +149,3 @@ def projectWithConfig(module: String) =
           </developer>
         </developers>
   )
-
-credentials ++= (for {
-  username <- Option(System.getenv().get("SONATYPE_USERNAME"))
-  password <- Option(System.getenv().get("SONATYPE_PASSWORD"))
-} yield Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password)).toSeq

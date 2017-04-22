@@ -56,6 +56,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
   /** 사용자사전. **/
   private[koala] lazy val userDic: Trie = new Trie(Trie.DEFAULT_TRIE_BUF_SIZE_USER)
   private[koala] lazy val numAutomata: NumberAutomata = new NumberAutomata
+  private var baseEntries = Seq[(String, Seq[POSTag])]()
   private[koala] var usrBuffer = Set[(String, POSTag)]()
   private var dicLastUpdate, mapLastUpdate = 0l
 
@@ -118,36 +119,43 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     }
 
   override def baseEntriesOf(f: (POSTag) => Boolean): Iterator[(String, POSTag)] = {
-    val targetIDs = POS.values.filter(f).map(x => tagSet.getTagID(tagToHNN(x).toLowerCase))
-    type TNode = Trie#TNODE
+    extractBaseEntries().iterator.collect {
+      case (word, tags) if tags.exists(f) =>
+        tags.filter(f).map(x => word -> x)
+    }.flatten
+  }
 
-    @tailrec
-    def iterate(stack: List[(Array[Char], TNode)],
-                acc: Seq[(String, POSTag)] = Seq.empty): Seq[(String, POSTag)] =
-      if (stack.isEmpty) acc
-      else {
-        val (prefix, top) = stack.head
-        var nStack = stack.tail
+  private def extractBaseEntries(): Seq[(String, Seq[POSTag])] =
+    if (baseEntries.nonEmpty) baseEntries
+    else this.synchronized {
+      type TNode = Trie#TNODE
 
-        val word = prefix :+ top.key
-        val value = top.info_list.asScala
+      @tailrec
+      def iterate(stack: List[(Array[Char], TNode)]): Unit =
+        if (stack.nonEmpty) {
+          val (prefix, top) = stack.head
+          var nStack = stack.tail
 
-        val newSeq = if (value != null && value.exists(x => targetIDs.contains(x.tag))) {
-          val wordstr = Code.toString(word)
-          value.filter(x => targetIDs.contains(x.tag))
-            .map(x => wordstr -> fromHNNTag(tagSet.getTagName(x.tag))) ++: acc
-        } else acc
+          val word = prefix :+ top.key
+          val value = top.info_list.asScala
 
-        if (top.child_size > 0) {
-          val children = top.child_idx until (top.child_idx + top.child_size)
-          nStack ++:= children.map(id => word -> systemDic.get_node(id))
+          if (value != null) {
+            val wordstr = Code.toString(word)
+            baseEntries +:= (wordstr -> value.map(x => fromHNNTag(tagSet.getTagName(x.tag))))
+          }
+
+          if (top.child_size > 0) {
+            val children = top.child_idx until (top.child_idx + top.child_size)
+            nStack ++:= children.map(id => word -> systemDic.get_node(id))
+          }
+
+          iterate(nStack)
         }
 
-        iterate(nStack, newSeq)
-      }
+      iterate(List(Array.empty[Char] -> systemDic.node_head))
 
-    iterate(List(Array.empty[Char] -> systemDic.node_head)).toIterator
-  }
+      baseEntries
+    }
 
   override protected def modelName: String = "hannanum"
 }

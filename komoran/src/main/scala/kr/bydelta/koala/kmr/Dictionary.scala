@@ -39,6 +39,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
 
   private var userLastUpdated = 0l
   private var userBuffer = Set[(String, POSTag)]()
+  private var baseEntries = Seq[(String, Seq[POSTag])]()
 
   override def addUserDictionary(dict: (String, POSTag)*): Unit = Dictionary synchronized {
     userDict.getParentFile.mkdirs()
@@ -95,36 +96,43 @@ object Dictionary extends CanCompileDict with CanExtractResource {
   }
 
   override def baseEntriesOf(f: (POSTag) => Boolean): Iterator[(String, POSTag)] = {
-    type TNode = TrieNode[java.util.List[KPair[Integer, java.lang.Double]]]
-    val targetIDs = POS.values.filter(f).map(p => table.getId(tagToKomoran(p)))
+    extractBaseEntries().iterator.collect {
+      case (word, tags) if tags.exists(f) =>
+        tags.filter(f).map(x => word -> x)
+    }.flatten
+  }
 
-    @tailrec
-    def iterate(stack: List[(Seq[Char], TNode)],
-                acc: Seq[(String, POSTag)] = Seq.empty): Seq[(String, POSTag)] =
-      if (stack.isEmpty) acc
-      else {
-        val (prefix, top) = stack.head
-        var nStack = stack.tail
+  private def extractBaseEntries(): Seq[(String, Seq[POSTag])] =
+    if (baseEntries.nonEmpty) baseEntries
+    else this.synchronized {
+      type TNode = TrieNode[java.util.List[KPair[Integer, java.lang.Double]]]
 
-        val word = if (top.getKey == null) prefix else prefix :+ top.getKey.charValue()
-        val value = if (top.getValue != null) top.getValue.asScala else Seq()
+      @tailrec
+      def iterate(stack: List[(Seq[Char], TNode)]): Unit =
+        if (stack.nonEmpty) {
+          val (prefix, top) = stack.head
+          var nStack = stack.tail
 
-        val newSeq = if (value != null && value.exists(x => x != null && targetIDs.contains(x.getFirst))) {
-          val wordstr = util.reunionKorean(word)
-          value.filter(x => targetIDs.contains(x.getFirst))
-            .map(x => wordstr -> fromKomoranTag(table.getPos(x.getFirst))) ++: acc
-        } else acc
+          val word = if (top.getKey == null) prefix else prefix :+ top.getKey.charValue()
+          val value = if (top.getValue != null) top.getValue.asScala else Seq()
 
-        val children = top.getChildren
-        if (children != null) {
-          nStack ++:= children.map(word -> _)
+          if (value != null && value.exists(_ != null)) {
+            val wordstr = util.reunionKorean(word)
+            baseEntries +:= wordstr -> value.map(x => fromKomoranTag(table.getPos(x.getFirst)))
+          }
+
+          val children = top.getChildren
+          if (children != null) {
+            nStack ++:= children.map(word -> _)
+          }
+
+          iterate(nStack)
         }
 
-        iterate(nStack, newSeq)
-      }
+      iterate(List(Seq.empty[Char] -> dic.getRoot))
 
-    iterate(List(Seq.empty[Char] -> dic.getRoot)).toIterator
-  }
+      baseEntries
+    }
 
   override protected def modelName: String = "komoran"
 }
