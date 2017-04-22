@@ -10,6 +10,7 @@ git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/nearbydelta/K
 # Commit and Push the Changes
 cd gh-pages
 git rm -rf ./api/*
+mkdir ./api
 mv $WD/target/scala-$VER/unidoc $HOME/gh-pages/api/scala
 mv $WD/target/javaunidoc $HOME/gh-pages/api/java
 mv $WD/README.md $HOME/gh-pages/index.md
