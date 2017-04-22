@@ -84,7 +84,7 @@ Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 
 ```
 
 # 사용방법
-아래에 대부분의 사항에 대해 기술하겠지만, 상세한 사항은 [![ScalaDoc](http://javadoc-badge.appspot.com/kr.bydelta/koalanlp-core_2.12.svg?label=scaladoc)](http://nearbydelta.github.io/KoalaNLP/api/scala/kr/bydelta/koala/index.html)을 참고하십시오.
+아래에 대부분의 사항에 대해 기술하겠지만, 상세한 사항은 [![ScalaDoc](http://javadoc-badge.appspot.com/kr.bydelta/koalanlp-core_2.12.svg?label=scaladoc&style=flat-sqaure)](http://nearbydelta.github.io/KoalaNLP/api/scala/kr/bydelta/koala/index.html)을 참고하십시오.
 
 ## 문장 분리
 품사 태깅을 거치지 않은 문장 분리는, 한나눔과 트위터(OpenKoreanText) 분석기만 지원됩니다. 타 패키지의 경우 문장 분리 작업이 품사 태깅 이후에 이루어집니다.
