@@ -1,16 +1,25 @@
 import sbt.Keys._
-import sbtunidoc.Plugin.UnidocKeys._
 
 lazy val root = (project in file("."))
+  .enablePlugins(ScalaUnidocPlugin, JavaUnidocPlugin)
   .aggregate(core, kkma, hannanum, twitter, komoran, eunjeon, kryo)
-  .settings(unidocSettings: _*)
   .settings(
     publishArtifact := false,
     packagedArtifacts := Map.empty,
     publishLocal := {},
     publish := {},
-    unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples, model, server)
+    unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples, model, server),
+    unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples, model, server)
   ).settings(aggregate in update := true)
+lazy val core = (project in file("core"))
+  .enablePlugins(GenJavadocPlugin)
+  .settings(projectWithConfig("core"): _*)
+  .settings(
+    libraryDependencies ++= Seq(
+      "org.log4s" %% "log4s" % "latest.release",
+      "org.slf4j" % "slf4j-simple" % "latest.release" % "provided"
+    )
+  )
 
 resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
 
@@ -19,16 +28,8 @@ resolvers ++= Seq(
 )
 
 sonatypeProfileName := "kr.bydelta"
-
-lazy val core = (project in file("core"))
-  .settings(projectWithConfig("core"): _*)
-  .settings(
-    libraryDependencies ++= Seq(
-      "org.log4s" %% "log4s" % "[1.3.4,)",
-      "org.slf4j" % "slf4j-simple" % "[1.7.24,)" % "provided"
-    )
-  )
 lazy val kkma = (project in file("kkma"))
+  .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("kkma"): _*)
   .settings(
     assemblyOption in assembly := (assemblyOption in assembly).value.
@@ -40,6 +41,7 @@ lazy val kkma = (project in file("kkma"))
     addArtifact(artifact in(Compile, assembly), assembly))
   .dependsOn(core % "test->test;compile->compile")
 lazy val hannanum = (project in file("hannanum"))
+  .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("hannanum"): _*)
   .settings(
     assemblyOption in assembly := (assemblyOption in assembly).value.
@@ -51,18 +53,21 @@ lazy val hannanum = (project in file("hannanum"))
     addArtifact(artifact in(Compile, assembly), assembly))
   .dependsOn(core % "test->test;compile->compile")
 lazy val eunjeon = (project in file("eunjeon"))
+  .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("eunjeon"): _*)
   .settings(
-    libraryDependencies += "org.bitbucket.eunjeon" %% "seunjeon" % "[1.1.0,)"
+    libraryDependencies += "org.bitbucket.eunjeon" %% "seunjeon" % "latest.release"
   ).dependsOn(core % "test->test;compile->compile")
 lazy val twitter = (project in file("twitter"))
+  .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("twitter"): _*)
   .settings(
     libraryDependencies ++= Seq(
-      "org.openkoreantext" % "open-korean-text" % "[1.1,)"
+      "org.openkoreantext" % "open-korean-text" % "latest.release"
     )
   ).dependsOn(core % "test->test;compile->compile")
 lazy val komoran = (project in file("komoran"))
+  .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("komoran"): _*)
   .settings(
     assemblyOption in assembly := (assemblyOption in assembly).value.
@@ -77,35 +82,38 @@ lazy val samples = (project in file("samples"))
   .settings(projectWithConfig("samples"): _*)
   .dependsOn(eunjeon, twitter, komoran, kkma, hannanum, server)
 lazy val server = (project in file("server"))
+  .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("server"): _*)
   .settings(
     coverageEnabled := false,
     libraryDependencies ++= Seq(
-      "com.tumblr" %% "colossus" % "0.8.3",
-      "com.tumblr" %% "colossus-testkit" % "0.8.3" % "test",
-      "com.typesafe.play" %% "play-json" % "[2.4,)"
+      "com.tumblr" %% "colossus" % "latest.release",
+      "com.tumblr" %% "colossus-testkit" % "latest.release" % "test",
+      "com.typesafe.play" %% "play-json" % "latest.release"
     )
   )
   .dependsOn(core, kkma % "test")
 lazy val kryo = (project in file("kryo"))
+  .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("kryo"))
   .settings(
-    libraryDependencies += "com.twitter" %% "chill" % "[0.9.2,)"
+    libraryDependencies += "com.twitter" %% "chill" % "latest.release"
   )
   .dependsOn(core, kkma % "test", twitter % "test")
 lazy val model = (project in file("model"))
   .settings(projectWithConfig("model"))
   .settings(
     libraryDependencies ++= Seq(
-      "org.tensorflow" % "tensorflow" % "latest.integration"
+      "org.tensorflow" % "tensorflow" % "latest.release"
     )
   ).dependsOn(core)
+val VERSION = "1.5.2-SNAPSHOT"
 
 def projectWithConfig(module: String) =
   Seq(
     organization := "kr.bydelta",
     name := s"koalaNLP-$module",
-    version := "1.5.1",
+    version := VERSION,
     scalaVersion := "2.11.8",
     scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature"),
     scalacOptions in Test ++= Seq("-Yrangepos"),
@@ -113,7 +121,8 @@ def projectWithConfig(module: String) =
     publishArtifact in Test := false,
     coverageExcludedPackages := ".*\\.helper\\..*",
     test in assembly := {},
-    libraryDependencies += "org.specs2" %% "specs2-core" % "[3.8,)" % "test",
+    libraryDependencies += "org.specs2" %% "specs2-core" % "latest.release" % "test",
+    apiURL := Some(url("https://nearbydelta.github.io/KoalaNLP/api/scala/")),
     homepage := Some(url("http://nearbydelta.github.io/KoalaNLP")),
     parallelExecution in Test := false,
     publishTo := version { v: String ⇒
@@ -140,3 +149,8 @@ def projectWithConfig(module: String) =
           </developer>
         </developers>
   )
+
+credentials ++= (for {
+  username <- Option(System.getenv().get("SONATYPE_USERNAME"))
+  password <- Option(System.getenv().get("SONATYPE_PASSWORD"))
+} yield Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password)).toSeq

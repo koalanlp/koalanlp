@@ -17,6 +17,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../twitter/src/test/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../twitter/target/scala-2.11/resource_managed/test" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/../../twitter/target" />
+      <excludeFolder url="file://$MODULE_DIR$/../../twitter/target/java" />
       <excludeFolder url="file://$MODULE_DIR$/../../twitter/target/resolution-cache" />
       <excludeFolder url="file://$MODULE_DIR$/../../twitter/target/scala-2.10" />
       <excludeFolder url="file://$MODULE_DIR$/../../twitter/target/scala-2.12" />
@@ -40,7 +41,6 @@
     <orderEntry type="library" name="SBT: org.log4s:log4s_2.11:1.3.4:jar" level="project" />
     <orderEntry type="library" name="SBT: com.twitter:twitter-text:1.14.3:jar" level="project" />
     <orderEntry type="library" name="SBT: org.openkoreantext:open-korean-text:1.2:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.slf4j:slf4j-api:1.8.0-alpha1:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.slf4j:slf4j-simple:1.8.0-alpha1:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.slf4j:slf4j-api:1.7.21:jar" level="project" />
   </component>
 </module>

@@ -19,11 +19,13 @@
       <sourceFolder url="file://$MODULE_DIR$/../../model/target/scala-2.11/resource_managed/test" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/../../model/target" />
       <excludeFolder url="file://$MODULE_DIR$/../../model/target/resolution-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/../../model/target/scala-2.12" />
       <excludeFolder url="file://$MODULE_DIR$/../../model/target/streams" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="core" exported="" />
+    <orderEntry type="library" name="SBT: org.slf4j:slf4j-api:1.7.21:jar" level="project" />
     <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.8:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scalaz:scalaz-concurrent_2.11:7.2.0:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scalaz:scalaz-core_2.11:7.2.0:jar" level="project" />
@@ -36,8 +38,6 @@
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.5:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang:scala-reflect:2.11.8:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.slf4j:slf4j-api:1.8.0-alpha1:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.slf4j:slf4j-simple:1.8.0-alpha1:jar" level="project" />
     <orderEntry type="library" name="SBT: org.tensorflow:libtensorflow:1.1.0-rc2:jar" level="project" />
     <orderEntry type="library" name="SBT: org.tensorflow:libtensorflow_jni:1.1.0-rc2:jar" level="project" />
     <orderEntry type="library" name="SBT: org.tensorflow:tensorflow:1.1.0-rc2:jar" level="project" />
