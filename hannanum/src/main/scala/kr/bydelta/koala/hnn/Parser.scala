@@ -65,7 +65,8 @@ class Parser extends CanDepParse {
                     term.getWord.replaceAll("\\-LRB\\-", "(").replaceAll("\\-RRB\\-", ")")
                   else
                     term.getWord
-                Morpheme(word, term.getPOS, fromHNNTag(term.getPOS))
+                // 한나눔의 Parser 결과는 세종 표기를 따름.
+                Morpheme(word, term.getPOS, fromSejongTag(term.getPOS))
             }
           )
       }

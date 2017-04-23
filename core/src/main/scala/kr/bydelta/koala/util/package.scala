@@ -65,7 +65,9 @@ package object util {
   // 규칙적탈락: 어간 'ㄹ'탈락. 'ㄹ'이 'ㄴㅂㅅ오'앞에서 탈락.
   // 규칙적첨가: ('ㄹ'이외의 종료 어간) + '-ㄴ,-ㄹ,-오,-시,-며.'
   // 규칙적탈락: 어간 'ㅡ'탈락. 'ㅡ'가 'ㅏ/ㅓ'앞에서 탈락.
-  def reduceVerbApply(verb: Seq[Char], isVerb: Boolean, rest: Seq[Char]): Seq[Char] = {
+  def reduceVerbApply(verb: Seq[Char], isVerb: Boolean, rest: Seq[Char]): Seq[Char] =
+  if (rest.isEmpty) verb
+  else {
     val verbStr = verb.mkString
     val restStr = rest.mkString
     val verbRev = verb.reverse
@@ -74,62 +76,75 @@ package object util {
 
     if (!next.isHangul) {
       verb ++ rest
-    } else if ((verbStr.matches("^벗|솟|씻|뺏$") && isVerb) ||
-      (char != '낫' && char.getJongsungCode == 19 && !isVerb))
-      verb ++ harmony(verbRev, rest)
-    else if (char.getJongsungCode == 19) // 종성: ㅅ
-      (char - char.getJongsungCode).toChar +: harmony(verbRev, rest)
-    else if (verbStr.matches("^듣|깨닫|붇|묻|눋$"))
-      verbRev.tail.reverse ++: (char + 1).toChar +: harmony(verbRev, rest)
-    else if (verbStr.matches("^돕|겁|곱$"))
-      (char - char.getJongsungCode).toChar +: (addOh(rest.head) +: rest.tail)
-    else if (verbStr.matches("^굽|뽑|씹|업|입|잡|접|좁|집$"))
-      verb ++ harmony(verbRev, rest)
-    else if (char.getJongsungCode == 17) // 종성: ㅂ
-      verbRev.tail.reverse ++: ((char - 17).toChar +: (addWoo(rest.head) +: rest.tail))
-    else if (verbStr.matches("^치르|따르|다다르|우러르|들르$") &&
-      (startsWithAh(next) || startsWithUh(next)))
-      verbRev.tail.reverse ++:
-        harmony(verbRev.tail, reconstructKorean(char.getChosungCode, next.getJungsungCode, next.getJongsungCode) +: rest.tail)
-    else if (verbStr == "푸르" && startsWithUh(next))
-      verb ++:
-        harmony(verbRev, (next - 6 * JUNGSUNG_RANGE).toChar +: rest.tail)
-    else if (verbStr == "푸" && startsWithUh(next))
-      (next + 6 * JUNGSUNG_RANGE).toChar +: rest.tail
-    else if (char == '르' && (startsWithAh(next) || startsWithUh(next)))
-      verbRev.tail.tail.reverse ++: ((verbRev.tail.head + 8).toChar +:
-        harmony(verbRev.tail, (next - 6 * JUNGSUNG_RANGE).toChar +: rest.tail))
-    else if (char == '하' && (startsWithAh(next) || startsWithUh(next)))
-      verb ++: harmony(Seq('어'), (next + 2 * JONGSUNG_RANGE).toChar +: rest.tail) //force "ㅕ"
-    else if (isVerb && char == '가' && next == '아' && (rest.tail.head - rest.tail.head.getJongsungCode) == '라')
-      verb ++: ('거' +: rest.tail)
-    else if (isVerb && char == '오' && next == '아' && (rest.tail.head - rest.tail.head.getJongsungCode) == '라')
-      verb ++: ('너' +: rest.tail)
-    else if (verbStr == "다" && restStr == "아")
-      "다오".toSeq
-    else if (!isVerb && char.getJongsungCode == 27 && char != '좋') {
-      // 종성: ㅎ
-      if (next.isIncompleteHangul) {
-        verbRev.tail.reverse ++ ((char - 27 + HanLastList.indexOf(next)).toChar +: rest.tail)
-      } else if (next.getJungsungCode == 18) {
-        // "ㅡ"
-        verbRev.tail.reverse ++ ((char - 27 + next.getJongsungCode).toChar +: rest.tail)
-      } else if (startsWithAh(next) || startsWithUh(next)) {
-        verbRev.tail.reverse ++
-          (reconstructKorean(char.getChosungCode, next.getJungsungCode + 1, next.getJongsungCode) +: rest.tail)
-      } else
+    } else if (next.getChosungCode == 11 || next.isIncompleteHangul) {
+      if ((verbStr.matches("^벗|솟|씻|뺏$") && isVerb) ||
+        (char != '낫' && char.getJongsungCode == 19 && !isVerb))
         verb ++ harmony(verbRev, rest)
-    } else if (endsWithEu(char) &&
-      (startsWithAh(next) || startsWithUh(next))) {
-      verbRev.tail.reverse ++:
-        harmony(verbRev.tail, reconstructKorean(char.getChosungCode, next.getJungsungCode, next.getJongsungCode) +: rest.tail)
+      else if (char.getJongsungCode == 19) // 종성: ㅅ
+        (char - char.getJongsungCode).toChar +: harmony(verbRev, rest)
+      else if (verbStr.matches("^듣|깨닫|붇|묻|눋$"))
+        verbRev.tail.reverse ++: (char + 1).toChar +: harmony(verbRev, rest)
+      else if (verbStr.matches("^돕|겁|곱$"))
+        (char - char.getJongsungCode).toChar +: (addOh(rest.head) +: rest.tail)
+      else if (verbStr.matches("^굽|뽑|씹|업|입|잡|접|좁|집$"))
+        verb ++ harmony(verbRev, rest)
+      else if (char.getJongsungCode == 17) // 종성: ㅂ
+        verbRev.tail.reverse ++: ((char - 17).toChar +: (addWoo(rest.head) +: rest.tail))
+      else if (verbStr.matches("^치르|따르|다다르|우러르|들르$") &&
+        (startsWithAh(next) || startsWithUh(next)))
+        verbRev.tail.reverse ++:
+          harmony(verbRev.tail, reconstructKorean(char.getChosungCode, next.getJungsungCode, next.getJongsungCode) +: rest.tail)
+      else if (verbStr == "푸르" && startsWithUh(next))
+        verb ++:
+          harmony(verbRev, (next - 6 * JUNGSUNG_RANGE).toChar +: rest.tail)
+      else if (verbStr == "푸" && startsWithUh(next))
+        (next + 6 * JUNGSUNG_RANGE).toChar +: rest.tail
+      else if (char == '르' && (startsWithAh(next) || startsWithUh(next)))
+        verbRev.tail.tail.reverse ++: ((verbRev.tail.head + 8).toChar +:
+          harmony(verbRev.tail, (next - 6 * JUNGSUNG_RANGE).toChar +: rest.tail))
+      else if (char == '하' && (startsWithAh(next) || startsWithUh(next)))
+        verb ++: harmony(Seq('어'), (next + 2 * JONGSUNG_RANGE).toChar +: rest.tail) //force "ㅕ"
+      else if (isVerb && char == '가' && next == '아' && (rest.tail.head - rest.tail.head.getJongsungCode) == '라')
+        verb ++: ('거' +: rest.tail)
+      else if (isVerb && char == '오' && next == '아' && (rest.tail.head - rest.tail.head.getJongsungCode) == '라')
+        verb ++: ('너' +: rest.tail)
+      else if (verbStr == "다" && restStr == "아")
+        "다오".toSeq
+      else if (!isVerb && char.getJongsungCode == 27 && char != '좋') {
+        // 종성: ㅎ
+        if (next.isIncompleteHangul) {
+          verbRev.tail.reverse ++ ((char - 27 + HanLastList.indexOf(next)).toChar +: rest.tail)
+        } else if (next.getJungsungCode == 18) {
+          // "ㅡ"
+          verbRev.tail.reverse ++ ((char - 27 + next.getJongsungCode).toChar +: rest.tail)
+        } else if (startsWithAh(next) || startsWithUh(next)) {
+          verbRev.tail.reverse ++
+            (reconstructKorean(char.getChosungCode, next.getJungsungCode + 1, next.getJongsungCode) +: rest.tail)
+        } else
+          verb ++ harmony(verbRev, rest)
+      } else if (endsWithEu(char) &&
+        (startsWithAh(next) || startsWithUh(next))) {
+        verbRev.tail.reverse ++:
+          harmony(verbRev.tail, reconstructKorean(char.getChosungCode, next.getJungsungCode, next.getJongsungCode) +: rest.tail)
+      } else if (endsWithL(char) && startsWithOh(next)) {
+        verbRev.tail.reverse ++: harmony(verbRev.tail, (char - char.getJongsungCode).toChar +: rest)
+      } else if (char.endsWithJongsung && !endsWithL(char)) {
+        if (next == '오') {
+          verb ++ harmony(verbRev, '으' +: rest)
+        } else
+          verb ++ harmony(verbRev, rest)
+      } else if (char.getJungsungCode == HanSecondList.length - 1 && startsWithUh(next)) {
+        verbRev.tail.reverse ++: (reconstructKorean(char.getChosungCode, 6, next.getJongsungCode) +: rest.tail)
+      } else {
+        verb ++ harmony(verbRev, rest)
+      }
     } else if (endsWithL(char) &&
-      (startsWithB(next) || startsWithN(next) || startsWithS(next) || startsWithOh(next))) {
+      (startsWithB(next) || startsWithN(next) || startsWithS(next))) {
       verbRev.tail.reverse ++: harmony(verbRev.tail, (char - char.getJongsungCode).toChar +: rest)
     } else if (char.endsWithJongsung && !endsWithL(char)) {
       if (next == 'ㄴ' || next == 'ㄹ') {
         verb ++ harmony(verbRev, reconstructKorean(jung = 18, jong = HanLastList.indexOf(next)) +: rest)
-      } else if (next == '오' || next == '시' || next == '며') {
+      } else if (next == '시' || next == '며') {
         verb ++ harmony(verbRev, '으' +: rest)
       } else
         verb ++ harmony(verbRev, rest)
@@ -141,7 +156,7 @@ package object util {
   private def addOh(ch: Char): Char = {
     val jcode = ch.getJungsungCode
     if (ch.isIncompleteHangul)
-      reconstructKorean(cho = HanFirstList.indexOf(ch), jung = 13)
+      reconstructKorean(jong = HanLastList.indexOf(ch), jung = 13)
     else if (jcode == 18) // ㅡ->ㅜ
       (ch - JONGSUNG_RANGE * 5).toChar
     else if (jcode == 0) //ㅏ->ㅘ
@@ -155,7 +170,7 @@ package object util {
   private def addWoo(ch: Char): Char = {
     val jcode = ch.getJungsungCode
     if (ch.isIncompleteHangul)
-      reconstructKorean(cho = HanFirstList.indexOf(ch), jung = 13)
+      reconstructKorean(jong = HanLastList.indexOf(ch), jung = 13)
     else if (jcode == 18) // ㅡ->ㅜ
       (ch - JONGSUNG_RANGE * 5).toChar
     else if (jcode == 0) //ㅏ->ㅝ
@@ -179,13 +194,14 @@ package object util {
         rest
     } else {
       val frontJung = HanSecondList(front.head.getJungsungCode)
-      val isTheCase = frontJung == 'ㅏ' || frontJung == 'ㅗ'
+      val isTheCase = frontJung == 'ㅏ' || frontJung == 'ㅗ' || frontJung == 'ㅑ'
       val ch = rest.head
       val restJung = HanSecondList(ch.getJungsungCode)
-      if (isTheCase && SecondNeg.contains(restJung)) {
+      val restCho = ch.getChosungCode == 11
+      if (isTheCase && SecondNeg.contains(restJung) && restCho) {
         reconstructKorean(ch.getChosungCode,
           HanSecondList.indexOf(SecondPos(SecondNeg.indexOf(restJung))), ch.getJongsungCode) +: rest.tail
-      } else if (!isTheCase && SecondPos.contains(restJung)) {
+      } else if (!isTheCase && SecondPos.contains(restJung) && restCho) {
         reconstructKorean(ch.getChosungCode,
           HanSecondList.indexOf(SecondNeg(SecondPos.indexOf(restJung))), ch.getJongsungCode) +: rest.tail
       } else

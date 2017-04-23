@@ -9,27 +9,17 @@ install:
 script:
 - sbt -J-Xmx4g server/test
 - sbt -J-Xmx4g clean
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage core/test
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kryo/testOnly *Kryo*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *Tagger*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kkma/testOnly *Implicit*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kkma/testOnly *Tag*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kkma/testOnly *Parse*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage komoran/test
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage twitter/test
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *Split*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *Tag*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *Parse*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kryo/testOnly *Dic*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *Learn*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kkma/testOnly *Learn*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *Learn*"
+- travis_wait sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kkma/test"
+- travis_wait sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "komoran/test"
+- travis_wait sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "twitter/test"
+- travis_wait sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/test"
+- travis_wait sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kryo/test"
+- travis_wait sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "core/test"
+- travis_wait sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "hannanum/test"
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverageReport coverageAggregate
 after_success:
 - bash <(curl -s https://codecov.io/bash)
-- sbt ++$TRAVIS_SCALA_VERSION unidoc
-- bash ./ghdoc.sh $TRAVIS_SCALA_VERSION
-- "[[ $TRAVIS_BRANCH == \"master\" ]] && { sbt ++$TRAVIS_SCALA_VERSION publish; };"
+- bash ./ghdoc.sh
 notifications:
   webhooks:
     urls:

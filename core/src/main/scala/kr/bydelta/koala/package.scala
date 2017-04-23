@@ -320,6 +320,23 @@ package object koala {
     * @param tag 통합품사로 변환할 원본표기.
     * @return 변환된 통합품사.
     */
+  def fromSejongTag(tag: String): POS.Value = {
+    tag.toUpperCase match {
+      case "SO" | "SW" => POS.SY
+      case "NF" => POS.UN
+      case "NV" => POS.UV
+      case "NE" => POS.UE
+      case "SH" => POS.SL
+      case x => POS withName x
+    }
+  }
+
+  /**
+    * 통합품사로 변환.
+    *
+    * @param tag 통합품사로 변환할 원본표기.
+    * @return 변환된 통합품사.
+    */
   def fromKKMATag(tag: String): POS.Value = {
     tag.toUpperCase match {
       case "VXV" | "VXA" => POS.VX

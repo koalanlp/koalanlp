@@ -18,6 +18,7 @@ object Komoran {
         println("품사 부착...")
         tagger.tagParagraph(line).foreach {
           sent =>
+            println(sent.surfaceString())
             println(sent.singleLineString)
             println()
         }

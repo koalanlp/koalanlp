@@ -1,5 +1,9 @@
 import sbt.Keys._
 
+fork in Test := true
+testForkedParallel in Test := true
+concurrentRestrictions in Global := Seq(Tags.limit(Tags.Test, 1))
+
 lazy val root = (project in file("."))
   .enablePlugins(ScalaUnidocPlugin, JavaUnidocPlugin)
   .aggregate(core, kkma, hannanum, twitter, komoran, eunjeon, kryo)
@@ -124,7 +128,6 @@ def projectWithConfig(module: String) =
     libraryDependencies += "org.specs2" %% "specs2-core" % "latest.release" % "test",
     apiURL := Some(url("https://nearbydelta.github.io/KoalaNLP/api/scala/")),
     homepage := Some(url("http://nearbydelta.github.io/KoalaNLP")),
-    parallelExecution in Test := false,
     publishTo := version { v: String ⇒
       val nexus = "https://oss.sonatype.org/"
       if (v.trim.endsWith("SNAPSHOT"))

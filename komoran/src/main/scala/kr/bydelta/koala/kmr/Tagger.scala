@@ -41,16 +41,17 @@ class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]
         word =>
           val wAsScala = word.asScala
           val originalWord =
-            if (wAsScala.exists(_.getSecond.startsWith("V"))) {
-              val (verb, rest) = wAsScala.splitAt(wAsScala.indexWhere(_.getSecond.startsWith("V")) + 1)
-              reunionKorean(reduceVerbApply(
-                verb.map(_.getFirst).mkString.toSeq,
-                fromKomoranTag(verb.last.getSecond) == POS.VV,
-                rest.map(_.getFirst).mkString.toSeq
-              ))
-            } else {
-              reunionKorean(wAsScala.map(_.getFirst).mkString.toSeq)
-            }
+            reunionKorean(wAsScala.foldLeft((Seq.empty[Char], false))({
+              case ((prevSeq, wasVerb), curr) =>
+                val tag = curr.getSecond.toUpperCase
+                if (tag.startsWith("E")) {
+                  val newSeq = reduceVerbApply(prevSeq, wasVerb, curr.getFirst.toSeq)
+                  (newSeq, false)
+                } else {
+                  val isVerb = (tag.startsWith("V") && tag != "VA") || tag == "XSV"
+                  (prevSeq ++ curr.getFirst.toSeq, isVerb)
+                }
+            })._1)
 
           Word(
             originalWord,
