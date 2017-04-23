@@ -2,7 +2,7 @@ package kr.bydelta.koala.twt
 
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.traits.CanCompileDict
-import kr.bydelta.koala.{fromTwtTag, tagToTwt}
+import kr.bydelta.koala.{POS, fromTwtTag, tagToTwt}
 import org.openkoreantext.processor.util.{KoreanDictionaryProvider, KoreanPos}
 
 import scala.collection.JavaConverters._
@@ -65,8 +65,17 @@ object Dictionary extends CanCompileDict {
   }
 
   override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[(String, POSTag)] = {
-    KoreanDictionaryProvider.koreanDictionary.filterKeys(x => filter(fromTwtTag(x.toString)))
-      .iterator.flatMap(s => s._2.iterator().asScala.map {
+    val np =
+      if (filter(POS.NNP)) KoreanDictionaryProvider.properNouns.iterator.asScala.map {
+        case x: String => x -> POS.NNP
+        case x: Array[Char] => new String(x) -> POS.NNP
+        case x => x.toString -> POS.NNP
+      }
+      else Iterator.empty
+
+    val dicKeys = KoreanDictionaryProvider.koreanDictionary.keys.filter(x => filter(fromTwtTag(x.toString))).toSet
+    val dic = KoreanDictionaryProvider.koreanDictionary.filterKeys(dicKeys)
+    np ++ dic.iterator.flatMap(s => s._2.iterator.asScala.map {
       case x: String => x -> fromTwtTag(s._1.toString)
       case x: Array[Char] => new String(x) -> fromTwtTag(s._1.toString)
       case x => x.toString -> fromTwtTag(s._1.toString)

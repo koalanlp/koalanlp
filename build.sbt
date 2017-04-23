@@ -111,7 +111,7 @@ lazy val model = (project in file("model"))
       "org.tensorflow" % "tensorflow" % "latest.release"
     )
   ).dependsOn(core)
-val VERSION = "1.5.2-SNAPSHOT"
+val VERSION = "1.5.2"
 
 def projectWithConfig(module: String) =
   Seq(
