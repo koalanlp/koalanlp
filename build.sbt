@@ -103,7 +103,8 @@ lazy val kryo = (project in file("kryo"))
   .settings(
     libraryDependencies += "com.twitter" %% "chill" % "latest.release"
   )
-  .dependsOn(core, kkma % "test", twitter % "test")
+  .dependsOn(core,
+    kkma % "test", twitter % "test", komoran % "test", hannanum % "test", eunjeon % "test")
 lazy val model = (project in file("model"))
   .settings(projectWithConfig("model"))
   .settings(
@@ -111,7 +112,7 @@ lazy val model = (project in file("model"))
       "org.tensorflow" % "tensorflow" % "latest.release"
     )
   ).dependsOn(core)
-val VERSION = "1.5.2-SNAPSHOT"
+val VERSION = "1.5.2"
 
 def projectWithConfig(module: String) =
   Seq(

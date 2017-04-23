@@ -31,12 +31,22 @@
     <orderEntry type="module-library" scope="TEST">
       <library name="SBT: unmanaged-jars-test">
         <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../hannanum/lib/NLPHub-latest.jar!/" />
           <root url="jar://$MODULE_DIR$/../../kkma/lib/KKMA-2.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../komoran/lib/komoran-2.4-SNAPSHOT.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../komoran/lib/shineware-common-2.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../komoran/lib/shineware-ds-1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" scope="TEST" name="SBT: org.slf4j:slf4j-jdk14:1.7.12:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.bitbucket.eunjeon:seunjeon_2.11:1.3.0:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: com.typesafe.scala-logging:scala-logging_2.11:3.5.0:jar" level="project" />
+    <orderEntry type="module" module-name="komoran" exported="" scope="TEST" />
+    <orderEntry type="module" module-name="hannanum" exported="" scope="TEST" />
+    <orderEntry type="module" module-name="eunjeon" exported="" scope="TEST" />
     <orderEntry type="module" module-name="kkma" exported="" scope="TEST" />
     <orderEntry type="library" name="SBT: com.esotericsoftware:minlog:1.3.0:jar" level="project" />
     <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.8:jar" level="project" />

@@ -1,14 +1,12 @@
 package kr.bydelta.koala.test.core
 
-import scala.util.Random
-
 /**
   * Created by bydelta on 17. 4. 23.
   */
 trait Examples {
   def exampleSequence(duplicate: Int = 1, requireMultiLine: Boolean = false) = {
     val seq = if (requireMultiLine) Examples.exampleSeq.filter(_._1 > 1) else Examples.exampleSeq
-    (0 until duplicate).flatMap(_ => seq).sortBy(_ => Random.nextDouble())
+    (0 until duplicate).flatMap(_ => seq)
   }
 }
 
