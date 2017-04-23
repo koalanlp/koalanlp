@@ -30,7 +30,7 @@ object DictionaryImportSpec extends Specification {
       KDict.userdic.morphemes.size must be_>(prevSize)
     }
 
-    "not throw exception" in {
+    "not throw exception during import" in {
       val dictionaries = Seq(EDict, HDict, RDict, KDict, TDict)
       Result.unit {
         dictionaries.combinations(2).foreach {
