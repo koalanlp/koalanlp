@@ -11,29 +11,25 @@ if [[ $TRAVIS_EVENT_TYPE == "cron" ]]; then
     cp sonatype.sbt ~/.sbt/0.13/
     sbt ++$TRAVIS_SCALA_VERSION publish
 elif [[ $TRAVIS_EVENT_TYPE == "push" ]]; then
-    if [[ $TAG == *"SNAPSHOT" ]]; then
-        echo "SNAPSHOT version does not require to build a document."
-    else
-        # GENERATE DOC
-        sbt ++$1 unidoc
+    # GENERATE DOC
+    sbt ++$1 unidoc
 
-        # CLONE GH-PAGES
-        cd $HOME
-        git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/nearbydelta/KoalaNLP gh-pages > /dev/null
+    # CLONE GH-PAGES
+    cd $HOME
+    git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/nearbydelta/KoalaNLP gh-pages > /dev/null
 
-        # COPY & PUSH
-        cd gh-pages
-        git rm -rf ./api/*
-        mkdir ./api
+    # COPY & PUSH
+    cd gh-pages
+    git rm -rf ./api/*
+    mkdir ./api
 
-        mv $WD/target/scala-$VER/unidoc $HOME/gh-pages/api/scala
-        mv $WD/target/javaunidoc $HOME/gh-pages/api/java
-        mv $WD/README.md $HOME/gh-pages/index.md
+    mv $WD/target/scala-$VER/unidoc $HOME/gh-pages/api/scala
+    mv $WD/target/javaunidoc $HOME/gh-pages/api/java
+    mv $WD/README.md $HOME/gh-pages/index.md
 
-        git add -f ./api
-        git add -f ./index.md
+    git add -f ./api
+    git add -f ./index.md
 
-        git commit -m "Lastest javadoc on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to gh-pages"
-        git push -fq origin gh-pages > /dev/null
-    fi
+    git commit -m "Lastest javadoc on successful travis build $TRAVIS_BUILD_NUMBER (RELEASE $TAG) auto-pushed to gh-pages"
+    git push -fq origin gh-pages > /dev/null
 fi

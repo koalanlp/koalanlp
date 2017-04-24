@@ -3,13 +3,15 @@ KoalaNLP
 (구) KoreanAnalyzer
 
 [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core_2.12.svg?style=flat-square&label=release)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core_2.12%22)
+[![ScalaDoc](https://img.shields.io/badge/doc-Scala-red.svg?style=flat-square)](http://nearbydelta.github.io/KoalaNLP/api/scala/kr/bydelta/koala/index.html)
+[![JavaDoc](https://img.shields.io/badge/doc-Java-blue.svg?style=flat-square)](http://nearbydelta.github.io/KoalaNLP/api/java/index.html)
+[![분석기별 품사비교표](https://img.shields.io/badge/%ED%92%88%EC%82%AC-%EB%B9%84%EA%B5%90%ED%91%9C-blue.svg?style=flat-square)](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)
+
 [![Build Status](https://img.shields.io/travis/nearbydelta/KoalaNLP.svg?style=flat-square&branch=master)](https://travis-ci.org/nearbydelta/KoalaNLP)
 [![codecov](https://img.shields.io/codecov/c/github/nearbydelta/KoalaNLP.svg?style=flat-square)](https://codecov.io/gh/nearbydelta/KoalaNLP)
-[![GPL Licence](https://img.shields.io/github/license/nearbydelta/KoalaNLP.svg?style=flat-square)](https://opensource.org/licenses/GPL-3.0/)
+[![Dependency Status](https://www.versioneye.com/user/projects/58fadf836ac171431cf95062/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58fadf836ac171431cf95062)
 
-[![ScalaDoc](http://javadoc-badge.appspot.com/kr.bydelta/koalanlp-core_2.12.svg?label=scaladoc)](http://nearbydelta.github.io/KoalaNLP/api/scala/kr/bydelta/koala/index.html)
-[![JavaDoc](http://javadoc-badge.appspot.com/kr.bydelta/koalanlp-core_2.12.svg?label=javadoc)](http://nearbydelta.github.io/KoalaNLP/api/java/index.html)
-[![분석기별 품사비교표](https://img.shields.io/badge/%ED%92%88%EC%82%AC-%EB%B9%84%EA%B5%90%ED%91%9C-blue.svg?style=flat-square)](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)
+[![GPL Licence](https://img.shields.io/badge/license-GPL%20v3-green.svg?style=flat-square)](https://opensource.org/licenses/GPL-3.0/)
 [![Gitter](https://img.shields.io/gitter/room/nearbydelta/KoalaNLP.svg?style=flat-square)](https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # 소개

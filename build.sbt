@@ -20,8 +20,8 @@ lazy val core = (project in file("core"))
   .settings(projectWithConfig("core"): _*)
   .settings(
     libraryDependencies ++= Seq(
-      "org.log4s" %% "log4s" % "latest.release",
-      "org.slf4j" % "slf4j-simple" % "latest.release" % "test"
+      "org.log4s" %% "log4s" % "[1.3.4,)",
+      "org.slf4j" % "slf4j-simple" % "[1.7,)" % "test"
     )
   )
 
@@ -60,14 +60,14 @@ lazy val eunjeon = (project in file("eunjeon"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("eunjeon"): _*)
   .settings(
-    libraryDependencies += "org.bitbucket.eunjeon" %% "seunjeon" % "latest.release"
+    libraryDependencies += "org.bitbucket.eunjeon" %% "seunjeon" % "[1.3,)"
   ).dependsOn(core % "test->test;compile->compile")
 lazy val twitter = (project in file("twitter"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("twitter"): _*)
   .settings(
     libraryDependencies ++= Seq(
-      "org.openkoreantext" % "open-korean-text" % "latest.release"
+      "org.openkoreantext" % "open-korean-text" % "[1.2,)"
     )
   ).dependsOn(core % "test->test;compile->compile")
 lazy val komoran = (project in file("komoran"))
@@ -91,9 +91,9 @@ lazy val server = (project in file("server"))
   .settings(
     coverageEnabled := false,
     libraryDependencies ++= Seq(
-      "com.tumblr" %% "colossus" % "latest.release",
-      "com.tumblr" %% "colossus-testkit" % "latest.release" % "test",
-      "com.typesafe.play" %% "play-json" % "latest.release"
+      "com.tumblr" %% "colossus" % "[0.9,)",
+      "com.tumblr" %% "colossus-testkit" % "[0.9,)" % "test",
+      "com.typesafe.play" %% "play-json" % "[2.6,)"
     )
   )
   .dependsOn(core, kkma % "test")
@@ -101,7 +101,7 @@ lazy val kryo = (project in file("kryo"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("kryo"))
   .settings(
-    libraryDependencies += "com.twitter" %% "chill" % "latest.release"
+    libraryDependencies += "com.twitter" %% "chill" % "[0.9,)"
   )
   .dependsOn(core,
     kkma % "test", twitter % "test", komoran % "test", hannanum % "test", eunjeon % "test")
@@ -127,7 +127,7 @@ def projectWithConfig(module: String) =
     publishArtifact in Test := false,
     coverageExcludedPackages := ".*\\.helper\\..*",
     test in assembly := {},
-    libraryDependencies += "org.specs2" %% "specs2-core" % "latest.release" % "test",
+    libraryDependencies += "org.specs2" %% "specs2-core" % "[3.8,)" % "test",
     apiURL := Some(url("https://nearbydelta.github.io/KoalaNLP/api/scala/")),
     homepage := Some(url("http://nearbydelta.github.io/KoalaNLP")),
     publishTo := version { v: String ⇒
