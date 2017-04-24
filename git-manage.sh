@@ -9,17 +9,14 @@ git config --global user.name "travis-ci"
 
 if [[ $TRAVIS_EVENT_TYPE == "cron" ]]; then
     cp sonatype.sbt ~/.sbt/0.13/
-
-    # ADD SNAPSHOT VARIABLE
-    cat build.sbt | sed -e 's/val VERSION\s*=\s*"\(.*\)"/val VERSION = "\1-SNAPSHOT"/g' | tee build.sbt > \dev\null
     sbt ++$TRAVIS_SCALA_VERSION publish
-
 elif [[ $TRAVIS_EVENT_TYPE == "push" ]]; then
-    if [[ $MSG == *"RELEASE"* ]]; then
+    if [[ $TAG == *"SNAPSHOT" ]]; then
+        echo "SNAPSHOT version does not require to build a document."
+    else
         # SET RELEASE TAG
         git tag v$TAG
         git push --tags
-
 
         # GENERATE DOC
         sbt ++$1 unidoc
