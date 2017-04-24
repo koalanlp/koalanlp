@@ -74,6 +74,7 @@ class HannanumParserSpec extends Specification with Examples {
 
       Result.foreach(exampleSequence().filter(_._1 == 1).map(_._2)) {
         sent =>
+          println(s"Parsing: $sent")
           val tagged = kParser.parse(sent)
 
           try {
@@ -114,12 +115,14 @@ class HannanumParserSpec extends Specification with Examples {
 
       val multithreaded = sents.par.map {
         sent =>
+          println(s"Parsing: $sent")
           new Parser().parse(sent).treeString
       }.seq.mkString("\n")
 
       val parser = new Parser
       val singlethreaded = sents.map {
         sent =>
+          println(s"Parsing: $sent")
           parser.parse(sent).treeString
       }.mkString("\n")
 

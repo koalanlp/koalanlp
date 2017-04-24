@@ -15,7 +15,7 @@ private[koala] class UserDicReader extends SimpleDicReader with Iterator[String]
   /**
     * 파일스트림 모사를 위한 현재위치 Marker.
     */
-  private var iterator: Iterator[String] = _
+  private var iterator: Iterator[String] = morphemes.iterator
 
   /**
     * 사전에 (형태소,품사)리스트를 추가.

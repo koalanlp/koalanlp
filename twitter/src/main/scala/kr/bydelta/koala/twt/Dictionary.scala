@@ -11,6 +11,9 @@ import scala.collection.JavaConverters._
   * 트위터 분석기 사용자사전
   */
 object Dictionary extends CanCompileDict {
+  val dicKeys = Seq(KoreanPos.Noun, KoreanPos.Verb, KoreanPos.Adjective, KoreanPos.Adverb, KoreanPos.Determiner,
+    KoreanPos.Exclamation, KoreanPos.Josa, KoreanPos.Eomi, KoreanPos.PreEomi, KoreanPos.Conjunction, KoreanPos.NounPrefix,
+    KoreanPos.VerbPrefix, KoreanPos.Suffix)
   private val logger = org.log4s.getLogger
   private var userDict = Set[(String, POSTag)]()
 
@@ -74,12 +77,12 @@ object Dictionary extends CanCompileDict {
       }
       else Iterator.empty
 
-    val dicKeys = KoreanDictionaryProvider.koreanDictionary.keySet.filter(x => filter(fromTwtTag(x.toString)))
-    val dic = KoreanDictionaryProvider.koreanDictionary.filterKeys(dicKeys)
-    np ++ dic.flatMap(s => s._2.iterator.asScala.map {
-      case x: String => x -> fromTwtTag(s._1.toString)
-      case x: Array[Char] => new String(x) -> fromTwtTag(s._1.toString)
-      case x => x.toString -> fromTwtTag(s._1.toString)
-    }).iterator
+    val dicKeys = this.dicKeys.filter(x => filter(fromTwtTag(x.toString)))
+    val dic = dicKeys.iterator.flatMap(key => KoreanDictionaryProvider.koreanDictionary(key).asScala.map {
+      case x: String => x -> fromTwtTag(key.toString)
+      case x: Array[Char] => new String(x) -> fromTwtTag(key.toString)
+      case x => x.toString -> fromTwtTag(key.toString)
+    })
+    np ++ dic
   }
 }

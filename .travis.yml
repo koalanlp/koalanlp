@@ -7,22 +7,15 @@ install:
 - cp -r ./hannanum/models/* ./
 - cp sonatype.sbt ~/.sbt/0.13/
 script:
-- sbt -J-Xmx4g server/test
+- sbt -J-Xmx4g -J-XX:MaxPermSize=256M server/test
 - sbt -J-Xmx4g clean
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kkma/testOnly *.core.*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "komoran/testOnly *.core.*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "twitter/testOnly *.core.*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *.core.*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kryo/testOnly *.core.*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "core/testOnly *.core.*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *.core.*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kkma/testOnly *.pack.*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "komoran/testOnly *.pack.*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "twitter/testOnly *.pack.*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *.pack.*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kryo/testOnly *.pack.*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "core/testOnly *.pack.*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *.pack.*"
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kkma/test"
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "komoran/test"
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "twitter/test"
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/test"
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kryo/test"
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "core/test"
+- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "hannanum/test"
 after_success:
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverageReport coverageAggregate
 - bash <(curl -s https://codecov.io/bash)
