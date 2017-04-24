@@ -20,7 +20,8 @@ for SCALA in $SCALA_VERS; do
     java -jar ~/.IdeaIC2016.1/system/sbt/sbt-launch.jar ++$SCALA publishSigned
 done
 
-git commit -a -m "RELEASE v$JAR_VER_CURRENT"
+git add build.sbt
+git commit -m "RELEASE v$JAR_VER_CURRENT"
 git tag v$JAR_VER_CURRENT
 
 echo SET TO $JAR_VER_NEXT
@@ -28,6 +29,7 @@ cat build.sbt | sed -e 's/val VERSION\s*=\s*".*"/val VERSION = "'$JAR_VER_NEXT'-
 rm build.sbt
 mv build_new.sbt build.sbt
 
+git add build.sbt
 git commit -a -m "inital commit of v$JAR_VER_NEXT"
 git push origin master
 git push --tags
