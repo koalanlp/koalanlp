@@ -5,22 +5,22 @@ jdk:
 - oraclejdk8
 install:
 - cp -r ./hannanum/models/* ./
-- cp sonatype.sbt ~/.sbt/0.13/
 script:
-- sbt -J-Xmx4g server/test
-- sbt -J-Xmx4g clean
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kkma/test"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "komoran/test"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "twitter/test"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *.pack.*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *.core.*"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "kryo/test"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "core/test"
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverage "hannanum/test"
+- sbt -J-Xmx3g server/test
+- sbt -J-Xmx3g clean
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "kkma/test"
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "komoran/test"
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "twitter/test"
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *.pack.*"
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *.core.*"
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "kryo/test"
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "core/test"
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *.pack.*"
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *.core.*"
 after_success:
-- sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverageReport coverageAggregate
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverageReport coverageAggregate
 - bash <(curl -s https://codecov.io/bash)
-- bash ./ghdoc.sh
+- bash ./git-manage.sh
 notifications:
   webhooks:
     urls:
