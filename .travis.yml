@@ -20,7 +20,7 @@ script:
 after_success:
 - sbt -J-Xmx4g ++$TRAVIS_SCALA_VERSION coverageReport coverageAggregate
 - bash <(curl -s https://codecov.io/bash)
-- bash ./ghdoc.sh
+- bash ./git-manage.sh
 notifications:
   webhooks:
     urls:
