@@ -11,7 +11,7 @@ JAR_VER_NEXT=$JAR_VER_MAJOR.$JAR_VER_MINOR.$(($JAR_VER_INCRM + 1))
 
 # reset version code
 echo BUILD $JAR_VER_CURRENT
-cat build.sbt | sed -e 's/val VERSION\s*=\s*".*"/val VERSION = "'$JAR_VER_CURRENT'"/g' | tee build.sbt > /dev/null
+cat build.sbt | sed -e 's/val VERSION\s*=\s*".*"/val VERSION = "'$JAR_VER_CURRENT'"/g' > build.sbt
 
 java -jar ~/.IdeaIC2016.1/system/sbt/sbt-launch.jar ++2.11.8 server/publishSigned
 for SCALA in $SCALA_VERS; do
@@ -22,7 +22,7 @@ git commit -a -m "RELEASE v$JAR_VER_CURRENT"
 git tag v$JAR_VER_CURRENT
 
 echo SET TO $JAR_VER_NEXT
-cat build.sbt | sed -e 's/val VERSION\s*=\s*".*"/val VERSION = "'$JAR_VER_NEXT'-SNAPSHOT"/g' | tee build.sbt > /dev/null
+cat build.sbt | sed -e 's/val VERSION\s*=\s*".*"/val VERSION = "'$JAR_VER_NEXT'-SNAPSHOT"/g' > build.sbt
 
 git commit -a -m "inital commit of v$JAR_VER_NEXT"
 git push origin master
