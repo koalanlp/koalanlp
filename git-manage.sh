@@ -14,10 +14,6 @@ elif [[ $TRAVIS_EVENT_TYPE == "push" ]]; then
     if [[ $TAG == *"SNAPSHOT" ]]; then
         echo "SNAPSHOT version does not require to build a document."
     else
-        # SET RELEASE TAG
-        git tag v$TAG
-        git push --tags
-
         # GENERATE DOC
         sbt ++$1 unidoc
 
