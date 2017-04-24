@@ -8,7 +8,7 @@ KoalaNLP
 [![GPL Licence](https://img.shields.io/github/license/nearbydelta/KoalaNLP.svg?style=flat-square)](https://opensource.org/licenses/GPL-3.0/)
 
 [![ScalaDoc](http://javadoc-badge.appspot.com/kr.bydelta/koalanlp-core_2.12.svg?label=scaladoc)](http://nearbydelta.github.io/KoalaNLP/api/scala/kr/bydelta/koala/index.html)
-[![JavaDoc](http://javadoc-badge.appspot.com/kr.bydelta/koalanlp-core_2.12.svg?label=javadoc)](http://nearbydelta.github.io/KoalaNLP/api/java/kr/bydelta/koala/index.html)
+[![JavaDoc](http://javadoc-badge.appspot.com/kr.bydelta/koalanlp-core_2.12.svg?label=javadoc)](http://nearbydelta.github.io/KoalaNLP/api/java/index.html)
 [![분석기별 품사비교표](https://img.shields.io/badge/%ED%92%88%EC%82%AC-%EB%B9%84%EA%B5%90%ED%91%9C-blue.svg?style=flat-square)](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)
 [![Gitter](https://img.shields.io/gitter/room/nearbydelta/KoalaNLP.svg?style=flat-square)](https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
