@@ -132,10 +132,12 @@ class HannanumParserSpec extends Specification with Examples {
     "supports dictionary" in {
       val sent = "아햏, 2000년대에 유행한 통신은어로, 개벽이, 햏햏 등의 여러 신조어를 유통시켰다."
 
+      println(s"Parsing: $sent")
       val noUserDict = new Parser().parse(sent).treeString
 
       Dictionary.addUserDictionary("아햏" -> POS.IC, "개벽이" -> POS.NNG, "햏햏" -> POS.NNG)
 
+      println(s"Parsing: $sent")
       val dictApplied = new Parser().parse(sent).treeString
 
       noUserDict must_!= dictApplied

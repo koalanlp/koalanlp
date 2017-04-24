@@ -35,10 +35,6 @@ class Parser extends CanDepParse {
     convert(taggedRaw)
   }
 
-  override def parse(sentence: Sentence): Sentence = {
-    convert(deParse(sentence))
-  }
-
   /**
     * 의존관계분석을 수행하고, 그 결과를 변환.
     *
@@ -117,6 +113,10 @@ class Parser extends CanDepParse {
     sentence
   }
 
+  override def parse(sentence: Sentence): Sentence = {
+    convert(deParse(sentence))
+  }
+
   /**
     * 통합분석기의 결과를 한나눔 문장객체로 복원.
     *
@@ -135,4 +135,3 @@ class Parser extends CanDepParse {
     new HSent(0, 0, true, plainEojeols.toArray, eojeols.toArray)
   }
 }
-
