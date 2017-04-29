@@ -12,7 +12,7 @@ if [[ $TRAVIS_EVENT_TYPE == "cron" ]]; then
     sbt ++$TRAVIS_SCALA_VERSION publish
 elif [[ $TRAVIS_EVENT_TYPE == "push" ]]; then
     # GENERATE DOC
-    sbt ++$1 unidoc
+    sbt ++$TRAVIS_SCALA_VERSION unidoc
 
     # CLONE GH-PAGES
     cd $HOME
