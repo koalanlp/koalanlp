@@ -29,6 +29,6 @@ target/
 hs_err_pid*
 
 # Hannanum model (for testing)
-models
-conf
-data
+/models
+/conf
+/data

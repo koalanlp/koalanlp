@@ -102,6 +102,13 @@ final class Word private(val surface: String, val morphemes: Vector[Morpheme])
     case _ => false
   }
 
+  /**
+    * Index of this word within the sentence.
+    *
+    * @return index
+    */
+  def id = index
+
   override def canEqual(that: Any): Boolean = that.isInstanceOf[Word]
 
   /**
@@ -113,10 +120,10 @@ final class Word private(val surface: String, val morphemes: Vector[Morpheme])
     s"$surface\t= " + morphemes.mkString("") +
       (if (deps.isEmpty) ""
       else {
-        "\n\t의존관계:" + deps.map {
+        "\n" + deps.map {
           case Relationship(_, tag, target) =>
-            s"--[$tag]--> $target"
-        }.mkString(" ")
+            f".... 이 어절의 $tag: 어절 [#$target]"
+        }.mkString("\n")
       })
   }
 
@@ -142,6 +149,22 @@ final class Word private(val surface: String, val morphemes: Vector[Morpheme])
     new ArrayBuffer[Morpheme] mapResult Word.applySeq(id, surface)
 
   /**
+    * 구문분석과 품사분석의 결과를 String으로 변환.
+    *
+    * @return 본 객체의 정보를 담은 String.
+    */
+  private[koala] def toStringWithSentence(sent: Sentence): String = {
+    s"$surface\t= " + morphemes.mkString("") +
+      (if (deps.isEmpty) ""
+      else {
+        "\n" + deps.map {
+          case Relationship(_, tag, target) =>
+            f".... 이 어절의 $tag%15s인 어절: [#$target%2d] ${sent(target).surface}"
+        }.mkString("\n")
+      })
+  }
+
+  /**
     * 어절에 의존하는 새로운 의존소 추가.
     *
     * @param word   의존소가 될 어절 Word 객체.
@@ -151,13 +174,6 @@ final class Word private(val surface: String, val morphemes: Vector[Morpheme])
   private[koala] def addDependant(word: Int, tag: FunctionalTag, rawTag: String) {
     deps += Relationship(id, tag, rawTag, word)
   }
-
-  /**
-    * Index of this word within the sentence.
-    *
-    * @return index
-    */
-  def id = index
 }
 
 /**
@@ -173,6 +189,20 @@ object Word{
     */
   def apply(surface: String, morphemes: collection.Seq[Morpheme]) =
   applySeq(-1, surface)(morphemes)
+
+  /**
+    * Generate word from given information
+    *
+    * @param id        Index within the sentence
+    * @param surface   Surface string
+    * @param morphemes Sequence of morphemes
+    * @return A new word
+    */
+  private def applySeq(id: Int, surface: String)(morphemes: collection.Seq[Morpheme]) = {
+    val w = new Word(surface, morphemes.toVector)
+    w.index = id
+    w
+  }
 
   /**
     * Extract surface form and morphemes for case-matching.
@@ -210,20 +240,6 @@ object Word{
     * @return Empty word
     */
   private[koala] def apply() = applySeq(-1, "")(Seq.empty)
-
-  /**
-    * Generate word from given information
-    *
-    * @param id        Index within the sentence
-    * @param surface   Surface string
-    * @param morphemes Sequence of morphemes
-    * @return A new word
-    */
-  private def applySeq(id: Int, surface: String)(morphemes: collection.Seq[Morpheme]) = {
-    val w = new Word(surface, morphemes.toVector)
-    w.index = id
-    w
-  }
 }
 
 /**
