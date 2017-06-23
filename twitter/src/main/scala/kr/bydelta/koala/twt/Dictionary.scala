@@ -80,10 +80,16 @@ object Dictionary extends CanCompileDict {
       else Iterator.empty
 
     val dicKeys = this.dicKeys.filter(x => filter(fromTwtTag(x.toString)))
-    val dic = dicKeys.iterator.flatMap(key => KoreanDictionaryProvider.koreanDictionary.get(key).asScala.map {
-      case x: String => x -> fromTwtTag(key.toString)
-      case x: Array[Char] => new String(x) -> fromTwtTag(key.toString)
-      case x => x.toString -> fromTwtTag(key.toString)
+    val dic = dicKeys.iterator.flatMap(key => {
+      val keydic = KoreanDictionaryProvider.koreanDictionary.get(key)
+      if (keydic != null)
+        keydic.asScala.map {
+          case x: String => x -> fromTwtTag(key.toString)
+          case x: Array[Char] => new String(x) -> fromTwtTag(key.toString)
+          case x => x.toString -> fromTwtTag(key.toString)
+        }
+      else
+        Map.empty
     })
     np ++ dic
   }
