@@ -99,7 +99,7 @@ package object koala {
       case POS.VV | POS.VX |
            POS.VCP | POS.VCN => "Verb"
       case POS.VA => "Adjective"
-      case POS.MM => "Determiner"
+      case POS.MM => "Modifier"
       case POS.MAG | POS.MAJ => "Adverb"
       case POS.IC => "Exclamation"
       case POS.JKB | POS.JKC |
@@ -110,7 +110,7 @@ package object koala {
       case POS.EP => "PreEomi"
       case POS.EF | POS.EC |
            POS.ETM | POS.ETN => "Eomi"
-      case POS.XPN => "NounPrefix"
+      case POS.XPN => "Unknown"
       case POS.XPV => "VerbPrefix"
       case POS.XSA | POS.XSM |
            POS.XSN | POS.XSO | POS.XSV => "Suffix"
@@ -236,14 +236,13 @@ package object koala {
       case "Number" => POS.NR
       case "Verb" => POS.VV
       case "Adjective" => POS.VA
-      case "Determiner" => POS.MM
+      case "Determiner" | "Modifier" => POS.MM
       case "Adverb" => POS.MAG
       case "Exclamation" => POS.IC
       case "Josa" => POS.JX
       case "Conjunction" => POS.JC
       case "PreEomi" => POS.EP
       case "Eomi" => POS.EF
-      case "NounPrefix" => POS.XPN
       case "VerbPrefix" => POS.XPV
       case "Suffix" => POS.XSO
       case "Punctuation" => POS.SF

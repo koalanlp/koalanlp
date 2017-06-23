@@ -141,7 +141,7 @@ final class Sentence private(val words: Vector[Word])
     words.zipWithIndex.map {
       case (w, id) =>
         f"[#$id%2d] ${w.toStringWithSentence(this)}" +
-          (if (topLevels.exists(_.target == w.index)) "\n.... 이 단어가 ROOT 입니다" else "")
+          (if (topLevels.exists(_.target == w.index)) "\n.... 이 어절이 ROOT 입니다" else "")
     }.mkString("\n")
 
   /**

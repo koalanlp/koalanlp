@@ -12,7 +12,7 @@ import scala.collection.JavaConverters._
   */
 object Dictionary extends CanCompileDict {
   val dicKeys = Seq(KoreanPos.Noun, KoreanPos.Verb, KoreanPos.Adjective, KoreanPos.Adverb, KoreanPos.Determiner,
-    KoreanPos.Exclamation, KoreanPos.Josa, KoreanPos.Eomi, KoreanPos.PreEomi, KoreanPos.Conjunction, KoreanPos.NounPrefix,
+    KoreanPos.Exclamation, KoreanPos.Josa, KoreanPos.Eomi, KoreanPos.PreEomi, KoreanPos.Conjunction, KoreanPos.Modifier,
     KoreanPos.VerbPrefix, KoreanPos.Suffix)
   private val logger = org.log4s.getLogger
   private var userDict = Set[(String, POSTag)]()
@@ -34,7 +34,7 @@ object Dictionary extends CanCompileDict {
   private def add(tag: KoreanPos.KoreanPos, morph: Seq[String]) =
   tag match {
     case KoreanPos.Noun | KoreanPos.Determiner | KoreanPos.Exclamation | KoreanPos.Josa | KoreanPos.Eomi |
-         KoreanPos.PreEomi | KoreanPos.Conjunction | KoreanPos.NounPrefix | KoreanPos.VerbPrefix |
+         KoreanPos.PreEomi | KoreanPos.Conjunction | KoreanPos.Modifier | KoreanPos.VerbPrefix |
          KoreanPos.Suffix | KoreanPos.Adverb =>
       KoreanDictionaryProvider.addWordsToDictionary(tag, morph)
     case KoreanPos.ProperNoun =>
@@ -58,7 +58,9 @@ object Dictionary extends CanCompileDict {
       case (tag, words) =>
         val tagDic =
           if (tag == KoreanPos.ProperNoun) Some(KoreanDictionaryProvider.properNouns)
-          else KoreanDictionaryProvider.koreanDictionary.get(tag)
+          else if (KoreanDictionaryProvider.koreanDictionary.containsKey(tag))
+            Some(KoreanDictionaryProvider.koreanDictionary.get(tag))
+          else None
 
         // Filter out existing morphemes!
         if (tagDic.isDefined)
@@ -78,7 +80,7 @@ object Dictionary extends CanCompileDict {
       else Iterator.empty
 
     val dicKeys = this.dicKeys.filter(x => filter(fromTwtTag(x.toString)))
-    val dic = dicKeys.iterator.flatMap(key => KoreanDictionaryProvider.koreanDictionary(key).asScala.map {
+    val dic = dicKeys.iterator.flatMap(key => KoreanDictionaryProvider.koreanDictionary.get(key).asScala.map {
       case x: String => x -> fromTwtTag(key.toString)
       case x: Array[Char] => new String(x) -> fromTwtTag(key.toString)
       case x => x.toString -> fromTwtTag(key.toString)
