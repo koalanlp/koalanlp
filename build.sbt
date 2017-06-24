@@ -113,7 +113,7 @@ lazy val model = (project in file("model"))
     )
   ).dependsOn(core)
 
-val VERSION = "1.5.4-SNAPSHOT"
+val VERSION = "1.5.4"
 
 def projectWithConfig(module: String) =
   Seq(
