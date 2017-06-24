@@ -15,6 +15,7 @@ echo BUILD $JAR_VER_CURRENT
 cat build.sbt | sed -e 's/val VERSION\s*=\s*".*"/val VERSION = "'$JAR_VER_CURRENT'"/g' > build_new.sbt
 rm build.sbt
 mv build_new.sbt build.sbt
+git add build.sbt
 git commit -m "RELEASE v$JAR_VER_CURRENT"
 git tag v$JAR_VER_CURRENT
 
