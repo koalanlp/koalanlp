@@ -88,7 +88,7 @@ Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 
 # 사용방법
 아래에는 대표적인 특징만 기술되어 있습니다.
 
-상세한 사항은 [Wiki](/wiki/Home) 또는 [![ScalaDoc](http://javadoc-badge.appspot.com/kr.bydelta/koalanlp-core_2.12.svg?label=scaladoc&style=flat-square)](http://nearbydelta.github.io/KoalaNLP/api/scala/kr/bydelta/koala/index.html)을 참고하십시오.
+상세한 사항은 [Wiki](https://github.com/nearbydelta/KoalaNLP/wiki/Home) 또는 [![ScalaDoc](http://javadoc-badge.appspot.com/kr.bydelta/koalanlp-core_2.12.svg?label=scaladoc&style=flat-square)](http://nearbydelta.github.io/KoalaNLP/api/scala/kr/bydelta/koala/index.html)을 참고하십시오.
 
 ## 여러 패키지의 사용
 통합 인터페이스는 여러 패키지간의 호환이 가능하게 설계되어 있습니다. 이론적으로는 타 패키지의 품사 분석 결과를 토대로 구문 분석이 가능합니다.
@@ -198,4 +198,4 @@ sentence match {
 * Eunjeon: Apache License 2.0
 
 # 결과 비교
-[Wiki:결과비교](/wiki/4.-결과-비교)를 참조해주세요.
+[Wiki:결과비교](https://github.com/nearbydelta/KoalaNLP/wiki/4.-결과-비교)를 참조해주세요.
