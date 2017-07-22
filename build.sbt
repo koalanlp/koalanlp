@@ -6,22 +6,22 @@ concurrentRestrictions in Global := Seq(Tags.limit(Tags.Test, 1))
 
 lazy val root = (project in file("."))
   .enablePlugins(ScalaUnidocPlugin, JavaUnidocPlugin)
-  .aggregate(core, kkma, hannanum, twitter, komoran, eunjeon, kryo)
+  .aggregate(core, kkma, hannanum, twitter, komoran, eunjeon, kryo, custom)
   .settings(
     publishArtifact := false,
     packagedArtifacts := Map.empty,
     publishLocal := {},
     publish := {},
-    unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples, model, server),
-    unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples, model, server)
+    unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples, server),
+    unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples, server)
   ).settings(aggregate in update := true)
 lazy val core = (project in file("core"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("core"): _*)
   .settings(
     libraryDependencies ++= Seq(
-      "org.log4s" %% "log4s" % "[1.3.4,)",
-      "org.slf4j" % "slf4j-simple" % "[1.7,)" % "test"
+      "org.log4s" %% "log4s" % "1.3.6",
+      "org.slf4j" % "slf4j-simple" % "1.8.0-alpha2" % "test"
     )
   )
 
@@ -60,14 +60,14 @@ lazy val eunjeon = (project in file("eunjeon"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("eunjeon"): _*)
   .settings(
-    libraryDependencies += "org.bitbucket.eunjeon" %% "seunjeon" % "[1.3,)"
+    libraryDependencies += "org.bitbucket.eunjeon" %% "seunjeon" % "1.3.0"
   ).dependsOn(core % "test->test;compile->compile")
 lazy val twitter = (project in file("twitter"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("twitter"): _*)
   .settings(
     libraryDependencies ++= Seq(
-      "org.openkoreantext" % "open-korean-text" % "[2.0.1,)"
+      "org.openkoreantext" % "open-korean-text" % "2.1.0"
     )
   ).dependsOn(core % "test->test;compile->compile")
 lazy val komoran = (project in file("komoran"))
@@ -101,19 +101,19 @@ lazy val kryo = (project in file("kryo"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("kryo"))
   .settings(
-    libraryDependencies += "com.twitter" %% "chill" % "[0.9,)"
+    libraryDependencies += "com.twitter" %% "chill" % "0.9.2"
   )
   .dependsOn(core,
     kkma % "test", twitter % "test", komoran % "test", hannanum % "test", eunjeon % "test")
-lazy val model = (project in file("model"))
-  .settings(projectWithConfig("model"))
+lazy val custom = (project in file("custom"))
+  .settings(projectWithConfig("custom"))
   .settings(
     libraryDependencies ++= Seq(
-      "org.tensorflow" % "tensorflow" % "latest.release"
+      "org.apache.opennlp" % "opennlp-tools" % "[1.8,)"
     )
   ).dependsOn(core)
 
-val VERSION = "1.5.5-SNAPSHOT"
+val VERSION = "1.6.0-SNAPSHOT"
 
 def projectWithConfig(module: String) =
   Seq(

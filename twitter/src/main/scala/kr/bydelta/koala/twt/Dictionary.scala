@@ -2,7 +2,7 @@ package kr.bydelta.koala.twt
 
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.traits.CanCompileDict
-import kr.bydelta.koala.{POS, fromTwtTag, tagToTwt}
+import kr.bydelta.koala.{fromTwtTag, tagToTwt}
 import org.openkoreantext.processor.util.{KoreanDictionaryProvider, KoreanPos}
 
 import scala.collection.JavaConverters._
@@ -11,10 +11,6 @@ import scala.collection.JavaConverters._
   * 트위터 분석기 사용자사전
   */
 object Dictionary extends CanCompileDict {
-  val dicKeys = Seq(KoreanPos.Noun, KoreanPos.Verb, KoreanPos.Adjective, KoreanPos.Adverb, KoreanPos.Determiner,
-    KoreanPos.Exclamation, KoreanPos.Josa, KoreanPos.Eomi, KoreanPos.PreEomi, KoreanPos.Conjunction, KoreanPos.Modifier,
-    KoreanPos.VerbPrefix, KoreanPos.Suffix)
-  private val logger = org.log4s.getLogger
   private var userDict = Set[(String, POSTag)]()
 
   override def addUserDictionary(dict: (String, POSTag)*): Unit = {
@@ -33,15 +29,16 @@ object Dictionary extends CanCompileDict {
     */
   private def add(tag: KoreanPos.KoreanPos, morph: Seq[String]) =
   tag match {
-    case KoreanPos.Noun | KoreanPos.Determiner | KoreanPos.Exclamation | KoreanPos.Josa | KoreanPos.Eomi |
-         KoreanPos.PreEomi | KoreanPos.Conjunction | KoreanPos.Modifier | KoreanPos.VerbPrefix |
-         KoreanPos.Suffix | KoreanPos.Adverb =>
-      KoreanDictionaryProvider.addWordsToDictionary(tag, morph)
+    case t if KoreanDictionaryProvider.koreanDictionary.containsKey(t) =>
+      KoreanDictionaryProvider.addWordsToDictionary(t, morph)
     case KoreanPos.ProperNoun =>
       morph.foreach(KoreanDictionaryProvider.properNouns.add)
     case KoreanPos.Verb | KoreanPos.Adjective =>
+    // * Verb/Adjective dictionary cannot be modified in OKT.
+    // KoreanDictionaryProvider.predicateStems.get(tag)
     case _ =>
-      KoreanDictionaryProvider.addWordsToDictionary(KoreanPos.Noun, morph)
+    // * No proper dictionary.
+    // KoreanDictionaryProvider.addWordsToDictionary(KoreanPos.Noun, morph)
   }
 
   override def items: Set[(String, POSTag)] = userDict
@@ -71,26 +68,26 @@ object Dictionary extends CanCompileDict {
   }
 
   override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[(String, POSTag)] = {
-    val np =
-      if (filter(POS.NNP)) KoreanDictionaryProvider.properNouns.iterator.asScala.map {
-        case x: String => x -> POS.NNP
-        case x: Array[Char] => new String(x) -> POS.NNP
-        case x => x.toString -> POS.NNP
-      }
-      else Iterator.empty
-
-    val dicKeys = this.dicKeys.filter(x => filter(fromTwtTag(x.toString)))
-    val dic = dicKeys.iterator.flatMap(key => {
-      val keydic = KoreanDictionaryProvider.koreanDictionary.get(key)
-      if (keydic != null)
-        keydic.asScala.map {
-          case x: String => x -> fromTwtTag(key.toString)
-          case x: Array[Char] => new String(x) -> fromTwtTag(key.toString)
-          case x => x.toString -> fromTwtTag(key.toString)
+    KoreanPos.values.filter(x => filter(fromTwtTag(x.toString))).iterator.flatMap {
+      case t if KoreanDictionaryProvider.koreanDictionary.containsKey(t) =>
+        val key = fromTwtTag(t.toString)
+        KoreanDictionaryProvider.koreanDictionary.get(t).asScala.map {
+          case x: String => x -> key
+          case x: Array[Char] => new String(x) -> key
+          case x => x.toString -> key
         }
-      else
-        Map.empty
-    })
-    np ++ dic
+      case KoreanPos.ProperNoun =>
+        val key = fromTwtTag(KoreanPos.ProperNoun.toString)
+        KoreanDictionaryProvider.properNouns.asScala.map {
+          case x: String => x -> key
+          case x: Array[Char] => new String(x) -> key
+          case x => x.toString -> key
+        }
+      case t@(KoreanPos.Verb | KoreanPos.Adjective) =>
+        val key = fromTwtTag(t.toString)
+        KoreanDictionaryProvider.predicateStems(t).keys.map(_ -> key)
+      case _ =>
+        Map()
+    }
   }
 }
