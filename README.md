@@ -70,13 +70,12 @@ libraryDependencies += "kr.bydelta" %% "koalanlp-kryo" % "latest.release" // Kry
 libraryDependencies += "kr.bydelta" %% "koalanlp-server" % "latest.release" // HTTP 서비스
 ```
 
-Maven을 사용하시는 경우, 다음과 같습니다.
-(버전은 Latest Release 기준입니다. SNAPSHOT을 사용하시려면, `LATEST`를 사용하세요.)
+Maven을 사용하시는 경우, 다음과 같습니다. {TAGGER.PACK}, {TAGGER.VERSION}은 사용하고자 하는 패키지와 버전을 쓰시면 됩니다.
 ```xml
 <dependency>
   <groupId>kr.bydelta</groupId>
   <artifactId>koalanlp-{TAGGER.PACK}_2.12</artifactId>
-  <version>RELEASE</version>
+  <version>{TAGGER.VERSION}</version>
 </dependency>
 ```
 
