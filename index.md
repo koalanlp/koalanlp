@@ -21,7 +21,7 @@ KoalaNLP
 __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이 목적입니다.
 * Hannanum: KAIST의 [한나눔 형태소 분석기](http://kldp.net/projects/hannanum/)와 [NLP_HUB 구문분석기](http://semanticweb.kaist.ac.kr/home/index.php/NLP_HUB)
 * KKMA: 서울대의 [꼬꼬마 형태소/구문 분석기](http://kkma.snu.ac.kr/documents/index.jsp)
-* Komoran: Shineware의 [코모란 v2.4](http://shineware.tistory.com/entry/KOMORAN-ver-24)
+* Komoran: Junsoo Shin님의 [코모란 v3.0](https://github.com/shin285/KOMORAN)
 * Twitter: OpenKoreanText의 [오픈 소스 한국어 처리기](http://openkoreantext.org) (구 Twitter 한국어 분석기)<sup>1</sup>
 * Eunjeon: 은전한닢 프로젝트의 [SEunjeon(S은전)](https://bitbucket.org/eunjeon/seunjeon)
 
@@ -40,13 +40,13 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 | `koalanlp-core` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core_2.12%22) | 8+ | 2.10+ | 통합 인터페이스의 정의가 등재된 중심 묶음입니다. |
 | `koalanlp-hannanum` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-hannanum_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-hannanum_2.12%22) | 8+ | 2.10+ | 한나눔 분석기 패키지입니다. <sup>2</sup> |
 | `koalanlp-kkma` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kkma_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kkma_2.12%22) | 8+ | 2.10+ | 꼬꼬마 분석기 패키지입니다. <sup>2</sup> |
-| `koalanlp-komoran` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-komoran_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-komoran_2.12%22) | 8+ | 2.10+ | 코모란 분석기 패키지입니다. <sup>2</sup> |
+| `koalanlp-komoran` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-komoran_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-komoran_2.12%22) | 8+ | 2.10+ | 코모란 분석기 패키지입니다. |
 | `koalanlp-twitter` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-twitter_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-twitter_2.12%22) | 8+ | **2.12+**<sup>3</sup> | 트위터(OpenKoreanText) 분석기 패키지입니다. |
 | `koalanlp-eunjeon` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-eunjeon_2.12%22) | 8+ | **2.11+**<sup>3</sup> | 은전한닢 분석기 패키지입니다. |
 | `koalanlp-kryo` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kryo_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kryo_2.12%22) | 8+ | 2.10+ | Kryo Serialization을 지원하기 위한 패키지입니다. |
 | `koalanlp-server` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-server_2.11.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-server_2.11%22) | 8+ | **2.10 - 2.11**<sup>3</sup> | HTTP 서비스 구성을 위한 패키지입니다. |
 
-> <sup>주2</sup> 꼬꼬마, 한나눔, 코모란 분석기는 타 분석기와 달리 Maven repository에 등재되어 있지 않아, 원래는 수동으로 직접 추가하셔야 합니다.
+> <sup>주2</sup> 꼬꼬마, 한나눔 분석기는 타 분석기와 달리 Maven repository에 등재되어 있지 않아, 원래는 수동으로 직접 추가하셔야 합니다.
 > 이 점이 불편하다는 것을 알기에, KoalaNLP는 assembly 형태로 해당 패키지를 포함하여 배포하고 있습니다. 포함된 패키지를 사용하려면, `assembly` classifier를 사용하십시오.
 > "assembly" classifier가 지정되지 않으면, 각 분석기 라이브러리가 빠진 채로 dependency가 참조됩니다.
 >
@@ -61,9 +61,9 @@ SBT를 사용하시는 경우, 다음과 같이 추가하시면 됩니다.
 ```sbt
 libraryDependencies += "kr.bydelta" %% "koalanlp-twitter" % "latest.release"	//트위터 분석기의 경우
 libraryDependencies += "kr.bydelta" %% "koalanlp-eunjeon" % "latest.release"	//은전한닢 분석기의 경우
+libraryDependencies += "kr.bydelta" %% "koalanlp-komoran" % "latest.release"	//코모란 분석기의 경우
 
 libraryDependencies += "kr.bydelta" %% "koalanlp-kkma" % "latest.release" classifier "assembly"	//꼬꼬마 분석기의 경우
-libraryDependencies += "kr.bydelta" %% "koalanlp-komoran" % "latest.release" classifier "assembly"	//코모란 분석기의 경우
 libraryDependencies += "kr.bydelta" %% "koalanlp-hannanum" % "latest.release" classifier "assembly"	//한나눔 분석기의 경우
 
 libraryDependencies += "kr.bydelta" %% "koalanlp-kryo" % "latest.release" // Kryo Serialization
@@ -192,7 +192,7 @@ sentence match {
 각 분석기의 License와 저작권은 각 프로젝트에서 지정한 바를 따릅니다. (`kr.bydelta.koala.helper` 하위에 새로 수정되어 등록된 Class/Object는 각 프로젝트의 결과물을 조금 수정한 판본이며, 저작권은 각 프로젝트에 귀속됩니다.)
 * Hannanum: GPL v3
 * KKMA: GPL v2 (GPL v2를 따르지 않더라도, 상업적 이용시 별도 협의 가능)
-* Komoran: GPL v2, 역컴파일 불가, 비상업적 용도 사용 가능, 상업적 용도 사용시 별도 협의 (3년미만의 10명 이하 사업장 자유)
+* Komoran: GPL v2
 * Twitter: Apache License 2.0
 * Eunjeon: Apache License 2.0
 
