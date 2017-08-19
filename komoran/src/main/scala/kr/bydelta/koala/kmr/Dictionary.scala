@@ -5,9 +5,10 @@ import java.io.{BufferedWriter, File, FileOutputStream, OutputStreamWriter}
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala._
 import kr.bydelta.koala.traits.{CanCompileDict, CanExtractResource}
-import kr.co.shineware.ds.trie.model.TrieNode
-import kr.co.shineware.nlp.komoran.modeler.model.{Observation, PosTable}
-import kr.co.shineware.util.common.model.{Pair => KPair}
+import kr.co.shineware.ds.aho_corasick.model.AhoCorasickNode
+import kr.co.shineware.nlp.komoran.model.ScoredTag
+import kr.co.shineware.nlp.komoran.modeler.model.Observation
+import kr.co.shineware.nlp.komoran.parser.KoreanUnitParser
 
 import scala.annotation.tailrec
 import scala.collection.JavaConverters._
@@ -17,6 +18,8 @@ import scala.io.Source
   * 코모란 분석기 사용자사전
   */
 object Dictionary extends CanCompileDict with CanExtractResource {
+
+
   /**
     * 사용자사전을 저장할 파일의 위치.
     */
@@ -26,17 +29,12 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     file.deleteOnExit()
     file
   }
-  private lazy val dic = {
-    val obs = new Observation
-    obs.load(extractResource() + File.separator + "observation.model")
-    obs.getTrieDictionary
+  private lazy val systemdic = {
+    val o = new Observation
+    o.load(o.getClass.getClassLoader.getResourceAsStream("models_full" + File.separator + "observation.model"))
+    o
   }
-  private lazy val table = {
-    val tbl = new PosTable
-    tbl.load(extractResource() + File.separator + "pos.table")
-    tbl
-  }
-
+  private lazy val unitparser = new KoreanUnitParser()
   private var userLastUpdated = 0l
   private var userBuffer = Set[(String, POSTag)]()
   private var baseEntries = Seq[(String, Seq[POSTag])]()
@@ -69,15 +67,30 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     val (_, system) =
       if (onlySystemDic) (Seq.empty[(String, POSTag)], word)
       else word.partition(items.contains)
+
     system.groupBy(_._1).iterator.flatMap {
       case (w, tags) =>
-        val searched = dic.get(w)
+        val searched =
+          try {
+            systemdic.getTrieDictionary.get(unitparser.parse(w)).asScala
+          } catch {
+            case _: NullPointerException =>
+              Map.empty
+            case e: Throwable =>
+              e.printStackTrace()
+              Map.empty
+          }
 
         // Filter out existing morphemes!
-        if (searched == null) tags // For the case of not found.
+        if (searched.isEmpty) tags // For the case of not found.
         else {
-          val found = searched.asScala.map(_.getFirst)
-          tags.filterNot(t => found.contains(table.getId(tagToKomoran(t._2))))
+          val found = searched.map {
+            case (units, scoredtag) =>
+              val word = unitparser.combine(units)
+              val tag = scoredtag.asScala.map(_.getTag)
+              word -> tag
+          }.filter(_._1 == w).flatMap(_._2).toSeq
+          tags.filterNot(t => found.contains(tagToKomoran(t._2)))
         }
     }.toSeq
   }
@@ -105,20 +118,18 @@ object Dictionary extends CanCompileDict with CanExtractResource {
   private def extractBaseEntries(): Seq[(String, Seq[POSTag])] =
     if (baseEntries.nonEmpty) baseEntries
     else this.synchronized {
-      type TNode = TrieNode[java.util.List[KPair[Integer, java.lang.Double]]]
-
       @tailrec
-      def iterate(stack: List[(Seq[Char], TNode)]): Unit =
+      def iterate(stack: List[(Seq[Char], AhoCorasickNode[java.util.List[ScoredTag]])]): Unit =
         if (stack.nonEmpty) {
           val (prefix, top) = stack.head
           var nStack = stack.tail
 
-          val word = if (top.getKey == null) prefix else prefix :+ top.getKey.charValue()
+          val word = if (top.getParent == null) prefix else prefix :+ top.getKey
           val value = if (top.getValue != null) top.getValue.asScala else Seq()
 
           if (value != null && value.exists(_ != null)) {
-            val wordstr = util.reunionKorean(word)
-            baseEntries +:= wordstr -> value.map(x => fromKomoranTag(table.getPos(x.getFirst)))
+            val wordstr = unitparser.combine(word.mkString)
+            baseEntries +:= wordstr -> value.map(x => fromKomoranTag(x.getTag))
           }
 
           val children = top.getChildren
@@ -129,10 +140,15 @@ object Dictionary extends CanCompileDict with CanExtractResource {
           iterate(nStack)
         }
 
-      iterate(List(Seq.empty[Char] -> dic.getRoot))
+      iterate(List(Seq.empty[Char] -> systemdic.getTrieDictionary.newFindContext().getCurrentNode))
 
       baseEntries
     }
+
+  /**
+    * 압축해제 작업없음. 임시폴더만 생성
+    */
+  override protected[koala] def extractResource(): String = this.getExtractedPath
 
   override protected def modelName: String = "komoran"
 }

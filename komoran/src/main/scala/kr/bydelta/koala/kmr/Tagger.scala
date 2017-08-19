@@ -1,71 +1,79 @@
 package kr.bydelta.koala.kmr
 
-import java.util
-
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.traits.CanTag
 import kr.bydelta.koala.util.{reduceVerbApply, reunionKorean}
 import kr.bydelta.koala.{POS, fromKomoranTag}
-import kr.co.shineware.nlp.komoran.core.analyzer.Komoran
-import kr.co.shineware.util.common.model.{Pair => KPair}
+import kr.co.shineware.nlp.komoran.core.Komoran
+import kr.co.shineware.nlp.komoran.model.KomoranResult
 
-import scala.collection.JavaConverters._
 import scala.collection.mutable.ArrayBuffer
 
 /**
   * 코모란 형태소분석기.
   */
-class Tagger extends CanTag[java.util.List[java.util.List[KPair[String, String]]]] {
+class Tagger extends CanTag[KomoranResult] {
   /**
     * 코모란 분석기 객체.
     */
   lazy val komoran = {
     Dictionary.extractResource()
-    val komoran = new Komoran(Dictionary.extractResource())
+    val komoran = new Komoran()
 
     if (Dictionary.userDict.exists())
       komoran.setUserDic(Dictionary.userDict.getAbsolutePath)
     komoran
   }
 
-  override def tagSentenceRaw(text: String): util.List[util.List[KPair[String, String]]] =
-    komoran.analyze(text)
+  override def tagSentenceRaw(text: String): KomoranResult =
+    if (text.trim.isEmpty) null
+    else komoran.analyze(text)
 
   override def tagParagraph(text: String): Seq[Sentence] = {
     splitSentences(convert(tagSentenceRaw(text)).words)
   }
 
-  override private[koala] def convert(result: util.List[util.List[KPair[String, String]]]): Sentence =
-    Sentence(
-      result.asScala.map {
-        word =>
-          val wAsScala = word.asScala
-          val originalWord =
-            reunionKorean(wAsScala.foldLeft((Seq.empty[Char], false))({
-              case ((prevSeq, wasVerb), curr) =>
-                val tag = curr.getSecond.toUpperCase
-                if (tag.startsWith("E")) {
-                  val newSeq = reduceVerbApply(prevSeq, wasVerb, curr.getFirst.toSeq)
-                  (newSeq, false)
-                } else {
-                  val isVerb = (tag.startsWith("V") && tag != "VA") || tag == "XSV"
-                  (prevSeq ++ curr.getFirst.toSeq, isVerb)
-                }
-            })._1)
+  def constructWordSurface(wAsScala: Seq[Morpheme]) = {
+    reunionKorean(wAsScala.foldLeft((Seq.empty[Char], false))({
+      case ((prevSeq, wasVerb), curr) =>
+        val tag = curr.rawTag.toUpperCase
+        if (tag.startsWith("E")) {
+          val newSeq = reduceVerbApply(prevSeq, wasVerb, curr.surface.toSeq)
+          (newSeq, false)
+        } else {
+          val isVerb = (tag.startsWith("V") && tag != "VA") || tag == "XSV"
+          (prevSeq ++ curr.surface.toSeq, isVerb)
+        }
+    })._1)
+  }
 
-          Word(
-            originalWord,
-            wAsScala.map {
-              pair =>
-                Morpheme(
-                  pair.getFirst,
-                  pair.getSecond,
-                  fromKomoranTag(pair.getSecond)
-                )
-            }
-          )
+  override private[koala] def convert(result: KomoranResult): Sentence = {
+    if (result != null) {
+      val words = ArrayBuffer[Word]()
+      var morphs = ArrayBuffer[Morpheme]()
+      var lastIdx = 0
+      val tokenIt = result.getTokenList.iterator()
+
+      while (tokenIt.hasNext) {
+        val token = tokenIt.next()
+        val tag = token.getPos
+        if (token.getBeginIndex > lastIdx) {
+          words += Word(surface = constructWordSurface(morphs), morphemes = morphs)
+          morphs = ArrayBuffer[Morpheme]()
+        }
+
+        morphs += Morpheme(surface = token.getMorph, rawTag = token.getPos, fromKomoranTag(tag))
+        lastIdx = token.getEndIndex
       }
-    )
+
+      if (morphs.nonEmpty) {
+        words += Word(surface = constructWordSurface(morphs), morphemes = morphs)
+      }
+
+      Sentence(words)
+    } else
+      Sentence(Seq.empty)
+  }
 
   /**
     * 분석결과를 토대로 문장을 분리함.

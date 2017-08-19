@@ -8,6 +8,7 @@ package object util {
   private final val SecondNeg = Seq('ㅓ', 'ㅕ')
   private lazy val endsWithL = charEndsWith('ㄹ')(_)
   private lazy val endsWithEu = charEndsWithMo('ㅡ')(_)
+  private lazy val endsWithAh = charEndsWithMo('ㅏ')(_)
   private lazy val startsWithN = charStartsWith('ㄴ')(_)
   private lazy val startsWithB = charStartsWith('ㅂ')(_)
   private lazy val startsWithS = charStartsWith('ㅅ')(_)
@@ -148,6 +149,8 @@ package object util {
         verb ++ harmony(verbRev, '으' +: rest)
       } else
         verb ++ harmony(verbRev, rest)
+    } else if (endsWithAh(char) && startsWithAh(next)) {
+      verb ++ rest.tail
     } else {
       verb ++ harmony(verbRev, rest)
     }

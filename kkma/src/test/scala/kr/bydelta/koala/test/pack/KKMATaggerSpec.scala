@@ -18,7 +18,7 @@ class KKMATaggerSpec extends TaggerSpec {
     val original = kkma.divideToSentences(kkma.leaveJustBest(
       kkma.postProcess(kkma.analyze(str)))).asScala.flatMap(_.asScala)
 
-    val tag = original.map(_.asScala.map(_.getString).mkString("+")).mkString(" ")
+    val tag = original.map(_.asScala.map(m => m.getString + "/" + m.getTag).mkString("+")).mkString(" ")
     val surface = original.map(_.getExp).mkString(" ")
 
     surface -> tag

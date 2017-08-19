@@ -59,7 +59,7 @@ trait CanExtractResource {
     *
     * @return 임시 디렉터리의 절대경로 String.
     */
-  private def getExtractedPath = {
+  protected def getExtractedPath = {
     TMP.mkdirs()
     TMP.getAbsolutePath
   }

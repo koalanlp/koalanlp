@@ -52,7 +52,12 @@ class HannanumTaggerSpec extends TaggerSpec {
     workflow.synchronized {
       workflow.analyze(str)
       val original = workflow.getResultOfSentence(new Sentence(0, 0, true))
-      val tag = original.getEojeols.map(_.getMorphemes.mkString("+")).mkString(" ")
+      val tag = original.getEojeols.map {
+        e =>
+          e.getMorphemes.zip(e.getTags).map {
+            case (m, t) => s"$m/$t"
+          }.mkString("+")
+      }.mkString(" ")
       val surface = original.getPlainEojeols.mkString(" ")
       surface -> tag
     }

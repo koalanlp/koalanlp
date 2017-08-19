@@ -1,7 +1,7 @@
 package kr.bydelta.koala.test.core
 
 import kr.bydelta.koala.kmr.{Dictionary, Tagger}
-import kr.co.shineware.util.common.model.Pair
+import kr.co.shineware.nlp.komoran.model.KomoranResult
 import org.specs2.execute.Result
 import org.specs2.mutable.Specification
 
@@ -10,7 +10,7 @@ import scala.collection.JavaConverters._
 /**
   * Created by bydelta on 16. 7. 30.
   */
-class KomoranLearnSpec extends Specification with BasicWordLearnerSpecs[java.util.List[java.util.List[Pair[String, String]]]] {
+class KomoranLearnSpec extends Specification with BasicWordLearnerSpecs[KomoranResult] {
   sequential
 
   override def getTagger = new Tagger

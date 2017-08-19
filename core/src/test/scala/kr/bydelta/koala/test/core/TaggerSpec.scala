@@ -19,6 +19,7 @@ trait TaggerSpec extends Specification with Examples {
   def getDict: CanCompileDict
 
   def expectCorrectParse(str: String) = {
+    print("S")
     val tagger = getTagger
     val (oSurface, oTag) = tagSentByOrig(str)
     val (tSurface, tTag) = tagSentByKoala(str, tagger)
@@ -33,12 +34,13 @@ trait TaggerSpec extends Specification with Examples {
 
   def tagSentByKoala(str: String, tagger: CanTag[_]): (String, String) = {
     val tagged = tagger.tagSentence(str)
-    val tag = tagged.map(_.map(_.surface).mkString("+")).mkString(" ")
+    val tag = tagged.map(_.map(m => m.surface + "/" + m.rawTag).mkString("+")).mkString(" ")
     val surface = tagged.surfaceString()
     surface -> tag
   }
 
   def expectCorrectParses(str: Seq[String]) = {
+    print("T")
     val tagger = getTagger
     val single = str.map(s => tagSentByKoala(s, tagger))
     val multi = str.par.map {
@@ -87,12 +89,14 @@ trait TaggerSpec extends Specification with Examples {
         val tagger = getTagger
         Result.foreach(exampleSequence(requireMultiLine = true)) {
           case (n, sent) =>
+            print("L")
             val splits = tagger.tagParagraph(sent)
             splits.length must_== n
         }
       }
 
       "tag paragraph" in {
+        print("P")
         val sent = "포털의 '속초' 연관 검색어로 '포켓몬 고'가 올랐다. 속초시청이 관광객의 편의를 위해 예전에 만들었던 무료 와이파이존 지도는 순식간에 인기 게시물이 됐다."
         val sents = Seq("포털의 '속초' 연관 검색어로 '포켓몬 고'가 올랐다.",
           "속초시청이 관광객의 편의를 위해 예전에 만들었던 무료 와이파이존 지도는 순식간에 인기 게시물이 됐다.")
@@ -106,6 +110,7 @@ trait TaggerSpec extends Specification with Examples {
       }
     } else {
       "tag paragraph" in {
+        print("P")
         val tagger = getTagger
         Result.foreach(exampleSequence()) {
           case (_, sent) =>

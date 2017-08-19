@@ -3,7 +3,7 @@ package kr.bydelta.koala.test.pack
 import kr.bydelta.koala.kmr.{Dictionary, Tagger}
 import kr.bydelta.koala.test.core.TaggerSpec
 import kr.bydelta.koala.traits.{CanCompileDict, CanTag}
-import kr.co.shineware.nlp.komoran.core.analyzer.Komoran
+import kr.co.shineware.nlp.komoran.core.Komoran
 import org.specs2.execute.Result
 
 import scala.collection.JavaConverters._
@@ -13,16 +13,26 @@ import scala.collection.JavaConverters._
   */
 class KomoranTaggerSpec extends TaggerSpec {
   override def tagSentByOrig(str: String): (String, String) = {
-    val komoran = new Komoran(Dictionary.extractResource())
-    val original = komoran.analyze(str).asScala
+    val komoran = new Komoran()
+    val original = komoran.analyze(str)
 
-    val tag = original.map(_.asScala.map(_.getFirst).mkString("+")).mkString(" ")
+    val (tag, _) = original.getTokenList.asScala.foldLeft((new StringBuilder, 0)) {
+      case ((builder, prev), token) if token.getBeginIndex > prev =>
+        builder.append(" ")
+        builder.append(token.getMorph + "/" + token.getPos)
+        (builder, token.getEndIndex)
+      case ((builder, prev), token) =>
+        builder.append(token.getMorph + "/" + token.getPos)
+        (builder, token.getEndIndex)
+    }
 
-    "" -> tag
+    "" -> tag.toString()
   }
 
   override def tagSentByKoala(str: String, tagger: CanTag[_]): (String, String) = {
-    val (surface, tag) = super.tagSentByKoala(str, tagger)
+    val tagged = tagger.tagSentence(str)
+    val tag = tagged.map(_.map(m => m.surface + "/" + m.rawTag).mkString).mkString(" ")
+
     str -> tag
   }
 

@@ -27,6 +27,13 @@ class EunjeonTaggerSpec extends TaggerSpec {
 
   override def tagParaByOrig(str: String): Seq[String] = Seq.empty
 
+  override def tagSentByKoala(str: String, tagger: CanTag[_]): (String, String) = {
+    val tagged = tagger.tagSentence(str)
+    val tag = tagged.map(_.map(_.surface).mkString("+")).mkString(" ")
+    val surface = tagged.surfaceString()
+    surface -> tag
+  }
+
   override def getTagger: CanTag[_] =
     new Tagger()
 

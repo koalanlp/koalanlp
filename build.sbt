@@ -32,6 +32,7 @@ resolvers ++= Seq(
 )
 
 sonatypeProfileName := "kr.bydelta"
+
 lazy val kkma = (project in file("kkma"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("kkma"): _*)
@@ -74,17 +75,18 @@ lazy val komoran = (project in file("komoran"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("komoran"): _*)
   .settings(
-    assemblyOption in assembly := (assemblyOption in assembly).value.
-      copy(includeScala = false),
-    artifact in(Compile, assembly) := {
-      val art = (artifact in(Compile, assembly)).value
-      art.copy(`classifier` = Some("assembly"))
-    },
-    addArtifact(artifact in(Compile, assembly), assembly))
-  .dependsOn(core % "test->test;compile->compile")
+    resolvers += "jitpack" at "https://jitpack.io",
+    libraryDependencies ++= Seq(
+      "com.github.shin285" % "KOMORAN" % "3.2.1.5"
+    )
+  ).dependsOn(core % "test->test;compile->compile")
+
+
 lazy val samples = (project in file("samples"))
   .settings(projectWithConfig("samples"): _*)
   .dependsOn(eunjeon, twitter, komoran, kkma, hannanum, server)
+
+
 lazy val server = (project in file("server"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("server"): _*)
@@ -111,7 +113,7 @@ lazy val custom = (project in file("custom"))
     libraryDependencies ++= Seq(
       "org.apache.opennlp" % "opennlp-tools" % "[1.8,)"
     )
-  ).dependsOn(core)
+  ).dependsOn(core % "test->test;compile->compile")
 
 val VERSION = "1.6.0-SNAPSHOT"
 
