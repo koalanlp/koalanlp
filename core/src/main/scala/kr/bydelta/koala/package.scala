@@ -132,7 +132,22 @@ package object koala {
       *
       * @return 종성으로 끝난다면, true를, 없다면 false를 반환.
       */
-    def endsWithJongsung = getJongsungCode != 0
+    def endsWithJongsung = isCompleteHangul && getJongsungCode != 0
+
+    /**
+      * (Code modified from Seunjeon package)
+      * 종성 종료 코드
+      *
+      * @return 종성으로 끝난다면, 해당 위치를, 없다면 0을 반환.
+      */
+    def getJongsungCode = (ch - HANGUL_START) % JONGSUNG_RANGE
+
+    /**
+      * 완성된 문자의 범위인지 확인.
+      *
+      * @return True: 완성된 문자일 경우.
+      */
+    def isCompleteHangul = HANGUL_START <= ch && ch <= HANGUL_END
 
     /**
       * (Code modified from Seunjeon package)
@@ -171,14 +186,6 @@ package object koala {
 
     /**
       * (Code modified from Seunjeon package)
-      * 종성 종료 코드
-      *
-      * @return 종성으로 끝난다면, 해당 위치를, 없다면 0을 반환.
-      */
-    def getJongsungCode = (ch - HANGUL_START) % JONGSUNG_RANGE
-
-    /**
-      * (Code modified from Seunjeon package)
       * 중성 종료 코드
       *
       * @return 중성으로 끝난다면, 해당 위치를, 없다면 0을 반환.
@@ -192,13 +199,6 @@ package object koala {
       * @return 초성으로 끝난다면, 해당 위치를, 없다면 0을 반환.
       */
     def getChosungCode = (ch - HANGUL_START) / JUNGSUNG_RANGE
-
-    /**
-      * 완성된 문자의 범위인지 확인.
-      *
-      * @return True: 완성된 문자일 경우.
-      */
-    def isCompleteHangul = HANGUL_START <= ch && ch <= HANGUL_END
 
     /**
       * 한글의 초성자음 문자인지 확인
