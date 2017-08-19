@@ -57,6 +57,19 @@ lazy val hannanum = (project in file("hannanum"))
     },
     addArtifact(artifact in(Compile, assembly), assembly))
   .dependsOn(core % "test->test;compile->compile")
+lazy val arirang = (project in file("arirang"))
+  .enablePlugins(GenJavadocPlugin)
+  .settings(projectWithConfig("arirang"): _*)
+  .settings(
+    assemblyOption in assembly := (assemblyOption in assembly).value.
+      copy(includeScala = false),
+    artifact in(Compile, assembly) := {
+      val art = (artifact in(Compile, assembly)).value
+      art.copy(`classifier` = Some("assembly"))
+    },
+    addArtifact(artifact in(Compile, assembly), assembly))
+  .dependsOn(core % "test->test;compile->compile")
+
 lazy val eunjeon = (project in file("eunjeon"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("eunjeon"): _*)
@@ -111,7 +124,8 @@ lazy val custom = (project in file("custom"))
   .settings(projectWithConfig("custom"))
   .settings(
     libraryDependencies ++= Seq(
-      "org.apache.opennlp" % "opennlp-tools" % "[1.8,)"
+      "org.apache.opennlp" % "opennlp-tools" % "[1.8,)",
+      "org.deeplearning4j" % "deeplearning4j-core" % "[0.9,)"
     )
   ).dependsOn(core % "test->test;compile->compile")
 
