@@ -19,7 +19,11 @@ object Arirang {
       line = StdIn.readLine()
       if (line.nonEmpty) {
         println("품사 부착...")
-        println(tagger.tagSentence(line).singleLineString)
+        tagger.tag(line).foreach {
+          sent =>
+            println(sent.singleLineString)
+            println()
+        }
       }
     } while (line.nonEmpty)
   }

@@ -16,7 +16,7 @@ object Komoran {
       line = StdIn.readLine()
       if (line.nonEmpty) {
         println("품사 부착...")
-        tagger.tagParagraph(line).foreach {
+        tagger.tag(line).foreach {
           sent =>
             println(sent.surfaceString())
             println(sent.singleLineString)

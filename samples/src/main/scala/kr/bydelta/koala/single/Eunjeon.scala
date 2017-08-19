@@ -16,7 +16,7 @@ object Eunjeon {
       line = StdIn.readLine()
       if (line.nonEmpty) {
         println("품사 부착...")
-        tagger.tagParagraph(line).foreach {
+        tagger.tag(line).foreach {
           sent =>
             println(sent.singleLineString)
             println()

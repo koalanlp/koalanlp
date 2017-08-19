@@ -23,14 +23,9 @@ class Tagger extends CanTag[Seq[Eojeol]] {
     tok
   }
 
-  override def tagSentenceRaw(text: String): Seq[Eojeol] =
-    Eojeoler.build(tokenizer.parseText(
-      text.replace('/', '／').replace('+', '＋').replace('*', '＊'),
-      dePreAnalysis = true))
-
-  override def tagParagraph(text: String): Seq[Sentence] = {
+  override def tagParagraphRaw(text: String): Seq[Seq[Eojeol]] = {
     val parsed = Eojeoler.build(tokenizer.parseText(text, dePreAnalysis = false))
-    splitSentences(parsed).map(convert)
+    splitSentences(parsed)
   }
 
   override private[koala] def convert(seq: Seq[Eojeol]): Sentence =

@@ -65,7 +65,7 @@ class HannanumParserSpec extends Specification with Examples {
   "HannanumParser" should {
     "handle empty sentence" in {
       val sent = new Parser().parse("")
-      sent.words must beEmpty
+      sent must beEmpty
     }
 
     "parse a sentence" in {
@@ -75,7 +75,7 @@ class HannanumParserSpec extends Specification with Examples {
       Result.foreach(exampleSequence().filter(_._1 == 1).map(_._2)) {
         sent =>
           println(s"Parsing: $sent")
-          val tagged = kParser.parse(sent)
+          val tagged = kParser.parse(sent).head
 
           try {
             workflow.analyze(sent)
@@ -116,14 +116,14 @@ class HannanumParserSpec extends Specification with Examples {
       val multithreaded = sents.par.map {
         sent =>
           println(s"Parsing: $sent")
-          new Parser().parse(sent).treeString
+          new Parser().parse(sent).map(_.treeString).mkString("\n")
       }.seq.mkString("\n")
 
       val parser = new Parser
       val singlethreaded = sents.map {
         sent =>
           println(s"Parsing: $sent")
-          parser.parse(sent).treeString
+          parser.parse(sent).map(_.treeString).mkString("\n")
       }.mkString("\n")
 
       multithreaded must_== singlethreaded
@@ -133,12 +133,12 @@ class HannanumParserSpec extends Specification with Examples {
       val sent = "아햏, 2000년대에 유행한 통신은어로, 개벽이, 햏햏 등의 여러 신조어를 유통시켰다."
 
       println(s"Parsing: $sent")
-      val noUserDict = new Parser().parse(sent).treeString
+      val noUserDict = new Parser().parse(sent).map(_.treeString).mkString("\n")
 
       Dictionary.addUserDictionary("아햏" -> POS.IC, "개벽이" -> POS.NNG, "햏햏" -> POS.NNG)
 
       println(s"Parsing: $sent")
-      val dictApplied = new Parser().parse(sent).treeString
+      val dictApplied = new Parser().parse(sent).map(_.treeString).mkString("\n")
 
       noUserDict must_!= dictApplied
     }

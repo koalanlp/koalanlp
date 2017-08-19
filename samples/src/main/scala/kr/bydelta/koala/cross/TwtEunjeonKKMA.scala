@@ -24,10 +24,12 @@ object TwtEunjeonKKMA {
         splitter.sentences(line).foreach {
           sent =>
             println("품사 부착...")
-            val tagged = tagger.tagSentence(sent)
-            println(tagged.singleLineString)
-            println("의존 구문 분석...")
-            println(parser.parse(tagged).treeString)
+            tagger.tag(sent).foreach {
+              tagged =>
+                println(tagged.singleLineString)
+                println("의존 구문 분석...")
+                println(parser.parse(tagged).treeString)
+            }
         }
       }
     } while (line.nonEmpty)

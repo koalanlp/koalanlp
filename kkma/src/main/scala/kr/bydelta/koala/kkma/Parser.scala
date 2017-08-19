@@ -16,13 +16,11 @@ class Parser extends CanDepParse {
   /** 형태소분석기 **/
   lazy val tagger = new Tagger
 
-  override def parse(sentence: String): KSent =
-    tagger.tagParagraphRaw(sentence).headOption match {
-      case Some(rawSentence) =>
+  override def parse(sentence: String): Seq[KSent] =
+    tagger.tagParagraphRaw(sentence).map {
+      rawSentence =>
         val tagged = tagger.convert(rawSentence)
         parseRaw(rawSentence, tagged)
-      case _ =>
-        KSent(Seq())
     }
 
   override def parse(sentence: KSent): KSent = {

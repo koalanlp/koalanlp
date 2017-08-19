@@ -42,15 +42,13 @@ final class Tagger extends CanTag[Sentence] {
   private lazy val analyzer = new SafeChartMorphAnalyzer
   private[this] val logger = org.log4s.getLogger
 
-  override def tagSentenceRaw(text: String): Sentence =
-    if (text.trim.isEmpty) new Sentence(0, 0, true, Array(), Array())
+  override def tagParagraphRaw(text: String): Seq[Sentence] =
+    if (text.trim.isEmpty) Seq()
     else {
       try {
         Dictionary synchronized {
           workflow.analyze(text)
-          val sent = workflow.getResultOfSentence(new Sentence(0, 0, false))
-          if (sent.isEndOfDocument) sent
-          else throw new IllegalStateException("This is not a single sentence!")
+          retrieveSentences()
         }
       } catch {
         case e: Throwable =>
@@ -58,21 +56,6 @@ final class Tagger extends CanTag[Sentence] {
           throw e
       }
   }
-
-  def tagParagraph(text: String): Seq[KSent] =
-    if (text.trim.isEmpty) Seq()
-    else {
-      try {
-        Dictionary.synchronized {
-          workflow.analyze(text)
-          retrieveSentences()
-        }
-      } catch {
-        case e: Throwable =>
-          logger.error(e)("Paragraph Tagging failed.")
-          throw e
-      }
-    }
 
   @throws[Throwable]
   override protected def finalize() {
@@ -101,7 +84,7 @@ final class Tagger extends CanTag[Sentence] {
     * @return 문장분리 결과.
     */
   @tailrec
-  private def retrieveSentences(acc: ArrayBuffer[Sentence] = ArrayBuffer()): ArrayBuffer[KSent] = {
+  private def retrieveSentences(acc: ArrayBuffer[Sentence] = ArrayBuffer()): ArrayBuffer[Sentence] = {
     (try {
       Some(workflow.getResultOfSentence(new Sentence(0, 0, false)))
     } catch {
@@ -112,8 +95,8 @@ final class Tagger extends CanTag[Sentence] {
         if (!sent.isEndOfDocument)
           retrieveSentences(acc)
         else
-          acc.map(convert)
-      case _ => acc.map(convert)
+          acc
+      case _ => acc
     }
   }
 }

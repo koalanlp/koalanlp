@@ -52,7 +52,7 @@ class Service(context: ServerContext,
     */
   def parseReq(request: HttpRequest): Callback[HttpResponse] = {
     val json = try {
-      val para = tagger.tagParagraph(request.body.bytes.utf8String)
+      val para = tagger.tag(request.body.bytes.utf8String)
 
       Json.obj(
         "success" -> true,
@@ -117,7 +117,7 @@ class Service(context: ServerContext,
     */
   def tagReq(request: HttpRequest): Callback[HttpResponse] = {
     val json = try {
-      val para = tagger.tagParagraph(request.body.bytes.utf8String)
+      val para = tagger.tag(request.body.bytes.utf8String)
 
       Json.obj(
         "success" -> true,

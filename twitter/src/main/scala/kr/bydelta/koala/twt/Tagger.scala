@@ -9,17 +9,14 @@ import org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken
   * 트위터 품사분석기.
   */
 class Tagger extends CanTag[Seq[KoreanToken]] {
-  override def tagParagraph(text: String): Seq[Sentence] = {
+  override def tagParagraphRaw(text: String): Seq[Seq[KoreanToken]] = {
     OpenKoreanTextProcessor.splitSentences(text).map {
       sent =>
-        tagSentence(sent.text)
+        OpenKoreanTextProcessor.tokenize(
+          OpenKoreanTextProcessor.normalize(sent.text)
+        )
     }
   }
-
-  override def tagSentenceRaw(text: String): Seq[KoreanToken] =
-    OpenKoreanTextProcessor.tokenize(
-      OpenKoreanTextProcessor.normalize(text)
-    )
 
   override private[koala] def convert(result: Seq[KoreanToken]): Sentence = {
     Sentence(

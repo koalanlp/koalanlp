@@ -37,7 +37,7 @@ class KKMAParserSpec extends Specification with Examples {
   "KKMAParser" should {
     "handle empty sentence" in {
       val sent = new Parser().parse("")
-      sent.words must beEmpty
+      sent must beEmpty
     }
 
     "parse a sentence" in {
@@ -46,7 +46,7 @@ class KKMAParserSpec extends Specification with Examples {
       val kkma = new MorphemeAnalyzer
 
       Result.foreach(exampleSequence().filter(_._1 == 1).map(_._2)) { sent =>
-        val tagged = parser.parse(sent)
+        val tagged = parser.parse(sent).head
 
         val original = kkpa.parse(
           kkma.divideToSentences(kkma.leaveJustBest(
@@ -67,7 +67,7 @@ class KKMAParserSpec extends Specification with Examples {
 
       val multithreaded = sents.par.map {
         sent =>
-          val parsed = new Parser().parse(sent)
+          val parsed = new Parser().parse(sent).head
           iterateTree(parsed.root.dependents, "ROOT", parsed).sorted.mkString("\n")
       }.seq.mkString("\n")
 
@@ -93,11 +93,11 @@ class KKMAParserSpec extends Specification with Examples {
     "supports dictionary" in {
       val sent = "아햏햏, 2000년대에 유행한 통신은어로, 개벽이, 햏햏 등의 여러 신조어를 유통시켰다."
 
-      val noUserDict = new Parser().parse(sent).treeString
+      val noUserDict = new Parser().parse(sent).map(_.treeString).mkString("\n")
 
       Dictionary.addUserDictionary("아햏햏" -> POS.IC, "개벽이" -> POS.NNP, "햏햏" -> POS.NNG)
 
-      val dictApplied = new Parser().parse(sent).treeString
+      val dictApplied = new Parser().parse(sent).map(_.treeString).mkString("\n")
 
       noUserDict must_!= dictApplied
     }

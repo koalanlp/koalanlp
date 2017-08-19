@@ -55,9 +55,9 @@ object Implicit {
       * Tag given sentence.
       *
       * @param tagger Tagger to be used
-      * @return Sentence instance (tagged)
+      * @return Sequence of Sentence instances (tagged)
       */
-    def toTagged(implicit tagger: CanTag[_]) = tagger.tagSentence(str)
+    def toTagged(implicit tagger: CanTag[_]) = tagger.tag(str)
 
     /**
       * Parse given sentence

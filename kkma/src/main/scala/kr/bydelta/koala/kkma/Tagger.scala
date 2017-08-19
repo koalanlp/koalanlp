@@ -25,39 +25,13 @@ final class Tagger(logPath: String = "kkma.log") extends CanTag[Sentence] {
     ma
   }
 
-  override def tagSentence(text: String): koala.data.Sentence = {
-    val sentences = tagParagraphRaw(text).map(convert)
-    koala.data.Sentence(sentences.flatten)
-  }
-
-  override private[koala] def convert(result: Sentence): koala.data.Sentence =
-    koala.data.Sentence(
-      result.asScala.map {
-        eojeol =>
-          Word(
-            eojeol.getExp,
-            eojeol.asScala.map {
-              morph => koala.data.Morpheme(
-                morph.getString,
-                morph.getTag,
-                fromKKMATag(morph.getTag)
-              )
-            }
-          )
-      }
-    )
-
-  override def tagParagraph(text: String): Seq[koala.data.Sentence] = tagParagraphRaw(text).map(convert)
-
-  override def tagSentenceRaw(text: String): Sentence = tagParagraphRaw(text).head
-
   /**
     * 변환되지않은, 분석결과를 반환.
     *
     * @param text 분석할 String.
     * @return 원본 문장객체.
     */
-  def tagParagraphRaw(text: String): Seq[Sentence] =
+  override def tagParagraphRaw(text: String): Seq[Sentence] =
   if (text.trim.isEmpty)
     Seq()
   else
@@ -77,5 +51,22 @@ final class Tagger(logPath: String = "kkma.log") extends CanTag[Sentence] {
     //    ma.closeLogger()
     super.finalize()
   }
+
+  override private[koala] def convert(result: Sentence): koala.data.Sentence =
+    koala.data.Sentence(
+      result.asScala.map {
+        eojeol =>
+          Word(
+            eojeol.getExp,
+            eojeol.asScala.map {
+              morph => koala.data.Morpheme(
+                morph.getString,
+                morph.getTag,
+                fromKKMATag(morph.getTag)
+              )
+            }
+          )
+      }
+    )
 }
 

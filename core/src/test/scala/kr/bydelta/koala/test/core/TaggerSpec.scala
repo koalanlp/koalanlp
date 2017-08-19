@@ -1,5 +1,6 @@
 package kr.bydelta.koala.test.core
 
+import kr.bydelta.koala.data.Sentence
 import kr.bydelta.koala.traits.{CanCompileDict, CanTag}
 import org.specs2.execute.Result
 import org.specs2.mutable.Specification
@@ -33,7 +34,7 @@ trait TaggerSpec extends Specification with Examples {
   }
 
   def tagSentByKoala(str: String, tagger: CanTag[_]): (String, String) = {
-    val tagged = tagger.tagSentence(str)
+    val tagged = Sentence(tagger.tag(str).flatten)
     val tag = tagged.map(_.map(m => m.surface + "/" + m.rawTag).mkString("+")).mkString(" ")
     val surface = tagged.surfaceString()
     surface -> tag
@@ -70,8 +71,8 @@ trait TaggerSpec extends Specification with Examples {
 
   "Tagger" should {
     "handle empty sentence" in {
-      val sent = getTagger.tagSentence("")
-      sent.words must beEmpty
+      val sent = getTagger.tag("")
+      sent must beEmpty
     }
 
     "tag a sentence" in {
@@ -92,23 +93,12 @@ trait TaggerSpec extends Specification with Examples {
         Result.foreach(exampleSequence(requireMultiLine = true)) {
           case (n, sent) =>
             print("L")
-            val splits = tagger.tagParagraph(sent)
+            val splits = tagger.tag(sent)
+            if (splits.length != n) {
+              println("NOTMATCHED" + splits)
+            }
             splits.length must_== n
         }
-      }
-
-      "tag paragraph" in {
-        print("P")
-        val sent = "포털의 '속초' 연관 검색어로 '포켓몬 고'가 올랐다. 속초시청이 관광객의 편의를 위해 예전에 만들었던 무료 와이파이존 지도는 순식간에 인기 게시물이 됐다."
-        val sents = Seq("포털의 '속초' 연관 검색어로 '포켓몬 고'가 올랐다.",
-          "속초시청이 관광객의 편의를 위해 예전에 만들었던 무료 와이파이존 지도는 순식간에 인기 게시물이 됐다.")
-        val tagger = getTagger
-        val splits = tagger.tagParagraph(sent)
-        val sentMap = sents.map(tagger.tagSentence)
-
-        splits.length must_== 2
-        splits.head mustEqual sentMap.head
-        splits.last mustEqual sentMap.last
       }
     } else if (isParagraphImplemented) {
       "tag paragraph" in {
@@ -116,7 +106,7 @@ trait TaggerSpec extends Specification with Examples {
         val tagger = getTagger
         Result.foreach(exampleSequence()) {
           case (_, sent) =>
-            val splits = tagger.tagParagraph(sent)
+            val splits = tagger.tag(sent)
             val orig = tagParaByOrig(sent)
 
             splits.length must_== orig.length

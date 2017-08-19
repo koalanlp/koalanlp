@@ -12,7 +12,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * 코모란 형태소분석기.
   */
-class Tagger extends CanTag[KomoranResult] {
+class Tagger extends CanTag[Sentence] {
   /**
     * 코모란 분석기 객체.
     */
@@ -23,13 +23,11 @@ class Tagger extends CanTag[KomoranResult] {
     komoran
   }
 
-  override def tagSentenceRaw(text: String): KomoranResult =
-    if (text.trim.isEmpty) null
-    else komoran.analyze(text)
-
-  override def tagParagraph(text: String): Seq[Sentence] = {
-    splitSentences(convert(tagSentenceRaw(text)).words)
+  override def tagParagraphRaw(text: String): Seq[Sentence] = {
+    splitSentences(convertParagraph(komoran.analyze(text)).words)
   }
+
+  override def convert(result: Sentence): Sentence = result
 
   def constructWordSurface(wAsScala: Seq[Morpheme]) = {
     reunionKorean(wAsScala.foldLeft((Seq.empty[Char], false))({
@@ -45,7 +43,7 @@ class Tagger extends CanTag[KomoranResult] {
     })._1)
   }
 
-  override private[koala] def convert(result: KomoranResult): Sentence = {
+  private def convertParagraph(result: KomoranResult): Sentence = {
     if (result != null) {
       val words = ArrayBuffer[Word]()
       var morphs = ArrayBuffer[Morpheme]()

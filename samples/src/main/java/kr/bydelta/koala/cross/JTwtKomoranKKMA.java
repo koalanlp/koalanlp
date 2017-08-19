@@ -28,14 +28,16 @@ public class JTwtKomoranKKMA {
 
                 for (String sent : paragraph) {
                     // 이제, 아래와 같이 품사분석을 진행합니다.
-                    Sentence sentence = tagger.tagSentence(sent);
+                    List<Sentence> sentences = tagger.jTag(sent);
 
-                    // 아래와 같이, 의존관계분석을 진행합니다.
-                    // Sentence 객체를 넣었으므로, 해당 객체에 변경사항이 기록됩니다.
-                    parser.parse(sentence);
+                    for (Sentence tagged : sentences) {
+                        // 아래와 같이, 의존관계분석을 진행합니다.
+                        // Sentence 객체를 넣었으므로, 해당 객체에 변경사항이 기록됩니다.
+                        parser.parse(tagged);
 
-                    System.out.println(sentence.treeString());
-                    System.out.println();
+                        System.out.println(tagged.treeString());
+                        System.out.println();
+                    }
                 }
             }
         } while (!line.isEmpty());

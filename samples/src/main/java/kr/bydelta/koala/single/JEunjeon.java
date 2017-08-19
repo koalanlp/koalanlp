@@ -39,7 +39,7 @@ public class JEunjeon {
                 System.out.println("품사 부착...");
 
                 // 문단 단위를 Tagging하는 경우:
-                List<Sentence> paragraph = tagger.jTagParagraph(line);
+                List<Sentence> paragraph = tagger.jTag(line);
                 // 1개 문장인 경우는, 아래와 같습니다.
                 // Sentence sent = tagger.tagSentence(line);
 

@@ -26,9 +26,12 @@ object ImplicitEx {
           sent =>
             println("품사 부착...")
             val tagged = sent.toTagged
-            println(tagged.singleLineString)
-            println("의존 구문 분석...")
-            println(tagged.toParsed.treeString)
+            tagged.foreach {
+              line =>
+                println(line.singleLineString)
+                println("의존 구문 분석...")
+                println(line.toParsed.treeString)
+            }
         }
       }
     } while (line.nonEmpty)

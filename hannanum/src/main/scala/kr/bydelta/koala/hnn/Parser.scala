@@ -30,9 +30,12 @@ class Parser extends CanDepParse {
     */
   private lazy val conv: Converter = new Converter
 
-  override def parse(sentence: String): Sentence = {
-    val taggedRaw = tagger.tagSentenceRaw(sentence)
-    convert(taggedRaw)
+  override def parse(sentence: String): Seq[Sentence] = {
+    tagger.tagParagraphRaw(sentence).map(convert)
+  }
+
+  override def parse(sentence: Sentence): Sentence = {
+    convert(deParse(sentence))
   }
 
   /**
@@ -111,10 +114,6 @@ class Parser extends CanDepParse {
         }
     }
     sentence
-  }
-
-  override def parse(sentence: Sentence): Sentence = {
-    convert(deParse(sentence))
   }
 
   /**

@@ -1,5 +1,6 @@
 package kr.bydelta.koala.test.pack
 
+import kr.bydelta.koala.data.Sentence
 import kr.bydelta.koala.eunjeon.{Dictionary, Tagger}
 import kr.bydelta.koala.test.core.TaggerSpec
 import kr.bydelta.koala.traits.{CanCompileDict, CanTag}
@@ -28,7 +29,7 @@ class EunjeonTaggerSpec extends TaggerSpec {
   override def tagParaByOrig(str: String): Seq[String] = Seq.empty
 
   override def tagSentByKoala(str: String, tagger: CanTag[_]): (String, String) = {
-    val tagged = tagger.tagSentence(str)
+    val tagged = Sentence(tagger.tag(str).flatten)
     val tag = tagged.map(_.map(_.surface).mkString("+")).mkString(" ")
     val surface = tagged.surfaceString()
     surface -> tag
