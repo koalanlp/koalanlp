@@ -185,7 +185,7 @@ package object util {
   }
 
   private def harmony(front: Seq[Char], rest: Seq[Char]) =
-    if (!rest.head.isCompleteHangul || !front.head.isCompleteHangul)
+    if (!rest.head.isCompleteHangul || (front.nonEmpty && !front.head.isCompleteHangul))
       rest
     else if (front.isEmpty) {
       val restJung = HanSecondList(rest.head.getJungsungCode)
