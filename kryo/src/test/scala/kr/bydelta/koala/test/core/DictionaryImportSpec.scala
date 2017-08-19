@@ -36,10 +36,8 @@ object DictionaryImportSpec extends Specification {
       Result.unit {
         dictionaries.combinations(2).foreach {
           set =>
-            if (set.last != ADict)
-              Try(set.head.importFrom(set.last, _ == POS.NNP, fastAppend = true)) must beSuccessfulTry
-            if (set.head != ADict)
-              Try(set.last.importFrom(set.head, _ == POS.NNP, fastAppend = true)) must beSuccessfulTry
+            Try(set.head.importFrom(set.last, _ == POS.NNP, fastAppend = true)) must beSuccessfulTry
+            Try(set.last.importFrom(set.head, _ == POS.NNP, fastAppend = true)) must beSuccessfulTry
         }
       }
     }
