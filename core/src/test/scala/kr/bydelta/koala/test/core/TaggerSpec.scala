@@ -40,11 +40,11 @@ trait TaggerSpec extends Specification with Examples {
   }
 
   def expectCorrectParses(str: Seq[String]) = {
-    print("T")
     val tagger = getTagger
     val single = str.map(s => tagSentByKoala(s, tagger))
     val multi = str.par.map {
       s =>
+        print("T")
         val t = getTagger
         tagSentByKoala(s, t)
     }

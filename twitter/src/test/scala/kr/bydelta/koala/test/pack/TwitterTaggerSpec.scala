@@ -4,6 +4,7 @@ import kr.bydelta.koala.test.core.TaggerSpec
 import kr.bydelta.koala.traits.{CanCompileDict, CanTag}
 import kr.bydelta.koala.twt.{Dictionary, Tagger}
 import org.openkoreantext.processor.OpenKoreanTextProcessor
+import org.openkoreantext.processor.util.KoreanPos
 import org.specs2.execute.Result
 
 /**
@@ -14,7 +15,11 @@ class TwitterTaggerSpec extends TaggerSpec {
   override def tagSentByOrig(str: String): (String, String) = {
     val original = OpenKoreanTextProcessor.tokenize(OpenKoreanTextProcessor.normalize(str))
 
-    val tag = original.map(w => w.text + "/" + w.pos).mkString(" ").replaceAll("[ ]{2,}", "##").replaceAll(" ", "+").replaceAll("##", " ")
+    val tag = original.map {
+      w =>
+        if (w.pos != KoreanPos.Space) w.text + "/" + w.pos
+        else w.text
+    }.mkString(" ").replaceAll("[ ]{2,}", "##").replaceAll(" ", "+").replaceAll("##", " ")
     "" -> tag
   }
 

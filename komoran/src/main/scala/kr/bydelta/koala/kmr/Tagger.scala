@@ -17,9 +17,7 @@ class Tagger extends CanTag[KomoranResult] {
     * 코모란 분석기 객체.
     */
   lazy val komoran = {
-    Dictionary.extractResource()
-    val komoran = new Komoran()
-
+    val komoran = Tagger.komoran
     if (Dictionary.userDict.exists())
       komoran.setUserDic(Dictionary.userDict.getAbsolutePath)
     komoran
@@ -148,6 +146,14 @@ class Tagger extends CanTag[KomoranResult] {
   * 코모란 분석기의 Companion object.
   */
 private[koala] object Tagger {
+  /**
+    * 코모란 분석기 객체.
+    */
+  private lazy val komoran = {
+    Dictionary.extractResource()
+    val komoran = new Komoran()
+    komoran
+  }
   private val quoteRegex = "(?U)[\'\"]{1}".r
   private val openParenRegex = "(?U)[\\(\\[\\{<〔〈《「『【‘“]{1}".r
   private val closeParenRegex = "(?U)[\\)\\]\\}>〕〉》」』】’”]{1}".r
