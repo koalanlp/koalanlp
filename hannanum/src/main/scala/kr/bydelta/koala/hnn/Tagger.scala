@@ -48,7 +48,9 @@ final class Tagger extends CanTag[Sentence] {
       try {
         Dictionary synchronized {
           workflow.analyze(text)
-          workflow.getResultOfSentence(new Sentence(0, 0, false))
+          val sent = workflow.getResultOfSentence(new Sentence(0, 0, false))
+          if (sent.isEndOfDocument) sent
+          else throw new IllegalStateException("This is not a single sentence!")
         }
       } catch {
         case e: Throwable =>
@@ -99,19 +101,19 @@ final class Tagger extends CanTag[Sentence] {
     * @return 문장분리 결과.
     */
   @tailrec
-  private def retrieveSentences(acc: ArrayBuffer[KSent] = ArrayBuffer()): ArrayBuffer[KSent] = {
+  private def retrieveSentences(acc: ArrayBuffer[Sentence] = ArrayBuffer()): ArrayBuffer[KSent] = {
     (try {
       Some(workflow.getResultOfSentence(new Sentence(0, 0, false)))
     } catch {
       case _: Throwable => None.asInstanceOf[Sentence]
     }) match {
       case Some(sent: Sentence) if sent.getEojeols != null =>
-        acc += convert(sent)
+        acc += sent
         if (!sent.isEndOfDocument)
           retrieveSentences(acc)
         else
-          acc
-      case _ => acc
+          acc.map(convert)
+      case _ => acc.map(convert)
     }
   }
 }
