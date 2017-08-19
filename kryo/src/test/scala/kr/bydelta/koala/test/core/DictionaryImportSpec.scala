@@ -1,6 +1,7 @@
 package kr.bydelta.koala.test.core
 
 import kr.bydelta.koala.POS
+import kr.bydelta.koala.arirang.{Dictionary => ADict}
 import kr.bydelta.koala.eunjeon.{Dictionary => EDict}
 import kr.bydelta.koala.hnn.{Dictionary => HDict}
 import kr.bydelta.koala.kkma.{Dictionary => KDict}
@@ -31,12 +32,14 @@ object DictionaryImportSpec extends Specification {
     }
 
     "not throw exception during import" in {
-      val dictionaries = Seq(EDict, HDict, RDict, KDict, TDict)
+      val dictionaries = Seq(EDict, HDict, RDict, KDict, TDict, ADict)
       Result.unit {
         dictionaries.combinations(2).foreach {
           set =>
-            Try(set.head.importFrom(set.last, _ == POS.NNP, fastAppend = true)) must beSuccessfulTry
-            Try(set.last.importFrom(set.head, _ == POS.NNP, fastAppend = true)) must beSuccessfulTry
+            if (set.last != ADict)
+              Try(set.head.importFrom(set.last, _ == POS.NNP, fastAppend = true)) must beSuccessfulTry
+            if (set.head != ADict)
+              Try(set.last.importFrom(set.head, _ == POS.NNP, fastAppend = true)) must beSuccessfulTry
         }
       }
     }

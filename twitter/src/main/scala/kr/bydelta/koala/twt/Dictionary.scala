@@ -2,7 +2,6 @@ package kr.bydelta.koala.twt
 
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.traits.CanCompileDict
-import kr.bydelta.koala.{fromTwtTag, tagToTwt}
 import org.openkoreantext.processor.util.{KoreanDictionaryProvider, KoreanPos}
 
 import scala.collection.JavaConverters._

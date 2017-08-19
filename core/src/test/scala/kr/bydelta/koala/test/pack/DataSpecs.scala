@@ -14,9 +14,9 @@ import scala.util.Random
 class DataSpecs extends Specification {
   "Morpheme" should {
     "provide correct equality" in {
-      val morph1 = Morpheme("밥", "NNP", fromKKMATag("NNP"))
-      val morph2 = Morpheme("밥", "ncn", fromHNNTag("ncn"))
-      val morph3 = Morpheme("밥", "NNG", fromEunjeonTag("NNG"))
+      val morph1 = Morpheme("밥", "NNP", POS.NNP)
+      val morph2 = Morpheme("밥", "ncn", POS.NNP)
+      val morph3 = Morpheme("밥", "NNG", POS.NNG)
 
       (morph1 == morph2) must beFalse
       (morph2 == morph3) must beTrue
@@ -24,7 +24,7 @@ class DataSpecs extends Specification {
       morph1.isModifier must beFalse
       morph1.isNoun must beTrue
 
-      val morph4: Morpheme = Morpheme("은", "JX", fromEunjeonTag("JX"))
+      val morph4: Morpheme = Morpheme("은", "JX", POS.JX)
       morph4.isJosa must beTrue
       morph4.isPredicate must beFalse
 
@@ -115,88 +115,6 @@ class DataSpecs extends Specification {
 
       val concated = sent ++ sent
       concated must beAnInstanceOf[Sentence]
-    }
-  }
-
-  "TagConversion" should {
-    "convert tags correctly" in {
-      val toLC = (x: String) => x.toLowerCase
-      val toUC = (x: String) => x.toUpperCase
-      val fromOrder = Seq(fromKKMATag(_), toLC.andThen(fromHNNTag), fromEunjeonTag(_),
-        fromTwtTag(_), fromKomoranTag(_))
-      val toOrder = Seq(tagToKKMA(_), (tagToHNN _).andThen(toUC), tagToEunjeon(_),
-        tagToTwt(_), tagToKomoran(_))
-      val tagMap = Map(
-        //통합->꼬꼬마,한나눔,은전,트위터,코모란
-        "NNG" -> Seq("NNG", "<NCPA\n<NCPS\nNCN\n<NCR", "NNG", "Noun", "NNG"),
-        "NNP" -> Seq("NNP", "<NQPA\n<NQPB\n<NQPC\nNQQ", "NNP", "ProperNoun", "NNP"),
-        "NNB" -> Seq("NNB", "NBN\n<NBS", "NNB", ">Noun", "NNB"),
-        "NNM" -> Seq("NNM", "NBU", "NNBC", ">Noun", ">NNB"),
-        "NR" -> Seq("NR", "NNC\n<NNO", "NR", "Number", "NR"),
-        "NP" -> Seq("NP", "<NPP\nNPD", "NP", ">Noun", "NP"),
-        "VV" -> Seq("VV", "<PVD\nPVG", "VV", "Verb", "VV"),
-        "VA" -> Seq("VA", "<PAD\nPAA", "VA", "Adjective", "VA"),
-        "VX" -> Seq("VXV\n<VXA", "PX", "VX", ">Verb", "VX"),
-        "VCP" -> Seq("VCP", "JP", "VCP", ">Verb", "VCP"),
-        "VCN" -> Seq("VCN", ">PAA", "VCN", ">Verb", "VCN"),
-        "MM" -> Seq("MDT\n<MDN", "<MMD\nMMA", "MM", "Modifier\n<Determiner", "MM"),
-        "MAG" -> Seq("MAG", "<MAD\nMAG", "MAG", "Adverb", "MAG"),
-        "MAJ" -> Seq("MAC", "MAJ", "MAJ", ">Adverb", "MAJ"),
-        "IC" -> Seq("IC", "II", "IC", "Exclamation", "IC"),
-        "JKS" -> Seq("JKS", "JCS", "JKS", ">Josa", "JKS"),
-        "JKC" -> Seq("JKC", "JCC", "JKC", ">Josa", "JKC"),
-        "JKG" -> Seq("JKG", "JCM", "JKG", ">Josa", "JKG"),
-        "JKO" -> Seq("JKO", "JCO", "JKO", ">Josa", "JKO"),
-        "JKB" -> Seq("JKM", "JCA", "JKB", ">Josa", "JKB"),
-        "JKV" -> Seq("JKI", "JCV", "JKV", ">Josa", "JKV"),
-        "JKQ" -> Seq("JKQ", "JCR", "JKQ", ">Josa", "JKQ"),
-        "JC" -> Seq("JC", "JCT\n<JCJ", "JC", "Conjunction", "JC"),
-        "JX" -> Seq("JX", "<JXC\nJXF", "JX", "Josa", "JX"),
-        "EP" -> Seq("<EPH\nEPT\n<EPP", "EP", "EP", "PreEomi", "EP"),
-        "EF" -> Seq("EFN\n<EFQ\n<EFO\n<EFA\n<EFI\n<EFR", "EF", "EF", "Eomi", "EF"),
-        "EC" -> Seq("ECE\n<ECD\n<ECS", "ECC\n<ECS\n<ECX", "EC", ">Eomi", "EC"),
-        "ETN" -> Seq("ETN", "ETN", "ETN", ">Eomi", "ETN"),
-        "ETM" -> Seq("ETD", "ETM", "ETM", ">Eomi", "ETM"),
-        "XPN" -> Seq("XPN", "<XP\n<XPN", "XPN", ">Unknown", "XPN"),
-        "XPV" -> Seq("XPV", "<XPV", ">XR", "VerbPrefix", ">XR"),
-        "XSN" -> Seq("XSN", "<XSNU\n<XSNA\n<XSNCA\n<XSNCC\n<XSNS\n<XSNP\nXSNX", "XSN", ">Suffix", "XSN"),
-        "XSV" -> Seq("XSV", "<XSVV\n<XSVA\nXSVN", "XSV", ">Suffix", "XSV"),
-        "XSA" -> Seq("XSA", "<XSMS\nXSMN", "XSA", ">Suffix", "XSA"),
-        "XSM" -> Seq("XSM", "<XSAM\nXSAS", "", ">Suffix", ""),
-        "XSO" -> Seq("XSO", "", "", "Suffix", ""),
-        "XR" -> Seq("XR", "", "XR", "", "XR"),
-        "SF" -> Seq("SF", "SF", "SF", "Punctuation", "SF"),
-        "SP" -> Seq("SP", "SP", "SC", ">Others", "SP"),
-        "SS" -> Seq("SS", "SL\n<SR", "SSO\n<SSC", ">Others", "SS"),
-        "SE" -> Seq("SE", "SE", "SE", ">Others", "SE"),
-        "SY" -> Seq("<SO\nSW", "<SD\n<SU\nSY", "SY", "<CashTag\nOthers", "<SO\nSW"),
-        "UN" -> Seq("UN", "", ">UNKNOWN", ">Unknown", ">NA"),
-        "UV" -> Seq("UV", "", ">UNKNOWN", ">Unknown", ">NA"),
-        "UE" -> Seq("UE", "", "UNKNOWN", "Unknown", "NA"),
-        "SL" -> Seq("OL\n<OH", "F", "SL\n<SH", "<Alpha\nForeign", "SL\n<SH"),
-        "SN" -> Seq("ON", ">NNC", "SN", ">Number", "SN")
-      )
-
-      Result.unit {
-        tagMap.foreach {
-          case (iTag, tags) =>
-            val iPOS = POS.withName(iTag)
-            tags.zip(fromOrder.zip(toOrder)).foreach {
-              case (list, (from, to)) =>
-                if (list.nonEmpty) {
-                  list.split("\n").foreach {
-                    case tag if tag startsWith "<" =>
-                      from(tag.substring(1)) must_== iPOS
-                    case tag if tag startsWith ">" =>
-                      to(iPOS) must_== tag.substring(1)
-                    case tag =>
-                      from(tag) must_== iPOS
-                      to(iPOS) must_== tag
-                  }
-                }
-            }
-        }
-      }
     }
   }
 

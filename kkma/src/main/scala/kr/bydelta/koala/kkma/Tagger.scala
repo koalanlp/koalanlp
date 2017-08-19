@@ -6,7 +6,6 @@ package kr.bydelta.koala.kkma
 
 import kr.bydelta.koala
 import kr.bydelta.koala.data.Word
-import kr.bydelta.koala.fromKKMATag
 import kr.bydelta.koala.traits.CanTag
 import org.snu.ids.ha.ma._
 
@@ -48,6 +47,10 @@ final class Tagger(logPath: String = "kkma.log") extends CanTag[Sentence] {
       }
     )
 
+  override def tagParagraph(text: String): Seq[koala.data.Sentence] = tagParagraphRaw(text).map(convert)
+
+  override def tagSentenceRaw(text: String): Sentence = tagParagraphRaw(text).head
+
   /**
     * 변환되지않은, 분석결과를 반환.
     *
@@ -68,10 +71,6 @@ final class Tagger(logPath: String = "kkma.log") extends CanTag[Sentence] {
         )
         )
     ).asScala
-
-  override def tagParagraph(text: String): Seq[koala.data.Sentence] = tagParagraphRaw(text).map(convert)
-
-  override def tagSentenceRaw(text: String): Sentence = tagParagraphRaw(text).head
 
   @throws[Throwable]
   override protected def finalize() {

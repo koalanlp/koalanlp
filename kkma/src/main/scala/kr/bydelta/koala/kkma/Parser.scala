@@ -1,6 +1,5 @@
 package kr.bydelta.koala.kkma
 
-import kr.bydelta.koala._
 import kr.bydelta.koala.data.{Sentence => KSent}
 import kr.bydelta.koala.traits.CanDepParse
 import org.snu.ids.ha.ma.{Eojeol, MCandidate, MExpression, Sentence}
@@ -25,6 +24,10 @@ class Parser extends CanDepParse {
       case _ =>
         KSent(Seq())
     }
+
+  override def parse(sentence: KSent): KSent = {
+    parseRaw(deParse(sentence), sentence)
+  }
 
   /**
     * 꼬꼬마 형태소분석 결과를 토대로 의존구문분석 진행
@@ -62,10 +65,6 @@ class Parser extends CanDepParse {
         headWord.addDependant(thisWord, tag, rawTag)
     }
     tagged
-  }
-
-  override def parse(sentence: KSent): KSent = {
-    parseRaw(deParse(sentence), sentence)
   }
 
   /**

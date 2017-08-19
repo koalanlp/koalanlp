@@ -29,7 +29,7 @@ trait TaggerSpec extends Specification with Examples {
     if (oSurface.nonEmpty)
       tSurface must_== oSurface
 
-    tSurface.replaceAll("\\s+", "") must_== str.replaceAll("\\s+", "")
+    tSurface.replaceAll("[\\s\\.]+", "") must_== str.replaceAll("[\\s\\.]+", "")
   }
 
   def tagSentByKoala(str: String, tagger: CanTag[_]): (String, String) = {
@@ -65,6 +65,8 @@ trait TaggerSpec extends Specification with Examples {
   def expectNonEmptyDict: Result
 
   def isSentenceSplitterImplemented: Boolean
+
+  def isParagraphImplemented: Boolean = true
 
   "Tagger" should {
     "handle empty sentence" in {
@@ -108,7 +110,7 @@ trait TaggerSpec extends Specification with Examples {
         splits.head mustEqual sentMap.head
         splits.last mustEqual sentMap.last
       }
-    } else {
+    } else if (isParagraphImplemented) {
       "tag paragraph" in {
         print("P")
         val tagger = getTagger
@@ -121,6 +123,10 @@ trait TaggerSpec extends Specification with Examples {
             splits.map(_.map(_.map(_.surface).mkString("+"))
               .mkString(" ")).mkString("\n") must_== orig.mkString("\n")
         }
+      }
+    } else {
+      "tag pargraph" in {
+        Result.unit(())
       }
     }
   }

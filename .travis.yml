@@ -11,6 +11,7 @@ script:
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "kkma/test"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "komoran/test"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "twitter/test"
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "arirang/test"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *.pack.*"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *.core.*"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "kryo/test"

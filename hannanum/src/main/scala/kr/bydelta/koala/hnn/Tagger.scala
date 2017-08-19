@@ -8,7 +8,6 @@ import kaist.cilab.jhannanum.plugin.supplement.MorphemeProcessor.UnknownMorphPro
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.InformalSentenceFilter.InformalSentenceFilter
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.SentenceSegmentor.SentenceSegmentor
 import kr.bydelta.koala.data.{Morpheme, Word, Sentence => KSent}
-import kr.bydelta.koala.fromHNNTag
 import kr.bydelta.koala.helper.{SafeChartMorphAnalyzer, SafeHMMTagger}
 import kr.bydelta.koala.traits.CanTag
 

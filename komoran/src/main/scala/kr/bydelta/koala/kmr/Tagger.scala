@@ -1,9 +1,9 @@
 package kr.bydelta.koala.kmr
 
+import kr.bydelta.koala.POS
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.traits.CanTag
 import kr.bydelta.koala.util.{reduceVerbApply, reunionKorean}
-import kr.bydelta.koala.{POS, fromKomoranTag}
 import kr.co.shineware.nlp.komoran.core.Komoran
 import kr.co.shineware.nlp.komoran.model.KomoranResult
 

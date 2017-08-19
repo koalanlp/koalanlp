@@ -58,15 +58,15 @@ package object custom {
   }
 
   final def dissembleKorean(seq: Seq[Char]) = {
-    seq.flatMap(_.toDissembledSeq.flatMap{
-      c =>
-        if (c.isJungsungJamo){
-          c match {
-              \\ ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅜㅝㅞㅟ
-            case '\u1162': \\ ㅑ
-              \\
-          }
-        }else Seq(c)
-    })
+//    seq.flatMap(_.toDissembledSeq.flatMap{
+//      c =>
+//        if (c.isJungsungJamo){
+//          c match {
+//              \\ ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅜㅝㅞㅟ
+//            case '\u1162': \\ ㅑ
+//              \\
+//          }
+//        }else Seq(c)
+//    })
   }
 }

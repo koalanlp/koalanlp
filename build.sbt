@@ -6,14 +6,14 @@ concurrentRestrictions in Global := Seq(Tags.limit(Tags.Test, 1))
 
 lazy val root = (project in file("."))
   .enablePlugins(ScalaUnidocPlugin, JavaUnidocPlugin)
-  .aggregate(core, kkma, hannanum, twitter, komoran, eunjeon, kryo, custom)
+  .aggregate(core, kkma, hannanum, twitter, komoran, eunjeon, kryo, arirang)
   .settings(
     publishArtifact := false,
     packagedArtifacts := Map.empty,
     publishLocal := {},
     publish := {},
-    unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples, server),
-    unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples, server)
+    unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples, server, custom),
+    unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples, server, custom)
   ).settings(aggregate in update := true)
 lazy val core = (project in file("core"))
   .enablePlugins(GenJavadocPlugin)
@@ -97,7 +97,7 @@ lazy val komoran = (project in file("komoran"))
 
 lazy val samples = (project in file("samples"))
   .settings(projectWithConfig("samples"): _*)
-  .dependsOn(eunjeon, twitter, komoran, kkma, hannanum, server)
+  .dependsOn(eunjeon, twitter, komoran, kkma, hannanum, server, arirang)
 
 
 lazy val server = (project in file("server"))
@@ -119,13 +119,13 @@ lazy val kryo = (project in file("kryo"))
     libraryDependencies += "com.twitter" %% "chill" % "0.9.2"
   )
   .dependsOn(core,
-    kkma % "test", twitter % "test", komoran % "test", hannanum % "test", eunjeon % "test")
+    kkma % "test", twitter % "test", komoran % "test", hannanum % "test", eunjeon % "test", arirang % "test")
 lazy val custom = (project in file("custom"))
   .settings(projectWithConfig("custom"))
   .settings(
     libraryDependencies ++= Seq(
-      "org.apache.opennlp" % "opennlp-tools" % "[1.8,)",
-      "org.deeplearning4j" % "deeplearning4j-core" % "[0.9,)"
+      "org.apache.opennlp" % "opennlp-tools" % "[1.8,)"
+      //      "org.deeplearning4j" % "deeplearning4j-core" % "[0.9,)"
     )
   ).dependsOn(core % "test->test;compile->compile")
 
