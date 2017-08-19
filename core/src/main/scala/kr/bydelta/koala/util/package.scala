@@ -100,14 +100,14 @@ package object util {
           harmony(verbRev, (next - 6 * JUNGSUNG_RANGE).toChar +: rest.tail)
       else if (verbStr == "푸" && startsWithUh(next))
         (next + 6 * JUNGSUNG_RANGE).toChar +: rest.tail
-      else if (char == '르' && (startsWithAh(next) || startsWithUh(next)))
+      else if (char == '르' && (startsWithAh(next) || startsWithUh(next)) && verb.length > 1)
         verbRev.tail.tail.reverse ++: ((verbRev.tail.head + 8).toChar +:
           harmony(verbRev.tail, (next - 6 * JUNGSUNG_RANGE).toChar +: rest.tail))
       else if (char == '하' && (startsWithAh(next) || startsWithUh(next)))
         verb ++: harmony(Seq('어'), (next + 2 * JONGSUNG_RANGE).toChar +: rest.tail) //force "ㅕ"
-      else if (isVerb && char == '가' && next == '아' && (rest.tail.head - rest.tail.head.getJongsungCode) == '라')
+      else if (isVerb && char == '가' && next == '아' && rest.length > 1 && (rest.tail.head - rest.tail.head.getJongsungCode) == '라')
         verb ++: ('거' +: rest.tail)
-      else if (isVerb && char == '오' && next == '아' && (rest.tail.head - rest.tail.head.getJongsungCode) == '라')
+      else if (isVerb && char == '오' && next == '아' && rest.length > 1 && (rest.tail.head - rest.tail.head.getJongsungCode) == '라')
         verb ++: ('너' +: rest.tail)
       else if (verbStr == "다" && restStr == "아")
         "다오".toSeq
@@ -185,7 +185,7 @@ package object util {
   }
 
   private def harmony(front: Seq[Char], rest: Seq[Char]) =
-    if (!rest.head.isCompleteHangul || !front.head.isCompleteHangul)
+    if (!rest.head.isCompleteHangul || (front.nonEmpty && !front.head.isCompleteHangul))
       rest
     else if (front.isEmpty) {
       val restJung = HanSecondList(rest.head.getJungsungCode)

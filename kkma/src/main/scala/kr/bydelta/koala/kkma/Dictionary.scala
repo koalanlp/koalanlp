@@ -1,7 +1,6 @@
 package kr.bydelta.koala.kkma
 
 import kr.bydelta.koala.POS.POSTag
-import kr.bydelta.koala._
 import kr.bydelta.koala.helper.UserDicReader
 import kr.bydelta.koala.traits.CanCompileDict
 import org.snu.ids.ha.dic.{RawDicFileReader, SimpleDicFileReader, Dictionary => Dict}
@@ -35,10 +34,17 @@ object Dictionary extends CanCompileDict {
 
   override def items: Set[(String, POSTag)] = this synchronized {
     userdic.reset()
-    userdic.map {
+    userdic.flatMap {
       line =>
-        val segs = line.split('/')
-        segs(0) -> fromKKMATag(segs(1))
+        try {
+          val segs = line.split('/')
+          Some(segs(0) -> fromKKMATag(segs(1)))
+        } catch {
+          case _: NullPointerException | _: ArrayIndexOutOfBoundsException =>
+            None
+          case e: Throwable =>
+            throw e
+        }
     }.toSet
   }
 
