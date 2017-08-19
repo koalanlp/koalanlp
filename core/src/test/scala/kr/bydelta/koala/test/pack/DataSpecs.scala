@@ -15,7 +15,7 @@ class DataSpecs extends Specification {
   "Morpheme" should {
     "provide correct equality" in {
       val morph1 = Morpheme("밥", "NNP", POS.NNP)
-      val morph2 = Morpheme("밥", "ncn", POS.NNP)
+      val morph2 = Morpheme("밥", "ncn", POS.NNG)
       val morph3 = Morpheme("밥", "NNG", POS.NNG)
 
       (morph1 == morph2) must beFalse

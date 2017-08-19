@@ -60,5 +60,5 @@ class HannanumTagConversionSpec extends TagConversionSpec {
 
   override def from(x: String) = fromHNNTag(x)
 
-  override def to(x: POSTag): String = tagToHNN(x)
+  override def to(x: POSTag): String = tagToHNN(x).toUpperCase
 }
