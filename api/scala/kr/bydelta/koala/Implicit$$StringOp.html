@@ -155,6 +155,14 @@
                         </a>
                       </li><li class="current-entities indented4">
                         <span class="separator"></span>
+                        <a class="class" href="Implicit$$SentenceSeqOp.html" title="Sentence Sequence operation
+"></a>
+                        <a href="Implicit$$SentenceSeqOp.html" title="Sentence Sequence operation
+">
+                          SentenceSeqOp
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
                         <a class="class" href="" title="String operation
 "></a>
                         <a href="" title="String operation
@@ -537,9 +545,9 @@
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="kr.bydelta.koala.Implicit.StringOp#toParsed" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toParsed(implicitparser:kr.bydelta.koala.traits.CanDepParse):kr.bydelta.koala.data.Sentence"></a><a id="toParsed(CanDepParse):Sentence"></a>
+      <a id="toParsed(implicitparser:kr.bydelta.koala.traits.CanDepParse):Seq[kr.bydelta.koala.data.Sentence]"></a><a id="toParsed(CanDepParse):Seq[Sentence]"></a>
       <span class="permalink">
-      <a href="../../../kr/bydelta/koala/Implicit$$StringOp.html#toParsed(implicitparser:kr.bydelta.koala.traits.CanDepParse):kr.bydelta.koala.data.Sentence" title="Permalink">
+      <a href="../../../kr/bydelta/koala/Implicit$$StringOp.html#toParsed(implicitparser:kr.bydelta.koala.traits.CanDepParse):Seq[kr.bydelta.koala.data.Sentence]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -548,7 +556,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toParsed</span><span class="params">(<span class="implicit">implicit </span><span name="parser">parser: <a href="traits/CanDepParse.html" class="extype" name="kr.bydelta.koala.traits.CanDepParse">CanDepParse</a></span>)</span><span class="result">: <a href="data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a></span>
+        <span class="name">toParsed</span><span class="params">(<span class="implicit">implicit </span><span name="parser">parser: <a href="traits/CanDepParse.html" class="extype" name="kr.bydelta.koala.traits.CanDepParse">CanDepParse</a></span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
       </span>
       
       <p class="shortcomment cmt">Parse given sentence
@@ -571,9 +579,9 @@
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="kr.bydelta.koala.Implicit.StringOp#toTagged" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toTagged(implicittagger:kr.bydelta.koala.traits.CanTag[_]):kr.bydelta.koala.data.Sentence"></a><a id="toTagged(CanTag[_]):Sentence"></a>
+      <a id="toTagged(implicittagger:kr.bydelta.koala.traits.CanTag[_]):Seq[kr.bydelta.koala.data.Sentence]"></a><a id="toTagged(CanTag[_]):Seq[Sentence]"></a>
       <span class="permalink">
-      <a href="../../../kr/bydelta/koala/Implicit$$StringOp.html#toTagged(implicittagger:kr.bydelta.koala.traits.CanTag[_]):kr.bydelta.koala.data.Sentence" title="Permalink">
+      <a href="../../../kr/bydelta/koala/Implicit$$StringOp.html#toTagged(implicittagger:kr.bydelta.koala.traits.CanTag[_]):Seq[kr.bydelta.koala.data.Sentence]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -582,11 +590,11 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toTagged</span><span class="params">(<span class="implicit">implicit </span><span name="tagger">tagger: <a href="traits/CanTag.html" class="extype" name="kr.bydelta.koala.traits.CanTag">CanTag</a>[_]</span>)</span><span class="result">: <a href="data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a></span>
+        <span class="name">toTagged</span><span class="params">(<span class="implicit">implicit </span><span name="tagger">tagger: <a href="traits/CanTag.html" class="extype" name="kr.bydelta.koala.traits.CanTag">CanTag</a>[_]</span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
       </span>
       
       <p class="shortcomment cmt">Tag given sentence.</p><div class="fullcomment"><div class="comment cmt"><p>Tag given sentence.
-</p></div><dl class="paramcmts block"><dt class="param">tagger</dt><dd class="cmt"><p>Tagger to be used</p></dd><dt>returns</dt><dd class="cmt"><p>Sentence instance (tagged)</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">tagger</dt><dd class="cmt"><p>Tagger to be used</p></dd><dt>returns</dt><dd class="cmt"><p>Sequence of Sentence instances (tagged)</p></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <span class="permalink">

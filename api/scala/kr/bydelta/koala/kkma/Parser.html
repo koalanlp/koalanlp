@@ -530,9 +530,9 @@
       <p class="shortcomment cmt">Sentence 객체의 의존구문을 분석함.</p><div class="fullcomment"><div class="comment cmt"><p>Sentence 객체의 의존구문을 분석함.
 </p></div><dl class="paramcmts block"><dt class="param">sentence</dt><dd class="cmt"><p>의존구문분석을 할 Sentence 객체.</p></dd><dt>returns</dt><dd class="cmt"><p>의존구문분석 결과가 포함된 Sentence 객체. (입력값과 동일한 객체)</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.kkma.Parser">Parser</a> → <a href="../traits/CanDepParse.html" class="extype" name="kr.bydelta.koala.traits.CanDepParse">CanDepParse</a></dd></dl></div>
     </li><li name="kr.bydelta.koala.kkma.Parser#parse" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="parse(sentence:String):kr.bydelta.koala.data.Sentence"></a><a id="parse(String):Sentence"></a>
+      <a id="parse(sentence:String):Seq[kr.bydelta.koala.data.Sentence]"></a><a id="parse(String):Seq[Sentence]"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/kkma/Parser.html#parse(sentence:String):kr.bydelta.koala.data.Sentence" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/kkma/Parser.html#parse(sentence:String):Seq[kr.bydelta.koala.data.Sentence]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -541,11 +541,28 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">parse</span><span class="params">(<span name="sentence">sentence: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a></span>
+        <span class="name">parse</span><span class="params">(<span name="sentence">sentence: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
       </span>
       
       <p class="shortcomment cmt">String 텍스트의 의존구문을 분석함.</p><div class="fullcomment"><div class="comment cmt"><p>String 텍스트의 의존구문을 분석함.
-</p></div><dl class="paramcmts block"><dt class="param">sentence</dt><dd class="cmt"><p>의존구문분석을 할 String.</p></dd><dt>returns</dt><dd class="cmt"><p>의존구문분석 결과가 포함된 Sentence 객체.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.kkma.Parser">Parser</a> → <a href="../traits/CanDepParse.html" class="extype" name="kr.bydelta.koala.traits.CanDepParse">CanDepParse</a></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">sentence</dt><dd class="cmt"><p>의존구문분석을 할 String.</p></dd><dt>returns</dt><dd class="cmt"><p>의존구문분석 결과가 포함된 Sentence 객체의 Sequence</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.kkma.Parser">Parser</a> → <a href="../traits/CanDepParse.html" class="extype" name="kr.bydelta.koala.traits.CanDepParse">CanDepParse</a></dd></dl></div>
+    </li><li name="kr.bydelta.koala.traits.CanDepParse#parse" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="parse(sentences:Seq[kr.bydelta.koala.data.Sentence]):Seq[kr.bydelta.koala.data.Sentence]"></a><a id="parse(Seq[Sentence]):Seq[Sentence]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/kkma/Parser.html#parse(sentences:Seq[kr.bydelta.koala.data.Sentence]):Seq[kr.bydelta.koala.data.Sentence]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parse</span><span class="params">(<span name="sentences">sentences: <span class="extype" name="scala.Seq">Seq</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Sentence Sequence의 의존구문을 분석함.</p><div class="fullcomment"><div class="comment cmt"><p>Sentence Sequence의 의존구문을 분석함.
+</p></div><dl class="paramcmts block"><dt class="param">sentences</dt><dd class="cmt"><p>의존구문분석을 할 Sentence Sequence.</p></dd><dt>returns</dt><dd class="cmt"><p>의존구문분석 결과가 포함된 Sentence Sequence. (입력값과 동일한 객체의 Sequence)</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../traits/CanDepParse.html" class="extype" name="kr.bydelta.koala.traits.CanDepParse">CanDepParse</a></dd></dl></div>
     </li><li name="kr.bydelta.koala.kkma.Parser#parser" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="parser:org.snu.ids.ha.sp.Parser"></a>
       <span class="permalink">
