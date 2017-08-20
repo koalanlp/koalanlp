@@ -129,7 +129,7 @@ lazy val custom = (project in file("custom"))
     )
   ).dependsOn(core % "test->test;compile->compile")
 
-val VERSION = "1.7.0-SNAPSHOT"
+val VERSION = "1.7.0"
 
 def projectWithConfig(module: String) =
   Seq(
