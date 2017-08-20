@@ -38,7 +38,7 @@ class ImplicitSpec extends Specification {
       tagged.toParsed.head.root.dependents must containTheSameElementsAs(parser.parse(tagged).head.root.dependents.toSeq)
 
       // Sentence-level
-      tagged.head.toParsed.head.root.dependents must containTheSameElementsAs(parser.parse(tagged.head).head.root.dependents.toSeq)
+      tagged.head.toParsed.root.dependents must containTheSameElementsAs(parser.parse(tagged.head).root.dependents.toSeq)
     }
   }
 }

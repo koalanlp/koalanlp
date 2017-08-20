@@ -21,7 +21,7 @@ object KryoSpec extends Specification {
       val parser = new Parser
       val kryo = KryoWrap.kryo
 
-      val sent = parser.parse(text)
+      val sent = parser.parse(text).head
 
       val tmpFile = new File(System.getProperty("java.io.tmpdir"), "test.sent")
       val output = new Output(new FileOutputStream(tmpFile))

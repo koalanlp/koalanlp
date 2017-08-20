@@ -30,7 +30,7 @@ trait TaggerSpec extends Specification with Examples {
     if (oSurface.nonEmpty)
       tSurface must_== oSurface
 
-    tSurface.replaceAll("[\\s\\.]+", "") must_== str.replaceAll("[\\s\\.]+", "")
+    tSurface.replaceAll("\\s+", "") must_== str.replaceAll("\\s+", "")
   }
 
   def tagSentByKoala(str: String, tagger: CanTag[_]): (String, String) = {
@@ -95,7 +95,7 @@ trait TaggerSpec extends Specification with Examples {
             print("L")
             val splits = tagger.tag(sent)
             if (splits.length != n) {
-              println("NOTMATCHED" + splits)
+              println(" NOTMATCHED " + splits.map(_.singleLineString))
             }
             splits.length must_== n
         }

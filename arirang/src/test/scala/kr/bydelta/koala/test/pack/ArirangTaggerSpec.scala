@@ -21,16 +21,17 @@ class ArirangTaggerSpec extends TaggerSpec {
     tagger.analyze(str, list, false)
     val original = list.asScala.map(_.asScala.maxBy(_.getScore))
 
-    val tag = original.map(_.toString).mkString("").replaceAll("\\([NVZ]\\)", "").replaceAll("\\s+", "")
-    val surface = original.map(_.getSource.trim).filter(_.nonEmpty).mkString(" ")
+    val tag = original.map(_.toString).mkString.replaceAll("[NVZ\\s\\.,\\(\\)]+", "")
 
-    surface -> tag
+    "" -> tag
   }
 
   override def tagSentByKoala(str: String, tagger: CanTag[_]): (String, String) = {
     val tagged = tagger.tagSentence(str)
-    val tag = tagged.map(_.map(m => m.surface + "(" + m.rawTag.last + ")").mkString(",")).mkString("").replaceAll("\\([NVZ]\\)", "").replaceAll("\\s+", "")
+    val tag = tagged.map(_.map(m => m.surface + "(" + m.rawTag.last + ")").mkString(","))
+      .mkString.replaceAll("[NVZ\\s\\.,\\(\\)]+", "")
     val surface = tagged.surfaceString()
+
     surface -> tag
   }
 

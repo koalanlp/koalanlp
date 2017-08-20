@@ -2,6 +2,7 @@ package kr.bydelta.koala.arirang
 
 import java.util
 
+import kr.bydelta.koala.Implicit._
 import kr.bydelta.koala.POS
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.traits.CanTag
@@ -20,31 +21,77 @@ class Tagger extends CanTag[Sentence] {
     if (text.trim.isEmpty) Seq.empty
     else {
       val list = new util.LinkedList[util.List[AnalysisOutput]]()
-      tagger.analyze(text, list, false)
-      splitSentences(convertParagraph(list.asScala.map(_.asScala.maxBy(_.getScore))))
+      tagger.analyze(text.trim, list, false)
+      splitSentences(convertParagraph(text.trim, list.asScala.map(_.asScala.maxBy(_.getScore))))
     }
 
   override private[koala] def convert(result: Sentence): Sentence = result
 
-  private[koala] def convertParagraph(result: Seq[AnalysisOutput]): Sentence = {
-    Sentence(
-      result.filter(_.getSource.trim.nonEmpty).map {
+  private[koala] def convertParagraph(text: String, result: Seq[AnalysisOutput]): Sentence = {
+    var sentence = text
+    var wordlist =
+      result.filter(_.getSource.trim.nonEmpty).flatMap {
         word =>
-          val morphs = interpretOutput(word).flatMap {
-            case m@Morpheme(s, tag) if Tagger.punctuations.findFirstMatchIn(s).isDefined ||
+          val words = ArrayBuffer[Word]()
+          var surface = word.getSource.trim
+          var morphs = Seq[Morpheme]()
+
+          val (sentCurr, sentRemain) = sentence.splitAt(sentence.indexOf(surface))
+          sentence = sentRemain.substring(surface.length)
+
+          if (sentCurr.trim.nonEmpty) {
+            morphs +:= Morpheme(sentCurr.trim, " ", POS.UE)
+            surface = sentCurr + surface
+          }
+          morphs = morphs ++: interpretOutput(word)
+          morphs = morphs.flatMap {
+            // Find Special characters and separate them as morphemes
+            case m@Morpheme(s, tag) if Tagger.SPRegex.findFirstMatchIn(s).isDefined ||
+              Tagger.SFRegex.findFirstMatchIn(s).isDefined ||
               Tagger.filterRegex.findFirstMatchIn(s).isDefined =>
               s.split(Tagger.punctuationsSplit).map {
-                case x if Tagger.punctuations.findFirstMatchIn(x).isDefined =>
+                case x if Tagger.SPRegex.findFirstMatchIn(x).isDefined =>
+                  Morpheme(x, m.rawTag, POS.SP)
+                case x if Tagger.SFRegex.findFirstMatchIn(x).isDefined =>
                   Morpheme(x, m.rawTag, POS.SF)
-                case x if Tagger.filterRegex.findFirstMatchIn(x).isDefined =>
+                case x if Tagger.SSRegex.findFirstMatchIn(x).isDefined =>
                   Morpheme(x, m.rawTag, POS.SS)
-                case x => Morpheme(x, m.rawTag, tag)
+                case x if x.matches("\\s+") =>
+                  Morpheme(x, m.rawTag, POS.TEMP)
+                case x => Morpheme(x.trim, m.rawTag, tag)
               }
             case m => Seq(m)
           }
-          Word(surface = word.getSource.trim, morphemes = morphs)
+
+          // Now separate special characters as words
+          while (morphs.exists(Tagger.checkset)) {
+            val (morph, after) = morphs.splitAt(morphs.indexWhere(Tagger.checkset))
+            val symbol = after.head.surface
+            val (prev, next) = surface.splitAt(surface.indexOf(symbol))
+            if (prev.trim.nonEmpty) {
+              words.append(Word(surface = prev.trim, morphemes = morph))
+            }
+            if (symbol.trim.nonEmpty) {
+              words.append(Word(surface = symbol.trim, morphemes = Seq(after.head)))
+            }
+
+            surface = next.substring(symbol.length)
+            morphs = after.tail
+          }
+
+          if (surface.trim.nonEmpty) {
+            words.append(Word(surface = surface.trim, morphemes = morphs))
+          }
+
+          words
       }
-    )
+
+    if (sentence.trim.nonEmpty) {
+      wordlist :+= Word(surface = sentence.trim,
+        morphemes = Seq(Morpheme(surface = sentence.trim, rawTag = " ", tag = POS.UE)))
+    }
+
+    Sentence(wordlist)
   }
 
   private def interpretOutput(o: AnalysisOutput): Seq[Morpheme] = {
@@ -177,7 +224,6 @@ class Tagger extends CanTag[Sentence] {
                              acc: ArrayBuffer[Sentence] = ArrayBuffer()): Seq[Sentence] =
   if (para.isEmpty) acc
   else {
-    import kr.bydelta.koala.Implicit._
     val rawEndmark = para.indexWhere(_.exists(POS.SF), pos)
     val rawParen = para.indexWhere({
       e =>
@@ -232,13 +278,16 @@ class Tagger extends CanTag[Sentence] {
 }
 
 object Tagger {
-  private val punctuations = "(?U)[,\\.:;\\?\\!\\s]+".r
-  private val punctuationsSplit = "(?U)((?<=[,\\.:;\\?\\!\\s^\'\"\\(\\[\\{<〔〈《「『【‘“\\)\\]\\}>〕〉》」』】’”]+)|" +
-    "(?=[,\\.:;\\?\\!\\s^\'\"\\(\\[\\{<〔〈《「『【‘“\\)\\]\\}>〕〉》」』】’”]+))"
+  private val checkset = Seq(POS.SF, POS.SP, POS.SS, POS.TEMP)
+  private val SFRegex = "(?U)[\\.\\?\\!]+".r
+  private val SPRegex = "(?U)[,:;·/]+".r
+  private val punctuationsSplit = "(?U)((?<=[,\\.:;\\?\\!/·\\s\'\"\\(\\[\\{<〔〈《「『【‘“\\)\\]\\}>〕〉》」』】’”]+)|" +
+    "(?=[,\\.:;\\?\\!/·\\s\'\"\\(\\[\\{<〔〈《「『【‘“\\)\\]\\}>〕〉》」』】’”]+))"
   private val quoteRegex = "(?U)[\'\"]{1}".r
   private val openParenRegex = "(?U)[\\(\\[\\{<〔〈《「『【‘“]{1}".r
   private val closeParenRegex = "(?U)[\\)\\]\\}>〕〉》」』】’”]{1}".r
   private val matchRegex = ("(?U)(\'[^\']*\'|\"[^\"]*\"|\\([^\\(\\)]*\\)|\\[[^\\[\\]]*\\]|\\{[^\\{\\}]*\\}|" +
     "<[^<>]*>|〔[^〔〕]*〕|〈[^〈〉]*〉|《[^《》]*》|「[^「」]*」|『[^『』]*』|【[^【】]*】|‘[^‘’]*’|“[^“”]*”)").r
   private val filterRegex = "(?U)[^\'\"\\(\\[\\{<〔〈《「『【‘“\\)\\]\\}>〕〉》」』】’”]+".r
+  private val SSRegex = "(?U)[\'\"\\(\\[\\{<〔〈《「『【‘“\\)\\]\\}>〕〉》」』】’”]+".r
 }

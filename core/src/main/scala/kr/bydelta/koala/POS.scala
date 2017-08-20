@@ -156,6 +156,8 @@ object POS extends Enumeration {
   /** 숫자 **/
   val SN = Value
 
+  /** 임시기호(내부처리용) **/
+  protected[koala] val TEMP = Value
 
   /**
     * 체언인지 확인한다

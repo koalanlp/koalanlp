@@ -23,9 +23,10 @@ class Tagger extends CanTag[Sentence] {
     komoran
   }
 
-  override def tagParagraphRaw(text: String): Seq[Sentence] = {
-    splitSentences(convertParagraph(komoran.analyze(text)).words)
-  }
+  override def tagParagraphRaw(text: String): Seq[Sentence] =
+    if (text.trim.nonEmpty) {
+      splitSentences(convertParagraph(komoran.analyze(text)).words)
+    } else Seq.empty
 
   override def convert(result: Sentence): Sentence = result
 
