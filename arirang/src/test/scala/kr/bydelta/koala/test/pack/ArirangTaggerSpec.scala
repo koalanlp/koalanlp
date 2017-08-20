@@ -21,7 +21,7 @@ class ArirangTaggerSpec extends TaggerSpec {
     tagger.analyze(str, list, false)
     val original = list.asScala.map(_.asScala.maxBy(_.getScore))
 
-    val tag = original.map(_.toString).mkString("").replaceAll("\\(N\\)", "").replaceAll("\\s+", "")
+    val tag = original.map(_.toString).mkString("").replaceAll("\\([NVZ]\\)", "").replaceAll("\\s+", "")
     val surface = original.map(_.getSource.trim).filter(_.nonEmpty).mkString(" ")
 
     surface -> tag
@@ -29,7 +29,7 @@ class ArirangTaggerSpec extends TaggerSpec {
 
   override def tagSentByKoala(str: String, tagger: CanTag[_]): (String, String) = {
     val tagged = tagger.tagSentence(str)
-    val tag = tagged.map(_.map(m => m.surface + "(" + m.rawTag.last + ")").mkString(",")).mkString("").replaceAll("\\(N\\)", "").replaceAll("\\s+", "")
+    val tag = tagged.map(_.map(m => m.surface + "(" + m.rawTag.last + ")").mkString(",")).mkString("").replaceAll("\\([NVZ]\\)", "").replaceAll("\\s+", "")
     val surface = tagged.surfaceString()
     surface -> tag
   }
@@ -46,7 +46,5 @@ class ArirangTaggerSpec extends TaggerSpec {
 
   override def expectNonEmptyDict: Result = Result.unit(())
 
-  override def isSentenceSplitterImplemented: Boolean = false
-
-  override def isParagraphImplemented: Boolean = false
+  override def isSentenceSplitterImplemented: Boolean = true
 }

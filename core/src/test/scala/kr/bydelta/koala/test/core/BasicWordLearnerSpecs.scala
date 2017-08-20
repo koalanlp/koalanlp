@@ -9,13 +9,15 @@ import kr.bydelta.koala.util.BasicWordLearner
   */
 trait BasicWordLearnerSpecs[X] {
   lazy final val INC_1 = INCLUDED_SET.partition(word => {
-    val morphs = tagger.tagSentence(word).flatMap(_.morphemes)
-    tagger.tagSentence(word).length > 1 && CanLearnWord.ALLOWED_ENDING(morphs.last.tag) &&
+    val words = tagger.tagSentence(word)
+    val morphs = words.flatMap(_.morphemes)
+    words.length > 1 && CanLearnWord.ALLOWED_ENDING(morphs.last.tag) &&
       !morphs.exists(CanLearnWord.DENIED_MORPS) && !isAlphabetPronounced(word)
   })
   lazy final val INC_2 = INCLUDED_SET_2.partition(word => {
-    val morphs = tagger.tagSentence(word).flatMap(_.morphemes)
-    tagger.tagSentence(word).length > 1 && CanLearnWord.ALLOWED_ENDING(morphs.last.tag) &&
+    val words = tagger.tagSentence(word)
+    val morphs = words.flatMap(_.morphemes)
+    words.length > 1 && CanLearnWord.ALLOWED_ENDING(morphs.last.tag) &&
       !morphs.exists(CanLearnWord.DENIED_MORPS) && !isAlphabetPronounced(word)
   })
   final val EXCLUDED_SET: Seq[String] = Seq("등장하는", "요격하는")

@@ -16,11 +16,11 @@ class ImplicitSpec extends Specification {
     import kr.bydelta.koala.Implicit._
 
     "handle empty sentence" in {
-      "".toTagged must_== tagger.tagSentence("")
+      "".toTagged must_== tagger.tag("")
     }
 
     "tag a sentence" in {
-      "고급진 오므라이스를 원한다면, 데미글라스를 올려보아요.".toTagged must_== tagger.tagSentence("고급진 오므라이스를 원한다면, 데미글라스를 올려보아요.")
+      "고급진 오므라이스를 원한다면, 데미글라스를 올려보아요.".toTagged must_== tagger.tag("고급진 오므라이스를 원한다면, 데미글라스를 올려보아요.")
     }
 
     "parse a sentence" in {
@@ -28,12 +28,17 @@ class ImplicitSpec extends Specification {
       val parsed2 = parser.parse("고급진 오므라이스를 원한다면, 데미글라스를 올려보아요.")
 
       parsed1 must_== parsed2
-      parsed1.root.dependents must containTheSameElementsAs(parsed2.root.dependents.toSeq)
+      parsed1.head.root.dependents must containTheSameElementsAs(parsed2.head.root.dependents.toSeq)
     }
 
     "parse after tagging" in {
       val tagged = "고급진 오므라이스를 원한다면, 데미글라스를 올려보아요.".toTagged
-      tagged.toParsed.root.dependents must containTheSameElementsAs(parser.parse(tagged).root.dependents.toSeq)
+
+      // Sequence-level
+      tagged.toParsed.head.root.dependents must containTheSameElementsAs(parser.parse(tagged).head.root.dependents.toSeq)
+
+      // Sentence-level
+      tagged.head.toParsed.head.root.dependents must containTheSameElementsAs(parser.parse(tagged.head).head.root.dependents.toSeq)
     }
   }
 }

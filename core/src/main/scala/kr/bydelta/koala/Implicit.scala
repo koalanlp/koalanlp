@@ -91,4 +91,19 @@ object Implicit {
     def toParsed(implicit parser: CanDepParse) = parser.parse(sent)
   }
 
+  /**
+    * Sentence Sequence operation
+    *
+    * @param sent Sentence Seq
+    */
+  implicit class SentenceSeqOp(sent: Seq[Sentence]) {
+    /**
+      * Parse given sentences
+      *
+      * @param parser Parser to be used
+      * @return Sentence Seq instance (parsed)
+      */
+    def toParsed(implicit parser: CanDepParse) = parser.parse(sent)
+  }
+
 }
