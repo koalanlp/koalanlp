@@ -19,6 +19,7 @@ import kr.bydelta.koala.test.core.Examples
 import org.specs2.execute.Result
 import org.specs2.mutable._
 
+import scala.collection.JavaConverters._
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -116,14 +117,14 @@ class HannanumParserSpec extends Specification with Examples {
       val multithreaded = sents.par.map {
         sent =>
           println(s"Parsing: $sent")
-          new Parser().parse(sent).map(_.treeString).mkString("\n")
+          new Parser().jParse(sent).asScala.map(_.treeString).mkString("\n")
       }.seq.mkString("\n")
 
       val parser = new Parser
       val singlethreaded = sents.map {
         sent =>
           println(s"Parsing: $sent")
-          parser.parse(sent).map(_.treeString).mkString("\n")
+          parser.jParse(sent).map(_.treeString).mkString("\n")
       }.mkString("\n")
 
       multithreaded must_== singlethreaded

@@ -4,6 +4,8 @@ import kr.bydelta.koala.kkma.{Parser, Tagger}
 import org.snu.ids.ha.sp.{Parser => KParser}
 import org.specs2.mutable._
 
+import scala.collection.JavaConverters._
+
 /**
   * Created by bydelta on 16. 7. 26.
   */
@@ -35,7 +37,7 @@ class ImplicitSpec extends Specification {
       val tagged = "고급진 오므라이스를 원한다면, 데미글라스를 올려보아요.".toTagged
 
       // Sequence-level
-      tagged.toParsed.head.root.dependents must containTheSameElementsAs(parser.parse(tagged).head.root.dependents.toSeq)
+      tagged.toParsed.head.root.dependents must containTheSameElementsAs(parser.jParse(tagged.asJava).get(0).root.dependents.toSeq)
 
       // Sentence-level
       tagged.head.toParsed.root.dependents must containTheSameElementsAs(parser.parse(tagged.head).root.dependents.toSeq)
