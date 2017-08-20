@@ -124,7 +124,7 @@ class HannanumParserSpec extends Specification with Examples {
       val singlethreaded = sents.map {
         sent =>
           println(s"Parsing: $sent")
-          parser.jParse(sent).map(_.treeString).mkString("\n")
+          parser.jParse(sent).asScala.map(_.treeString).mkString("\n")
       }.mkString("\n")
 
       multithreaded must_== singlethreaded
