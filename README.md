@@ -79,16 +79,20 @@ Maven을 사용하시는 경우, 다음과 같습니다. `${TAGGER_PACK}`위치�
 <dependency>
   <groupId>kr.bydelta</groupId>
   <artifactId>koalanlp-${TAGGER.PACK}_2.12</artifactId>
-  <version>RELEASE</version>
+  <version>${TAGGER_VER}</version>
 </dependency>
 ```
+
+> [질문] 저는 Java개발자입니다. 왜 패키지명칭에 `_2.12`가 붙나요?
+>
+> KoalaNLP가 Scala에서 개발되었기 때문에, 개발 당시 Scala의 버전인 2.12가 뒤에 붙은 것입니다.
 
 Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 추가하세요.
 ```xml
   <classifier>assembly</classifier>
 ```
 
-예를 들어서, 꼬꼬마 분석기 버전 1.7.0을 추가하고자 한다면, 아래와 같습니다.
+예를 들어서, 꼬꼬마 분석기(koalanlp-kkma) 버전 1.7.0을 추가하고자 한다면, 아래와 같습니다.
 ```xml
 <dependency>
   <groupId>kr.bydelta</groupId>
