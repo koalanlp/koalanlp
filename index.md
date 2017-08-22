@@ -74,12 +74,11 @@ libraryDependencies += "kr.bydelta" %% "koalanlp-kryo" % "latest.release" // Kry
 libraryDependencies += "kr.bydelta" %% "koalanlp-server" % "latest.release" // HTTP 서비스
 ```
 
-Maven을 사용하시는 경우, 다음과 같습니다.
-(버전은 Latest Release 기준입니다. SNAPSHOT을 사용하시려면, `LATEST`를 사용하세요.)
+Maven을 사용하시는 경우, 다음과 같습니다. `${TAGGER_PACK}`위치에는 원하는 품사분석기의 패키지를 써주시고, `${TAGGER_VER}`위치에는 품사분석기의 버전을 써주세요.
 ```xml
 <dependency>
   <groupId>kr.bydelta</groupId>
-  <artifactId>koalanlp-{TAGGER.PACK}_2.12</artifactId>
+  <artifactId>koalanlp-${TAGGER.PACK}_2.12</artifactId>
   <version>RELEASE</version>
 </dependency>
 ```
@@ -87,6 +86,16 @@ Maven을 사용하시는 경우, 다음과 같습니다.
 Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 추가하세요.
 ```xml
   <classifier>assembly</classifier>
+```
+
+예를 들어서, 꼬꼬마 분석기 버전 1.7.0을 추가하고자 한다면, 아래와 같습니다.
+```xml
+<dependency>
+  <groupId>kr.bydelta</groupId>
+  <artifactId>koalanlp-kkma_2.12</artifactId>
+  <classifier>assembly</classifier>
+  <version>1.7.0</version>
+</dependency>
 ```
 
 # 사용방법
