@@ -17,9 +17,9 @@ class Parser extends CanDepParse {
   lazy val tagger = new Tagger
 
   override def parse(sentence: String): Seq[KSent] =
-    tagger.tagParagraphRaw(sentence).map {
+    tagger.tagParagraphOriginal(sentence).map {
       rawSentence =>
-        val tagged = tagger.convert(rawSentence)
+        val tagged = tagger.convertSentence(rawSentence)
         parseRaw(rawSentence, tagged)
     }
 

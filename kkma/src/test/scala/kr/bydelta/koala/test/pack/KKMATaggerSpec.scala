@@ -33,15 +33,8 @@ class KKMATaggerSpec extends TaggerSpec {
     original.map(_.asScala.map(_.asScala.map(_.getString).mkString("+")).mkString(" "))
   }
 
-  override def getTagger: CanTag[_] =
+  override def getTagger: CanTag =
     new Tagger()
-
-  override def getDict: CanCompileDict =
-    Dictionary
-
-  override def expectEmptyDict: Result = Result.unit(())
-
-  override def expectNonEmptyDict: Result = Result.unit(())
 
   override def isSentenceSplitterImplemented: Boolean = false
 }

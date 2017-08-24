@@ -15,9 +15,7 @@ trait TaggerSpec extends Specification with Examples {
 
   def tagParaByOrig(str: String): Seq[String]
 
-  def getTagger: CanTag[_]
-
-  def getDict: CanCompileDict
+  def getTagger: CanTag
 
   def expectCorrectParse(str: String) = {
     print("S")
@@ -33,7 +31,7 @@ trait TaggerSpec extends Specification with Examples {
     tSurface.replaceAll("\\s+", "") must_== str.replaceAll("\\s+", "")
   }
 
-  def tagSentByKoala(str: String, tagger: CanTag[_]): (String, String) = {
+  def tagSentByKoala(str: String, tagger: CanTag): (String, String) = {
     val tagged = Sentence(tagger.tag(str).flatten)
     val tag = tagged.map(_.map(m => m.surface + "/" + m.rawTag).mkString("+")).mkString(" ")
     val surface = tagged.surfaceString()
@@ -60,10 +58,6 @@ trait TaggerSpec extends Specification with Examples {
       }
     }
   }
-
-  def expectEmptyDict: Result
-
-  def expectNonEmptyDict: Result
 
   def isSentenceSplitterImplemented: Boolean
 

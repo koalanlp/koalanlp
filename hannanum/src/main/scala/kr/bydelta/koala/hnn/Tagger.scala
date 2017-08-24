@@ -9,7 +9,7 @@ import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.InformalSenten
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.SentenceSegmentor.SentenceSegmentor
 import kr.bydelta.koala.data.{Morpheme, Word, Sentence => KSent}
 import kr.bydelta.koala.helper.{SafeChartMorphAnalyzer, SafeHMMTagger}
-import kr.bydelta.koala.traits.CanTag
+import kr.bydelta.koala.traits.CanTagOnlyAParagraph
 
 import scala.annotation.tailrec
 import scala.collection.mutable.ArrayBuffer
@@ -17,7 +17,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * 한나눔 품사분석기.
   */
-final class Tagger extends CanTag[Sentence] {
+final class Tagger extends CanTagOnlyAParagraph[Sentence] {
   /** 한나눔 품사분석 Workflow **/
   private lazy val workflow = {
     val workflow = new Workflow
@@ -42,7 +42,7 @@ final class Tagger extends CanTag[Sentence] {
   private lazy val analyzer = new SafeChartMorphAnalyzer
   private[this] val logger = org.log4s.getLogger
 
-  override def tagParagraphRaw(text: String): Seq[Sentence] =
+  override def tagParagraphOriginal(text: String): Seq[Sentence] =
     if (text.trim.isEmpty) Seq()
     else {
       try {
@@ -55,15 +55,9 @@ final class Tagger extends CanTag[Sentence] {
           logger.error(e)("Sentence Tagging failed.")
           throw e
       }
-  }
+    }
 
-  @throws[Throwable]
-  override protected def finalize() {
-    workflow.close()
-    super.finalize()
-  }
-
-  override private[koala] def convert(result: Sentence): KSent =
+  override private[koala] def convertSentence(result: Sentence): KSent =
     KSent(
       result.getEojeols.view.zip(result.getPlainEojeols.view).map {
         case (eojeol, plain) =>

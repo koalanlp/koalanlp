@@ -10,7 +10,7 @@ import scala.collection.JavaConverters._
 /**
   * Created by bydelta on 16. 7. 30.
   */
-class TwitterLearnSpec extends Specification with BasicWordLearnerSpecs[Seq[KoreanToken]] {
+class TwitterLearnSpec extends Specification with BasicWordLearnerSpecs {
   sequential
   def getTagger = new Tagger
   def getDict = Dictionary

@@ -29,7 +29,7 @@ class KomoranTaggerSpec extends TaggerSpec {
     "" -> tag.toString()
   }
 
-  override def tagSentByKoala(str: String, tagger: CanTag[_]): (String, String) = {
+  override def tagSentByKoala(str: String, tagger: CanTag): (String, String) = {
     val tagged = tagger.tagSentence(str)
     val tag = tagged.map(_.map(m => m.surface + "/" + m.rawTag).mkString).mkString(" ")
 
@@ -38,17 +38,8 @@ class KomoranTaggerSpec extends TaggerSpec {
 
   override def tagParaByOrig(str: String): Seq[String] = Seq.empty
 
-  override def getTagger: CanTag[_] =
+  override def getTagger: CanTag =
     new Tagger()
-
-  override def getDict: CanCompileDict =
-    Dictionary
-
-  override def expectEmptyDict: Result =
-    Dictionary.userDict.length() must_== 0l
-
-  override def expectNonEmptyDict: Result =
-    Dictionary.userDict.length() must be_>(0l)
 
   override def isSentenceSplitterImplemented: Boolean = true
 }

@@ -35,7 +35,7 @@ trait Server {
     *
     * @return a tagger
     */
-  def getTagger: CanTag[_]
+  def getTagger: CanTag
 
   /**
     * Parser generator

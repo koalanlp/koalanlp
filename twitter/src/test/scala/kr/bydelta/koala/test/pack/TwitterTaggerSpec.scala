@@ -30,15 +30,8 @@ class TwitterTaggerSpec extends TaggerSpec {
     original.map(_.map(_.text).mkString(" ").replaceAll("[ ]{2,}", "##").replaceAll(" ", "+").replaceAll("##", " "))
   }
 
-  override def getTagger: CanTag[_] =
+  override def getTagger: CanTag =
     new Tagger()
-
-  override def getDict: CanCompileDict =
-    Dictionary
-
-  override def expectEmptyDict: Result = Result.unit(())
-
-  override def expectNonEmptyDict: Result = Result.unit(())
 
   override def isSentenceSplitterImplemented: Boolean = false
 }

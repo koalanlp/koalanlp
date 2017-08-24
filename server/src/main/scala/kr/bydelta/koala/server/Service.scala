@@ -21,7 +21,7 @@ import play.api.libs.json.{JsArray, JsObject, Json}
   * @param dict    Dictionary instance (singleton object)
   */
 class Service(context: ServerContext,
-              val tagger: CanTag[_],
+              val tagger: CanTag,
               val parser: CanDepParse,
               val dict: CanCompileDict) extends RequestHandler(context) {
 

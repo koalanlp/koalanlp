@@ -3,7 +3,7 @@ package kr.bydelta.koala.custom
 import java.io.{File, FileInputStream, InputStream}
 
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
-import kr.bydelta.koala.traits.CanTag
+import kr.bydelta.koala.traits.{CanTag, CanTagOnlyASentence}
 import kr.bydelta.koala.{KoreanStringExtension, POS}
 import opennlp.tools.postag.{POSModel, POSTaggerME}
 
@@ -12,7 +12,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * Created by bydelta on 17. 8. 18.
   */
-class Tagger(model: POSModel) extends CanTag[Sentence] {
+class Tagger(model: POSModel) extends CanTagOnlyASentence[Sentence] {
   private val tag = new POSTaggerME(model)
   private val tokenizer = new POSTaggerME(TOK_MODEL)
 

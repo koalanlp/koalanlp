@@ -10,7 +10,7 @@ import scala.collection.JavaConverters._
 /**
   * Created by bydelta on 16. 7. 30.
   */
-class KomoranLearnSpec extends Specification with BasicWordLearnerSpecs[Sentence] {
+class KomoranLearnSpec extends Specification with BasicWordLearnerSpecs {
   sequential
 
   override def getTagger = new Tagger

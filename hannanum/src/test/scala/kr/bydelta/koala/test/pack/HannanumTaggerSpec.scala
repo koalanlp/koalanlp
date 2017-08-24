@@ -69,17 +69,8 @@ class HannanumTaggerSpec extends TaggerSpec {
       original.map(_.getEojeols.map(_.getMorphemes.mkString("+")).mkString(" "))
     }
 
-  override def getTagger: CanTag[_] =
+  override def getTagger: CanTag =
     new Tagger()
-
-  override def getDict: CanCompileDict =
-    Dictionary
-
-  override def expectEmptyDict: Result =
-    Dictionary.userDic.search_end must_== prevEnd
-
-  override def expectNonEmptyDict: Result =
-    Dictionary.userDic.search_end must_!= prevEnd
 
   /**
     * 문장결과를 읽어들임.

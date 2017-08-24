@@ -10,7 +10,7 @@ import scala.collection.JavaConverters._
 /**
   * Created by bydelta on 16. 7. 30.
   */
-class HannanumLearnSpec extends Specification with BasicWordLearnerSpecs[Sentence] {
+class HannanumLearnSpec extends Specification with BasicWordLearnerSpecs {
   sequential
 
   override def getTagger = new Tagger

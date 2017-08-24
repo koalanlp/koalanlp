@@ -11,7 +11,7 @@ import scala.collection.JavaConverters._
 /**
   * Created by bydelta on 16. 7. 30.
   */
-class EunjeonLearnSpec extends Specification with BasicWordLearnerSpecs[scala.Seq[Eojeol]] {
+class EunjeonLearnSpec extends Specification with BasicWordLearnerSpecs {
   sequential
 
   "SimpleWordLearner" should {

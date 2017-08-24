@@ -28,22 +28,13 @@ class EunjeonTaggerSpec extends TaggerSpec {
 
   override def tagParaByOrig(str: String): Seq[String] = Seq.empty
 
-  override def tagSentByKoala(str: String, tagger: CanTag[_]): (String, String) = {
+  override def tagSentByKoala(str: String, tagger: CanTag): (String, String) = {
     val tagged = Sentence(tagger.tag(str).flatten)
     val tag = tagged.map(_.map(_.surface).mkString("+")).mkString(" ")
     val surface = tagged.surfaceString()
     surface -> tag
   }
 
-  override def getTagger: CanTag[_] =
+  override def getTagger: CanTag =
     new Tagger()
-
-  override def getDict: CanCompileDict =
-    Dictionary
-
-  override def expectEmptyDict: Result =
-    Dictionary.userDict.termDict must beEmpty
-
-  override def expectNonEmptyDict: Result =
-    Dictionary.nonEmpty must beTrue
 }

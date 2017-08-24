@@ -7,7 +7,7 @@ import kr.bydelta.koala.util.BasicWordLearner
 /**
   * Created by bydelta on 16. 7. 31.
   */
-trait BasicWordLearnerSpecs[X] {
+trait BasicWordLearnerSpecs {
   lazy final val INC_1 = INCLUDED_SET.partition(word => {
     val words = tagger.tagSentence(word)
     val morphs = words.flatMap(_.morphemes)
@@ -57,7 +57,7 @@ trait BasicWordLearnerSpecs[X] {
     |추가 문장. 월스트리트는 뉴욕에. 월스트리트를 점령하라. 월스트리트와 함께.
     | """.stripMargin.split("\n").toSeq
 
-  def getTagger:CanTag[X]
+  def getTagger:CanTag
 
   def getDict:CanCompileDict
 }

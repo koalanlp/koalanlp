@@ -17,7 +17,7 @@ class ServiceSpec extends HttpServiceSpec {
   val server = new Server {
     override val port: Int = 8080
     override val dict: CanCompileDict = Dictionary
-    override def getTagger: CanTag[_] = new Tagger
+    override def getTagger: CanTag = new Tagger
     override def getParser: CanDepParse = new Parser
   }
 

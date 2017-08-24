@@ -26,7 +26,7 @@ class ArirangTaggerSpec extends TaggerSpec {
     "" -> tag
   }
 
-  override def tagSentByKoala(str: String, tagger: CanTag[_]): (String, String) = {
+  override def tagSentByKoala(str: String, tagger: CanTag): (String, String) = {
     val tagged = tagger.tagSentence(str)
     val tag = tagged.map(_.map(m => m.surface + "(" + m.rawTag.last + ")").mkString(","))
       .mkString.replaceAll("[NVZ\\s\\.,\\(\\)]+", "")
@@ -37,15 +37,8 @@ class ArirangTaggerSpec extends TaggerSpec {
 
   override def tagParaByOrig(str: String): Seq[String] = Seq.empty
 
-  override def getTagger: CanTag[_] =
+  override def getTagger: CanTag =
     new Tagger()
-
-  override def getDict: CanCompileDict =
-    Dictionary
-
-  override def expectEmptyDict: Result = Result.unit(())
-
-  override def expectNonEmptyDict: Result = Result.unit(())
 
   override def isSentenceSplitterImplemented: Boolean = true
 }

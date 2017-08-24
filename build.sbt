@@ -4,6 +4,17 @@ fork in Test := true
 testForkedParallel in Test := true
 concurrentRestrictions in Global := Seq(Tags.limit(Tags.Test, 1))
 
+resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
+resolvers ++= Seq(
+  "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/"
+)
+
+sonatypeProfileName := "kr.bydelta"
+
+/** 버전 **/
+val VERSION = "1.7.1-SNAPSHOT"
+
+/** Root project **/
 lazy val root = (project in file("."))
   .enablePlugins(ScalaUnidocPlugin, JavaUnidocPlugin)
   .aggregate(core, kkma, hannanum, twitter, komoran, eunjeon, kryo, arirang)
@@ -15,6 +26,8 @@ lazy val root = (project in file("."))
     unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples, server, custom),
     unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples, server, custom)
   ).settings(aggregate in update := true)
+
+/** Core Project (Data structure, Trait, etc.) **/
 lazy val core = (project in file("core"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("core"): _*)
@@ -25,57 +38,45 @@ lazy val core = (project in file("core"))
     )
   )
 
-resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
-
-resolvers ++= Seq(
-  "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/"
-)
-
-sonatypeProfileName := "kr.bydelta"
-
+/** 1. 라이브러리 포함 프로젝트 **/
+/** 꼬꼬마 Project **/
 lazy val kkma = (project in file("kkma"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("kkma"): _*)
-  .settings(
-    assemblyOption in assembly := (assemblyOption in assembly).value.
-      copy(includeScala = false),
-    artifact in(Compile, assembly) := {
-      val art = (artifact in(Compile, assembly)).value
-      art.copy(`classifier` = Some("assembly"))
-    },
-    addArtifact(artifact in(Compile, assembly), assembly))
+  .settings(assemblySettings: _*)
   .dependsOn(core % "test->test;compile->compile")
+
+/** 한나눔 프로젝트 **/
 lazy val hannanum = (project in file("hannanum"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("hannanum"): _*)
-  .settings(
-    assemblyOption in assembly := (assemblyOption in assembly).value.
-      copy(includeScala = false),
-    artifact in(Compile, assembly) := {
-      val art = (artifact in(Compile, assembly)).value
-      art.copy(`classifier` = Some("assembly"))
-    },
-    addArtifact(artifact in(Compile, assembly), assembly))
+  .settings(assemblySettings: _*)
   .dependsOn(core % "test->test;compile->compile")
+
+/** 아리랑 프로젝트 **/
 lazy val arirang = (project in file("arirang"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("arirang"): _*)
-  .settings(
-    assemblyOption in assembly := (assemblyOption in assembly).value.
-      copy(includeScala = false),
-    artifact in(Compile, assembly) := {
-      val art = (artifact in(Compile, assembly)).value
-      art.copy(`classifier` = Some("assembly"))
-    },
-    addArtifact(artifact in(Compile, assembly), assembly))
+  .settings(assemblySettings: _*)
   .dependsOn(core % "test->test;compile->compile")
 
+/** 라이노 프로젝트 **/
+lazy val rhino = (project in file("rhino"))
+  .enablePlugins(GenJavadocPlugin)
+  .settings(projectWithConfig("rhino"): _*)
+  .settings(assemblySettings: _*)
+  .dependsOn(core % "test->test;compile->compile")
+
+/** 2. 라이브러리 외부참조 프로젝트 **/
+/** 은전한닢 프로젝트 **/
 lazy val eunjeon = (project in file("eunjeon"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("eunjeon"): _*)
   .settings(
     libraryDependencies += "org.bitbucket.eunjeon" %% "seunjeon" % "1.3.0"
   ).dependsOn(core % "test->test;compile->compile")
+
+/** OpenKoreanText 프로젝트 **/
 lazy val twitter = (project in file("twitter"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("twitter"): _*)
@@ -84,6 +85,8 @@ lazy val twitter = (project in file("twitter"))
       "org.openkoreantext" % "open-korean-text" % "2.1.0"
     )
   ).dependsOn(core % "test->test;compile->compile")
+
+/** 코모란 프로젝트. **/
 lazy val komoran = (project in file("komoran"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("komoran"): _*)
@@ -94,12 +97,8 @@ lazy val komoran = (project in file("komoran"))
     )
   ).dependsOn(core % "test->test;compile->compile")
 
-
-lazy val samples = (project in file("samples"))
-  .settings(projectWithConfig("samples"): _*)
-  .dependsOn(eunjeon, twitter, komoran, kkma, hannanum, server, arirang)
-
-
+/** 3. 기타 도우미 프로젝트 **/
+/** 분석기 서버 프로젝트 **/
 lazy val server = (project in file("server"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("server"): _*)
@@ -112,6 +111,8 @@ lazy val server = (project in file("server"))
     )
   )
   .dependsOn(core, kkma % "test")
+
+/** Kryo 직렬화 프로젝트 **/
 lazy val kryo = (project in file("kryo"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("kryo"))
@@ -120,6 +121,14 @@ lazy val kryo = (project in file("kryo"))
   )
   .dependsOn(core,
     kkma % "test", twitter % "test", komoran % "test", hannanum % "test", eunjeon % "test", arirang % "test")
+
+/** 사용방법 샘플 프로젝트 **/
+lazy val samples = (project in file("samples"))
+  .settings(projectWithConfig("samples"): _*)
+  .dependsOn(eunjeon, twitter, komoran, kkma, hannanum, server, arirang)
+
+/** 4. 모형 훈련 프로젝트 **/
+/** Customization **/
 lazy val custom = (project in file("custom"))
   .settings(projectWithConfig("custom"))
   .settings(
@@ -129,8 +138,8 @@ lazy val custom = (project in file("custom"))
     )
   ).dependsOn(core % "test->test;compile->compile")
 
-val VERSION = "1.7.1-SNAPSHOT"
 
+/** 공통 프로젝트 Configuration **/
 def projectWithConfig(module: String) =
   Seq(
     organization := "kr.bydelta",
@@ -170,3 +179,12 @@ def projectWithConfig(module: String) =
           </developer>
         </developers>
   )
+
+/** Assembly Classifier 설정 **/
+lazy val assemblySettings = Seq(
+  assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false),
+  artifact in(Compile, assembly) := {
+    val art = (artifact in(Compile, assembly)).value
+    art.copy(`classifier` = Some("assembly"))
+  },
+  addArtifact(artifact in(Compile, assembly), assembly))

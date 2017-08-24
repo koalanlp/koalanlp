@@ -10,7 +10,7 @@ import scala.collection.JavaConverters._
 /**
   * Created by bydelta on 16. 7. 30.
   */
-class ArirangLearnSpec extends Specification with BasicWordLearnerSpecs[Sentence] {
+class ArirangLearnSpec extends Specification with BasicWordLearnerSpecs {
   sequential
 
   def getTagger = new Tagger

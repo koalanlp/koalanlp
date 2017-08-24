@@ -9,7 +9,7 @@ import kr.bydelta.koala.traits.{CanCompileDict, CanLearnWord, CanTag}
   * @param tagger  품사분석의 기준이 되는 Tagger
   * @param targets 신조어 등을 등록할 사용자사전들.
   */
-class BasicWordLearner(protected val tagger: CanTag[_], override protected val targets: CanCompileDict*)
+class BasicWordLearner(protected val tagger: CanTag, override protected val targets: CanCompileDict*)
   extends SimpleWordLearner(targets: _*) {
   override def extractNouns(corpora: Iterator[String],
                             minOccurrence: Int = 100,

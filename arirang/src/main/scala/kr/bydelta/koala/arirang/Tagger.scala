@@ -5,7 +5,7 @@ import java.util
 import kr.bydelta.koala.Implicit._
 import kr.bydelta.koala.POS
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
-import kr.bydelta.koala.traits.CanTag
+import kr.bydelta.koala.traits.CanTagOnlyASentence
 import org.apache.lucene.analysis.ko.morph.{AnalysisOutput, PatternConstants, WordSegmentAnalyzer}
 
 import scala.collection.JavaConverters._
@@ -14,20 +14,18 @@ import scala.collection.mutable.ArrayBuffer
 /**
   * Created by bydelta on 17. 8. 19.
   */
-class Tagger extends CanTag[Sentence] {
+class Tagger extends CanTagOnlyASentence[Seq[AnalysisOutput]] {
   val tagger = new WordSegmentAnalyzer
 
-  override def tagParagraphRaw(text: String): Seq[Sentence] =
-    if (text.trim.isEmpty) Seq.empty
-    else {
-      val list = new util.LinkedList[util.List[AnalysisOutput]]()
-      tagger.analyze(text.trim, list, false)
-      splitSentences(convertParagraph(text.trim, list.asScala.map(_.asScala.maxBy(_.getScore))))
-    }
+  override def tagSentenceOriginal(text: String): Seq[AnalysisOutput] =
+  if (text.trim.isEmpty) Seq.empty
+  else {
+    val list = new util.LinkedList[util.List[AnalysisOutput]]()
+    tagger.analyze(text.trim, list, false)
+    list.asScala.map(_.asScala.maxBy(_.getScore))
+  }
 
-  override private[koala] def convert(result: Sentence): Sentence = result
-
-  private[koala] def convertParagraph(text: String, result: Seq[AnalysisOutput]): Sentence = {
+  override private[koala] def convertSentence(text: String, result: Seq[AnalysisOutput]): Sentence = {
     var sentence = text
     var wordlist =
       result.filter(_.getSource.trim.nonEmpty).flatMap {
@@ -207,74 +205,6 @@ class Tagger extends CanTag[Sentence] {
 
     morphs
   }
-
-
-  /**
-    * 분석결과를 토대로 문장을 분리함.
-    *
-    * @param para 분리할 문단.
-    * @param pos  현재 읽고있는 위치.
-    * @param open 현재까지 열려있는 묶음기호 Stack.
-    * @param acc  현재까지 분리된 문장들.
-    * @return 문장단위로 분리된 결과
-    */
-  private def splitSentences(para: Seq[Word],
-                             pos: Int = 0,
-                             open: List[Char] = List(),
-                             acc: ArrayBuffer[Sentence] = ArrayBuffer()): Seq[Sentence] =
-  if (para.isEmpty) acc
-  else {
-    val rawEndmark = para.indexWhere(_.exists(POS.SF), pos)
-    val rawParen = para.indexWhere({
-      e =>
-        (e.exists(POS.SS) ||
-          Tagger.openParenRegex.findFirstMatchIn(e.surface).isDefined ||
-          Tagger.closeParenRegex.findFirstMatchIn(e.surface).isDefined ||
-          Tagger.quoteRegex.findFirstMatchIn(e.surface).isDefined) &&
-          Tagger.matchRegex.findFirstIn(e.surface).isEmpty
-    }, pos)
-
-    val endmark = if (rawEndmark == -1) para.length else rawEndmark
-    val paren = if (rawParen == -1) para.length else rawParen
-
-    if (endmark == paren && paren == para.length) {
-      acc += Sentence(para)
-      acc
-    } else if (open.isEmpty) {
-      if (endmark < paren) {
-        val (sent, next) = para.splitAt(endmark + 1)
-        acc += Sentence(sent)
-        splitSentences(next, 0, open, acc)
-      } else {
-        val parenStr = para(paren)
-        val surface = Tagger.filterRegex.replaceAllIn(parenStr.surface, "")
-        var nOpen = open
-        if (Tagger.closeParenRegex.findFirstMatchIn(surface).isEmpty) {
-          nOpen ++:= surface.toSeq
-        }
-        splitSentences(para, paren + 1, nOpen, acc)
-      }
-    } else {
-      if (paren == para.length) {
-        acc += Sentence(para)
-        acc
-      } else {
-        val parenStr = para(paren)
-        val surface = Tagger.filterRegex.replaceAllIn(parenStr.surface, "")
-        var nOpen = open
-        if (Tagger.openParenRegex.findFirstMatchIn(surface).isDefined) {
-          nOpen ++:= surface.toSeq
-        } else if (Tagger.closeParenRegex.findFirstMatchIn(surface).isDefined) {
-          nOpen = nOpen.tail
-        } else {
-          val top = nOpen.head
-          if (surface.last == top) nOpen = nOpen.tail
-          else nOpen ++:= surface.toSeq
-        }
-        splitSentences(para, paren + 1, nOpen, acc)
-      }
-    }
-  }
 }
 
 object Tagger {
@@ -283,11 +213,6 @@ object Tagger {
   private val SPRegex = "(?U)[,:;·/]+".r
   private val punctuationsSplit = "(?U)((?<=[,\\.:;\\?\\!/·\\s\'\"\\(\\[\\{<〔〈《「『【‘“\\)\\]\\}>〕〉》」』】’”]+)|" +
     "(?=[,\\.:;\\?\\!/·\\s\'\"\\(\\[\\{<〔〈《「『【‘“\\)\\]\\}>〕〉》」』】’”]+))"
-  private val quoteRegex = "(?U)[\'\"]{1}".r
-  private val openParenRegex = "(?U)[\\(\\[\\{<〔〈《「『【‘“]{1}".r
-  private val closeParenRegex = "(?U)[\\)\\]\\}>〕〉》」』】’”]{1}".r
-  private val matchRegex = ("(?U)(\'[^\']*\'|\"[^\"]*\"|\\([^\\(\\)]*\\)|\\[[^\\[\\]]*\\]|\\{[^\\{\\}]*\\}|" +
-    "<[^<>]*>|〔[^〔〕]*〕|〈[^〈〉]*〉|《[^《》]*》|「[^「」]*」|『[^『』]*』|【[^【】]*】|‘[^‘’]*’|“[^“”]*”)").r
   private val filterRegex = "(?U)[^\'\"\\(\\[\\{<〔〈《「『【‘“\\)\\]\\}>〕〉》」』】’”]+".r
   private val SSRegex = "(?U)[\'\"\\(\\[\\{<〔〈《「『【‘“\\)\\]\\}>〕〉》」』】’”]+".r
 }
