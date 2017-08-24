@@ -39,7 +39,7 @@ package object koala {
       case "SO" | "SW" => POS.SY
       case "NF" => POS.UN
       case "NV" => POS.UV
-      case "NE" => POS.UE
+      case "NA" => POS.UE
       case "SH" => POS.SL
       case x => POS withName x
     }
@@ -53,11 +53,12 @@ package object koala {
     */
   def tagToSejong(tag: POS.Value): String = {
     tag match {
-      case POS.SY => "SO"
+      case POS.SY => "SW"
       case POS.UN => "NF"
       case POS.UV => "NV"
-      case POS.UE => "NE"
-      case POS.SL => "SH"
+      case POS.UE => "NA"
+      case POS.NNM => "NNB"
+      case POS.XPV => "XR"
       case x => x.toString
     }
   }

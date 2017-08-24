@@ -7,28 +7,35 @@ import kr.bydelta.koala.traits.CanTagOnlyASentence
 /**
   * Created by bydelta on 17. 8. 23.
   */
-class Tagger extends CanTagOnlyASentence[Array[String]]{
-  override def tagSentenceOriginal(text: String): Array[String] = {
+class Tagger extends CanTagOnlyASentence[Array[(String, String)]] {
+  override def tagSentenceOriginal(text: String): Array[(String, String)] = {
     val rhino = Dictionary.getRHINO(text)
-    rhino.GetOutput()
-    rhino.GetOutputArr()
+    rhino.GetOutput().split("[\r\n]+").map {
+      word =>
+        val Array(head, next, _@_*) = word.split("\t")
+        (head, next)
+    }
   }
 
-  override private[koala] def convertSentence(text: String, result: Array[String]): Sentence = {
+  override private[koala] def convertSentence(text: String, result: Array[(String, String)]): Sentence = {
     if (result != null) {
       Sentence(
         result.map{
-          word =>
+          case (surface, word) =>
+            val matcher = Tagger.MORPH_MATCH
             val morphs =
-              word.split(" \\+ ").map{
-                morph =>
-                  val (surf, rawTag) = morph.splitAt(morph.indexOf("/"))
-                  Morpheme(surface = surf, rawTag = rawTag, tag = fromSejongTag(rawTag.substring(1)))
-              }
-            Word(surface = "", morphemes = morphs)
+              matcher.findAllMatchIn(word).map {
+                case matcher(surf, raw) =>
+                  Morpheme(surface = surf.trim, rawTag = raw, tag = fromSejongTag(raw))
+              }.toSeq
+            Word(surface = surface, morphemes = morphs)
         }
       )
     } else
       Sentence(Seq.empty)
   }
+}
+
+object Tagger {
+  private val MORPH_MATCH = "([^\\s]+)/([A-Z]{2,3})".r
 }

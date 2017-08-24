@@ -203,6 +203,9 @@ final class Sentence private(val words: Vector[Word])
   * Companion object for Sentence
   */
 object Sentence {
+
+  def empty = new Sentence(Vector.empty)
+
   /**
     * Create a sentence.
     *

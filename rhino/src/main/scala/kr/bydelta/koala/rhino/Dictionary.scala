@@ -23,11 +23,17 @@ object Dictionary extends CanCompileDict with CanExtractResource{
   @volatile private var aspgEnding: Array[Int] = _
   @volatile private var nonEndingList: Array[Array[String]] = _
 
-  override protected def modelName: String = "rhino"
+  def getRHINO(input: String) = {
+    load()
+    new MainClass(input, combiMethods_List, endingMethods_List, complexStem_MethodDeleted,
+      stem_MethodDeleted, afterNumber_MethodDeleted, ending_MethodDeleted, stem_List,
+      ending_List, afterNumber_List, nonEndingList, aspgStem, aspgEnding)
+  }
 
   private def load() = synchronized{
     if (aspgEnding == null) {
-      val fa: FileAnalyzer = new FileAnalyzer(getExtractedPath + File.pathSeparator)
+      val rspath = extractResource() + File.separator + "resource" + File.separator
+      val fa: FileAnalyzer = new FileAnalyzer(rspath)
       combiMethods_List = fa.MakeMethodsList("rhino.lexicon.combi.combi")
       endingMethods_List = fa.MakeMethodsList("rhino.lexicon.ending.ending")
       complexStem_MethodDeleted = fa.MakeFileArray("complexStem_MethodDeleted.txt")
@@ -41,13 +47,6 @@ object Dictionary extends CanCompileDict with CanExtractResource{
       aspgStem = fa.GetAspNum("stem_List.txt")
       aspgEnding = fa.GetAspNum("ending_List.txt")
     }
-  }
-
-  def getRHINO(input: String) = {
-    load()
-    new MainClass(input, combiMethods_List, endingMethods_List, complexStem_MethodDeleted,
-      stem_MethodDeleted, afterNumber_MethodDeleted, ending_MethodDeleted, stem_List,
-      ending_List, afterNumber_List, nonEndingList, aspgStem, aspgEnding)
   }
 
   override def addUserDictionary(dict: (String, POSTag)*): Unit = {
@@ -65,4 +64,6 @@ object Dictionary extends CanCompileDict with CanExtractResource{
   override def getNotExists(onlySystemDic: Boolean, word: (String, POSTag)*): Seq[(String, POSTag)] = {
     throw new UnsupportedOperationException("RHINO does not have method for handling a dictionary")
   }
+
+  override protected def modelName: String = "rhino"
 }

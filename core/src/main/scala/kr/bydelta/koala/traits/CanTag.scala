@@ -40,7 +40,8 @@ trait CanTag{
     * @param text 품사분석을 시행할 문단 String
     * @return 품사분석 결과를 문장단위로 잘라서 포함한 `java.util.List<Sentence>` 객체
     */
-  final def jTag(text: String): java.util.List[Sentence] = tag(text).asJava
+  @deprecated("Use jTag(String) instead. This will be removed at v2.0.0", "2.0.0")
+  final def jTagParagraph(text: String): java.util.List[Sentence] = jTag(text)
 
   /**
     * (Java) 주어진 String 문단을 분석하여 품사를 부착함.
@@ -48,8 +49,7 @@ trait CanTag{
     * @param text 품사분석을 시행할 문단 String
     * @return 품사분석 결과를 문장단위로 잘라서 포함한 `java.util.List<Sentence>` 객체
     */
-  @deprecated("Use jTag(String) instead. This will be removed at v2.0.0", "2.0.0")
-  final def jTagParagraph(text: String): java.util.List[Sentence] = jTag(text)
+  final def jTag(text: String): java.util.List[Sentence] = tag(text).asJava
 }
 
 /**
@@ -59,20 +59,24 @@ trait CanTag{
   */
 trait CanTagASentence[S] extends CanTag{
   /**
+    * 주어진 String 문장을 분석하여 품사를 부착함.
+    *
+    * @param text 품사분석을 시행할 문장 String
+    * @return 품사분석 결과를 포함한 Sentence 객체
+    */
+  override final def tagSentence(text: String): Sentence = {
+    val trim = text.trim
+    if (trim.nonEmpty) convertSentence(tagSentenceOriginal(trim))
+    else Sentence.empty
+  }
+
+  /**
     * 변환되지않은, 분석결과를 반환.
     *
     * @param text 분석할 String.
     * @return 원본 문단객체의 Sequence
     */
   def tagSentenceOriginal(text: String): S
-
-  /**
-    * 주어진 String 문장을 분석하여 품사를 부착함.
-    *
-    * @param text 품사분석을 시행할 문장 String
-    * @return 품사분석 결과를 포함한 Sentence 객체
-    */
-  override final def tagSentence(text: String): Sentence = convertSentence(tagSentenceOriginal(text))
 
   /**
     * 분석결과를 변환함.
@@ -90,20 +94,24 @@ trait CanTagASentence[S] extends CanTag{
   */
 trait CanTagAParagraph[S] extends CanTagASentence[S]{
   /**
+    * 주어진 String 문단을 분석하여 품사를 부착함.
+    *
+    * @param text 품사분석을 시행할 문단 String
+    * @return 품사분석 결과를 문장단위로 잘라서 포함한 Seq[Sentence] 객체
+    */
+  override final def tag(text: String): Seq[Sentence] = {
+    val trim = text.trim
+    if (trim.nonEmpty) tagParagraphOriginal(trim).map(convertSentence)
+    else Seq.empty
+  }
+
+  /**
     * 변환되지않은, 분석결과를 반환.
     *
     * @param text 분석할 String.
     * @return 원본 문단객체의 Sequence
     */
   def tagParagraphOriginal(text: String): Seq[S]
-
-  /**
-    * 주어진 String 문단을 분석하여 품사를 부착함.
-    *
-    * @param text 품사분석을 시행할 문단 String
-    * @return 품사분석 결과를 문장단위로 잘라서 포함한 Seq[Sentence] 객체
-    */
-  override final def tag(text: String): Seq[Sentence] = tagParagraphOriginal(text).map(convertSentence)
 }
 
 /**
@@ -113,21 +121,16 @@ trait CanTagAParagraph[S] extends CanTagASentence[S]{
   */
 trait CanTagOnlyASentence[S] extends CanTag{
   /**
-    * 변환되지않은, 분석결과를 반환.
-    *
-    * @param text 분석할 String.
-    * @return 원본 문단객체의 Sequence
-    */
-  def tagSentenceOriginal(text: String): S
-
-  /**
     * 주어진 String 문장을 분석하여 품사를 부착함.
     *
     * @param text 품사분석을 시행할 문장 String
     * @return 품사분석 결과를 포함한 Sentence 객체
     */
-  override final def tagSentence(text: String): Sentence = convertSentence(text, tagSentenceOriginal(text))
-
+  override final def tagSentence(text: String): Sentence = {
+    val trim = text.trim
+    if (trim.nonEmpty) convertSentence(trim, tagSentenceOriginal(trim))
+    else Sentence.empty
+  }
 
   /**
     * 주어진 String 문단을 분석하여 품사를 부착함.
@@ -135,7 +138,19 @@ trait CanTagOnlyASentence[S] extends CanTag{
     * @param text 품사분석을 시행할 문단 String
     * @return 품사분석 결과를 문장단위로 잘라서 포함한 Seq[Sentence] 객체
     */
-  override final def tag(text: String): Seq[Sentence] = SentenceSplitter(convertSentence(text, tagSentenceOriginal(text)))
+  override final def tag(text: String): Seq[Sentence] = {
+    val trim = text.trim
+    if (trim.nonEmpty) SentenceSplitter(convertSentence(trim, tagSentenceOriginal(trim)))
+    else Seq.empty
+  }
+
+  /**
+    * 변환되지않은, 분석결과를 반환.
+    *
+    * @param text 분석할 String.
+    * @return 원본 문단객체의 Sequence
+    */
+  def tagSentenceOriginal(text: String): S
 
   /**
     * 분석결과를 변환함.
@@ -154,21 +169,16 @@ trait CanTagOnlyASentence[S] extends CanTag{
   */
 trait CanTagOnlyAParagraph[S] extends CanTag{
   /**
-    * 변환되지않은, 분석결과를 반환.
-    *
-    * @param text 분석할 String.
-    * @return 원본 문단객체의 Sequence
-    */
-  def tagParagraphOriginal(text: String): Seq[S]
-
-  /**
     * 주어진 String 문장을 분석하여 품사를 부착함.
     *
     * @param text 품사분석을 시행할 문장 String
     * @return 품사분석 결과를 포함한 Sentence 객체
     */
-  override final def tagSentence(text: String): Sentence = Sentence(tag(text).flatten)
-
+  override final def tagSentence(text: String): Sentence = {
+    val trim = text.trim
+    if (trim.nonEmpty) Sentence(tag(trim).flatten)
+    else Sentence.empty
+  }
 
   /**
     * 주어진 String 문단을 분석하여 품사를 부착함.
@@ -176,7 +186,19 @@ trait CanTagOnlyAParagraph[S] extends CanTag{
     * @param text 품사분석을 시행할 문단 String
     * @return 품사분석 결과를 문장단위로 잘라서 포함한 Seq[Sentence] 객체
     */
-  override final def tag(text: String): Seq[Sentence] = tagParagraphOriginal(text).map(convertSentence)
+  override final def tag(text: String): Seq[Sentence] = {
+    val trim = text.trim
+    if (trim.nonEmpty) tagParagraphOriginal(trim).map(convertSentence)
+    else Seq.empty
+  }
+
+  /**
+    * 변환되지않은, 분석결과를 반환.
+    *
+    * @param text 분석할 String.
+    * @return 원본 문단객체의 Sequence
+    */
+  def tagParagraphOriginal(text: String): Seq[S]
 
   /**
     * 분석결과를 변환함.

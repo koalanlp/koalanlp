@@ -11,13 +11,10 @@ resolvers ++= Seq(
 
 sonatypeProfileName := "kr.bydelta"
 
-/** 버전 **/
-val VERSION = "1.7.1-SNAPSHOT"
-
 /** Root project **/
 lazy val root = (project in file("."))
   .enablePlugins(ScalaUnidocPlugin, JavaUnidocPlugin)
-  .aggregate(core, kkma, hannanum, twitter, komoran, eunjeon, kryo, arirang)
+  .aggregate(core, kkma, hannanum, twitter, komoran, eunjeon, kryo, arirang, rhino)
   .settings(
     publishArtifact := false,
     packagedArtifacts := Map.empty,
@@ -26,7 +23,6 @@ lazy val root = (project in file("."))
     unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples, server, custom),
     unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples, server, custom)
   ).settings(aggregate in update := true)
-
 /** Core Project (Data structure, Trait, etc.) **/
 lazy val core = (project in file("core"))
   .enablePlugins(GenJavadocPlugin)
@@ -37,8 +33,6 @@ lazy val core = (project in file("core"))
       "org.slf4j" % "slf4j-simple" % "1.8.0-alpha2" % "test"
     )
   )
-
-/** 1. 라이브러리 포함 프로젝트 **/
 /** 꼬꼬마 Project **/
 lazy val kkma = (project in file("kkma"))
   .enablePlugins(GenJavadocPlugin)
@@ -46,28 +40,25 @@ lazy val kkma = (project in file("kkma"))
   .settings(assemblySettings: _*)
   .dependsOn(core % "test->test;compile->compile")
 
+/** 1. 라이브러리 포함 프로젝트 **/
 /** 한나눔 프로젝트 **/
 lazy val hannanum = (project in file("hannanum"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("hannanum"): _*)
   .settings(assemblySettings: _*)
   .dependsOn(core % "test->test;compile->compile")
-
 /** 아리랑 프로젝트 **/
 lazy val arirang = (project in file("arirang"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("arirang"): _*)
   .settings(assemblySettings: _*)
   .dependsOn(core % "test->test;compile->compile")
-
 /** 라이노 프로젝트 **/
 lazy val rhino = (project in file("rhino"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("rhino"): _*)
   .settings(assemblySettings: _*)
   .dependsOn(core % "test->test;compile->compile")
-
-/** 2. 라이브러리 외부참조 프로젝트 **/
 /** 은전한닢 프로젝트 **/
 lazy val eunjeon = (project in file("eunjeon"))
   .enablePlugins(GenJavadocPlugin)
@@ -76,6 +67,7 @@ lazy val eunjeon = (project in file("eunjeon"))
     libraryDependencies += "org.bitbucket.eunjeon" %% "seunjeon" % "1.3.0"
   ).dependsOn(core % "test->test;compile->compile")
 
+/** 2. 라이브러리 외부참조 프로젝트 **/
 /** OpenKoreanText 프로젝트 **/
 lazy val twitter = (project in file("twitter"))
   .enablePlugins(GenJavadocPlugin)
@@ -85,7 +77,6 @@ lazy val twitter = (project in file("twitter"))
       "org.openkoreantext" % "open-korean-text" % "2.1.0"
     )
   ).dependsOn(core % "test->test;compile->compile")
-
 /** 코모란 프로젝트. **/
 lazy val komoran = (project in file("komoran"))
   .enablePlugins(GenJavadocPlugin)
@@ -96,8 +87,6 @@ lazy val komoran = (project in file("komoran"))
       "com.github.shin285" % "KOMORAN" % "3.2.1.5"
     )
   ).dependsOn(core % "test->test;compile->compile")
-
-/** 3. 기타 도우미 프로젝트 **/
 /** 분석기 서버 프로젝트 **/
 lazy val server = (project in file("server"))
   .enablePlugins(GenJavadocPlugin)
@@ -112,6 +101,7 @@ lazy val server = (project in file("server"))
   )
   .dependsOn(core, kkma % "test")
 
+/** 3. 기타 도우미 프로젝트 **/
 /** Kryo 직렬화 프로젝트 **/
 lazy val kryo = (project in file("kryo"))
   .enablePlugins(GenJavadocPlugin)
@@ -121,13 +111,10 @@ lazy val kryo = (project in file("kryo"))
   )
   .dependsOn(core,
     kkma % "test", twitter % "test", komoran % "test", hannanum % "test", eunjeon % "test", arirang % "test")
-
 /** 사용방법 샘플 프로젝트 **/
 lazy val samples = (project in file("samples"))
   .settings(projectWithConfig("samples"): _*)
-  .dependsOn(eunjeon, twitter, komoran, kkma, hannanum, server, arirang)
-
-/** 4. 모형 훈련 프로젝트 **/
+  .dependsOn(eunjeon, twitter, komoran, kkma, hannanum, server, arirang, rhino)
 /** Customization **/
 lazy val custom = (project in file("custom"))
   .settings(projectWithConfig("custom"))
@@ -138,6 +125,17 @@ lazy val custom = (project in file("custom"))
     )
   ).dependsOn(core % "test->test;compile->compile")
 
+/** 4. 모형 훈련 프로젝트 **/
+/** Assembly Classifier 설정 **/
+lazy val assemblySettings = Seq(
+  assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false),
+  artifact in(Compile, assembly) := {
+    val art = (artifact in(Compile, assembly)).value
+    art.copy(`classifier` = Some("assembly"))
+  },
+  addArtifact(artifact in(Compile, assembly), assembly))
+/** 버전 **/
+val VERSION = "1.7.1-SNAPSHOT"
 
 /** 공통 프로젝트 Configuration **/
 def projectWithConfig(module: String) =
@@ -179,12 +177,3 @@ def projectWithConfig(module: String) =
           </developer>
         </developers>
   )
-
-/** Assembly Classifier 설정 **/
-lazy val assemblySettings = Seq(
-  assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false),
-  artifact in(Compile, assembly) := {
-    val art = (artifact in(Compile, assembly)).value
-    art.copy(`classifier` = Some("assembly"))
-  },
-  addArtifact(artifact in(Compile, assembly), assembly))

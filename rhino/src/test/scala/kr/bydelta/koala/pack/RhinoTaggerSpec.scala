@@ -2,36 +2,28 @@ package kr.bydelta.koala.pack
 
 import kr.bydelta.koala.rhino.{Dictionary, Tagger}
 import kr.bydelta.koala.test.core.TaggerSpec
-import kr.bydelta.koala.traits.{CanCompileDict, CanTag}
-import org.specs2.execute.Result
-import rhino.RHINO
+import kr.bydelta.koala.traits.CanTag
 
 /**
   * Created by bydelta on 16. 7. 26.
   */
 class RhinoTaggerSpec extends TaggerSpec {
   override def tagSentByOrig(str: String): (String, String) = {
-    val rhino = new RHINO()
-    val original = rhino.ExternCall()
+    val rhino = Dictionary.getRHINO(str)
+    val tagged = rhino.GetOutput().trim
+    val original = tagged.split("[\r\n]+").map(_.split("\t").head).mkString(" ")
 
-    val (tag, _) = original.getTokenList.asScala.foldLeft((new StringBuilder, 0)) {
-      case ((builder, prev), token) if token.getBeginIndex > prev =>
-        builder.append(" ")
-        builder.append(token.getMorph + "/" + token.getPos)
-        (builder, token.getEndIndex)
-      case ((builder, prev), token) =>
-        builder.append(token.getMorph + "/" + token.getPos)
-        (builder, token.getEndIndex)
-    }
-
-    "" -> tag.toString()
+    original -> tagged
   }
 
   override def tagSentByKoala(str: String, tagger: CanTag): (String, String) = {
     val tagged = tagger.tagSentence(str)
-    val tag = tagged.map(_.map(m => m.surface + "/" + m.rawTag).mkString).mkString(" ")
+    val tag = tagged.map { word =>
+      word.surface + "\t" + word.map(m => m.surface + "/" + m.rawTag).mkString(" + ")
+    }.mkString("\r\n")
+    val surface = tagged.surfaceString()
 
-    str -> tag
+    surface -> tag
   }
 
   override def tagParaByOrig(str: String): Seq[String] = Seq.empty

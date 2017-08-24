@@ -25,6 +25,7 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 * Twitter: OpenKoreanText의 [오픈 소스 한국어 처리기](http://openkoreantext.org) (구 Twitter 한국어 분석기)<sup>1-1</sup>
 * Eunjeon: 은전한닢 프로젝트의 [SEunjeon(S은전)](https://bitbucket.org/eunjeon/seunjeon)
 * Arirang: 이수명님의 [Arirang Morpheme Analyzer](http://cafe.naver.com/korlucene) <sup>1-2</sup>
+* RHINO: 최석재님의 [RHINO v2.5.4](https://github.com/SukjaeChoi/RHINO)
 
 > <sup>주1-1</sup> 이전 코드와의 연속성을 위해서, OpenKoreanText의 패키지 명칭은 twitter로 유지합니다.
 >
@@ -44,10 +45,11 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 | `koalanlp-twitter` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-twitter_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-twitter_2.12%22) | 8+ | **2.12+**<sup>2-3</sup> | 트위터(OpenKoreanText) 분석기 패키지입니다. |
 | `koalanlp-eunjeon` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-eunjeon_2.12%22) | 8+ | 2.11+ | 은전한닢 분석기 패키지입니다. |
 | `koalanlp-arirang` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-arirang_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-arirang_2.12%22) | 8+ | 2.11+ | 아리랑 분석기 패키지입니다.<sup>2-1</sup> |
+| `koalanlp-rhino` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-rhino_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-rhino_2.12%22) | 8+ | 2.11+ | RHINO 분석기 패키지입니다.<sup>2-1</sup> |
 | `koalanlp-kryo` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kryo_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kryo_2.12%22) | 8+ | 2.11+ | Kryo Serialization을 지원하기 위한 패키지입니다. |
 | `koalanlp-server` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-server_2.11.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-server_2.11%22) | 8+ | **2.10 - 2.11**<sup>2-3</sup> | HTTP 서비스 구성을 위한 패키지입니다. |
 
-> <sup>주2-1</sup> 꼬꼬마, 한나눔, 아리랑 분석기는 타 분석기와 달리 Maven repository에 등재되어 있지 않아, 원래는 수동으로 직접 추가하셔야 합니다.
+> <sup>주2-1</sup> 꼬꼬마, 한나눔, 아리랑, RHINO 분석기는 타 분석기와 달리 Maven repository에 등재되어 있지 않아, 원래는 수동으로 직접 추가하셔야 합니다.
 > 이 점이 불편하다는 것을 알기에, KoalaNLP는 assembly 형태로 해당 패키지를 포함하여 배포하고 있습니다. 포함된 패키지를 사용하려면, `assembly` classifier를 사용하십시오.
 > "assembly" classifier가 지정되지 않으면, 각 분석기 라이브러리가 빠진 채로 dependency가 참조됩니다.
 >
@@ -69,6 +71,7 @@ libraryDependencies += "kr.bydelta" %% "koalanlp-komoran" % "latest.release"	//�
 libraryDependencies += "kr.bydelta" %% "koalanlp-kkma" % "latest.release" classifier "assembly"	//꼬꼬마 분석기의 경우
 libraryDependencies += "kr.bydelta" %% "koalanlp-hannanum" % "latest.release" classifier "assembly"	//한나눔 분석기의 경우
 libraryDependencies += "kr.bydelta" %% "koalanlp-arirang" % "latest.release" classifier "assembly"	//아리랑 분석기의 경우
+libraryDependencies += "kr.bydelta" %% "koalanlp-rhino" % "latest.release" classifier "assembly"	//RHINO 분석기의 경우
 
 libraryDependencies += "kr.bydelta" %% "koalanlp-kryo" % "latest.release" // Kryo Serialization
 libraryDependencies += "kr.bydelta" %% "koalanlp-server" % "latest.release" // HTTP 서비스
@@ -213,6 +216,8 @@ sentence match {
 * Komoran: GPL v2
 * Twitter: Apache License 2.0
 * Eunjeon: Apache License 2.0
+* Arirang: Apache License 2.0
+* RHINO: 비상업적 용도 사용가능.
 
 # 결과 비교
 [Wiki:결과비교](https://github.com/nearbydelta/KoalaNLP/wiki/4.-결과-비교)를 참조해주세요.

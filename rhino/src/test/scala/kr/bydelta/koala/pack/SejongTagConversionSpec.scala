@@ -1,6 +1,8 @@
 package kr.bydelta.koala.pack
 
 import kr.bydelta.koala.POS.POSTag
+import kr.bydelta.koala.test.pack.TagConversionSpec
+import kr.bydelta.koala.{fromSejongTag, tagToSejong}
 
 /**
   * Created by bydelta on 17. 8. 19.
@@ -8,7 +10,6 @@ import kr.bydelta.koala.POS.POSTag
 class SejongTagConversionSpec extends TagConversionSpec {
   val tagMap =
     Map(
-      //통합->꼬꼬마,한나눔,은전,트위터,코모란
       "NNG" -> "NNG",
       "NNP" -> "NNP",
       "NNB" -> "NNB",
@@ -51,14 +52,14 @@ class SejongTagConversionSpec extends TagConversionSpec {
       "SS" -> "SS",
       "SE" -> "SE",
       "SY" -> "<SO\nSW",
-      "UN" -> ">NA",
-      "UV" -> ">NA",
+      "UN" -> "NF",
+      "UV" -> "NV",
       "UE" -> "NA",
       "SL" -> "SL\n<SH",
       "SN" -> "SN"
     )
 
-  override def from(x: String) = fromKomoranTag(x)
+  override def from(x: String) = fromSejongTag(x)
 
-  override def to(x: POSTag): String = tagToKomoran(x)
+  override def to(x: POSTag): String = tagToSejong(x)
 }

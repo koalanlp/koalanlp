@@ -11,6 +11,10 @@ trait Examples {
 }
 
 private object Examples {
+  private final val exampleSpecial =
+    """01 1+1은 2이고, 3*3은 9이다.
+      |01 a/b는 분수이다.
+      |01 | 기호는 분리기호이다.""".stripMargin
   // Example 1: JTBC, 2017.04.22
   private final val example1 =
   """03 북한이 도발을 멈추지 않으면 미국이 북핵 시설을 타격해도 군사개입을 하지 않겠다. 중국 관영 환구시보가 밝힌 내용인데요. 중국이 여태껏 제시한 북한에 대한 압박 수단 가운데 가장 이례적이고, 수위가 높은 것으로 보입니다.
@@ -89,7 +93,7 @@ private object Examples {
     |11 씨게이트 : 기업 관점에서 보자면 데이터 폭증에 대비해 데이터를 어디에 저장하고, 데이터를 어떻게 분석·처리하며, 데이터를 어떻게 이동하고, 그것을 어떻게 비즈니스에 유용하게 쓰는지에 대해 생각해야 한다. 나아가 이 모든 데이터를 어떻게 보호하느냐 역시 고려해야 한다. 업계의 일원으로서 이런 문제를 봤을 때 당면하는 과제는 결국 어떤 솔루션을 제공해야 이 같은 문제를 극복할 수 있을까로 요약된다. 아직은 엣지 디바이스가 많지는 않지만 앞으로 더 많은 새로운 디바이스가 나올 것이다. 이 상황에 현재 보안은 필요한 만큼의 절반 정도 밖에 충족하지 못하고 있다. 여기서 사업 기회를 찾을 수 있다. 새로운 기회가 될 수 있기에 밝고 낙관적인 전망이 있다고 이야기 하고 싶다. 소비자로서는 모든 것을 통해 혜택을 누릴 수 있다. 생활이 한결 편리해질 것이다. 아무래도 가장 큰 문제는 사생활 문제와 보안이다. 결과적으로 개인은 편안한 삶을 영위하면서도 프라이버시와 보안에 신경을 써야 하고, 기술발전이 어떤 변화를 몰고 올지 역시 생각해야 한다.""".stripMargin
 
   private final val exampleSeq =
-    (example1.split("\n") ++ example2.split("\n") ++ example3.split("\n") ++ example4.split("\n")).map {
+    (example1.split("\n") ++ example2.split("\n") ++ example3.split("\n") ++ example4.split("\n") ++ exampleSpecial.split("\n")).map {
       str => str.take(2).toInt -> str.drop(3)
     }
 }
