@@ -3,7 +3,6 @@ package kr.bydelta.koala.kmr
 import java.io.{BufferedWriter, File, FileOutputStream, OutputStreamWriter}
 
 import kr.bydelta.koala.POS.POSTag
-import kr.bydelta.koala._
 import kr.bydelta.koala.traits.{CanCompileDict, CanExtractResource}
 import kr.co.shineware.ds.aho_corasick.model.AhoCorasickNode
 import kr.co.shineware.nlp.komoran.model.ScoredTag
@@ -12,6 +11,7 @@ import kr.co.shineware.nlp.komoran.parser.KoreanUnitParser
 
 import scala.annotation.tailrec
 import scala.collection.JavaConverters._
+import scala.collection.mutable.ArrayBuffer
 import scala.io.Source
 
 /**
@@ -35,11 +35,11 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     o
   }
   private lazy val unitparser = new KoreanUnitParser()
+  private val userBuffer = ArrayBuffer[(String, POSTag)]()
   private var userLastUpdated = 0l
-  private var userBuffer = Set[(String, POSTag)]()
   private var baseEntries = Seq[(String, Seq[POSTag])]()
 
-  override def addUserDictionary(dict: (String, POSTag)*): Unit = Dictionary synchronized {
+  override def addUserDictionary(dict: (String, POSTag)*): Unit = userDict synchronized {
     userDict.getParentFile.mkdirs()
     val bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(userDict, true)))
     dict.foreach {
@@ -52,7 +52,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     bw.close()
   }
 
-  override def addUserDictionary(morph: String, tag: POSTag): Unit = Dictionary synchronized {
+  override def addUserDictionary(morph: String, tag: POSTag): Unit = userDict synchronized {
     userDict.getParentFile.mkdirs()
     val bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(userDict, true)))
     bw.write(morph)
@@ -95,17 +95,15 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     }.toSeq
   }
 
-  override def items: Set[(String, POSTag)] = userBuffer synchronized {
-    if (userLastUpdated < userDict.lastModified()) {
-      userLastUpdated = userDict.lastModified()
-      userBuffer ++= Source.fromFile(userDict).getLines().map {
-        line =>
-          val segs = line.split('\t')
-          segs(0) -> fromKomoranTag(segs(1))
-      }
+  override def items: Set[(String, POSTag)] = userDict synchronized {
+    userBuffer.clear()
+    userBuffer appendAll Source.fromFile(userDict).getLines().map {
+      line =>
+        val segs = line.split('\t')
+        segs(0) -> fromKomoranTag(segs(1))
     }
 
-    userBuffer
+    userBuffer.toSet
   }
 
   override def baseEntriesOf(f: (POSTag) => Boolean): Iterator[(String, POSTag)] = {

@@ -20,14 +20,13 @@ class RhinoTaggerSpec extends TaggerSpec {
         DictionaryReader.ending_List, DictionaryReader.afterNumber_List,
         DictionaryReader.nonEndingList, DictionaryReader.aspgStem, DictionaryReader.aspgEnding)
     val tagged = rhino.GetOutput().trim
-    val original = tagged.split("[\r\n]+").map(_.split("\t").head).mkString(" ")
 
-    original -> tagged
+    "" -> tagged
   }
 
   override def tagSentByKoala(str: String, tagger: CanTag): (String, String) = {
     val tagged = tagger.tagSentence(str)
-    val tag = tagged.map { word =>
+    val tag = tagged.filterNot(_.exists(_.rawTag.isEmpty)).map { word =>
       word.surface + "\t" + word.map(m => m.surface + "/" + m.rawTag).mkString(" + ")
     }.mkString("\r\n")
     val surface = tagged.surfaceString()

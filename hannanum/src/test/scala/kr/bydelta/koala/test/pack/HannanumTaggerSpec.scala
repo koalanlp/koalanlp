@@ -12,8 +12,7 @@ import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.SentenceSegmen
 import kaist.cilab.parser.berkeleyadaptation.Configuration
 import kr.bydelta.koala.hnn.{Dictionary, Tagger}
 import kr.bydelta.koala.test.core.TaggerSpec
-import kr.bydelta.koala.traits.{CanCompileDict, CanTag}
-import org.specs2.execute.Result
+import kr.bydelta.koala.traits.CanTag
 
 import scala.annotation.tailrec
 import scala.collection.mutable.ArrayBuffer
@@ -51,14 +50,14 @@ class HannanumTaggerSpec extends TaggerSpec {
   override def tagSentByOrig(str: String): (String, String) =
     workflow.synchronized {
       workflow.analyze(str)
-      val original = workflow.getResultOfSentence(new Sentence(0, 0, true))
-      val tag = original.getEojeols.map {
+      val original = retrieveSentences()
+      val tag = original.flatMap(_.getEojeols).map {
         e =>
           e.getMorphemes.zip(e.getTags).map {
             case (m, t) => s"$m/$t"
           }.mkString("+")
       }.mkString(" ")
-      val surface = original.getPlainEojeols.mkString(" ")
+      val surface = original.flatMap(_.getPlainEojeols).mkString(" ")
       surface -> tag
     }
 
