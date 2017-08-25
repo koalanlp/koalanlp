@@ -11,7 +11,8 @@ script:
 - sbt -J-Xmx3g server/test
 - sbt -J-Xmx3g clean
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "kkma/test"
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "komoran/test"
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "komoran/testOnly *.pack.*"
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "komoran/testOnly *.core.*"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "twitter/test"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "arirang/test"
 - sh -e /etc/init.d/xvfb start #Because original RHINO requires X11

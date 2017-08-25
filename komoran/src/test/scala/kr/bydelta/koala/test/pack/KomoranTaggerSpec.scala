@@ -1,10 +1,9 @@
 package kr.bydelta.koala.test.pack
 
-import kr.bydelta.koala.kmr.{Dictionary, Tagger}
+import kr.bydelta.koala.kmr.Tagger
 import kr.bydelta.koala.test.core.TaggerSpec
-import kr.bydelta.koala.traits.{CanCompileDict, CanTag}
+import kr.bydelta.koala.traits.CanTag
 import kr.co.shineware.nlp.komoran.core.Komoran
-import org.specs2.execute.Result
 
 import scala.collection.JavaConverters._
 

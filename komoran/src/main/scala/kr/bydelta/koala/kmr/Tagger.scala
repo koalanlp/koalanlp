@@ -1,9 +1,8 @@
 package kr.bydelta.koala.kmr
 
-import kr.bydelta.koala.POS
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
-import kr.bydelta.koala.traits.{CanTag, CanTagOnlyASentence}
-import kr.bydelta.koala.util.{SentenceSplitter, reduceVerbApply, reunionKorean}
+import kr.bydelta.koala.traits.CanTagOnlyASentence
+import kr.bydelta.koala.util.{reduceVerbApply, reunionKorean}
 import kr.co.shineware.nlp.komoran.core.Komoran
 import kr.co.shineware.nlp.komoran.model.KomoranResult
 
@@ -51,7 +50,7 @@ class Tagger extends CanTagOnlyASentence[KomoranResult] {
 
       Sentence(words)
     } else
-      Sentence(Seq.empty)
+      Sentence.empty
   }
 
   def constructWordSurface(wAsScala: Seq[Morpheme]) = {

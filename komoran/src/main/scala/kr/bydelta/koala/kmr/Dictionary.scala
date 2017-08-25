@@ -36,7 +36,6 @@ object Dictionary extends CanCompileDict with CanExtractResource {
   }
   private lazy val unitparser = new KoreanUnitParser()
   private val userBuffer = ArrayBuffer[(String, POSTag)]()
-  private var userLastUpdated = 0l
   private var baseEntries = Seq[(String, Seq[POSTag])]()
 
   override def addUserDictionary(dict: (String, POSTag)*): Unit = userDict synchronized {
