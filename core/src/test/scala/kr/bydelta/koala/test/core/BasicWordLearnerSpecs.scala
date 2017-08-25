@@ -3,11 +3,15 @@ package kr.bydelta.koala.test.core
 import kr.bydelta.koala._
 import kr.bydelta.koala.traits.{CanCompileDict, CanLearnWord, CanTag}
 import kr.bydelta.koala.util.BasicWordLearner
+import org.specs2.execute.Result
+import org.specs2.mutable.Specification
+
+import scala.collection.JavaConverters._
 
 /**
   * Created by bydelta on 16. 7. 31.
   */
-trait BasicWordLearnerSpecs {
+trait BasicWordLearnerSpecs extends Specification {
   lazy final val INC_1 = INCLUDED_SET.partition(word => {
     val words = tagger.tagSentence(word)
     val morphs = words.flatMap(_.morphemes)
@@ -60,4 +64,55 @@ trait BasicWordLearnerSpecs {
   def getTagger:CanTag
 
   def getDict:CanCompileDict
+
+  "BasicWordLearner" should {
+    var lv0Empty = false
+
+    "extract all nouns" in {
+      val level0 = learner.extractNouns(text.toIterator, minOccurrence = 2, minVariations = 2)
+      val level2 = learner.extractNouns(text.toIterator, minOccurrence = 5, minVariations = 3)
+
+      lv0Empty = level0.isEmpty
+      level0.size must be_>=(level2.size)
+      level0 must not(containAnyOf(EXCLUDED_SET))
+      level0 must containAllOf(INC_1._1)
+      level0 must not(containAnyOf(INC_1._2))
+      level2 must containAllOf(INC_2._1)
+      level2 must not(containAnyOf(INC_2._2))
+    }
+
+    "learn all nouns" in {
+      Result.unit {
+        if (!lv0Empty) {
+          val tagger1 = getTagger
+          val beforeLearn = text.map(s => tagger1.tagSentence(s).singleLineString).mkString("\n")
+
+          learner.jLearn(text.toIterator.asJava, minOccurrence = 1, minVariations = 1)
+
+          val tagger2 = getTagger
+          val afterLearn = text.map(s => tagger2.tagSentence(s).singleLineString).mkString("\n")
+
+          beforeLearn must_!= afterLearn
+        }
+      }
+    }
+  }
+
+  "Dictionary" should {
+    "add a noun" in {
+      getDict.addUserDictionary("갑질", POS.NNG) must not(throwA[Exception])
+      getDict.getNotExists(false, "갑질" -> POS.NNG) must beEmpty
+      getDict.getNotExists(false, "갑질" -> POS.VX) must not(beEmpty)
+    }
+    "add a verb" in {
+      getDict.addUserDictionary("구글링" -> POS.VV) must not(throwA[Exception])
+      getDict.getNotExists(false, "구글링" -> POS.VV) must beEmpty
+      getDict.getNotExists(false, "구글링" -> POS.MM) must not(beEmpty)
+    }
+    "add a modifier" in {
+      getDict.addUserDictionary("대애박" -> POS.MM) must not(throwA[Exception])
+      getDict.getNotExists(false, "대애박" -> POS.MM) must beEmpty
+      getDict.getNotExists(false, "대애박" -> POS.NNP) must not(beEmpty)
+    }
+  }
 }

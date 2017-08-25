@@ -1,6 +1,8 @@
 package kr.bydelta.koala.pack
 
+import kr.bydelta.koala.POS
 import kr.bydelta.koala.helper.DictionaryReader
+import kr.bydelta.koala.rhino.Dictionary
 import org.specs2.execute.Result
 import org.specs2.mutable.Specification
 import rhino.FileAnalyzer
@@ -126,4 +128,12 @@ class DictionaryReaderSpec extends Specification {
     }
   }
 
+  "Dictionary" should {
+    "throw exceptions" in {
+      Dictionary.items must throwA[UnsupportedOperationException]
+      Dictionary.getNotExists(false, ("ABC", POS.VV)) must throwA[UnsupportedOperationException]
+      Dictionary.addUserDictionary("ABC" -> POS.VV) must throwA[UnsupportedOperationException]
+      Dictionary.addUserDictionary("ABC", POS.VV) must throwA[UnsupportedOperationException]
+    }
+  }
 }

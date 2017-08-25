@@ -14,7 +14,9 @@ private object Examples {
   private final val exampleSpecial =
     """01 1+1은 2이고, 3*3은 9이다.
       |01 a/b는 분수이다.
-      |01 | 기호는 분리기호이다.""".stripMargin
+      |01 | 기호는 분리기호이다.
+      |02 ▶ 오늘의 날씨입니다. ◆ 기온 23도는 낮부터임.
+      |01 【그】가 졸음이다. 사랑스러웠기에.""".stripMargin
   // Example 1: JTBC, 2017.04.22
   private final val example1 =
   """03 북한이 도발을 멈추지 않으면 미국이 북핵 시설을 타격해도 군사개입을 하지 않겠다. 중국 관영 환구시보가 밝힌 내용인데요. 중국이 여태껏 제시한 북한에 대한 압박 수단 가운데 가장 이례적이고, 수위가 높은 것으로 보입니다.
