@@ -5,6 +5,8 @@ jdk:
 - oraclejdk8
 install:
 - cp -r ./hannanum/models/* ./
+before_script:
+- export DISPLAY=:99.0
 script:
 - sbt -J-Xmx3g server/test
 - sbt -J-Xmx3g clean
@@ -12,7 +14,10 @@ script:
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "komoran/test"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "twitter/test"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "arirang/test"
-- DISPLAY=:0.0 sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "rhino/testOnly *.pack.*"
+- sh -e /etc/init.d/xvfb start #Because original RHINO requires X11
+- sleep 3 # give xvfb some time to start
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "rhino/testOnly *.pack.*"
+- sh -e /etc/init.d/xvfb stop #Stop X11 simulation
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "rhino/testOnly *.rhino.*"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *.pack.*"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *.core.*"
