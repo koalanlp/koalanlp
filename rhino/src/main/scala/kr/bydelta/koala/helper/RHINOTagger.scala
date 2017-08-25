@@ -12,6 +12,12 @@ import kr.bydelta.koala.data.{Morpheme, Word}
   * The author of RHINO has the original copyright.
   */
 private[koala] object RHINOTagger {
+  final val SPECIALS = "([■▶◀◆▲◇◈☎【】]+)".r
+  final val TOKENIZE = " .?!。‘’“”`\'\"(){}[]─,ㆍ·:;/…_~∼∽□+-=±÷×*^><｜|％%&￦₩\\＄$¥￥£￡°㎞㎏@©ⓒ↑|#♥♡★☆♪♬■▶◀◆▲◇◈☎【】"
+  final val RETAGGING_CONTAIN = "(는|은|을|세|야|자라고)".r
+  final val RETAGGING_EQUAL = "^(는|은|을|세|야|자라고)$".r
+  final val MORPH_MATCH = "([^\\s]+)/([A-Z]{2,3})".r
+
   def tag(input: String) = {
     val arr = split(input)
     val inputArr = arr.filter(_._2).map(_._1).toArray
@@ -111,26 +117,4 @@ private[koala] object RHINOTagger {
         (t, true)
     }.toSeq
   }
-
-  final val SPECIALS = "([■▶◀◆▲◇◈☎【】]+)".r
-  final val TOKENIZE = " .?!。‘’“”`\'\"(){}[]─,ㆍ·:;/…_~∼∽□+-=±÷×*^><｜|％%&￦₩\\＄$¥￥£￡°㎞㎏@©ⓒ↑|#♥♡★☆♪♬■▶◀◆▲◇◈☎【】"
-  final val RETAGGING_CONTAIN = "(는|은|을|세|야|자라고)".r
-  final val RETAGGING_EQUAL = "^(는|은|을|세|야|자라고)$".r
-
-  private[koala] def split(input: String) = {
-    val tok = new StringTokenizer(input.replaceAll("\\s+", " "), TOKENIZE, true)
-    new Iterator[String] {
-      override def hasNext: Boolean = tok.hasMoreTokens
-
-      override def next(): String = tok.nextToken()
-    }.filter(_.trim.nonEmpty).map {
-      case SPECIALS(t) =>
-        (t, false)
-      case t =>
-        (t, true)
-    }.toSeq
-  }
-
-  final
-  val MORPH_MATCH = "([^\\s]+)/([A-Z]{2,3})".r
 }
