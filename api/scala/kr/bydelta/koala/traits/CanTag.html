@@ -190,6 +190,38 @@
                         </a>
                       </li><li class="current-entities indented4">
                         <span class="separator"></span>
+                        <a class="trait" href="CanTagAParagraph.html" title="문단1개, 문장1개가 분석가능한 품사분석기 Trait
+"></a>
+                        <a href="CanTagAParagraph.html" title="문단1개, 문장1개가 분석가능한 품사분석기 Trait
+">
+                          CanTagAParagraph
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="CanTagASentence.html" title="문장1개가 분석가능한 품사분석기 Trait
+"></a>
+                        <a href="CanTagASentence.html" title="문장1개가 분석가능한 품사분석기 Trait
+">
+                          CanTagASentence
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="CanTagOnlyAParagraph.html" title="문장1개는 불가하지만, 문단1개가 분석가능한 품사분석기 Trait
+"></a>
+                        <a href="CanTagOnlyAParagraph.html" title="문장1개는 불가하지만, 문단1개가 분석가능한 품사분석기 Trait
+">
+                          CanTagOnlyAParagraph
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="CanTagOnlyASentence.html" title="문단1개는 불가하지만, 문장1개가 분석가능한 품사분석기 Trait
+"></a>
+                        <a href="CanTagOnlyASentence.html" title="문단1개는 불가하지만, 문장1개가 분석가능한 품사분석기 Trait
+">
+                          CanTagOnlyASentence
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
                         <a class="class" href="Particle.html" title="Case Class of morpheme particle (For CanLearnWord)
 "></a>
                         <a href="Particle.html" title="Case Class of morpheme particle (For CanLearnWord)
@@ -219,13 +251,13 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <span class="name">CanTag</span><span class="tparams">[<span name="S">S</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name">CanTag</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
 
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>품사분석기 Trait
-</p></div><dl class="paramcmts block"><dt class="tparam">S</dt><dd class="cmt"><p>분석기의 출력객체(문장)</p></dd></dl><div class="toggleContainer block">
+</p></div><div class="toggleContainer block">
           <span class="toggle">
             Linear Supertypes
           </span>
@@ -234,7 +266,7 @@
             <span class="toggle">
               Known Subclasses
             </span>
-            <div class="subClasses hiddenContent"><a href="../arirang/Tagger.html" class="extype" name="kr.bydelta.koala.arirang.Tagger">Tagger</a>, <a href="../eunjeon/Tagger.html" class="extype" name="kr.bydelta.koala.eunjeon.Tagger">Tagger</a>, <a href="../hnn/Tagger.html" class="extype" name="kr.bydelta.koala.hnn.Tagger">Tagger</a>, <a href="../kkma/Tagger.html" class="extype" name="kr.bydelta.koala.kkma.Tagger">Tagger</a>, <a href="../kmr/Tagger.html" class="extype" name="kr.bydelta.koala.kmr.Tagger">Tagger</a>, <a href="../twt/Tagger.html" class="extype" name="kr.bydelta.koala.twt.Tagger">Tagger</a></div>
+            <div class="subClasses hiddenContent"><a href="../arirang/Tagger.html" class="extype" name="kr.bydelta.koala.arirang.Tagger">Tagger</a>, <a href="../eunjeon/Tagger.html" class="extype" name="kr.bydelta.koala.eunjeon.Tagger">Tagger</a>, <a href="../hnn/Tagger.html" class="extype" name="kr.bydelta.koala.hnn.Tagger">Tagger</a>, <a href="../kkma/Tagger.html" class="extype" name="kr.bydelta.koala.kkma.Tagger">Tagger</a>, <a href="../kmr/Tagger.html" class="extype" name="kr.bydelta.koala.kmr.Tagger">Tagger</a>, <a href="../rhino/Tagger.html" class="extype" name="kr.bydelta.koala.rhino.Tagger">Tagger</a>, <a href="CanTagAParagraph.html" class="extype" name="kr.bydelta.koala.traits.CanTagAParagraph">CanTagAParagraph</a>, <a href="CanTagASentence.html" class="extype" name="kr.bydelta.koala.traits.CanTagASentence">CanTagASentence</a>, <a href="CanTagOnlyAParagraph.html" class="extype" name="kr.bydelta.koala.traits.CanTagOnlyAParagraph">CanTagOnlyAParagraph</a>, <a href="CanTagOnlyASentence.html" class="extype" name="kr.bydelta.koala.traits.CanTagOnlyASentence">CanTagOnlyASentence</a>, <a href="../twt/Tagger.html" class="extype" name="kr.bydelta.koala.twt.Tagger">Tagger</a></div>
           </div></div>
         
 
@@ -284,10 +316,10 @@
 
         <div class="values members">
               <h3>Abstract Value Members</h3>
-              <ol><li name="kr.bydelta.koala.traits.CanTag#tagParagraphRaw" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="tagParagraphRaw(text:String):Seq[S]"></a><a id="tagParagraphRaw(String):Seq[S]"></a>
+              <ol><li name="kr.bydelta.koala.traits.CanTag#tag" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="tag(text:String):Seq[kr.bydelta.koala.data.Sentence]"></a><a id="tag(String):Seq[Sentence]"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTag.html#tagParagraphRaw(text:String):Seq[S]" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanTag.html#tag(text:String):Seq[kr.bydelta.koala.data.Sentence]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -296,11 +328,28 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">tagParagraphRaw</span><span class="params">(<span name="text">text: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="kr.bydelta.koala.traits.CanTag.S">S</span>]</span>
+        <span class="name">tag</span><span class="params">(<span name="text">text: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
       </span>
       
-      <p class="shortcomment cmt">변환되지않은, 분석결과를 반환.</p><div class="fullcomment"><div class="comment cmt"><p>변환되지않은, 분석결과를 반환.
-</p></div><dl class="paramcmts block"><dt class="param">text</dt><dd class="cmt"><p>분석할 String.</p></dd><dt>returns</dt><dd class="cmt"><p>원본 문단객체의 Sequence</p></dd></dl></div>
+      <p class="shortcomment cmt">주어진 String 문단을 분석하여 품사를 부착함.</p><div class="fullcomment"><div class="comment cmt"><p>주어진 String 문단을 분석하여 품사를 부착함.
+</p></div><dl class="paramcmts block"><dt class="param">text</dt><dd class="cmt"><p>품사분석을 시행할 문단 String</p></dd><dt>returns</dt><dd class="cmt"><p>품사분석 결과를 문장단위로 잘라서 포함한 Seq[Sentence] 객체</p></dd></dl></div>
+    </li><li name="kr.bydelta.koala.traits.CanTag#tagSentence" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="tagSentence(text:String):kr.bydelta.koala.data.Sentence"></a><a id="tagSentence(String):Sentence"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanTag.html#tagSentence(text:String):kr.bydelta.koala.data.Sentence" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tagSentence</span><span class="params">(<span name="text">text: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a></span>
+      </span>
+      
+      <p class="shortcomment cmt">주어진 String 문장을 분석하여 품사를 부착함.</p><div class="fullcomment"><div class="comment cmt"><p>주어진 String 문장을 분석하여 품사를 부착함.
+</p></div><dl class="paramcmts block"><dt class="param">text</dt><dd class="cmt"><p>품사분석을 시행할 문장 String</p></dd><dt>returns</dt><dd class="cmt"><p>품사분석 결과를 포함한 Sentence 객체</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -576,40 +625,6 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="kr.bydelta.koala.traits.CanTag#tag" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="tag(text:String,forceSingleSentence:Boolean):Seq[kr.bydelta.koala.data.Sentence]"></a><a id="tag(String,Boolean):Seq[Sentence]"></a>
-      <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTag.html#tag(text:String,forceSingleSentence:Boolean):Seq[kr.bydelta.koala.data.Sentence]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">tag</span><span class="params">(<span name="text">text: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="forceSingleSentence">forceSingleSentence: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
-      </span>
-      
-      <p class="shortcomment cmt">주어진 String 문단을 분석하여 품사를 부착함.</p><div class="fullcomment"><div class="comment cmt"><p>주어진 String 문단을 분석하여 품사를 부착함.
-</p></div><dl class="paramcmts block"><dt class="param">text</dt><dd class="cmt"><p>품사분석을 시행할 문단 String</p></dd><dt>returns</dt><dd class="cmt"><p>품사분석 결과를 문장단위로 잘라서 포함한 Seq[Sentence] 객체</p></dd></dl></div>
-    </li><li name="kr.bydelta.koala.traits.CanTag#tagSentence" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="tagSentence(text:String):kr.bydelta.koala.data.Sentence"></a><a id="tagSentence(String):Sentence"></a>
-      <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTag.html#tagSentence(text:String):kr.bydelta.koala.data.Sentence" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">tagSentence</span><span class="params">(<span name="text">text: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a></span>
-      </span>
-      
-      <p class="shortcomment cmt">주어진 String 문장을 분석하여 품사를 부착함.</p><div class="fullcomment"><div class="comment cmt"><p>주어진 String 문장을 분석하여 품사를 부착함.
-</p></div><dl class="paramcmts block"><dt class="param">text</dt><dd class="cmt"><p>품사분석을 시행할 문장 String</p></dd><dt>returns</dt><dd class="cmt"><p>품사분석 결과를 포함한 Sentence 객체</p></dd></dl></div>
     </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <span class="permalink">
@@ -712,14 +727,14 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 2.0.0) Use jTag(String) instead.">jTagParagraph</span><span class="params">(<span name="text">text: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.util.List">List</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
+        <span class="name deprecated" title="Deprecated: (Since version 2.0.0) Use jTag(String) instead. This will be removed at v2.0.0">jTagParagraph</span><span class="params">(<span name="text">text: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.util.List">List</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
       </span>
       
       <p class="shortcomment cmt">(Java) 주어진 String 문단을 분석하여 품사를 부착함.</p><div class="fullcomment"><div class="comment cmt"><p>(Java) 주어진 String 문단을 분석하여 품사를 부착함.
 </p></div><dl class="paramcmts block"><dt class="param">text</dt><dd class="cmt"><p>품사분석을 시행할 문단 String</p></dd><dt>returns</dt><dd class="cmt"><p>품사분석 결과를 문장단위로 잘라서 포함한 <code>java.util.List&lt;Sentence&gt;</code> 객체</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
                 <span class="name">@deprecated</span>
               
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.0.0)</i> Use jTag(String) instead.</p></dd></dl></div>
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.0.0)</i> Use jTag(String) instead. This will be removed at v2.0.0</p></dd></dl></div>
     </li><li name="kr.bydelta.koala.traits.CanTag#tagParagraph" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="tagParagraph(text:String):Seq[kr.bydelta.koala.data.Sentence]"></a><a id="tagParagraph(String):Seq[Sentence]"></a>
       <span class="permalink">
@@ -732,34 +747,14 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 2.0.0) Use tag(String) instead.">tagParagraph</span><span class="params">(<span name="text">text: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
+        <span class="name deprecated" title="Deprecated: (Since version 1.6.0) Use tag(String) instead. This will be removed at v2.0.0">tagParagraph</span><span class="params">(<span name="text">text: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
       </span>
       
       <p class="shortcomment cmt">주어진 String 문단을 분석하여 품사를 부착함.</p><div class="fullcomment"><div class="comment cmt"><p>주어진 String 문단을 분석하여 품사를 부착함.
 </p></div><dl class="paramcmts block"><dt class="param">text</dt><dd class="cmt"><p>품사분석을 시행할 문단 String</p></dd><dt>returns</dt><dd class="cmt"><p>품사분석 결과를 문장단위로 잘라서 포함한 Seq[Sentence] 객체</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
                 <span class="name">@deprecated</span>
               
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.0.0)</i> Use tag(String) instead.</p></dd></dl></div>
-    </li><li name="kr.bydelta.koala.traits.CanTag#tagSentenceRaw" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="tagSentenceRaw(text:String):S"></a><a id="tagSentenceRaw(String):S"></a>
-      <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTag.html#tagSentenceRaw(text:String):S" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name deprecated" title="Deprecated: (Since version 2.0.0) Use tagParagraphRaw(String) instead.">tagSentenceRaw</span><span class="params">(<span name="text">text: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="kr.bydelta.koala.traits.CanTag.S">S</span></span>
-      </span>
-      
-      <p class="shortcomment cmt">변환되지않은, 분석결과를 반환.</p><div class="fullcomment"><div class="comment cmt"><p>변환되지않은, 분석결과를 반환.
-</p></div><dl class="paramcmts block"><dt class="param">text</dt><dd class="cmt"><p>분석할 String.</p></dd><dt>returns</dt><dd class="cmt"><p>원본 문장객체.</p></dd></dl><dl class="attributes block"> <dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.0.0)</i> Use tagParagraphRaw(String) instead.</p></dd></dl></div>
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 1.6.0)</i> Use tag(String) instead. This will be removed at v2.0.0</p></dd></dl></div>
     </li></ol>
             </div>
         </div>
