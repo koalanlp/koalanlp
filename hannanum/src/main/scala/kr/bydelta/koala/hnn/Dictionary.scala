@@ -6,7 +6,6 @@ import kaist.cilab.jhannanum.common.Code
 import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.datastructure.{TagSet, Trie}
 import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.resource.{AnalyzedDic, Connection, ConnectionNot, NumberAutomata}
 import kr.bydelta.koala.POS.POSTag
-import kr.bydelta.koala._
 import kr.bydelta.koala.traits.{CanCompileDict, CanExtractResource}
 
 import scala.annotation.tailrec
@@ -97,13 +96,10 @@ object Dictionary extends CanCompileDict with CanExtractResource {
   }
 
   override def items: Set[(String, POSTag)] = {
-    if (mapLastUpdate < usrDicPath.lastModified()) {
-      mapLastUpdate = usrDicPath.lastModified()
-      usrBuffer ++= Source.fromFile(usrDicPath).getLines().toStream.map {
-        line =>
-          val segs = line.split('\t')
-          segs(0) -> fromHNNTag(segs(1))
-      }
+    usrBuffer ++= Source.fromFile(usrDicPath).getLines().toStream.map {
+      line =>
+        val segs = line.split('\t')
+        segs(0) -> fromHNNTag(segs(1))
     }
 
     usrBuffer
