@@ -1,15 +1,24 @@
 package kr.bydelta.koala.pack
 
-import kr.bydelta.koala.rhino.{Dictionary, Tagger}
+import kr.bydelta.koala.helper.{DictionaryReader, RHINOTagger}
+import kr.bydelta.koala.rhino.Tagger
 import kr.bydelta.koala.test.core.TaggerSpec
 import kr.bydelta.koala.traits.CanTag
+import org.specs2.execute.Result
+import rhino.{MainClass, PreProcess}
 
 /**
   * Created by bydelta on 16. 7. 26.
   */
 class RhinoTaggerSpec extends TaggerSpec {
   override def tagSentByOrig(str: String): (String, String) = {
-    val rhino = Dictionary.getRHINO(str)
+    val rhino =
+      new MainClass(str, DictionaryReader.combiMethods_List,
+        DictionaryReader.endingMethods_List, DictionaryReader.complexStem_MethodDeleted,
+        DictionaryReader.stem_MethodDeleted, DictionaryReader.afterNumber_MethodDeleted,
+        DictionaryReader.ending_MethodDeleted, DictionaryReader.stem_List,
+        DictionaryReader.ending_List, DictionaryReader.afterNumber_List,
+        DictionaryReader.nonEndingList, DictionaryReader.aspgStem, DictionaryReader.aspgEnding)
     val tagged = rhino.GetOutput().trim
     val original = tagged.split("[\r\n]+").map(_.split("\t").head).mkString(" ")
 
@@ -32,4 +41,18 @@ class RhinoTaggerSpec extends TaggerSpec {
     new Tagger()
 
   override def isSentenceSplitterImplemented: Boolean = true
+
+  "RHINOTagger" should {
+    "split sentence as the same way" in {
+      Result.unit {
+        exampleSequence().foreach {
+          case (_, sent) =>
+            val preproc = new PreProcess(sent).GetOutput()
+            val implemented = RHINOTagger.split(sent)
+
+            implemented.filter(_._2).map(_._1).mkString("//") must be_==(preproc.mkString("//"))
+        }
+      }
+    }
+  }
 }
