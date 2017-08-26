@@ -216,16 +216,16 @@ class DataSpecs extends Specification {
             str.head.getJungsungCode mustEqual code.head._2
             str.head.getJongsungCode mustEqual code.head._3
 
-            str.dissembleHangul mustEqual code.flatMap(x => Seq(x._1, x._2, x._3)).mkString
-            str.head.toDissembledSeq mustEqual code.head
+            str.dissembleHangul.toSeq.map(_.toInt) mustEqual code.flatMap(x => Seq(x._1 + 0x1100, x._2 + 0x1161, x._3 + 0x11A7))
+            str.head.toDissembledSeq.map(_.toInt) mustEqual Seq(code.head._1 + 0x1100, code.head._2 + 0x1161, code.head._3 + 0x11A7)
         }
       }
     }
 
     "know which is jamo" in {
       'k'.isCompleteHangul must beFalse
-      'ㅏ'.isCompleteHangul must beFalse
-      'ㅏ'.isJungsungJamo must beTrue
+      0x1161.toChar.isCompleteHangul must beFalse
+      0x1161.toChar.isJungsungJamo must beTrue
 
       val ch = '겁'
       val cho = (ch.getChosungCode + 0x1100).toChar
@@ -330,10 +330,11 @@ class DataSpecs extends Specification {
           ("갑", "-", true, "갑-"),
           ("쌓", "자고", true, "쌓자고"),
           ("좇", "ㄴ", true, "좇은"),
+          ("좇", "며", true, "좇으며"),
           ("갖", "ㄹ", true, "갖을"),
           ("붙", "며", true, "붙으며"),
           ("붙", "니", true, "붙니"),
-          ("가", "안", true, "간"),
+          ("사가", "안", true, "사간"),
           ("끌", "오", true, "끄오")
         )
 

@@ -130,13 +130,18 @@ package object util {
         verbRev.tail ++ ((char - char.getJongsungCode).toChar +: rest)
       } else if (char.endsWithJongsung && !endsWithL(char)) {
         // 규칙적첨가: ('ㄹ'이외의 종료 어간) + '-ㄴ,-ㄹ,-오,-시,-며.'
-        if (next == '오') {
+        if (next == 'ㄴ' || next == 'ㄹ') {
+          verb ++ harmony(verbRev, reconstructKorean(jung = 18, jong = HanLastList.indexOf(next)) +: rest.tail)
+        } else if (next == '오') {
           verb ++ harmony(verbRev, '으' +: rest)
         } else
           verb ++ harmony(verbRev, rest)
       } else if (char.getJungsungCode == HanSecondList.length - 1 && startsWithUh(next)) {
         // 불규칙: 'ㅎ'종성 + 'ㅓ' = 'ㅎ'탈락 + 어간 어미가 'ㅐ'로 변화
         verbRev.tail.reverse ++: (reconstructKorean(char.getChosungCode, 6, next.getJongsungCode) +: rest.tail)
+      } else if (endsWithAh(char) && startsWithAh(next)) {
+        verbRev.tail.reverse ++
+          (reconstructKorean(char.getChosungCode, char.getJungsungCode, next.getJongsungCode) +: rest.tail)
       } else {
         verb ++ harmony(verbRev, rest)
       }
@@ -146,15 +151,10 @@ package object util {
       verbRev.tail.reverse ++: harmony(verbRev.tail, (char - char.getJongsungCode).toChar +: rest)
     } else if (char.endsWithJongsung && !endsWithL(char)) {
       // 규칙적첨가: ('ㄹ'이외의 종료 어간) + '-ㄴ,-ㄹ,-오,-시,-며.'
-      if (next == 'ㄴ' || next == 'ㄹ') {
-        verb ++ harmony(verbRev, reconstructKorean(jung = 18, jong = HanLastList.indexOf(next)) +: rest)
-      } else if (next == '시' || next == '며') {
+      if (next == '시' || next == '며') {
         verb ++ harmony(verbRev, '으' +: rest)
       } else
         verb ++ harmony(verbRev, rest)
-    } else if (endsWithAh(char) && startsWithAh(next)) {
-      verbRev.tail.reverse ++
-        (reconstructKorean(char.getChosungCode, char.getJongsungCode, next.getJongsungCode) +: rest.tail)
     } else {
       verb ++ harmony(verbRev, rest)
     }
