@@ -160,7 +160,7 @@ def projectWithConfig(module: String) =
       else
         Some("releases" at nexus + "service/local/staging/deploy/maven2")
     }.value,
-    licenses := Seq("GPL v3" -> url("https://opensource.org/licenses/GPL-3.0/")),
+    licenses := Seq("MIT" -> url("https://tldrlegal.com/license/mit-license")),
     publishMavenStyle := true,
     publishArtifact in Test := false,
     pomIncludeRepository := { _ ⇒ false },

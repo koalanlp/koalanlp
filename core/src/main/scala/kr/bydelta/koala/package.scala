@@ -141,7 +141,17 @@ package object koala {
       *
       * @return 종성으로 끝난다면, 해당 위치를, 없다면 0을 반환.
       */
-    def getJongsungCode = (ch - HANGUL_START) % JONGSUNG_RANGE
+    def getJongsungCode =
+    if (isJongsungJamo) ch - 0x11A7
+    else if (isCompleteHangul) (ch - HANGUL_START) % JONGSUNG_RANGE
+    else 0
+
+    /**
+      * 한글의 종성자음 문자인지 확인
+      *
+      * @return True: 종료 문자가 종성자음인 경우.
+      */
+    def isJongsungJamo = 0x11A7 <= ch && ch <= 0x11C2
 
     /**
       * 완성된 문자의 범위인지 확인.
@@ -189,24 +199,12 @@ package object koala {
       * (Code modified from Seunjeon package)
       * 중성 종료 코드
       *
-      * @return 중성으로 끝난다면, 해당 위치를, 없다면 0을 반환.
+      * @return 중성으로 끝난다면, 해당 위치를, 없다면 -1을 반환.
       */
-    def getJungsungCode = (ch - HANGUL_START) % JUNGSUNG_RANGE / JONGSUNG_RANGE
-
-    /**
-      * (Code modified from Seunjeon package)
-      * 초성 종료 코드
-      *
-      * @return 초성으로 끝난다면, 해당 위치를, 없다면 0을 반환.
-      */
-    def getChosungCode = (ch - HANGUL_START) / JUNGSUNG_RANGE
-
-    /**
-      * 한글의 초성자음 문자인지 확인
-      *
-      * @return True: 종료 문자가 초성자음인 경우.
-      */
-    def isChosungJamo = 0x1100 <= ch && ch <= 0x1112
+    def getJungsungCode =
+    if (isCompleteHangul) (ch - HANGUL_START) % JUNGSUNG_RANGE / JONGSUNG_RANGE
+    else if (isJungsungJamo) ch - 0x1161
+    else -1
 
     /**
       * 한글의 중성자음 문자인지 확인
@@ -216,11 +214,22 @@ package object koala {
     def isJungsungJamo = 0x1161 <= ch && ch <= 0x1175
 
     /**
-      * 한글의 종성자음 문자인지 확인
+      * (Code modified from Seunjeon package)
+      * 초성 종료 코드
       *
-      * @return True: 종료 문자가 종성자음인 경우.
+      * @return 초성으로 끝난다면, 해당 위치를, 없다면 -1을 반환.
       */
-    def isJongsungJamo = 0x11A7 <= ch && ch <= 0x11C2
+    def getChosungCode =
+    if (isCompleteHangul) (ch - HANGUL_START) / JUNGSUNG_RANGE
+    else if (isChosungJamo) ch - 0x1100
+    else -1
+
+    /**
+      * 한글의 초성자음 문자인지 확인
+      *
+      * @return True: 종료 문자가 초성자음인 경우.
+      */
+    def isChosungJamo = 0x1100 <= ch && ch <= 0x1112
   }
 
   /**

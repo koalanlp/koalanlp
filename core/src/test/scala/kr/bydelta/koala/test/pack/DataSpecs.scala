@@ -33,6 +33,10 @@ class DataSpecs extends Specification {
 
       morph1.toString must_== "밥/NNP(NNP)"
       morph1.equalsWithoutTag(morph2) must beTrue
+
+      val Morpheme(s, t) = morph4
+      s must_== morph4.surface
+      t must_== morph4.tag
     }
   }
 
@@ -65,6 +69,11 @@ class DataSpecs extends Specification {
       filtered must beAnInstanceOf[Word]
 
       (word ++ word) must beAnInstanceOf[Word]
+
+      val Word(s, m, m2) = word
+      s must_== word.surface
+      m must_== word.head
+      m2 must_== word(1)
     }
   }
 
@@ -104,6 +113,30 @@ class DataSpecs extends Specification {
       sent.matches(Seq(Seq("NN", "J"), Seq("N", "J"))) must beFalse
       sent.matches(Array(Array("NP", "J"), Array("N", "JKO"))) must beTrue
 
+      val sent2 = Sentence(
+        Seq(
+          Word(
+            "밥을",
+            Seq(
+              Morpheme("밥", "NNG", POS.NNG),
+              Morpheme("을", "JKO", POS.JKO)
+            )
+          ),
+          Word(
+            "나는",
+            Seq(
+              Morpheme("나", "NP", POS.NP),
+              Morpheme("는", "JX", POS.JX)
+            )
+          )
+        )
+      )
+
+      sent must not(beEqualTo(sent2))
+      sent2.root.addDependant(1, FunctionalTag.Object, "O")
+      sent2(1).addDependant(0, FunctionalTag.Subject, "S")
+      sent2.root.dependents.zip(sent2.root.jDependents.asScala).forall(x => x._1 == x._2) must beTrue
+
       import Implicit._
       val filtered = sent.filter(Seq(POS.JX, POS.JC))
       filtered must beAnInstanceOf[Sentence]
@@ -115,13 +148,60 @@ class DataSpecs extends Specification {
 
       val concated = sent ++ sent
       concated must beAnInstanceOf[Sentence]
+
+      val Sentence(m, m2) = sent
+      m must_== sent.head
+      m2 must_== sent(1)
     }
   }
 
-  "KoreanCharacterExtension" should {
-    "give the same result with KoreanStringExtension" in {
-      reconstructKorean('한'.getChosungCode, '걱'.getJungsungCode, '물'.getJongsungCode) mustEqual '헐'
+  "package" should {
+    "convert alphabet" in {
+      val examples = Seq(
+        "A" -> "에이",
+        "B" -> "비",
+        "C" -> "씨",
+        "D" -> "디",
+        "E" -> "이",
+        "F" -> "에프",
+        "G" -> "지",
+        "H" -> "에이치",
+        "I" -> "아이",
+        "J" -> "제이",
+        "K" -> "케이",
+        "L" -> "엘",
+        "M" -> "엠",
+        "N" -> "엔",
+        "O" -> "오",
+        "P" -> "피",
+        "Q" -> "큐",
+        "R" -> "알",
+        "S" -> "에스",
+        "T" -> "티",
+        "U" -> "유",
+        "V" -> "브이",
+        "W" -> "더블유",
+        "X" -> "엑스",
+        "Y" -> "와이",
+        "Z" -> "제트"
+      )
 
+      Result.unit {
+        (1 to 50).foreach {
+          _ =>
+            val (original, korean) = (1 to 6).map(_ => examples(Random.nextInt(examples.length))).unzip
+
+            pronounceAlphabet(original.mkString) must_== korean.mkString
+            writeAlphabet(korean.mkString) must_== original.mkString
+        }
+      }
+    }
+
+    "give the same function in Extensions" in {
+      reconstructKorean('한'.getChosungCode, '걱'.getJungsungCode, '물'.getJongsungCode) mustEqual '헐'
+    }
+
+    "construct or dissamble Korean jamo" in {
       Result.unit {
         (1 to 50).foreach {
           _ =>
@@ -135,10 +215,40 @@ class DataSpecs extends Specification {
             str.head.getChosungCode mustEqual code.head._1
             str.head.getJungsungCode mustEqual code.head._2
             str.head.getJongsungCode mustEqual code.head._3
+
+            str.dissembleHangul mustEqual code.flatMap(x => Seq(x._1, x._2, x._3)).mkString
+            str.head.toDissembledSeq mustEqual code.head
         }
       }
     }
 
+    "know which is jamo" in {
+      'k'.isCompleteHangul must beFalse
+      'ㅏ'.isCompleteHangul must beFalse
+      'ㅏ'.isJungsungJamo must beTrue
+
+      val ch = '겁'
+      val cho = (ch.getChosungCode + 0x1100).toChar
+      cho.isChosungJamo must beTrue
+      cho.getChosungCode must_== ch.getChosungCode
+      cho.getJungsungCode must_== -1
+      cho.getJongsungCode must_== 0
+
+      val jung = (ch.getJungsungCode + 0x1161).toChar
+      jung.isJungsungJamo must beTrue
+      jung.getChosungCode must_== -1
+      jung.getJungsungCode must_== ch.getJungsungCode
+      jung.getJongsungCode must_== 0
+
+      val jong = (ch.getJongsungCode + 0x11A7).toChar
+      jong.isJongsungJamo must beTrue
+      jong.getChosungCode must_== -1
+      jong.getJungsungCode must_== -1
+      jong.getJongsungCode must_== ch.getJongsungCode
+    }
+  }
+
+  "util package" should {
     "reduce verb application correctly" in {
       val map =
         Seq(("깨닫", "아", true, "깨달아"),
@@ -210,12 +320,45 @@ class DataSpecs extends Specification {
           ("보", "면", true, "보면"),
           ("주장하", "았다", true, "주장하였다"),
           ("너그럽", "게", false, "너그럽게"),
-          ("연결지", "었", true, "연결졌"))
+          ("연결지", "었", true, "연결졌"),
+          ("다", "아", true, "다오"),
+          ("눕", "으니", true, "누우니"),
+          ("눕", "자", true, "눕자"),
+          ("돕", "으면", true, "도우면"),
+          ("곱", "ㄴ", false, "고운"),
+          ("곱", "어", false, "고와"),
+          ("갑", "-", true, "갑-"),
+          ("쌓", "자고", true, "쌓자고"),
+          ("좇", "ㄴ", true, "좇은"),
+          ("갖", "ㄹ", true, "갖을"),
+          ("붙", "며", true, "붙으며"),
+          ("붙", "니", true, "붙니"),
+          ("가", "안", true, "간"),
+          ("끌", "오", true, "끄오")
+        )
 
       Result.unit {
         map.foreach {
           case (verb, rest, isVerb, result) =>
             util.reduceVerbApply(verb.toSeq, isVerb, rest.toSeq).mkString mustEqual result
+        }
+      }
+    }
+
+    "reunion korean" in {
+
+      val map =
+        Seq(
+          Seq('ㄱ', 'ㅏ', 'ㄴ', 'ㄷ', 'ㅣ') -> "간디",
+          Seq('ㄱ', 'ㅏ', 'ㄱ', 'ㅓ', 'ㄷ', 'ㅡ', 'ㄴ') -> "가거든",
+          Seq('갑', 'ㅘ', 'ㅆ', 'ㅇ', 'ㅓ') -> "가봤어",
+          Seq('가', 'ㅗ', 'ㄴ', 'ㅜ', 'ㄹ', 'ㅣ') -> "가ㅗ누리"
+        )
+
+      Result.unit {
+        map.foreach {
+          case (seq, result) =>
+            util.reunionKorean(seq).mkString mustEqual result
         }
       }
     }
