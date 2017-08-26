@@ -1,7 +1,5 @@
 KoalaNLP
 ==============
-(구) KoreanAnalyzer
-
 [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core_2.12.svg?style=flat-square&label=release)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core_2.12%22)
 [![ScalaDoc](https://img.shields.io/badge/doc-Scala-red.svg?style=flat-square)](http://nearbydelta.github.io/KoalaNLP/api/scala/kr/bydelta/koala/index.html)
 [![JavaDoc](https://img.shields.io/badge/doc-Java-blue.svg?style=flat-square)](http://nearbydelta.github.io/KoalaNLP/api/java/index.html)
@@ -11,7 +9,7 @@ KoalaNLP
 [![codecov](https://img.shields.io/codecov/c/github/nearbydelta/KoalaNLP.svg?style=flat-square)](https://codecov.io/gh/nearbydelta/KoalaNLP)
 [![Dependency Status](https://www.versioneye.com/user/projects/58fadf836ac171431cf95062/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58fadf836ac171431cf95062)
 
-[![GPL Licence](https://img.shields.io/badge/license-GPL%20v3-green.svg?style=flat-square)](https://opensource.org/licenses/GPL-3.0/)
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 [![Gitter](https://img.shields.io/gitter/room/nearbydelta/KoalaNLP.svg?style=flat-square)](https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # 소개
@@ -21,7 +19,7 @@ KoalaNLP
 __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이 목적입니다.
 * Hannanum: KAIST의 [한나눔 형태소 분석기](http://kldp.net/projects/hannanum/)와 [NLP_HUB 구문분석기](http://semanticweb.kaist.ac.kr/home/index.php/NLP_HUB)
 * KKMA: 서울대의 [꼬꼬마 형태소/구문 분석기](http://kkma.snu.ac.kr/documents/index.jsp)
-* Komoran: Junsoo Shin님의 [코모란 v3.0](https://github.com/shin285/KOMORAN)
+* Komoran: Junsoo Shin님의 [코모란 v3.x](https://github.com/shin285/KOMORAN)
 * Twitter: OpenKoreanText의 [오픈 소스 한국어 처리기](http://openkoreantext.org) (구 Twitter 한국어 분석기)<sup>1-1</sup>
 * Eunjeon: 은전한닢 프로젝트의 [SEunjeon(S은전)](https://bitbucket.org/eunjeon/seunjeon)
 * Arirang: 이수명님의 [Arirang Morpheme Analyzer](http://cafe.naver.com/korlucene) <sup>1-2</sup>
@@ -95,13 +93,13 @@ Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 
   <classifier>assembly</classifier>
 ```
 
-예를 들어서, 꼬꼬마 분석기(koalanlp-kkma) 버전 1.7.0을 추가하고자 한다면, 아래와 같습니다.
+예를 들어서, 꼬꼬마 분석기(koalanlp-kkma) 버전 1.8.0을 추가하고자 한다면, 아래와 같습니다.
 ```xml
 <dependency>
   <groupId>kr.bydelta</groupId>
   <artifactId>koalanlp-kkma_2.12</artifactId>
   <classifier>assembly</classifier>
-  <version>1.7.0</version>
+  <version>1.8.0</version>
 </dependency>
 ```
 
@@ -209,14 +207,14 @@ sentence match {
 ```
 
 # License 조항
-이 프로젝트 자체(KoalaNLP-core)와 인터페이스 통합을 위한 코드는  *GPL v3*을 따르며,
+이 프로젝트 자체(KoalaNLP-core)와 인터페이스 통합을 위한 코드는 v1.8.0부터 [*MIT License*](https://tldrlegal.com/license/mit-license)을 따르며,
 각 분석기의 License와 저작권은 각 프로젝트에서 지정한 바를 따릅니다. (`kr.bydelta.koala.helper` 하위에 새로 수정되어 등록된 Class/Object는 각 프로젝트의 결과물을 조금 수정한 판본이며, 저작권은 각 프로젝트에 귀속됩니다.)
-* Hannanum: GPL v3
-* KKMA: GPL v2 (GPL v2를 따르지 않더라도, 상업적 이용시 별도 협의 가능)
-* Komoran: GPL v2
-* Twitter: Apache License 2.0
-* Eunjeon: Apache License 2.0
-* Arirang: Apache License 2.0
+* Hannanum: [GPL v3](https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3))
+* KKMA: [GPL v2](https://tldrlegal.com/license/gnu-general-public-license-v2) (GPL v2를 따르지 않더라도, 상업적 이용시 별도 협의 가능)
+* Komoran: [GPL v2](https://tldrlegal.com/license/gnu-general-public-license-v2)
+* Twitter: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
+* Eunjeon: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
+* Arirang: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
 * RHINO: 비상업적 용도 사용가능.
 
 # 결과 비교
