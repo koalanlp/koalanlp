@@ -17,8 +17,9 @@ import scala.collection.{IndexedSeqLike, mutable}
   * @param surface   어절의 표면형 String.
   * @param morphemes 어절에 포함된 형태소의 목록 Seq[Morpheme].
   */
+@SerialVersionUID(1080201L)
 final class Word private(val surface: String, val morphemes: Vector[Morpheme])
-  extends IndexedSeq[Morpheme] with IndexedSeqLike[Morpheme, Word] {
+  extends IndexedSeq[Morpheme] with IndexedSeqLike[Morpheme, Word] with Serializable {
 
   /**
     * Index of this word
@@ -102,13 +103,6 @@ final class Word private(val surface: String, val morphemes: Vector[Morpheme])
     case _ => false
   }
 
-  /**
-    * Index of this word within the sentence.
-    *
-    * @return index
-    */
-  def id = index
-
   override def canEqual(that: Any): Boolean = that.isInstanceOf[Word]
 
   /**
@@ -147,6 +141,13 @@ final class Word private(val surface: String, val morphemes: Vector[Morpheme])
 
   override protected[this] def newBuilder: mutable.Builder[Morpheme, Word] =
     new ArrayBuffer[Morpheme] mapResult Word.applySeq(id, surface)
+
+  /**
+    * Index of this word within the sentence.
+    *
+    * @return index
+    */
+  def id = index
 
   /**
     * 구문분석과 품사분석의 결과를 String으로 변환.
@@ -191,20 +192,6 @@ object Word{
   applySeq(-1, surface)(morphemes)
 
   /**
-    * Generate word from given information
-    *
-    * @param id        Index within the sentence
-    * @param surface   Surface string
-    * @param morphemes Sequence of morphemes
-    * @return A new word
-    */
-  private def applySeq(id: Int, surface: String)(morphemes: collection.Seq[Morpheme]) = {
-    val w = new Word(surface, morphemes.toVector)
-    w.index = id
-    w
-  }
-
-  /**
     * Extract surface form and morphemes for case-matching.
     *
     * @note "Extractor" is for pattern matching. That is, a word `w` can be matched as:
@@ -235,6 +222,20 @@ object Word{
   }
 
   /**
+    * Generate word from given information
+    *
+    * @param id        Index within the sentence
+    * @param surface   Surface string
+    * @param morphemes Sequence of morphemes
+    * @return A new word
+    */
+  private def applySeq(id: Int, surface: String)(morphemes: collection.Seq[Morpheme]) = {
+    val w = new Word(surface, morphemes.toVector)
+    w.index = id
+    w
+  }
+
+  /**
     * Create empty word (for root)
     *
     * @return Empty word
@@ -250,9 +251,10 @@ object Word{
   * @param rawRel   Relation name (Not-normalized, original)
   * @param target   Index of target word (within Sentence)
   */
+@SerialVersionUID(1080201L)
 final class Relationship private(val head: Int,
                                  val relation: FunctionalTag, val rawRel: String,
-                                 val target: Int) {
+                                 val target: Int) extends Serializable {
 
   override def equals(obj: scala.Any): Boolean =
     obj match {

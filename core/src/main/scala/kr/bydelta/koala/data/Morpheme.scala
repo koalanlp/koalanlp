@@ -10,7 +10,8 @@ import kr.bydelta.koala.POS.POSTag
   * @param rawTag  원본 형태소 분석기의 품사 String / POS Tag, produced by the original tagger.
   * @param tag     통합 품사 / POS Tag, induced by Koala.
   */
-final class Morpheme private(val surface: String, val rawTag: String, val tag: POSTag) {
+@SerialVersionUID(1080201L)
+final class Morpheme private(val surface: String, val rawTag: String, val tag: POSTag) extends Serializable {
   /**
     * Index of this morpheme
     */

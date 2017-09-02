@@ -11,8 +11,9 @@ import scala.collection.{IndexedSeqLike, mutable}
   *
   * @param words 문장에 포함되는 어절의 나열. / Word sequence
   */
+@SerialVersionUID(1080201L)
 final class Sentence private(val words: Vector[Word])
-  extends IndexedSeq[Word] with IndexedSeqLike[Word, Sentence] {
+  extends IndexedSeq[Word] with IndexedSeqLike[Word, Sentence] with Serializable {
 
   /* Initialization */
   words.zipWithIndex.par.foreach {
@@ -34,6 +35,13 @@ final class Sentence private(val words: Vector[Word])
     * (Java) Head words for this sentence.
     */
   def jTopLevels = topLevels.asJava
+
+  /**
+    * 의존 구문 분석 결과, 나타난 핵심어들.
+    *
+    * Head words for this sentence.
+    */
+  def topLevels = root.dependents
 
   /**
     * (Java) 주어진 품사 표기의 Sequence를 포함하는지 확인.
@@ -145,13 +153,6 @@ final class Sentence private(val words: Vector[Word])
     }.mkString("\n")
 
   /**
-    * 의존 구문 분석 결과, 나타난 핵심어들.
-    *
-    * Head words for this sentence.
-    */
-  def topLevels = root.dependents
-
-  /**
     * 띄어쓰기 된 문장을 반환.
     *
     * @param delimiter 어절 사이의 띄어쓰기 방식. 기본값 = 공백(" ")
@@ -215,6 +216,16 @@ object Sentence {
   def apply(words: collection.Seq[Word]) = applySeq(words)
 
   /**
+    * Create a sentence.
+    *
+    * @note Access is restricted because (i) Sentence should be created within Koala package,
+    *       and (ii) most developers using this package seldom needs this operation.
+    * @param words Word sequence.
+    * @return a new Sentence.
+    */
+  private def applySeq(words: collection.Seq[Word]) = new Sentence(words.toVector)
+
+  /**
     * Extractor for the sentences.
     *
     * @note "Extractor" is for pattern matching. That is, a sentence `s` can be matched as:
@@ -250,14 +261,4 @@ object Sentence {
     * @return a new Builder
     */
   private def newBuilder = new ArrayBuffer[Word] mapResult applySeq
-
-  /**
-    * Create a sentence.
-    *
-    * @note Access is restricted because (i) Sentence should be created within Koala package,
-    *       and (ii) most developers using this package seldom needs this operation.
-    * @param words Word sequence.
-    * @return a new Sentence.
-    */
-  private def applySeq(words: collection.Seq[Word]) = new Sentence(words.toVector)
 }
