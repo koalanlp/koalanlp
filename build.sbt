@@ -74,7 +74,7 @@ lazy val twitter = (project in file("twitter"))
   .settings(projectWithConfig("twitter"): _*)
   .settings(
     libraryDependencies ++= Seq(
-      "org.openkoreantext" % "open-korean-text" % "2.1.0"
+      "org.openkoreantext" % "open-korean-text" % "2.1.2"
     )
   ).dependsOn(core % "test->test;compile->compile")
 /** 코모란 프로젝트. **/
