@@ -83,8 +83,10 @@ object SentenceSplitter {
           nOpen = nOpen.tail
         } else {
           val top = nOpen.head
-          if (surface.last == top) nOpen = nOpen.tail
-          else nOpen ++:= surface.toSeq
+          if (surface.nonEmpty) {
+            if (surface.last == top) nOpen = nOpen.tail
+            else nOpen ++:= surface.toSeq
+          }
         }
         split(para, paren + 1, nOpen, acc)
       }
