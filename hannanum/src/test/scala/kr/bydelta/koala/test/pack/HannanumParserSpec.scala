@@ -14,13 +14,13 @@ import kaist.cilab.parser.corpusconverter.sejong2treebank.sejongtree.ParseTree
 import kaist.cilab.parser.psg2dg.Converter
 import kr.bydelta.koala.POS
 import kr.bydelta.koala.data.Relationship
-import kr.bydelta.koala.hnn.{Dictionary, Parser}
+import kr.bydelta.koala.hnn.{Dictionary, Parser, Tagger}
 import kr.bydelta.koala.test.core.Examples
 import org.specs2.execute.Result
 import org.specs2.mutable._
 
-import scala.collection.JavaConverters._
 import scala.collection.mutable.ArrayBuffer
+import scala.util.Random
 
 /**
   * Created by bydelta on 16. 7. 26.
@@ -117,19 +117,24 @@ class HannanumParserSpec extends Specification with Examples {
     }
 
     "be thread-safe" in {
-      val sents = exampleSequence().filter(_._1 == 1).map(_._2)
+      val tagger = new Tagger()
+      val sents = Random.shuffle(exampleSequence().filter(_._1 == 1).map(_._2)).take(10).map {
+        sent =>
+          print("T")
+          tagger.tagSentence(sent)
+      }
 
       val multithreaded = sents.par.map {
         sent =>
           print("M")
-          new Parser().jParse(sent).asScala.map(_.treeString).mkString("\n")
+          new Parser().parse(sent).treeString
       }.seq.mkString("\n")
 
       val parser = new Parser
       val singlethreaded = sents.map {
         sent =>
-          print("T")
-          parser.jParse(sent).asScala.map(_.treeString).mkString("\n")
+          print("S")
+          parser.parse(sent).treeString
       }.mkString("\n")
 
       multithreaded must_== singlethreaded
