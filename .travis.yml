@@ -25,7 +25,7 @@ script:
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "kryo/testOnly *.pack.*"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "kryo/testOnly *.core.*"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "core/test"
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *.pack.*"
+- travis_wait 30 sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *.pack.*"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *.core.*"
 after_success:
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverageReport coverageAggregate
