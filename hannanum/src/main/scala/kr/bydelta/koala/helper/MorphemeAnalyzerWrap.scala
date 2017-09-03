@@ -15,6 +15,8 @@ import scala.collection.mutable.ArrayBuffer
   * 원본의 Copyright: KAIST 한나눔 개발팀.
   */
 private[koala] object MorphemeAnalyzerWrap {
+  private final val TOKENS = "^(\\+*[^\\+]*)/([a-z]+)\\+".r
+
   @throws[Exception]
   def getSpacedresult(in: Sentence): Seq[String] =
     this.getAnalysisResult(in).flatMap(_.tokenList.map(_.word))
@@ -40,25 +42,23 @@ private[koala] object MorphemeAnalyzerWrap {
           } else
             tok.nextToken.trim
 
-        val eachAnal = new StringTokenizer(analResult, "+")
+        var eachAnal = analResult + "+"
         var tokTmp = ArrayBuffer[Eojeol#Token]()
-        while (eachAnal.hasMoreElements) {
-          var tokIdx = eachAnal.nextToken
-          while (tokIdx.indexOf('/') == -1) {
-            tokIdx += eachAnal.nextToken
-          }
+        while (eachAnal.nonEmpty) {
+          TOKENS.findFirstMatchIn(eachAnal) match {
+            case Some(TOKENS(token, pos)) =>
+              eachAnal = eachAnal.substring(token.length + pos.length + 2)
 
-          val t = new e.Token()
-          tokIdx.splitAt(tokIdx.lastIndexOf('/')) match {
-            case (h@"부터", _) =>
-              t.word = h
-              t.pos = "jca"
-            case (head, tail) =>
-              t.word = head
-              t.pos = tail.substring(1)
-          }
+              val t = new e.Token()
+              t.word = token
+              t.pos =
+                if (token == "부터") "jca"
+                else pos
 
-          tokTmp += t
+              tokTmp += t
+            case None =>
+              throw new IllegalStateException()
+          }
         }
 
         e.tokenList = tokTmp.toArray

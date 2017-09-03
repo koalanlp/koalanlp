@@ -55,6 +55,7 @@ class HannanumParserSpec extends Specification with Examples {
                         buf: ArrayBuffer[String] = ArrayBuffer()): ArrayBuffer[String] = {
     word.foreach {
       w =>
+        print(".")
         val rawTag = w.rawRel
         val target = sentence(w.target)
         buf += (parent + "--" + rawTag + "-->" + target.surface)
@@ -65,6 +66,7 @@ class HannanumParserSpec extends Specification with Examples {
 
   "HannanumParser" should {
     "handle empty sentence" in {
+      print("E")
       val sent = new Parser().parse("")
       sent must beEmpty
     }
@@ -75,10 +77,11 @@ class HannanumParserSpec extends Specification with Examples {
 
       Result.foreach(exampleSequence().filter(_._1 == 1).map(_._2)) {
         sent =>
-          println(s"Parsing: $sent")
+          print("0")
           val tagged = kParser.parse(sent).head
 
           try {
+            print("1")
             workflow.analyze(sent)
             val oSent = workflow.getResultOfSentence(new Sentence(0, 0, true))
             val original = {
@@ -93,6 +96,7 @@ class HannanumParserSpec extends Specification with Examples {
               conv.convert(parseTree)
             }
 
+            print("2")
             val oNodes = original.getNodeList.map {
               node =>
                 (try {
@@ -105,6 +109,7 @@ class HannanumParserSpec extends Specification with Examples {
             iterateTree(tagged.root.dependents, "ROOT", tagged).sorted.mkString("\n") must_== oNodes
           } catch {
             case _: Throwable =>
+              print("E")
               // 원본 파서가 오류났을때, 해당 문장 무시. (한나눔 파서가 불안정함)
               true must_== true
           }
@@ -116,14 +121,14 @@ class HannanumParserSpec extends Specification with Examples {
 
       val multithreaded = sents.par.map {
         sent =>
-          println(s"Parsing: $sent")
+          print("M")
           new Parser().jParse(sent).asScala.map(_.treeString).mkString("\n")
       }.seq.mkString("\n")
 
       val parser = new Parser
       val singlethreaded = sents.map {
         sent =>
-          println(s"Parsing: $sent")
+          print("T")
           parser.jParse(sent).asScala.map(_.treeString).mkString("\n")
       }.mkString("\n")
 
@@ -133,12 +138,12 @@ class HannanumParserSpec extends Specification with Examples {
     "supports dictionary" in {
       val sent = "아햏, 2000년대에 유행한 통신은어로, 개벽이, 햏햏 등의 여러 신조어를 유통시켰다."
 
-      println(s"Parsing: $sent")
+      print("D")
       val noUserDict = new Parser().parse(sent).map(_.treeString).mkString("\n")
 
       Dictionary.addUserDictionary("아햏" -> POS.IC, "개벽이" -> POS.NNG, "햏햏" -> POS.NNG)
 
-      println(s"Parsing: $sent")
+      print("D")
       val dictApplied = new Parser().parse(sent).map(_.treeString).mkString("\n")
 
       noUserDict must_!= dictApplied
