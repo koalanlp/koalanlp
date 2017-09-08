@@ -269,7 +269,7 @@
 있었고	있/paa+었/ep+고/ecc^있/px+었/ep+고/ecc^있/paa+었/ep+고/ecs^있/px+었/ep+고/ecs^있/paa+었/ep+고/ecx^있/px+었/ep+고/ecx
 있었다	있/paa+었/ep+다/ef^있/px+었/ep+다/ef
 있었다.	있/paa+었/ep+다/ef+./sf^있/px+었/ep+다/ef+./sf
-있었던	있/px+었/ep+던/et^있/paa+었/ep+던/etm
+있었던	있/px+었/ep+던/etm^있/paa+었/ep+던/etm
 있을	있/paa+을/etm^있/px+을/etm
 있지	있/px+지/ecx^있/paa+지/ecx
 자기	자기/npp^자기/ncn^자/pvg+기/etn
