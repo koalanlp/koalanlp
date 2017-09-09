@@ -42,8 +42,14 @@ private[koala] object RHINOTagger {
         } else if (interface.FindSentenceMark(inputArr(i))) {
           outputArr(i) = interface.GetSentenceMarkResult()
         } else if (interface.CheckNumber(i)) {
-          outputArr(i) = interface.FindArabicNumberPlus(i,
-            DictionaryReader.afterNumber_MethodDeleted, DictionaryReader.afterNumber_List)
+          try{
+            outputArr(i) = interface.FindArabicNumberPlus(i,
+              DictionaryReader.afterNumber_MethodDeleted, DictionaryReader.afterNumber_List)
+          }catch{
+            case _: Throwable  =>
+              // RHINO Exception Handling 안되는 부분
+              outputArr(i) = inputArr(i) + "/NF"
+          }
         } else {
           val Array(head, eogan, eomi) = interface.FindMorph(i, inputArr(i))
           val full =

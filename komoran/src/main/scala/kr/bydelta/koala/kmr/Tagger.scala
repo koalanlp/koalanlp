@@ -57,7 +57,7 @@ class Tagger extends CanTagOnlyASentence[KomoranResult] {
     reunionKorean(wAsScala.foldLeft((Seq.empty[Char], false))({
       case ((prevSeq, wasVerb), curr) =>
         val tag = curr.rawTag.toUpperCase
-        if (tag.startsWith("E")) {
+        if (tag.startsWith("E") && prevSeq.nonEmpty) {
           val newSeq = reduceVerbApply(prevSeq, wasVerb, curr.surface.toSeq)
           (newSeq, false)
         } else {
