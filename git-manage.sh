@@ -31,5 +31,6 @@ if [[ $TRAVIS_EVENT_TYPE == "push" ]]; then
     git push -fq origin gh-pages > /dev/null
 fi
 
+cd $WD
 cp sonatype.sbt ~/.sbt/0.13/
 sbt ++$TRAVIS_SCALA_VERSION publish
