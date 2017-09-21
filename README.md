@@ -19,7 +19,7 @@ KoalaNLP
 __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이 목적입니다.
 * Hannanum: KAIST의 [한나눔 형태소 분석기](http://kldp.net/projects/hannanum/)와 [NLP_HUB 구문분석기](http://semanticweb.kaist.ac.kr/home/index.php/NLP_HUB)
 * KKMA: 서울대의 [꼬꼬마 형태소/구문 분석기](http://kkma.snu.ac.kr/documents/index.jsp)
-* Komoran: Junsoo Shin님의 [코모란 v3.x](https://github.com/shin285/KOMORAN)
+* KOMORAN: Junsoo Shin님의 [코모란 v3.x](https://github.com/shin285/KOMORAN)
 * Twitter: OpenKoreanText의 [오픈 소스 한국어 처리기](http://openkoreantext.org) (구 Twitter 한국어 분석기)<sup>1-1</sup>
 * Eunjeon: 은전한닢 프로젝트의 [SEunjeon(S은전)](https://bitbucket.org/eunjeon/seunjeon)
 * Arirang: 이수명님의 [Arirang Morpheme Analyzer](http://cafe.naver.com/korlucene) <sup>1-2</sup>
@@ -211,7 +211,7 @@ sentence match {
 각 분석기의 License와 저작권은 각 프로젝트에서 지정한 바를 따릅니다. (`kr.bydelta.koala.helper` 하위에 새로 수정되어 등록된 Class/Object는 각 프로젝트의 결과물을 조금 수정한 판본이며, 저작권은 각 프로젝트에 귀속됩니다.)
 * Hannanum: [GPL v3](https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3))
 * KKMA: [GPL v2](https://tldrlegal.com/license/gnu-general-public-license-v2) (GPL v2를 따르지 않더라도, 상업적 이용시 별도 협의 가능)
-* Komoran: [GPL v2](https://tldrlegal.com/license/gnu-general-public-license-v2)
+* KOMORAN: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
 * Twitter: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
 * Eunjeon: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
 * Arirang: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
