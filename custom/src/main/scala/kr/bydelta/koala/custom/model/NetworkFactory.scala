@@ -66,44 +66,55 @@ object NetworkFactory {
 class KoreanCharacterIterator(val stream: InputStream,
                               val miniBatchSize: Int = 10,
                               val taggers: Seq[CanTag]) extends DataSetIterator {
-  private val lines = Source.fromInputStream(stream).getLines().toSeq
-  private val lineSize = lines.size
-  private var lineIt = Random.shuffle(lines).toIterator
+  private var lines: Iterator[(CanTag, String)] = _
+
+  reset()
 
   override def batch(): Int = ???
 
   override def cursor(): Int = ???
 
-  override def totalExamples(): Int = ???
-
   override def resetSupported(): Boolean = ???
 
-  override def inputColumns(): Int = ???
-
-  override def getPreProcessor: DataSetPreProcessor = ???
-
-  override def setPreProcessor(preProcessor: DataSetPreProcessor): Unit = ???
-
-  override def getLabels: util.List[String] = ???
-
-  override def totalOutcomes(): Int = ???
-
-  override def reset(): Unit = {
-    lineIt = lines.toIterator
-    lineCount = lineSize
+  override def getPreProcessor: DataSetPreProcessor = {
+    throw new UnsupportedOperationException("Not implemented")
   }
 
-  override def asyncSupported(): Boolean = ???
+  override def setPreProcessor(preProcessor: DataSetPreProcessor): Unit = {
+    throw new UnsupportedOperationException("Not implemented")
+  }
 
-  override def numExamples(): Int = ???
+  override def getLabels: util.List[String] = {
+    throw new UnsupportedOperationException("Not implemented")
+  }
+
+  override def reset(): Unit = {
+    lines = Random.shuffle(Source.fromInputStream(stream).getLines().flatMap {
+      line =>
+        taggers.map(_ -> line)
+    }.toStream.view).toIterator
+  }
+
+  override def asyncSupported(): Boolean = true
+
+  override def numExamples(): Int = totalExamples()
+
+  override def totalExamples(): Int = ???
 
   override def next(): DataSet = next(miniBatchSize)
 
   override def next(num: Int): DataSet = {
-    val nExamples = Math.min(num, lineCount)
+    val examples = (0 until num).flatMap {
+      case _ if lines.hasNext => Some(lines.next())
+      case _ => None
+    }
 
-    val input = Nd4j.create(Array(nExamples, 20,))
+    val input = Nd4j.create(Array(examples.size, inputColumns(), totalOutcomes()))
   }
+
+  override def inputColumns(): Int = 20
+
+  override def totalOutcomes(): Int = 47
 
   override def hasNext: Boolean = ???
 

@@ -3,6 +3,7 @@ package kr.bydelta.koala.test.pack
 import kr.bydelta.koala.kmr.Tagger
 import kr.bydelta.koala.test.core.TaggerSpec
 import kr.bydelta.koala.traits.CanTag
+import kr.co.shineware.nlp.komoran.constant.DEFAULT_MODEL
 import kr.co.shineware.nlp.komoran.core.Komoran
 
 import scala.collection.JavaConverters._
@@ -12,7 +13,7 @@ import scala.collection.JavaConverters._
   */
 class KomoranTaggerSpec extends TaggerSpec {
   override def tagSentByOrig(str: String): (String, String) = {
-    val komoran = new Komoran()
+    val komoran = new Komoran(DEFAULT_MODEL.FULL)
     val original = komoran.analyze(str)
 
     val (tag, _) = original.getTokenList.asScala.foldLeft((new StringBuilder, 0)) {

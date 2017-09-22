@@ -71,10 +71,14 @@ private[koala] class SafeChartMorphAnalyzer extends MorphAnalyzer {
         } catch {
           case e: Exception =>
             eojeolList.clear()
-            eojeolList.add(new Eojeol(Array[String](plainEojeol), Array[String]("nqq")))
+            eojeolList.add(new Eojeol(Array(plainEojeol), Array("nqq")))
         }
     }
-    eojeolList.toArray(new Array[Eojeol](0))
+
+    if (eojeolList.isEmpty && plainEojeol.nonEmpty)
+      Array(new Eojeol(Array(plainEojeol), Array("f")))
+    else
+      eojeolList.toArray(new Array[Eojeol](0))
   }
 
   def shutdown() {

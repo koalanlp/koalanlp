@@ -2,7 +2,7 @@ package kr.bydelta.koala.twt
 
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.traits.CanCompileDict
-import org.openkoreantext.processor.util.{KoreanDictionaryProvider, KoreanPos}
+import org.openkoreantext.processor.util.{CharArraySet, KoreanDictionaryProvider, KoreanPos}
 
 import scala.collection.JavaConverters._
 
@@ -28,7 +28,7 @@ object Dictionary extends CanCompileDict {
     */
   private def add(tag: KoreanPos.KoreanPos, morph: Seq[String]) =
   tag match {
-    case t if KoreanDictionaryProvider.koreanDictionary.containsKey(t) =>
+    case t if dictContainsKey(t) =>
       KoreanDictionaryProvider.addWordsToDictionary(t, morph)
     case KoreanPos.ProperNoun =>
       morph.foreach(KoreanDictionaryProvider.properNouns.add)
@@ -39,6 +39,18 @@ object Dictionary extends CanCompileDict {
     // * No proper dictionary.
     // KoreanDictionaryProvider.addWordsToDictionary(KoreanPos.Noun, morph)
   }
+
+  // $COVERAGE-OFF$
+  private def dictContainsKey(tag: KoreanPos.KoreanPos): Boolean =
+  KoreanDictionaryProvider.koreanDictionary match {
+    case map: java.util.HashMap[KoreanPos.KoreanPos, CharArraySet] => // OKT v2.x
+      map.containsKey(tag)
+    case map: scala.collection.mutable.HashMap[KoreanPos.KoreanPos, CharArraySet] =>
+      // OKT v1.x (for 2.11 support)
+      map.contains(tag)
+  }
+
+  // $COVERAGE-ON$
 
   override def items: Set[(String, POSTag)] = userDict
 
@@ -54,8 +66,8 @@ object Dictionary extends CanCompileDict {
       case (tag, words) =>
         val tagDic =
           if (tag == KoreanPos.ProperNoun) Some(KoreanDictionaryProvider.properNouns)
-          else if (KoreanDictionaryProvider.koreanDictionary.containsKey(tag))
-            Some(KoreanDictionaryProvider.koreanDictionary.get(tag))
+          else if (dictContainsKey(tag))
+            Some(dictGet(tag))
           else None
 
         // Filter out existing morphemes!
@@ -66,11 +78,20 @@ object Dictionary extends CanCompileDict {
     }.toSeq
   }
 
+  private def dictGet(tag: KoreanPos.KoreanPos): CharArraySet =
+    KoreanDictionaryProvider.koreanDictionary match {
+      case map: java.util.HashMap[KoreanPos.KoreanPos, CharArraySet] => // OKT v2.x
+        map.get(tag)
+      case map: scala.collection.mutable.HashMap[KoreanPos.KoreanPos, CharArraySet] =>
+        // OKT v1.x (for 2.11 support)
+        map.apply(tag)
+    }
+
   override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[(String, POSTag)] = {
     KoreanPos.values.filter(x => filter(fromTwtTag(x.toString))).iterator.flatMap {
-      case t if KoreanDictionaryProvider.koreanDictionary.containsKey(t) =>
+      case t if dictContainsKey(t) =>
         val key = fromTwtTag(t.toString)
-        KoreanDictionaryProvider.koreanDictionary.get(t).asScala.map {
+        dictGet(t).asScala.map {
           case x: String => x -> key
           case x: Array[Char] => new String(x) -> key
           case x => x.toString -> key

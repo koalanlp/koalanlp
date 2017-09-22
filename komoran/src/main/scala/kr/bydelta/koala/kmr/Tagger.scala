@@ -3,6 +3,7 @@ package kr.bydelta.koala.kmr
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.traits.CanTagOnlyASentence
 import kr.bydelta.koala.util.{reduceVerbApply, reunionKorean}
+import kr.co.shineware.nlp.komoran.constant.DEFAULT_MODEL
 import kr.co.shineware.nlp.komoran.core.Komoran
 import kr.co.shineware.nlp.komoran.model.KomoranResult
 
@@ -10,17 +11,27 @@ import scala.collection.mutable.ArrayBuffer
 
 /**
   * 코모란 형태소분석기.
+  *
+  * @param useLightTagger KOMORAN Light Tagger 사용시 true.
   */
-class Tagger extends CanTagOnlyASentence[KomoranResult] {
+class Tagger(useLightTagger: Boolean) extends CanTagOnlyASentence[KomoranResult] {
+
   /**
     * 코모란 분석기 객체.
     */
   lazy val komoran = {
-    val komoran = Tagger.komoran
+    val komoran =
+      if (useLightTagger) Tagger.komoran_light
+      else Tagger.komoran_full
     if (Dictionary.userDict.exists())
       komoran.setUserDic(Dictionary.userDict.getAbsolutePath)
     komoran
   }
+
+  /**
+    * 코모란 형태소분석기. (Full Tagger)
+    */
+  def this() = this(false)
 
   override def tagSentenceOriginal(text: String): KomoranResult =
     komoran.analyze(text)
@@ -75,9 +86,18 @@ private[koala] object Tagger {
   /**
     * 코모란 분석기 객체.
     */
-  private lazy val komoran = {
+  private lazy val komoran_full = {
     Dictionary.extractResource()
-    val komoran = new Komoran()
+    val komoran = new Komoran(DEFAULT_MODEL.FULL)
+    komoran
+  }
+
+  /**
+    * 코모란 분석기 객체.
+    */
+  private lazy val komoran_light = {
+    Dictionary.extractResource()
+    val komoran = new Komoran(DEFAULT_MODEL.LIGHT)
     komoran
   }
 }

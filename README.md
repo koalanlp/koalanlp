@@ -40,12 +40,12 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 | `koalanlp-hannanum` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-hannanum_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-hannanum_2.12%22) | 8+ | 2.11+ | 한나눔 분석기 패키지입니다. <sup>2-1</sup> |
 | `koalanlp-kkma` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kkma_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kkma_2.12%22) | 8+ | 2.11+ | 꼬꼬마 분석기 패키지입니다. <sup>2-1</sup> |
 | `koalanlp-komoran` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-komoran_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-komoran_2.12%22) | 8+ | 2.11+ | 코모란 분석기 패키지입니다. <sup>2-2</sup> |
-| `koalanlp-twitter` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-twitter_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-twitter_2.12%22) | 8+ | **2.12+**<sup>2-3</sup> | 트위터(OpenKoreanText) 분석기 패키지입니다. |
+| `koalanlp-twitter` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-twitter_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-twitter_2.12%22) | 8+ | 2.11+<sup>2-3</sup> | 트위터(OpenKoreanText) 분석기 패키지입니다. |
 | `koalanlp-eunjeon` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-eunjeon_2.12%22) | 8+ | 2.11+ | 은전한닢 분석기 패키지입니다. |
 | `koalanlp-arirang` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-arirang_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-arirang_2.12%22) | 8+ | 2.11+ | 아리랑 분석기 패키지입니다.<sup>2-1</sup> |
 | `koalanlp-rhino` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-rhino_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-rhino_2.12%22) | 8+ | 2.11+ | RHINO 분석기 패키지입니다.<sup>2-1</sup> |
 | `koalanlp-kryo` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kryo_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-kryo_2.12%22) | 8+ | 2.11+ | Kryo Serialization을 지원하기 위한 패키지입니다. |
-| `koalanlp-server` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-server_2.11.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-server_2.11%22) | 8+ | **2.10 - 2.11**<sup>2-3</sup> | HTTP 서비스 구성을 위한 패키지입니다. |
+| `koalanlp-server` | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-server_2.12.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-server_2.11%22) | 8+ | 2.11+<sup>2-3</sup> | HTTP 서비스 구성을 위한 패키지입니다. |
 
 > <sup>주2-1</sup> 꼬꼬마, 한나눔, 아리랑, RHINO 분석기는 타 분석기와 달리 Maven repository에 등재되어 있지 않아, 원래는 수동으로 직접 추가하셔야 합니다.
 > 이 점이 불편하다는 것을 알기에, KoalaNLP는 assembly 형태로 해당 패키지를 포함하여 배포하고 있습니다. 포함된 패키지를 사용하려면, `assembly` classifier를 사용하십시오.
@@ -54,10 +54,12 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 > <sup>주2-2</sup> 코모란 분석기는 KoalaNLP v1.6.0부터 Jitpack에 등재된 코모란 3.2를 Dependency 참조합니다. 따라서 "assembly" classifier는 v1.5.4까지 지원됩니다.
 >
 > <sup>주2-3</sup>
-> 의존하고 있는 일부 패키지가 일부 Scala 버전을 지원하지 않아, 지정된 Scala 버전만 사용 가능 합니다.
+> `twitter`패키지의 경우, Scala 2.11용 패키지는 Legacy인 OpenKoreanText 1.2 버전을 사용합니다.
+>
+> `server`패키지의 경우, Scala 2.11용 패키지는 Legacy인 Colossus 0.9.1 버전을 사용합니다.
 
 ## Dependency 추가하기
-KoalaNLP는 Scala 2.12.1에서 컴파일 되었으며, Scala 2.11+과 Java 8+을 지원합니다.
+KoalaNLP는 Scala 2.11.8과, 2.12.3에서 컴파일 되었으며, Scala 2.11+과 Java 8+을 지원합니다.
 
 SBT를 사용하시는 경우, 다음과 같이 추가하시면 됩니다.
 (버전은 Latest Release 기준입니다. SNAPSHOT을 사용하시려면, `latest.integration`을 사용하세요.)
@@ -93,13 +95,13 @@ Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 
   <classifier>assembly</classifier>
 ```
 
-예를 들어서, 꼬꼬마 분석기(koalanlp-kkma) 버전 1.8.0을 추가하고자 한다면, 아래와 같습니다.
+예를 들어서, 꼬꼬마 분석기(koalanlp-kkma) 버전 1.8.2를 추가하고자 한다면, 아래와 같습니다.
 ```xml
 <dependency>
   <groupId>kr.bydelta</groupId>
   <artifactId>koalanlp-kkma_2.12</artifactId>
   <classifier>assembly</classifier>
-  <version>1.8.0</version>
+  <version>1.8.2</version>
 </dependency>
 ```
 

@@ -5,9 +5,7 @@ testForkedParallel in Test := true
 concurrentRestrictions in Global := Seq(Tags.limit(Tags.Test, 1))
 
 resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
-resolvers ++= Seq(
-  "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/"
-)
+resolvers += Resolver.typesafeRepo("releases")
 
 sonatypeProfileName := "kr.bydelta"
 
@@ -73,9 +71,13 @@ lazy val twitter = (project in file("twitter"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("twitter"): _*)
   .settings(
-    libraryDependencies ++= Seq(
-      "org.openkoreantext" % "open-korean-text" % "2.1.2"
-    )
+    libraryDependencies ++=
+      (CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((2, 11)) =>
+          Seq("org.openkoreantext" % "open-korean-text" % "1.2")
+        case _ =>
+          Seq("org.openkoreantext" % "open-korean-text" % "2.1.2")
+      })
   ).dependsOn(core % "test->test;compile->compile")
 /** 코모란 프로젝트. **/
 lazy val komoran = (project in file("komoran"))
@@ -84,7 +86,7 @@ lazy val komoran = (project in file("komoran"))
   .settings(
     resolvers += "jitpack" at "https://jitpack.io",
     libraryDependencies ++= Seq(
-      "com.github.shin285" % "KOMORAN" % "3.2.1.5"
+      "com.github.shin285" % "KOMORAN" % "3.3.2"
     )
   ).dependsOn(core % "test->test;compile->compile")
 /** 분석기 서버 프로젝트 **/
@@ -93,11 +95,21 @@ lazy val server = (project in file("server"))
   .settings(projectWithConfig("server"): _*)
   .settings(
     coverageEnabled := false,
-    libraryDependencies ++= Seq(
-      "com.tumblr" %% "colossus" % "[0.9,)",
-      "com.tumblr" %% "colossus-testkit" % "[0.9,)" % "test",
-      "com.typesafe.play" %% "play-json" % "[2.6,)"
-    )
+    libraryDependencies ++=
+      (CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((2, 11)) =>
+          Seq(
+            "com.tumblr" %% "colossus" % "0.9.1",
+            "com.tumblr" %% "colossus-testkit" % "0.9.1" % "test",
+            "com.typesafe.play" %% "play-json" % "2.6.3"
+          )
+        case _ =>
+          Seq(
+            "com.tumblr" %% "colossus" % "0.10.0-SNAPSHOT",
+            "com.tumblr" %% "colossus-testkit" % "0.10.0-SNAPSHOT" % "test",
+            "com.typesafe.play" %% "play-json" % "2.6.3"
+          )
+      })
   )
   .dependsOn(core, kkma % "test")
 
@@ -120,8 +132,8 @@ lazy val custom = (project in file("custom"))
   .settings(projectWithConfig("custom"))
   .settings(
     libraryDependencies ++= Seq(
-      "org.apache.opennlp" % "opennlp-tools" % "[1.8,)"
-      //      "org.deeplearning4j" % "deeplearning4j-core" % "[0.9,)"
+      "org.apache.opennlp" % "opennlp-tools" % "1.8.2",
+      "org.deeplearning4j" % "deeplearning4j-core" % "0.9.1"
     )
   ).dependsOn(core % "test->test;compile->compile")
 
@@ -143,14 +155,14 @@ def projectWithConfig(module: String) =
     organization := "kr.bydelta",
     name := s"koalaNLP-$module",
     version := VERSION,
-    scalaVersion := "2.11.8",
+    scalaVersion := "2.12.3",
     scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature"),
     scalacOptions in Test ++= Seq("-Yrangepos"),
-    crossScalaVersions := Seq("2.11.8", "2.12.1"),
+    crossScalaVersions := Seq("2.11.8", "2.12.3"),
     publishArtifact in Test := false,
     coverageExcludedPackages := ".*\\.helper\\..*",
     test in assembly := {},
-    libraryDependencies += "org.specs2" %% "specs2-core" % "[3.8,)" % "test",
+    libraryDependencies += "org.specs2" %% "specs2-core" % "3.9.5" % "test",
     apiURL := Some(url("https://nearbydelta.github.io/KoalaNLP/api/scala/")),
     homepage := Some(url("http://nearbydelta.github.io/KoalaNLP")),
     publishTo := version { v: String ⇒
