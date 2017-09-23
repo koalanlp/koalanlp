@@ -17,7 +17,7 @@ if [[ $TRAVIS_SCALA_VERSION == $SCALAVER ]]; then
         sbt ++$SCALAVER unidoc
 
         # GENERATE COMPARISON
-        sbt -J-Xmx3g ++$SCALAVER "samples/runMain kr.bydelta.koala.wiki.ComparisonGenerator '4.1.-임의-결과-비교.md' $SCALAVER"
+        sbt -J-Xmx3g ++$SCALAVER "samples/runMain kr.bydelta.koala.wiki.ComparisonGenerator ./4.1.-임의-결과-비교.md $SCALAVER"
 
         # CLONE GH-PAGES
         cd $HOME
