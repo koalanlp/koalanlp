@@ -1,11 +1,7 @@
 package kr.bydelta.koala.test.pack
 
-import kr.bydelta.koala.test.core.TaggerSpec
-import kr.bydelta.koala.traits.{CanCompileDict, CanTag}
-import kr.bydelta.koala.twt.{Dictionary, Tagger}
-import org.openkoreantext.processor.OpenKoreanTextProcessor
-import org.openkoreantext.processor.util.KoreanPos
-import org.specs2.execute.Result
+import kr.bydelta.koala.traits.CanTag
+import kr.bydelta.koala.twt.Tagger
 
 /**
   * Created by bydelta on 16. 7. 26.
@@ -13,7 +9,7 @@ import org.specs2.execute.Result
 class TwitterTaggerSpec extends TaggerSpec {
 
   override def tagSentByOrig(str: String): (String, String) = {
-    val original = OpenKoreanTextProcessor.tokenize(OpenKoreanTextProcessor.normalize(str))
+    val original = TwitterKoreanProcessor.tokenize(TwitterKoreanProcessor.normalize(str))
 
     val tag = original.map {
       w =>
@@ -24,8 +20,8 @@ class TwitterTaggerSpec extends TaggerSpec {
   }
 
   override def tagParaByOrig(str: String): Seq[String] = {
-    val sentences = OpenKoreanTextProcessor.splitSentences(str).map(_.text)
-    val original = sentences.map(s => OpenKoreanTextProcessor.tokenize(OpenKoreanTextProcessor.normalize(s)))
+    val sentences = TwitterKoreanProcessor.splitSentences(str).map(_.text)
+    val original = sentences.map(s => TwitterKoreanProcessor.tokenize(TwitterKoreanProcessor.normalize(s)))
 
     original.map(_.map(_.text).mkString(" ").replaceAll("[ ]{2,}", "##").replaceAll(" ", "+").replaceAll("##", " "))
   }

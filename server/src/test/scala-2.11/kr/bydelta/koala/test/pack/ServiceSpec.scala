@@ -1,8 +1,5 @@
 package kr.bydelta.koala.test.pack
 
-import colossus.core.ServerRef
-import colossus.protocols.http.{HttpBody, HttpCode, HttpRequest}
-import colossus.testkit._
 import kr.bydelta.koala.kkma.{Dictionary, Parser, Tagger}
 import kr.bydelta.koala.server.Server
 import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}
@@ -20,8 +17,9 @@ class ServiceSpec extends HttpServiceSpec {
     override def getTagger: CanTag = new Tagger
     override def getParser: CanDepParse = new Parser
   }
+  val ref = server.getHttpServerRef
 
-  override def service: ServerRef = server.getHttpServerRef
+  override def service: ServerRef = ref
 
   override def requestTimeout: FiniteDuration = 1.minute
 

@@ -54,12 +54,13 @@ KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록�
 > <sup>주2-2</sup> 코모란 분석기는 KoalaNLP v1.6.0부터 Jitpack에 등재된 코모란 3.2를 Dependency 참조합니다. 따라서 "assembly" classifier는 v1.5.4까지 지원됩니다.
 >
 > <sup>주2-3</sup>
-> `twitter`패키지의 경우, Scala 2.11용 패키지는 Legacy인 OpenKoreanText 1.2 버전을 사용합니다.
+> `twitter`패키지의 경우, Scala 2.11용 패키지는 OKT의 Legacy인 Twitter의 korean-text 4.4.4 버전을 사용합니다.
 >
-> `server`패키지의 경우, Scala 2.11용 패키지는 Legacy인 Colossus 0.9.1 버전을 사용합니다.
+> `server`패키지의 경우, Scala 2.11용 패키지는 Legacy인 Colossus 0.9.1 버전을 사용합니다. 
+> (2.12용 패키지는 colossus 0.10.0-RC1이 배포되는 대로 반영됩니다.)
 
 ## Dependency 추가하기
-KoalaNLP는 Scala 2.11.8과, 2.12.3에서 컴파일 되었으며, Scala 2.11+과 Java 8+을 지원합니다.
+KoalaNLP는 Scala 2.11과, 2.12에서 컴파일 되었으며, Scala 2.11+과 Java 8+을 지원합니다.
 
 SBT를 사용하시는 경우, 다음과 같이 추가하시면 됩니다.
 (버전은 Latest Release 기준입니다. SNAPSHOT을 사용하시려면, `latest.integration`을 사용하세요.)

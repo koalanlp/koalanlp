@@ -73,10 +73,8 @@ lazy val twitter = (project in file("twitter"))
   .settings(
     libraryDependencies ++=
       (CrossVersion.partialVersion(scalaVersion.value) match {
-        case Some((2, 11)) =>
-          Seq("org.openkoreantext" % "open-korean-text" % "1.2")
-        case _ =>
-          Seq("org.openkoreantext" % "open-korean-text" % "2.1.2")
+        case Some((2, 12)) => Seq("org.openkoreantext" % "open-korean-text" % "2.1.2")
+        case _ => Seq("com.twitter.penguin" % "korean-text" % "4.4.4")
       })
   ).dependsOn(core % "test->test;compile->compile")
 /** 코모란 프로젝트. **/
@@ -105,8 +103,8 @@ lazy val server = (project in file("server"))
           )
         case _ =>
           Seq(
-            "com.tumblr" %% "colossus" % "0.10.0-SNAPSHOT",
-            "com.tumblr" %% "colossus-testkit" % "0.10.0-SNAPSHOT" % "test",
+            //            "com.tumblr" %% "colossus" % "0.10.0-RC1",
+            //            "com.tumblr" %% "colossus-testkit" % "0.10.0-RC1" % "test",
             "com.typesafe.play" %% "play-json" % "2.6.3"
           )
       })
@@ -117,7 +115,7 @@ lazy val server = (project in file("server"))
 /** Kryo 직렬화 프로젝트 **/
 lazy val kryo = (project in file("kryo"))
   .enablePlugins(GenJavadocPlugin)
-  .settings(projectWithConfig("kryo"))
+  .settings(projectWithConfig("kryo"): _*)
   .settings(
     libraryDependencies += "com.twitter" %% "chill" % "0.9.2"
   )
@@ -126,10 +124,13 @@ lazy val kryo = (project in file("kryo"))
 /** 사용방법 샘플 프로젝트 **/
 lazy val samples = (project in file("samples"))
   .settings(projectWithConfig("samples"): _*)
+  .settings(
+    libraryDependencies += "org.jsoup" % "jsoup" % "1.10.3"
+  )
   .dependsOn(eunjeon, twitter, komoran, kkma, hannanum, server, arirang, rhino)
 /** Customization **/
 lazy val custom = (project in file("custom"))
-  .settings(projectWithConfig("custom"))
+  .settings(projectWithConfig("custom"): _*)
   .settings(
     libraryDependencies ++= Seq(
       "org.apache.opennlp" % "opennlp-tools" % "1.8.2",
@@ -158,7 +159,7 @@ def projectWithConfig(module: String) =
     scalaVersion := "2.12.3",
     scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature"),
     scalacOptions in Test ++= Seq("-Yrangepos"),
-    crossScalaVersions := Seq("2.11.8", "2.12.3"),
+    crossScalaVersions := Seq("2.11.11", "2.12.3"),
     publishArtifact in Test := false,
     coverageExcludedPackages := ".*\\.helper\\..*",
     test in assembly := {},

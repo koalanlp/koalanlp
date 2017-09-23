@@ -40,19 +40,9 @@ object Dictionary extends CanCompileDict {
     // KoreanDictionaryProvider.addWordsToDictionary(KoreanPos.Noun, morph)
   }
 
-  // $COVERAGE-OFF$
-  private def dictContainsKey(tag: KoreanPos.KoreanPos): Boolean =
-  KoreanDictionaryProvider.koreanDictionary match {
-    case map: java.util.HashMap[KoreanPos.KoreanPos, CharArraySet] => // OKT v2.x
-      map.containsKey(tag)
-    case map: scala.collection.mutable.HashMap[KoreanPos.KoreanPos, CharArraySet] =>
-      // OKT v1.x (for 2.11 support)
-      map.contains(tag)
-  }
+  override def items: Set[(String, POSTag)] = userDict
 
   // $COVERAGE-ON$
-
-  override def items: Set[(String, POSTag)] = userDict
 
   /**
     * 사전에 등재되어 있는지 확인하고, 사전에 없는단어만 반환합니다.
@@ -78,15 +68,6 @@ object Dictionary extends CanCompileDict {
     }.toSeq
   }
 
-  private def dictGet(tag: KoreanPos.KoreanPos): CharArraySet =
-    KoreanDictionaryProvider.koreanDictionary match {
-      case map: java.util.HashMap[KoreanPos.KoreanPos, CharArraySet] => // OKT v2.x
-        map.get(tag)
-      case map: scala.collection.mutable.HashMap[KoreanPos.KoreanPos, CharArraySet] =>
-        // OKT v1.x (for 2.11 support)
-        map.apply(tag)
-    }
-
   override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[(String, POSTag)] = {
     KoreanPos.values.filter(x => filter(fromTwtTag(x.toString))).iterator.flatMap {
       case t if dictContainsKey(t) =>
@@ -110,4 +91,11 @@ object Dictionary extends CanCompileDict {
         Map()
     }
   }
+
+  // $COVERAGE-OFF$
+  private def dictContainsKey(tag: KoreanPos.KoreanPos): Boolean =
+  KoreanDictionaryProvider.koreanDictionary.containsKey(tag)
+
+  private def dictGet(tag: KoreanPos.KoreanPos): CharArraySet =
+    KoreanDictionaryProvider.koreanDictionary.get(tag)
 }

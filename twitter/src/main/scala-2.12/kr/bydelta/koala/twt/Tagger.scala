@@ -5,6 +5,7 @@ import kr.bydelta.koala.traits.CanTagAParagraph
 import org.openkoreantext.processor.OpenKoreanTextProcessor
 import org.openkoreantext.processor.tokenizer.KoreanTokenizer.KoreanToken
 
+
 /**
   * 트위터 품사분석기.
   */
@@ -21,7 +22,7 @@ class Tagger extends CanTagAParagraph[Seq[KoreanToken]] {
 
   override private[koala] def convertSentence(result: Seq[KoreanToken]): Sentence = {
     Sentence(
-      new Iterator[Seq[KoreanToken]]{
+      new Iterator[Seq[KoreanToken]] {
         val it = result.iterator
 
         override def hasNext: Boolean = it.hasNext

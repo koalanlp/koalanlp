@@ -16,13 +16,19 @@ import scala.collection.JavaConverters._
   *
   * @param logPath 꼬꼬마 형태소분석기의 log를 저장할 위치.
   */
-final class Tagger(logPath: String = "kkma.log") extends CanTagOnlyAParagraph[Sentence] {
+final class Tagger(logPath: String) extends CanTagOnlyAParagraph[Sentence] {
+
   /** 꼬꼬마 형태소분석기 객체. **/
   private lazy val ma = {
     Dictionary.reloadDic()
     val ma = new MorphemeAnalyzer
     ma
   }
+
+  /**
+    * 꼬꼬마 형태소분석기.
+    */
+  def this() = this("kkma.log")
 
   override def tagParagraphOriginal(text: String): Seq[Sentence] =
     if (text.trim.isEmpty)
