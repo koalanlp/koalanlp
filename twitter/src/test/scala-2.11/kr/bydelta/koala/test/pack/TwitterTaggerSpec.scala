@@ -1,5 +1,8 @@
 package kr.bydelta.koala.test.pack
 
+import com.twitter.penguin.korean.TwitterKoreanProcessor
+import com.twitter.penguin.korean.util.KoreanPos
+import kr.bydelta.koala.test.core.TaggerSpec
 import kr.bydelta.koala.traits.CanTag
 import kr.bydelta.koala.twt.Tagger
 

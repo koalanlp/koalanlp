@@ -1,5 +1,15 @@
 package kr.bydelta.koala.server
 
+import colossus.core.ServerContext
+import colossus.protocols.http.HttpMethod._
+import colossus.protocols.http.UrlParsing._
+import colossus.protocols.http.server.RequestHandler
+import colossus.protocols.http.{Http, HttpRequest, HttpResponse}
+import colossus.protocols.http.HttpMethod.{Get, Post, Put}
+import colossus.protocols.http.UrlParsing.Root
+import colossus.protocols.http.server.RequestHandler
+import colossus.service.Callback
+import colossus.service.GenRequestHandler.PartialHandler
 import kr.bydelta.koala.POS
 import kr.bydelta.koala.data.{Morpheme, Relationship}
 import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}

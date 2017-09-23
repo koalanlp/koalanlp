@@ -1,5 +1,8 @@
 package kr.bydelta.koala.test.pack
 
+import colossus.core.ServerRef
+import colossus.protocols.http.{HttpBody, HttpCode, HttpRequest}
+import colossus.testkit.HttpServiceSpec
 import kr.bydelta.koala.kkma.{Dictionary, Parser, Tagger}
 import kr.bydelta.koala.server.Server
 import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}

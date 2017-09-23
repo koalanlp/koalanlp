@@ -1,5 +1,9 @@
 package kr.bydelta.koala.server
 
+import akka.actor.ActorSystem
+import colossus.IOSystem
+import colossus.core.ServerRef
+import colossus.protocols.http.server.HttpServer
 import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}
 
 /**

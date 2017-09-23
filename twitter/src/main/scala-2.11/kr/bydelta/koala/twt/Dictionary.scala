@@ -1,7 +1,9 @@
 package kr.bydelta.koala.twt
 
+import com.twitter.penguin.korean.util.{CharArraySet, KoreanDictionaryProvider, KoreanPos}
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.traits.CanCompileDict
+import scala.collection.JavaConverters._
 
 /**
   * 트위터 분석기 사용자사전

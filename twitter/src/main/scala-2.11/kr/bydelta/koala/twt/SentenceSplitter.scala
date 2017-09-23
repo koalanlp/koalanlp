@@ -1,5 +1,6 @@
 package kr.bydelta.koala.twt
 
+import com.twitter.penguin.korean.TwitterKoreanProcessor
 import kr.bydelta.koala.traits.CanSplitSentence
 
 /**

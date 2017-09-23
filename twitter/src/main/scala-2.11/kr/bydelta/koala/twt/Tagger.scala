@@ -1,5 +1,7 @@
 package kr.bydelta.koala.twt
 
+import com.twitter.penguin.korean.TwitterKoreanProcessor
+import com.twitter.penguin.korean.tokenizer.KoreanTokenizer.KoreanToken
 import kr.bydelta.koala.data.{Morpheme, Sentence, Word}
 import kr.bydelta.koala.traits.CanTagAParagraph
 
