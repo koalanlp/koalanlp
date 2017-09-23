@@ -133,11 +133,11 @@ object Dictionary extends CanCompileDict with CanExtractResource {
           var nStack = stack.tail
 
           val word = prefix :+ top.key
-          val value = top.info_list.asScala
+          val value = top.info_list
 
           if (value != null) {
             val wordstr = Code.toString(word)
-            baseEntries +:= (wordstr -> value.map(x => fromHNNTag(tagSet.getTagName(x.tag))))
+            baseEntries +:= (wordstr -> value.asScala.map(x => fromHNNTag(tagSet.getTagName(x.tag))))
           }
 
           if (top.child_size > 0) {

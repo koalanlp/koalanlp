@@ -11,12 +11,15 @@ git config --global user.email "travis@travis-ci.org"
 git config --global user.name "travis-ci"
 
 if [[ $TRAVIS_SCALA_VERSION == $SCALAVER ]]; then
+    sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverageReport coverageAggregate
+    bash <(curl -s https://codecov.io/bash)
+
     if [[ $TRAVIS_EVENT_TYPE == "push" ]]; then
         # GENERATE DOC
         sbt ++$SCALAVER unidoc
 
         # GENERATE COMPARISON
-        sbt -J-Xmx3g ++$SCALAVER "samples/runMain kr.bydelta.koala.wiki.ComparisonGenerator 4.1.-임의-결과-비교.md $SYSVER $SCALAVER"
+        sbt -J-Xmx3g ++$SCALAVER "samples/runMain kr.bydelta.koala.wiki.ComparisonGenerator '4.1.-임의-결과-비교.md' $SYSVER $SCALAVER"
 
         # CLONE GH-PAGES
         cd $HOME
@@ -43,9 +46,9 @@ if [[ $TRAVIS_SCALA_VERSION == $SCALAVER ]]; then
 
         # COPY & PUSH
         cd wiki
-        git rm -f ./4.1.-임의-결과-비교.md
-        mv $WD/4.1.-임의-결과-비교.md ./
-        git add -f ./4.1.-임의-결과-비교.md
+        git rm -f "./4.1.-임의-결과-비교.md"
+        mv "$WD/4.1.-임의-결과-비교.md" ./
+        git add -f "./4.1.-임의-결과-비교.md"
 
         git commit -m "Lastest comparison in successful travis build $TRAVIS_BUILD_NUMBER (RELEASE $TAG) auto-pushed to wiki"
         git push -fq origin master > /dev/null

@@ -33,7 +33,7 @@ object DictionaryImportSpec extends Specification {
 
     "not throw exception during import" in {
       val dictionaries = Seq(EDict, HDict, RDict, KDict, TDict, ADict)
-      Result.foreach(dictionaries.combinations(2)) {
+      Result.foreach(dictionaries.combinations(2).toSeq) {
         case Seq(head, last) =>
           head must not(beNull)
           last must not(beNull)

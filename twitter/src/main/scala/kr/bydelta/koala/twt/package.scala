@@ -20,7 +20,7 @@ package object twt {
            POS.VCP | POS.VCN => "Verb"
       case POS.VA => "Adjective"
       case POS.MM =>
-        if (scala.util.Properties.versionString.startsWith("2.11"))
+        if (scala.util.Properties.versionNumberString.startsWith("2.11"))
           "Determiner"
         else
           "Modifier"

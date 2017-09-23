@@ -36,8 +36,6 @@ script:
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *.pack.*"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *.core.*"
 after_success:
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverageReport coverageAggregate
-- bash <(curl -s https://codecov.io/bash)
 - bash ./git-manage.sh
 notifications:
   webhooks:
