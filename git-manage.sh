@@ -5,8 +5,6 @@ VER=`echo $SCALAVER | cut -d. -f1,2`
 MSG=$TRAVIS_COMMIT_MESSAGE
 TAG=`cat build.sbt | grep "val VERSION" | cut -d\" -f2`
 
-SYSVER=`cat /etc/*-release | grep -e "^[^=]\+$" | uniq`
-
 git config --global user.email "travis@travis-ci.org"
 git config --global user.name "travis-ci"
 
@@ -19,7 +17,7 @@ if [[ $TRAVIS_SCALA_VERSION == $SCALAVER ]]; then
         sbt ++$SCALAVER unidoc
 
         # GENERATE COMPARISON
-        sbt -J-Xmx3g ++$SCALAVER "samples/runMain kr.bydelta.koala.wiki.ComparisonGenerator '4.1.-임의-결과-비교.md' $SYSVER $SCALAVER"
+        sbt -J-Xmx3g ++$SCALAVER "samples/runMain kr.bydelta.koala.wiki.ComparisonGenerator '4.1.-임의-결과-비교.md' $SCALAVER"
 
         # CLONE GH-PAGES
         cd $HOME
@@ -53,8 +51,8 @@ if [[ $TRAVIS_SCALA_VERSION == $SCALAVER ]]; then
         git commit -m "Lastest comparison in successful travis build $TRAVIS_BUILD_NUMBER (RELEASE $TAG) auto-pushed to wiki"
         git push -fq origin master > /dev/null
     fi
-
-    cd $WD
-    cp sonatype.sbt ~/.sbt/0.13/
-    sbt ++$TRAVIS_SCALA_VERSION publish
 fi
+
+cd $WD
+cp sonatype.sbt ~/.sbt/0.13/
+sbt ++$TRAVIS_SCALA_VERSION publish

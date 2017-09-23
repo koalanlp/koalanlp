@@ -20,7 +20,9 @@ class TwitterConversionSpec extends TagConversionSpec {
       "VX" -> ">Verb",
       "VCP" -> ">Verb",
       "VCN" -> ">Verb",
-      "MM" -> "Modifier\n<Determiner",
+      "MM" ->
+        (if (scala.util.Properties.versionNumberString.startsWith("2.11")) "Determiner"
+        else "Modifier\n<Determiner"),
       "MAG" -> "Adverb",
       "MAJ" -> ">Adverb",
       "IC" -> "Exclamation",

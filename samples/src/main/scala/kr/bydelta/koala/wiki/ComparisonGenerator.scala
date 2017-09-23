@@ -2,6 +2,7 @@ package kr.bydelta.koala.wiki
 
 import java.io.{BufferedWriter, FileOutputStream, OutputStreamWriter}
 import java.net.URL
+import java.util.GregorianCalendar
 
 import kr.bydelta.koala
 import kr.bydelta.koala.data.Sentence
@@ -82,7 +83,8 @@ object ComparisonGenerator {
 
     implicit val bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(args.head)))
     text("실제 사용 성능을 보여드리기 위해서, 카카오 뉴스에서 임의로 뉴스를 선택하고 10개 문단을 표본추출하였습니다.")
-    text(s"실험환경: (Travis CI) ${args(1)}, **3GB** MaxHeap, **${procs}**-core(s), Scala **${args(2)}**")
+    text(s"실험환경: (Travis CI) **3GB** MaxHeap, **$procs**-core(s), Scala **${args(1)}**")
+    text(s"실험일시: ${new GregorianCalendar().getTime}")
     heading("시간 성능 개관")
     table(
       "." +: names,
