@@ -94,11 +94,11 @@ object ComparisonGenerator {
           case (seq, i) => s"Sentence #$i" +: seq.map(_ + "s")
         }
     )
-    text(s"가장 **빠르게 초기화**된 것은 `${names(loadings.zipWithIndex.minBy(_._1)._2)}`이며, " +
+    text(s"가장 __빠르게 초기화__된 것은 `${names(loadings.zipWithIndex.minBy(_._1)._2)}`이며, " +
       s"가장 느리게 초기화된 패키지는 `${names(loadings.zipWithIndex.maxBy(_._1)._2)}`입니다.")
-    text(s"가장 **빠르게 사전을 불러온** 것은 `${names(lazyLoading.zipWithIndex.minBy(_._1)._2)}`이며, " +
+    text(s"가장 __빠르게 사전을 불러온__ 것은 `${names(lazyLoading.zipWithIndex.minBy(_._1)._2)}`이며, " +
       s"가장 느리게 사전을 불러온 패키지는 `${names(lazyLoading.zipWithIndex.maxBy(_._1)._2)}`입니다.")
-    text(s"첫 문장을 빼면, 평균적으로 **가장 빠르게 분석**한 것은 `${names(meanProcessing.zipWithIndex.minBy(_._1)._2)}`이며, " +
+    text(s"첫 문장을 빼면, 평균적으로 __가장 빠르게 분석__한 것은 `${names(meanProcessing.zipWithIndex.minBy(_._1)._2)}`이며, " +
       s"가장 느리게 분석한 패키지는 `${names(meanProcessing.zipWithIndex.maxBy(_._1)._2)}`입니다.")
 
     heading("Tagging 결과")
@@ -106,9 +106,11 @@ object ComparisonGenerator {
       "정답이 없으므로, 바르게 분석했는지의 여부는 여러분께서 판단하셔야 합니다. " +
       "다음과 같은 기준으로 평가해보시는 것을 권장합니다.")
     list(
+      "띄어쓰기나 어절구분은 정확한가? (바르게 분석했다면, 읽는 데 __어색함이 없어야__ 합니다)",
       "고유명사나 신조어를 어떻게 분석했는가? (바르게 분석했다면, __고유명사/NNP__ 품사가 붙고, 적절히 띄어쓰기 되어야 합니다)",
-      "명사가 바르게 분석되었는가? (바르게 분석했다면, __N으로 시작하는 품사__가 붙어야 합니다)",
-      "띄어쓰기나 어절구분은 정확한가? (바르게 분석했다면, 읽는 데 __어색함이 없어야__ 합니다)"
+      "체언(명사)이 바르게 분석되었는가? (바르게 분석했다면, __N으로 시작하는 품사__ 가 붙어야 합니다)",
+      "용언(동사, 형용사)가 바르게 분석되었는가? (바르게 분석했다면, __V으로 시작하는 품사__ 가 붙고, 이후에, 어미(__E로 시작하는 품사)__ 가 붙어야 합니다)" +
+        "   * 명사로도 쓰이는 동사는 N(명사)+XSV(용언화 접미사) 형태를 띄기도 합니다."
     )
 
     testset.zipWithIndex.zip(taggedParagraphs).foreach {
@@ -168,7 +170,7 @@ object ComparisonGenerator {
   }
 
   def quote(text: String*)(implicit bw: BufferedWriter) = {
-    bw.write(text.map("> " + _).mkString("\n"))
+    bw.write(text.map("> " + _).mkString("\n>\n"))
     bw.newLine()
   }
 
