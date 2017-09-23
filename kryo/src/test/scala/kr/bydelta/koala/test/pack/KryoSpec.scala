@@ -13,7 +13,7 @@ import org.specs2.mutable.Specification
   * Created by bydelta on 16. 8. 5.
   */
 object KryoSpec extends Specification {
-  isolated
+  sequential
 
   "SentenceSerializer" should {
     "save a sentence" in {
@@ -48,7 +48,7 @@ object KryoSpec extends Specification {
       Dictionary.userdic.morphemes.clear()
       Dictionary.userdic.reset()
 
-      Dictionary.addUserDictionary("힐스테이트", POS.NNP)
+      Dictionary.addUserDictionary("힐스테이트1", POS.NNP)
 
       val tmpFile = new File(System.getProperty("java.io.tmpdir"), "test.dic")
       Dictionary >> tmpFile
@@ -59,7 +59,7 @@ object KryoSpec extends Specification {
       Dictionary.userdic.morphemes.size must_== 0
       Dictionary << tmpFile
 
-      Dictionary.userdic.morphemes must contain("힐스테이트/NNP")
+      Dictionary.userdic.morphemes must contain("힐스테이트1/NNP")
     }
   }
 
@@ -68,7 +68,7 @@ object KryoSpec extends Specification {
       Dictionary.userdic.morphemes.clear()
       Dictionary.userdic.reset()
 
-      Dictionary.addUserDictionary("힐스테이트", POS.NNP)
+      Dictionary.addUserDictionary("힐스테이트2", POS.NNP)
 
       val tmpFile = new File(System.getProperty("java.io.tmpdir"), "test-java.dic")
       val dicStream = new DictionaryStream(JavaDictionary.get)
@@ -80,7 +80,7 @@ object KryoSpec extends Specification {
       Dictionary.userdic.morphemes.size must_== 0
       dicStream readFrom tmpFile
 
-      Dictionary.items must contain("힐스테이트" -> POS.NNP)
+      Dictionary.items must contain("힐스테이트2" -> POS.NNP)
     }
   }
 }

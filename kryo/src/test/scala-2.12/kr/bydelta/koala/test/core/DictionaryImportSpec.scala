@@ -16,7 +16,7 @@ import scala.util.Try
   * Created by bydelta on 16. 8. 5.
   */
 object DictionaryImportSpec extends Specification {
-  isolated
+  sequential
 
   "Dictionaries" should {
     "import other dictionary (nouns)" in {
