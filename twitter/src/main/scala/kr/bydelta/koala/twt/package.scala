@@ -10,7 +10,7 @@ package object twt {
     * @param tag 원본품사로 변환할 통합표기.
     * @return 변환된 품사.
     */
-  def tagToTwt(tag: _root_.kr.bydelta.koala.POS.Value): String = {
+  def tagToTwt(tag: POS.Value): String = {
     tag match {
       case POS.NNG | POS.NNB |
            POS.NNM | POS.NP => "Noun"
@@ -19,7 +19,11 @@ package object twt {
       case POS.VV | POS.VX |
            POS.VCP | POS.VCN => "Verb"
       case POS.VA => "Adjective"
-      case POS.MM => "Modifier"
+      case POS.MM =>
+        if (scala.util.Properties.versionString.startsWith("2.11"))
+          "Determiner"
+        else
+          "Modifier"
       case POS.MAG | POS.MAJ => "Adverb"
       case POS.IC => "Exclamation"
       case POS.JKB | POS.JKC |

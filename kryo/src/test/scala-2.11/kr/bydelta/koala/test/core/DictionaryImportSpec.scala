@@ -33,12 +33,12 @@ object DictionaryImportSpec extends Specification {
 
     "not throw exception during import" in {
       val dictionaries = Seq(EDict, HDict, RDict, KDict, TDict, ADict)
-      Result.unit {
-        dictionaries.combinations(2).foreach {
-          set =>
-            Try(set.head.importFrom(set.last, _ == POS.NNG, fastAppend = true)) must beSuccessfulTry
-            Try(set.last.importFrom(set.head, _ == POS.NNG, fastAppend = true)) must beSuccessfulTry
-        }
+      Result.foreach(dictionaries.combinations(2)) {
+        case Seq(head, last) =>
+          head must not(beNull)
+          last must not(beNull)
+          Try(head.importFrom(last, _ == POS.NNB, fastAppend = true)) must beSuccessfulTry
+          Try(last.importFrom(head, _ == POS.NNB, fastAppend = true)) must beSuccessfulTry
       }
     }
   }
