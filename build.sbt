@@ -12,14 +12,14 @@ sonatypeProfileName := "kr.bydelta"
 /** Root project **/
 lazy val root = (project in file("."))
   .enablePlugins(ScalaUnidocPlugin, JavaUnidocPlugin)
-  .aggregate(core, kkma, hannanum, twitter, komoran, eunjeon, kryo, arirang, rhino)
+  .aggregate(core, kkma, hannanum, twitter, komoran, eunjeon, kryo, arirang, rhino, server)
   .settings(
     publishArtifact := false,
     packagedArtifacts := Map.empty,
     publishLocal := {},
     publish := {},
-    unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples, server, custom),
-    unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples, server, custom)
+    unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples, custom),
+    unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples, custom)
   ).settings(aggregate in update := true)
 /** Core Project (Data structure, Trait, etc.) **/
 lazy val core = (project in file("core"))
