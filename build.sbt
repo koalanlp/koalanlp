@@ -4,7 +4,7 @@ fork in Test := true
 testForkedParallel in Test := true
 concurrentRestrictions in Global := Seq(Tags.limit(Tags.Test, 1))
 
-resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
+resolvers ++= Seq("releases").map(Resolver.sonatypeRepo)
 resolvers += Resolver.typesafeRepo("releases")
 
 sonatypeProfileName := "kr.bydelta"
@@ -103,8 +103,8 @@ lazy val server = (project in file("server"))
           )
         case _ =>
           Seq(
-            //            "com.tumblr" %% "colossus" % "0.10.0-RC1",
-            //            "com.tumblr" %% "colossus-testkit" % "0.10.0-RC1" % "test",
+            "com.tumblr" %% "colossus" % "0.10.0-RC1",
+            "com.tumblr" %% "colossus-testkit" % "0.10.0-RC1" % "test",
             "com.typesafe.play" %% "play-json" % "2.6.3"
           )
       })
