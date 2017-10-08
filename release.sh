@@ -19,7 +19,6 @@ git add build.sbt
 git commit -m "RELEASE v$JAR_VER_CURRENT"
 git tag v$JAR_VER_CURRENT
 
-java -jar ~/.IdeaIC2016.1/system/sbt/sbt-launch.jar ++2.11.8 server/publishSigned
 for SCALA in $SCALA_VERS; do
     java -jar ~/.IdeaIC2016.1/system/sbt/sbt-launch.jar ++$SCALA publishSigned
 done

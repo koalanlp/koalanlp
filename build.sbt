@@ -103,8 +103,8 @@ lazy val server = (project in file("server"))
           )
         case _ =>
           Seq(
-            "com.tumblr" %% "colossus" % "0.10.0-RC1",
-            "com.tumblr" %% "colossus-testkit" % "0.10.0-RC1" % "test",
+            "com.tumblr" %% "colossus" % "0.10.1",
+            "com.tumblr" %% "colossus-testkit" % "0.10.1" % "test",
             "com.typesafe.play" %% "play-json" % "2.6.3"
           )
       })
