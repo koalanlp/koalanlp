@@ -76,10 +76,10 @@ class Parser extends CanDepParse {
     result.foreach {
       word =>
         val mexp = new MExpression(word.surface,
-          new MCandidate(word.head.surface, tagToKKMA(word.head.tag)))
+          new MCandidate(word.head.surface, fromSejongPOS(word.head.tag)))
         word.tail.foreach {
           morph =>
-            mexp.add(new MCandidate(morph.surface, tagToKKMA(morph.tag)))
+            mexp.add(new MCandidate(morph.surface, fromSejongPOS(morph.tag)))
         }
         sent.add(new Eojeol(mexp))
     }

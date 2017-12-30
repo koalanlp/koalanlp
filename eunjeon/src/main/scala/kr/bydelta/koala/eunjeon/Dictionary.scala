@@ -54,7 +54,7 @@ object Dictionary extends CanCompileDict {
   override def addUserDictionary(dict: (String, POSTag)*): Unit = {
     rawDict ++= dict.map {
       case (word, tag) =>
-        val oTag = tagToEunjeon(tag)
+        val oTag = fromSejongPOS(tag)
         if (word.endsWithHangul) {
           val jong = if (word.endsWithJongsung) "T" else "F"
           s"$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
@@ -97,7 +97,7 @@ object Dictionary extends CanCompileDict {
     rawDict.map {
       line =>
         val segs = line.split(",")
-        segs(0) -> fromEunjeonTag(segs(4))
+        segs(0) -> toSejongPOS(segs(4))
     }
 
   override def getNotExists(onlySystemDic: Boolean, word: (String, POSTag)*): Seq[(String, POSTag)] = {
@@ -114,7 +114,7 @@ object Dictionary extends CanCompileDict {
           val found = searched.map(_.feature.head)
           tags.filterNot {
             case (_, tag) =>
-              found.contains(tagToEunjeon(tag))
+              found.contains(fromSejongPOS(tag))
           }
         } else tags // The case of not found
     }.toSeq
@@ -148,17 +148,17 @@ object Dictionary extends CanCompileDict {
 
     if (array.length == 1) {
       Seq(
-        data.Morpheme(m.surface, compoundTag, fromEunjeonTag(compoundTag))
+        data.Morpheme(m.surface, compoundTag, toSejongPOS(compoundTag))
       )
     } else if (tokens == "*") {
       Seq(
-        data.Morpheme(m.surface, compoundTag, fromEunjeonTag(compoundTag))
+        data.Morpheme(m.surface, compoundTag, toSejongPOS(compoundTag))
       )
     } else {
       tokens.split("\\+").map {
         tok =>
           val arr = tok.split("/")
-          data.Morpheme(arr.head, arr(1), fromEunjeonTag(arr(1)))
+          data.Morpheme(arr.head, arr(1), toSejongPOS(arr(1)))
       }
     }
   }

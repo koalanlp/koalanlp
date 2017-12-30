@@ -13,7 +13,7 @@ object Dictionary extends CanCompileDict {
 
   override def addUserDictionary(dict: (String, POSTag)*): Unit = {
     userDict ++= dict
-    dict.groupBy(x => KoreanPos withName fromSejong(x._2)).foreach {
+    dict.groupBy(x => KoreanPos withName fromSejongPOS(x._2)).foreach {
       case (twtTag, seq) =>
         add(twtTag, seq.map(_._1))
     }
@@ -51,7 +51,7 @@ object Dictionary extends CanCompileDict {
     * @return 사전에 없는 단어들.
     */
   override def getNotExists(dummy: Boolean, word: (String, POSTag)*): Seq[(String, POSTag)] = {
-    word.groupBy(w => KoreanPos.withName(fromSejong(w._2))).iterator.flatMap {
+    word.groupBy(w => KoreanPos.withName(fromSejongPOS(w._2))).iterator.flatMap {
       case (tag, words) =>
         val tagDic =
           if (tag == KoreanPos.ProperNoun) Some(KoreanDictionaryProvider.properNouns)
@@ -75,23 +75,23 @@ object Dictionary extends CanCompileDict {
     KoreanDictionaryProvider.koreanDictionary.apply(tag)
 
   override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[(String, POSTag)] = {
-    KoreanPos.values.filter(x => filter(toSejong(x.toString))).iterator.flatMap {
+    KoreanPos.values.filter(x => filter(toSejongPOS(x.toString))).iterator.flatMap {
       case t if dictContainsKey(t) =>
-        val key = toSejong(t.toString)
+        val key = toSejongPOS(t.toString)
         dictGet(t).asScala.map {
           case x: String => x -> key
           case x: Array[Char] => new String(x) -> key
           case x => x.toString -> key
         }
       case KoreanPos.ProperNoun =>
-        val key = toSejong(KoreanPos.ProperNoun.toString)
+        val key = toSejongPOS(KoreanPos.ProperNoun.toString)
         KoreanDictionaryProvider.properNouns.asScala.map {
           case x: String => x -> key
           case x: Array[Char] => new String(x) -> key
           case x => x.toString -> key
         }
       case t@(KoreanPos.Verb | KoreanPos.Adjective) =>
-        val key = toSejong(t.toString)
+        val key = toSejongPOS(t.toString)
         KoreanDictionaryProvider.predicateStems(t).keys.map(_ -> key)
       case _ =>
         Map()

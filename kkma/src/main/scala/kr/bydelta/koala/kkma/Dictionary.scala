@@ -14,7 +14,7 @@ object Dictionary extends CanCompileDict {
   /** 원본사전의 어휘목록 **/
   private lazy val systemDicByTag = Dict.getInstance.getAsList.asScala.flatMap {
     _.asScala.filter(_.getTag != null)
-      .map(m => fromKKMATag(m.getTag) -> m.getExp) // (품사, 표현식)으로 변환.
+      .map(m => toSejongPOS(m.getTag) -> m.getExp) // (품사, 표현식)으로 변환.
   }.groupBy(_._1).mapValues(_.map(_.swap))
 
   /** 사용자사전 Reader **/
@@ -26,7 +26,7 @@ object Dictionary extends CanCompileDict {
     if (dict.nonEmpty) {
       userdic ++=
         dict.map {
-          case (word, integratedTag) if word.nonEmpty => (word, tagToKKMA(integratedTag))
+          case (word, integratedTag) if word.nonEmpty => (word, fromSejongPOS(integratedTag))
         }
       isDicChanged = true
     }
@@ -38,7 +38,7 @@ object Dictionary extends CanCompileDict {
       line =>
         try {
           val segments = line.split('/')
-          Some(segments(0) -> fromKKMATag(segments(1)))
+          Some(segments(0) -> toSejongPOS(segments(1)))
         } catch {
           case _: NullPointerException | _: ArrayIndexOutOfBoundsException =>
             None
@@ -50,7 +50,7 @@ object Dictionary extends CanCompileDict {
 
   override def getNotExists(onlySystemDic: Boolean, word: (String, POSTag)*): Seq[(String, POSTag)] = {
     val converted = word.map {
-      case tup@(w, t) => (w, tup, tagToKKMA(t))
+      case tup@(w, t) => (w, tup, fromSejongPOS(t))
     }
 
     // Filter out existing morphemes!

@@ -1,7 +1,7 @@
 package kr.bydelta.koala.test.pack
 
 import kr.bydelta.koala.POS.POSTag
-import kr.bydelta.koala.eunjeon.{fromEunjeonTag, tagToEunjeon}
+import kr.bydelta.koala.eunjeon.{toSejongPOS, fromSejongPOS}
 
 /**
   * Created by bydelta on 17. 8. 19.
@@ -56,11 +56,11 @@ class EunjeonTagConversionSpec extends TagConversionSpec {
       "NV" -> ">UNKNOWN",
       "NA" -> "UNKNOWN",
       "SL" -> "SL",
-      "SH" -> "SH,"
+      "SH" -> "SH",
       "SN" -> "SN"
     )
 
-  override def from(x: String) = fromEunjeonTag(x)
+  override def from(x: String) = toSejongPOS(x)
 
-  override def to(x: POSTag): String = tagToEunjeon(x)
+  override def to(x: POSTag): String = fromSejongPOS(x)
 }

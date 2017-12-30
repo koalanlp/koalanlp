@@ -58,11 +58,11 @@ class TwitterConversionSpec extends TagConversionSpec {
       "NV" -> ">Unknown",
       "NA" -> "Unknown",
       "SL" -> "<Alpha\nForeign",
-      "SH" -> ">Foriegn",
+      "SH" -> ">Foreign",
       "SN" -> ">Number"
     )
 
-  override def from(x: String) = toSejong(x)
+  override def from(x: String) = toSejongPOS(x)
 
-  override def to(x: POSTag): String = fromSejong(x)
+  override def to(x: POSTag): String = fromSejongPOS(x)
 }

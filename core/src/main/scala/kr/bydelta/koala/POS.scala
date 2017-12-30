@@ -149,7 +149,7 @@ object POS extends Enumeration {
     * @deprecated 2.0.0에서 삭제예정. POS.SW(기타기호) 또는 POS.SO(붙임기호) 사용권장.
     */
   @deprecated("POS.SW(기타기호) 또는 POS.SO(붙임기호) 사용권장.", "2.0.0")
-  val SY: POSTag = SW
+  val SY: POSTag = Value("SW")
 
   /** 명사 추정 범주 **/
   val NF: POSTag = Value
@@ -158,7 +158,7 @@ object POS extends Enumeration {
     * @deprecated 2.0.0에서 삭제예정. POS.NF(명사추정범주) 사용권장.
     */
   @deprecated("POS.NF(명사추정범주) 사용권장.", "2.0.0")
-  val UN: POSTag = NF
+  val UN: POSTag = Value("NF")
   /** 동사 추정 범주 **/
   val NV: POSTag = Value
   /** 동사 추정 범주
@@ -166,7 +166,7 @@ object POS extends Enumeration {
     * @deprecated 2.0.0에서 삭제예정. POS.NV(동사추정범주) 사용권장.
     */
   @deprecated("POS.NV(동사추정범주) 사용권장.", "2.0.0")
-  val UV: POSTag = NV
+  val UV: POSTag = Value("NV")
   /** 분석 불능 범주 **/
   val NA: POSTag = Value
   /** 분석 불능 범주
@@ -174,7 +174,7 @@ object POS extends Enumeration {
     * @deprecated 2.0.0에서 삭제예정. POS.NA(분석불능범주) 사용권장.
     */
   @deprecated("POS.NA(분석불능범주) 사용권장.", "2.0.0")
-  val UE: POSTag = NA
+  val UE: POSTag = Value("NA")
 
   /** 외국어 **/
   val SL: POSTag = Value

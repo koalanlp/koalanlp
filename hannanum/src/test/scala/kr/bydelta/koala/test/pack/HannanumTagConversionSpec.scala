@@ -60,7 +60,7 @@ class HannanumTagConversionSpec extends TagConversionSpec {
       "SN" -> ">NNC"
     )
 
-  override def from(x: String) = fromHNNTag(x)
+  override def from(x: String) = toSejongPOS(x)
 
-  override def to(x: POSTag): String = tagToHNN(x).toUpperCase
+  override def to(x: POSTag): String = fromSejongPOS(x).toUpperCase
 }

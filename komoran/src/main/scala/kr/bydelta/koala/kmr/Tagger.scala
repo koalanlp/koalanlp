@@ -51,7 +51,7 @@ class Tagger(useLightTagger: Boolean) extends CanTagOnlyASentence[KomoranResult]
           morphs = ArrayBuffer[Morpheme]()
         }
 
-        morphs += Morpheme(surface = token.getMorph, rawTag = token.getPos, fromKomoranTag(tag))
+        morphs += Morpheme(surface = token.getMorph, rawTag = token.getPos, toSejongPOS(tag))
         lastIdx = token.getEndIndex
       }
 

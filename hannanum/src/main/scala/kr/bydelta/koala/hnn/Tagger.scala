@@ -65,7 +65,7 @@ final class Tagger extends CanTagOnlyAParagraph[Sentence] {
             plain,
             eojeol.getMorphemes.view.zip(eojeol.getTags.view).map {
               case (morph, tag) =>
-                Morpheme(morph, tag, fromHNNTag(tag))
+                Morpheme(morph, tag, toSejongPOS(tag))
             }
           )
       }

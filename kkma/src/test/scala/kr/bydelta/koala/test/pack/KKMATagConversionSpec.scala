@@ -60,7 +60,7 @@ class KKMATagConversionSpec extends TagConversionSpec {
       "SN" -> "ON"
     )
 
-  override def from(x: String) = fromKKMATag(x)
+  override def from(x: String) = toSejongPOS(x)
 
-  override def to(x: POSTag): String = tagToKKMA(x)
+  override def to(x: POSTag): String = fromSejongPOS(x)
 }

@@ -126,7 +126,7 @@ class Parser extends CanDepParse {
     val (plainEojeols, eojeols) = result.words.map {
       word =>
         val (morphs, tags) = word.morphemes.map {
-          m => (m.surface, tagToHNN(m.tag))
+          m => (m.surface, fromSejongPOS(m.tag))
         }.unzip
         (word.surface, new Eojeol(morphs.toArray, tags.toArray))
     }.unzip

@@ -61,7 +61,7 @@ class KomoranTagConversionSpec extends TagConversionSpec {
       "SN" -> "SN"
     )
 
-  override def from(x: String) = fromKomoranTag(x)
+  override def from(x: String) = toSejongPOS(x)
 
-  override def to(x: POSTag): String = tagToKomoran(x)
+  override def to(x: POSTag): String = fromSejongPOS(x)
 }

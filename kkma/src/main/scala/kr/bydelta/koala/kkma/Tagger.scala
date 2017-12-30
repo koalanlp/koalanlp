@@ -55,7 +55,7 @@ final class Tagger(logPath: String) extends CanTagOnlyAParagraph[Sentence] {
               morph => koala.data.Morpheme(
                 morph.getString,
                 morph.getTag,
-                fromKKMATag(morph.getTag)
+                toSejongPOS(morph.getTag)
               )
             }
           )

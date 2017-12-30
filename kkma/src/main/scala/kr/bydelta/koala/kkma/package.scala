@@ -31,7 +31,7 @@ package object kkma {
     * @param tag 원본품사로 변환할 통합표기.
     * @return 변환된 품사.
     */
-  def tagToKKMA(tag: _root_.kr.bydelta.koala.POS.Value): String = {
+  def fromSejongPOS(tag: _root_.kr.bydelta.koala.POS.Value): String = {
     tag match {
       case POS.VX => "VXV"
       case POS.MM => "MDT"
@@ -59,7 +59,7 @@ package object kkma {
     * @param tag 통합품사로 변환할 원본표기.
     * @return 변환된 통합품사.
     */
-  def fromKKMATag(tag: String): POS.Value = {
+  def toSejongPOS(tag: String): POS.Value = {
     tag.toUpperCase match {
       case "VXV" | "VXA" => POS.VX
       case "MDT" | "MDN" => POS.MM

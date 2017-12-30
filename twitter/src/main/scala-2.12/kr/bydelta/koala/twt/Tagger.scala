@@ -34,7 +34,7 @@ class Tagger extends CanTagAParagraph[Seq[KoreanToken]] {
         tokens =>
           Word(tokens.map(_.text).mkString,
             tokens.map {
-              tok => Morpheme(tok.text, tok.pos.toString, toSejong(tok.pos.toString))
+              tok => Morpheme(tok.text, tok.pos.toString, toSejongPOS(tok.pos.toString))
             }
           )
       }.toSeq

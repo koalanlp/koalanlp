@@ -17,7 +17,7 @@ package object twt {
     * @param tag The POS Tag value to be converted (POSTag type)
     * @return The name of POS tag which is used in OpenKoreanText (String)
     */
-  def fromSejong(tag: POS.Value): String = {
+  def fromSejongPOS(tag: POS.Value): String = {
     tag match {
       case POS.NNG | POS.NNB |
            POS.NNM | POS.NP => "Noun"
@@ -62,7 +62,7 @@ package object twt {
     * @param tag The name of POS Tag to be converted (String)
     * @return The POS Tag value which is the most suitable (POSTag type)
     */
-  def toSejong(tag: String): POS.Value = {
+  def toSejongPOS(tag: String): POS.Value = {
     tag match {
       case "Noun" => POS.NNG
       case "ProperNoun" => POS.NNP

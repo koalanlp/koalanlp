@@ -31,7 +31,7 @@ package object hnn {
     * @param tag 원본품사로 변환할 통합표기.
     * @return 변환된 품사.
     */
-  def tagToHNN(tag: _root_.kr.bydelta.koala.POS.Value): String = {
+  def fromSejongPOS(tag: POS.Value): String = {
     (tag match {
       case POS.NNG | POS.NF => "NCN"
       case POS.NNP => "NQQ"
@@ -75,7 +75,7 @@ package object hnn {
     * @param tag 통합품사로 변환할 원본표기.
     * @return 변환된 통합품사.
     */
-  def fromHNNTag(tag: String): POS.Value = {
+  def toSejongPOS(tag: String): POS.Value = {
     tag.toLowerCase match {
       case x if x startsWith "nc" => POS.NNG
       case x if x startsWith "nq" => POS.NNP

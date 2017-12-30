@@ -45,7 +45,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
       case (str, pos) =>
         bw.write(str)
         bw.write('\t')
-        bw.write(tagToKomoran(pos))
+        bw.write(fromSejongPOS(pos))
         bw.newLine()
     }
     bw.close()
@@ -56,7 +56,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     val bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(userDict, true)))
     bw.write(morph)
     bw.write('\t')
-    bw.write(tagToKomoran(tag))
+    bw.write(fromSejongPOS(tag))
     bw.newLine()
     bw.close()
   }
@@ -89,7 +89,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
               val tag = scoredtag.asScala.map(_.getTag)
               word -> tag
           }.filter(_._1 == w).flatMap(_._2).toSeq
-          tags.filterNot(t => found.contains(tagToKomoran(t._2)))
+          tags.filterNot(t => found.contains(fromSejongPOS(t._2)))
         }
     }.toSeq
   }
@@ -99,7 +99,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     userBuffer appendAll Source.fromFile(userDict).getLines().map {
       line =>
         val segs = line.split('\t')
-        segs(0) -> fromKomoranTag(segs(1))
+        segs(0) -> toSejongPOS(segs(1))
     }
 
     userBuffer.toSet
@@ -126,7 +126,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
 
           if (value != null && value.exists(_ != null)) {
             val wordstr = unitparser.combine(word.mkString)
-            baseEntries +:= wordstr -> value.map(x => fromKomoranTag(x.getTag))
+            baseEntries +:= wordstr -> value.map(x => toSejongPOS(x.getTag))
           }
 
           val children = top.getChildren

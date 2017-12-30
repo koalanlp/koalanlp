@@ -69,7 +69,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
       case (morph, tag) =>
         writer.write(morph)
         writer.write('\t')
-        writer.write(tagToHNN(tag).toLowerCase)
+        writer.write(fromSejongPOS(tag).toLowerCase)
         writer.newLine()
     }
     writer.close()
@@ -89,7 +89,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
         else {
           val found = morph.info_list.asScala.map(_.tag)
           tags.filterNot {
-            case (_, t) => found.contains(tagSet.getTagID(tagToHNN(t).toLowerCase))
+            case (_, t) => found.contains(tagSet.getTagID(fromSejongPOS(t).toLowerCase))
           }
         }
     }.toSeq
@@ -99,7 +99,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
     usrBuffer ++= Source.fromFile(usrDicPath).getLines().toStream.map {
       line =>
         val segments = line.split('\t')
-        segments(0) -> fromHNNTag(segments(1))
+        segments(0) -> toSejongPOS(segments(1))
     }
 
     usrBuffer
@@ -137,7 +137,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
 
           if (value != null) {
             val wordString = Code.toString(word)
-            baseEntries +:= (wordString -> value.asScala.map(x => fromHNNTag(tagSet.getTagName(x.tag))))
+            baseEntries +:= (wordString -> value.asScala.map(x => toSejongPOS(tagSet.getTagName(x.tag))))
           }
 
           if (top.child_size > 0) {
