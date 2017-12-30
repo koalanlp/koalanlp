@@ -85,7 +85,7 @@ lazy val komoran = (project in file("komoran"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("komoran"): _*)
   .settings(
-    resolvers += "jitpack" at "https://jitpack.io",
+    resolvers += "jitpack" at "https://jitpack.io/",
     libraryDependencies ++= Seq(
       "com.github.shin285" % "KOMORAN" % "3.3.3"
     )

@@ -63,7 +63,8 @@ package object hnn {
       case POS.SS => "SL"
       case POS.SL | POS.SH => "F"
       case POS.SN => "NNC"
-      case POS.SW | POS.SO | POS.XR | POS.NA => "SY"
+      case POS.SO => "SD"
+      case POS.SW | POS.XR | POS.NA => "SY"
       case POS.XPN | POS.XPV => "XP"
       case x => x.toString
     }).toLowerCase
