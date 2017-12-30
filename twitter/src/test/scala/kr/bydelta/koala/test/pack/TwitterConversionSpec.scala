@@ -41,7 +41,7 @@ class TwitterConversionSpec extends TagConversionSpec {
     case NA => Seq(Conversion("Unknown"))
     case SL => Seq(Conversion("Foreign"), Conversion("Alpha", toTagger = false))
     case SH => Seq(Conversion("Foreign", toSejong = false))
-    case SN => Seq(Conversion("Number", toTagger = false))
+    case SN => Seq(Conversion("Number", toSejong = false))
   }
 
   override def from(x: String): POSTag = toSejongPOS(x)

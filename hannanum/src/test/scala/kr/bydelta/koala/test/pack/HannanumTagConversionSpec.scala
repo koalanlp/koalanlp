@@ -50,7 +50,7 @@ class HannanumTagConversionSpec extends TagConversionSpec {
     case XSA =>
       Seq(Conversion("xsmn"), Conversion("xsms", toTagger = false))
     case XSM =>
-      Seq(Conversion("xsam"), Conversion("xsas", toTagger = false))
+      Seq(Conversion("xsas"), Conversion("xsam", toTagger = false))
     case XSO | XR | NF | NV | NA => Seq.empty
     case SS => Seq(Conversion("sl"), Conversion("sr", toTagger = false))
     case SO => Seq(Conversion("sd"))
