@@ -6,7 +6,7 @@ import kr.bydelta.koala.POS;
 import kr.bydelta.koala.POS$;
 import kr.bydelta.koala.traits.CanCompileDict;
 import scala.Tuple2;
-import scala.collection.JavaConverters;
+import scala.collection.JavaConversions;
 
 import java.io.*;
 import java.util.LinkedList;
@@ -49,7 +49,7 @@ public class DictionaryStream {
     public void saveTo(OutputStream stream) {
         Output output = new Output(stream);
 
-        Set<Tuple2<String, POS$.Value>> list = JavaConverters.setAsJavaSet(dict.items());
+        Set<Tuple2<String, POS$.Value>> list = JavaConversions.setAsJavaSet(dict.items());
         output.writeInt(list.size());
 
         for (Tuple2<String, POS$.Value> item : list) {
