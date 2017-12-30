@@ -8,7 +8,7 @@ import kr.bydelta.koala.kmr._
   */
 class KomoranTagConversionSpec extends TagConversionSpec {
 
-  override def tagMap: PartialFunction[POSTag, Seq[Conversion]] = {
+  protected override def tagMap: PartialFunction[POSTag, Seq[Conversion]] = {
     case NNM => Seq(Conversion("NNB", toSejong = false))
     case XPV => Seq(Conversion("XR", toSejong = false))
     case XSM | XSO => Seq.empty

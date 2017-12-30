@@ -8,7 +8,7 @@ import kr.bydelta.koala.eunjeon.{toSejongPOS, fromSejongPOS}
   */
 class EunjeonTagConversionSpec extends TagConversionSpec {
 
-  override def tagMap: PartialFunction[POSTag, Seq[Conversion]] = {
+  protected override def tagMap: PartialFunction[POSTag, Seq[Conversion]] = {
     case NNM => Seq(Conversion("NNBC"))
     case XPV => Seq(Conversion("XR", toSejong = false))
     case XSM | XSO => Seq.empty

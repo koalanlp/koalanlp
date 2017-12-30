@@ -8,7 +8,7 @@ import kr.bydelta.koala.kkma._
   */
 class KKMATagConversionSpec extends TagConversionSpec {
 
-  override def tagMap: PartialFunction[POSTag, Seq[Conversion]] = {
+  protected override def tagMap: PartialFunction[POSTag, Seq[Conversion]] = {
     case VX => Seq(Conversion("VXV"), Conversion("VXA", toTagger = false))
     case MM => Seq(Conversion("MDT"), Conversion("MDN", toTagger = false))
     case MAJ => Seq(Conversion("MAC"))

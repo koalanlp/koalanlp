@@ -8,7 +8,7 @@ import kr.bydelta.koala.twt._
   */
 class TwitterConversionSpec extends TagConversionSpec {
 
-  override def tagMap: PartialFunction[POSTag, Seq[Conversion]] = {
+  protected override def tagMap: PartialFunction[POSTag, Seq[Conversion]] = {
     case NNG => Seq(Conversion("Noun"))
     case NNP => Seq(Conversion("ProperNoun"))
     case NNB | NNM | NP => Seq(Conversion("Noun", toSejong = false))

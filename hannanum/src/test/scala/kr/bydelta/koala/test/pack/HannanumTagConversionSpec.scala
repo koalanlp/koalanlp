@@ -8,7 +8,7 @@ import kr.bydelta.koala.hnn._
   */
 class HannanumTagConversionSpec extends TagConversionSpec {
 
-  override def tagMap: PartialFunction[POSTag, Seq[Conversion]] = {
+  protected override def tagMap: PartialFunction[POSTag, Seq[Conversion]] = {
     case NNG =>
       Seq(Conversion("ncpa", toTagger = false), Conversion("ncps", toTagger = false),
         Conversion("ncn"), Conversion("ncr", toTagger = false))

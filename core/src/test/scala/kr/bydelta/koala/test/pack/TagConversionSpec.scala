@@ -13,7 +13,14 @@ case class Conversion(tag: String,
                       toSejong: Boolean = true)
 
 trait TagConversionSpec extends Specification {
-  def tagMap: PartialFunction[POSTag, Seq[Conversion]]
+  private final val TEMP_MAPPER: PartialFunction[POSTag, Seq[Conversion]] = {
+    case POS.TEMP => Seq.empty
+  }
+
+  def getMapping: PartialFunction[POSTag, Seq[Conversion]] =
+    TEMP_MAPPER orElse tagMap
+
+  protected def tagMap: PartialFunction[POSTag, Seq[Conversion]]
 
   def from(x: String): POSTag
 
@@ -23,7 +30,7 @@ trait TagConversionSpec extends Specification {
     "convert tags correctly" in {
       Result.unit {
         POS.values.foreach { iPOS =>
-          tagMap(iPOS).foreach {
+          getMapping(iPOS).foreach {
             case Conversion(tag, toTagger, toSejong) =>
               if (toTagger)
                 to(iPOS) must_== tag
