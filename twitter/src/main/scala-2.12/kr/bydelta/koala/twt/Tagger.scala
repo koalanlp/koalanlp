@@ -23,7 +23,7 @@ class Tagger extends CanTagAParagraph[Seq[KoreanToken]] {
   override private[koala] def convertSentence(result: Seq[KoreanToken]): Sentence = {
     Sentence(
       new Iterator[Seq[KoreanToken]] {
-        val it = result.iterator
+        val it: Iterator[KoreanToken] = result.iterator
 
         override def hasNext: Boolean = it.hasNext
 
@@ -34,7 +34,7 @@ class Tagger extends CanTagAParagraph[Seq[KoreanToken]] {
         tokens =>
           Word(tokens.map(_.text).mkString,
             tokens.map {
-              tok => Morpheme(tok.text, tok.pos.toString, fromTwtTag(tok.pos.toString))
+              tok => Morpheme(tok.text, tok.pos.toString, toSejong(tok.pos.toString))
             }
           )
       }.toSeq

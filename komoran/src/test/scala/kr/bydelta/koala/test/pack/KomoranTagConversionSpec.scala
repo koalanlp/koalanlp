@@ -51,11 +51,13 @@ class KomoranTagConversionSpec extends TagConversionSpec {
       "SP" -> "SP",
       "SS" -> "SS",
       "SE" -> "SE",
-      "SY" -> "<SO\nSW",
-      "UN" -> ">NA",
-      "UV" -> ">NA",
-      "UE" -> "NA",
-      "SL" -> "SL\n<SH",
+      "SO" -> "SO",
+      "SW" -> "SW",
+      "NF" -> ">NA",
+      "NV" -> ">NA",
+      "NA" -> "NA",
+      "SL" -> "SL",
+      "SH" -> "SH",
       "SN" -> "SN"
     )
 

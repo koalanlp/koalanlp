@@ -15,24 +15,24 @@ import scala.collection.JavaConverters._
 
 private[koala] object BerkeleyParserWrap {
   lazy val args: String = "-in " + Configuration.parserModel
-  lazy val opts = new OptionParser(classOf[GrammarTester.Options]).parse(args.split(" "), true).asInstanceOf[GrammarTester.Options]
+  lazy val opts: GrammarTester.Options = new OptionParser(classOf[GrammarTester.Options]).parse(args.split(" "), true).asInstanceOf[GrammarTester.Options]
   lazy val finalLevel: Int = opts.finalLevel
   lazy val viterbiParse: Boolean = opts.viterbi
   lazy val doVariational: Boolean = false
   lazy val useGoldPOS: Boolean = opts.useGoldPOS
 
   lazy val inFileName: String = Dictionary.extractResource() + File.separator + opts.inFileName
-  lazy val pData = {
+  lazy val pData: ParserData = {
     val p = ParserData.Load(inFileName)
     Numberer.setNumberers(p.getNumbs)
     p
   }
-  lazy val grammar = {
+  lazy val grammar: Grammar = {
     val g = pData.getGrammar
     g.splitRules()
     g
   }
-  lazy val lexicon = pData.getLexicon
+  lazy val lexicon: Lexicon = pData.getLexicon
 }
 
 /**
@@ -44,7 +44,7 @@ private[koala] object BerkeleyParserWrap {
   * 원본의 Copyright: KAIST 한나눔 개발팀.
   */
 private[koala] class BerkeleyParserWrap(val grammarName: String) {
-  val parser = {
+  val parser: CoarseToFineMaxRuleParser = {
     val p = new CoarseToFineMaxRuleParser(BerkeleyParserWrap.grammar, BerkeleyParserWrap.lexicon,
       BerkeleyParserWrap.opts.unaryPenalty, BerkeleyParserWrap.finalLevel,
       BerkeleyParserWrap.viterbiParse, false, false, BerkeleyParserWrap.opts.accurate,

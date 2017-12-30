@@ -42,9 +42,12 @@ package object kkma {
       case POS.EF => "EFN"
       case POS.EC => "ECE"
       case POS.ETM => "ETD"
-      case POS.SY => "SW"
       case POS.SL => "OL"
+      case POS.SH => "OH"
       case POS.SN => "ON"
+      case POS.NF => "UN"
+      case POS.NV => "UV"
+      case POS.NA => "UE"
       case x => x.toString
     }
   }
@@ -67,10 +70,13 @@ package object kkma {
       case x if x startsWith "EF" => POS.EF
       case x if x startsWith "EC" => POS.EC
       case "ETD" => POS.ETM
-      case "SO" | "SW" => POS.SY
-      case "OL" | "OH" => POS.SL
+      case "OL" => POS.SL
+      case "OH" => POS.SH
       case "ON" => POS.SN
-      case "EMO" => POS.SY //Emoticons
+      case "UN" => POS.NF
+      case "UV" => POS.NV
+      case "UE" => POS.NA
+      case "EMO" => POS.SW //Emoticons
       case x => POS withName x
     }
   }

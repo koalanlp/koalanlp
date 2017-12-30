@@ -1,6 +1,6 @@
 package kr.bydelta.koala.kryo
 
-import com.twitter.chill.ScalaKryoInstantiator
+import com.twitter.chill.{KryoBase, ScalaKryoInstantiator}
 import kr.bydelta.koala.data.{Morpheme, Relationship, Sentence, Word}
 
 /**
@@ -14,7 +14,7 @@ object KryoWrap {
     *
     * @return Kryo instance.
     */
-  def kryo = {
+  def kryo: KryoBase = {
     val k = instantiator.newKryo()
     k.addDefaultSerializer(classOf[Morpheme], MorphemeSerializer)
     k.addDefaultSerializer(classOf[Word], WordSerializer)

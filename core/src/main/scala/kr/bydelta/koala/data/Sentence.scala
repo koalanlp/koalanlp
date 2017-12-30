@@ -34,14 +34,14 @@ final class Sentence private(val words: Vector[Word])
     *
     * (Java) Head words for this sentence.
     */
-  def jTopLevels = topLevels.asJava
+  def jTopLevels: java.util.Set[Relationship] = topLevels.asJava
 
   /**
     * 의존 구문 분석 결과, 나타난 핵심어들.
     *
     * Head words for this sentence.
     */
-  def topLevels = root.dependents
+  def topLevels: Set[Relationship] = root.dependents
 
   /**
     * (Java) 주어진 품사 표기의 Sequence를 포함하는지 확인.
@@ -86,7 +86,7 @@ final class Sentence private(val words: Vector[Word])
     *
     * @return 체언을 포함하는 어절들의 Sequence
     */
-  def jNouns = nouns.asJava
+  def jNouns: java.util.List[Word] = nouns.asJava
 
   /**
     * 체언^명사, 수사, 대명사^을 포함하는 어절들
@@ -95,7 +95,7 @@ final class Sentence private(val words: Vector[Word])
     *
     * @return 체언을 포함하는 어절들의 Sequence
     */
-  def nouns = words.filter(_.exists(_.isNoun))
+  def nouns: Seq[Word] = words.filter(_.exists(_.isNoun))
 
   /**
     * (Java) 용언^동사, 형용사^을 포함하는 어절들
@@ -104,7 +104,7 @@ final class Sentence private(val words: Vector[Word])
     *
     * @return 용언을 포함하는 어절들의 Sequence
     */
-  def jVerbs = verbs.asJava
+  def jVerbs: java.util.List[Word] = verbs.asJava
 
   /**
     * 용언^동사, 형용사^을 포함하는 어절들
@@ -113,7 +113,7 @@ final class Sentence private(val words: Vector[Word])
     *
     * @return 용언을 포함하는 어절들의 Sequence
     */
-  def verbs = words.filter(_.exists(_.isPredicate))
+  def verbs: Seq[Word] = words.filter(_.exists(_.isPredicate))
 
   /**
     * (Java) 수식언^관형사, 부사^을 포함하는 어절들
@@ -122,7 +122,7 @@ final class Sentence private(val words: Vector[Word])
     *
     * @return 수식언을 포함하는 어절들의 Sequence
     */
-  def jModifiers = modifiers.asJava
+  def jModifiers: java.util.List[Word] = modifiers.asJava
 
   /**
     * 수식언^관형사, 부사^을 포함하는 어절들
@@ -131,7 +131,7 @@ final class Sentence private(val words: Vector[Word])
     *
     * @return 수식언을 포함하는 어절들의 Sequence
     */
-  def modifiers = words.filter(_.exists(_.isModifier))
+  def modifiers: Seq[Word] = words.filter(_.exists(_.isModifier))
 
   override def apply(idx: Int): Word = words(idx)
 
@@ -142,7 +142,7 @@ final class Sentence private(val words: Vector[Word])
     *
     * @return 어절 순회 Iterator.
     */
-  def jIterator = iterator.asJava
+  def jIterator: java.util.Iterator[Word] = iterator.asJava
 
   override def toString: String =
   surfaceString() + "\n" +
@@ -213,7 +213,7 @@ object Sentence {
     * @param words Word sequence.
     * @return a new Sentence.
     */
-  def apply(words: collection.Seq[Word]) = applySeq(words)
+  def apply(words: collection.Seq[Word]): Sentence = applySeq(words)
 
   /**
     * Create a sentence.

@@ -57,7 +57,7 @@ object Implicit {
       * @param tagger Tagger to be used
       * @return Sequence of Sentence instances (tagged)
       */
-    def toTagged(implicit tagger: CanTag) = tagger.tag(str)
+    def toTagged(implicit tagger: CanTag): Seq[Sentence] = tagger.tag(str)
 
     /**
       * Parse given sentence
@@ -65,7 +65,7 @@ object Implicit {
       * @param parser Parser to be used
       * @return Sentence instance (parsed)
       */
-    def toParsed(implicit parser: CanDepParse) = parser.parse(str)
+    def toParsed(implicit parser: CanDepParse): Seq[Sentence] = parser.parse(str)
 
     /**
       * Split string into sentences
@@ -73,7 +73,7 @@ object Implicit {
       * @param split SentenceSplitter to be used
       * @return Sequence of Sentence Strings
       */
-    def sentences(implicit split: CanSplitSentence) = split.sentences(str)
+    def sentences(implicit split: CanSplitSentence): Seq[String] = split.sentences(str)
   }
 
   /**
@@ -88,7 +88,7 @@ object Implicit {
       * @param parser Parser to be used
       * @return Sentence instance (parsed)
       */
-    def toParsed(implicit parser: CanDepParse) = parser.parse(sent)
+    def toParsed(implicit parser: CanDepParse): Sentence = parser.parse(sent)
   }
 
   /**
@@ -103,7 +103,7 @@ object Implicit {
       * @param parser Parser to be used
       * @return Sentence Seq instance (parsed)
       */
-    def toParsed(implicit parser: CanDepParse) = parser.parse(sent)
+    def toParsed(implicit parser: CanDepParse): Seq[Sentence] = parser.parse(sent)
   }
 
 }

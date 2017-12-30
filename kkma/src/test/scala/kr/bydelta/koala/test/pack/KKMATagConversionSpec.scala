@@ -50,11 +50,13 @@ class KKMATagConversionSpec extends TagConversionSpec {
       "SP" -> "SP",
       "SS" -> "SS",
       "SE" -> "SE",
-      "SY" -> "<SO\nSW",
-      "UN" -> "UN",
-      "UV" -> "UV",
-      "UE" -> "UE",
-      "SL" -> "OL\n<OH",
+      "SO" -> "SO",
+      "SW" -> "SW",
+      "UN" -> "NF",
+      "UV" -> "NV",
+      "UE" -> "NA",
+      "SL" -> "OL",
+      "SH" -> "OH",
       "SN" -> "ON"
     )
 

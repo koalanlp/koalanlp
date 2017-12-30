@@ -37,8 +37,8 @@ object Dictionary extends CanCompileDict {
     userdic.flatMap {
       line =>
         try {
-          val segs = line.split('/')
-          Some(segs(0) -> fromKKMATag(segs(1)))
+          val segments = line.split('/')
+          Some(segments(0) -> fromKKMATag(segments(1)))
         } catch {
           case _: NullPointerException | _: ArrayIndexOutOfBoundsException =>
             None

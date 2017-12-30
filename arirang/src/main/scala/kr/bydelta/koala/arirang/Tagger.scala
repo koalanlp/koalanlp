@@ -27,7 +27,7 @@ class Tagger extends CanTagOnlyASentence[Seq[AnalysisOutput]] {
 
   override private[koala] def convertSentence(text: String, result: Seq[AnalysisOutput]): Sentence = {
     var sentence = text
-    var wordlist =
+    var wordList =
       result.filter(_.getSource.trim.nonEmpty).flatMap {
         word =>
           val words = ArrayBuffer[Word]()
@@ -38,7 +38,7 @@ class Tagger extends CanTagOnlyASentence[Seq[AnalysisOutput]] {
           sentence = sentRemain.substring(surface.length)
 
           if (sentCurr.trim.nonEmpty) {
-            morphs +:= Morpheme(sentCurr.trim, " ", POS.UE)
+            morphs +:= Morpheme(sentCurr.trim, " ", POS.NA)
             surface = sentCurr + surface
           }
           morphs = morphs ++: interpretOutput(word)
@@ -62,8 +62,8 @@ class Tagger extends CanTagOnlyASentence[Seq[AnalysisOutput]] {
           }
 
           // Now separate special characters as words
-          while (morphs.exists(Tagger.checkset)) {
-            val (morph, after) = morphs.splitAt(morphs.indexWhere(Tagger.checkset))
+          while (morphs.exists(Tagger.checkSet)) {
+            val (morph, after) = morphs.splitAt(morphs.indexWhere(Tagger.checkSet))
             val symbol = after.head.surface
             val (prev, next) = surface.splitAt(surface.indexOf(symbol))
             if (prev.trim.nonEmpty) {
@@ -85,11 +85,11 @@ class Tagger extends CanTagOnlyASentence[Seq[AnalysisOutput]] {
       }
 
     if (sentence.trim.nonEmpty) {
-      wordlist :+= Word(surface = sentence.trim,
-        morphemes = Seq(Morpheme(surface = sentence.trim, rawTag = " ", tag = POS.UE)))
+      wordList :+= Word(surface = sentence.trim,
+        morphemes = Seq(Morpheme(surface = sentence.trim, rawTag = " ", tag = POS.NA)))
     }
 
-    Sentence(wordlist)
+    Sentence(wordList)
   }
 
   private def interpretOutput(o: AnalysisOutput): Seq[Morpheme] = {
@@ -98,7 +98,7 @@ class Tagger extends CanTagOnlyASentence[Seq[AnalysisOutput]] {
       case PatternConstants.POS_NPXM => POS.NNG
       case PatternConstants.POS_VJXV => POS.VV
       case PatternConstants.POS_AID => POS.MAG
-      case _ => POS.SY
+      case _ => POS.SW
     }))
 
     if (o.getNsfx != null) {
@@ -208,7 +208,7 @@ class Tagger extends CanTagOnlyASentence[Seq[AnalysisOutput]] {
 }
 
 object Tagger {
-  private val checkset = Seq(POS.SF, POS.SP, POS.SS, POS.TEMP)
+  private val checkSet = Seq(POS.SF, POS.SP, POS.SS, POS.TEMP)
   private val SFRegex = "(?U)[\\.\\?\\!]+".r
   private val SPRegex = "(?U)[,:;·/]+".r
   private val punctuationsSplit = "(?U)((?<=[,\\.:;\\?\\!/·\\s\'\"\\(\\[\\{<〔〈《「『【‘“\\)\\]\\}>〕〉》」』】’”]+)|" +

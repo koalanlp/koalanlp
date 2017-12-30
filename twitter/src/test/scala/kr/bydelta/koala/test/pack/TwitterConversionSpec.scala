@@ -52,15 +52,17 @@ class TwitterConversionSpec extends TagConversionSpec {
       "SP" -> ">Others",
       "SS" -> ">Others",
       "SE" -> ">Others",
-      "SY" -> "<CashTag\nOthers",
-      "UN" -> ">Unknown",
-      "UV" -> ">Unknown",
-      "UE" -> "Unknown",
+      "SO" -> ">Others",
+      "SW" -> "<CashTag\nOthers",
+      "NF" -> ">Unknown",
+      "NV" -> ">Unknown",
+      "NA" -> "Unknown",
       "SL" -> "<Alpha\nForeign",
+      "SH" -> ">Foriegn",
       "SN" -> ">Number"
     )
 
-  override def from(x: String) = fromTwtTag(x)
+  override def from(x: String) = toSejong(x)
 
-  override def to(x: POSTag): String = tagToTwt(x)
+  override def to(x: POSTag): String = fromSejong(x)
 }

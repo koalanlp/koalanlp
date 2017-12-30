@@ -18,7 +18,7 @@ private[koala] object RHINOTagger {
   final val RETAGGING_EQUAL = "^(는|은|을|세|야|자라고)$".r
   final val MORPH_MATCH = "([^\\s]+)/([A-Z]{2,3})".r
 
-  def tag(input: String) = {
+  def tag(input: String): Seq[Word] = {
     val arr = split(input)
     val inputArr = arr.filter(_._2).map(_._1).toArray
     val outputArr = Array.fill(inputArr.length)("")
@@ -92,7 +92,7 @@ private[koala] object RHINOTagger {
     /* 여기서부터는 RHINO에 없는 코드입니다. */
     arr.foldLeft((0, Seq.empty[Word])) {
       case ((idxOfInputArr, seq), (symbol, false)) =>
-        (idxOfInputArr, Word(symbol, Seq(Morpheme(symbol, "", POS.SY))) +: seq)
+        (idxOfInputArr, Word(symbol, Seq(Morpheme(symbol, "", POS.SW))) +: seq)
       case ((idxOfInputArr, seq), (".", true)) if idxOfInputArr > 0 && inputArr(idxOfInputArr - 1).matches("^\\.+$") =>
         val surf = seq.head.surface + "."
         (idxOfInputArr + 1, Word(surf, Seq(Morpheme(surf, "SE", POS.SE))) +: seq.tail)

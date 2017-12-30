@@ -41,14 +41,14 @@ final class Word private(val surface: String, val morphemes: Vector[Morpheme])
   /**
     * 현재 어절에 의존하는 의존소의 목록. 즉, 현재 어절의 핵심 의미를 보조하거나, 보강하는 단어들.
     */
-  def dependents = deps
+  def dependents: Set[Relationship] = deps
 
   /**
     * (Java) 현재 어절에 의존하는 의존소의 목록. 즉, 현재 어절의 핵심 의미를 보조하거나, 보강하는 단어들.
     *
     * @return 의존소 목록 `java.util.List<Word>`
     */
-  def jDependents = deps.asJava
+  def jDependents: java.util.Set[Relationship] = deps.asJava
 
   /**
     * 주어진 품사 표기의 Sequence를 포함하는지 확인.
@@ -137,7 +137,7 @@ final class Word private(val surface: String, val morphemes: Vector[Morpheme])
     *
     * @return 형태소 순회 Iterator.
     */
-  def jIterator = iterator.asJava
+  def jIterator: java.util.Iterator[Morpheme] = iterator.asJava
 
   override protected[this] def newBuilder: mutable.Builder[Morpheme, Word] =
     new ArrayBuffer[Morpheme] mapResult Word.applySeq(id, surface)
@@ -147,7 +147,7 @@ final class Word private(val surface: String, val morphemes: Vector[Morpheme])
     *
     * @return index
     */
-  def id = index
+  def id: Int = index
 
   /**
     * 구문분석과 품사분석의 결과를 String으로 변환.
@@ -188,7 +188,7 @@ object Word{
     * @param morphemes Sequence of morphemes
     * @return A new word
     */
-  def apply(surface: String, morphemes: collection.Seq[Morpheme]) =
+  def apply(surface: String, morphemes: collection.Seq[Morpheme]): Word =
   applySeq(-1, surface)(morphemes)
 
   /**

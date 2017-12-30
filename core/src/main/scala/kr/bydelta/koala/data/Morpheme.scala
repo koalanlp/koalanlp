@@ -22,7 +22,7 @@ final class Morpheme private(val surface: String, val rawTag: String, val tag: P
     *
     * @return index
     */
-  def id = index
+  def id: Int = index
 
   /**
     * 체언^명사, 수사, 대명사^ 형태소인지 확인.
@@ -58,7 +58,7 @@ final class Morpheme private(val surface: String, val rawTag: String, val tag: P
     *
     * @return True : 관계언 형태소일 경우.
     */
-  def isJosa: Boolean = POS.isPostposition(tag)
+  def isJosa: Boolean = POS.isPostPosition(tag)
 
   /**
     * 통합 품사가 주어진 품사 표기에 대응하는지 확인.

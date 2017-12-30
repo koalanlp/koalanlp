@@ -23,11 +23,11 @@ trait Server {
   /**
     * Generator function for tagger
     */
-  implicit val taggerGenerator = () => this.getTagger
+  implicit val taggerGenerator: () => CanTag = () => this.getTagger
   /**
     * Generator function for parser
     */
-  implicit val parserGenerator = () => this.getParser
+  implicit val parserGenerator: () => CanDepParse = () => this.getParser
   private[this] val logger = org.log4s.getLogger
 
   /**
@@ -51,8 +51,8 @@ trait Server {
     * @param args Arguments.
     */
   def main(args: Array[String]): Unit = {
-    implicit val actorSystem = ActorSystem()
-    implicit val io = IOSystem()
+    implicit val actorSystem: ActorSystem = ActorSystem()
+    implicit val io: IOSystem = IOSystem()
 
     logger info "Server initializing"
     getHttpServerRef

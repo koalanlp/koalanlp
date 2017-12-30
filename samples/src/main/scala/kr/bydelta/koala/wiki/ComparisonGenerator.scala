@@ -27,7 +27,7 @@ object ComparisonGenerator {
 
   def main(args: Array[String]): Unit = {
     // Fetch random article
-    implicit val testset = Random.shuffle(
+    implicit val testset: Seq[String] = Random.shuffle(
       Try(Jsoup.parse(new URL("http://media.daum.net/politics/"), 10000)) match {
         case Success(doc) =>
           val articles = doc.select("a.link_txt").iterator()
@@ -81,7 +81,7 @@ object ComparisonGenerator {
 
     val procs = Runtime.getRuntime.availableProcessors()
 
-    implicit val bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(args.head)))
+    implicit val bw: BufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(args.head)))
     text("실제 사용 성능을 보여드리기 위해서, 카카오 뉴스에서 임의로 뉴스를 선택하고 10개 문단을 표본추출하였습니다.")
     text(s"실험환경: (Travis CI) **3GB** MaxHeap, **$procs**-core(s), Scala **${args(1)}**")
     text(s"실험일시: ${new GregorianCalendar().getTime}")
@@ -94,11 +94,11 @@ object ComparisonGenerator {
           case (seq, i) => s"Sentence #$i" +: seq.map(_ + "s")
         }
     )
-    text(s"가장 __빠르게 초기화__된 것은 `${names(loadings.zipWithIndex.minBy(_._1)._2)}`이며, " +
+    text(s"가장 __빠르게 초기화된__ 것은 `${names(loadings.zipWithIndex.minBy(_._1)._2)}`이며, " +
       s"가장 느리게 초기화된 패키지는 `${names(loadings.zipWithIndex.maxBy(_._1)._2)}`입니다.")
     text(s"가장 __빠르게 사전을 불러온__ 것은 `${names(lazyLoading.zipWithIndex.minBy(_._1)._2)}`이며, " +
       s"가장 느리게 사전을 불러온 패키지는 `${names(lazyLoading.zipWithIndex.maxBy(_._1)._2)}`입니다.")
-    text(s"첫 문장을 빼면, 평균적으로 __가장 빠르게 분석__한 것은 `${names(meanProcessing.zipWithIndex.minBy(_._1)._2)}`이며, " +
+    text(s"첫 문장을 빼면, 평균적으로 __가장 빠르게 분석한__ 것은 `${names(meanProcessing.zipWithIndex.minBy(_._1)._2)}`이며, " +
       s"가장 느리게 분석한 패키지는 `${names(meanProcessing.zipWithIndex.maxBy(_._1)._2)}`입니다.")
 
     heading("Tagging 결과")
@@ -109,7 +109,7 @@ object ComparisonGenerator {
       "띄어쓰기나 어절구분은 정확한가? (바르게 분석했다면, 읽는 데 __어색함이 없어야__ 합니다)",
       "고유명사나 신조어를 어떻게 분석했는가? (바르게 분석했다면, __고유명사/NNP__ 품사가 붙고, 적절히 띄어쓰기 되어야 합니다)",
       "체언(명사)이 바르게 분석되었는가? (바르게 분석했다면, __N으로 시작하는 품사__ 가 붙어야 합니다)",
-      "용언(동사, 형용사)가 바르게 분석되었는가? (바르게 분석했다면, __V으로 시작하는 품사__ 가 붙고, 이후에, 어미(__E로 시작하는 품사)__ 가 붙어야 합니다)" +
+      "용언(동사, 형용사)가 바르게 분석되었는가? (바르게 분석했다면, __V으로 시작하는 품사__ 가 붙고, 이후에, 어미(__E로 시작하는 품사__) 가 붙어야 합니다)" +
         "   * 명사로도 쓰이는 동사는 N(명사)+XSV(용언화 접미사) 형태를 띄기도 합니다."
     )
 
@@ -164,35 +164,35 @@ object ComparisonGenerator {
     (delta, para)
   }
 
-  def heading(text: String, depth: Int = 2)(implicit bw: BufferedWriter) = {
+  def heading(text: String, depth: Int = 2)(implicit bw: BufferedWriter): Unit = {
     bw.write("#" * depth + s" $text")
     bw.newLine()
   }
 
-  def quote(text: String*)(implicit bw: BufferedWriter) = {
+  def quote(text: String*)(implicit bw: BufferedWriter): Unit = {
     bw.write(text.map("> " + _).mkString("\n>\n"))
     bw.newLine()
   }
 
-  def codeQuote(text: Seq[String])(implicit bw: BufferedWriter) = {
+  def codeQuote(text: Seq[String])(implicit bw: BufferedWriter): Unit = {
     bw.write("```text\n" + text.mkString("\n") + "\n```\n")
     bw.newLine()
   }
 
-  def table(headers: Seq[String], values: Seq[Seq[String]])(implicit bw: BufferedWriter) = {
+  def table(headers: Seq[String], values: Seq[Seq[String]])(implicit bw: BufferedWriter): Unit = {
     bw.write(headers.mkString(" | ") + "\n" +
       headers.map(_ => "---").mkString(" | ") + "\n" +
       values.map(_.mkString(" | ")).mkString("\n"))
     bw.newLine()
   }
 
-  def text(text: String)(implicit bw: BufferedWriter) = {
+  def text(text: String)(implicit bw: BufferedWriter): Unit = {
     bw.newLine()
     bw.write(text)
     bw.newLine()
   }
 
-  def list(text: String*)(implicit bw: BufferedWriter) = {
+  def list(text: String*)(implicit bw: BufferedWriter): Unit = {
     bw.newLine()
     bw.write(text.map("* " + _).mkString("\n"))
     bw.newLine()

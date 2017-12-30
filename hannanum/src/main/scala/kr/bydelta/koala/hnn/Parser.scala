@@ -28,7 +28,7 @@ class Parser extends CanDepParse {
   /**
     * 의존관계분석결과 변환기.
     */
-  private lazy val conv: Converter = new Converter
+  private lazy val converter: Converter = new Converter
 
   override def parse(sentence: String): Seq[Sentence] = {
     tagger.tagParagraphOriginal(sentence).map(convert)
@@ -48,7 +48,7 @@ class Parser extends CanDepParse {
   if (hSent.getEojeols.isEmpty) Sentence(Seq())
   else {
     val tree = parseTreeOf(hSent)
-    val depTree: DTree = conv.convert(tree)
+    val depTree: DTree = converter.convert(tree)
 
     val sentence = Sentence(
       depTree.getNodeList.map {
@@ -97,7 +97,7 @@ class Parser extends CanDepParse {
   if (sentence.getEojeols.isEmpty) new ParseTree("", "", 0, true)
   else
     new ParseTree(
-      sentence.getPlainEojeols.mkString(" "), conv.StringforDepformat(
+      sentence.getPlainEojeols.mkString(" "), converter.StringforDepformat(
         Converter.functionTagReForm(
           wrapper.parseForced(encodeParenthesis(sentence))
         )

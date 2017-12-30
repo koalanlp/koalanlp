@@ -27,7 +27,7 @@ trait CanExtractResource {
     *
     * @return 압축해제된 임시 디렉터리의 절대경로
     */
-  protected[koala] def extractResource() = {
+  protected[koala] def extractResource(): String = {
     TMP synchronized {
       if (!initialized) {
         initialized = true
@@ -59,7 +59,7 @@ trait CanExtractResource {
     *
     * @return 임시 디렉터리의 절대경로 String.
     */
-  protected def getExtractedPath = {
+  protected def getExtractedPath: String = {
     TMP.mkdirs()
     TMP.getAbsolutePath
   }

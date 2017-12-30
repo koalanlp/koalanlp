@@ -271,7 +271,7 @@ object CanLearnWord {
   /** 호칭에 붙는 의존 명사 및 명사형 전성어미 목록 (다음절) **/
   protected[koala] final val DEPS_CALL_LONG = Seq("하기", "되기")
   protected[koala] final val ALLOWED_ENDING = Set(
-    POS.NNG, POS.NNP, POS.UN, POS.UE, POS.UV, POS.NR, POS.SL, POS.SN
+    POS.NNG, POS.NNP, POS.NF, POS.NA, POS.NV, POS.NR, POS.SL, POS.SN
   )
   protected[koala] final val DENIED_MORPS = (m: Morpheme) => {
     m.isJosa || POS.isEnding(m.tag) || POS.isSuffix(m.tag) || m.tag == POS.XR

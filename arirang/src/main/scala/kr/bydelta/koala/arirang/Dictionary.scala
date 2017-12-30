@@ -14,8 +14,8 @@ import scala.collection.mutable.ArrayBuffer
   * Created by bydelta on 17. 8. 19.
   */
 object Dictionary extends CanCompileDict {
-  val userItems = ArrayBuffer[(String, POSTag)]()
-  val systemdic = mutable.HashMap[POS.POSTag, Set[String]]()
+  val userItems: ArrayBuffer[(String, POSTag)] = ArrayBuffer.empty
+  val systemdic: mutable.HashMap[POS.POSTag, Set[String]] = mutable.HashMap.empty
 
   override def addUserDictionary(dict: (String, POSTag)*): Unit = {
     userItems appendAll dict
@@ -54,7 +54,7 @@ object Dictionary extends CanCompileDict {
     }
   }
 
-  private def load() = Dictionary.synchronized {
+  private def load(): Unit = Dictionary.synchronized {
     readAuxDict("josa.dic", POS.JX)
     readAuxDict("eomi.dic", POS.EP)
     readAuxDict("prefix.dic", POS.XPN)
@@ -72,7 +72,7 @@ object Dictionary extends CanCompileDict {
     }
   }
 
-  private def readDict() = {
+  private def readDict(): Unit = {
     try {
       val list = FileUtil.readLines(KoreanEnv.getInstance().getValue("dictionary.dic"), "UTF-8")
       list.addAll(FileUtil.readLines(KoreanEnv.getInstance().getValue("extension.dic"), "UTF-8"))
@@ -85,7 +85,7 @@ object Dictionary extends CanCompileDict {
             if (segs.last(0) != '0') buffer += (POS.NNG -> word)
             if (segs.last(1) != '0') buffer += (POS.VV -> word)
             if (segs.last(2) != '0') buffer += (POS.MAG -> word)
-            if (segs.last.substring(0, 3) == "000") buffer += (POS.UE -> word)
+            if (segs.last.substring(0, 3) == "000") buffer += (POS.NA -> word)
             buffer
           } else Seq.empty
       }.groupBy(_._1).foreach {
@@ -101,13 +101,13 @@ object Dictionary extends CanCompileDict {
 
   private def mapToTag(tag: POS.POSTag): POS.POSTag =
     tag match {
-      case p if POS.isPostposition(p) => POS.JX
+      case p if POS.isPostPosition(p) => POS.JX
       case POS.XPN | POS.XPV => POS.XPN
       case p if POS.isSuffix(p) => POS.XSN
       case p if POS.isEnding(p) => POS.EP
       case p if POS.isNoun(p) => POS.NNG
       case p if POS.isPredicate(p) => POS.VV
       case p if p == POS.IC || POS.isModifier(p) => POS.MAG
-      case _ => POS.UE
+      case _ => POS.NA
     }
 }

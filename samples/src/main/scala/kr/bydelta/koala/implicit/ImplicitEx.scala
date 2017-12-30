@@ -12,9 +12,9 @@ import scala.io.StdIn
 object ImplicitEx {
   def main(args: Array[String]) {
     import kr.bydelta.koala.Implicit._
-    implicit val splitter = new SentenceSplitter
-    implicit val tagger = new Tagger
-    implicit val parser = new Parser
+    implicit val splitter: SentenceSplitter = new SentenceSplitter
+    implicit val tagger: Tagger = new Tagger
+    implicit val parser: Parser = new Parser
 
     var line = ""
     do {

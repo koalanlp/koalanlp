@@ -1,11 +1,10 @@
 package kr.bydelta.koala
 
+import kr.bydelta.koala.KoreanCharacterExtension
 import opennlp.tools.parser.ParserModel
 import opennlp.tools.postag.POSModel
 import opennlp.tools.sentdetect.SentenceModel
 import opennlp.tools.tokenize.TokenizerModel
-
-import scala.annotation.tailrec
 
 /**
   * Created by bydelta on 17. 6. 24.
@@ -24,101 +23,72 @@ package object custom {
   final val POS_MODEL_PATH = "data/pos.model"
   final val DEP_MODEL_PATH = "data/dep.model"
 
-  final def dissembleKorean(seq: Seq[Char]) = {
+  final lazy val RULE_JUNG = Map(
+    'ㅏ' -> Seq('\u1161'),
+    'ㅑ' -> Seq('\u1163'),
+    'ㅓ' -> Seq('\u1165'),
+    'ㅕ' -> Seq('\u1167'),
+    'ㅗ' -> Seq('\u1169'),
+    'ㅛ' -> Seq('\u116d'),
+    'ㅜ' -> Seq('\u116e'),
+    'ㅠ' -> Seq('\u1172'),
+    'ㅡ' -> Seq('\u1173'),
+    'ㅣ' -> Seq('\u1175'),
+    'ㅐ' -> Seq('\u1161', '\u1175'),
+    'ㅒ' -> Seq('\u1163', '\u1175'),
+    'ㅔ' -> Seq('\u1165', '\u1175'),
+    'ㅖ' -> Seq('\u1167', '\u1175'),
+    'ㅢ' -> Seq('\u1173', '\u1175'),
+    'ㅘ' -> Seq('\u1169', '\u1161'),
+    'ㅚ' -> Seq('\u1169', '\u1175'),
+    'ㅝ' -> Seq('\u116e', '\u1165'),
+    'ㅟ' -> Seq('\u116e', '\u1175'),
+    'ㅙ' -> Seq('\u1169', '\u1161', '\u1175'),
+    'ㅞ' -> Seq('\u116e', '\u1165', '\u1175')
+  ).map(t => (t._1 - 8174).toChar -> t._2)
+
+  final lazy val RULE_CHO = (0x1100 to 0x1112).map(_.toChar).toSet
+  final lazy val RULE_JONG = Map(
+    0x11a7 -> Seq('\u11a7'),
+    0x11a8 -> Seq('\u11a8'), //ㄱ/
+    0x11bf -> Seq('\u11bf'), //ㅋ/
+    0x11a9 -> Seq('\u11a9'), //ㄲ/
+    0x11aa -> Seq('\u11a8', '\u11ba'), //ㄱㅅ
+    0x11ab -> Seq('\u11ab'), //ㄴ
+    0x11ac -> Seq('\u11ab', '\u11bd'), //ㄴㅈ
+    0x11ad -> Seq('\u11ab', '\u11c2'), //ㄴㅎ
+    0x11ae -> Seq('\u11ae'), //ㄷ
+    0x11c0 -> Seq('\u11c0'), //ㅌ/
+    0x11af -> Seq('\u11af'), //ㄹ
+    0x11b0 -> Seq('\u11af', '\u11a8'), //ㄹㄱ
+    0x11b1 -> Seq('\u11af', '\u11b7'), //ㄹㅁ
+    0x11b2 -> Seq('\u11af', '\u11b8'), //ㄹㅂ/
+    0x11b3 -> Seq('\u11af', '\u11ba'), //ㄹㅅ/
+    0x11b4 -> Seq('\u11af', '\u1110'), //ㄹㅌ/
+    0x11b5 -> Seq('\u11af', '\u11c1'), //ㄹㅍ/
+    0x11b6 -> Seq('\u11af', '\u11c2'), //ㄹㅎ/
+    0x11b7 -> Seq('\u11b7'), //ㅁ/
+    0x11b8 -> Seq('\u11b8'), //ㅂ/
+    0x11c1 -> Seq('\u11c1'), //ㅍ/
+    0x11b9 -> Seq('\u11b8', '\u11ba'), //ㅂㅅ/
+    0x11ba -> Seq('\u11ba'), //ㅅ/
+    0x11bb -> Seq('\u11bb'), //ㅆ/
+    0x11bd -> Seq('\u11bd'), //ㅈ/
+    0x11be -> Seq('\u11be'), //ㅊ/
+    0x11bc -> Seq('\u11bc'), //ㅇ/
+    0x11c2 -> Seq('\u11c2') //ㅎ/
+  ).map(t => t._1.toChar -> (t._2 :+ 7))
+
+  final def toCodePoints(seq: Seq[Char]) = {
     seq.flatMap(_.toDissembledSeq.flatMap{
       c =>
-        c match {
-          // ㅏ ㅐ  ㅑ  ㅒ ㅓ  ㅔ ㅕ  ㅖ ㅗ  ㅘ ㅙ  ㅚ ㅛ ㅜ ㅝ  ㅞ  ㅟ ㅠ  ㅡ ㅢ  |
-          // 61 62 63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 70 71 72 73 74 75
-          case '\u1163' => Seq('\u1175', '\u1161')
-          case '\u1164' => Seq('\u1175', '\u1162')
-
-          case '\u1167' => Seq('\u1175', '\u1165')
-          case '\u1168' => Seq('\u1175', '\u1166')
-
-          case '\u116a' => Seq('\u1169', '\u1161')
-          case '\u116b' => Seq('\u1169', '\u1162')
-          case '\u116c' => Seq('\u1169', '\u1175')
-          case '\u116d' => Seq('\u1175', '\u1169')
-
-          case '\u116f' => Seq('\u116e', '\u1165')
-          case '\u1170' => Seq('\u116e', '\u1166')
-          case '\u1171' => Seq('\u116e', '\u1175')
-          case '\u1172' => Seq('\u1175', '\u116e')
-
-          case '\u1174' => Seq('\u1173', '\u1175')
-
-          // ㄹㅁ
-          case '\u11b1' => Seq('\u11af', '\u11b7')
-          case _ => Seq(c)
-        }
+        if (RULE_CHO(c)) Seq(c) // Range: 0 ~ 6
+        else if (RULE_JUNG.contains(c)) RULE_JUNG(c) // Range: 8 ~ 17
+        else if (RULE_JONG.contains(c)) RULE_JONG(c) // Range: 0 ~ 7
+        else if (c.isDigit) Seq('0')
+        else if (c.isLetter) Seq('A')
+        else if (c.isWhitespace) Seq(' ')
+        else Seq(c)
     })
   }
-
-  @tailrec
-  final def assembleKorean(seq: Seq[Char], acc: Seq[Char] = Seq.empty): String =
-    if (seq.isEmpty) acc.reverse.mkString
-    else if (acc.isEmpty || (!seq.head.isJungsungJamo && !seq.head.isJongsungJamo))
-      assembleKorean(seq.tail, seq.head +: acc)
-    else {
-      val head = seq.head
-      val last = acc.head
-      if (head.isJungsungJamo && last.isChosungJamo)
-        assembleKorean(seq.tail, reconstructKorean(last - '\u1100', head - '\u1161') +: acc.tail)
-      else
-        assembleKorean(seq.tail, assemble(head, last) ++: acc.tail)
-    }
-
-  private def assemble(pre: Char, post: Char): Seq[Char] =
-    (pre, post) match {
-      case ('\u1175', '\u1161') => Seq('\u1163')
-      case ('\u1175', '\u1162') => Seq('\u1164')
-      case (ch, '\u1161') if ch.getJungsungCode == 20 && !ch.endsWithJongsung =>
-        Seq(reconstructKorean(cho = ch.getChosungCode, jung = 2))
-      case (ch, '\u1162') if ch.getJungsungCode == 20 && !ch.endsWithJongsung =>
-        Seq(reconstructKorean(cho = ch.getChosungCode, jung = 3))
-
-      case ('\u1175', '\u1165') => Seq('\u1167')
-      case ('\u1175', '\u1166') => Seq('\u1168')
-      case (ch, '\u1165') if ch.getJungsungCode == 20 && !ch.endsWithJongsung =>
-        Seq(reconstructKorean(cho = ch.getChosungCode, jung = 6))
-      case (ch, '\u1166') if ch.getJungsungCode == 20 && !ch.endsWithJongsung =>
-        Seq(reconstructKorean(cho = ch.getChosungCode, jung = 7))
-
-      case ('\u1169', '\u1161') => Seq('\u116a')
-      case ('\u1169', '\u1162') => Seq('\u116b')
-      case ('\u1169', '\u1175') => Seq('\u116c')
-      case ('\u1175', '\u1169') => Seq('\u116d')
-      case (ch, '\u1161') if ch.getJungsungCode == 8 && !ch.endsWithJongsung =>
-        Seq(reconstructKorean(cho = ch.getChosungCode, jung = 9))
-      case (ch, '\u1162') if ch.getJungsungCode == 8 && !ch.endsWithJongsung =>
-        Seq(reconstructKorean(cho = ch.getChosungCode, jung = 10))
-      case (ch, '\u1175') if ch.getJungsungCode == 8 && !ch.endsWithJongsung =>
-        Seq(reconstructKorean(cho = ch.getChosungCode, jung = 11))
-      case (ch, '\u1169') if ch.getJungsungCode == 20 && !ch.endsWithJongsung =>
-        Seq(reconstructKorean(cho = ch.getChosungCode, jung = 12))
-
-      case ('\u116e', '\u1165') => Seq('\u116f')
-      case ('\u116e', '\u1166') => Seq('\u1170')
-      case ('\u116e', '\u1175') => Seq('\u1171')
-      case ('\u1175', '\u116e') => Seq('\u1172')
-      case (ch, '\u1165') if ch.getJungsungCode == 13 && !ch.endsWithJongsung =>
-        Seq(reconstructKorean(cho = ch.getChosungCode, jung = 14))
-      case (ch, '\u1166') if ch.getJungsungCode == 13 && !ch.endsWithJongsung =>
-        Seq(reconstructKorean(cho = ch.getChosungCode, jung = 15))
-      case (ch, '\u1175') if ch.getJungsungCode == 13 && !ch.endsWithJongsung =>
-        Seq(reconstructKorean(cho = ch.getChosungCode, jung = 16))
-      case (ch, '\u116e') if ch.getJungsungCode == 20 && !ch.endsWithJongsung =>
-        Seq(reconstructKorean(cho = ch.getChosungCode, jung = 17))
-
-      case ('\u1173', '\u1175') => Seq('\u1174')
-      case (ch, '\u1175') if ch.getJungsungCode == 18 && !ch.endsWithJongsung =>
-        Seq(reconstructKorean(cho = ch.getChosungCode, jung = 19))
-
-      // ㄹㅁ
-      case ('\u11af', '\u11b7') => Seq('\u11b1')
-      case (ch, '\u11b7') if ch.getJongsungCode == 8 =>
-        Seq(reconstructKorean(cho = ch.getChosungCode, jung = ch.getJungsungCode, jong = 10))
-      case _ => Seq(post, pre)
-    }
 }

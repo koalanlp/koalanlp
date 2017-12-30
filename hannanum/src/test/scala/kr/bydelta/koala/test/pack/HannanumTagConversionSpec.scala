@@ -50,11 +50,13 @@ class HannanumTagConversionSpec extends TagConversionSpec {
       "SP" -> "SP",
       "SS" -> "SL\n<SR",
       "SE" -> "SE",
-      "SY" -> "<SD\n<SU\nSY",
+      "SO" -> "SD",
+      "SW" -> "<SU\nSY",
       "UN" -> "",
       "UV" -> "",
       "UE" -> "",
       "SL" -> "F",
+      "SH" -> ">F",
       "SN" -> ">NNC"
     )
 

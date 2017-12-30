@@ -23,7 +23,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
   /**
     * 사용자사전을 저장할 파일의 위치.
     */
-  lazy val userDict = {
+  lazy val userDict: File = {
     val file = new File(extractResource(), "koala.dict")
     file.createNewFile()
     file.deleteOnExit()

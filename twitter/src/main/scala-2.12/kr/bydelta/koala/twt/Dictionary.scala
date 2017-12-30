@@ -14,7 +14,7 @@ object Dictionary extends CanCompileDict {
 
   override def addUserDictionary(dict: (String, POSTag)*): Unit = {
     userDict ++= dict
-    dict.groupBy(x => KoreanPos withName tagToTwt(x._2)).foreach {
+    dict.groupBy(x => KoreanPos withName fromSejong(x._2)).foreach {
       case (twtTag, seq) =>
         add(twtTag, seq.map(_._1))
     }
@@ -26,7 +26,7 @@ object Dictionary extends CanCompileDict {
     * @param tag   POS Tag
     * @param morph Morpheme sequence.
     */
-  private def add(tag: KoreanPos.KoreanPos, morph: Seq[String]) =
+  private def add(tag: KoreanPos.KoreanPos, morph: Seq[String]): Unit =
   tag match {
     case t if dictContainsKey(t) =>
       KoreanDictionaryProvider.addWordsToDictionary(t, morph)
@@ -52,7 +52,7 @@ object Dictionary extends CanCompileDict {
     * @return 사전에 없는 단어들.
     */
   override def getNotExists(dummy: Boolean, word: (String, POSTag)*): Seq[(String, POSTag)] = {
-    word.groupBy(w => KoreanPos.withName(tagToTwt(w._2))).iterator.flatMap {
+    word.groupBy(w => KoreanPos.withName(fromSejong(w._2))).iterator.flatMap {
       case (tag, words) =>
         val tagDic =
           if (tag == KoreanPos.ProperNoun) Some(KoreanDictionaryProvider.properNouns)
@@ -69,23 +69,23 @@ object Dictionary extends CanCompileDict {
   }
 
   override def baseEntriesOf(filter: (POSTag) => Boolean): Iterator[(String, POSTag)] = {
-    KoreanPos.values.filter(x => filter(fromTwtTag(x.toString))).iterator.flatMap {
+    KoreanPos.values.filter(x => filter(toSejong(x.toString))).iterator.flatMap {
       case t if dictContainsKey(t) =>
-        val key = fromTwtTag(t.toString)
+        val key = toSejong(t.toString)
         dictGet(t).asScala.map {
           case x: String => x -> key
           case x: Array[Char] => new String(x) -> key
           case x => x.toString -> key
         }
       case KoreanPos.ProperNoun =>
-        val key = fromTwtTag(KoreanPos.ProperNoun.toString)
+        val key = toSejong(KoreanPos.ProperNoun.toString)
         KoreanDictionaryProvider.properNouns.asScala.map {
           case x: String => x -> key
           case x: Array[Char] => new String(x) -> key
           case x => x.toString -> key
         }
       case t@(KoreanPos.Verb | KoreanPos.Adjective) =>
-        val key = fromTwtTag(t.toString)
+        val key = toSejong(t.toString)
         KoreanDictionaryProvider.predicateStems(t).keys.map(_ -> key)
       case _ =>
         Map()

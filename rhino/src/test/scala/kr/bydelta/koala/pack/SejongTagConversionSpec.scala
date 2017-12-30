@@ -40,7 +40,7 @@ class SejongTagConversionSpec extends TagConversionSpec {
       "ETN" -> "ETN",
       "ETM" -> "ETM",
       "XPN" -> "XPN",
-      "XPV" -> ">XR",
+      "XPV" -> "",
       "XSN" -> "XSN",
       "XSV" -> "XSV",
       "XSA" -> "XSA",
@@ -51,11 +51,13 @@ class SejongTagConversionSpec extends TagConversionSpec {
       "SP" -> "SP",
       "SS" -> "SS",
       "SE" -> "SE",
-      "SY" -> "<SO\nSW",
-      "UN" -> "NF",
-      "UV" -> "NV",
-      "UE" -> "NA",
-      "SL" -> "SL\n<SH",
+      "SO" -> "SO",
+      "SW" -> "SW",
+      "NF" -> "NF",
+      "NV" -> "NV",
+      "NA" -> "NA",
+      "SL" -> "SL",
+      "SH" -> "SH",
       "SN" -> "SN"
     )
 

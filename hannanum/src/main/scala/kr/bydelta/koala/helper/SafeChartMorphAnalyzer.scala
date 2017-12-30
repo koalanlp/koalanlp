@@ -69,7 +69,7 @@ private[koala] class SafeChartMorphAnalyzer extends MorphAnalyzer {
           chart.analyze
           chart.getResult()
         } catch {
-          case e: Exception =>
+          case _: Exception =>
             eojeolList.clear()
             eojeolList.add(new Eojeol(Array(plainEojeol), Array("nqq")))
         }

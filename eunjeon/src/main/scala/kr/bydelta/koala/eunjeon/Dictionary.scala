@@ -14,14 +14,14 @@ object Dictionary extends CanCompileDict {
   private lazy val rightIDMap =
     Source.fromInputStream(classOf[NngUtil].getResourceAsStream(DictBuilder.RIGHT_ID_DEF)).getLines()
       .map { line =>
-        val splitted = line.split(" ")
-        splitted(1).replaceAll("^([^,]+,[^,]+,[^,]+),.*", "$1") -> splitted.head.toShort
+        val splits = line.split(" ")
+        splits(1).replaceAll("^([^,]+,[^,]+,[^,]+),.*", "$1") -> splits.head.toShort
       }.toMap
   private lazy val leftIDMap =
     Source.fromInputStream(classOf[NngUtil].getResourceAsStream(DictBuilder.LEFT_ID_DEF)).getLines()
       .map { line =>
-        val splitted = line.split(" ")
-        splitted(1).replaceAll("^([^,]+,[^,]+),.*", "$1") -> splitted.head.toShort
+        val splits = line.split(" ")
+        splits(1).replaceAll("^([^,]+,[^,]+),.*", "$1") -> splits.head.toShort
       }.toMap
   /**
     * 은전한닢 어휘사전.
@@ -49,7 +49,7 @@ object Dictionary extends CanCompileDict {
     *
     * @return True: 항목이 있을 때.
     */
-  def nonEmpty = rawDict.nonEmpty
+  def nonEmpty: Boolean = rawDict.nonEmpty
 
   override def addUserDictionary(dict: (String, POSTag)*): Unit = {
     rawDict ++= dict.map {
@@ -144,18 +144,18 @@ object Dictionary extends CanCompileDict {
   def convertMorpheme(m: Morpheme): Seq[data.Morpheme] = {
     val array = m.feature
     val compoundTag = array.head
-    val tokenized = array.last
+    val tokens = array.last
 
     if (array.length == 1) {
       Seq(
         data.Morpheme(m.surface, compoundTag, fromEunjeonTag(compoundTag))
       )
-    } else if (tokenized == "*") {
+    } else if (tokens == "*") {
       Seq(
         data.Morpheme(m.surface, compoundTag, fromEunjeonTag(compoundTag))
       )
     } else {
-      tokenized.split("\\+").map {
+      tokens.split("\\+").map {
         tok =>
           val arr = tok.split("/")
           data.Morpheme(arr.head, arr(1), fromEunjeonTag(arr(1)))

@@ -62,7 +62,10 @@ lazy val eunjeon = (project in file("eunjeon"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("eunjeon"): _*)
   .settings(
-    libraryDependencies += "org.bitbucket.eunjeon" %% "seunjeon" % "1.3.0"
+    libraryDependencies += (CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((2, 12)) => "org.bitbucket.eunjeon" %% "seunjeon" % "1.4.0"
+      case _ => "org.bitbucket.eunjeon" %% "seunjeon" % "1.3.1"
+    })
   ).dependsOn(core % "test->test;compile->compile")
 
 /** 2. 라이브러리 외부참조 프로젝트 **/
@@ -84,7 +87,7 @@ lazy val komoran = (project in file("komoran"))
   .settings(
     resolvers += "jitpack" at "https://jitpack.io",
     libraryDependencies ++= Seq(
-      "com.github.shin285" % "KOMORAN" % "3.3.2"
+      "com.github.shin285" % "KOMORAN" % "3.3.3"
     )
   ).dependsOn(core % "test->test;compile->compile")
 /** 분석기 서버 프로젝트 **/
@@ -132,9 +135,12 @@ lazy val samples = (project in file("samples"))
 lazy val custom = (project in file("custom"))
   .settings(projectWithConfig("custom"): _*)
   .settings(
+    resolvers += Resolver.sonatypeRepo("snapshots"),
     libraryDependencies ++= Seq(
       "org.apache.opennlp" % "opennlp-tools" % "1.8.2",
-      "org.deeplearning4j" % "deeplearning4j-core" % "0.9.1"
+      "org.platanios" %% "tensorflow" % "0.1.0-SNAPSHOT",
+      "org.platanios" %% "tensorflow" % "0.1.0-SNAPSHOT" % "test" classifier "linux-cpu-x86_64"
+      //      "org.deeplearning4j" % "deeplearning4j-core" % "0.9.1"
     )
   ).dependsOn(core % "test->test;compile->compile")
 
@@ -142,13 +148,11 @@ lazy val custom = (project in file("custom"))
 /** Assembly Classifier 설정 **/
 lazy val assemblySettings = Seq(
   assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false),
-  artifact in(Compile, assembly) := {
-    val art = (artifact in(Compile, assembly)).value
-    art.copy(`classifier` = Some("assembly"))
-  },
+  artifact in(Compile, assembly) :=
+    (artifact in(Compile, assembly)).value.withClassifier(Some("assembly")),
   addArtifact(artifact in(Compile, assembly), assembly))
 /** 버전 **/
-val VERSION = "1.8.5-SNAPSHOT"
+val VERSION = "1.9.0-SNAPSHOT"
 
 /** 공통 프로젝트 Configuration **/
 def projectWithConfig(module: String) =

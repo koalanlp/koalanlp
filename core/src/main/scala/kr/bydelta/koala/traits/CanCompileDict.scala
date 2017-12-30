@@ -31,7 +31,7 @@ trait CanCompileDict {
     * @param morphs 추가할 단어의 표면형의 목록.
     * @param tags   추가할 단어의 품사의 목록.
     */
-  def jUserDictionary(morphs: java.util.List[String], tags: java.util.List[POSTag]) =
+  def jUserDictionary(morphs: java.util.List[String], tags: java.util.List[POSTag]): Unit =
   addUserDictionary(morphs.asScala.zip(tags.asScala): _*)
 
   /**

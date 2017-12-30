@@ -38,13 +38,13 @@ package object util {
               // 종성으로 끝나는 완전한 문자.
               val chosung = HanFirstList.indexOf(HanLastList(acc.head.getJongsungCode))
               val newFrontChar = (acc.head - acc.head.getJongsungCode).toChar
-              val newChar: Char = reconstructKorean(chosung, HanSecondList.indexOf(char), 0)
+              val newChar: Char = reconstructKorean(chosung, HanSecondList.indexOf(char))
               newChar +: newFrontChar +: acc.tail
             }
           } else {
             // 앞에 초성만 있었을때.
             val chosung = HanFirstList.indexOf(acc.head)
-            val newChar: Char = reconstructKorean(chosung, HanSecondList.indexOf(char), 0)
+            val newChar: Char = reconstructKorean(chosung, HanSecondList.indexOf(char))
             newChar +: acc.tail
           }
         } else {

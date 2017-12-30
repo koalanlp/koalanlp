@@ -19,7 +19,7 @@ class Tagger(useLightTagger: Boolean) extends CanTagOnlyASentence[KomoranResult]
   /**
     * 코모란 분석기 객체.
     */
-  lazy val komoran = {
+  lazy val komoran: Komoran = {
     val komoran =
       if (useLightTagger) Tagger.komoran_light
       else Tagger.komoran_full
@@ -64,7 +64,7 @@ class Tagger(useLightTagger: Boolean) extends CanTagOnlyASentence[KomoranResult]
       Sentence.empty
   }
 
-  def constructWordSurface(wAsScala: Seq[Morpheme]) = {
+  def constructWordSurface(wAsScala: Seq[Morpheme]): String = {
     reunionKorean(wAsScala.foldLeft((Seq.empty[Char], false))({
       case ((prevSeq, wasVerb), curr) =>
         val tag = curr.rawTag.toUpperCase

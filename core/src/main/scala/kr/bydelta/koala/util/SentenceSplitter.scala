@@ -20,7 +20,7 @@ object SentenceSplitter {
     * @param para 분리할 문단.
     * @return 문장단위로 분리된 결과
     */
-  def apply(para: Seq[Word]) = split(para)
+  def apply(para: Seq[Word]): Seq[Sentence] = split(para)
 
   /**
     * 분석결과를 토대로 문장을 분리함.

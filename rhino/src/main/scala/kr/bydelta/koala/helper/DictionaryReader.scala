@@ -57,7 +57,7 @@ private[koala] object DictionaryReader {
     try {
       Source.fromInputStream(stream).getLines().map(_.trim).toArray
     } catch {
-      case e: Throwable =>
+      case _: Throwable =>
         Array.empty[String]
     }
 

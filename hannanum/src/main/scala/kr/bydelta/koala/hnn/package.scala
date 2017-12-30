@@ -33,13 +33,13 @@ package object hnn {
     */
   def tagToHNN(tag: _root_.kr.bydelta.koala.POS.Value): String = {
     (tag match {
-      case POS.NNG | POS.UN => "NCN"
+      case POS.NNG | POS.NF => "NCN"
       case POS.NNP => "NQQ"
       case POS.NNB => "NBN"
       case POS.NNM => "NBU"
       case POS.NR => "NNC"
       case POS.NP => "NPD"
-      case POS.VV | POS.UV => "PVG"
+      case POS.VV | POS.NV => "PVG"
       case POS.VA => "PAA"
       case POS.VX => "PX"
       case POS.VCP => "JP"
@@ -61,9 +61,9 @@ package object hnn {
       case POS.XSA => "XSMN"
       case POS.XSM => "XSAS"
       case POS.SS => "SL"
-      case POS.SL => "F"
+      case POS.SL | POS.SH => "F"
       case POS.SN => "NNC"
-      case POS.SY | POS.XR | POS.UE => "SY"
+      case POS.SW | POS.SO | POS.XR | POS.NA => "SY"
       case POS.XPN | POS.XPV => "XP"
       case x => x.toString
     }).toLowerCase
@@ -107,7 +107,8 @@ package object hnn {
       case x if x startsWith "xsm" => POS.XSA
       case x if x startsWith "xsa" => POS.XSM
       case "sl" | "sr" => POS.SS
-      case "sd" | "su" | "sy" => POS.SY
+      case "sd" => POS.SO
+      case "su" | "sy" => POS.SW
       case "f" => POS.SL
       case x => POS withName x.toUpperCase
     }

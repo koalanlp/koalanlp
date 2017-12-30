@@ -6,10 +6,11 @@ import kr.bydelta.koala.traits.CanCompileDict;
 import java.util.List;
 
 /**
- * 자바 사용자를 위한, 사용자정의사전.
+ * 자바 사용자를 위한, 아리랑 분석기 사용자 정의사전.
  * <p>
  * POS$.Value 클래스는, POS.EC()와 같이 입력하면 생성됩니다.
  */
+@SuppressWarnings("WeakerAccess")
 public class JavaDictionary {
     /**
      * 사용자 정의 사전을 입력합니다.

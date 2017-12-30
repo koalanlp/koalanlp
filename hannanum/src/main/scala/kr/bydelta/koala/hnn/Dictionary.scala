@@ -57,7 +57,7 @@ object Dictionary extends CanCompileDict with CanExtractResource {
   private[koala] lazy val numAutomata: NumberAutomata = new NumberAutomata
   private var baseEntries = Seq[(String, Seq[POSTag])]()
   private[koala] var usrBuffer = Set[(String, POSTag)]()
-  private var dicLastUpdate, mapLastUpdate = 0l
+  private var dicLastUpdate = 0l
 
   override def addUserDictionary(morph: String, tag: POSTag) {
     addUserDictionary(morph -> tag)
@@ -98,14 +98,14 @@ object Dictionary extends CanCompileDict with CanExtractResource {
   override def items: Set[(String, POSTag)] = {
     usrBuffer ++= Source.fromFile(usrDicPath).getLines().toStream.map {
       line =>
-        val segs = line.split('\t')
-        segs(0) -> fromHNNTag(segs(1))
+        val segments = line.split('\t')
+        segments(0) -> fromHNNTag(segments(1))
     }
 
     usrBuffer
   }
 
-  def loadDictionary() =
+  def loadDictionary(): Unit =
     userDic synchronized {
       if (dicLastUpdate < usrDicPath.lastModified()) {
         dicLastUpdate = usrDicPath.lastModified()
@@ -136,8 +136,8 @@ object Dictionary extends CanCompileDict with CanExtractResource {
           val value = top.info_list
 
           if (value != null) {
-            val wordstr = Code.toString(word)
-            baseEntries +:= (wordstr -> value.asScala.map(x => fromHNNTag(tagSet.getTagName(x.tag))))
+            val wordString = Code.toString(word)
+            baseEntries +:= (wordString -> value.asScala.map(x => fromHNNTag(tagSet.getTagName(x.tag))))
           }
 
           if (top.child_size > 0) {

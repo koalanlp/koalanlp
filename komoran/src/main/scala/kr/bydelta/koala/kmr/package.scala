@@ -15,8 +15,7 @@ package object kmr {
       case POS.NNM => "NNB"
       case POS.XSM | POS.XSO => "XSN"
       case POS.XPV => "XR"
-      case POS.SY => "SW"
-      case POS.UN | POS.UV | POS.UE => "NA"
+      case POS.NF | POS.NV => "NA"
       case _ => tag.toString
     }
   }
@@ -28,11 +27,6 @@ package object kmr {
     * @return 변환된 통합품사.
     */
   def fromKomoranTag(tag: String): POS.Value = {
-    tag.toUpperCase match {
-      case "SW" | "SO" => POS.SY
-      case "NA" => POS.UE
-      case "SL" | "SH" => POS.SL
-      case x => POS withName x
-    }
+    POS withName tag
   }
 }

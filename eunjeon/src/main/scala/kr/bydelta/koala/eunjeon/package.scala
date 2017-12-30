@@ -17,7 +17,8 @@ package object eunjeon {
       case POS.SP => "SC"
       case POS.XPV => "XR"
       case POS.XSM | POS.XSO => "XSN"
-      case POS.UN | POS.UE | POS.UV => "UNKNOWN"
+      case POS.SW | POS.SO => "SY"
+      case POS.NF | POS.NV | POS.NA => "UNKNOWN"
       case x => x.toString
     }
   }
@@ -33,8 +34,7 @@ package object eunjeon {
       case "NNBC" => POS.NNM
       case "SC" => POS.SP
       case "SSO" | "SSC" => POS.SS
-      case "SL" | "SH" => POS.SL
-      case "UNKNOWN" => POS.UE
+      case "UNKNOWN" => POS.NA
       case x => POS withName x
     }
   }

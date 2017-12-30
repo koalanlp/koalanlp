@@ -40,7 +40,7 @@ private[koala] class UserDicReader extends SimpleDicReader with Iterator[String]
 
   override def cleanup() {}
 
-  override def hasNext = iterator.hasNext
+  override def hasNext: Boolean = iterator.hasNext
 
   override def next(): String = readLine
 
@@ -57,7 +57,7 @@ private[koala] class UserDicReader extends SimpleDicReader with Iterator[String]
   /**
     * 위치 초기화. (반복읽기를 위함.)
     */
-  def reset() = {
+  def reset(): Unit = {
     iterator = morphemes.iterator
   }
 }
