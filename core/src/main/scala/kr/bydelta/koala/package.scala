@@ -5,9 +5,6 @@ import scala.annotation.tailrec
 /**
   * = KoalaNLP =
   *
-  * KoalaNLP
-  *
-  * KoalaNLP is an integrated API for analyzing Korean, with underlying various taggers and parsers.
   * <h3>통합 Scala 한국어 분석기, Koala</h3>
   *
   * <p>각 Package의 Parser와 Tagger를 참조하세요.</p>

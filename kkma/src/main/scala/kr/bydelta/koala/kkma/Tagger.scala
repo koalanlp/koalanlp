@@ -1,9 +1,5 @@
 package kr.bydelta.koala.kkma
 
-/**
-  * Created by bydelta on 16. 7. 21.
-  */
-
 import kr.bydelta.koala
 import kr.bydelta.koala.data.{Word, Sentence => KSent}
 import kr.bydelta.koala.traits.CanTagOnlyAParagraph

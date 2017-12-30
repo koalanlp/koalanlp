@@ -5,7 +5,7 @@ import kr.bydelta.koala.helper.RHINOTagger
 import kr.bydelta.koala.traits.CanTagOnlyASentence
 
 /**
-  * Created by bydelta on 17. 8. 23.
+  * 라이노 형태소 분석기입니다.
   */
 class Tagger extends CanTagOnlyASentence[Seq[Word]] {
   override def tagSentenceOriginal(text: String): Seq[Word] = {

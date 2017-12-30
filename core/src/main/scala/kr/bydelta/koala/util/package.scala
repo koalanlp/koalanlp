@@ -1,7 +1,7 @@
 package kr.bydelta.koala
 
 /**
-  * Created by bydelta on 17. 4. 8.
+  * 한국어 처리에 도움이 되는, Utility 모음입니다.
   */
 package object util {
   private final val SecondPos = Seq('ㅏ', 'ㅑ')

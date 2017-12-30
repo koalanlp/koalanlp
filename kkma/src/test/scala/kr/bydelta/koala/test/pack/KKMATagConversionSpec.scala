@@ -25,6 +25,9 @@ class KKMATagConversionSpec extends TagConversionSpec {
     case SL => Seq(Conversion("OL"))
     case SH => Seq(Conversion("OH"))
     case SN => Seq(Conversion("ON"))
+    case NF => Seq(Conversion("UN"))
+    case NV => Seq(Conversion("UV"))
+    case NA => Seq(Conversion("UE"))
     case x => Seq(Conversion(x.toString))
   }
 

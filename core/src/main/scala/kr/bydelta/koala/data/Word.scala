@@ -1,9 +1,5 @@
 package kr.bydelta.koala.data
 
-/**
-  * Created by bydelta on 16. 7. 20.
-  */
-
 import kr.bydelta.koala.FunctionalTag.FunctionalTag
 
 import scala.collection.JavaConverters._

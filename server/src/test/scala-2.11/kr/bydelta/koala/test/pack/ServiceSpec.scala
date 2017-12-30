@@ -10,7 +10,7 @@ import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}
 import scala.concurrent.duration._
 
 /**
-  * Created by bydelta on 16. 7. 31.
+  * Scala 2.11을 위한, HttpServiceSpec.
   */
 class ServiceSpec extends HttpServiceSpec {
 

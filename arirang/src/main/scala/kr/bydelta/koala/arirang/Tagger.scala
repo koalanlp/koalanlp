@@ -12,7 +12,7 @@ import scala.collection.JavaConverters._
 import scala.collection.mutable.ArrayBuffer
 
 /**
-  * Created by bydelta on 17. 8. 19.
+  * 아리랑 형태소 분석기입니다.
   */
 class Tagger extends CanTagOnlyASentence[Seq[AnalysisOutput]] {
   val tagger = new WordSegmentAnalyzer

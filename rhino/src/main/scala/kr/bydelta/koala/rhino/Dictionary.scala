@@ -4,7 +4,7 @@ import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.traits.CanCompileDict
 
 /**
-  * Created by bydelta on 17. 8. 23.
+  * 라이노 분석기의 사용자사전입니다.
   */
 object Dictionary extends CanCompileDict {
   override def addUserDictionary(dict: (String, POSTag)*): Unit = {

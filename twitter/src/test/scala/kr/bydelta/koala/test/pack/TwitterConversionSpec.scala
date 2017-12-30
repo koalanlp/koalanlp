@@ -40,7 +40,7 @@ class TwitterConversionSpec extends TagConversionSpec {
     case SW => Seq(Conversion("Others"), Conversion("CashTag", toTagger = false))
     case NA => Seq(Conversion("Unknown"))
     case SL => Seq(Conversion("Foreign"), Conversion("Alpha", toTagger = false))
-    case SH => Seq(Conversion("Foreign", toTagger = false))
+    case SH => Seq(Conversion("Foreign", toSejong = false))
     case SN => Seq(Conversion("Number", toTagger = false))
   }
 

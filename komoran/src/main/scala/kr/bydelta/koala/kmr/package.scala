@@ -1,7 +1,7 @@
 package kr.bydelta.koala
 
 /**
-  * Created by bydelta on 17. 8. 19.
+  * 코모란 분석기 패키지입니다.
   */
 package object kmr {
   /**

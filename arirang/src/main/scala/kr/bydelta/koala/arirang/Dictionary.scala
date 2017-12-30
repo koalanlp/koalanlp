@@ -11,7 +11,7 @@ import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 /**
-  * Created by bydelta on 17. 8. 19.
+  * 아리랑 분석기의 사용자사전입니다.
   */
 object Dictionary extends CanCompileDict {
   val userItems: ArrayBuffer[(String, POSTag)] = ArrayBuffer.empty
