@@ -18,7 +18,7 @@ class KKMATagConversionSpec extends TagConversionSpec {
       Seq(Conversion("EPT"), Conversion("EPH", toTagger = false), Conversion("EPP", toTagger = false))
     case EF =>
       Seq(Conversion("EFN"), Conversion("EFQ", toTagger = false), Conversion("EFO", toTagger = false),
-        Conversion("EFA"), Conversion("EFI", toTagger = false), Conversion("EFR", toTagger = false))
+        Conversion("EFA", toTagger = false), Conversion("EFI", toTagger = false), Conversion("EFR", toTagger = false))
     case EC =>
       Seq(Conversion("ECE"), Conversion("ECD", toTagger = false), Conversion("ECS", toTagger = false))
     case ETM => Seq(Conversion("ETD"))

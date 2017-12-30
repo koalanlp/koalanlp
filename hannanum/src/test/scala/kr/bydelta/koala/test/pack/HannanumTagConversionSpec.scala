@@ -38,7 +38,8 @@ class HannanumTagConversionSpec extends TagConversionSpec {
     case JX => Seq(Conversion("jxf"), Conversion("jxc", toTagger = false))
     case EC =>
       Seq(Conversion("ecc"), Conversion("ecs", toTagger = false), Conversion("ecx", toTagger = false))
-    case XPN => Seq(Conversion("xpn"), Conversion("xp", toTagger = false))
+    case XPN => Seq(Conversion("xp"))
+    case XPV => Seq(Conversion("xp", toTagger = false))
     case XSN =>
       Seq(Conversion("xsnx"), Conversion("xsnu", toTagger = false),
         Conversion("xsna", toTagger = false), Conversion("xsnca", toTagger = false),

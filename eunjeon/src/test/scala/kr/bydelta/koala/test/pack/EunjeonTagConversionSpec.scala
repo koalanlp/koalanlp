@@ -17,6 +17,7 @@ class EunjeonTagConversionSpec extends TagConversionSpec {
     case SO => Seq(Conversion("SY", toSejong = false))
     case NF | NV => Seq(Conversion("Unknown", toSejong = false))
     case NA => Seq(Conversion("Unknown"))
+    case SP => Seq(Conversion("SC"))
     case x => Seq(Conversion(x.toString))
   }
 

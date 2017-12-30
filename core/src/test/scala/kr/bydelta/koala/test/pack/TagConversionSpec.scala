@@ -23,8 +23,7 @@ trait TagConversionSpec extends Specification {
     "convert tags correctly" in {
       Result.unit {
         POS.values.foreach { iPOS =>
-          val list = tagMap(iPOS)
-          list.foreach {
+          tagMap(iPOS).foreach {
             case Conversion(tag, toTagger, toSejong) =>
               if (toTagger)
                 to(iPOS) must_== tag
