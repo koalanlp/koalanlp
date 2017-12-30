@@ -32,22 +32,6 @@ package object koala {
   ).toSeq.sortBy(-_._2.length)
 
   /**
-    * 세종품사를 통합품사로 변환.
-    *
-    * @param tag 통합품사로 변환할 원본표기.
-    * @return 변환된 통합품사.
-    */
-  def fromSejongTag(tag: String): POS.Value = POS withName tag
-
-  /**
-    * 통합품사를 세종품사로 변환.
-    *
-    * @param tag 세종품사로 변환할 원본표기.
-    * @return 변환된 품사.
-    */
-  def tagToSejong(tag: POS.Value): String = tag.toString
-
-  /**
     * 알파벳 발음나는 대로 국문표기
     *
     * @param x   변환할 문자열.

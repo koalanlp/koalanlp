@@ -1,15 +1,19 @@
 package kr.bydelta.koala.test.pack
 
+import kr.bydelta.koala.POS
 import kr.bydelta.koala.POS.POSTag
-import kr.bydelta.koala._
 import org.specs2.execute.Result
 import org.specs2.mutable.Specification
 
 /**
   * Created by bydelta on 16. 7. 31.
   */
+case class Conversion(tag: String,
+                      toTagger: Boolean = true,
+                      toSejong: Boolean = true)
+
 trait TagConversionSpec extends Specification {
-  val tagMap: Map[String, String]
+  def tagMap: PartialFunction[POSTag, Seq[Conversion]]
 
   def from(x: String): POSTag
 
@@ -18,21 +22,15 @@ trait TagConversionSpec extends Specification {
   "TagConversion" should {
     "convert tags correctly" in {
       Result.unit {
-        tagMap.foreach {
-          case (iTag, list) =>
-            val iPOS = POS.withName(iTag)
-
-            if (list.nonEmpty) {
-              list.split("\n").foreach {
-                case tag if tag startsWith "<" =>
-                  from(tag.substring(1)) must_== iPOS
-                case tag if tag startsWith ">" =>
-                  to(iPOS) must_== tag.substring(1)
-                case tag =>
-                  from(tag) must_== iPOS
-                  to(iPOS) must_== tag
-              }
-            }
+        POS.values.foreach { iPOS =>
+          val list = tagMap(iPOS)
+          list.foreach {
+            case Conversion(tag, toTagger, toSejong) =>
+              if (toTagger)
+                to(iPOS) must_== tag
+              if (toSejong)
+                from(tag) must_== iPOS
+          }
         }
       }
     }

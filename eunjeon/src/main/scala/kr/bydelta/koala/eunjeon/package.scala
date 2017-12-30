@@ -34,6 +34,7 @@ package object eunjeon {
       case "NNBC" => POS.NNM
       case "SC" => POS.SP
       case "SSO" | "SSC" => POS.SS
+      case "SY" => POS.SW
       case "UNKNOWN" => POS.NA
       case x => POS withName x
     }

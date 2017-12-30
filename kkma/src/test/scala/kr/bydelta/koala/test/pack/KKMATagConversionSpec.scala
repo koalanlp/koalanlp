@@ -1,66 +1,34 @@
 package kr.bydelta.koala.test.pack
 
-import kr.bydelta.koala.POS.POSTag
+import kr.bydelta.koala.POS._
 import kr.bydelta.koala.kkma._
 
 /**
   * Created by bydelta on 17. 8. 19.
   */
 class KKMATagConversionSpec extends TagConversionSpec {
-  val tagMap =
-    Map(
-      "NNG" -> "NNG",
-      "NNP" -> "NNP",
-      "NNB" -> "NNB",
-      "NNM" -> "NNM",
-      "NR" -> "NR",
-      "NP" -> "NP",
-      "VV" -> "VV",
-      "VA" -> "VA",
-      "VX" -> "VXV\n<VXA",
-      "VCP" -> "VCP",
-      "VCN" -> "VCN",
-      "MM" -> "MDT\n<MDN",
-      "MAG" -> "MAG",
-      "MAJ" -> "MAC",
-      "IC" -> "IC",
-      "JKS" -> "JKS",
-      "JKC" -> "JKC",
-      "JKG" -> "JKG",
-      "JKO" -> "JKO",
-      "JKB" -> "JKM",
-      "JKV" -> "JKI",
-      "JKQ" -> "JKQ",
-      "JC" -> "JC",
-      "JX" -> "JX",
-      "EP" -> "<EPH\nEPT\n<EPP",
-      "EF" -> "EFN\n<EFQ\n<EFO\n<EFA\n<EFI\n<EFR",
-      "EC" -> "ECE\n<ECD\n<ECS",
-      "ETN" -> "ETN",
-      "ETM" -> "ETD",
-      "XPN" -> "XPN",
-      "XPV" -> "XPV",
-      "XSN" -> "XSN",
-      "XSV" -> "XSV",
-      "XSA" -> "XSA",
-      "XSM" -> "XSM",
-      "XSO" -> "XSO",
-      "XR" -> "XR",
-      "SF" -> "SF",
-      "SP" -> "SP",
-      "SS" -> "SS",
-      "SE" -> "SE",
-      "SO" -> "SO",
-      "SW" -> "SW",
-      "UN" -> "NF",
-      "UV" -> "NV",
-      "UE" -> "NA",
-      "SL" -> "OL",
-      "SH" -> "OH",
-      "SN" -> "ON"
-    )
 
-  override def from(x: String) = toSejongPOS(x)
+  override def tagMap: PartialFunction[POSTag, Seq[Conversion]] = {
+    case VX => Seq(Conversion("VXV"), Conversion("VXA", toTagger = false))
+    case MM => Seq(Conversion("MDT"), Conversion("MDN", toTagger = false))
+    case MAJ => Seq(Conversion("MAC"))
+    case JKB => Seq(Conversion("JKM"))
+    case JKV => Seq(Conversion("JKI"))
+    case EP =>
+      Seq(Conversion("EPT"), Conversion("EPH", toTagger = false), Conversion("EPP", toTagger = false))
+    case EF =>
+      Seq(Conversion("EFN"), Conversion("EFQ", toTagger = false), Conversion("EFO", toTagger = false),
+        Conversion("EFA"), Conversion("EFI", toTagger = false), Conversion("EFR", toTagger = false))
+    case EC =>
+      Seq(Conversion("ECE"), Conversion("ECD", toTagger = false), Conversion("ECS", toTagger = false))
+    case ETM => Seq(Conversion("ETD"))
+    case SL => Seq(Conversion("OL"))
+    case SH => Seq(Conversion("OH"))
+    case SN => Seq(Conversion("ON"))
+    case x => Seq(Conversion(x.toString))
+  }
+
+  override def from(x: String): POSTag = toSejongPOS(x)
 
   override def to(x: POSTag): String = fromSejongPOS(x)
 }

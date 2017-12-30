@@ -65,7 +65,7 @@ class Parser extends CanDepParse {
                   else
                     term.getWord
                 // 한나눔의 Parser 결과는 세종 표기를 따름.
-                Morpheme(word, term.getPOS, fromSejongTag(term.getPOS))
+                Morpheme(word, term.getPOS, POS.withName(term.getPOS))
             }
           )
       }

@@ -107,7 +107,7 @@ private[koala] object RHINOTagger {
   private def translateOutputMorpheme(morphStr: String) =
     MORPH_MATCH.findAllMatchIn(morphStr).map {
       case MORPH_MATCH(surf, raw) =>
-        Morpheme(surface = surf.trim, rawTag = raw, tag = fromSejongTag(raw))
+        Morpheme(surface = surf.trim, rawTag = raw, tag = POS.withName(raw))
     }.toSeq
 
   private[koala] def split(input: String) = {

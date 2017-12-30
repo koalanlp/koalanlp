@@ -1,66 +1,66 @@
 package kr.bydelta.koala.test.pack
 
-import kr.bydelta.koala.POS.POSTag
+import kr.bydelta.koala.POS._
 import kr.bydelta.koala.hnn._
 
 /**
   * Created by bydelta on 17. 8. 19.
   */
 class HannanumTagConversionSpec extends TagConversionSpec {
-  val tagMap =
-    Map(
-      "NNG" -> "<NCPA\n<NCPS\nNCN\n<NCR",
-      "NNP" -> "<NQPA\n<NQPB\n<NQPC\nNQQ",
-      "NNB" -> "NBN\n<NBS",
-      "NNM" -> "NBU",
-      "NR" -> "NNC\n<NNO",
-      "NP" -> "<NPP\nNPD",
-      "VV" -> "<PVD\nPVG",
-      "VA" -> "<PAD\nPAA",
-      "VX" -> "PX",
-      "VCP" -> "JP",
-      "VCN" -> ">PAA",
-      "MM" -> "<MMD\nMMA",
-      "MAG" -> "<MAD\nMAG",
-      "MAJ" -> "MAJ",
-      "IC" -> "II",
-      "JKS" -> "JCS",
-      "JKC" -> "JCC",
-      "JKG" -> "JCM",
-      "JKO" -> "JCO",
-      "JKB" -> "JCA",
-      "JKV" -> "JCV",
-      "JKQ" -> "JCR",
-      "JC" -> "JCT\n<JCJ",
-      "JX" -> "<JXC\nJXF",
-      "EP" -> "EP",
-      "EF" -> "EF",
-      "EC" -> "ECC\n<ECS\n<ECX",
-      "ETN" -> "ETN",
-      "ETM" -> "ETM",
-      "XPN" -> "<XP\n<XPN",
-      "XPV" -> "<XPV",
-      "XSN" -> "<XSNU\n<XSNA\n<XSNCA\n<XSNCC\n<XSNS\n<XSNP\nXSNX",
-      "XSV" -> "<XSVV\n<XSVA\nXSVN",
-      "XSA" -> "<XSMS\nXSMN",
-      "XSM" -> "<XSAM\nXSAS",
-      "XSO" -> "",
-      "XR" -> "",
-      "SF" -> "SF",
-      "SP" -> "SP",
-      "SS" -> "SL\n<SR",
-      "SE" -> "SE",
-      "SO" -> "SD",
-      "SW" -> "<SU\nSY",
-      "UN" -> "",
-      "UV" -> "",
-      "UE" -> "",
-      "SL" -> "F",
-      "SH" -> ">F",
-      "SN" -> ">NNC"
-    )
 
-  override def from(x: String) = toSejongPOS(x)
+  override def tagMap: PartialFunction[POSTag, Seq[Conversion]] = {
+    case NNG =>
+      Seq(Conversion("ncpa", toTagger = false), Conversion("ncps", toTagger = false),
+        Conversion("ncn"), Conversion("ncr", toTagger = false))
+    case NNP =>
+      Seq(Conversion("nqpa", toTagger = false), Conversion("nqpb", toTagger = false),
+        Conversion("nqpc", toTagger = false), Conversion("nqq"))
+    case NNB => Seq(Conversion("nbn"), Conversion("nbs", toTagger = false))
+    case NNM => Seq(Conversion("nbu"))
+    case NR => Seq(Conversion("nnc"), Conversion("nno", toTagger = false))
+    case NP => Seq(Conversion("npd"), Conversion("npp", toTagger = false))
+    case VV => Seq(Conversion("pvg"), Conversion("pvd", toTagger = false))
+    case VA => Seq(Conversion("paa"), Conversion("pad", toTagger = false))
+    case VX => Seq(Conversion("px"))
+    case VCP => Seq(Conversion("jp"))
+    case VCN => Seq(Conversion("paa", toSejong = false))
+    case MM => Seq(Conversion("mma"), Conversion("mmd", toTagger = false))
+    case MAG => Seq(Conversion("mag"), Conversion("mad", toTagger = false))
+    case IC => Seq(Conversion("ii"))
+    case JKS => Seq(Conversion("jcs"))
+    case JKC => Seq(Conversion("jcc"))
+    case JKG => Seq(Conversion("jcm"))
+    case JKO => Seq(Conversion("jco"))
+    case JKB => Seq(Conversion("jca"))
+    case JKV => Seq(Conversion("jcv"))
+    case JKQ => Seq(Conversion("jcr"))
+    case JC => Seq(Conversion("jct"), Conversion("jcj", toTagger = false))
+    case JX => Seq(Conversion("jxf"), Conversion("jxc", toTagger = false))
+    case EC =>
+      Seq(Conversion("ecc"), Conversion("ecs", toTagger = false), Conversion("ecx", toTagger = false))
+    case XPN => Seq(Conversion("xpn"), Conversion("xp", toTagger = false))
+    case XSN =>
+      Seq(Conversion("xsnx"), Conversion("xsnu", toTagger = false),
+        Conversion("xsna", toTagger = false), Conversion("xsnca", toTagger = false),
+        Conversion("xsncc", toTagger = false), Conversion("xsns", toTagger = false),
+        Conversion("xsnp", toTagger = false))
+    case XSV =>
+      Seq(Conversion("xsvn"), Conversion("xsvv", toTagger = false), Conversion("xsva", toTagger = false))
+    case XSA =>
+      Seq(Conversion("xsmn"), Conversion("xsms", toTagger = false))
+    case XSM =>
+      Seq(Conversion("xsam"), Conversion("xsas", toTagger = false))
+    case XSO | XR | NF | NV | NA => Seq.empty
+    case SS => Seq(Conversion("sl"), Conversion("sr", toTagger = false))
+    case SO => Seq(Conversion("sd"))
+    case SW => Seq(Conversion("sy"), Conversion("su", toTagger = false))
+    case SL => Seq(Conversion("f"))
+    case SH => Seq(Conversion("f", toSejong = false))
+    case SN => Seq(Conversion("nnc", toSejong = false))
+    case x => Seq(Conversion(x.toString.toLowerCase))
+  }
 
-  override def to(x: POSTag): String = fromSejongPOS(x).toUpperCase
+  override def from(x: String): POSTag = toSejongPOS(x)
+
+  override def to(x: POSTag): String = fromSejongPOS(x).toLowerCase
 }

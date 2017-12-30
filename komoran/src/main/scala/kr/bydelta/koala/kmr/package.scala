@@ -27,6 +27,6 @@ package object kmr {
     * @return 변환된 통합품사.
     */
   def toSejongPOS(tag: String): POS.Value = {
-    POS withName tag
+    POS withName tag.toUpperCase
   }
 }
