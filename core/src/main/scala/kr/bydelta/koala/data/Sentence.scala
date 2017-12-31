@@ -75,7 +75,7 @@ final class Sentence private(val words: Vector[Word])
   def matches(tag: Seq[Seq[String]]): Boolean =
     words.foldLeft(tag) {
       case (list, w) =>
-        if (w.matches(list.head)) list.tail
+        if (list.nonEmpty && w.matches(list.head)) list.tail
         else list
     }.isEmpty
 

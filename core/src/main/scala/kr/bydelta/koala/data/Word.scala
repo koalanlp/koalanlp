@@ -47,6 +47,20 @@ final class Word private(val surface: String, val morphemes: Vector[Morpheme])
   def jDependents: java.util.Set[Relationship] = deps.asJava
 
   /**
+    * (Java) 주어진 품사 표기의 Sequence를 포함하는지 확인.
+    * <br/>
+    * `POS$.Value[]`의 형태이며, 이는 품사가 어절을 구성한 형태를 따른 것임.
+    * <br/>
+    * Sequence가 *연속되지 않더라도* 확인함. 즉, "초/XPN거대하/VAㄴ/ETM"이란 어절이 있다면,
+    * `{POS.XPN(),POS.ETM()}`는 중간 형태소에 대응하는 품사가 없지만, 순서는 포함되므로,
+    * `true`를 반환함.
+    *
+    * @param tag 확인할 통합 품사 표기의 Sequence. `POS$.Value[]` 객체.
+    * @return True: 존재하는 경우
+    */
+  def matches(tag: Array[String]): Boolean = matches(tag.toSeq)
+
+  /**
     * 주어진 품사 표기의 Sequence를 포함하는지 확인.
     * <br/>
     * `Seq[POSTag]`의 형태이며, 이는 품사가 어절을 구성한 형태를 따른 것임.
@@ -59,32 +73,11 @@ final class Word private(val surface: String, val morphemes: Vector[Morpheme])
     * @return True: 존재하는 경우
     */
   def matches(tag: Seq[String]): Boolean =
-  tag.foldLeft(true) {
-    case (true, t) =>
-      this.exists(_.hasTag(t))
-    case (false, _) =>
-      false
-  }
-
-  /**
-    * (Java) 주어진 품사 표기의 Sequence를 포함하는지 확인.
-    * <br/>
-    * `POS$.Value[]`의 형태이며, 이는 품사가 어절을 구성한 형태를 따른 것임.
-    * <br/>
-    * Sequence가 *연속되지 않더라도* 확인함. 즉, "초/XPN거대하/VAㄴ/ETM"이란 어절이 있다면,
-    * `{POS.XPN(),POS.ETM()}`는 중간 형태소에 대응하는 품사가 없지만, 순서는 포함되므로,
-    * `true`를 반환함.
-    *
-    * @param tag 확인할 통합 품사 표기의 Sequence. `POS$.Value[]` 객체.
-    * @return True: 존재하는 경우
-    */
-  def matches(tag: Array[String]): Boolean =
-  tag.foldLeft(true) {
-    case (true, t) =>
-      this.exists(_.hasTag(t))
-    case (false, _) =>
-      false
-  }
+    morphemes.foldLeft(tag) {
+      case (list, w) =>
+        if (list.nonEmpty && w.tag.toString.startsWith(list.head)) list.tail
+        else list
+    }.isEmpty
 
   /**
     * 표면형이 같은지 비교함.

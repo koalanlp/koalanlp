@@ -20,7 +20,7 @@ git commit -m "RELEASE v$JAR_VER_CURRENT"
 git tag v$JAR_VER_CURRENT
 
 for SCALA in $SCALA_VERS; do
-    java -jar ~/.IdeaIC2016.1/system/sbt/sbt-launch.jar ++$SCALA publishSigned
+    java -jar ~/.IntelliJIdea2017.3/system/sbt/sbt-launch.jar ++$SCALA publishSigned
 done
 
 echo SET TO $JAR_VER_NEXT
