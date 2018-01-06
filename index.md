@@ -10,7 +10,8 @@ KoalaNLP
 [![Dependency Status](https://www.versioneye.com/user/projects/58fadf836ac171431cf95062/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58fadf836ac171431cf95062)
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
-[![Gitter](https://img.shields.io/gitter/room/nearbydelta/KoalaNLP.svg?style=flat-square)](https://gitter.im/nearbydelta/KoalaNLP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![nodejs-koalanlp](https://img.shields.io/badge/Nodejs-KoalaNLP-blue.svg?style=flat-square)](https://nearbydelta.github.io/nodejs-koalanlp)
+[![py-koalanlp](https://img.shields.io/badge/Python-KoalaNLP-blue.svg?style=flat-square)](https://nearbydelta.github.io/py-koalanlp)
 
 # 소개
 한국어 형태소 및 구문 분석기의 모음입니다.
