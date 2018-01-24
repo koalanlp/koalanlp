@@ -3,7 +3,7 @@ package kr.bydelta.koala.test.pack
 import kr.bydelta.koala.kkma.{Dictionary, Tagger}
 import kr.bydelta.koala.test.core.TaggerSpec
 import kr.bydelta.koala.traits.{CanCompileDict, CanTag}
-import org.snu.ids.ha.ma.MorphemeAnalyzer
+import org.snu.ids.kkma.ma.MorphemeAnalyzer
 import org.specs2.execute.Result
 
 import scala.collection.JavaConverters._

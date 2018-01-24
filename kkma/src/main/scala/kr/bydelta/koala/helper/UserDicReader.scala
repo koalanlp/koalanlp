@@ -1,6 +1,6 @@
 package kr.bydelta.koala.helper
 
-import org.snu.ids.ha.dic.SimpleDicReader
+import org.snu.ids.kkma.dic.SimpleDicReader
 
 import scala.collection.mutable.ArrayBuffer
 

@@ -6,6 +6,7 @@ concurrentRestrictions in Global := Seq(Tags.limit(Tags.Test, 1))
 
 resolvers ++= Seq("releases").map(Resolver.sonatypeRepo)
 resolvers += Resolver.typesafeRepo("releases")
+resolvers += Resolver.mavenLocal
 
 sonatypeProfileName := "kr.bydelta"
 
@@ -76,7 +77,7 @@ lazy val twitter = (project in file("twitter"))
   .settings(
     libraryDependencies ++=
       (CrossVersion.partialVersion(scalaVersion.value) match {
-        case Some((2, 12)) => Seq("org.openkoreantext" % "open-korean-text" % "2.1.2")
+        case Some((2, 12)) => Seq("org.openkoreantext" % "open-korean-text" % "2.2.0")
         case _ => Seq("com.twitter.penguin" % "korean-text" % "4.4.4")
       })
   ).dependsOn(core % "test->test;compile->compile")
@@ -102,13 +103,13 @@ lazy val server = (project in file("server"))
           Seq(
             "com.tumblr" %% "colossus" % "0.9.1",
             "com.tumblr" %% "colossus-testkit" % "0.9.1" % "test",
-            "com.typesafe.play" %% "play-json" % "2.6.8"
+            "org.json" % "json" % "20171018"
           )
         case _ =>
           Seq(
             "com.tumblr" %% "colossus" % "0.10.1",
             "com.tumblr" %% "colossus-testkit" % "0.10.1" % "test",
-            "com.typesafe.play" %% "play-json" % "2.6.8"
+            "org.json" % "json" % "20171018"
           )
       })
   )

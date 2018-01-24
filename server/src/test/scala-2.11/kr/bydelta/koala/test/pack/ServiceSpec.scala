@@ -6,6 +6,7 @@ import colossus.testkit.HttpServiceSpec
 import kr.bydelta.koala.kkma.{Dictionary, Parser, Tagger}
 import kr.bydelta.koala.server.Server
 import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}
+import org.json.JSONObject
 
 import scala.concurrent.duration._
 
@@ -28,23 +29,88 @@ class ServiceSpec extends HttpServiceSpec {
 
   "TaggerService" should {
     "generate correct tag response" in {
-      val expectedOutput =
-        """{"success":true,"data":[{"words":[{"word":"나는","in":[{"morph":"나","tag":"NP"},{"morph":"는","tag":"JX"}]},""" +
-          """{"word":"먹는다","in":[{"morph":"먹","tag":"VV"},{"morph":"는","tag":"EP"},{"morph":"다","tag":"EF"}]}]}]}"""
+      def expectedOutput(str: String): Boolean =
+        try {
+          val json = new JSONObject(str)
+          if (json.getBoolean("success")) false
+          else {
+            val data = json >>> "data" >> 0 >>> "words"
+            assert(data.length() == 2)
 
-      expectCodeAndBody(HttpRequest.post("/tag").withBody(HttpBody("나는 먹는다")), HttpCode(200), expectedOutput)
-      expectCodeAndBody(HttpRequest.get("/tag").withBody(HttpBody("나는 먹는다")), HttpCode(200), expectedOutput)
-      expectCodeAndBody(HttpRequest.put("/tag").withBody(HttpBody("나는 먹는다")), HttpCode(200), expectedOutput)
+            val firstWord = data >> 0
+            assert(firstWord ? "surface" == "나는")
+            assert((firstWord >>> "dependents").length() == 0)
+            assert((firstWord >>> "morphemes").length() == 2)
+            assert((firstWord >>> "morphemes" >> 0) ? "surface" == "나")
+            assert((firstWord >>> "morphemes" >> 0) ? "tag" == "NP")
+            assert((firstWord >>> "morphemes" >> 1) ? "surface" == "는")
+            assert((firstWord >>> "morphemes" >> 1) ? "tag" == "JX")
+
+            val secondWord = data >> 1
+            assert(secondWord ? "surface" == "먹는다")
+            assert((secondWord >>> "dependents").length() == 0)
+            assert((secondWord >>> "morphemes").length() == 3)
+            assert((firstWord >>> "morphemes" >> 0) ? "surface" == "먹")
+            assert((firstWord >>> "morphemes" >> 0) ? "tag" == "VV")
+            assert((firstWord >>> "morphemes" >> 1) ? "surface" == "는")
+            assert((firstWord >>> "morphemes" >> 1) ? "tag" == "EP")
+            assert((firstWord >>> "morphemes" >> 1) ? "surface" == "다")
+            assert((firstWord >>> "morphemes" >> 1) ? "tag" == "EF")
+
+            true
+          }
+        } catch {
+          case _: Throwable => false
+        }
+
+      expectCodeAndBodyPredicate(HttpRequest.post("/tag").withBody(HttpBody("나는 먹는다")), HttpCode(200), expectedOutput)
+      expectCodeAndBodyPredicate(HttpRequest.get("/tag").withBody(HttpBody("나는 먹는다")), HttpCode(200), expectedOutput)
+      expectCodeAndBodyPredicate(HttpRequest.put("/tag").withBody(HttpBody("나는 먹는다")), HttpCode(200), expectedOutput)
     }
 
     "generate correct parse response" in {
-      val expectedOutput =
-        """{"success":true,"data":[{"root":[{"rel":"Conjunctive","rawRel":"연결","childID":1}],"words":[{"word":"나는","children":[],"in":[{"morph":"나","tag":"NP"},{"morph":"는","tag":"JX"}]},""" +
-          """{"word":"먹는다","children":[{"rel":"Object","rawRel":"(주어,목적)대상","childID":0}],"in":[{"morph":"먹","tag":"VV"},{"morph":"는","tag":"EP"},{"morph":"다","tag":"EF"}]}]}]}"""
+      def expectedOutput(str: String): Boolean =
+        try {
+          val json = new JSONObject(str)
+          if (json.getBoolean("success")) false
+          else {
+            val root = json >>> "data" >> 0 >>> "root"
+            assert((root >> 0) ? "rel" == "Conjunctive")
+            assert((root >> 0).getInt("childID") == 1)
+            val data = json >>> "data" >> 0 >>> "words"
+            assert(data.length() == 2)
 
-      expectCodeAndBody(HttpRequest.post("/parse").withBody(HttpBody("나는 먹는다")), HttpCode(200), expectedOutput)
-      expectCodeAndBody(HttpRequest.get("/parse").withBody(HttpBody("나는 먹는다")), HttpCode(200), expectedOutput)
-      expectCodeAndBody(HttpRequest.put("/parse").withBody(HttpBody("나는 먹는다")), HttpCode(200), expectedOutput)
+            val firstWord = data >> 0
+            assert(firstWord ? "surface" == "나는")
+            assert((firstWord >>> "dependents").length() == 0)
+            assert((firstWord >>> "morphemes").length() == 2)
+            assert((firstWord >>> "morphemes" >> 0) ? "surface" == "나")
+            assert((firstWord >>> "morphemes" >> 0) ? "tag" == "NP")
+            assert((firstWord >>> "morphemes" >> 1) ? "surface" == "는")
+            assert((firstWord >>> "morphemes" >> 1) ? "tag" == "JX")
+
+            val secondWord = data >> 1
+            assert(secondWord ? "surface" == "먹는다")
+            assert((secondWord >>> "dependents").length() == 1)
+            assert((secondWord >>> "dependents" >> 0) ? "rel" == "Object")
+            assert((secondWord >>> "dependents" >> 0).getInt("childID") == 0)
+            assert((secondWord >>> "morphemes").length() == 3)
+            assert((firstWord >>> "morphemes" >> 0) ? "surface" == "먹")
+            assert((firstWord >>> "morphemes" >> 0) ? "tag" == "VV")
+            assert((firstWord >>> "morphemes" >> 1) ? "surface" == "는")
+            assert((firstWord >>> "morphemes" >> 1) ? "tag" == "EP")
+            assert((firstWord >>> "morphemes" >> 1) ? "surface" == "다")
+            assert((firstWord >>> "morphemes" >> 1) ? "tag" == "EF")
+
+            true
+          }
+        } catch {
+          case _: Throwable => false
+        }
+
+      expectCodeAndBodyPredicate(HttpRequest.post("/parse").withBody(HttpBody("나는 먹는다")), HttpCode(200), expectedOutput)
+      expectCodeAndBodyPredicate(HttpRequest.get("/parse").withBody(HttpBody("나는 먹는다")), HttpCode(200), expectedOutput)
+      expectCodeAndBodyPredicate(HttpRequest.put("/parse").withBody(HttpBody("나는 먹는다")), HttpCode(200), expectedOutput)
     }
 
     "provide dictionary's put action" in {

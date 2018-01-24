@@ -2,8 +2,8 @@ package kr.bydelta.koala.kkma
 
 import kr.bydelta.koala.data.{Sentence => KSent}
 import kr.bydelta.koala.traits.CanDepParse
-import org.snu.ids.ha.ma.{Eojeol, MCandidate, MExpression, Sentence}
-import org.snu.ids.ha.sp.{Parser => KParser}
+import org.snu.ids.kkma.ma.{Eojeol, MCandidate, MExpression, Sentence}
+import org.snu.ids.kkma.sp.{Parser => KParser}
 
 import scala.collection.JavaConverters._
 

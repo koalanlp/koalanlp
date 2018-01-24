@@ -1,7 +1,7 @@
 package kr.bydelta.koala.test.core
 
 import kr.bydelta.koala.kkma.{Parser, Tagger}
-import org.snu.ids.ha.sp.{Parser => KParser}
+import org.snu.ids.kkma.sp.{Parser => KParser}
 import org.specs2.mutable._
 
 import scala.collection.JavaConverters._

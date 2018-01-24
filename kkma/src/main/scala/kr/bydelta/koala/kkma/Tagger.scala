@@ -3,7 +3,7 @@ package kr.bydelta.koala.kkma
 import kr.bydelta.koala
 import kr.bydelta.koala.data.{Word, Sentence => KSent}
 import kr.bydelta.koala.traits.CanTagOnlyAParagraph
-import org.snu.ids.ha.ma._
+import org.snu.ids.kkma.ma._
 
 import scala.collection.JavaConverters._
 

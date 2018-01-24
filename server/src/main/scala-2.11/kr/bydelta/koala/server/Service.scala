@@ -10,10 +10,7 @@ import colossus.protocols.http.UrlParsing.Root
 import colossus.protocols.http.server.RequestHandler
 import colossus.service.Callback
 import colossus.service.GenRequestHandler.PartialHandler
-import kr.bydelta.koala.POS
-import kr.bydelta.koala.data.{Morpheme, Relationship}
 import kr.bydelta.koala.traits.{CanCompileDict, CanDepParse, CanTag}
-import play.api.libs.json.{JsArray, JsObject, Json}
 
 /**
   * Tagger service provider class
@@ -44,7 +41,7 @@ class Service(context: ServerContext,
     case request@Put on Root / "parse" => parseReq(request)
 
     case request =>
-      Callback.successful(request.notFound("""{"success":false,"message":"There is no such path in the server."}"""))
+      Callback.successful(request.notFound(Json.failure("There is no such path in the server.")))
   }
 
   /**
@@ -57,59 +54,12 @@ class Service(context: ServerContext,
     val json = try {
       val para = tagger.tag(request.body.bytes.utf8String)
 
-      Json.obj(
-        "success" -> true,
-        "data" ->
-          JsArray(
-            para.map {
-              sentence =>
-                val newSent = parser.parse(sentence)
-
-                Json.obj(
-                  "root" -> newSent.root.dependents.map {
-                    case r@Relationship(_, fTag, target) =>
-                      Json.obj(
-                        "rel" -> fTag,
-                        "rawRel" -> r.rawRel,
-                        "childID" -> target
-                      )
-                  },
-                  "words" -> JsArray(
-                  newSent.map {
-                    word =>
-                      Json.obj(
-                        "word" -> word.surface,
-                        "children" -> word.dependents.map {
-                          case r@Relationship(_, fTag, target) =>
-                            Json.obj(
-                              "rel" -> fTag,
-                              "rawRel" -> r.rawRel,
-                              "childID" -> target
-                            )
-                        },
-                        "in" -> JsArray(
-                          word.map {
-                            case Morpheme(surf, tag) => Json.obj(
-                              "morph" -> surf,
-                              "tag" -> tag
-                            )
-                          }
-                        )
-                      )
-                  }
-                  )
-                )
-            }
-          )
-      )
+      Json.success(para.map(parser.parse))
     } catch {
       case e: Throwable =>
-        Json.obj(
-          "success" -> false,
-          "message" -> e.getStackTrace.mkString("\n")
-        )
+        Json.failure(e.getStackTrace.mkString("\n"))
     }
-    Callback.successful(request.ok(json.toString))
+    Callback.successful(request.ok(json))
   }
 
   /**
@@ -122,41 +72,12 @@ class Service(context: ServerContext,
     val json = try {
       val para = tagger.tag(request.body.bytes.utf8String)
 
-      Json.obj(
-        "success" -> true,
-        "data" ->
-          JsArray(
-            para.map {
-              sentence =>
-                Json.obj(
-                  "words" -> JsArray(
-                    sentence.map {
-                      word =>
-                        Json.obj(
-                          "word" -> word.surface,
-                          "in" -> JsArray(
-                            word.map {
-                              case Morpheme(surf, tag) => Json.obj(
-                                "morph" -> surf,
-                                "tag" -> tag
-                              )
-                            }
-                          )
-                        )
-                    }
-                  )
-                )
-            }
-          )
-      )
+      Json.success(para)
     } catch {
       case e: Throwable =>
-        Json.obj(
-          "success" -> false,
-          "message" -> e.getStackTrace.mkString("\n")
-        )
+        Json.failure(e.getStackTrace.mkString("\n"))
     }
-    Callback.successful(request.ok(json.toString))
+    Callback.successful(request.ok(json))
   }
 
   /**
@@ -167,19 +88,12 @@ class Service(context: ServerContext,
     */
   def dictReq(request: HttpRequest): Callback[HttpResponse] = {
     try {
-      val arr = Json.parse(request.body.bytes.toArray).as[JsArray]
-      val list = arr.value.map {
-        raw =>
-          val item = raw.as[JsObject]
-          val morph = (item \ "morph").as[String]
-          val tag = POS withName (item \ "tag").as[String]
-          morph -> tag
-      }
+      val list = Json.parseDictJson(request.body.bytes.utf8String)
       dict.addUserDictionary(list: _*)
-      Callback.successful(request.ok("""{"success":true}"""))
+      Callback.successful(request.ok(Json.success()))
     } catch {
       case _: Throwable =>
-        Callback.successful(request.badRequest("""{"success":false,"message":"Invalid JSON format!"}"""))
+        Callback.successful(request.badRequest(Json.failure("Invalid JSON format!")))
     }
   }
 }

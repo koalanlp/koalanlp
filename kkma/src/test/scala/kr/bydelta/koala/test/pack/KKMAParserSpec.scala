@@ -4,8 +4,8 @@ import kr.bydelta.koala.POS
 import kr.bydelta.koala.data.{Relationship, Sentence}
 import kr.bydelta.koala.kkma.{Dictionary, Parser}
 import kr.bydelta.koala.test.core.Examples
-import org.snu.ids.ha.ma.MorphemeAnalyzer
-import org.snu.ids.ha.sp.{ParseTreeNode, Parser => KParser}
+import org.snu.ids.kkma.ma.MorphemeAnalyzer
+import org.snu.ids.kkma.sp.{ParseTreeNode, Parser => KParser}
 import org.specs2.execute.Result
 import org.specs2.mutable._
 

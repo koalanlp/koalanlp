@@ -3,7 +3,7 @@ package kr.bydelta.koala.kkma
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.helper.UserDicReader
 import kr.bydelta.koala.traits.CanCompileDict
-import org.snu.ids.ha.dic.{RawDicFileReader, SimpleDicFileReader, Dictionary => Dict}
+import org.snu.ids.kkma.dic.{RawDicFileReader, SimpleDicFileReader, Dictionary => Dict}
 
 import scala.collection.JavaConverters._
 
@@ -81,12 +81,23 @@ object Dictionary extends CanCompileDict {
         userdic.reset()
         Dict.reload(
           Seq(
-            new SimpleDicFileReader("/dic/kcc.dic"),
-            new SimpleDicFileReader("/dic/noun.dic"),
-            new SimpleDicFileReader("/dic/person.dic"),
-            new RawDicFileReader("/dic/raw.dic"),
-            new SimpleDicFileReader("/dic/simple.dic"),
-            new SimpleDicFileReader("/dic/verb.dic"),
+            new SimpleDicFileReader("/dic/00nng.dic"),
+            new SimpleDicFileReader("/dic/01nnp.dic"),
+            new SimpleDicFileReader("/dic/02nnb.dic"),
+            new SimpleDicFileReader("/dic/03nr.dic"),
+            new SimpleDicFileReader("/dic/04np.dic"),
+            new SimpleDicFileReader("/dic/05comp.dic"),
+            new SimpleDicFileReader("/dic/06slang.dic"),
+            new SimpleDicFileReader("/dic/10verb.dic"),
+            new SimpleDicFileReader("/dic/11vx.dic"),
+            new SimpleDicFileReader("/dic/12xr.dic"),
+            new SimpleDicFileReader("/dic/20md.dic"),
+            new SimpleDicFileReader("/dic/21ma.dic"),
+            new SimpleDicFileReader("/dic/30ic.dic"),
+            new SimpleDicFileReader("/dic/40x.dic"),
+            new RawDicFileReader("/dic/50josa.dic"),
+            new RawDicFileReader("/dic/51eomi.dic"),
+            new RawDicFileReader("/dic/52raw.dic"),
             userdic
           ).asJava
         )
