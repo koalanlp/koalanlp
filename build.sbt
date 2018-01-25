@@ -19,8 +19,8 @@ lazy val root = (project in file("."))
     packagedArtifacts := Map.empty,
     publishLocal := (),
     publish := (),
-    unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples, custom),
-    unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples, custom)
+    unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples),
+    unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples)
   ).settings(aggregate in update := true)
 /** Core Project (Data structure, Trait, etc.) **/
 lazy val core = (project in file("core"))
