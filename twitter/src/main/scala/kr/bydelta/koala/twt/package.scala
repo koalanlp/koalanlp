@@ -12,7 +12,6 @@ package object twt {
   /**
     * Convert tag: from Sejong (Standard) POS tag, to OpenKoreanText's POS tag
     *
-    * @usecase {{{fromSejong(POS.NNP)}}} will return "ProperNoun"
     * @see [[https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s Conversion Table (Korean)]]
     * @param tag The POS Tag value to be converted (POSTag type)
     * @return The name of POS tag which is used in OpenKoreanText (String)
@@ -57,7 +56,6 @@ package object twt {
   /**
     * Convert tag: from OpenKoreanText's POS tag, to Sejong (Standard) POS tag
     *
-    * @usecase {{{toSejong("Noun")}}} will return POS.NNG
     * @see [[https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s Conversion Table (Korean)]]
     * @param tag The name of POS Tag to be converted (String)
     * @return The POS Tag value which is the most suitable (POSTag type)
