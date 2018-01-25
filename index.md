@@ -7,7 +7,7 @@ KoalaNLP
 
 [![Build Status](https://img.shields.io/travis/nearbydelta/KoalaNLP.svg?style=flat-square&branch=master)](https://travis-ci.org/nearbydelta/KoalaNLP)
 [![codecov](https://img.shields.io/codecov/c/github/nearbydelta/KoalaNLP.svg?style=flat-square)](https://codecov.io/gh/nearbydelta/KoalaNLP)
-[![Dependency Status](https://www.versioneye.com/user/projects/58fadf836ac171431cf95062/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58fadf836ac171431cf95062)
+[![Known Vulnerabilities](https://snyk.io/test/github/nearbydelta/KoalaNLP/badge.svg)](https://snyk.io/test/github/nearbydelta/KoalaNLP)
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 [![nodejs-koalanlp](https://img.shields.io/badge/Nodejs-KoalaNLP-blue.svg?style=flat-square)](https://nearbydelta.github.io/nodejs-koalanlp)
