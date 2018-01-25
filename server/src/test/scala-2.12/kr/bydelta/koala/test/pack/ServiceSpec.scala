@@ -34,7 +34,7 @@ class ServiceSpec extends HttpServiceSpec {
       def expectedOutput(str: String): Boolean =
         try {
           val json = new JSONObject(str)
-          if (json.getBoolean("success")) false
+          if (!json.getBoolean("success")) false
           else {
             val data = json >>> "data" >> 0 >>> "words"
             assert(data.length() == 2)
@@ -52,12 +52,12 @@ class ServiceSpec extends HttpServiceSpec {
             assert(secondWord ? "surface" == "먹는다")
             assert((secondWord >>> "dependents").length() == 0)
             assert((secondWord >>> "morphemes").length() == 3)
-            assert((firstWord >>> "morphemes" >> 0) ? "surface" == "먹")
-            assert((firstWord >>> "morphemes" >> 0) ? "tag" == "VV")
-            assert((firstWord >>> "morphemes" >> 1) ? "surface" == "는")
-            assert((firstWord >>> "morphemes" >> 1) ? "tag" == "EP")
-            assert((firstWord >>> "morphemes" >> 1) ? "surface" == "다")
-            assert((firstWord >>> "morphemes" >> 1) ? "tag" == "EF")
+            assert((secondWord >>> "morphemes" >> 0) ? "surface" == "먹")
+            assert((secondWord >>> "morphemes" >> 0) ? "tag" == "VV")
+            assert((secondWord >>> "morphemes" >> 1) ? "surface" == "는")
+            assert((secondWord >>> "morphemes" >> 1) ? "tag" == "EP")
+            assert((secondWord >>> "morphemes" >> 2) ? "surface" == "다")
+            assert((secondWord >>> "morphemes" >> 2) ? "tag" == "EF")
 
             true
           }
@@ -74,7 +74,7 @@ class ServiceSpec extends HttpServiceSpec {
       def expectedOutput(str: String): Boolean =
         try {
           val json = new JSONObject(str)
-          if (json.getBoolean("success")) false
+          if (!json.getBoolean("success")) false
           else {
             val root = json >>> "data" >> 0 >>> "root"
             assert((root >> 0) ? "rel" == "Conjunctive")
@@ -97,12 +97,12 @@ class ServiceSpec extends HttpServiceSpec {
             assert((secondWord >>> "dependents" >> 0) ? "rel" == "Object")
             assert((secondWord >>> "dependents" >> 0).getInt("childID") == 0)
             assert((secondWord >>> "morphemes").length() == 3)
-            assert((firstWord >>> "morphemes" >> 0) ? "surface" == "먹")
-            assert((firstWord >>> "morphemes" >> 0) ? "tag" == "VV")
-            assert((firstWord >>> "morphemes" >> 1) ? "surface" == "는")
-            assert((firstWord >>> "morphemes" >> 1) ? "tag" == "EP")
-            assert((firstWord >>> "morphemes" >> 1) ? "surface" == "다")
-            assert((firstWord >>> "morphemes" >> 1) ? "tag" == "EF")
+            assert((secondWord >>> "morphemes" >> 0) ? "surface" == "먹")
+            assert((secondWord >>> "morphemes" >> 0) ? "tag" == "VV")
+            assert((secondWord >>> "morphemes" >> 1) ? "surface" == "는")
+            assert((secondWord >>> "morphemes" >> 1) ? "tag" == "EP")
+            assert((secondWord >>> "morphemes" >> 2) ? "surface" == "다")
+            assert((secondWord >>> "morphemes" >> 2) ? "tag" == "EF")
 
             true
           }
