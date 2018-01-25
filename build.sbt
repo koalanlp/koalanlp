@@ -17,8 +17,8 @@ lazy val root = (project in file("."))
   .settings(
     publishArtifact := false,
     packagedArtifacts := Map.empty,
-    publishLocal := (),
-    publish := (),
+    publishLocal := {},
+    publish := {},
     unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples),
     unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples)
   ).settings(aggregate in update := true)
@@ -141,7 +141,7 @@ lazy val assemblySettings = Seq(
     (artifact in(Compile, assembly)).value.withClassifier(Some("assembly")),
   addArtifact(artifact in(Compile, assembly), assembly))
 /** 버전 **/
-val VERSION = "1.9.2-SNAPSHOT"
+val VERSION = "1.9.2"
 
 /** 공통 프로젝트 Configuration **/
 def projectWithConfig(module: String) =
