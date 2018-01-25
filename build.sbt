@@ -17,8 +17,8 @@ lazy val root = (project in file("."))
   .settings(
     publishArtifact := false,
     packagedArtifacts := Map.empty,
-    publishLocal := {},
-    publish := {},
+    publishLocal := (),
+    publish := (),
     unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples, custom),
     unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples, custom)
   ).settings(aggregate in update := true)
@@ -132,18 +132,6 @@ lazy val samples = (project in file("samples"))
     libraryDependencies += "org.jsoup" % "jsoup" % "1.10.3"
   )
   .dependsOn(eunjeon, twitter, komoran, kkma, hannanum, server, arirang, rhino)
-/** Customization **/
-lazy val custom = (project in file("custom"))
-  .settings(projectWithConfig("custom"): _*)
-  .settings(
-    resolvers += Resolver.sonatypeRepo("snapshots"),
-    libraryDependencies ++= Seq(
-      "org.apache.opennlp" % "opennlp-tools" % "1.8.2",
-      "org.platanios" %% "tensorflow" % "0.1.0-SNAPSHOT",
-      "org.platanios" %% "tensorflow" % "0.1.0-SNAPSHOT" % "test" classifier "linux-cpu-x86_64"
-      //      "org.deeplearning4j" % "deeplearning4j-core" % "0.9.1"
-    )
-  ).dependsOn(core % "test->test;compile->compile")
 
 /** 4. 모형 훈련 프로젝트 **/
 /** Assembly Classifier 설정 **/

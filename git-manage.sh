@@ -2,6 +2,7 @@
 WD=$(pwd)
 SCALAVER=`cat build.sbt | grep "scalaVersion := " | cut -d\" -f2`
 VER=`echo $SCALAVER | cut -d. -f1,2`
+SBT_VER=`cat project/build.properties | cut -d= -f2 | cut -d. -f1,2`
 MSG=$TRAVIS_COMMIT_MESSAGE
 TAG=`cat build.sbt | grep "val VERSION" | cut -d\" -f2`
 
@@ -54,5 +55,5 @@ if [[ $TRAVIS_SCALA_VERSION == $SCALAVER ]]; then
 fi
 
 cd $WD
-cp sonatype.sbt ~/.sbt/1.0/
+cp sonatype.sbt ~/.sbt/$SBT_VER/
 sbt ++$TRAVIS_SCALA_VERSION publish
