@@ -19,9 +19,9 @@ KoalaNLP
 이 프로젝트는 __서로 다른 형태의 형태소 분석기를__ 모아,
 __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이 목적입니다.
 * Hannanum: KAIST의 [한나눔 형태소 분석기](http://kldp.net/projects/hannanum/)와 [NLP_HUB 구문분석기](http://semanticweb.kaist.ac.kr/home/index.php/NLP_HUB)
-* KKMA: 서울대의 [꼬꼬마 형태소/구문 분석기](http://kkma.snu.ac.kr/documents/index.jsp)
-* KOMORAN: Junsoo Shin님의 [코모란 v3.x](https://github.com/shin285/KOMORAN)
-* Twitter: OpenKoreanText의 [오픈 소스 한국어 처리기](http://openkoreantext.org) (구 Twitter 한국어 분석기)<sup>1-1</sup>
+* KKMA: 서울대의 [꼬꼬마 형태소/구문 분석기 v2.1](http://kkma.snu.ac.kr/documents/index.jsp)
+* KOMORAN: Junsoo Shin님의 [코모란 v3.3.3](https://github.com/shin285/KOMORAN)
+* Twitter: OpenKoreanText의 [오픈 소스 한국어 처리기 v2.2.0](http://openkoreantext.org) (구 Twitter 한국어 분석기)<sup>1-1</sup>
 * Eunjeon: 은전한닢 프로젝트의 [SEunjeon(S은전)](https://bitbucket.org/eunjeon/seunjeon)
 * Arirang: 이수명님의 [Arirang Morpheme Analyzer](http://cafe.naver.com/korlucene) <sup>1-2</sup>
 * RHINO: 최석재님의 [RHINO v2.5.4](https://github.com/SukjaeChoi/RHINO)
