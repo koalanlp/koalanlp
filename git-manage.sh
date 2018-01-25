@@ -54,5 +54,5 @@ if [[ $TRAVIS_SCALA_VERSION == $SCALAVER ]]; then
 fi
 
 cd $WD
-cp sonatype.sbt ~/.sbt/0.13/
+cp sonatype.sbt ~/.sbt/1.0/
 sbt ++$TRAVIS_SCALA_VERSION publish

@@ -5,8 +5,17 @@ import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.data.{Morpheme, Relationship, Sentence, Word}
 import org.json.{JSONArray, JSONWriter}
 
+/**
+  * Json handling object
+  */
 object Json {
 
+  /**
+    * Build Success response
+    *
+    * @param data Sentences
+    * @return JSON String (Success Response)
+    */
   def success(data: Seq[Sentence]): String = {
     val sw = new StringBuffer()
     val writer = new JSONWriter(sw)
@@ -17,6 +26,11 @@ object Json {
     sw.toString
   }
 
+  /**
+    * Build Success response
+    *
+    * @return JSON String (Empty Success Response)
+    */
   def success(): String = {
     val sw = new StringBuffer()
     val writer = new JSONWriter(sw)
@@ -26,6 +40,13 @@ object Json {
     sw.toString
   }
 
+
+  /**
+    * Build Failure response
+    *
+    * @param data Sentences
+    * @return JSON String (Failure Response)
+    */
   def failure(msg: String): String = {
     val sw = new StringBuffer()
     val writer = new JSONWriter(sw)
@@ -36,6 +57,12 @@ object Json {
     sw.toString
   }
 
+  /**
+    * Parse JSON array for dictionary
+    *
+    * @param string JSON String to be parsed
+    * @return Sequence of morphemes.
+    */
   def parseDictJson(string: String): Seq[(String, POSTag)] = {
     val json = new JSONArray(string)
     val len = json.length()
@@ -46,6 +73,13 @@ object Json {
     }
   }
 
+  /**
+    * Write JSON String
+    *
+    * @param writer JSON Writer
+    * @param x      Any object to be written
+    * @return JSON Writer which is passed in.
+    */
   private def apply(writer: JSONWriter, x: Any): JSONWriter =
     x match {
       case m: Morpheme =>
