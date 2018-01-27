@@ -37,13 +37,6 @@ script:
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *.core.*"
 after_success:
 - bash ./git-manage.sh
-notifications:
-  webhooks:
-    urls:
-    - https://webhooks.gitter.im/e/4145719c054cb2b715b3
-    on_success: change
-    on_failure: always
-    on_start: never
 env:
   global:
   - SONATYPE_USERNAME=nearbydelta

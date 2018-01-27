@@ -194,7 +194,7 @@ object POS extends Enumeration {
     *
     * @return 체언인 경우 True
     */
-  def isNoun: POSTag => Boolean = Set(NNG, NNP, NNB, NR, NP)
+  def isNoun: POSTag => Boolean = Set(NNG, NNP, NNB, NNM, NR, NP)
 
   /**
     * 용언인지 확인한다
@@ -229,14 +229,14 @@ object POS extends Enumeration {
     *
     * @return 접사인 경우 True
     */
-  def isAffix: POSTag => Boolean = Set(XPN, XPV, XSN, XSV, XSM, XSN, XSO, XR)
+  def isAffix: POSTag => Boolean = Set(XPN, XPV, XSN, XSV, XSM, XSA, XSO, XR)
 
   /**
     * 접미사인지 확인한다
     *
     * @return 접사인 경우 True
     */
-  def isSuffix: POSTag => Boolean = Set(XSN, XSV, XSM, XSN, XSO)
+  def isSuffix: POSTag => Boolean = Set(XSN, XSV, XSM, XSA, XSO)
 
   /**
     * 기호인지 확인한다
