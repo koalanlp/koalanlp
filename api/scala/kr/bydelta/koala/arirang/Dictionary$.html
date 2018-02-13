@@ -1,0 +1,791 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+          <title></title>
+          <meta name="description" content="" />
+          <meta name="keywords" content="" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../../lib/index.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../../../lib/jquery.panzoom.min.js"></script>
+      <script type="text/javascript" src="../../../../lib/jquery.mousewheel.min.js"></script>
+      <script type="text/javascript" src="../../../../lib/index.js"></script>
+      <script type="text/javascript" src="../../../../index.js"></script>
+      <script type="text/javascript" src="../../../../lib/scheduler.js"></script>
+      <script type="text/javascript" src="../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+        /* this variable can be used by the JS to determine the path to the root document */
+        var toRoot = '../../../../';
+      </script>
+    
+        </head>
+        <body>
+      <div id="search">
+        <span id="doc-title"><span id="doc-version"></span></span>
+        <span class="close-results"><span class="left">&lt;</span> Back</span>
+        <div id="textfilter">
+          <span class="input">
+            <input autocapitalize="none" placeholder="Search" id="index-input" type="text" accesskey="/" />
+            <i class="clear material-icons"></i>
+            <i id="search-icon" class="material-icons"></i>
+          </span>
+        </div>
+    </div>
+      <div id="search-results">
+        <div id="search-progress">
+          <div id="progress-fill"></div>
+        </div>
+        <div id="results-content">
+          <div id="entity-results"></div>
+          <div id="member-results"></div>
+        </div>
+      </div>
+      <div id="content-scroll-container" style="-webkit-overflow-scrolling: touch;">
+        <div id="content-container" style="-webkit-overflow-scrolling: touch;">
+          <div id="subpackage-spacer">
+            <div id="packages">
+              <h1>Packages</h1>
+              <ul>
+                <li name="_root_.root" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_root_"></a><a id="root:_root_"></a>
+      <span class="permalink">
+      <a href="index.html#_root_" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../../../../index.html">
+              <span class="name">root</span>
+            </a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="_root_.kr" visbl="pub" class="indented1 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="kr"></a><a id="kr:kr"></a>
+      <span class="permalink">
+      <a href="index.html#kr" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../../../index.html">
+              <span class="name">kr</span>
+            </a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="kr.bydelta" visbl="pub" class="indented2 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="bydelta"></a><a id="bydelta:bydelta"></a>
+      <span class="permalink">
+      <a href="../kr/index.html#bydelta" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../../index.html">
+              <span class="name">bydelta</span>
+            </a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../../index.html" class="extype" name="kr">kr</a></dd></dl></div>
+    </li><li name="kr.bydelta.koala" visbl="pub" class="indented3 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="koala"></a><a id="koala:koala"></a>
+      <span class="permalink">
+      <a href="../../kr/bydelta/index.html#koala" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="각 Package의 Parser와 Tagger를 참조하세요." href="../index.html">
+              <span class="name">koala</span>
+            </a>
+      </span>
+      
+      <p class="shortcomment cmt">각 Package의 Parser와 Tagger를 참조하세요.</p><div class="fullcomment"><div class="comment cmt"><h3> KoalaNLP </h3><h5> 통합 Scala 한국어 분석기, Koala </h5><p>각 Package의 Parser와 Tagger를 참조하세요.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../index.html" class="extype" name="kr.bydelta">bydelta</a></dd></dl></div>
+    </li><li name="kr.bydelta.koala.arirang" visbl="pub" class="indented4 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="arirang"></a><a id="arirang:arirang"></a>
+      <span class="permalink">
+      <a href="../../../kr/bydelta/koala/index.html#arirang" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="아리랑 분석기 패키지입니다." href="index.html">
+              <span class="name">arirang</span>
+            </a>
+      </span>
+      
+      <p class="shortcomment cmt">아리랑 분석기 패키지입니다.</p><div class="fullcomment"><div class="comment cmt"><p>아리랑 분석기 패키지입니다.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="kr.bydelta.koala">koala</a></dd></dl></div>
+    </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="object" href="" title="아리랑 분석기의 사용자사전입니다."></a>
+                        <a href="" title="아리랑 분석기의 사용자사전입니다.">
+                          Dictionary
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="JavaDictionary.html" title="자바 사용자를 위한, 아리랑 분석기 사용자 정의사전."></a>
+                        <a href="JavaDictionary.html" title="자바 사용자를 위한, 아리랑 분석기 사용자 정의사전.">
+                          JavaDictionary
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <a class="object" href="Tagger$.html" title=""></a>
+                        <a class="class" href="Tagger.html" title="아리랑 형태소 분석기입니다."></a>
+                        <a href="Tagger.html" title="아리랑 형태소 분석기입니다.">
+                          Tagger
+                        </a>
+                      </li>
+              </ul>
+            </div>
+          </div>
+          <div id="content">
+            <body class="object value">
+      <div id="definition">
+        <div class="big-circle object">o</div>
+        <p id="owner"><a href="../../../index.html" class="extype" name="kr">kr</a>.<a href="../../index.html" class="extype" name="kr.bydelta">bydelta</a>.<a href="../index.html" class="extype" name="kr.bydelta.koala">koala</a>.<a href="index.html" class="extype" name="kr.bydelta.koala.arirang">arirang</a></p>
+        <h1>Dictionary<span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span></h1>
+        <h3><span class="morelinks"></span></h3>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Dictionary</span><span class="result"> extends <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></span>
+      </span>
+      </h4>
+
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>아리랑 분석기의 사용자사전입니다.
+</p></div><div class="toggleContainer block">
+          <span class="toggle">
+            Linear Supertypes
+          </span>
+          <div class="superTypes hiddenContent"><a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div class="toggle"></div>
+        <div id="memberfilter">
+          <i class="material-icons arrow"></i>
+          <span class="input">
+            <input id="mbrsel-input" placeholder="Filter all members" type="text" accesskey="/" />
+          </span>
+          <i class="clear material-icons"></i>
+        </div>
+        <div id="filterby">
+          <div id="order">
+            <span class="filtertype">Ordering</span>
+            <ol>
+              
+              <li class="alpha in"><span>Alphabetic</span></li>
+              <li class="inherit out"><span>By Inheritance</span></li>
+            </ol>
+          </div>
+          <div class="ancestors">
+                  <span class="filtertype">Inherited<br />
+                  </span>
+                  <ol id="linearization">
+                    <li class="in" name="kr.bydelta.koala.arirang.Dictionary"><span>Dictionary</span></li><li class="in" name="kr.bydelta.koala.traits.CanCompileDict"><span>CanCompileDict</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  </ol>
+                </div><div class="ancestors">
+              <span class="filtertype"></span>
+              <ol>
+                <li class="hideall out"><span>Hide All</span></li>
+                <li class="showall in"><span>Show All</span></li>
+              </ol>
+            </div>
+          <div id="visbl">
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+            </div>
+        </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        
+
+        
+
+        <div class="values members">
+              <h3>Value Members</h3>
+              <ol>
+                <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#!=(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html###():Int" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a><a id="==(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#==(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="kr.bydelta.koala.arirang.Dictionary#addUserDictionary" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addUserDictionary(dict:(String,kr.bydelta.koala.POS.POSTag)*):Unit"></a><a id="addUserDictionary((String,POSTag)*):Unit"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#addUserDictionary(dict:(String,kr.bydelta.koala.POS.POSTag)*):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">addUserDictionary</span><span class="params">(<span name="dict">dict: (<span class="extype" name="scala.Predef.String">String</span>, <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>)*</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.</p><div class="fullcomment"><div class="comment cmt"><p>사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.
+</p></div><dl class="paramcmts block"><dt class="param">dict</dt><dd class="cmt"><p>추가할 (표면형,품사)의 순서쌍.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.arirang.Dictionary">Dictionary</a> → <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
+    </li><li name="kr.bydelta.koala.traits.CanCompileDict#addUserDictionary" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addUserDictionary(morph:String,tag:kr.bydelta.koala.POS.POSTag):Unit"></a><a id="addUserDictionary(String,POSTag):Unit"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#addUserDictionary(morph:String,tag:kr.bydelta.koala.POS.POSTag):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">addUserDictionary</span><span class="params">(<span name="morph">morph: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tag">tag: <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">사용자 사전에, 표면형과 그 품사를 추가.</p><div class="fullcomment"><div class="comment cmt"><p>사용자 사전에, 표면형과 그 품사를 추가.
+</p></div><dl class="paramcmts block"><dt class="param">morph</dt><dd class="cmt"><p>표면형.</p></dd><dt class="param">tag</dt><dd class="cmt"><p>품사.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#asInstanceOf[T0]:T0" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="kr.bydelta.koala.arirang.Dictionary#baseEntriesOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="baseEntriesOf(filter:kr.bydelta.koala.POS.POSTag=&gt;Boolean):Iterator[(String,kr.bydelta.koala.POS.POSTag)]"></a><a id="baseEntriesOf((POSTag)⇒Boolean):Iterator[(String,POSTag)]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#baseEntriesOf(filter:kr.bydelta.koala.POS.POSTag=&gt;Boolean):Iterator[(String,kr.bydelta.koala.POS.POSTag)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">baseEntriesOf</span><span class="params">(<span name="filter">filter: (<a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Iterator">Iterator</span>[(<span class="extype" name="scala.Predef.String">String</span>, <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>)]</span>
+      </span>
+      
+      <p class="shortcomment cmt">원본 사전에 등재된 항목 중에서, 지정된 형태소의 항목만을 가져옵니다.</p><div class="fullcomment"><div class="comment cmt"><p>원본 사전에 등재된 항목 중에서, 지정된 형태소의 항목만을 가져옵니다. (복합 품사 결합 형태는 제외)
+</p></div><dl class="paramcmts block"><dt class="param">filter</dt><dd class="cmt"><p>가져올 품사인지 판단하는 함수.</p></dd><dt>returns</dt><dd class="cmt"><p>(형태소, 품사)의 Iterator.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.arirang.Dictionary">Dictionary</a> → <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
+    </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a><a id="clone():AnyRef"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#clone():Object" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../java/lang/index.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="kr.bydelta.koala.traits.CanCompileDict#contains" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="contains(word:String,posTag:Set[kr.bydelta.koala.POS.POSTag]):Boolean"></a><a id="contains(String,Set[POSTag]):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#contains(word:String,posTag:Set[kr.bydelta.koala.POS.POSTag]):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">contains</span><span class="params">(<span name="word">word: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="posTag">posTag: <span class="extype" name="scala.Predef.Set">Set</span>[<a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>] = <span class="symbol"><span class="name"><a href="../../../index.html">Set(POS.NNP, POS.NNG)</a></span></span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">사전에 등재되어 있는지 확인합니다.</p><div class="fullcomment"><div class="comment cmt"><p>사전에 등재되어 있는지 확인합니다.
+</p></div><dl class="paramcmts block"><dt class="param">word</dt><dd class="cmt"><p>확인할 형태소</p></dd><dt class="param">posTag</dt><dd class="cmt"><p>품사들(기본값: NNP 고유명사, NNG 일반명사)</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
+    </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#eq(x$1:AnyRef):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a><a id="equals(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#equals(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#finalize():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../java/lang/index.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#getClass():Class[_]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="kr.bydelta.koala.arirang.Dictionary#getNotExists" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getNotExists(onlySystemDic:Boolean,word:(String,kr.bydelta.koala.POS.POSTag)*):Seq[(String,kr.bydelta.koala.POS.POSTag)]"></a><a id="getNotExists(Boolean,(String,POSTag)*):Seq[(String,POSTag)]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#getNotExists(onlySystemDic:Boolean,word:(String,kr.bydelta.koala.POS.POSTag)*):Seq[(String,kr.bydelta.koala.POS.POSTag)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getNotExists</span><span class="params">(<span name="onlySystemDic">onlySystemDic: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="word">word: (<span class="extype" name="scala.Predef.String">String</span>, <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>)*</span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[(<span class="extype" name="scala.Predef.String">String</span>, <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>)]</span>
+      </span>
+      
+      <p class="shortcomment cmt">사전에 등재되어 있는지 확인하고, 사전에 없는단어만 반환합니다.</p><div class="fullcomment"><div class="comment cmt"><p>사전에 등재되어 있는지 확인하고, 사전에 없는단어만 반환합니다.
+</p></div><dl class="paramcmts block"><dt class="param">onlySystemDic</dt><dd class="cmt"><p>시스템 사전에서만 검색할지 결정합니다.</p></dd><dt class="param">word</dt><dd class="cmt"><p>확인할 (형태소, 품사)들.</p></dd><dt>returns</dt><dd class="cmt"><p>사전에 없는 단어들.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.arirang.Dictionary">Dictionary</a> → <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#hashCode():Int" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="kr.bydelta.koala.traits.CanCompileDict#importFrom" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="importFrom(dict:kr.bydelta.koala.traits.CanCompileDict,filter:kr.bydelta.koala.POS.POSTag=&gt;Boolean,fastAppend:Boolean):Unit"></a><a id="importFrom(CanCompileDict,(POSTag)⇒Boolean,Boolean):Unit"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#importFrom(dict:kr.bydelta.koala.traits.CanCompileDict,filter:kr.bydelta.koala.POS.POSTag=&gt;Boolean,fastAppend:Boolean):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">importFrom</span><span class="params">(<span name="dict">dict: <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></span>, <span name="filter">filter: (<a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>) ⇒ <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol"><span class="name"><a href="../../../index.html">POS.isNoun</a></span></span></span>, <span name="fastAppend">fastAppend: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">다른 사전을 참조하여, 선택된 사전에 없는 단어를 사용자사전으로 추가합니다.</p><div class="fullcomment"><div class="comment cmt"><p>다른 사전을 참조하여, 선택된 사전에 없는 단어를 사용자사전으로 추가합니다.
+</p></div><dl class="paramcmts block"><dt class="param">dict</dt><dd class="cmt"><p>참조할 사전</p></dd><dt class="param">filter</dt><dd class="cmt"><p>추가할 품사를 지정하는 함수.</p></dd><dt class="param">fastAppend</dt><dd class="cmt"><p>선택된 사전에 존재하는지를 검사하지 않고, 빠르게 추가하고자 할 때 (기본값 false)</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#isInstanceOf[T0]:Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="kr.bydelta.koala.arirang.Dictionary#items" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="items:Set[(String,kr.bydelta.koala.POS.POSTag)]"></a><a id="items:Set[(String,POSTag)]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#items:Set[(String,kr.bydelta.koala.POS.POSTag)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">items</span><span class="result">: <span class="extype" name="scala.Predef.Set">Set</span>[(<span class="extype" name="scala.Predef.String">String</span>, <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>)]</span>
+      </span>
+      
+      <p class="shortcomment cmt">사용자 사전에 등재된 모든 Item을 불러옵니다.</p><div class="fullcomment"><div class="comment cmt"><p>사용자 사전에 등재된 모든 Item을 불러옵니다.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>(형태소, 통합품사)의 Sequence.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.arirang.Dictionary">Dictionary</a> → <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
+    </li><li name="kr.bydelta.koala.traits.CanCompileDict#jUserDictionary" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="jUserDictionary(morphs:java.util.List[String],tags:java.util.List[kr.bydelta.koala.POS.POSTag]):Unit"></a><a id="jUserDictionary(List[String],List[POSTag]):Unit"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#jUserDictionary(morphs:java.util.List[String],tags:java.util.List[kr.bydelta.koala.POS.POSTag]):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">jUserDictionary</span><span class="params">(<span name="morphs">morphs: <span class="extype" name="java.util.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="tags">tags: <span class="extype" name="java.util.List">List</span>[<a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">(Java) 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.</p><div class="fullcomment"><div class="comment cmt"><p>(Java) 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.
+</p></div><dl class="paramcmts block"><dt class="param">morphs</dt><dd class="cmt"><p>추가할 단어의 표면형의 목록.</p></dd><dt class="param">tags</dt><dd class="cmt"><p>추가할 단어의 품사의 목록.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></dd></dl></div>
+    </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#ne(x$1:AnyRef):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#notify():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#notifyAll():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="kr.bydelta.koala.arirang.Dictionary#systemdic" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="systemdic:scala.collection.mutable.HashMap[kr.bydelta.koala.POS.POSTag,Set[String]]"></a><a id="systemdic:HashMap[POSTag,Set[String]]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#systemdic:scala.collection.mutable.HashMap[kr.bydelta.koala.POS.POSTag,Set[String]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">systemdic</span><span class="result">: <span class="extype" name="scala.collection.mutable.HashMap">HashMap</span>[<a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>, <span class="extype" name="scala.Predef.Set">Set</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
+      </span>
+      
+      
+    </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#toString():String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="kr.bydelta.koala.arirang.Dictionary#userItems" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="userItems:scala.collection.mutable.ArrayBuffer[(String,kr.bydelta.koala.POS.POSTag)]"></a><a id="userItems:ArrayBuffer[(String,POSTag)]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#userItems:scala.collection.mutable.ArrayBuffer[(String,kr.bydelta.koala.POS.POSTag)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">userItems</span><span class="result">: <span class="extype" name="scala.collection.mutable.ArrayBuffer">ArrayBuffer</span>[(<span class="extype" name="scala.Predef.String">String</span>, <a href="../POS$.html#POSTag=kr.bydelta.koala.POS.Value" class="extmbr" name="kr.bydelta.koala.POS.POSTag">POSTag</a>)]</span>
+      </span>
+      
+      
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#wait():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a><a id="wait(Long,Int):Unit"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a><a id="wait(Long):Unit"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/arirang/Dictionary$.html#wait(x$1:Long):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li>
+              </ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="kr.bydelta.koala.traits.CanCompileDict">
+              <h3>Inherited from <a href="../traits/CanCompileDict.html" class="extype" name="kr.bydelta.koala.traits.CanCompileDict">CanCompileDict</a></h3>
+            </div><div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+    </body>
+          </div>
+        </div>
+      </div>
+    </body>
+      </html>
