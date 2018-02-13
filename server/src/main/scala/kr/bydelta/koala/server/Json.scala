@@ -1,5 +1,7 @@
 package kr.bydelta.koala.server
 
+import java.io.StringWriter
+
 import kr.bydelta.koala.POS
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala.data.{Morpheme, Relationship, Sentence, Word}
@@ -17,7 +19,7 @@ object Json {
     * @return JSON String (Success Response)
     */
   def success(data: Seq[Sentence]): String = {
-    val sw = new StringBuffer()
+    val sw = new StringWriter()
     val writer = new JSONWriter(sw)
     apply(writer.`object`()
       .key("success").value(true)
@@ -32,7 +34,7 @@ object Json {
     * @return JSON String (Empty Success Response)
     */
   def success(): String = {
-    val sw = new StringBuffer()
+    val sw = new StringWriter()
     val writer = new JSONWriter(sw)
     writer.`object`()
       .key("success").value(true)
@@ -44,11 +46,11 @@ object Json {
   /**
     * Build Failure response
     *
-    * @param data Sentences
+    * @param msg Message String
     * @return JSON String (Failure Response)
     */
   def failure(msg: String): String = {
-    val sw = new StringBuffer()
+    val sw = new StringWriter()
     val writer = new JSONWriter(sw)
     writer.`object`()
       .key("success").value(true)

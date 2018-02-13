@@ -68,7 +68,7 @@ trait CanLearnWord[S, J] {
     *
     * @param corpora       새로운 단어를 발굴할 말뭉치.
     * @param minOccurrence 단어 등록을 위한, 최소 출현 횟수. (기본값 10회)
-    * @param minVariations 단어 등록을 위한, 최소 활용(변형) 횟수. (기본값 [[CanLearnWord.JOSA_COUNT_MAJOR]]회) 용언의 경우는 활용형의 변화를, 체언의 경우는 조사의 변화를 파악함.
+    * @param minVariations 단어 등록을 위한, 최소 활용(변형) 횟수. (기본값 CanLearnWord.JOSA_COUNT_MAJOR회) 용언의 경우는 활용형의 변화를, 체언의 경우는 조사의 변화를 파악함.
     * @return 새로운 단어와 그 품사의 Sequence.
     */
   def extractNouns(corpora: S, minOccurrence: Int = 10,
