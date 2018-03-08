@@ -64,7 +64,7 @@ lazy val eunjeon = (project in file("eunjeon"))
   .settings(projectWithConfig("eunjeon"): _*)
   .settings(
     libraryDependencies += (CrossVersion.partialVersion(scalaVersion.value) match {
-      case Some((2, 12)) => "org.bitbucket.eunjeon" %% "seunjeon" % "1.4.0" exclude("com.jsuereth", "sbt-pgp")
+      case Some((2, 12)) => "org.bitbucket.eunjeon" %% "seunjeon" % "1.5.0" exclude("com.jsuereth", "sbt-pgp") exclude("org.scala-lang", "scala-library")
       case _ => "org.bitbucket.eunjeon" %% "seunjeon" % "1.3.1"
     })
   ).dependsOn(core % "test->test;compile->compile")
@@ -75,10 +75,10 @@ lazy val twitter = (project in file("twitter"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("twitter"): _*)
   .settings(
-    libraryDependencies ++=
+    libraryDependencies +=
       (CrossVersion.partialVersion(scalaVersion.value) match {
-        case Some((2, 12)) => Seq("org.openkoreantext" % "open-korean-text" % "2.2.0")
-        case _ => Seq("com.twitter.penguin" % "korean-text" % "4.4.4")
+        case Some((2, 12)) => "org.openkoreantext" % "open-korean-text" % "2.2.0" exclude("org.scala-lang", "scala-library")
+        case _ => "com.twitter.penguin" % "korean-text" % "4.4.4" exclude("org.scala-lang", "scala-library")
       })
   ).dependsOn(core % "test->test;compile->compile")
 /** 코모란 프로젝트. **/

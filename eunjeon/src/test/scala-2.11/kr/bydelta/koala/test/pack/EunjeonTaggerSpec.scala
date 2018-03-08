@@ -1,11 +1,10 @@
 package kr.bydelta.koala.test.pack
 
 import kr.bydelta.koala.data.Sentence
-import kr.bydelta.koala.eunjeon.{Dictionary, Tagger}
+import kr.bydelta.koala.eunjeon.Tagger
 import kr.bydelta.koala.test.core.TaggerSpec
-import kr.bydelta.koala.traits.{CanCompileDict, CanTag}
+import kr.bydelta.koala.traits.CanTag
 import org.bitbucket.eunjeon.seunjeon.Analyzer
-import org.specs2.execute.Result
 
 /**
   * Created by bydelta on 16. 7. 26.
