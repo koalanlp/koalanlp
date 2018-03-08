@@ -64,7 +64,7 @@ lazy val eunjeon = (project in file("eunjeon"))
   .settings(projectWithConfig("eunjeon"): _*)
   .settings(
     libraryDependencies += (CrossVersion.partialVersion(scalaVersion.value) match {
-      case Some((2, 12)) => "org.bitbucket.eunjeon" %% "seunjeon" % "1.5.0" exclude("com.jsuereth", "sbt-pgp") exclude("org.scala-lang", "scala-library")
+      case Some((2, 12)) => "org.bitbucket.eunjeon" %% "seunjeon" % "1.5.0" exclude("com.jsuereth", "sbt-pgp")
       case _ => "org.bitbucket.eunjeon" %% "seunjeon" % "1.3.1"
     })
   ).dependsOn(core % "test->test;compile->compile")
