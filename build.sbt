@@ -66,7 +66,11 @@ lazy val eunjeon = (project in file("eunjeon"))
     libraryDependencies += (CrossVersion.partialVersion(scalaVersion.value) match {
       case Some((2, 12)) => "org.bitbucket.eunjeon" %% "seunjeon" % "1.5.0" exclude("com.jsuereth", "sbt-pgp") exclude("org.scala-lang", "scala-library")
       case _ => "org.bitbucket.eunjeon" %% "seunjeon" % "1.3.1" exclude("org.scala-lang", "scala-library")
-    })
+    }),
+    unmanagedResourceDirectories in Compile += (baseDirectory.value / "src" / "main" / (CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((maj, min)) => s"resources-$maj.$min"
+      case _ => "resources"
+    }))
   ).dependsOn(core % "test->test;compile->compile")
 
 /** 2. 라이브러리 외부참조 프로젝트 **/
