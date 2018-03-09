@@ -15,7 +15,7 @@ import scala.reflect.io.{File, Path}
   */
 object DictionaryExtractor {
   def main(args: Array[String]): Unit = {
-    val resources = Path("eunjeon") / "src" / "main" / "resources"
+    val resources = Path("eunjeon") / "src" / "main" / "resources-2.12"
     println(resources.toAbsolute.toString())
 
     val termDictStream = new ObjectInputStream(new BufferedInputStream(

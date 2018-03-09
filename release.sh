@@ -16,7 +16,7 @@ echo BUILD $JAR_VER_CURRENT
 
 echo BUILD EUNJEON DICT
 $SBT_PATH ++2.12.0 eunjeon/run
-git add eunjeon/src/main/resources/*
+git add eunjeon/src/main/resources-2.12/*
 
 cat build.sbt | sed -e 's/val VERSION\s*=\s*".*"/val VERSION = "'$JAR_VER_CURRENT'"/g' > build_new.sbt
 rm build.sbt
