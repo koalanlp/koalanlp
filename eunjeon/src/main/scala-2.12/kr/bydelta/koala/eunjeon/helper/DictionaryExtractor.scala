@@ -17,6 +17,7 @@ object DictionaryExtractor {
   def main(args: Array[String]): Unit = {
     val resources = Path("eunjeon") / "src" / "main" / "resources-2.12"
     println(resources.toAbsolute.toString())
+    resources.createDirectory()
 
     val termDictStream = new ObjectInputStream(new BufferedInputStream(
       new BufferedInputStream(classOf[LexiconDict].getResourceAsStream(DictBuilder.TERM_DICT), 32*1024), 16*1024))
