@@ -12,7 +12,7 @@ class Tagger extends CanTagOnlyASentence[Seq[Eojeol]] {
     * 은전한닢의 내장 Tokenizer.
     */
   lazy val tokenizer: Tokenizer = {
-    val tok = new Tokenizer(Dictionary.lexiconDict, Dictionary.connectionCostDict, false)
+    val tok = new Tokenizer(Dictionary.lexiconDict, Dictionary.connectionCostDict, Dictionary.needCompress)
     if (Dictionary.nonEmpty) {
       Dictionary.reloadDic()
       tok.setUserDict(Dictionary.userDict)

@@ -1,7 +1,10 @@
 package kr.bydelta.koala.eunjeon
 
+import java.io.ObjectInputStream
+
 import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala._
+import kr.bydelta.koala.eunjeon.helper.DictionaryExtractor
 import kr.bydelta.koala.traits.CanCompileDict
 import org.bitbucket.eunjeon.seunjeon._
 
@@ -23,10 +26,43 @@ object Dictionary extends CanCompileDict {
         val splits = line.split(" ")
         splits(1).replaceAll("^([^,]+,[^,]+),.*", "$1") -> splits.head.toShort
       }.toMap
+
+  /**
+    * Check whether compression required
+    */
+  private[koala] val needCompress = Runtime.getRuntime.freeMemory() / 1024.0 / 1024.0 / 1024.0 < 1.0
+
   /**
     * 은전한닢 어휘사전.
     */
-  private[koala] val lexiconDict = new LexiconDict().load(false)
+  private[koala] val lexiconDict = {
+    val beginAt = System.currentTimeMillis()
+    val classLoader = this.getClass.getClassLoader
+    val tdStream = new ObjectInputStream(classLoader.getResourceAsStream("term.dict"))
+    val tdSize = tdStream.readInt()
+    val td = (0 until tdSize).map(_ => DictionaryExtractor.readMorpheme(tdStream, needCompress))
+    tdStream.close()
+
+    val dmStream = new ObjectInputStream(classLoader.getResourceAsStream("dict.map"))
+    val dmSize = dmStream.readInt()
+    val dm = (0 until dmSize).map{ _ =>
+      val arrSize = dmStream.readInt()
+      (0 until arrSize).map(_ => dmStream.readInt()).toArray
+    }.toArray
+    dmStream.close()
+
+    val trieStream = classOf[LexiconDict].getResourceAsStream(DictBuilder.TERM_TRIE)
+    val trie = DoubleArrayTrie(trieStream)
+
+    val ld = new LexiconDict()
+    ld.termDict = td.toArray
+    ld.dictMapper = dm
+    ld.trie = trie
+
+    ld.logger.info(s"[Koala] System dict loading is completed (${System.currentTimeMillis() - beginAt} ms, Compress: $needCompress)")
+
+    ld
+  }
   /**
     * 은전한닢 연결성 사전.
     */

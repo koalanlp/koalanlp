@@ -1,10 +1,18 @@
 package kr.bydelta.koala.test.pack
 
 import kr.bydelta.koala.data.Sentence
-import kr.bydelta.koala.eunjeon.Tagger
+import kr.bydelta.koala.eunjeon.{Dictionary, Tagger}
 import kr.bydelta.koala.test.core.TaggerSpec
 import kr.bydelta.koala.traits.CanTag
-import org.bitbucket.eunjeon.seunjeon.Analyzer
+import org.bitbucket.eunjeon.seunjeon._
+
+object EunjeonAnalyzer extends BasicAnalyzer {
+  override lazy val tokenizer: Tokenizer = {
+    val lexiconDict = Dictionary.lexiconDict
+    val connectionCostDict = new ConnectionCostDict().load()
+    new Tokenizer(lexiconDict, connectionCostDict, Dictionary.needCompress)
+  }
+}
 
 /**
   * Created by bydelta on 16. 7. 26.
@@ -14,7 +22,7 @@ class EunjeonTaggerSpec extends TaggerSpec {
   override def isSentenceSplitterImplemented: Boolean = true
 
   override def tagSentByOrig(str: String): (String, String) = {
-    val original = Analyzer.parseEojeol(str)
+    val original = EunjeonAnalyzer.parseEojeol(str)
     val tag = original.map(_.nodes.map {
       e =>
         val arr = e.morpheme.getFeature.split(",").last
