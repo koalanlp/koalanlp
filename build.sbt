@@ -145,7 +145,7 @@ lazy val assemblySettings = Seq(
     (artifact in(Compile, assembly)).value.withClassifier(Some("assembly")),
   addArtifact(artifact in(Compile, assembly), assembly))
 /** 버전 **/
-val VERSION = "1.9.4-SNAPSHOT"
+val VERSION = "1.9.4"
 
 /** 공통 프로젝트 Configuration **/
 def projectWithConfig(module: String) =
