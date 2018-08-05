@@ -1,5 +1,18 @@
 import sbt.Keys._
 
+/** Root project **/
+lazy val root = (project in file("."))
+  .enablePlugins(ScalaUnidocPlugin, JavaUnidocPlugin)
+  .aggregate(core, kryo, server)
+  .settings(
+    publishArtifact := false,
+    packagedArtifacts := Map.empty,
+    publishLocal := {},
+    publish := {},
+    unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples),
+    unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples)
+  ).settings(aggregate in update := true)
+
 fork in Test := true
 testForkedParallel in Test := true
 concurrentRestrictions in Global := Seq(Tags.limit(Tags.Test, 1))
@@ -9,92 +22,6 @@ resolvers += Resolver.typesafeRepo("releases")
 resolvers += Resolver.mavenLocal
 
 sonatypeProfileName := "kr.bydelta"
-
-/** Root project **/
-lazy val root = (project in file("."))
-  .enablePlugins(ScalaUnidocPlugin, JavaUnidocPlugin)
-  .aggregate(core, kkma, hannanum, twitter, komoran, eunjeon, kryo, arirang, rhino, server)
-  .settings(
-    publishArtifact := false,
-    packagedArtifacts := Map.empty,
-    publishLocal := {},
-    publish := {},
-    unidocProjectFilter in(ScalaUnidoc, unidoc) := inAnyProject -- inProjects(samples),
-    unidocProjectFilter in(JavaUnidoc, unidoc) := inAnyProject -- inProjects(samples)
-  ).settings(aggregate in update := true)
-/** Core Project (Data structure, Trait, etc.) **/
-lazy val core = (project in file("core"))
-  .enablePlugins(GenJavadocPlugin)
-  .settings(projectWithConfig("core"): _*)
-  .settings(
-    libraryDependencies ++= Seq(
-      "org.log4s" %% "log4s" % "1.3.6",
-      "org.slf4j" % "slf4j-simple" % "1.8.0-alpha2" % "test"
-    )
-  )
-/** 꼬꼬마 Project **/
-lazy val kkma = (project in file("kkma"))
-  .enablePlugins(GenJavadocPlugin)
-  .settings(projectWithConfig("kkma"): _*)
-  .settings(assemblySettings: _*)
-  .dependsOn(core % "test->test;compile->compile")
-
-/** 1. 라이브러리 포함 프로젝트 **/
-/** 한나눔 프로젝트 **/
-lazy val hannanum = (project in file("hannanum"))
-  .enablePlugins(GenJavadocPlugin)
-  .settings(projectWithConfig("hannanum"): _*)
-  .settings(assemblySettings: _*)
-  .dependsOn(core % "test->test;compile->compile")
-/** 아리랑 프로젝트 **/
-lazy val arirang = (project in file("arirang"))
-  .enablePlugins(GenJavadocPlugin)
-  .settings(projectWithConfig("arirang"): _*)
-  .settings(assemblySettings: _*)
-  .dependsOn(core % "test->test;compile->compile")
-/** 라이노 프로젝트 **/
-lazy val rhino = (project in file("rhino"))
-  .enablePlugins(GenJavadocPlugin)
-  .settings(projectWithConfig("rhino"): _*)
-  .settings(assemblySettings: _*)
-  .dependsOn(core % "test->test;compile->compile")
-/** 은전한닢 프로젝트 **/
-lazy val eunjeon = (project in file("eunjeon"))
-  .enablePlugins(GenJavadocPlugin)
-  .settings(projectWithConfig("eunjeon"): _*)
-  .settings(
-    libraryDependencies += (CrossVersion.partialVersion(scalaVersion.value) match {
-      case Some((2, 12)) => "org.bitbucket.eunjeon" %% "seunjeon" % "1.5.0" exclude("com.jsuereth", "sbt-pgp") exclude("org.scala-lang", "scala-library")
-      case _ => "org.bitbucket.eunjeon" %% "seunjeon" % "1.3.1" exclude("org.scala-lang", "scala-library")
-    }),
-    unmanagedResourceDirectories in Compile += (baseDirectory.value / "src" / "main" / (CrossVersion.partialVersion(scalaVersion.value) match {
-      case Some((maj, min)) => s"resources-$maj.$min"
-      case _ => "resources"
-    }))
-  ).dependsOn(core % "test->test;compile->compile")
-
-/** 2. 라이브러리 외부참조 프로젝트 **/
-/** OpenKoreanText 프로젝트 **/
-lazy val twitter = (project in file("twitter"))
-  .enablePlugins(GenJavadocPlugin)
-  .settings(projectWithConfig("twitter"): _*)
-  .settings(
-    libraryDependencies +=
-      (CrossVersion.partialVersion(scalaVersion.value) match {
-        case Some((2, 12)) => "org.openkoreantext" % "open-korean-text" % "2.2.0" exclude("org.scala-lang", "scala-library")
-        case _ => "com.twitter.penguin" % "korean-text" % "4.4.4" exclude("org.scala-lang", "scala-library")
-      })
-  ).dependsOn(core % "test->test;compile->compile")
-/** 코모란 프로젝트. **/
-lazy val komoran = (project in file("komoran"))
-  .enablePlugins(GenJavadocPlugin)
-  .settings(projectWithConfig("komoran"): _*)
-  .settings(
-    resolvers += "jitpack" at "https://jitpack.io/",
-    libraryDependencies ++= Seq(
-      "com.github.shin285" % "KOMORAN" % "3.3.3"
-    )
-  ).dependsOn(core % "test->test;compile->compile")
 /** 분석기 서버 프로젝트 **/
 lazy val server = (project in file("server"))
   .enablePlugins(GenJavadocPlugin)
@@ -107,43 +34,62 @@ lazy val server = (project in file("server"))
           Seq(
             "com.tumblr" %% "colossus" % "0.9.1",
             "com.tumblr" %% "colossus-testkit" % "0.9.1" % "test",
+            "kr.bydelta" %% "koalanlp-kkma" % "1.9.4" % "test",
             "org.json" % "json" % "20171018"
           )
         case _ =>
           Seq(
             "com.tumblr" %% "colossus" % "0.10.1",
             "com.tumblr" %% "colossus-testkit" % "0.10.1" % "test",
+            "kr.bydelta" %% "koalanlp-kkma" % "1.9.4" % "test",
             "org.json" % "json" % "20171018"
           )
       })
   )
-  .dependsOn(core, kkma % "test")
-
-/** 3. 기타 도우미 프로젝트 **/
+  .dependsOn(core)
+/** Core Project (Data structure, Trait, etc.) **/
+lazy val core = (project in file("core"))
+  .enablePlugins(GenJavadocPlugin)
+  .settings(projectWithConfig("core"): _*)
+  .settings(
+    libraryDependencies ++= Seq(
+      "org.log4s" %% "log4s" % "1.3.6",
+      "org.slf4j" % "slf4j-simple" % "1.8.0-alpha2" % "test"
+    )
+  )
 /** Kryo 직렬화 프로젝트 **/
 lazy val kryo = (project in file("kryo"))
   .enablePlugins(GenJavadocPlugin)
   .settings(projectWithConfig("kryo"): _*)
   .settings(
-    libraryDependencies += "com.twitter" %% "chill" % "0.9.2"
+    libraryDependencies ++= Seq("com.twitter" %% "chill" % "0.9.2",
+      "kr.bydelta" %% "koalanlp-kkma" % "1.9.4" % "test",
+      "kr.bydelta" %% "koalanlp-twitter" % "1.9.4" % "test",
+      "kr.bydelta" %% "koalanlp-komoran" % "1.9.4" % "test",
+      "kr.bydelta" %% "koalanlp-hannanum" % "1.9.4" % "test",
+      "kr.bydelta" %% "koalanlp-eunjeon" % "1.9.4" % "test",
+      "kr.bydelta" %% "koalanlp-arirang" % "1.9.4" % "test",
+    )
   )
-  .dependsOn(core,
-    kkma % "test", twitter % "test", komoran % "test", hannanum % "test", eunjeon % "test", arirang % "test")
+  .dependsOn(core)
+
+/** 3. 기타 도우미 프로젝트 **/
 /** 사용방법 샘플 프로젝트 **/
 lazy val samples = (project in file("samples"))
   .settings(projectWithConfig("samples"): _*)
   .settings(
-    libraryDependencies += "org.jsoup" % "jsoup" % "1.10.3"
+    libraryDependencies ++= Seq(
+      "org.jsoup" % "jsoup" % "1.10.3",
+      "kr.bydelta" %% "koalanlp-kkma" % "latest.integration",
+      "kr.bydelta" %% "koalanlp-twitter" % "latest.integration",
+      "kr.bydelta" %% "koalanlp-komoran" % "latest.integration",
+      "kr.bydelta" %% "koalanlp-hannanum" % "latest.integration",
+      "kr.bydelta" %% "koalanlp-eunjeon" % "latest.integration",
+      "kr.bydelta" %% "koalanlp-arirang" % "latest.integration",
+      "kr.bydelta" %% "koalanlp-rhino" % "latest.integration",
+    )
   )
-  .dependsOn(eunjeon, twitter, komoran, kkma, hannanum, server, arirang, rhino)
-
-/** 4. 모형 훈련 프로젝트 **/
-/** Assembly Classifier 설정 **/
-lazy val assemblySettings = Seq(
-  assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false),
-  artifact in(Compile, assembly) :=
-    (artifact in(Compile, assembly)).value.withClassifier(Some("assembly")),
-  addArtifact(artifact in(Compile, assembly), assembly))
+  .dependsOn(server)
 /** 버전 **/
 val VERSION = "1.9.5-SNAPSHOT"
 
@@ -161,8 +107,8 @@ def projectWithConfig(module: String) =
     coverageExcludedPackages := ".*\\.helper\\..*",
     test in assembly := {},
     libraryDependencies += "org.specs2" %% "specs2-core" % "3.9.5" % "test",
-    apiURL := Some(url("https://nearbydelta.github.io/KoalaNLP/api/scala/")),
-    homepage := Some(url("http://nearbydelta.github.io/KoalaNLP")),
+    apiURL := Some(url("https://koalanlp.github.io/KoalaNLP-core/api/scala/")),
+    homepage := Some(url("http://koalanlp.github.io/KoalaNLP-core")),
     publishTo := version { v: String ⇒
       val nexus = "https://oss.sonatype.org/"
       if (v.trim.endsWith("SNAPSHOT"))
@@ -176,8 +122,8 @@ def projectWithConfig(module: String) =
     pomIncludeRepository := { _ ⇒ false },
     pomExtra :=
       <scm>
-        <url>git@github.com:nearbydelta/KoalaNLP.git</url>
-        <connection>scm:git:git@github.com:nearbydelta/KoalaNLP.git</connection>
+        <url>git@github.com:koalanlp/KoalaNLP-core.git</url>
+        <connection>scm:git:git@github.com:koalanlp/KoalaNLP-core.git</connection>
       </scm>
         <developers>
           <developer>

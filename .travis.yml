@@ -4,8 +4,6 @@ scala:
 - 2.12.3
 jdk:
 - oraclejdk8
-install:
-- cp -r ./hannanum/models/* ./
 cache:
   directories:
   - $HOME/.ivy2/cache
@@ -17,29 +15,9 @@ before_script:
 - export DISPLAY=:99.0
 script:
 - sbt -J-Xmx3g clean
-- if [[ $TRAVIS_SCALA_VERSION = '2.12.3' ]]; then sbt -J-Xmx3g ++2.12.0 eunjeon/run; fi # build eunjeon dictionary
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "server/test"
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "kkma/test"
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "komoran/testOnly *.pack.*"
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "komoran/testOnly *.core.*"
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "twitter/test"
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "arirang/test"
-- sh -e /etc/init.d/xvfb start #Because original RHINO requires X11
-- sleep 3 # give xvfb some time to start
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "rhino/testOnly *.pack.*"
-- sh -e /etc/init.d/xvfb stop #Stop X11 simulation
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "rhino/testOnly *.rhino.*"
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *.pack.*"
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "eunjeon/testOnly *.core.*"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "kryo/testOnly *.pack.*"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "kryo/testOnly *.core.*"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "core/test"
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *.pack.*"
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "hannanum/testOnly *.core.*"
 after_success:
 - bash ./git-manage.sh
-env:
-  global:
-  - SONATYPE_USERNAME=nearbydelta
-  - secure: AkBpLcw9W+k5qlBqRWdtfZndic5kZ2VwP0HrtVRu0CYdJ2vqLdsjkjuQQXbNqGX4t9iuDe5nS/O5vnE6u9qHSDFB/xdMuhe7W8rRoF9d6L9tV1ruR++GHOCvCYtNd6ckJQk3L/t6ANwwVdpd5TpfnYpPOd/g/oqLTic8n4KumMP3cPfZpzIij5EvQS9sQftAUz+r8PNvbAmjXy1Cw3Y0z+Umryov6mcoOgmZY88AY/mIrxyy5N7dlil37r8v2Fj5GgCqn+PWzd6UoUYWnZgwRQEz2PMepo9uQ3rT1gPAhIrsKcXzE+WYMfoUu1xFZbBRsCRjNM20SdJUVpwA6n9d5YwCpNytzOq3+8M9yfAuE/zmEH91ggqhXWHP0hHBZT17LxU+G0cT+ACyGBjUocCozCU0Gs3CvOCIuQZQ6FDBm5d5aY7SCsc/H6xSLmVy4xJHeCsLXak5ItBBcho2FViu3AhaP8hHtFf+Rs1hs2Tt8f5G/4KoyXflXWNdQ8nIAT2P7PKk16OgUYQzTYg3+CdVqb+7DZJYFlejLudB69qM90auy92F3NcqyJqlsavx1IZIHwOMNmThFgytrHe8pInxx/r/oFFs/BBKC83xPQRBr0uRbvkbFKfjg3kpfiwCo7Lt9ntZVQhV9Jfm+4Lp/dZgVx6a1gQ4TfQyyEDkdqW2k6o=
-  - secure: N65l47Ujg/T983Gb6dZKwAFScBEgzs3NO0cgBnjY4NHUxOVgICRF3s7/2dCFkJUGNM1wpg9wl6uTmAMDuk50K+2LNCyUdd9aeCY2qgBr909BMn0i87LTyEyD0MoOdvFURO0oReE1RmX/h1uDxrno7yPuf6gsKv0CZ7EVPw9WwHFVFPro/lAjfh48npyxKgYCQlxHSGkUPc/UTvtNNSE2YQqji2XcWytb9Z2ZUMyzHSzaLDlcteLKLgsK9OWphJGWxuR4fG0UVfbcX1Q270fjbacrsC1PZF9MgPR3oJVYRYQjcKs27SrFl991RA4RkpK2QNr4aXe7uzxKKiVc0/Fw32mBT1/d7/K5j8d7v0M+3F10CUyZ7IfH+LUvNkLbxqi7RVcH1KCxOH71ZVqwso2ePNEIkAqN/q6XUHL+M83Axc3d5XvZX9LNTRUTz7YnXq+JiXtaICkhMU2PzYn8M7iGXENGRTXBUUKl+EIQEn85UT2kN1hDdYOo5HyReLKnrrY7jHWgt0WXIBXMkRJksJI2JV/ICXx4ZzL3ji/P3DvVZhJO2elBGJhNO3F3yefjDtyfS80UkngUpVv64WXuJQ906UksdgcDv+Q5lNdhvZl9D5+H0PYFG7e7BDe6Ub7tr0h3U0vrRb1j4omHvPwBOhQaVwAFsfb2J+NdmLUJFpAwvps=
