@@ -22,7 +22,7 @@ if [[ $TRAVIS_SCALA_VERSION == $SCALAVER ]]; then
 
 #        # CLONE GH-PAGES
 #        cd $HOME
-#        git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/nearbydelta/KoalaNLP gh-pages > /dev/null
+#        git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/koalanlp/KoalaNLP-core gh-pages > /dev/null
 #
 #        # COPY & PUSH
 #        cd gh-pages
@@ -41,7 +41,7 @@ if [[ $TRAVIS_SCALA_VERSION == $SCALAVER ]]; then
 
         # CLONE WIKI
         cd $HOME
-        git clone --quiet https://${GH_TOKEN}@github.com/nearbydelta/KoalaNLP.wiki.git wiki > /dev/null
+        git clone --quiet https://${GH_TOKEN}@github.com/koalanlp/KoalaNLP-core.wiki.git wiki > /dev/null
 
         # COPY & PUSH
         cd wiki
