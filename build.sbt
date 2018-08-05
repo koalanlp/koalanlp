@@ -34,14 +34,14 @@ lazy val server = (project in file("server"))
           Seq(
             "com.tumblr" %% "colossus" % "0.9.1",
             "com.tumblr" %% "colossus-testkit" % "0.9.1" % "test",
-            "kr.bydelta" %% "koalanlp-kkma" % "1.9.4" % "test",
+            "kr.bydelta" %% "koalanlp-kkma" % "1.9.4" % "test" classifier "assembly",
             "org.json" % "json" % "20171018"
           )
         case _ =>
           Seq(
             "com.tumblr" %% "colossus" % "0.10.1",
             "com.tumblr" %% "colossus-testkit" % "0.10.1" % "test",
-            "kr.bydelta" %% "koalanlp-kkma" % "1.9.4" % "test",
+            "kr.bydelta" %% "koalanlp-kkma" % "1.9.4" % "test" classifier "assembly",
             "org.json" % "json" % "20171018"
           )
       })
@@ -63,12 +63,12 @@ lazy val kryo = (project in file("kryo"))
   .settings(projectWithConfig("kryo"): _*)
   .settings(
     libraryDependencies ++= Seq("com.twitter" %% "chill" % "0.9.2",
-      "kr.bydelta" %% "koalanlp-kkma" % "1.9.4" % "test",
+      "kr.bydelta" %% "koalanlp-kkma" % "1.9.4" % "test" classifier "assembly",
       "kr.bydelta" %% "koalanlp-twitter" % "1.9.4" % "test",
       "kr.bydelta" %% "koalanlp-komoran" % "1.9.4" % "test",
-      "kr.bydelta" %% "koalanlp-hannanum" % "1.9.4" % "test",
+      "kr.bydelta" %% "koalanlp-hannanum" % "1.9.4" % "test" classifier "assembly",
       "kr.bydelta" %% "koalanlp-eunjeon" % "1.9.4" % "test",
-      "kr.bydelta" %% "koalanlp-arirang" % "1.9.4" % "test",
+      "kr.bydelta" %% "koalanlp-arirang" % "1.9.4" % "test" classifier "assembly",
     )
   )
   .dependsOn(core)
@@ -80,13 +80,13 @@ lazy val samples = (project in file("samples"))
   .settings(
     libraryDependencies ++= Seq(
       "org.jsoup" % "jsoup" % "1.10.3",
-      "kr.bydelta" %% "koalanlp-kkma" % "latest.integration",
+      "kr.bydelta" %% "koalanlp-kkma" % "latest.integration" classifier "assembly",
       "kr.bydelta" %% "koalanlp-twitter" % "latest.integration",
       "kr.bydelta" %% "koalanlp-komoran" % "latest.integration",
-      "kr.bydelta" %% "koalanlp-hannanum" % "latest.integration",
+      "kr.bydelta" %% "koalanlp-hannanum" % "latest.integration" classifier "assembly",
       "kr.bydelta" %% "koalanlp-eunjeon" % "latest.integration",
-      "kr.bydelta" %% "koalanlp-arirang" % "latest.integration",
-      "kr.bydelta" %% "koalanlp-rhino" % "latest.integration",
+      "kr.bydelta" %% "koalanlp-arirang" % "latest.integration" classifier "assembly",
+      "kr.bydelta" %% "koalanlp-rhino" % "latest.integration" classifier "assembly",
     )
   )
   .dependsOn(server)
