@@ -20,6 +20,7 @@ concurrentRestrictions in Global := Seq(Tags.limit(Tags.Test, 1))
 resolvers ++= Seq("releases").map(Resolver.sonatypeRepo)
 resolvers += Resolver.typesafeRepo("releases")
 resolvers += Resolver.mavenLocal
+resolvers += "jitpack" at "https://jitpack.io/"
 
 sonatypeProfileName := "kr.bydelta"
 /** 분석기 서버 프로젝트 **/
