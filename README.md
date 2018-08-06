@@ -1,17 +1,17 @@
 KoalaNLP
 ==============
 [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core_2.12.svg?style=flat-square&label=release)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core_2.12%22)
-[![ScalaDoc](https://img.shields.io/badge/doc-Scala-red.svg?style=flat-square)](http://nearbydelta.github.io/KoalaNLP/api/scala/kr/bydelta/koala/index.html)
-[![JavaDoc](https://img.shields.io/badge/doc-Java-blue.svg?style=flat-square)](http://nearbydelta.github.io/KoalaNLP/api/java/index.html)
+[![ScalaDoc](https://img.shields.io/badge/doc-Scala-red.svg?style=flat-square)](http://koalanlp.github.io/KoalaNLP-core/api/scala/kr/bydelta/koala/index.html)
+[![JavaDoc](https://img.shields.io/badge/doc-Java-blue.svg?style=flat-square)](http://koalanlp.github.io/KoalaNLP-core/api/java/index.html)
 [![분석기별 품사비교표](https://img.shields.io/badge/%ED%92%88%EC%82%AC-%EB%B9%84%EA%B5%90%ED%91%9C-blue.svg?style=flat-square)](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)
 
-[![Build Status](https://img.shields.io/travis/nearbydelta/KoalaNLP.svg?style=flat-square&branch=master)](https://travis-ci.org/nearbydelta/KoalaNLP)
-[![codecov](https://img.shields.io/codecov/c/github/nearbydelta/KoalaNLP.svg?style=flat-square)](https://codecov.io/gh/nearbydelta/KoalaNLP)
-[![Known Vulnerabilities](https://snyk.io/test/github/nearbydelta/KoalaNLP/badge.svg?style=flat-square)](https://snyk.io/test/github/nearbydelta/KoalaNLP)
+[![Build Status](https://img.shields.io/travis/koalanlp/KoalaNLP-core.svg?style=flat-square&branch=master)](https://travis-ci.org/koalanlp/KoalaNLP-core)
+[![codecov](https://img.shields.io/codecov/c/github/koalanlp/KoalaNLP-core.svg?style=flat-square)](https://codecov.io/gh/koalanlp/KoalaNLP-core)
+[![Known Vulnerabilities](https://snyk.io/test/github/koalanlp/KoalaNLP-core/badge.svg?style=flat-square)](https://snyk.io/test/github/koalanlp/KoalaNLP-core)
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
-[![nodejs-koalanlp](https://img.shields.io/badge/Nodejs-KoalaNLP-blue.svg?style=flat-square)](https://nearbydelta.github.io/nodejs-koalanlp)
-[![py-koalanlp](https://img.shields.io/badge/Python-KoalaNLP-blue.svg?style=flat-square)](https://nearbydelta.github.io/py-koalanlp)
+[![nodejs-koalanlp](https://img.shields.io/badge/Nodejs-KoalaNLP-blue.svg?style=flat-square)](https://koalanlp.github.io/nodejs-koalanlp)
+[![py-koalanlp](https://img.shields.io/badge/Python-KoalaNLP-blue.svg?style=flat-square)](https://koalanlp.github.io/py-koalanlp)
 
 # 소개
 한국어 형태소 및 구문 분석기의 모음입니다.
@@ -30,7 +30,7 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 >
 > <sup>주1-2</sup> Arirang 분석기의 출력을 형태소분석에 적합하게 조금 다듬었으므로, 원본과 약간 다른 결과를 낼 수도 있습니다.
 
-KoalaNLP의 Contributor가 되고 싶으시다면, 언제든지 Issue에 등록해주십시오.
+KoalaNLP Team의 일원이 되고 싶으시다면, 언제든지 Issue에 등록해주십시오.
 또한, 추가하고자 하는 새로운 프로젝트가 있으시면, Issue에 등록해주십시오.
 
 # SBT/Maven
@@ -66,6 +66,8 @@ KoalaNLP는 Scala 2.11과, 2.12에서 컴파일 되었으며, Scala 2.11+과 Jav
 SBT를 사용하시는 경우, 다음과 같이 추가하시면 됩니다.
 (버전은 Latest Release 기준입니다. SNAPSHOT을 사용하시려면, `latest.integration`을 사용하세요.)
 ```sbt
+resolvers += "jitpack" at "https://jitpack.io/" // 코모란 분석기의 참조를 위한 Resolver 추가.
+
 libraryDependencies += "kr.bydelta" %% "koalanlp-twitter" % "latest.release"	//트위터 분석기의 경우
 libraryDependencies += "kr.bydelta" %% "koalanlp-eunjeon" % "latest.release"	//은전한닢 분석기의 경우
 libraryDependencies += "kr.bydelta" %% "koalanlp-komoran" % "latest.release"	//코모란 분석기의 경우
@@ -110,7 +112,7 @@ Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 
 # 사용방법
 아래에는 대표적인 특징만 기술되어 있습니다.
 
-상세한 사항은 [Wiki](https://github.com/nearbydelta/KoalaNLP/wiki/Home) 또는 [![ScalaDoc](http://javadoc-badge.appspot.com/kr.bydelta/koalanlp-core_2.12.svg?label=scaladoc&style=flat-square)](http://nearbydelta.github.io/KoalaNLP/api/scala/kr/bydelta/koala/index.html)을 참고하십시오.
+상세한 사항은 [Wiki](https://github.com/koalanlp/KoalaNLP-core/wiki/Home) 또는 [![ScalaDoc](http://javadoc-badge.appspot.com/kr.bydelta/koalanlp-core_2.12.svg?label=scaladoc&style=flat-square)](http://koalanlp.github.io/KoalaNLP-core/api/scala/kr/bydelta/koala/index.html)을 참고하십시오.
 
 ## 여러 패키지의 사용
 통합 인터페이스는 여러 패키지간의 호환이 가능하게 설계되어 있습니다. 이론적으로는 타 패키지의 품사 분석 결과를 토대로 구문 분석이 가능합니다.
@@ -222,4 +224,4 @@ sentence match {
 * RHINO: 비상업적 용도 사용가능.
 
 # 결과 비교
-[Wiki:결과비교](https://github.com/nearbydelta/KoalaNLP/wiki/4.-결과-비교)를 참조해주세요.
+[Wiki:결과비교](https://github.com/koalanlp/KoalaNLP-core/wiki/4.-결과-비교)를 참조해주세요.
