@@ -14,34 +14,34 @@ if [[ $TRAVIS_SCALA_VERSION == $SCALAVER ]]; then
     bash <(curl -s https://codecov.io/bash)
 
     if [[ $TRAVIS_EVENT_TYPE == "push" ]]; then
-#        # GENERATE DOC
-#        sbt ++$SCALAVER unidoc
+        # GENERATE DOC
+        sbt ++$SCALAVER unidoc
 
         # GENERATE COMPARISON
         sbt -J-Xmx3g ++$SCALAVER "samples/runMain kr.bydelta.koala.wiki.ComparisonGenerator ./4.1.-임의-결과-비교.md $SCALAVER"
 
-#        # CLONE GH-PAGES
-#        cd $HOME
-#        git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/koalanlp/KoalaNLP-core gh-pages > /dev/null
-#
-#        # COPY & PUSH
-#        cd gh-pages
-#        git rm -rf ./api/*
-#        mkdir ./api
-#
-#        mv $WD/target/scala-$VER/unidoc $HOME/gh-pages/api/scala
-#        mv $WD/target/javaunidoc $HOME/gh-pages/api/java
-#        mv $WD/README.md $HOME/gh-pages/index.md
-#
-#        git add -f ./api
-#        git add -f ./index.md
-#
-#        git commit -m "Lastest javadoc on successful travis build $TRAVIS_BUILD_NUMBER (RELEASE $TAG) auto-pushed to gh-pages"
-#        git push -fq origin gh-pages > /dev/null
+        # CLONE GH-PAGES
+        cd $HOME
+        git clone --quiet --branch=gh-pages git@github.com:koalanlp/KoalaNLP-core gh-pages > /dev/null
+
+        # COPY & PUSH
+        cd gh-pages
+        git rm -rf ./api/*
+        mkdir ./api
+
+        mv $WD/target/scala-$VER/unidoc $HOME/gh-pages/api/scala
+        mv $WD/target/javaunidoc $HOME/gh-pages/api/java
+        mv $WD/README.md $HOME/gh-pages/index.md
+
+        git add -f ./api
+        git add -f ./index.md
+
+        git commit -m "Lastest javadoc on successful travis build $TRAVIS_BUILD_NUMBER (RELEASE $TAG) auto-pushed to gh-pages"
+        git push -fq origin gh-pages > /dev/null
 
         # CLONE WIKI
         cd $HOME
-        git clone --quiet https://${GH_TOKEN}@github.com/koalanlp/KoalaNLP-core.wiki.git wiki > /dev/null
+        git clone --quiet git@github.com:koalanlp/KoalaNLP-core.wiki.git wiki > /dev/null
 
         # COPY & PUSH
         cd wiki
@@ -53,7 +53,3 @@ if [[ $TRAVIS_SCALA_VERSION == $SCALAVER ]]; then
         git push -fq origin master > /dev/null
     fi
 fi
-
-cd $WD
-cp sonatype.sbt ~/.sbt/1.0/
-sbt ++$TRAVIS_SCALA_VERSION publish

@@ -16,8 +16,8 @@ function run_sbt(){
 # reset version code
 echo BUILD $JAR_VER_CURRENT
 
-echo BUILD EUNJEON DICT
-run_sbt ++2.12.0 eunjeon/run
+#echo BUILD EUNJEON DICT
+#run_sbt ++2.12.0 eunjeon/run
 
 cat build.sbt | sed -e 's/val VERSION\s*=\s*".*"/val VERSION = "'$JAR_VER_CURRENT'"/g' > build_new.sbt
 rm build.sbt

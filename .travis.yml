@@ -6,11 +6,11 @@ jdk:
 - oraclejdk8
 cache:
   directories:
-  - $HOME/.ivy2/cache
-  - $HOME/.sbt
+  - "$HOME/.ivy2/cache"
+  - "$HOME/.sbt"
 before_cache:
-  - find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
-  - find $HOME/.sbt        -name "*.lock"               -print -delete
+- find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
+- find $HOME/.sbt        -name "*.lock"               -print -delete
 before_script:
 - export DISPLAY=:99.0
 script:
@@ -21,3 +21,9 @@ script:
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "core/test"
 after_success:
 - bash ./git-manage.sh
+before_install:
+- openssl aes-256-cbc -K $encrypted_61168456aa19_key -iv $encrypted_61168456aa19_iv
+  -in deploy.key.enc -out deploy.key -d
+- chmod 600 deploy.key
+- eval `ssh-agent -s`
+- ssh-add deploy.key
