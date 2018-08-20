@@ -19,6 +19,7 @@ script:
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "kryo/testOnly *.pack.*"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "kryo/testOnly *.core.*"
 - sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "core/test"
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "samples/test"
 after_success:
 - bash ./git-manage.sh
 before_install:
