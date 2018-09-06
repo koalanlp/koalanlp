@@ -11,15 +11,9 @@ cache:
 before_cache:
 - find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
 - find $HOME/.sbt        -name "*.lock"               -print -delete
-before_script:
-- export DISPLAY=:99.0
 script:
 - sbt -J-Xmx3g clean
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "server/test"
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "kryo/testOnly *.pack.*"
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "kryo/testOnly *.core.*"
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "core/test"
-- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage "samples/test"
+- sbt -J-Xmx3g ++$TRAVIS_SCALA_VERSION coverage test
 after_success:
 - bash ./git-manage.sh
 before_install:
