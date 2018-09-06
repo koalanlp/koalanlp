@@ -145,6 +145,21 @@
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="kr.bydelta.koala">koala</a></dd></dl></div>
     </li><li class="current-entities indented4">
+                        <a class="object" href="Dependency$.html" title="의존구문구조 문법표지의 companion object
+"></a>
+                        <a class="class" href="Dependency.html" title="의존구문구조 문법표지 (비말단)"></a>
+                        <a href="Dependency.html" title="의존구문구조 문법표지 (비말단)">
+                          Dependency
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="DependencyRelationLike.html" title="의존구문구조 문법표지
+"></a>
+                        <a href="DependencyRelationLike.html" title="의존구문구조 문법표지
+">
+                          DependencyRelationLike
+                        </a>
+                      </li><li class="current-entities indented4">
                         <a class="object" href="Morpheme$.html" title="Companion object for Morpheme class."></a>
                         <a class="class" href="Morpheme.html" title="형태소 class / Morpheme class
 "></a>
@@ -153,13 +168,16 @@
                           Morpheme
                         </a>
                       </li><li class="current-entities indented4">
-                        <a class="object" href="Relationship$.html" title="Companion object for Relationship
-"></a>
-                        <a class="class" href="Relationship.html" title="Dependency Relationship container class
-"></a>
-                        <a href="Relationship.html" title="Dependency Relationship container class
-">
-                          Relationship
+                        <a class="object" href="Phrase$.html" title="구문구조 문법표지의 companion object."></a>
+                        <a class="class" href="Phrase.html" title="구문구조 문법 표지 (비말단)"></a>
+                        <a href="Phrase.html" title="구문구조 문법 표지 (비말단)">
+                          Phrase
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="PhraseLike.html" title="Trait: 문법 구조 표지 (구구조문법, 의존구조문법)"></a>
+                        <a href="PhraseLike.html" title="Trait: 문법 구조 표지 (구구조문법, 의존구조문법)">
+                          PhraseLike
                         </a>
                       </li><li class="current-entities indented4">
                         <a class="object" href="Sentence$.html" title="Companion object for Sentence
@@ -171,6 +189,14 @@
                           Sentence
                         </a>
                       </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="SyntacticPhraseLike.html" title="구문구조 문법 표지
+"></a>
+                        <a href="SyntacticPhraseLike.html" title="구문구조 문법 표지
+">
+                          SyntacticPhraseLike
+                        </a>
+                      </li><li class="current-entities indented4">
                         <a class="object" href="Word$.html" title="Companion object for Word
 "></a>
                         <a class="class" href="Word.html" title="어절 Class
@@ -178,6 +204,18 @@
                         <a href="Word.html" title="어절 Class
 ">
                           Word
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="WordDependency.html" title="의존구문구조 문법표지 (말단)"></a>
+                        <a href="WordDependency.html" title="의존구문구조 문법표지 (말단)">
+                          WordDependency
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="WordPhrase.html" title="구문구조 문법 표지 (말단)"></a>
+                        <a href="WordPhrase.html" title="구문구조 문법 표지 (말단)">
+                          WordPhrase
                         </a>
                       </li>
               </ul>
@@ -861,6 +899,22 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
+    </li><li name="kr.bydelta.koala.data.Sentence#dependencies" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="dependencies:Option[kr.bydelta.koala.data.DependencyRelationLike]"></a><a id="dependencies:Option[DependencyRelationLike]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/data/Sentence.html#dependencies:Option[kr.bydelta.koala.data.DependencyRelationLike]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">dependencies</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="DependencyRelationLike.html" class="extype" name="kr.bydelta.koala.data.DependencyRelationLike">DependencyRelationLike</a>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">의존구조 분석 결과 (Option)</p><div class="fullcomment"><div class="comment cmt"><p>의존구조 분석 결과 (Option)</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>의존구조 분석결과</p></dd></dl></div>
     </li><li name="scala.collection.SeqLike#diff" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="diff[B&gt;:A](that:scala.collection.GenSeq[B]):Repr"></a><a id="diff[B&gt;:Word](GenSeq[B]):Sentence"></a>
       <span class="permalink">
@@ -1219,6 +1273,70 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="kr.bydelta.koala.data.Sentence#getDependencyOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getDependencyOf(word:Int):Option[kr.bydelta.koala.data.DependencyRelationLike]"></a><a id="getDependencyOf(Int):Option[DependencyRelationLike]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/data/Sentence.html#getDependencyOf(word:Int):Option[kr.bydelta.koala.data.DependencyRelationLike]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getDependencyOf</span><span class="params">(<span name="word">word: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="DependencyRelationLike.html" class="extype" name="kr.bydelta.koala.data.DependencyRelationLike">DependencyRelationLike</a>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">어절에 직접 대응하는 최하위 의존구조</p><div class="fullcomment"><div class="comment cmt"><p>어절에 직접 대응하는 최하위 의존구조</p></div><dl class="paramcmts block"><dt class="param">word</dt><dd class="cmt"><p>의존구조를 찾고자 하는 어절의 번호</p></dd><dt>returns</dt><dd class="cmt"><p>어절을 포함하는 말단 의존구조 (찾지 못하면 null)</p></dd></dl></div>
+    </li><li name="kr.bydelta.koala.data.Sentence#getDependencyOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getDependencyOf(word:kr.bydelta.koala.data.Word):Option[kr.bydelta.koala.data.DependencyRelationLike]"></a><a id="getDependencyOf(Word):Option[DependencyRelationLike]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/data/Sentence.html#getDependencyOf(word:kr.bydelta.koala.data.Word):Option[kr.bydelta.koala.data.DependencyRelationLike]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getDependencyOf</span><span class="params">(<span name="word">word: <a href="Word.html" class="extype" name="kr.bydelta.koala.data.Word">Word</a></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="DependencyRelationLike.html" class="extype" name="kr.bydelta.koala.data.DependencyRelationLike">DependencyRelationLike</a>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">어절에 직접 대응하는 최하위 의존구조</p><div class="fullcomment"><div class="comment cmt"><p>어절에 직접 대응하는 최하위 의존구조</p></div><dl class="paramcmts block"><dt class="param">word</dt><dd class="cmt"><p>의존구조를 찾고자 하는 어절</p></dd><dt>returns</dt><dd class="cmt"><p>어절을 포함하는 말단 의존구조 (찾지 못하면 null)</p></dd></dl></div>
+    </li><li name="kr.bydelta.koala.data.Sentence#getPhraseOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getPhraseOf(word:Int):Option[kr.bydelta.koala.data.SyntacticPhraseLike]"></a><a id="getPhraseOf(Int):Option[SyntacticPhraseLike]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/data/Sentence.html#getPhraseOf(word:Int):Option[kr.bydelta.koala.data.SyntacticPhraseLike]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getPhraseOf</span><span class="params">(<span name="word">word: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="SyntacticPhraseLike.html" class="extype" name="kr.bydelta.koala.data.SyntacticPhraseLike">SyntacticPhraseLike</a>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">어절에 직접 대응하는 최하위 구구조</p><div class="fullcomment"><div class="comment cmt"><p>어절에 직접 대응하는 최하위 구구조</p></div><dl class="paramcmts block"><dt class="param">word</dt><dd class="cmt"><p>구구조를 찾고자 하는 어절의 번호</p></dd><dt>returns</dt><dd class="cmt"><p>어절을 포함하는 말단 구구조 (찾지 못하면 null)</p></dd></dl></div>
+    </li><li name="kr.bydelta.koala.data.Sentence#getPhraseOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getPhraseOf(word:kr.bydelta.koala.data.Word):Option[kr.bydelta.koala.data.SyntacticPhraseLike]"></a><a id="getPhraseOf(Word):Option[SyntacticPhraseLike]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/data/Sentence.html#getPhraseOf(word:kr.bydelta.koala.data.Word):Option[kr.bydelta.koala.data.SyntacticPhraseLike]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getPhraseOf</span><span class="params">(<span name="word">word: <a href="Word.html" class="extype" name="kr.bydelta.koala.data.Word">Word</a></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="SyntacticPhraseLike.html" class="extype" name="kr.bydelta.koala.data.SyntacticPhraseLike">SyntacticPhraseLike</a>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">어절에 직접 대응하는 최하위 구구조</p><div class="fullcomment"><div class="comment cmt"><p>어절에 직접 대응하는 최하위 구구조</p></div><dl class="paramcmts block"><dt class="param">word</dt><dd class="cmt"><p>구구조를 찾고자 하는 어절</p></dd><dt>returns</dt><dd class="cmt"><p>어절을 포함하는 말단 구구조 (찾지 못하면 null)</p></dd></dl></div>
     </li><li name="scala.collection.TraversableLike#groupBy" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="groupBy[K](f:A=&gt;K):scala.collection.immutable.Map[K,Repr]"></a><a id="groupBy[K]((Word)⇒K):Map[K,Sentence]"></a>
       <span class="permalink">
@@ -1606,23 +1724,6 @@
       
       <p class="shortcomment cmt">(Java) 체언<sup>명사, 수사, 대명사</sup>을 포함하는 어절들</p><div class="fullcomment"><div class="comment cmt"><p>(Java) 체언<sup>명사, 수사, 대명사</sup>을 포함하는 어절들</p><p>(Java) List of words which contains Nominal morphemes (Noun, Ordinal/Cardinal, Pronoun)
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>체언을 포함하는 어절들의 Sequence</p></dd></dl></div>
-    </li><li name="kr.bydelta.koala.data.Sentence#jTopLevels" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="jTopLevels:java.util.Set[kr.bydelta.koala.data.Relationship]"></a><a id="jTopLevels:Set[Relationship]"></a>
-      <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/data/Sentence.html#jTopLevels:java.util.Set[kr.bydelta.koala.data.Relationship]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">jTopLevels</span><span class="result">: <span class="extype" name="java.util.Set">Set</span>[<a href="Relationship.html" class="extype" name="kr.bydelta.koala.data.Relationship">Relationship</a>]</span>
-      </span>
-      
-      <p class="shortcomment cmt">(Java)의존 구문 분석 결과, 나타난 핵심어들.</p><div class="fullcomment"><div class="comment cmt"><p>(Java)의존 구문 분석 결과, 나타난 핵심어들.</p><p>(Java) Head words for this sentence.
-</p></div></div>
     </li><li name="kr.bydelta.koala.data.Sentence#jVerbs" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="jVerbs:java.util.List[kr.bydelta.koala.data.Word]"></a><a id="jVerbs:List[Word]"></a>
       <span class="permalink">
@@ -2217,6 +2318,22 @@ Sequence가 *연속되지 않더라도* 확인함. 즉, &quot;나/NP는/JKS 밥/
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>SeqLike</dd></dl></div>
+    </li><li name="kr.bydelta.koala.data.Sentence#phrases" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="phrases:Option[kr.bydelta.koala.data.SyntacticPhraseLike]"></a><a id="phrases:Option[SyntacticPhraseLike]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/data/Sentence.html#phrases:Option[kr.bydelta.koala.data.SyntacticPhraseLike]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">phrases</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="SyntacticPhraseLike.html" class="extype" name="kr.bydelta.koala.data.SyntacticPhraseLike">SyntacticPhraseLike</a>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">구구조 분석 결과 (Option)</p><div class="fullcomment"><div class="comment cmt"><p>구구조 분석 결과 (Option)</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>구구조 분석결과</p></dd></dl></div>
     </li><li name="scala.collection.GenSeqLike#prefixLength" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="prefixLength(p:A=&gt;Boolean):Int"></a><a id="prefixLength((Word)⇒Boolean):Int"></a>
       <span class="permalink">
@@ -3168,23 +3285,6 @@ Sequence가 *연속되지 않더라도* 확인함. 즉, &quot;나/NP는/JKS 밥/
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
-    </li><li name="kr.bydelta.koala.data.Sentence#topLevels" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="topLevels:Set[kr.bydelta.koala.data.Relationship]"></a><a id="topLevels:Set[Relationship]"></a>
-      <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/data/Sentence.html#topLevels:Set[kr.bydelta.koala.data.Relationship]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">topLevels</span><span class="result">: <span class="extype" name="scala.Predef.Set">Set</span>[<a href="Relationship.html" class="extype" name="kr.bydelta.koala.data.Relationship">Relationship</a>]</span>
-      </span>
-      
-      <p class="shortcomment cmt">의존 구문 분석 결과, 나타난 핵심어들.</p><div class="fullcomment"><div class="comment cmt"><p>의존 구문 분석 결과, 나타난 핵심어들.</p><p>Head words for this sentence.
-</p></div></div>
     </li><li name="scala.collection.generic.GenericTraversableTemplate#transpose" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="transpose[B](implicitasTraversable:A=&gt;scala.collection.GenTraversableOnce[B]):CC[CC[B]@scala.annotation.unchecked.uncheckedVariance]"></a><a id="transpose[B]((Word)⇒GenTraversableOnce[B]):IndexedSeq[IndexedSeq[B]]"></a>
       <span class="permalink">
@@ -3204,23 +3304,6 @@ Sequence가 *연속되지 않더라도* 확인함. 즉, &quot;나/NP는/JKS 밥/
                 <span class="name">@migration</span>
               
         </dd><dt>Migration</dt><dd class="cmt"><p><i>(Changed in version 2.9.0)</i> <code>transpose</code> throws an <code>IllegalArgumentException</code> if collections are not uniformly sized.</p></dd></dl></div>
-    </li><li name="kr.bydelta.koala.data.Sentence#treeString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="treeString:String"></a>
-      <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/data/Sentence.html#treeString:String" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">treeString</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      
-      <p class="shortcomment cmt">의존구문분석트리를 String형태로 그립니다.</p><div class="fullcomment"><div class="comment cmt"><p>의존구문분석트리를 String형태로 그립니다.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>트리 String.</p></dd></dl></div>
     </li><li name="scala.collection.SeqLike#union" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="union[B&gt;:A,That](that:scala.collection.GenSeq[B])(implicitbf:scala.collection.generic.CanBuildFrom[Repr,B,That]):That"></a><a id="union[B&gt;:Word,That](GenSeq[B])(CanBuildFrom[Sentence,B,That]):That"></a>
       <span class="permalink">

@@ -145,6 +145,21 @@
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="kr.bydelta.koala">koala</a></dd></dl></div>
     </li><li class="current-entities indented4">
+                        <a class="object" href="Dependency$.html" title="의존구문구조 문법표지의 companion object
+"></a>
+                        <a class="class" href="Dependency.html" title="의존구문구조 문법표지 (비말단)"></a>
+                        <a href="Dependency.html" title="의존구문구조 문법표지 (비말단)">
+                          Dependency
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="DependencyRelationLike.html" title="의존구문구조 문법표지
+"></a>
+                        <a href="DependencyRelationLike.html" title="의존구문구조 문법표지
+">
+                          DependencyRelationLike
+                        </a>
+                      </li><li class="current-entities indented4">
                         <a class="object" href="Morpheme$.html" title="Companion object for Morpheme class."></a>
                         <a class="class" href="Morpheme.html" title="형태소 class / Morpheme class
 "></a>
@@ -153,13 +168,16 @@
                           Morpheme
                         </a>
                       </li><li class="current-entities indented4">
-                        <a class="object" href="Relationship$.html" title="Companion object for Relationship
-"></a>
-                        <a class="class" href="Relationship.html" title="Dependency Relationship container class
-"></a>
-                        <a href="Relationship.html" title="Dependency Relationship container class
-">
-                          Relationship
+                        <a class="object" href="Phrase$.html" title="구문구조 문법표지의 companion object."></a>
+                        <a class="class" href="Phrase.html" title="구문구조 문법 표지 (비말단)"></a>
+                        <a href="Phrase.html" title="구문구조 문법 표지 (비말단)">
+                          Phrase
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="PhraseLike.html" title="Trait: 문법 구조 표지 (구구조문법, 의존구조문법)"></a>
+                        <a href="PhraseLike.html" title="Trait: 문법 구조 표지 (구구조문법, 의존구조문법)">
+                          PhraseLike
                         </a>
                       </li><li class="current-entities indented4">
                         <a class="object" href="Sentence$.html" title="Companion object for Sentence
@@ -171,6 +189,14 @@
                           Sentence
                         </a>
                       </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="SyntacticPhraseLike.html" title="구문구조 문법 표지
+"></a>
+                        <a href="SyntacticPhraseLike.html" title="구문구조 문법 표지
+">
+                          SyntacticPhraseLike
+                        </a>
+                      </li><li class="current-entities indented4">
                         <a class="object" href="" title="Companion object for Word
 "></a>
                         <a class="class" href="Word.html" title="어절 Class
@@ -178,6 +204,18 @@
                         <a href="Word.html" title="어절 Class
 ">
                           Word
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="WordDependency.html" title="의존구문구조 문법표지 (말단)"></a>
+                        <a href="WordDependency.html" title="의존구문구조 문법표지 (말단)">
+                          WordDependency
+                        </a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="WordPhrase.html" title="구문구조 문법 표지 (말단)"></a>
+                        <a href="WordPhrase.html" title="구문구조 문법 표지 (말단)">
+                          WordPhrase
                         </a>
                       </li>
               </ul>
@@ -315,10 +353,27 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="kr.bydelta.koala.data.Word#apply" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(surface:String,morphemes:Seq[kr.bydelta.koala.data.Morpheme]):kr.bydelta.koala.data.Word"></a><a id="apply(String,Seq[Morpheme]):Word"></a>
+    </li><li name="kr.bydelta.koala.data.Word#ROOT" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ROOT:kr.bydelta.koala.data.Word"></a><a id="ROOT:Word"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/data/Word$.html#apply(surface:String,morphemes:Seq[kr.bydelta.koala.data.Morpheme]):kr.bydelta.koala.data.Word" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/data/Word$.html#ROOT:kr.bydelta.koala.data.Word" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">lazy val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ROOT</span><span class="result">: <a href="Word.html" class="extype" name="kr.bydelta.koala.data.Word">Word</a></span>
+      </span>
+      
+      <p class="shortcomment cmt">ROOT Word (Constant)
+</p>
+    </li><li name="kr.bydelta.koala.data.Word#apply" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(id:Int,surface:String,morphemes:Seq[kr.bydelta.koala.data.Morpheme]):kr.bydelta.koala.data.Word"></a><a id="apply(Int,String,Seq[Morpheme]):Word"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/data/Word$.html#apply(id:Int,surface:String,morphemes:Seq[kr.bydelta.koala.data.Morpheme]):kr.bydelta.koala.data.Word" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -327,12 +382,12 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="surface">surface: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="morphemes">morphemes: <span class="extype" name="scala.collection.Seq">Seq</span>[<a href="Morpheme.html" class="extype" name="kr.bydelta.koala.data.Morpheme">Morpheme</a>]</span>)</span><span class="result">: <a href="Word.html" class="extype" name="kr.bydelta.koala.data.Word">Word</a></span>
+        <span class="name">apply</span><span class="params">(<span name="id">id: <span class="extype" name="scala.Int">Int</span></span>, <span name="surface">surface: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="morphemes">morphemes: <span class="extype" name="scala.collection.Seq">Seq</span>[<a href="Morpheme.html" class="extype" name="kr.bydelta.koala.data.Morpheme">Morpheme</a>]</span>)</span><span class="result">: <a href="Word.html" class="extype" name="kr.bydelta.koala.data.Word">Word</a></span>
       </span>
       
       <p class="shortcomment cmt">Create new word from given information
 </p><div class="fullcomment"><div class="comment cmt"><p>Create new word from given information
-</p></div><dl class="paramcmts block"><dt class="param">surface</dt><dd class="cmt"><p>Surface string</p></dd><dt class="param">morphemes</dt><dd class="cmt"><p>Sequence of morphemes</p></dd><dt>returns</dt><dd class="cmt"><p>A new word</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">id</dt><dd class="cmt"><p>Index in the sentence</p></dd><dt class="param">surface</dt><dd class="cmt"><p>Surface string</p></dd><dt class="param">morphemes</dt><dd class="cmt"><p>Sequence of morphemes</p></dd><dt>returns</dt><dd class="cmt"><p>A new word</p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <span class="permalink">

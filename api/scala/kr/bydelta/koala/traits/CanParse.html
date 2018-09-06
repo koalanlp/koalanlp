@@ -166,9 +166,9 @@
                         </a>
                       </li><li class="current-entities indented4">
                         <span class="separator"></span>
-                        <a class="trait" href="CanParse.html" title="의존구문분석 Trait
+                        <a class="trait" href="" title="의존구문분석 Trait
 "></a>
-                        <a href="CanParse.html" title="의존구문분석 Trait
+                        <a href="" title="의존구문분석 Trait
 ">
                           CanParse
                         </a>
@@ -214,9 +214,9 @@
                         </a>
                       </li><li class="current-entities indented4">
                         <span class="separator"></span>
-                        <a class="trait" href="" title="문단1개는 불가하지만, 문장1개가 분석가능한 품사분석기 Trait
+                        <a class="trait" href="CanTagOnlyASentence.html" title="문단1개는 불가하지만, 문장1개가 분석가능한 품사분석기 Trait
 "></a>
-                        <a href="" title="문단1개는 불가하지만, 문장1개가 분석가능한 품사분석기 Trait
+                        <a href="CanTagOnlyASentence.html" title="문단1개는 불가하지만, 문장1개가 분석가능한 품사분석기 Trait
 ">
                           CanTagOnlyASentence
                         </a>
@@ -237,8 +237,8 @@
       <div id="definition">
         <div class="big-circle trait">t</div>
         <p id="owner"><a href="../../../index.html" class="extype" name="kr">kr</a>.<a href="../../index.html" class="extype" name="kr.bydelta">bydelta</a>.<a href="../index.html" class="extype" name="kr.bydelta.koala">koala</a>.<a href="index.html" class="extype" name="kr.bydelta.koala.traits">traits</a></p>
-        <h1>CanTagOnlyASentence<span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html" title="Permalink">
+        <h1>CanParse<span class="permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span></h1>
@@ -251,17 +251,17 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <span class="name">CanTagOnlyASentence</span><span class="tparams">[<span name="S">S</span>]</span><span class="result"> extends <a href="CanTag.html" class="extype" name="kr.bydelta.koala.traits.CanTag">CanTag</a></span>
+        <span class="name">CanParse</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
 
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>문단1개는 불가하지만, 문장1개가 분석가능한 품사분석기 Trait
-</p></div><dl class="paramcmts block"><dt class="tparam">S</dt><dd class="cmt"><p>분석기의 출력객체(문장)</p></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>의존구문분석 Trait
+</p></div><div class="toggleContainer block">
           <span class="toggle">
             Linear Supertypes
           </span>
-          <div class="superTypes hiddenContent"><a href="CanTag.html" class="extype" name="kr.bydelta.koala.traits.CanTag">CanTag</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -287,7 +287,7 @@
                   <span class="filtertype">Inherited<br />
                   </span>
                   <ol id="linearization">
-                    <li class="in" name="kr.bydelta.koala.traits.CanTagOnlyASentence"><span>CanTagOnlyASentence</span></li><li class="in" name="kr.bydelta.koala.traits.CanTag"><span>CanTag</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                    <li class="in" name="kr.bydelta.koala.traits.CanParse"><span>CanParse</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                   </ol>
                 </div><div class="ancestors">
               <span class="filtertype"></span>
@@ -311,10 +311,10 @@
 
         <div class="values members">
               <h3>Abstract Value Members</h3>
-              <ol><li name="kr.bydelta.koala.traits.CanTagOnlyASentence#tagSentenceOriginal" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="tagSentenceOriginal(text:String):S"></a><a id="tagSentenceOriginal(String):S"></a>
+              <ol><li name="kr.bydelta.koala.traits.CanParse#parse" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="parse(sentence:kr.bydelta.koala.data.Sentence):kr.bydelta.koala.data.Sentence"></a><a id="parse(Sentence):Sentence"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#tagSentenceOriginal(text:String):S" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#parse(sentence:kr.bydelta.koala.data.Sentence):kr.bydelta.koala.data.Sentence" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -323,11 +323,28 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">tagSentenceOriginal</span><span class="params">(<span name="text">text: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="kr.bydelta.koala.traits.CanTagOnlyASentence.S">S</span></span>
+        <span class="name">parse</span><span class="params">(<span name="sentence">sentence: <a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a></span>)</span><span class="result">: <a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a></span>
       </span>
       
-      <p class="shortcomment cmt">변환되지않은, 분석결과를 반환.</p><div class="fullcomment"><div class="comment cmt"><p>변환되지않은, 분석결과를 반환.
-</p></div><dl class="paramcmts block"><dt class="param">text</dt><dd class="cmt"><p>분석할 String.</p></dd><dt>returns</dt><dd class="cmt"><p>원본 문단객체의 Sequence</p></dd></dl></div>
+      <p class="shortcomment cmt">Sentence 객체의 의존구문을 분석함.</p><div class="fullcomment"><div class="comment cmt"><p>Sentence 객체의 의존구문을 분석함.
+</p></div><dl class="paramcmts block"><dt class="param">sentence</dt><dd class="cmt"><p>의존구문분석을 할 Sentence 객체.</p></dd><dt>returns</dt><dd class="cmt"><p>의존구문분석 결과가 포함된 Sentence 객체. (입력값과 동일한 객체)</p></dd></dl></div>
+    </li><li name="kr.bydelta.koala.traits.CanParse#parse" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="parse(sentence:String):Seq[kr.bydelta.koala.data.Sentence]"></a><a id="parse(String):Seq[Sentence]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#parse(sentence:String):Seq[kr.bydelta.koala.data.Sentence]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parse</span><span class="params">(<span name="sentence">sentence: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">String 텍스트의 의존구문을 분석함.</p><div class="fullcomment"><div class="comment cmt"><p>String 텍스트의 의존구문을 분석함.
+</p></div><dl class="paramcmts block"><dt class="param">sentence</dt><dd class="cmt"><p>의존구문분석을 할 String.</p></dd><dt>returns</dt><dd class="cmt"><p>의존구문분석 결과가 포함된 Sentence 객체의 Sequence</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -337,7 +354,7 @@
                 <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#!=(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#!=(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -353,7 +370,7 @@
     </li><li name="scala.AnyRef###" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html###():Int" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html###():Int" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -369,7 +386,7 @@
     </li><li name="scala.AnyRef#==" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a><a id="==(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#==(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#==(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -385,7 +402,7 @@
     </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#asInstanceOf[T0]:T0" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#asInstanceOf[T0]:T0" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -401,7 +418,7 @@
     </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a><a id="clone():AnyRef"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#clone():Object" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#clone():Object" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -423,7 +440,7 @@
     </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#eq(x$1:AnyRef):Boolean" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#eq(x$1:AnyRef):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -439,7 +456,7 @@
     </li><li name="scala.AnyRef#equals" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="equals(x$1:Any):Boolean"></a><a id="equals(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#equals(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#equals(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -455,7 +472,7 @@
     </li><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#finalize():Unit" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#finalize():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -477,7 +494,7 @@
     </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#getClass():Class[_]" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#getClass():Class[_]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -493,7 +510,7 @@
     </li><li name="scala.AnyRef#hashCode" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#hashCode():Int" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#hashCode():Int" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -509,7 +526,7 @@
     </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#isInstanceOf[T0]:Boolean" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#isInstanceOf[T0]:Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -522,27 +539,44 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="kr.bydelta.koala.traits.CanTag#jTag" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="jTag(text:String):java.util.List[kr.bydelta.koala.data.Sentence]"></a><a id="jTag(String):List[Sentence]"></a>
+    </li><li name="kr.bydelta.koala.traits.CanParse#jParse" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="jParse(sentences:java.util.List[kr.bydelta.koala.data.Sentence]):java.util.List[kr.bydelta.koala.data.Sentence]"></a><a id="jParse(List[Sentence]):List[Sentence]"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#jTag(text:String):java.util.List[kr.bydelta.koala.data.Sentence]" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#jParse(sentences:java.util.List[kr.bydelta.koala.data.Sentence]):java.util.List[kr.bydelta.koala.data.Sentence]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">jTag</span><span class="params">(<span name="text">text: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.util.List">List</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
+        <span class="name">jParse</span><span class="params">(<span name="sentences">sentences: <span class="extype" name="java.util.List">List</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>)</span><span class="result">: <span class="extype" name="java.util.List">List</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
       </span>
       
-      <p class="shortcomment cmt">(Java) 주어진 String 문단을 분석하여 품사를 부착함.</p><div class="fullcomment"><div class="comment cmt"><p>(Java) 주어진 String 문단을 분석하여 품사를 부착함.
-</p></div><dl class="paramcmts block"><dt class="param">text</dt><dd class="cmt"><p>품사분석을 시행할 문단 String</p></dd><dt>returns</dt><dd class="cmt"><p>품사분석 결과를 문장단위로 잘라서 포함한 <code>java.util.List&lt;Sentence&gt;</code> 객체</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="CanTag.html" class="extype" name="kr.bydelta.koala.traits.CanTag">CanTag</a></dd></dl></div>
+      <p class="shortcomment cmt">(Java) Sentence List의 의존구문을 분석함.</p><div class="fullcomment"><div class="comment cmt"><p>(Java) Sentence List의 의존구문을 분석함.
+</p></div><dl class="paramcmts block"><dt class="param">sentences</dt><dd class="cmt"><p>의존구문분석을 할 Sentence Sequence.</p></dd><dt>returns</dt><dd class="cmt"><p>의존구문분석 결과가 포함된 Sentence List. (입력값과 동일한 객체의 Sequence)</p></dd></dl></div>
+    </li><li name="kr.bydelta.koala.traits.CanParse#jParse" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="jParse(sentence:String):java.util.List[kr.bydelta.koala.data.Sentence]"></a><a id="jParse(String):List[Sentence]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#jParse(sentence:String):java.util.List[kr.bydelta.koala.data.Sentence]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">jParse</span><span class="params">(<span name="sentence">sentence: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.util.List">List</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">(Java) String 텍스트의 의존구문을 분석함.</p><div class="fullcomment"><div class="comment cmt"><p>(Java) String 텍스트의 의존구문을 분석함.
+</p></div><dl class="paramcmts block"><dt class="param">sentence</dt><dd class="cmt"><p>의존구문분석을 할 String.</p></dd><dt>returns</dt><dd class="cmt"><p>의존구문분석 결과가 포함된 Sentence 객체의 List</p></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#ne(x$1:AnyRef):Boolean" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#ne(x$1:AnyRef):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -558,7 +592,7 @@
     </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#notify():Unit" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#notify():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -574,7 +608,7 @@
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#notifyAll():Unit" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#notifyAll():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -587,10 +621,27 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="kr.bydelta.koala.traits.CanParse#parse" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="parse(sentences:Seq[kr.bydelta.koala.data.Sentence]):Seq[kr.bydelta.koala.data.Sentence]"></a><a id="parse(Seq[Sentence]):Seq[Sentence]"></a>
+      <span class="permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#parse(sentences:Seq[kr.bydelta.koala.data.Sentence]):Seq[kr.bydelta.koala.data.Sentence]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">parse</span><span class="params">(<span name="sentences">sentences: <span class="extype" name="scala.Seq">Seq</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Sentence Sequence의 의존구문을 분석함.</p><div class="fullcomment"><div class="comment cmt"><p>Sentence Sequence의 의존구문을 분석함.
+</p></div><dl class="paramcmts block"><dt class="param">sentences</dt><dd class="cmt"><p>의존구문분석을 할 Sentence Sequence.</p></dd><dt>returns</dt><dd class="cmt"><p>의존구문분석 결과가 포함된 Sentence Sequence. (입력값과 동일한 객체의 Sequence)</p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -603,44 +654,10 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="kr.bydelta.koala.traits.CanTagOnlyASentence#tag" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="tag(text:String):Seq[kr.bydelta.koala.data.Sentence]"></a><a id="tag(String):Seq[Sentence]"></a>
-      <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#tag(text:String):Seq[kr.bydelta.koala.data.Sentence]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">tag</span><span class="params">(<span name="text">text: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a>]</span>
-      </span>
-      
-      <p class="shortcomment cmt">주어진 String 문단을 분석하여 품사를 부착함.</p><div class="fullcomment"><div class="comment cmt"><p>주어진 String 문단을 분석하여 품사를 부착함.
-</p></div><dl class="paramcmts block"><dt class="param">text</dt><dd class="cmt"><p>품사분석을 시행할 문단 String</p></dd><dt>returns</dt><dd class="cmt"><p>품사분석 결과를 문장단위로 잘라서 포함한 Seq[Sentence] 객체</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.traits.CanTagOnlyASentence">CanTagOnlyASentence</a> → <a href="CanTag.html" class="extype" name="kr.bydelta.koala.traits.CanTag">CanTag</a></dd></dl></div>
-    </li><li name="kr.bydelta.koala.traits.CanTagOnlyASentence#tagSentence" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="tagSentence(text:String):kr.bydelta.koala.data.Sentence"></a><a id="tagSentence(String):Sentence"></a>
-      <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#tagSentence(text:String):kr.bydelta.koala.data.Sentence" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">tagSentence</span><span class="params">(<span name="text">text: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="../data/Sentence.html" class="extype" name="kr.bydelta.koala.data.Sentence">Sentence</a></span>
-      </span>
-      
-      <p class="shortcomment cmt">주어진 String 문장을 분석하여 품사를 부착함.</p><div class="fullcomment"><div class="comment cmt"><p>주어진 String 문장을 분석하여 품사를 부착함.
-</p></div><dl class="paramcmts block"><dt class="param">text</dt><dd class="cmt"><p>품사분석을 시행할 문장 String</p></dd><dt>returns</dt><dd class="cmt"><p>품사분석 결과를 포함한 Sentence 객체</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kr.bydelta.koala.traits.CanTagOnlyASentence">CanTagOnlyASentence</a> → <a href="CanTag.html" class="extype" name="kr.bydelta.koala.traits.CanTag">CanTag</a></dd></dl></div>
     </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#toString():String" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#toString():String" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -656,7 +673,7 @@
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#wait():Unit" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#wait():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -678,7 +695,7 @@
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait(x$1:Long,x$2:Int):Unit"></a><a id="wait(Long,Int):Unit"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -700,7 +717,7 @@
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait(x$1:Long):Unit"></a><a id="wait(Long):Unit"></a>
       <span class="permalink">
-      <a href="../../../../kr/bydelta/koala/traits/CanTagOnlyASentence.html#wait(x$1:Long):Unit" title="Permalink">
+      <a href="../../../../kr/bydelta/koala/traits/CanParse.html#wait(x$1:Long):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -729,9 +746,7 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="kr.bydelta.koala.traits.CanTag">
-              <h3>Inherited from <a href="CanTag.html" class="extype" name="kr.bydelta.koala.traits.CanTag">CanTag</a></h3>
-            </div><div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
