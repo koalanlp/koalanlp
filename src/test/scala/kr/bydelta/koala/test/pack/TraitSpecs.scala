@@ -2,17 +2,7 @@ package kr.bydelta.koala.test.pack
 
 import java.io.File
 
-import kr.bydelta.koala.POS.POSTag
 import kr.bydelta.koala._
-import kr.bydelta.koala.data._
-import kr.bydelta.koala.traits._
-import kr.bydelta.koala.Implicit._
-import org.specs2.mutable.Specification
-
-import scala.collection.mutable
-import scala.collection.JavaConverters._
-import scala.io.Source
-import scala.language.reflectiveCalls
 
 /**
   * Created by bydelta on 16. 7. 31.
@@ -270,12 +260,12 @@ class TraitSpecs extends Specification {
         sentence.split("\n").map { sent =>
           val s = Sentence(sent.split(" ").zipWithIndex.map(t => Word(t._2, t._1, Seq(Morpheme(0, t._1, "NNP", POS.NNP)))))
           s.withPhraseTree(Phrase(PhraseType.S, s.map(w => Phrase(PhraseType.NP, w)):_*))
-            .withDependency(Dependency(PhraseType.NP, FunctionalTag.UNDEF, s.head, Seq.empty:_*))
+            .withDependency(Dependency(PhraseType.NP, FunctionType.UNDEF, s.head, Seq.empty: _*))
         }
 
       override def parse(sentence: Sentence): Sentence =
         sentence.withPhraseTree(Phrase(PhraseType.S, sentence.map(w => Phrase(PhraseType.NP, w)):_*))
-          .withDependency(Dependency(PhraseType.NP, FunctionalTag.UNDEF, sentence.head, Seq.empty:_*))
+          .withDependency(Dependency(PhraseType.NP, FunctionType.UNDEF, sentence.head, Seq.empty: _*))
     }
 
     "parse correctly" in {
