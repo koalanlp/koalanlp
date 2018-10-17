@@ -8,10 +8,18 @@ import org.junit.platform.gradle.plugin.EnginesExtension
 import org.junit.platform.gradle.plugin.JUnitPlatformExtension
 import org.junit.platform.gradle.plugin.JUnitPlatformPlugin
 
-val ossrhUsername = project.property("ossrhUsername") as? String ?: "FOO"
-val ossrhPassword = project.property("ossrhPassword") as? String ?: "BAR"
-val archivesBaseName = project.property("archivesBaseName") as? String ?: "koalanlp-x"
-val gitBaseName = project.property("gitBaseName") as? String ?: archivesBaseName
+val ossrhUsername =
+        if (project.hasProperty("ossrhUsername")) project.property("ossrhUsername") as? String
+        else "FOO"
+val ossrhPassword =
+        if (project.hasProperty("ossrhPassword")) project.property("ossrhPassword") as? String
+        else "FOO"
+val archivesBaseName =
+        if (project.hasProperty("archivesBaseName")) project.property("archivesBaseName") as? String
+        else "koalanlp-x"
+val gitBaseName =
+        if (project.hasProperty("gitBaseName")) project.property("gitBaseName") as? String
+        else archivesBaseName
 
 /**
  * Define Plugins
@@ -64,16 +72,6 @@ dependencies {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
-}
-
-/**
- * Build Scan
- */
-buildScan {
-    setLicenseAgreementUrl("https://gradle.com/terms-of-service")
-    setLicenseAgree("yes")
-
-    publishAlways()
 }
 
 tasks {

@@ -1,6 +1,9 @@
 package kr.bydelta.koala
 
-import org.amshove.kluent.*
+import org.amshove.kluent.`should be equal to`
+import org.amshove.kluent.`should be`
+import org.amshove.kluent.`should equal`
+import org.amshove.kluent.shouldContainSame
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
@@ -424,12 +427,14 @@ object ExtensionSpec : Spek({
                     jung?.getJongsung() `should be` null
 
                     val jong = ch.getJongsung()
-                    jong?.isChosungJamo() `should not be` true
-                    jong?.isJungsungJamo() `should not be` true
-                    jong?.isJongsungJamo() `should be` (jong != null)
-                    jong?.getChosung() `should be` null
-                    jong?.getJungsung() `should be` null
-                    jong?.getJongsung() `should equal` ch.getJongsung()
+                    if (jong != null) {
+                        jong.isChosungJamo() `should be` false
+                        jong.isJungsungJamo() `should be` false
+                        jong.isJongsungJamo() `should be` true
+                        jong.getChosung() `should be` null
+                        jong.getJungsung() `should be` null
+                        jong.getJongsung() `should equal` ch.getJongsung()
+                    }
                 } else {
                     ch.getChosung() `should be` null
                     ch.getJungsung() `should be` null

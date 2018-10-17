@@ -1,6 +1,3 @@
-@file:JvmName("Utils")
-@file:JvmMultifileClass
-
 package kr.bydelta.koala
 
 import kr.bydelta.koala.Entity.Companion.equals
@@ -42,6 +39,14 @@ abstract class Property : Serializable {
         if (key in properties)
             throw IllegalStateException("There are more than two properties belong to the same key: $key")
         properties[key] = value
+    }
+
+    /**
+     * (테스트 지원용)
+     * property를 삭제합니다.
+     */
+    internal fun removeProperty(key: Byte) {
+        properties.remove(key)
     }
 
     /**
@@ -479,17 +484,17 @@ class RoleTree constructor(node: Word, val type: RoleType,
  * 형태소 class
  *
  * @param surface 형태소 표면형 String
- * @param rawTag  원본 형태소 분석기의 품사 String
+ * @param originalTag  원본 형태소 분석기의 품사 String
  * @param tag     세종 품사표기
  */
 class Morpheme internal constructor(val surface: String, val tag: POS,
                                     val originalTag: String? = null) : Property() {
     /****** Properties ******/
 
-    /** 형태소의 어절 내 위치. [equal] 연산에 [id] 값은 포함되지 않으며,
+    /** 형태소의 어절 내 위치. [equals] 연산에 [id] 값은 포함되지 않으며,
      * 한번 값이 설정된 경우 다시 설정 불가능 (재설정시 [AlreadySetIDException] 발생). */
     var id: Int = -1
-        @Throws(AlreadySetIDException::class) set(value) {
+        @Throws(AlreadySetIDException::class) internal set(value) {
             if (field == -1) field = value
             else throw AlreadySetIDException()
         }
@@ -632,12 +637,10 @@ class Word @Throws(AlreadySetIDException::class) internal constructor(val surfac
 
     /********** Access property values **********/
 
-    /** 어절의 문장 내 위치. [equal] 연산에 [id] 값은 포함되지 않으며,
-     * 한번 값이 설정된 경우 다시 설정 불가능 (재설정시 [AlreadySetIDException] 발생). */
+    /** 어절의 문장 내 위치. [equals] 연산에 [id] 값은 포함되지 않음. */
     var id: Int = -1
-        @Throws(AlreadySetIDException::class) set(value) {
-            if (field == -1) field = value
-            else throw AlreadySetIDException()
+        internal set(value) {
+            field = value
         }
 
     /**

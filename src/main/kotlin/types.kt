@@ -1,4 +1,4 @@
-@file:JvmName("Utils")
+@file:JvmName("TypeUtils")
 @file:JvmMultifileClass
 
 package kr.bydelta.koala

@@ -1,5 +1,4 @@
-@file:JvmName("Utils")
-@file:JvmMultifileClass
+@file:JvmName("DicUtils")
 
 package kr.bydelta.koala
 
@@ -102,15 +101,15 @@ abstract class CanCompileDict {
  * @param zis 압축해제할 Zip 입력 스트림.
  */
 private fun unzipStream(zis: ZipInputStream, outpath: File) {
-    val entry = zis.getNextEntry()
+    val entry = zis.nextEntry
     if (entry != null) {
-        val targetFile = File(outpath, entry.getName())
+        val targetFile = File(outpath, entry.name)
         targetFile.deleteOnExit()
 
         if (entry.isDirectory) {
             targetFile.mkdirs()
         } else {
-            targetFile.getParentFile().mkdirs()
+            targetFile.parentFile.mkdirs()
             val fos = FileOutputStream(targetFile)
             try {
                 val buffer = ByteArray(1024)

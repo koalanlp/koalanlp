@@ -1,6 +1,3 @@
-@file:JvmName("Utils")
-@file:JvmMultifileClass
-
 package kr.bydelta.koala
 
 import java.util.*
@@ -16,6 +13,14 @@ interface CanSplitSentence {
      * @return 문장단위로 분리된 String의 [List].
      */
     fun sentences(text: String): List<String>
+
+    /**
+     * 주어진 문단 [text]를 문장단위로 분리함.
+     *
+     * @param text 문장단위로 분리할 String.
+     * @return 문장단위로 분리된 String의 [List].
+     */
+    operator fun invoke(text: String): List<String> = sentences(text)
 }
 
 object SentenceSplitter {
@@ -214,7 +219,7 @@ abstract class CanTagOnlyAParagraph<S> : CanTag {
  */
 interface CanAnalyzeProperty<IN : Property, OUT> {
     /**
-     * [sentence]를 분석하여 [OUT] 유형의 property 값을 반환함
+     * [item]을 분석하여 [OUT] 유형의 property 값을 반환함
      */
     fun getProperty(item: IN): OUT
 

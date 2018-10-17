@@ -289,10 +289,6 @@ object DataSpec : Spek({
                 { dummy1.id = 5 } `should not throw` AnyException
                 dummy1.id `should be equal to` 5
 
-                // After initializing id, it cannot be modified.
-                { dummy1.id = 5 } `should throw` AlreadySetIDException::class
-                { sent[0].id = 8 } `should throw` AlreadySetIDException::class
-
                 for ((index, word) in sent2.withIndex()) {
                     word.id `should be equal to` index
                 }

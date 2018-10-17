@@ -1,10 +1,8 @@
-@file:JvmName("Utils")
-@file:JvmMultifileClass
+@file:JvmName("HangulUtils")
 
 package kr.bydelta.koala
 
 import java.lang.IllegalArgumentException
-import java.io.File
 import kotlin.streams.toList
 
 /** '가' 위치 **/
@@ -123,7 +121,7 @@ private val HANJA_READ_TABLE by lazy {
             .map {
                 val (hanja, sound) = it.split(',')
                 if (sound.length > 1)
-                    hanja[0] to sound.replace(Regex("[\\(\\[\\{\\}\\]\\)]+"), "")[0]
+                    hanja[0] to sound.replace(Regex("[(\\[{}\\])]+"), "")[0]
                 else hanja[0] to sound[0]
             }.toList().toMap()
 }
@@ -528,11 +526,11 @@ private fun addOh(ch: Char): Char {
     return if (ch.isIncompleteHangul()) {
         assembleHangul(cho = HanFirstList[11], jung = HanSecondList[13], jong = ChoToJong.getOrDefault(ch, ch))
     } else if (jcode == 18) // ㅡ->ㅜ
-        (ch - JONGSUNG_RANGE * 5).toChar()
+        ch - JONGSUNG_RANGE * 5
     else if (jcode == 0) //ㅏ->ㅘ
-        (ch + JONGSUNG_RANGE * 9).toChar()
+        ch + JONGSUNG_RANGE * 9
     else if (jcode == 4) //ㅓ->ㅘ
-        (ch + JONGSUNG_RANGE * 5).toChar()
+        ch + JONGSUNG_RANGE * 5
     else
         ch
 }
@@ -543,11 +541,11 @@ private fun addWoo(ch: Char): Char {
     return if (ch.isIncompleteHangul())
         assembleHangul(cho = HanFirstList[11], jung = HanSecondList[13], jong = ChoToJong.getOrDefault(ch, ch))
     else if (jcode == 18) // ㅡ->ㅜ
-        (ch - JONGSUNG_RANGE * 5).toChar()
+        ch - JONGSUNG_RANGE * 5
     else if (jcode == 0) //ㅏ->ㅝ
-        (ch + JONGSUNG_RANGE * 14).toChar()
+        ch + JONGSUNG_RANGE * 14
     else if (jcode == 4) //ㅓ->ㅝ
-        (ch + JONGSUNG_RANGE * 10).toChar()
+        ch + JONGSUNG_RANGE * 10
     else
         ch
 }
