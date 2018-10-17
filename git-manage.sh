@@ -21,3 +21,6 @@ if [[ $TRAVIS_EVENT_TYPE == "push" ]]; then
 
     git push -fq origin $TRAVIS_BRANCH > /dev/null
 fi
+
+# Upload snapshot build
+./gradlew uploadArchives closeAndReleaseRepository -PossrhUsername="${SONATYPE_USERNAME}" -PossrhPassword="${SONATYPE_PASSWORD}"

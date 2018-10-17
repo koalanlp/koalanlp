@@ -20,7 +20,13 @@ git add gradle.properties
 git commit -m "RELEASE v$JAR_VER_CURRENT"
 git tag v$JAR_VER_CURRENT
 
-gradle clean jar dokkarJar sourceJar uploadArchives
+echo -n Sonatype username:
+read -s USERNAME
+
+echo -n Sonatype password:
+read -s PASSWORD
+
+./gradlew clean jar dokkarJar sourceJar
 
 echo SET TO $JAR_VER_NEXT
 cat gradle.properties | sed -e 's/version=\s*.*/version='$JAR_VER_CURRENT'-SNAPSHOT/g' > gradle.properties.new
