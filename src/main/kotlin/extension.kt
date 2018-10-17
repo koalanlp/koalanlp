@@ -303,7 +303,7 @@ fun assembleHangul(cho: Char, jung: Char, jong: Char? = null): Char {
 }
 
 /**
- * 초성을 [this.first] 문자로, 중성을 [this.second] 문자로, 종성을 [this.third] 문자로 갖는 한글 문자를 재구성합니다.
+ * 초성을 [Triple.first] 문자로, 중성을 [Triple.second] 문자로, 종성을 [Triple.third] 문자로 갖는 한글 문자를 재구성합니다.
  */
 fun Triple<Char, Char, Char?>.assembleHangul(): Char =
         assembleHangul(this.first, this.second, this.third)

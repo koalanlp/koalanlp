@@ -6,6 +6,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.zip.ZipInputStream
 
+/** Dictionary Entry 타입: 표면형을 나타내는 [String] 값과, 품사태그를 나타내는 [POS]값으로 구성.*/
 typealias DicEntry = Pair<String, POS>
 
 /**
@@ -36,6 +37,11 @@ abstract class CanCompileDict {
     fun addUserDictionary(morphs: List<String>, tags: List<POS>) =
             addUserDictionary(*morphs.zip(tags).toTypedArray())
 
+    /**
+     * 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.
+     *
+     * @param dict 추가할 (표면형,품사)의 순서쌍.
+     */
     operator fun plusAssign(entry: DicEntry) = addUserDictionary(entry)
 
     /**

@@ -9,9 +9,9 @@ cache:
   - $HOME/.gradle/caches/
   - $HOME/.gradle/wrapper/
 install:
-- gradle assemble
+- ./gradlew assemble
 script:
-- gradle clean check
+- ./gradlew clean check
 after_success:
 - bash ./git-manage.sh
 before_install:

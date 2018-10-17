@@ -35,7 +35,6 @@ apply {
 }
 
 plugins {
-    `build-scan`
     java
     maven
     signing

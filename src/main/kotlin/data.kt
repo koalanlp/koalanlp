@@ -16,6 +16,9 @@ internal const val KEY_SRL: Byte = 22
 internal const val KEY_CHILD: Byte = 30
 internal const val KEY_PARENT: Byte = 31
 
+/**
+ * ID가 이미 설정되었을 때 발생하는 Exception
+ */
 class AlreadySetIDException : Exception("The ID value was already initialized!")
 
 /**

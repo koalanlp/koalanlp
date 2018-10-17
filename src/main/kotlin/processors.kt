@@ -23,6 +23,9 @@ interface CanSplitSentence {
     operator fun invoke(text: String): List<String> = sentences(text)
 }
 
+/**
+ * 세종 태그셋 기반의 문장분리기
+ */
 object SentenceSplitter {
     private val quoteRegex = "\'\"＇＂"
     private val openParenRegex = "([{‘“（［｛<〔〈《「『【"
@@ -98,6 +101,9 @@ interface CanTag {
      */
     fun tag(text: String): List<Sentence>
 
+    /**
+     * 주어진 문단 [text]을 분석하여 품사를 부착하고, 결과로 [List]<[Sentence]> 객체를 돌려줌.
+     */
     operator fun invoke(text: String) = tag(text)
 }
 
@@ -219,12 +225,12 @@ abstract class CanTagOnlyAParagraph<S> : CanTag {
  */
 interface CanAnalyzeProperty<IN : Property, OUT> {
     /**
-     * [item]을 분석하여 [OUT] 유형의 property 값을 반환함
+     * [item]을 분석하여 property 값을 반환함
      */
     fun getProperty(item: IN): OUT
 
     /**
-     * [sentence]를 분석하여 [OUT] 유형의 property 값을 추가함
+     * [sentence]를 분석하여 property 값을 추가함
      */
     fun attachProperty(sentence: Sentence)
 
