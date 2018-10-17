@@ -8,8 +8,6 @@ cache:
   directories:
   - $HOME/.gradle/caches/
   - $HOME/.gradle/wrapper/
-install:
-- ./gradlew assemble
 script:
 - ./gradlew clean check
 after_success:
