@@ -1,14 +1,12 @@
-@file:JvmName("HangulUtils")
+package kr.bydelta.koala.ext
 
-package kr.bydelta.koala
-
-/** '가' 위치 **/
+/** '가'(ga) 위치 **/
 const val HANGUL_START = '가'
-/** '힣' 위치 **/
+/** '힣'(hih) 위치 **/
 const val HANGUL_END = '힣'
-/** 종성 범위 **/
+/** 종성 범위의 폭 **/
 const val JONGSUNG_RANGE = 0x001C
-/** 중성 범위 **/
+/** 중성 범위의 폭 **/
 const val JUNGSUNG_RANGE = 0x024C
 
 
@@ -29,7 +27,27 @@ val ALPHABET_READING = mapOf(
 ).toList().sortedBy { -it.second.length }
 
 /**
- * 주어진 문자열 [this] 에서 알파벳이 발음되는 대로 국문 문자열로 표기하여 값으로 돌려줌.
+ * 주어진 문자열 [this] 에서 알파벳이 발음되는 대로 국문 문자열로 표기하여 값으로 돌려줍니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * "ABC".alphaToHangul()
+ * ```
+ *
+ * ### Scala
+ * ```kotlin
+ * import kr.bydelta.koala.Implicits.*
+ * "ABC".alphaToHangul
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Utils.alphaToHangul("ABC")
+ * ```
+ *
+ * @since 2.0.0
+ * @return 국문 발음 표기된 문자열
  */
 fun CharSequence.alphaToHangul(): CharSequence {
     val buffer = StringBuffer()
@@ -45,7 +63,27 @@ fun CharSequence.alphaToHangul(): CharSequence {
 }
 
 /**
- * 주어진 문자열 [this]에 적힌 알파벳 발음을 알파벳으로 변환하여 문자열로 반환.
+ * 주어진 문자열 [this]에 적힌 알파벳 발음을 알파벳으로 변환하여 문자열로 반환합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * "에이비씨".hangulToAlpha()
+ * ```
+ *
+ * ### Scala
+ * ```kotlin
+ * import kr.bydelta.koala.Implicits.*
+ * "에이비씨".hangulToAlpha
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Utils.hangulToAlpha("에이비씨")
+ * ```
+ *
+ * @since 2.0.0
+ * @return 영문 변환된 문자열
  */
 fun CharSequence.hangulToAlpha(): CharSequence {
     val buffer = StringBuffer()
@@ -71,7 +109,27 @@ fun CharSequence.hangulToAlpha(): CharSequence {
 }
 
 /**
- * 주어진 문자열 [this]가 알파벳이 발음되는 대로 표기된 문자열인지 확인.
+ * 주어진 문자열 [this]가 알파벳이 발음되는 대로 표기된 문자열인지 확인합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * "에이비씨".isAlphaPronounced()
+ * ```
+ *
+ * ### Scala
+ * ```kotlin
+ * import kr.bydelta.koala.Implicits.*
+ * "에이비씨".isAlphaPronounced
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Utils.isAlphaPronounced("에이비씨")
+ * ```
+ *
+ * @since 2.0.0
+ * @return 영문 발음으로만 구성되었다면 true
  */
 fun CharSequence.isAlphaPronounced(): Boolean {
     var substr = this
@@ -91,7 +149,28 @@ fun CharSequence.isAlphaPronounced(): Boolean {
  ***** 한자 읽기 *****
  *********************/
 
-/** 현재 문자 [this]가 한자 범위인지 확인. */
+/** 현재 문자 [this]가 한자 범위인지 확인합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * '樂'.isHanja()
+ * ```
+ *
+ * ### Scala
+ * ```kotlin
+ * import kr.bydelta.koala.Implicits.*
+ * '樂'.isHanja
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Utils.isHanja('可')
+ * ```
+ *
+ * @since 2.0.0
+ * @return 한자범위라면 true
+ * */
 fun Char.isHanja(): Boolean {
     val code = this.toInt()
     return this.isCJKHanja() ||
@@ -100,8 +179,28 @@ fun Char.isHanja(): Boolean {
             (code in 0x2F800..0x2FA1F)  //  한중일 호환용 한자 보충 	 2F800 	 2FA1F
 }
 
-/** 현재 문자 [this]가 한중일 통합한자, 통합한자 확장 - A, 호환용 한자 범위인지 확인
- * (국사편찬위원회 한자음가사전은 해당 범위에서만 정의되어 있음)
+/** 현재 문자 [this]가 한중일 통합한자, 통합한자 확장 - A, 호환용 한자 범위인지 확인합니다.
+ * (국사편찬위원회 한자음가사전은 해당 범위에서만 정의되어 있어, 별도 확인합니다.)
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * '樂'.isCJKHanja()
+ * ```
+ *
+ * ### Scala
+ * ```kotlin
+ * import kr.bydelta.koala.Implicits.*
+ * '樂'.isCJKHanja
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Utils.isCJKHanja('可')
+ * ```
+ *
+ * @since 2.0.0
+ * @return 해당 범위의 한자라면 true
  * */
 fun Char.isCJKHanja(): Boolean {
     val code = this.toInt()
@@ -110,6 +209,7 @@ fun Char.isCJKHanja(): Boolean {
             (code in 0xF900..0xFAFF)    //  한중일 호환용 한자 	 F900 	 FAFF
 }
 
+/** 한자 음독 테이블 (국사편찬위원회) */
 private val HANJA_READ_TABLE by lazy {
     Object::class.java
             .getResourceAsStream("/hanjaToHangul.csv").bufferedReader()
@@ -139,14 +239,35 @@ private val HEAD_CORRECTION_IL = listOf('렬', '률')
 private val HANJA_BU_FIX = listOf('\u1103', '\u110C')
 
 /**
- * 국사편찬위원회 한자음가사전에 따라 한자 표기된 내용을 국문 표기로 전환함.
+ * 국사편찬위원회 한자음가사전에 따라 한자 표기된 내용을 국문 표기로 전환합니다.
  *
- * [headCorrection] 값이 true인 경우, whitespace에 따라오는 문자에 두음법칙을 자동 적용함. (기본값 true)
- * 단, 다음 의존명사는 예외: 냥(兩), 년(年), 리(里), 리(理), 량(輛)
+ * ## 참고
+ * * [headCorrection] 값이 true인 경우, whitespace에 따라오는 문자에 두음법칙을 자동 적용함. (기본값 true)
+ * * 단, 다음 의존명사는 예외: 냥(兩), 년(年), 리(里), 리(理), 량(輛)
  *
  * 다음 두음법칙은 사전을 조회하지 않기 때문에 적용되지 않음에 유의:
  * * 한자 파생어나 합성어에서 원 단어의 두음법칙: 예) "신여성"이 옳은 표기이나 "신녀성"으로 표기됨
  * * 외자가 아닌 이름: 예) "허난설헌"이 옳은 표기이나 "허란설헌"으로 표기됨
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * "可口可樂".hanjaToHangul()
+ * ```
+ *
+ * ### Scala
+ * ```kotlin
+ * import kr.bydelta.koala.Implicits.*
+ * "可口可樂".hanjaToHangul
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Utils.hanjaToHangul("可口可樂")
+ * ```
+ *
+ * @since 2.0.0
+ * @return 해당 범위의 한자라면 true
  */
 @JvmOverloads
 fun CharSequence.hanjaToHangul(headCorrection: Boolean = true): CharSequence {
@@ -213,31 +334,221 @@ fun CharSequence.hanjaToHangul(headCorrection: Boolean = true): CharSequence {
  ***** 한글 재구성 *****
  *********************/
 
-/** 현재 문자 [this]가 초성, 중성, 종성(선택적)을 다 갖춘 문자인지 확인. */
+/**
+ * 현재 문자 [this]가 초성, 중성, 종성(선택적)을 다 갖춘 문자인지 확인합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * '가'.isCompleteHangul()
+ * ```
+ *
+ * ### Scala
+ * ```kotlin
+ * import kr.bydelta.koala.Implicits.*
+ * '가'.isCompleteHangul
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Utils.isCompleteHangul('가')
+ * ```
+ *
+ * @since 2.0.0
+ * @return 조건에 맞으면 true
+ * */
 fun Char.isCompleteHangul(): Boolean = this in HANGUL_START..HANGUL_END
 
-/** 현재 문자 [this]가 불완전한 한글 문자인지 확인. */
+/** 현재 문자 [this]가 불완전한 한글 문자인지 확인합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * '가'.isIncompleteHangul()
+ * ```
+ *
+ * ### Scala
+ * ```kotlin
+ * import kr.bydelta.koala.Implicits.*
+ * '가'.isIncompleteHangul
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Utils.isIncompleteHangul('가')
+ * ```
+ *
+ * @since 2.0.0
+ * @return 조건에 맞으면 true
+ * */
 fun Char.isIncompleteHangul(): Boolean = this.toInt() in 0x1100..0x11FF || this.toInt() in 0x3130..0x318F
 
-/** 현재 문자 [this]가 한글 완성형 또는 조합용 문자인지 확인. */
+/** 현재 문자 [this]가 한글 완성형 또는 조합용 문자인지 확인합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * '가'.isHangul()
+ * ```
+ *
+ * ### Scala
+ * ```kotlin
+ * import kr.bydelta.koala.Implicits.*
+ * '가'.isHangul
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Utils.isHangul('가')
+ * ```
+ *
+ * @since 2.0.0
+ * @return 조건에 맞으면 true
+ * */
 fun Char.isHangul(): Boolean = this.isCompleteHangul() || this.isIncompleteHangul()
 
-/** 현재 문자열 [this]가 한글로 끝나면 true */
+/** 현재 문자열 [this]가 한글 (완성/조합)로 끝나는지 확인합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * "가나다".isHangulEnding()
+ * ```
+ *
+ * ### Scala
+ * ```kotlin
+ * import kr.bydelta.koala.Implicits.*
+ * "가나다".isHangulEnding
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Utils.isHangulEnding("가나다")
+ * ```
+ *
+ * @since 2.0.0
+ * @return 조건에 맞으면 true
+ * */
 fun CharSequence.isHangulEnding(): Boolean = this.last().isHangul()
 
-/** 현재 문자 [this]가 현대 한글 초성 자음 문자인지 확인. */
+/** 현재 문자 [this]가 현대 한글 초성 자음 문자인지 확인합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * '가'.isChosungJamo()
+ * ```
+ *
+ * ### Scala
+ * ```kotlin
+ * import kr.bydelta.koala.Implicits.*
+ * '가'.isChosungJamo
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Utils.isChosungJamo('가')
+ * ```
+ *
+ * @since 2.0.0
+ * @return 조건에 맞으면 true
+ * */
 fun Char.isChosungJamo(): Boolean = this.toInt() in 0x1100..0x1112
 
-/** 현재 문자 [this]가 현대 한글 중성 모음 문자인지 확인. */
+/** 현재 문자 [this]가 현대 한글 중성 모음 문자인지 확인합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * '가'.isJungsungJamo()
+ * ```
+ *
+ * ### Scala
+ * ```kotlin
+ * import kr.bydelta.koala.Implicits.*
+ * '가'.isJungsungJamo
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Utils.isJungsungJamo('가')
+ * ```
+ *
+ * @since 2.0.0
+ * @return 조건에 맞으면 true
+ * */
 fun Char.isJungsungJamo(): Boolean = this.toInt() in 0x1161..0x1175
 
-/** 현재 문자 [this]가 한글 종성 자음 문자인지 확인. */
+/** 현재 문자 [this]가 한글 종성 자음 문자인지 확인합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * '가'.isJongsungJamo()
+ * ```
+ *
+ * ### Scala
+ * ```kotlin
+ * import kr.bydelta.koala.Implicits.*
+ * '가'.isJongsungJamo
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Utils.isJongsungJamo('가')
+ * ```
+ *
+ * @since 2.0.0
+ * @return 조건에 맞으면 true
+ * */
 fun Char.isJongsungJamo(): Boolean = this.toInt() in 0x11A8..0x11C2
 
-/** 현재 문자 [this]가 종성으로 끝나면 true. */
+/** 현재 문자 [this]가 종성으로 끝인지 확인합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * '가'.isJongsungEnding()
+ * ```
+ *
+ * ### Scala
+ * ```kotlin
+ * import kr.bydelta.koala.Implicits.*
+ * '가'.isJongsungEnding
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Utils.isJongsungEnding('가')
+ * ```
+ *
+ * @since 2.0.0
+ * @return 조건에 맞으면 true
+ * */
 fun Char.isJongsungEnding(): Boolean = this.isCompleteHangul() && (this - HANGUL_START) % JONGSUNG_RANGE != 0
 
-/** 현재 문자열 [this]가 종성으로 끝나면 true */
+/** 현재 문자열 [this]가 종성으로 끝인지 확인합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * "가나다".isJongsungEnding()
+ * ```
+ *
+ * ### Scala
+ * ```kotlin
+ * import kr.bydelta.koala.Implicits.*
+ * "가나다".isJongsungEnding
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Utils.isJongsungEnding("가나다")
+ * ```
+ *
+ * @since 2.0.0
+ * @return 조건에 맞으면 true
+ * */
 fun CharSequence.isJongsungEnding(): Boolean = this.last().isJongsungEnding()
 
 /** 현재 문자 [this]에서 초성 자음문자 분리. 초성이 없으면 null. */
@@ -319,7 +630,7 @@ fun CharSequence.assembleHangul(): CharSequence {
         } else if (ch.isJungsungJamo() && buffer.last().isChosungJamo()) {
             val last = buffer.last()
             buffer.deleteCharAt(buffer.length - 1)
-            buffer.append(kr.bydelta.koala.assembleHangul(last, ch))
+            buffer.append(kr.bydelta.koala.ext.assembleHangul(last, ch))
         } else if (ch.isJongsungJamo() && !buffer.last().isJongsungEnding()) {
             val last = buffer.last()
             buffer.deleteCharAt(buffer.length - 1)

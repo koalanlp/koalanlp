@@ -1,6 +1,9 @@
 package kr.bydelta.koala
 
-import org.amshove.kluent.*
+import org.amshove.kluent.AnyException
+import org.amshove.kluent.`should be`
+import org.amshove.kluent.`should not throw`
+import org.amshove.kluent.`should throw`
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import java.io.ByteArrayInputStream
@@ -441,7 +444,7 @@ object DataSpec : Spek({
                 (sent2[1] in sent) `should be` true
             }
 
-            // setProperty, getSyntaxTree, getDependencyTree, getRoleTree, getNamedEntities
+            // setProperty, getSyntaxTree, getDependencyTree, getRoleTree, getEntities
             it("should provide proper way to set a property") {
                 { sent.getNamedEntities() } `should throw` UninitializedPropertyAccessException::class
                 { sent.getSyntaxTree() } `should throw` UninitializedPropertyAccessException::class

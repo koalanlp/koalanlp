@@ -40,7 +40,7 @@ dependencies {
 // documentation
 dokka {
     outputFormat = "html"
-    outputDirectory = "$rootDir/docs/api"
+    outputDirectory = "$buildDir/javadoc"
 
     linkMapping {
         dir = "src/main/kotlin"
@@ -49,11 +49,24 @@ dokka {
     }
 }
 
-task dokkaJar(type: org.gradle.jvm.tasks.Jar){
+task githubMarkdownDoc(type: org.jetbrains.dokka.gradle.DokkaTask){
+    outputFormat = "gfm"
+    outputDirectory = "$rootDir/docs/api"
+
+    linkMapping {
+        dir = "src/main/kotlin"
+        url = "https://github.com/koalanlp/${gitBaseName}/blob/${gitBranch}/src/main/kotlin"
+        suffix = "#L"
+    }
+
+
+}
+
+task dokkaJar(type: org.gradle.jvm.tasks.Jar, dependsOn: dokka){
     group = JavaBasePlugin.DOCUMENTATION_GROUP
     description = "Assembles Kotlin docs with Dokka"
     classifier = "javadoc"
-    from dokka
+    from "$buildDir/javadoc"
 }
 
 task sourceJar(type: org.gradle.jvm.tasks.Jar){

@@ -1,7 +1,6 @@
-@file:JvmName("DicUtils")
+package kr.bydelta.koala.dic
 
-package kr.bydelta.koala
-
+import kr.bydelta.koala.POS
 import java.io.File
 import java.io.FileOutputStream
 import java.util.zip.ZipInputStream

@@ -1,13 +1,53 @@
-package kr.bydelta.koala
+/**
+ * # Package kr.bydelta.koala.proc
+ *
+ * KoalaNLP가 지원하는, 또는 지원할 자연어처리 분석기 interface들을 모은 패키지입니다.
+ */
+package kr.bydelta.koala.proc
 
+import kr.bydelta.koala.POS
+import kr.bydelta.koala.data.*
 import java.util.*
 
 /**
  * 문장분리기 Interface
+ *
+ * 텍스트를 받아서 텍스트 문장들로 분리합니다.
+ *
+ * ## 사용법 예제
+ * 문장분리기 `SentenceSplitter`가 `CanSplitSentence`를 상속받았다면,
+ *
+ * ### Kotlin
+ * ```kotlin
+ * val splitter = SentenceSplitter()
+ * val sentence = "분석할 문장을 적었습니다."
+ * val splitted = splitter.sentences(sentence)
+ * // 또는
+ * val splitted = splitter(sentence)
+ * ```
+ *
+ * ### Scala
+ * ```scala
+ * import kr.bydelta.koala.Implicits.*
+ * val splitter = new SentenceSplitter()
+ * val sentence = "분석할 문장을 적었습니다."
+ * val splitted = splitter.sentences(sentence)
+ * // 또는
+ * val splitted = splitter(sentence)
+ * ```
+ *
+ * ### Java
+ * ```java
+ * SentenceSplitter splitter = new SentenceSplitter();
+ * String sentence = "분석할 문장을 적었습니다.";
+ * List<String> splitted = splitter.sentences(sentence);
+ * // 또는
+ * List<String> splitted = splitter.invoke(sentence);
+ * ```
  */
 interface CanSplitSentence {
     /**
-     * 주어진 문단 [text]를 문장단위로 분리함.
+     * 주어진 문단 [text]를 문장단위로 분리합니다.
      *
      * @param text 문장단위로 분리할 String.
      * @return 문장단위로 분리된 String의 [List].
@@ -15,7 +55,7 @@ interface CanSplitSentence {
     fun sentences(text: String): List<String>
 
     /**
-     * 주어진 문단 [text]를 문장단위로 분리함.
+     * 주어진 문단 [text]를 문장단위로 분리합니다.
      *
      * @param text 문장단위로 분리할 String.
      * @return 문장단위로 분리된 String의 [List].
@@ -24,7 +64,39 @@ interface CanSplitSentence {
 }
 
 /**
- * 세종 태그셋 기반의 문장분리기
+ * 세종 태그셋에 기반한 Heuristic 문장분리기
+ *
+ * 다음 조건에 따라 문장을 분리합니다:
+ * 1. 열린 괄호나 인용부호가 없고,
+ * 2. 숫자나 외국어로 둘러싸이지 않은 문장부호([POS.SF])가 어절의 마지막에 왔을 경우.
+ *
+ * ## 사용법 예제
+ * `SentenceSplitter`는 이미 singleton object이므로 초기화가 필요하지 않습니다.
+ *
+ * ### Kotlin
+ * ```kotlin
+ * val sentence = ... //Tagged result
+ * val splitted = SentenceSplitter.sentences(sentence)
+ * // 또는
+ * val splitted = SentenceSplitter(sentence)
+ * ```
+ *
+ * ### Scala
+ * ```scala
+ * import kr.bydelta.koala.Implicits.*
+ * val sentence = ... //Tagged result
+ * val splitted = SentenceSplitter.sentences(sentence)
+ * // 또는
+ * val splitted = SentenceSplitter(sentence)
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Sentence sentence = ... //Tagged result
+ * List<Sentence> splitted = SentenceSplitter.sentences(sentence);
+ * // 또는
+ * List<Sentence> splitted = SentenceSplitter.invoke(sentence);
+ * ```
  */
 object SentenceSplitter {
     private val quoteRegex = "\'\"＇＂"

@@ -1,0 +1,34 @@
+$dokka.format:gfm
+$dokka.linkExtension:md
+$dokka.location:kr.bydelta.koala$contains(kotlin.CharSequence, kr.bydelta.koala.POS)kr.bydelta.koala/kotlin.-char-sequence/contains.md
+$dokka.location:kr.bydelta.koala$contains(kotlin.collections.Iterable((kotlin.String)), kr.bydelta.koala.CoarseEntityType)kr.bydelta.koala/kotlin.collections.-iterable/contains.md
+$dokka.location:kr.bydelta.koala$contains(kotlin.collections.Iterable((kotlin.String)), kr.bydelta.koala.DependencyTag)kr.bydelta.koala/kotlin.collections.-iterable/contains.md
+$dokka.location:kr.bydelta.koala$contains(kotlin.collections.Iterable((kotlin.String)), kr.bydelta.koala.PhraseTag)kr.bydelta.koala/kotlin.collections.-iterable/contains.md
+$dokka.location:kr.bydelta.koala$contains(kotlin.collections.Iterable((kotlin.String)), kr.bydelta.koala.RoleType)kr.bydelta.koala/kotlin.collections.-iterable/contains.md
+$dokka.location:kr.bydelta.koala.ext$alphaToHangul(kotlin.CharSequence)kr.bydelta.koala.ext/kotlin.-char-sequence/alpha-to-hangul.md
+$dokka.location:kr.bydelta.koala.ext$assembleHangul(kotlin.CharSequence)kr.bydelta.koala.ext/kotlin.-char-sequence/assemble-hangul.md
+$dokka.location:kr.bydelta.koala.ext$assembleHangul(kotlin.Triple((kotlin.Char, , kotlin.Char)))kr.bydelta.koala.ext/kotlin.-triple/assemble-hangul.md
+$dokka.location:kr.bydelta.koala.ext$dissembleHangul(kotlin.Char)kr.bydelta.koala.ext/kotlin.-char/dissemble-hangul.md
+$dokka.location:kr.bydelta.koala.ext$dissembleHangul(kotlin.CharSequence)kr.bydelta.koala.ext/kotlin.-char-sequence/dissemble-hangul.md
+$dokka.location:kr.bydelta.koala.ext$getChosung(kotlin.Char)kr.bydelta.koala.ext/kotlin.-char/get-chosung.md
+$dokka.location:kr.bydelta.koala.ext$getJongsung(kotlin.Char)kr.bydelta.koala.ext/kotlin.-char/get-jongsung.md
+$dokka.location:kr.bydelta.koala.ext$getJungsung(kotlin.Char)kr.bydelta.koala.ext/kotlin.-char/get-jungsung.md
+$dokka.location:kr.bydelta.koala.ext$hangulToAlpha(kotlin.CharSequence)kr.bydelta.koala.ext/kotlin.-char-sequence/hangul-to-alpha.md
+$dokka.location:kr.bydelta.koala.ext$hanjaToHangul(kotlin.CharSequence, kotlin.Boolean)kr.bydelta.koala.ext/kotlin.-char-sequence/hanja-to-hangul.md
+$dokka.location:kr.bydelta.koala.ext$isAlphaPronounced(kotlin.CharSequence)kr.bydelta.koala.ext/kotlin.-char-sequence/is-alpha-pronounced.md
+$dokka.location:kr.bydelta.koala.ext$isCJKHanja(kotlin.Char)kr.bydelta.koala.ext/kotlin.-char/is-c-j-k-hanja.md
+$dokka.location:kr.bydelta.koala.ext$isChosungJamo(kotlin.Char)kr.bydelta.koala.ext/kotlin.-char/is-chosung-jamo.md
+$dokka.location:kr.bydelta.koala.ext$isCompleteHangul(kotlin.Char)kr.bydelta.koala.ext/kotlin.-char/is-complete-hangul.md
+$dokka.location:kr.bydelta.koala.ext$isHangul(kotlin.Char)kr.bydelta.koala.ext/kotlin.-char/is-hangul.md
+$dokka.location:kr.bydelta.koala.ext$isHangulEnding(kotlin.CharSequence)kr.bydelta.koala.ext/kotlin.-char-sequence/is-hangul-ending.md
+$dokka.location:kr.bydelta.koala.ext$isHanja(kotlin.Char)kr.bydelta.koala.ext/kotlin.-char/is-hanja.md
+$dokka.location:kr.bydelta.koala.ext$isIncompleteHangul(kotlin.Char)kr.bydelta.koala.ext/kotlin.-char/is-incomplete-hangul.md
+$dokka.location:kr.bydelta.koala.ext$isJongsungEnding(kotlin.Char)kr.bydelta.koala.ext/kotlin.-char/is-jongsung-ending.md
+$dokka.location:kr.bydelta.koala.ext$isJongsungEnding(kotlin.CharSequence)kr.bydelta.koala.ext/kotlin.-char-sequence/is-jongsung-ending.md
+$dokka.location:kr.bydelta.koala.ext$isJongsungJamo(kotlin.Char)kr.bydelta.koala.ext/kotlin.-char/is-jongsung-jamo.md
+$dokka.location:kr.bydelta.koala.ext$isJungsungJamo(kotlin.Char)kr.bydelta.koala.ext/kotlin.-char/is-jungsung-jamo.md
+kr.bydelta.koala
+kr.bydelta.koala.data
+kr.bydelta.koala.dic
+kr.bydelta.koala.ext
+kr.bydelta.koala.proc

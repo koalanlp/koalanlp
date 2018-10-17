@@ -1,10 +1,14 @@
-@file:JvmName("TypeUtils")
-@file:JvmMultifileClass
-
+/**
+ * # Package kr.bydelta.koala
+ *
+ * KoalaNLP의 공통 부분을 담은 패키지입니다.
+ */
 package kr.bydelta.koala
 
 /**
- * 세종 품사표기 표준안
+ * 세종 품사표기 표준안을 Enum Class로 담았습니다.
+ *
+ * @since 1.x
  */
 enum class POS {
     /** ([NOUNS]: 체언) ''일반명사'': 일반 개념을 표시하는 명사. **/
@@ -13,10 +17,12 @@ enum class POS {
     NNP,
 
     /** ([NOUNS]: 체언) ''일반 의존명사'' : 의미가 형식적이어서 다른 말 아래에 기대어 쓰이는 명사.
+     *
      * ‘것1’, ‘따름1’, ‘뿐1’, ‘데1’ 따위가 있다.
      * */
     NNB,
     /** ([NOUNS]: 체언) ''단위성 의존명사'' : 수효나 분량 따위의 단위를 나타내는 의존 명사.
+     *
      * ‘쌀 한 말, 쇠고기 한 근, 굴비 한 두름, 북어 한 쾌, 고무신 한 켤레, 광목 한 필’에서 ‘말3’, ‘근3’, ‘두름1’, ‘쾌1’, ‘켤레2’, ‘필2’
      * */
     NNM,
@@ -30,6 +36,7 @@ enum class POS {
     /** ([PREDICATES]: 용언) ''형용사'' : 사물의 성질이나 상태를 나타내는 품사. **/
     VA,
     /** ([PREDICATES]: 용언) ''보조용언'' : 본용언과 연결되어 그것의 뜻을 보충하는 역할을 하는 용언. 보조 동사, 보조 형용사가 있다.
+     *
      * ‘ 가지고 싶다’의 ‘싶다’, ‘먹어 보다’의 ‘보다1’ 따위이다.
      * */
     VX,
@@ -43,6 +50,7 @@ enum class POS {
     /** ([MODIFIERS]: 수식언) ''부사'' : 용언 또는 다른 말 앞에 놓여 그 뜻을 분명하게 하는 품사. **/
     MAG,
     /** ([MODIFIERS]: 수식언) ''접속부사'' : 앞의 체언이나 문장의 뜻을 뒤의 체언이나 문장에 이어 주면서 뒤의 말을 꾸며 주는 부사.
+     *
      * ‘ 그러나’, ‘그런데’, ‘그리고’, ‘하지만’ 따위가 있다.
      * */
     MAJ,
@@ -50,12 +58,13 @@ enum class POS {
     /** (독립언) ''감탄사'' : 말하는 이의 본능적인 놀람이나 느낌, 부름, 응답 따위를 나타내는 말의 부류이다. **/
     IC,
 
-    /** ([POSTPOSITIONS]: 관계언) ''주격 조사'' :
-     * 문장 안에서, 체언이 서술어의 주어임을 표시하는 격 조사. ‘이/가’, ‘께서’, ‘에서2’ 따위가 있다.
+    /** ([POSTPOSITIONS]: 관계언) ''주격 조사'' : 문장 안에서, 체언이 서술어의 주어임을 표시하는 격 조사.
+     *
+     * ‘이/가’, ‘께서’, ‘에서2’ 따위가 있다.
      * */
     JKS,
-    /** ([POSTPOSITIONS]: 관계언) ''보격 조사'' :
-     * 문장 안에서, 체언이 보어임을 표시하는 격 조사.
+    /** ([POSTPOSITIONS]: 관계언) ''보격 조사'' : 문장 안에서, 체언이 보어임을 표시하는 격 조사.
+     *
      * ‘철수는 위대한 학자가 되었다.’에서의 ‘가11’, ‘그는 보통 인물이 아니다.’에서의 ‘이27’ 따위이다.
      * */
     JKC,
@@ -64,37 +73,40 @@ enum class POS {
     /** ([POSTPOSITIONS]: 관계언) ''목적격 조사'' : 문장 안에서, 체언이 서술어의 목적어임을 표시하는 격 조사. ‘을/를’이 있다. **/
     JKO,
     /** ([POSTPOSITIONS]: 관계언) ''부사격 조사'' : 문장 안에서, 체언이 부사어임을 보이는 조사.
+     *
      * ‘ 에4’, ‘에서2’, ‘(으)로’, ‘와/과’, ‘보다4’ 따위가 있다. **/
     JKB,
     /** ([POSTPOSITIONS]: 관계언) ''호격 조사'' :
      * 문장 안에서, 체언이 부름의 자리에 놓이게 하여 독립어가 되게 하는 조사.
+     *
      * ‘영숙아’의 ‘아9’, ‘철수야’의 ‘야12’ 따위가 있다. **/
     JKV,
     /** ([POSTPOSITIONS]: 관계언) ''인용격 조사'': 앞의 말이 인용됨을 나타내는 조사. **/
     JKQ,
-    /** ([POSTPOSITIONS]: 관계언) ''접속 조사'' :
-     * 둘 이상의 단어나 구 따위를 같은 자격으로 이어 주는 구실을 하는 조사.
+    /** ([POSTPOSITIONS]: 관계언) ''접속 조사'' : 둘 이상의 단어나 구 따위를 같은 자격으로 이어 주는 구실을 하는 조사.
+     *
      * ‘와4’, ‘과12’, ‘하고5’, ‘(이)나’, ‘(이)랑’ 따위가 있다. **/
     JC,
-    /** ([POSTPOSITIONS]: 관계언) ''보조사'' :
-     * 체언, 부사, 활용 어미 따위에 붙어서 어떤 특별한 의미를 더해 주는 조사.
+    /** ([POSTPOSITIONS]: 관계언) ''보조사'' : 체언, 부사, 활용 어미 따위에 붙어서 어떤 특별한 의미를 더해 주는 조사.
+     *
      * ‘은5’, ‘는1’, ‘도15’, ‘만14’, ‘까지3’, ‘마저’, ‘조차8’, ‘부터’ 따위가 있다.
      * */
     JX,
 
-    /** ([ENDINGS]: 어미) ''선어말 어미'' :
-     * 어말 어미 앞에 나타나는 어미.
-     * ‘-시-23’, ‘-옵-1’ 따위와 같이 높임법에 관한 것과
-     * ‘-았-’, ‘-는-2’, ‘-더-2’, ‘-겠-’ 따위와 같이 시상(時相)에 관한 것이 있다.
+    /** ([ENDINGS]: 어미) ''선어말 어미'' : 어말 어미 앞에 나타나는 어미.
+     *
+     * * ‘-시-23’, ‘-옵-1’ 따위와 같이 높임법에 관한 것과
+     * * ‘-았-’, ‘-는-2’, ‘-더-2’, ‘-겠-’ 따위와 같이 시상(時相)에 관한 것이 있다.
      * */
     EP,
-    /** ([ENDINGS]: 어미) ''종결 어미'' :
-     * 한 문장을 종결되게 하는 어말 어미.
-     * 동사에는 평서형ㆍ감탄형ㆍ의문형ㆍ명령형ㆍ청유형이 있고, 형용사에는 평서형ㆍ감탄형ㆍ의문형이 있다.
+    /** ([ENDINGS]: 어미) ''종결 어미'' : 한 문장을 종결되게 하는 어말 어미.
+     *
+     * * 동사에는 평서형ㆍ감탄형ㆍ의문형ㆍ명령형ㆍ청유형이 있고,
+     * * 형용사에는 평서형ㆍ감탄형ㆍ의문형이 있다.
      * */
     EF,
-    /** ([ENDINGS]: 어미) ''연결 어미''
-     * 어간에 붙어 다음 말에 연결하는 구실을 하는 어미.
+    /** ([ENDINGS]: 어미) ''연결 어미'' 어간에 붙어 다음 말에 연결하는 구실을 하는 어미.
+     *
      * ‘-게10’, ‘-고25’, ‘-(으)며’, ‘-(으)면’, ‘-(으)니’, ‘-아/어’, ‘-지23’ 따위가 있다.
      * */
     EC,
@@ -128,7 +140,9 @@ enum class POS {
      * */
     XSO,
     /** ''어근'' :
-     * 단어를 분석할 때, 실질적 의미를 나타내는 중심이 되는 부분. ‘덮개’의 ‘덮-’, ‘어른스럽다’의 ‘어른1’ 따위이다.
+     * 단어를 분석할 때, 실질적 의미를 나타내는 중심이 되는 부분.
+     *
+     * ‘덮개’의 ‘덮-’, ‘어른스럽다’의 ‘어른1’ 따위이다.
      * */
     XR,
 
@@ -188,52 +202,82 @@ enum class POS {
     }
 
     /**
-     * 이 값이 체언([NOUNS])인지 확인하여, 체언인 경우 True
+     * 이 값이 체언([NOUNS])인지 확인합니다.
+     *
+     * @since 1.x
+     * @return 체언인 경우 True
      */
     fun isNoun(): Boolean = this in NOUNS
 
     /**
-     * 이 값이 용언([PREDICATES])인지 확인, 용언인 경우 True
+     * 이 값이 용언([PREDICATES])인지 확인합니다.
+     *
+     * @since 1.x
+     * @return 용언인 경우 True
      */
     fun isPredicate(): Boolean = this in PREDICATES
 
     /**
-     * 이 값이 수식언([MODIFIERS])인지 확인, 수식언인 경우 True
+     * 이 값이 수식언([MODIFIERS])인지 확인합니다.
+     *
+     * @since 1.x
+     * @return 수식언인 경우 True
      */
     fun isModifier(): Boolean = this in MODIFIERS
 
     /**
-     * 이 값이 관계언(조사; [POSTPOSITIONS])인지 확인, 관계언인 경우 True
+     * 이 값이 관계언(조사; [POSTPOSITIONS])인지 확인합니다.
+     *
+     * @since 1.x
+     * @return 관계언인 경우 True
      */
     fun isPostPosition(): Boolean = this in POSTPOSITIONS
 
     /**
-     * 이 값이 어미([ENDINGS])인지 확인, 어미인 경우 True
+     * 이 값이 어미([ENDINGS])인지 확인합니다.
+     *
+     * @since 1.x
+     * @return 어미인 경우 True
      */
     fun isEnding(): Boolean = this in ENDINGS
 
     /**
-     * 이 값이 접사([AFFIXES])인지 확인, 접사인 경우 True
+     * 이 값이 접사([AFFIXES])인지 확인합니다.
+     *
+     * @since 1.x
+     * @return 접사인 경우 True
      */
     fun isAffix(): Boolean = this in AFFIXES
 
     /**
-     * 이 값이 접미사([SUFFIXES])인지 확인, 접미사인 경우 True
+     * 이 값이 접미사([SUFFIXES])인지 확인합니다.
+     *
+     * @since 1.x
+     * @return 접미사인 경우 True
      */
     fun isSuffix(): Boolean = this in SUFFIXES
 
     /**
-     * 이 값이 기호([SYMBOLS])인지 확인, 기호인 경우 True
+     * 이 값이 기호([SYMBOLS])인지 확인합니다.
+     *
+     * @since 1.x
+     * @return 기호인 경우 True
      */
     fun isSymbol(): Boolean = this in SYMBOLS
 
     /**
-     * 이 값이 미확인 단어([UNKNOWNS])인지 확인, 미확인 단어인 경우 True
+     * 이 값이 미확인 단어([UNKNOWNS])인지 확인합니다.
+     *
+     * @since 1.x
+     * @return 미확인 단어인 경우 True
      */
     fun isUnknown(): Boolean = this in UNKNOWNS
 
     /**
-     * 이 값이 주어진 [tag]로 시작하는지 확인, 그러한 경우 True
+     * 이 값이 주어진 [tag]로 시작하는지 확인합니다.
+     *
+     * @since 2.0.0
+     * @return 그러한 경우 True
      */
     fun startsWith(tag: CharSequence): Boolean {
         val xtag = tag.toString().toUpperCase()
@@ -241,17 +285,26 @@ enum class POS {
     }
 }
 
+/**
+ * 전체 형태소의 개수
+ */
 internal inline val POS_SIZE get() = POS.values().size
 
 /**
- * (Extension) 이 String 값에 주어진 [tag]가 포함되는지 확인.
+ * (Extension) 이 String 값에 주어진 [tag]가 포함되는지 확인합니다.
+ *
+ * @since 2.0.0
+ * @param[tag] 하위 분류인지 확인할 형태소 품사표기 값
+ * @return 하위 분류에 해당한다면 true
  */
 operator fun CharSequence.contains(tag: POS): Boolean = tag.startsWith(this)
 
 /*************************************************************/
 
 /**
- * 세종 구문구조 표지자
+ * 세종 구문구조 표지자를 Enum class로 담았습니다.
+ *
+ * @since 2.0.0
  */
 enum class PhraseTag {
     /**
@@ -318,21 +371,26 @@ enum class PhraseTag {
      * 인용 부호 내부에 있는 인용된 절. 세종 표지에서는 Q, U, W, Y, Z가 사용되나 KoalaNLP에서는 하나로 통일함.
      */
     Q
-
-
 }
 
 /**
- * (Extension) 주어진 목록에 주어진 구문구조 표지 [tag]가 포함되는지 확인.
+ * (Extension) 주어진 목록에 주어진 구문구조 표지 [tag]가 포함되는지 확인합니다.
+ *
+ * @since 2.0.0
+ * @param[tag] 속하는지 확인할 구문구조 표지 값
+ * @return 목록 중 하나라도 일치한다면 true
  */
 operator fun Iterable<String>.contains(tag: PhraseTag): Boolean = this.any { it == tag.name }
 
 /********************************************************/
 
 /**
- * 의존구문구조 기능표지자 (ETRI 표준안)
+ * 의존구문구조 기능표지자를 담은 Enum class입니다.
+ * (ETRI 표준안)
  *
  * [참고](http://aiopen.etri.re.kr/data/1.%20%EC%9D%98%EC%A1%B4%20%EA%B5%AC%EB%AC%B8%EB%B6%84%EC%84%9D%EC%9D%84%20%EC%9C%84%ED%95%9C%20%ED%95%9C%EA%B5%AD%EC%96%B4%20%EC%9D%98%EC%A1%B4%EA%B4%80%EA%B3%84%20%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8%20%EB%B0%8F%20%EC%97%91%EC%86%8C%EB%B8%8C%EB%A0%88%EC%9D%B8%20%EC%96%B8%EC%96%B4%EB%B6%84%EC%84%9D%20%EB%A7%90%EB%AD%89%EC%B9%98.pdf)
+ *
+ * @since 1.x
  */
 enum class DependencyTag {
     /** ''주어'': 술어가 나타내는 동작이나 상태의 주체가 되는 말
@@ -376,7 +434,10 @@ operator fun Iterable<String>.contains(tag: DependencyTag): Boolean = this.any {
 /************************************************************/
 
 /**
- * 의미역(Semantic Role) 분석 표지 (ETRI 표준안)
+ * 의미역(Semantic Role) 분석 표지를 담은 Enum class입니다.
+ * (ETRI 표준안)
+ *
+ * @since 2.0.0
  */
 enum class RoleType {
     /** 주 동사 */
@@ -441,14 +502,21 @@ enum class RoleType {
 }
 
 /**
- * (Extension) 주어진 목록에 주어진 의미역 표지 [tag]가 포함되는지 확인.
+ * (Extension) 주어진 목록에 주어진 의미역 표지 [tag]가 포함되는지 확인합니다.
+ *
+ * @since 2.0.0
+ * @param[tag] 속하는지 확인할 구문구조 표지 값
+ * @return 목록 중 하나라도 일치한다면 true
  */
 operator fun Iterable<String>.contains(tag: RoleType): Boolean = this.any { it == tag.name }
 
 /************************************************************/
 
 /**
- * 대분류 개체명(Named Entity) 유형 (ETRI 표준안)
+ * 대분류 개체명(Named Entity) 유형을 담은 Enum class입니다.
+ * (ETRI 표준안)
+ *
+ * @since 2.0.0
  */
 enum class CoarseEntityType {
     /**
@@ -528,6 +596,10 @@ enum class CoarseEntityType {
 }
 
 /**
- * (Extension) 주어진 목록에 주어진 개체명 유형 [tag]가 포함되는지 확인.
+ * (Extension) 주어진 목록에 주어진 개체명 유형 [tag]가 포함되는지 확인합니다.
+ *
+ * @since 2.0.0
+ * @param[tag] 속하는지 확인할 구문구조 표지 값
+ * @return 목록 중 하나라도 일치한다면 true
  */
 operator fun Iterable<String>.contains(tag: CoarseEntityType): Boolean = this.any { it == tag.name }
