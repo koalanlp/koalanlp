@@ -2,9 +2,6 @@
 
 package kr.bydelta.koala
 
-import java.lang.IllegalArgumentException
-import kotlin.streams.toList
-
 /** '가' 위치 **/
 const val HANGUL_START = '가'
 /** '힣' 위치 **/
@@ -123,7 +120,7 @@ private val HANJA_READ_TABLE by lazy {
                 if (sound.length > 1)
                     hanja[0] to sound.replace(Regex("[(\\[{}\\])]+"), "")[0]
                 else hanja[0] to sound[0]
-            }.toList().toMap()
+            }.iterator().asSequence().toMap()
 }
 
 /** 두음법칙 예외조항이 적용되는 한자 */

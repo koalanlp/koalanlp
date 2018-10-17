@@ -4,9 +4,8 @@ import org.amshove.kluent.`should be equal to`
 import org.amshove.kluent.`should be`
 import org.amshove.kluent.`should equal`
 import org.amshove.kluent.shouldContainSame
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.describe
-import org.jetbrains.spek.api.dsl.it
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 
 object ProcessorSpec : Spek({
     describe("CanSplitSentence Interface") {
@@ -30,7 +29,7 @@ object ProcessorSpec : Spek({
                     |"/SW 나라/NNG+가/JKS 취로/NNG 사업/NNG+이/VCP 라도/EC 만들/VV+어/EC 주/VX+지/EC 않/VX+으면/EC 일/NNG+이/JKS 없/VA+어/EF ./SF 섬/NNG+이/VCP 라서/EC 어디/NP 다른/MM 데/NNB 나가/VV+서/EC 일/NNG+하/XSV+ᆯ/ETM 수/NNB+도/JX 없/VA+고/EC ./SW "/SW 가난/NNG+에/JKB 익숙/XR+하/XSA+아/EC+지/VX+ᆫ/ETM 연평/NNG+도/NNG 사람/NNG+들/XSN+은/JX '/SW 정당/NNG '/SW 과/JC '/SW 은혜/NNG '/SW 이/VCP+라는/ETM 말/NNG+을/JKO 즐기/VV+어/EC 쓰/VV+었/EP+다/EF ./SF""".trimMargin()
                         .split("\n").map { s ->
                             Sentence(s.split(" ").map { w ->
-                                val morphemes = w.split("\\+").map { m ->
+                                val morphemes = w.split("+").map { m ->
                                     val segments = m.split("/")
                                     Morpheme(segments[0], POS.valueOf(segments[1]), segments[1])
                                 }
@@ -44,7 +43,7 @@ object ProcessorSpec : Spek({
                 |가난/NNG+에/JKB 익숙/XR+하/XSA+아/EC+지/VX+ᆫ/ETM 연평/NNG+도/NNG 사람/NNG+들/XSN+은/JX '/SW 정당/NNG '/SW 과/JC '/SW 은혜/NNG '/SW 이/VCP+라는/ETM 말/NNG+을/JKO 즐기/VV+어/EC 쓰/VV+었/EP+다/EF ./SF""".trimMargin()
                         .split("\n").map { s ->
                             Sentence(s.split(" ").map { w ->
-                                val morphemes = w.split("\\+").map { m ->
+                                val morphemes = w.split("+").map { m ->
                                     val segments = m.split("/")
                                     Morpheme(segments[0], POS.valueOf(segments[1]), segments[1])
                                 }
@@ -54,10 +53,13 @@ object ProcessorSpec : Spek({
 
         val sent3 =
                 """오늘/NNG 환율/NNG+은/JX 137/SN ./SF 75/SN+원/NNM+에/JKB 거래/NNG+되/XSV+었/EP+다/EF+./SF
-                    |미스터/NNP 션샤인/NNP+은/JX 해외/NNG+에서/JKB Mr/SL ./SF Sunshine/SL+으로/JKB 부르/VV+ㄴ/EP+다/EF+./SF""".trimMargin()
+                    |미스터/NNP 션샤인/NNP+은/JX 해외/NNG+에서/JKB Mr/SL ./SF Sunshine/SL+으로/JKB 부르/VV+ㄴ/EP+다/EF+./SF
+                    |3/SN+./SF 3/SN+은/JX 실수/NNG+이/VCP+다/EF+./SF
+                    |7/SN+./SF
+                    |이/NP 문장/NNG+은/JX '/SS+quote/SN+!/SF+"/SS+가/JX 잘못/VA+되/EP+ㄴ/ETM 문장/NNG+이/VCP+다/EF+?/SF""".trimMargin()
                         .split("\n").map { s ->
                             Sentence(s.split(" ").map { w ->
-                                val morphemes = w.split("\\+").map { m ->
+                                val morphemes = w.split("+").map { m ->
                                     val segments = m.split("/")
                                     Morpheme(segments[0], POS.valueOf(segments[1]), segments[1])
                                 }
@@ -81,7 +83,7 @@ object ProcessorSpec : Spek({
             split2 `should equal` sent2
 
             val split3 = SentenceSplitter(sent3.flatten())
-            split3.size `should be equal to` 2
+            split3.size `should be equal to` 5
             split3 `should equal` sent3
         }
     }

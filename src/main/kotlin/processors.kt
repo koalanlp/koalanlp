@@ -38,52 +38,54 @@ object SentenceSplitter {
      * @return 문장단위로 분리된 결과
      */
     operator fun invoke(para: Iterable<Word>): List<Sentence> {
-        val sentences = mutableListOf<MutableList<Word>>(mutableListOf())
+        val sentences = mutableListOf<Sentence>()
         val parenStack = Stack<Char>()
-        val it = para.iterator()
+        val it = para.toList()
+        var begin = 0
 
-        while (it.hasNext()) {
-            val head = it.next()
-            sentences.last().add(head)
+        for (pos in 0 until it.size) {
+            val word = it[pos]
 
-            if (isEnding(head, parenStack)) sentences.add(mutableListOf())
-        }
-
-        return sentences.filter { it.isNotEmpty() }.map { Sentence(it.toList()) }
-    }
-
-    private fun isEnding(morphemes: Iterable<Morpheme>, stack: Stack<Char>): Boolean {
-        var isPreviousSL = false
-        var hasEndOfSentence = false
-        val it = morphemes.iterator()
-
-        while (it.hasNext()) {
-            val (surface: String, tag: POS) = it.next()
-
-            if (tag == POS.SF && (surface != "." || !isPreviousSL)) {
-                hasEndOfSentence = true
-            } else if (tag == POS.SN) {
-                hasEndOfSentence = false
-            } else {
-                for (ch in surface) {
-                    if (ch in openParenRegex) {
-                        stack.push(ch)
-                    } else if (ch in closeParenRegex) {
-                        if (stack.isNotEmpty() && closeParenRegex.indexOf(ch) == openParenRegex.indexOf(stack.peek()))
-                            stack.pop()
-                    } else if (ch in quoteRegex) {
-                        if (stack.isNotEmpty() && stack.peek() == ch)
-                            stack.pop()
-                        else
-                            stack.push(ch)
-                    }
+            for (ch in word.surface) {
+                if (ch in openParenRegex) {
+                    parenStack.push(ch)
+                } else if (ch in closeParenRegex) {
+                    if (parenStack.isNotEmpty() &&
+                            closeParenRegex.indexOf(ch) == openParenRegex.indexOf(parenStack.peek()))
+                        parenStack.pop()
+                } else if (ch in quoteRegex) {
+                    if (parenStack.isNotEmpty() && parenStack.peek() == ch)
+                        parenStack.pop()
+                    else
+                        parenStack.push(ch)
                 }
             }
 
-            isPreviousSL = tag == POS.SL
+            if (word.last().tag == POS.SF) {
+                val prevSLN =
+                        if (word.size == 1) {
+                            if (pos > 0) it[pos - 1].last().hasTagOneOf("SL", "SN") else false
+                        } else {
+                            word[word.size - 2].hasTagOneOf("SL", "SN")
+                        }
+                val nextSLN =
+                        if (pos + 1 < it.size) {
+                            it[pos + 1].first().hasTagOneOf("SL", "SN")
+                        } else false
+
+                if (!(prevSLN && nextSLN) && parenStack.isEmpty()) {
+                    //This is the end of the sentence!
+                    sentences.add(Sentence(it.subList(begin, pos + 1)))
+                    begin = pos + 1
+                }
+            }
         }
 
-        return stack.isEmpty() && hasEndOfSentence
+        if (begin < it.size) {
+            sentences.add(Sentence(it.subList(begin, it.size)))
+        }
+
+        return sentences.filter { it.isNotEmpty() }
     }
 }
 

@@ -1,2 +1,4 @@
 rootProject.name = archivesBaseName
 
+include 'java'
+include 'kotlin'

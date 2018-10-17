@@ -1,0 +1,135 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id "org.jetbrains.kotlin.jvm" version "1.2.71"
+    id "org.jetbrains.dokka" version "0.9.17"
+    id "com.bmuschko.nexus" version "2.3.1"
+    id "io.codearte.nexus-staging" version "0.12.0"
+}
+
+def baseName = archivesBaseName as String ?: 'koalanlp-x'
+def kotlin_version = '1.2.71'
+def gitBaseName = archivesBaseName.endsWith 'core' ? 'KoalaNLP-core' : baseName.replace('koalanlp', 'wrapper')
+def gitBranch = properties.'branch' as String ?: '2.x'
+
+ext.nexusUsername = properties.'ossrhUsername' as String ?: 'Foo'
+ext.nexusPassword = properties.'ossrhPassword' as String ?: 'Foo'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://dl.bintray.com/spekframework/spek-dev" }
+    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2"
+    testImplementation "org.amshove.kluent:kluent:1.42"
+    testImplementation('org.spekframework.spek2:spek-dsl-jvm:2.0.0-alpha.1') {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    testRuntimeOnly('org.spekframework.spek2:spek-runner-junit5:2.0.0-alpha.1') {
+//        exclude group: 'org.junit.platform'
+        exclude group: 'org.jetbrains.kotlin'
+    }
+}
+
+// documentation
+dokka {
+    outputFormat = "html"
+    outputDirectory = "$rootDir/docs/api"
+
+    linkMapping {
+        dir = "src/main/kotlin"
+        url = "https://github.com/koalanlp/${gitBaseName}/blob/${gitBranch}/src/main/kotlin"
+        suffix = "#L"
+    }
+
+    externalDocumentationLink{
+        url = new URL("https://koalanlp.github.io/${gitBaseName}/api")
+    }
+}
+
+task dokkaJar(type: org.gradle.jvm.tasks.Jar){
+    group = JavaBasePlugin.DOCUMENTATION_GROUP
+    description = "Assembles Kotlin docs with Dokka"
+    classifier = "javadoc"
+    from dokka
+}
+
+task sourceJar(type: org.gradle.jvm.tasks.Jar){
+    classifier = "sources"
+    from sourceSets.'main'.allSource
+}
+
+// publishing
+
+modifyPom {
+    project {
+        groupId group
+        artifactId archivesBaseName
+        version version
+
+        packaging "jar"
+        url "http://koalanlp.github.io/$gitBaseName"
+
+        scm {
+            connection "scm:git:git@github.com:koalanlp/${gitBaseName}.git"
+            developerConnection "scm:git:git@github.com:koalanlp/${gitBaseName}.git"
+            url "https://github.com/koalanlp/$gitBaseName"
+        }
+
+        licenses{
+            license{
+                name "MIT License"
+                url "https://tldrlegal.com/license/mit-license"
+            }
+        }
+
+        developers{
+            developer{
+                id "nearbydelta"
+                name "Bugeun Kim"
+                url "http://bydelta.kr"
+            }
+        }
+    }
+}
+
+extraArchive {
+    sources = true
+    tests = true
+    javadoc = true
+}
+
+nexus {
+    sign = true
+}
+
+nexusStaging {
+    packageGroup = group //optional if packageGroup == project.getGroup()
+}
+
+// testing
+
+test {
+    useJUnitPlatform {
+        includeEngines 'spek2'
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.2"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
+check.dependsOn jacocoTestReport
