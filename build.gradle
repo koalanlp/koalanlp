@@ -2,14 +2,14 @@ plugins {
     id 'java'
     id 'jacoco'
     id "org.jetbrains.kotlin.jvm" version "1.2.71"
-    id "org.jetbrains.dokka" version "0.9.17"
+    id "org.jetbrains.dokka" version "0.9.16"
     id "com.bmuschko.nexus" version "2.3.1"
     id "io.codearte.nexus-staging" version "0.12.0"
 }
 
 def baseName = archivesBaseName as String ?: 'koalanlp-x'
 def kotlin_version = '1.2.71'
-def gitBaseName = archivesBaseName.endsWith 'core' ? 'KoalaNLP-core' : baseName.replace('koalanlp', 'wrapper')
+def gitBaseName = archivesBaseName.endsWith('core') ? 'KoalaNLP-core' : baseName.replace('koalanlp', 'wrapper')
 def gitBranch = properties.'branch' as String ?: '2.x'
 
 ext.nexusUsername = properties.'ossrhUsername' as String ?: 'Foo'
@@ -46,10 +46,6 @@ dokka {
         dir = "src/main/kotlin"
         url = "https://github.com/koalanlp/${gitBaseName}/blob/${gitBranch}/src/main/kotlin"
         suffix = "#L"
-    }
-
-    externalDocumentationLink{
-        url = new URL("https://koalanlp.github.io/${gitBaseName}/api")
     }
 }
 
@@ -133,3 +129,6 @@ jacocoTestReport {
 }
 
 check.dependsOn jacocoTestReport
+javadoc.dependsOn dokkaJar
+
+defaultTasks 'clean'

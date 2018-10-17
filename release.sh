@@ -27,6 +27,7 @@ echo -n Sonatype password:
 read -s PASSWORD
 
 ./gradlew clean jar dokkarJar sourceJar
+./gradlew uploadArchives closeAndReleaseRepository -PnexusUsername=$SONATYPE_USERNAME -PnexusPassword=$SONATYPE_PASSWORD '-Psigning.keyId=yourKeyId' '-Psigning.password=yourPassword' -Psigning.secretKeyRingFile=path/to/maven.gpg
 
 echo SET TO $JAR_VER_NEXT
 cat gradle.properties | sed -e 's/version=\s*.*/version='$JAR_VER_CURRENT'-SNAPSHOT/g' > gradle.properties.new
