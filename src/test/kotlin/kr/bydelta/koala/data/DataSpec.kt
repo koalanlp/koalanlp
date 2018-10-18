@@ -338,6 +338,8 @@ object DataSpec : Spek({
 
                 // All these trees automatically set pointers on the words.
                 Entity(CoarseEntityType.PS, "PS_OTHER", listOf(dummy1))
+                Entity(CoarseEntityType.PS, "PS_SOME", listOf(dummy1))
+                Entity(CoarseEntityType.PS, "PS_ANOTHER", listOf(dummy1))
                 SyntaxTree(PhraseTag.NP, dummy1)
                 DepTree(dummy1, PhraseTag.NP, DependencyTag.SBJ)
                 RoleTree(dummy1, RoleType.ARG0)
@@ -596,6 +598,7 @@ object DataSpec : Spek({
             val dummy1 = ListProperty(listOf(IntProperty(1), IntProperty(2), IntProperty(3)))
             val dummy2 = ListProperty(listOf(IntProperty(1), IntProperty(2), IntProperty(3)))
             val dummy3 = ListProperty(listOf(IntProperty(1), IntProperty(3), IntProperty(2)))
+            val dummy4 = ListProperty(listOf(IntProperty(1), IntProperty(3)))
 
             // children
             it("should correctly handle children") {
@@ -634,6 +637,9 @@ object DataSpec : Spek({
                 dummy1 `should not equal` dummy3
                 dummy3 `should not equal` dummy1
 
+                dummy1 `should not equal` dummy4
+                dummy4 `should not equal` dummy1
+
                 dummy1 `should not equal` dummy1[0]
             }
 
@@ -671,6 +677,12 @@ object DataSpec : Spek({
             val dummy1 = Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent2[2]))
             val dummy2 = Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent2[2]))
             val dummy3 = Entity(CoarseEntityType.PL, "PL_OTHER", listOf(sent2[0], sent2[1]))
+
+            it("should check whether coarse type contains fine type") {
+                {
+                    Entity(CoarseEntityType.EV, "PS_OTHER", emptyList())
+                } `should throw` AssertionError::class
+            }
 
             // List<Word>
             it("should find index of given word") {
@@ -726,6 +738,8 @@ object DataSpec : Spek({
 
                 dummy1 `should not equal` dummy3
                 dummy3 `should not equal` dummy1
+
+                dummy1 `should not equal` Entity(CoarseEntityType.PS, "PS_SAMPLE", listOf(sent2[3]))
 
                 dummy1 `should not equal` dummy1[0]
             }
@@ -978,6 +992,8 @@ object DataSpec : Spek({
                 dummy1 `should not equal` dummy1[0]
                 dummy1 `should not equal` dummy1.leaf
 
+                dummy1[0] `should not equal` dummy1[1]
+
                 dummy1[0][0] `should equal` dummy2[0][0]
             }
 
@@ -1174,7 +1190,8 @@ object DataSpec : Spek({
 
             {
                 prop.setProperty(Entity(CoarseEntityType.EV, "EV_OTHER", listOf(prop)))
-                prop.setProperty(ListProperty(emptyList<Entity>()))
+                prop.setProperty(ListProperty(emptyList<DepTree>()))
+                prop.setProperty(ListProperty(listOf(IntProperty(1))))
             } `should not throw` IllegalArgumentException::class
 
             {

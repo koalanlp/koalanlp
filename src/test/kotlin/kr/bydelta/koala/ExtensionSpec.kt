@@ -332,7 +332,17 @@ object ExtensionSpec : Spek({
                     Pair("孝友文行", "효우문행"),
                     Pair("孝忍知愛", "효인지애"),
                     Pair("孝悌忠信", "효제충신"),
-                    Pair("斅學相長", "효학상장"))
+                    Pair("斅學相長", "효학상장"),
+                    Pair("雷雨", "뇌우"),
+                    Pair("老人恭敬", "노인공경"),
+                    Pair("300 兩", "300 냥"),
+                    Pair(" 兩班", " 양반"),
+                    Pair("1492 年에", "1492 년에"),
+                    Pair("年月日", "연월일"),
+                    Pair("30 里를 운행한 2 輛의 기차", "30 리를 운행한 2 량의 기차"),
+                    Pair("百分率", "백분율"),
+                    Pair("一列", "일렬"),
+                    Pair("戰列", "전열"))
 
             for ((hanja, hangul) in sample) {
                 hanja.hanjaToHangul().toString() `should be equal to` hangul
@@ -358,6 +368,7 @@ object ExtensionSpec : Spek({
         // CharSequence.isJongsungEnding
         it("should correctly identify Hangul characters") {
             'k'.isCompleteHangul() `should be` false
+            '車'.isCompleteHangul() `should be` false
             '\u1161'.isCompleteHangul() `should be` false
             '\u1161'.isJungsungJamo() `should be` true
 
@@ -476,6 +487,9 @@ object ExtensionSpec : Spek({
             };
 
             { assembleHangul('a', 'b') } `should throw` IllegalArgumentException::class
+
+            val sampleString = "SNS '인플루엔서' 쇼핑 피해 심각... 법적 안전장치 미비: ㄱ씨는 요즘 ㄴ SNS에서 갤럭시S"
+            sampleString.dissembleHangul().assembleHangul().toString() `should be equal to` sampleString
         }
     }
 
@@ -483,103 +497,115 @@ object ExtensionSpec : Spek({
         // correctVerbApply
         it("should correct verb application") {
 
-            val map =
-                    listOf(Pair(Triple("깨닫", true, "아"), "깨달아"),
-                            Pair(Triple("붇", true, "어나다"), "불어나다"),
-                            Pair(Triple("눋", true, "어"), "눌어"),
-                            Pair(Triple("믿", true, "어"), "믿어"),
-                            Pair(Triple("묻", true, "어"), "물어"),
-                            Pair(Triple("구르", true, "어"), "굴러"),
-                            Pair(Triple("모르", true, "아"), "몰라"),
-                            Pair(Triple("벼르", true, "어"), "별러"),
-                            Pair(Triple("마르", true, "아"), "말라"),
-                            Pair(Triple("무르", true, "어"), "물러"),
-                            Pair(Triple("누르", true, "어"), "눌러"),
-                            Pair(Triple("다르", true, "아"), "달라"),
-                            Pair(Triple("사르", true, "아"), "살라"),
-                            Pair(Triple("바르", true, "아"), "발라"),
-                            Pair(Triple("가르", true, "아"), "갈라"),
-                            Pair(Triple("나르", true, "아"), "날라"),
-                            Pair(Triple("자르", true, "아"), "잘라"),
-                            Pair(Triple("치르", true, "어"), "치러"),
-                            Pair(Triple("따르", true, "아"), "따라"),
-                            Pair(Triple("다다르", true, "아"), "다다라"),
-                            Pair(Triple("우러르", true, "어"), "우러러"),
-                            Pair(Triple("들르", true, "어"), "들러"),
-                            Pair(Triple("아니꼽", false, "어"), "아니꼬워"),
-                            Pair(Triple("무덥", false, "어"), "무더워"),
-                            Pair(Triple("우습", false, "어"), "우스워"),
-                            Pair(Triple("줍", true, "어"), "주워"),
-                            Pair(Triple("더럽", false, "어"), "더러워"),
-                            Pair(Triple("무섭", false, "어"), "무서워"),
-                            Pair(Triple("귀엽", false, "어"), "귀여워"),
-                            Pair(Triple("안쓰럽", false, "ㄴ"), "안쓰러운"),
-                            Pair(Triple("아름답", false, "어"), "아름다워"),
-                            Pair(Triple("잡", true, "아"), "잡아"),
-                            Pair(Triple("뽑", true, "아"), "뽑아"),
-                            Pair(Triple("곱", false, "아"), "고와"),
-                            Pair(Triple("돕", true, "아"), "도와"),
-                            Pair(Triple("뽑", true, "아"), "뽑아"),
-                            Pair(Triple("씹", true, "어"), "씹어"),
-                            Pair(Triple("업", true, "어"), "업어"),
-                            Pair(Triple("입", true, "어"), "입어"),
-                            Pair(Triple("잡", true, "아"), "잡아"),
-                            Pair(Triple("접", true, "아"), "접어"),
-                            Pair(Triple("좁", false, "아"), "좁아"),
-                            Pair(Triple("낫", true, "아"), "나아"),
-                            Pair(Triple("긋", true, "아"), "그어"),
-                            Pair(Triple("벗", true, "아"), "벗어"),
-                            Pair(Triple("솟", true, "아"), "솟아"),
-                            Pair(Triple("씻", true, "아"), "씻어"),
-                            Pair(Triple("뺏", true, "어"), "뺏어"),
-                            Pair(Triple("푸", true, "어"), "퍼"),
-                            Pair(Triple("끄", true, "아"), "꺼"),
-                            Pair(Triple("끄", true, "어"), "꺼"),
-                            Pair(Triple("들", true, "아"), "들어"),
-                            Pair(Triple("가", true, "아라"), "가거라"),
-                            Pair(Triple("삼가", true, "아라"), "삼가거라"),
-                            Pair(Triple("들어가", true, "아라"), "들어가거라"),
-                            Pair(Triple("오", true, "아라"), "오너라"),
-                            Pair(Triple("돌아오", true, "아라"), "돌아오너라"),
-                            Pair(Triple("푸르", false, "어"), "푸르러"),
-                            Pair(Triple("하", true, "았다"), "하였다"),
-                            Pair(Triple("하", true, "었다"), "하였다"),
-                            Pair(Triple("영원하", true, "아"), "영원하여"),
-                            Pair(Triple("파랗", false, "으면"), "파라면"),
-                            Pair(Triple("파랗", false, "ㄴ"), "파란"),
-                            Pair(Triple("동그랗", false, "은"), "동그란"),
-                            Pair(Triple("파랗", false, "았다"), "파랬다"),
-                            Pair(Triple("파랗", false, "을"), "파랄"),
-                            Pair(Triple("그렇", false, "아"), "그래"),
-                            Pair(Triple("시퍼렇", false, "었다"), "시퍼렜다"),
-                            Pair(Triple("그렇", false, "네"), "그렇네"),
-                            Pair(Triple("파랗", false, "네"), "파랗네"),
-                            Pair(Triple("노랗", false, "네"), "노랗네"),
-                            Pair(Triple("좋", false, "아"), "좋아"),
-                            Pair(Triple("낳", true, "아"), "낳아"),
-                            Pair(Triple("이", true, "라면서"), "이라면서"),
-                            Pair(Triple("보", true, "면"), "보면"),
-                            Pair(Triple("주장하", true, "았다"), "주장하였다"),
-                            Pair(Triple("너그럽", false, "게"), "너그럽게"),
-                            Pair(Triple("연결지", true, "었"), "연결졌"),
-                            Pair(Triple("다", true, "아"), "다오"),
-                            Pair(Triple("눕", true, "으니"), "누우니"),
-                            Pair(Triple("눕", true, "자"), "눕자"),
-                            Pair(Triple("돕", true, "으면"), "도우면"),
-                            Pair(Triple("곱", false, "ㄴ"), "고운"),
-                            Pair(Triple("곱", false, "어"), "고와"),
-                            Pair(Triple("갑", true, "-"), "갑-"),
-                            Pair(Triple("쌓", true, "자고"), "쌓자고"),
-                            Pair(Triple("좇", true, "ㄴ"), "좇은"),
-                            Pair(Triple("좇", true, "며"), "좇으며"),
-                            Pair(Triple("갖", true, "ㄹ"), "갖을"),
-                            Pair(Triple("붙", true, "며"), "붙으며"),
-                            Pair(Triple("붙", true, "니"), "붙니"),
-                            Pair(Triple("불", true, "나"), "부나"),
-                            Pair(Triple("불", true, "오"), "부오"),
-                            Pair(Triple("사가", true, "안"), "사간"),
-                            Pair(Triple("끌", true, "오"), "끄오")
-                    )
+            val map = """
+                |V 벗 아/어 벗어 자 벗자
+                |V 솟 아/어 솟아 나 솟나
+                |V 씻 아/어 씻어 냐 씻냐
+                |V 뺏 아/어 뺏어 니 뺏니
+                |A 낫 아/어 나아 니 낫니
+                |V 젓 아/어 저어 는 젓는
+                |V 긋 아/어 그어 기 긋기
+                |V 듣 아/어 들어 소 듣소
+                |V 깨닫 아/어 깨달아 니 깨닫니
+                |A 붇 아/어 불어 은 불은 ㅁ 불음 네 붇네
+                |V 뜯 아/어 뜯어 은 뜯은 ㅁ 뜯음 네 뜯네
+                |A 눋 아/어 눌어 은 눌은 ㅁ 눌음 네 눋네
+                |V 겯 아/어 결어
+                |V 싣 아/어 실어
+                |V 일컫 아/어 일컬어
+                |V 묻 아/어 묻어
+                |V 걷 아/어 걸어
+                |V 돕 아/어 도와 은 도운 ㅁ 도움
+                |A 곱 아/어 고와 은 고운 ㅁ 고움
+                |A 굽 아/어 굽어 은 굽은 ㅁ 굽음
+                |V 뽑 아/어 뽑아 은 뽑은 ㅁ 뽑음
+                |V 씹 아/어 씹어 은 씹은 ㅁ 씹음
+                |V 업 아/어 업어 은 업은 ㅁ 업음
+                |V 입 아/어 입어 은 입은 ㅁ 입음
+                |V 잡 아/어 잡아 은 잡은 ㅁ 잡음
+                |V 접 아/어 접어 은 접은 ㅁ 접음
+                |A 좁 아/어 좁아 은 좁은 ㅁ 좁음
+                |V 집 아/어 집어 은 집은 ㅁ 집음
+                |A 덥 아/어 더워 은 더운 ㅁ 더움
+                |A 우습 아/어 우스워 은 우스운 ㅁ 우스움
+                |V 줍 아/어 주워 은 주운 ㅁ 주움
+                |A 더럽 아/어 더러워 은 더러운 ㅁ 더러움
+                |A 무섭 아/어 무서워 은 무서운 ㅁ 무서움
+                |A 귀엽 아/어 귀여워 은 귀여운 ㅁ 귀여움
+                |A 안쓰럽 아/어 안쓰러워 은 안쓰러운 ㅁ 안쓰러움
+                |A 아름답 아/어 아름다워 은 아름다운
+                |A 아니꼽 아/어 아니꼬워 은 아니꼬운
+                |A 아깝 아/어 아까워 은 아까운
+                |A 감미롭 아/어 감미로워 은 감미로운
+                |V 구르 아/어 굴러 은 구른
+                |V 모르 아/어 몰라 은 모른
+                |V 벼르 아/어 별러 은 벼른
+                |V 마르 아/어 말라 은 마른
+                |V 무르 아/어 물러 은 무른
+                |V 누르 아/어 눌러 은 누른
+                |V 다르 아/어 달라 은 다른
+                |V 사르 아/어 살라 은 사른
+                |V 바르 아/어 발라 은 바른
+                |V 가르 아/어 갈라 은 가른
+                |V 나르 아/어 날라 은 나른
+                |V 자르 아/어 잘라 은 자른
+                |V 치르 아/어 치러 은 치른
+                |V 따르 아/어 따라 은 따른
+                |V 다다르 아/어 다다라 은 다다른
+                |V 우러르 아/어 우러러 은 우러른
+                |V 들르 아/어 들러
+                |A 푸르 아/어 푸르러 은 푸른
+                |V 이르 아/어 이르러 은 이른
+                |A 노르 아/어 노르러 은 노른
+                |V 푸 아/어 퍼 ㄴ 푼
+                |V 끄 아/어 꺼 ㄴ 끈
+                |V 부수 아/어 부숴
+                |V 주 아/어 줘
+                |V 누 아/어 눠
+                |V 주 어지다 주어지다
+                |V 붓 아/어 부어
+                |V 따르 아/어 따라
+                |V 모으 아/어 모아
+                |V 쓰 이다 쓰이다
+                |V 아니하 았다/었다 아니하였다
+                |V 영원하 아/어 영원하여
+                |V 달 아라/어라 다오
+                |A 파랗 으면 파라면 은 파란 았/었 파랬 니 파랗니 네 파랗네
+                |A 동그랗 으면 동그라면 은 동그란 았/었 동그랬 니 동그랗니 네 동그랗네
+                |A 그렇 으면 그러면 은 그런 았/었 그랬 아/어 그래 네 그렇네
+                |A 시퍼렇 으면 시퍼러면 은 시퍼런 아/어 시퍼래 네 시퍼렇네
+                |A 좋 으면 좋으면 아 좋아 네 좋네
+                |A 낳 으면 낳으면 아 낳아 네 낳네
+                |A 않 으면 않으면 아 않아 네 않네
+                |V 불 으면 불으면 아 불어 래 불래
+                |V 주장하 면 주장하면 었다/았다 주장하였다
+                |V 연결지 었 연결졌
+                |V 갚 - 갚- 다 갚다 은/ㄴ 갚은
+                |V 쌓 으면 쌓으면 자고 쌓자고
+                |V 좇 으니 좇으니 ㄴ 좇은
+                |V 갖 ㄴ 갖은 ㄹ 갖을
+                |V 불 니 부니 오 부오 시 부시
+                |V 끌 오 끄오 니 끄니 ㅂ니다 끕니다
+                |V 사 ㄴ 산
+                |V 기 다 기다 어 겨 기 기기
+                |""".trimMargin().trim().split("\n").flatMap { verbs ->
+                val splits = verbs.split(" ")
+                val isVerb = splits[0] == "V"
+                val root = splits[1]
+                (2 until splits.size step 2).flatMap { i ->
+                    val eomi = splits[i]
+                    val result = splits[i + 1]
+
+                    eomi.split("/").flatMap { str ->
+                        if (str.first() in listOf('ㄴ', 'ㅂ', 'ㄹ', 'ㅁ')) {
+                            listOf(str, ChoToJong[str.first()]!! + str.drop(1)).map {
+                                Pair(Triple(root, isVerb, it), result)
+                            }
+                        } else
+                            listOf(Pair(Triple(root, isVerb, str), result))
+                    }
+                }
+            }
 
             map.forEach {
                 val (input, result) = it

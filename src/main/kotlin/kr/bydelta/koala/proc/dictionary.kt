@@ -155,13 +155,8 @@ abstract class CanExtractResource {
         val path = File(System.getProperty("java.io.tmpdir"), "koalanlp-$modelName")
         path.mkdirs()
 
-        val zis = ZipInputStream(this::class.java.getResourceAsStream("/$modelName.zip"))
-        try {
-            unzipStream(zis, path)
-        } catch (e: Exception) {
-
-        } finally {
-            zis.close()
+        ZipInputStream(this::class.java.getResourceAsStream("/$modelName.zip")).use {
+            unzipStream(it, path)
         }
 
         path.absolutePath

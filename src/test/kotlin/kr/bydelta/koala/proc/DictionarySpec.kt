@@ -113,7 +113,10 @@ object DictionarySpec : Spek({
 
         // importFrom
         it("import from other dictionary") {
-            dict2.importFrom(dict1) { it.isNoun() }
+            dict2.importFrom(dict1) { it.isModifier() }
+            dict2.words.size `should be equal to` 0
+
+            dict2.importFrom(dict1)
             dict2.words.size `should be equal to` 4
             dict2.contains("테팔", setOf(POS.NNP, POS.NNG)) `should be` true
             dict2.contains("김종국", setOf(POS.NNP, POS.NNG)) `should be` true
@@ -135,6 +138,7 @@ object DictionarySpec : Spek({
             val path2 = sampleCER.extractResource()
 
             path `should be equal to` path2
+            path `should be equal to` sampleCER.getExtractedPath()
 
             val lines = File(path, "DataSpecs.scala").bufferedReader().lines().toList()
             lines.size `should be equal to` 565
