@@ -49,8 +49,8 @@ dokka {
     }
 }
 
-task githubMarkdownDoc(type: org.jetbrains.dokka.gradle.DokkaTask){
-    outputFormat = "gfm"
+task githubDoc(type: org.jetbrains.dokka.gradle.DokkaTask){
+    outputFormat = "html"
     outputDirectory = "$rootDir/docs/api"
 
     linkMapping {
@@ -58,8 +58,6 @@ task githubMarkdownDoc(type: org.jetbrains.dokka.gradle.DokkaTask){
         url = "https://github.com/koalanlp/${gitBaseName}/blob/${gitBranch}/src/main/kotlin"
         suffix = "#L"
     }
-
-
 }
 
 task dokkaJar(type: org.gradle.jvm.tasks.Jar, dependsOn: dokka){

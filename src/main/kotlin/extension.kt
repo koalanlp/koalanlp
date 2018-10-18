@@ -1,3 +1,19 @@
+@file:JvmName("ExtUtil")
+
+/**
+ * # Package kr.bydelta.koala.ext
+ *
+ * KoalaNLP가 지원하는 Character/String Extension function들을 모은 패키지입니다.
+ *
+ * ## 자바 및 스칼라 개발자를 위한 노트
+ * 1. 여기 수록된 항목 중에서 Types는 Java의 Class를 의미합니다.
+ *
+ * 2. 여기 수록된 항목 중에서 Extensions, Properties, Functions 항목에 있는 내용들은 (만약 있다면),
+ *    Java와 Scala에서 `kr.bydelta.koala.ext.ExtUtil`의 Static Member로 참조됩니다.
+ *
+ * 3. 만약, Scala의 경우 [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/) 패키지를 사용한다면,
+ *    Extensions에 수록된 Implicit 변환을 Kotlin에서와 동일하게 사용할 수 있습니다.
+ */
 package kr.bydelta.koala.ext
 
 /** '가'(ga) 위치 **/
@@ -27,7 +43,7 @@ val ALPHABET_READING = mapOf(
 ).toList().sortedBy { -it.second.length }
 
 /**
- * 주어진 문자열 [this] 에서 알파벳이 발음되는 대로 국문 문자열로 표기하여 값으로 돌려줍니다.
+ * 주어진 문자열에서 알파벳이 발음되는 대로 국문 문자열로 표기하여 값으로 돌려줍니다.
  *
  * ## 사용법
  * ### Kotlin
@@ -35,15 +51,15 @@ val ALPHABET_READING = mapOf(
  * "ABC".alphaToHangul()
  * ```
  *
- * ### Scala
- * ```kotlin
- * import kr.bydelta.koala.Implicits.*
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
  * "ABC".alphaToHangul
  * ```
  *
  * ### Java
  * ```java
- * Utils.alphaToHangul("ABC")
+ * ExtUtil.alphaToHangul("ABC")
  * ```
  *
  * @since 2.0.0
@@ -63,7 +79,7 @@ fun CharSequence.alphaToHangul(): CharSequence {
 }
 
 /**
- * 주어진 문자열 [this]에 적힌 알파벳 발음을 알파벳으로 변환하여 문자열로 반환합니다.
+ * 주어진 문자열에 적힌 알파벳 발음을 알파벳으로 변환하여 문자열로 반환합니다.
  *
  * ## 사용법
  * ### Kotlin
@@ -71,15 +87,15 @@ fun CharSequence.alphaToHangul(): CharSequence {
  * "에이비씨".hangulToAlpha()
  * ```
  *
- * ### Scala
- * ```kotlin
- * import kr.bydelta.koala.Implicits.*
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
  * "에이비씨".hangulToAlpha
  * ```
  *
  * ### Java
  * ```java
- * Utils.hangulToAlpha("에이비씨")
+ * ExtUtil.hangulToAlpha("에이비씨")
  * ```
  *
  * @since 2.0.0
@@ -109,7 +125,7 @@ fun CharSequence.hangulToAlpha(): CharSequence {
 }
 
 /**
- * 주어진 문자열 [this]가 알파벳이 발음되는 대로 표기된 문자열인지 확인합니다.
+ * 주어진 문자열이 알파벳이 발음되는 대로 표기된 문자열인지 확인합니다.
  *
  * ## 사용법
  * ### Kotlin
@@ -117,15 +133,15 @@ fun CharSequence.hangulToAlpha(): CharSequence {
  * "에이비씨".isAlphaPronounced()
  * ```
  *
- * ### Scala
- * ```kotlin
- * import kr.bydelta.koala.Implicits.*
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
  * "에이비씨".isAlphaPronounced
  * ```
  *
  * ### Java
  * ```java
- * Utils.isAlphaPronounced("에이비씨")
+ * ExtUtil.isAlphaPronounced("에이비씨")
  * ```
  *
  * @since 2.0.0
@@ -149,7 +165,7 @@ fun CharSequence.isAlphaPronounced(): Boolean {
  ***** 한자 읽기 *****
  *********************/
 
-/** 현재 문자 [this]가 한자 범위인지 확인합니다.
+/** 현재 문자가 한자 범위인지 확인합니다.
  *
  * ## 사용법
  * ### Kotlin
@@ -157,15 +173,15 @@ fun CharSequence.isAlphaPronounced(): Boolean {
  * '樂'.isHanja()
  * ```
  *
- * ### Scala
- * ```kotlin
- * import kr.bydelta.koala.Implicits.*
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
  * '樂'.isHanja
  * ```
  *
  * ### Java
  * ```java
- * Utils.isHanja('可')
+ * ExtUtil.isHanja('樂')
  * ```
  *
  * @since 2.0.0
@@ -179,7 +195,7 @@ fun Char.isHanja(): Boolean {
             (code in 0x2F800..0x2FA1F)  //  한중일 호환용 한자 보충 	 2F800 	 2FA1F
 }
 
-/** 현재 문자 [this]가 한중일 통합한자, 통합한자 확장 - A, 호환용 한자 범위인지 확인합니다.
+/** 현재 문자가 한중일 통합한자, 통합한자 확장 - A, 호환용 한자 범위인지 확인합니다.
  * (국사편찬위원회 한자음가사전은 해당 범위에서만 정의되어 있어, 별도 확인합니다.)
  *
  * ## 사용법
@@ -188,15 +204,15 @@ fun Char.isHanja(): Boolean {
  * '樂'.isCJKHanja()
  * ```
  *
- * ### Scala
- * ```kotlin
- * import kr.bydelta.koala.Implicits.*
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
  * '樂'.isCJKHanja
  * ```
  *
  * ### Java
  * ```java
- * Utils.isCJKHanja('可')
+ * ExtUtil.isCJKHanja('樂')
  * ```
  *
  * @since 2.0.0
@@ -255,15 +271,15 @@ private val HANJA_BU_FIX = listOf('\u1103', '\u110C')
  * "可口可樂".hanjaToHangul()
  * ```
  *
- * ### Scala
- * ```kotlin
- * import kr.bydelta.koala.Implicits.*
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
  * "可口可樂".hanjaToHangul
  * ```
  *
  * ### Java
  * ```java
- * Utils.hanjaToHangul("可口可樂")
+ * ExtUtil.hanjaToHangul("可口可樂")
  * ```
  *
  * @since 2.0.0
@@ -335,7 +351,7 @@ fun CharSequence.hanjaToHangul(headCorrection: Boolean = true): CharSequence {
  *********************/
 
 /**
- * 현재 문자 [this]가 초성, 중성, 종성(선택적)을 다 갖춘 문자인지 확인합니다.
+ * 현재 문자가 초성, 중성, 종성(선택적)을 다 갖춘 문자인지 확인합니다.
  *
  * ## 사용법
  * ### Kotlin
@@ -343,15 +359,15 @@ fun CharSequence.hanjaToHangul(headCorrection: Boolean = true): CharSequence {
  * '가'.isCompleteHangul()
  * ```
  *
- * ### Scala
- * ```kotlin
- * import kr.bydelta.koala.Implicits.*
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
  * '가'.isCompleteHangul
  * ```
  *
  * ### Java
  * ```java
- * Utils.isCompleteHangul('가')
+ * ExtUtil.isCompleteHangul('가')
  * ```
  *
  * @since 2.0.0
@@ -359,7 +375,7 @@ fun CharSequence.hanjaToHangul(headCorrection: Boolean = true): CharSequence {
  * */
 fun Char.isCompleteHangul(): Boolean = this in HANGUL_START..HANGUL_END
 
-/** 현재 문자 [this]가 불완전한 한글 문자인지 확인합니다.
+/** 현재 문자가 불완전한 한글 문자인지 확인합니다.
  *
  * ## 사용법
  * ### Kotlin
@@ -367,15 +383,15 @@ fun Char.isCompleteHangul(): Boolean = this in HANGUL_START..HANGUL_END
  * '가'.isIncompleteHangul()
  * ```
  *
- * ### Scala
- * ```kotlin
- * import kr.bydelta.koala.Implicits.*
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
  * '가'.isIncompleteHangul
  * ```
  *
  * ### Java
  * ```java
- * Utils.isIncompleteHangul('가')
+ * ExtUtil.isIncompleteHangul('가')
  * ```
  *
  * @since 2.0.0
@@ -383,7 +399,7 @@ fun Char.isCompleteHangul(): Boolean = this in HANGUL_START..HANGUL_END
  * */
 fun Char.isIncompleteHangul(): Boolean = this.toInt() in 0x1100..0x11FF || this.toInt() in 0x3130..0x318F
 
-/** 현재 문자 [this]가 한글 완성형 또는 조합용 문자인지 확인합니다.
+/** 현재 문자가 한글 완성형 또는 조합용 문자인지 확인합니다.
  *
  * ## 사용법
  * ### Kotlin
@@ -391,15 +407,15 @@ fun Char.isIncompleteHangul(): Boolean = this.toInt() in 0x1100..0x11FF || this.
  * '가'.isHangul()
  * ```
  *
- * ### Scala
- * ```kotlin
- * import kr.bydelta.koala.Implicits.*
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
  * '가'.isHangul
  * ```
  *
  * ### Java
  * ```java
- * Utils.isHangul('가')
+ * ExtUtil.isHangul('가')
  * ```
  *
  * @since 2.0.0
@@ -407,7 +423,7 @@ fun Char.isIncompleteHangul(): Boolean = this.toInt() in 0x1100..0x11FF || this.
  * */
 fun Char.isHangul(): Boolean = this.isCompleteHangul() || this.isIncompleteHangul()
 
-/** 현재 문자열 [this]가 한글 (완성/조합)로 끝나는지 확인합니다.
+/** 현재 문자열가 한글 (완성/조합)로 끝나는지 확인합니다.
  *
  * ## 사용법
  * ### Kotlin
@@ -415,15 +431,15 @@ fun Char.isHangul(): Boolean = this.isCompleteHangul() || this.isIncompleteHangu
  * "가나다".isHangulEnding()
  * ```
  *
- * ### Scala
- * ```kotlin
- * import kr.bydelta.koala.Implicits.*
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
  * "가나다".isHangulEnding
  * ```
  *
  * ### Java
  * ```java
- * Utils.isHangulEnding("가나다")
+ * ExtUtil.isHangulEnding("가나다")
  * ```
  *
  * @since 2.0.0
@@ -431,7 +447,7 @@ fun Char.isHangul(): Boolean = this.isCompleteHangul() || this.isIncompleteHangu
  * */
 fun CharSequence.isHangulEnding(): Boolean = this.last().isHangul()
 
-/** 현재 문자 [this]가 현대 한글 초성 자음 문자인지 확인합니다.
+/** 현재 문자가 현대 한글 초성 자음 문자인지 확인합니다.
  *
  * ## 사용법
  * ### Kotlin
@@ -439,15 +455,15 @@ fun CharSequence.isHangulEnding(): Boolean = this.last().isHangul()
  * '가'.isChosungJamo()
  * ```
  *
- * ### Scala
- * ```kotlin
- * import kr.bydelta.koala.Implicits.*
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
  * '가'.isChosungJamo
  * ```
  *
  * ### Java
  * ```java
- * Utils.isChosungJamo('가')
+ * ExtUtil.isChosungJamo('가')
  * ```
  *
  * @since 2.0.0
@@ -455,7 +471,7 @@ fun CharSequence.isHangulEnding(): Boolean = this.last().isHangul()
  * */
 fun Char.isChosungJamo(): Boolean = this.toInt() in 0x1100..0x1112
 
-/** 현재 문자 [this]가 현대 한글 중성 모음 문자인지 확인합니다.
+/** 현재 문자가 현대 한글 중성 모음 문자인지 확인합니다.
  *
  * ## 사용법
  * ### Kotlin
@@ -463,15 +479,15 @@ fun Char.isChosungJamo(): Boolean = this.toInt() in 0x1100..0x1112
  * '가'.isJungsungJamo()
  * ```
  *
- * ### Scala
- * ```kotlin
- * import kr.bydelta.koala.Implicits.*
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
  * '가'.isJungsungJamo
  * ```
  *
  * ### Java
  * ```java
- * Utils.isJungsungJamo('가')
+ * ExtUtil.isJungsungJamo('가')
  * ```
  *
  * @since 2.0.0
@@ -479,7 +495,7 @@ fun Char.isChosungJamo(): Boolean = this.toInt() in 0x1100..0x1112
  * */
 fun Char.isJungsungJamo(): Boolean = this.toInt() in 0x1161..0x1175
 
-/** 현재 문자 [this]가 한글 종성 자음 문자인지 확인합니다.
+/** 현재 문자가 한글 종성 자음 문자인지 확인합니다.
  *
  * ## 사용법
  * ### Kotlin
@@ -487,15 +503,15 @@ fun Char.isJungsungJamo(): Boolean = this.toInt() in 0x1161..0x1175
  * '가'.isJongsungJamo()
  * ```
  *
- * ### Scala
- * ```kotlin
- * import kr.bydelta.koala.Implicits.*
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
  * '가'.isJongsungJamo
  * ```
  *
  * ### Java
  * ```java
- * Utils.isJongsungJamo('가')
+ * ExtUtil.isJongsungJamo('가')
  * ```
  *
  * @since 2.0.0
@@ -503,7 +519,7 @@ fun Char.isJungsungJamo(): Boolean = this.toInt() in 0x1161..0x1175
  * */
 fun Char.isJongsungJamo(): Boolean = this.toInt() in 0x11A8..0x11C2
 
-/** 현재 문자 [this]가 종성으로 끝인지 확인합니다.
+/** 현재 문자가 종성으로 끝인지 확인합니다.
  *
  * ## 사용법
  * ### Kotlin
@@ -511,15 +527,15 @@ fun Char.isJongsungJamo(): Boolean = this.toInt() in 0x11A8..0x11C2
  * '가'.isJongsungEnding()
  * ```
  *
- * ### Scala
- * ```kotlin
- * import kr.bydelta.koala.Implicits.*
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
  * '가'.isJongsungEnding
  * ```
  *
  * ### Java
  * ```java
- * Utils.isJongsungEnding('가')
+ * ExtUtil.isJongsungEnding('가')
  * ```
  *
  * @since 2.0.0
@@ -527,7 +543,7 @@ fun Char.isJongsungJamo(): Boolean = this.toInt() in 0x11A8..0x11C2
  * */
 fun Char.isJongsungEnding(): Boolean = this.isCompleteHangul() && (this - HANGUL_START) % JONGSUNG_RANGE != 0
 
-/** 현재 문자열 [this]가 종성으로 끝인지 확인합니다.
+/** 현재 문자열이 종성으로 끝인지 확인합니다.
  *
  * ## 사용법
  * ### Kotlin
@@ -535,15 +551,15 @@ fun Char.isJongsungEnding(): Boolean = this.isCompleteHangul() && (this - HANGUL
  * "가나다".isJongsungEnding()
  * ```
  *
- * ### Scala
- * ```kotlin
- * import kr.bydelta.koala.Implicits.*
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
  * "가나다".isJongsungEnding
  * ```
  *
  * ### Java
  * ```java
- * Utils.isJongsungEnding("가나다")
+ * ExtUtil.isJongsungEnding("가나다")
  * ```
  *
  * @since 2.0.0
@@ -551,31 +567,137 @@ fun Char.isJongsungEnding(): Boolean = this.isCompleteHangul() && (this - HANGUL
  * */
 fun CharSequence.isJongsungEnding(): Boolean = this.last().isJongsungEnding()
 
-/** 현재 문자 [this]에서 초성 자음문자 분리. 초성이 없으면 null. */
+/** 현재 문자에서 초성 자음문자를 분리합니다. 초성이 없으면 null. 
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * '가'.getChosung()
+ * ```
+ *
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
+ * '가'.getChosung
+ * ```
+ *
+ * ### Java
+ * ```java
+ * ExtUtil.getChosung('가')
+ * ```
+ *
+ * @since 2.0.0
+ * @return [Char.isChosungJamo]가 참이면 문자를 그대로, [Char.isCompleteHangul]이 참이면 초성 문자를 분리해서 (0x1100-0x1112 대역), 아니라면 null.
+ * */
 fun Char.getChosung(): Char? =
         if (this.isCompleteHangul()) ((this - HANGUL_START) / JUNGSUNG_RANGE + 0x1100).toChar()
         else if (this.isChosungJamo()) this
         else null
 
-/** 현재 문자 [this]에서 중성 모음문자 분리. 중성이 없으면 null. */
+/** 현재 문자에서 중성 모음문자를 분리합니다. 중성이 없으면 null. 
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * '가'.getJungsung()
+ * ```
+ *
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
+ * '가'.getJungsung
+ * ```
+ *
+ * ### Java
+ * ```java
+ * ExtUtil.getJungsung('가')
+ * ```
+ *
+ * @since 2.0.0
+ * @return [Char.isJungsungJamo]가 참이면 문자를 그대로, [Char.isCompleteHangul]이 참이면 중성 문자를 분리해서 (0x1161-0x1175 대역), 아니라면 null.
+ * */
 fun Char.getJungsung(): Char? =
         if (this.isCompleteHangul()) ((this - HANGUL_START) % JUNGSUNG_RANGE / JONGSUNG_RANGE + 0x1161).toChar()
         else if (this.isJungsungJamo()) this
         else null
 
-/** 현재 문자 [this]에서 종성 자음문자 분리. 종성이 없으면 null. */
+/** 현재 문자에서 종성 자음문자를 분리합니다. 종성이 없으면 null. 
+ * 
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * '가'.getJongsung()
+ * ```
+ *
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
+ * '가'.getJongsung
+ * ```
+ *
+ * ### Java
+ * ```java
+ * ExtUtil.getJongsung('가')
+ * ```
+ *
+ * @since 2.0.0
+ * @return [Char.isJongsungJamo]가 참이면 문자를 그대로, [Char.isJongsungEnding]이 참이면 종성 문자를 분리해서 (0x11A7-0x11C2 대역), 아니라면 null.
+ * */
 fun Char.getJongsung(): Char? =
         if (this.isJongsungEnding())
             ((this - HANGUL_START) % JONGSUNG_RANGE + 0x11A7).toChar()
         else if (this.isJongsungJamo()) this
         else null
 
-/** 현재 문자 [this]를 초성, 중성, 종성 자음문자로 분리. 종성이 없으면 null. */
+/** 현재 문자를 초성, 중성, 종성 자음문자로 분리해 [Triple]을 구성합니다. 종성이 없으면 [Triple.third] 값은 null.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * '가'.dissembleHangul() // ㄱ, ㅏ, null
+ * ```
+ *
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
+ * '가'.dissembleHangul // ㄱ, ㅏ, null
+ * ```
+ *
+ * ### Java
+ * ```java
+ * ExtUtil.dissembleHangul('가') // ㄱ, ㅏ, null
+ * ```
+ *
+ * @since 2.0.0
+ * @return [Char.isCompleteHangul]이면 문자를 <초성, 중성, 종성?>으로 나누고, 아니라면 null.
+ * */
 fun Char.dissembleHangul(): Triple<Char, Char, Char?>? =
         if (this.isCompleteHangul()) Triple(this.getChosung()!!, this.getJungsung()!!, this.getJongsung())
         else null
 
-/** 현재 문자열 [this]를 초성, 중성, 종성 자음문자로 분리하여 새 문자열을 만듭니다. 종성이 없으면 종성은 쓰지 않습니다. */
+/**
+ * 현재 문자열 [this]를 초성, 중성, 종성 자음문자로 분리하여 새 문자열을 만듭니다. 종성이 없으면 종성은 쓰지 않습니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * "가나다".dissembleHangul() // "ㄱㅏㄴㅏㄷㅏ"
+ * ```
+ *
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
+ * "가나다".dissembleHangul // "ㄱㅏㄴㅏㄷㅏ"
+ * ```
+ *
+ * ### Java
+ * ```java
+ * ExtUtil.dissembleHangul("가나다") // "ㄱㅏㄴㅏㄷㅏ"
+ * ```
+ *
+ * @since 2.0.0
+ * @return [Char.isCompleteHangul]이 참인 문자는 초성, 중성, 종성 순서로 붙인 새 문자열로 바꾸고, 나머지는 그대로 둔 문자열.
+ * */
 fun CharSequence.dissembleHangul(): CharSequence {
     val buffer = StringBuffer()
     for (ch in this) {
@@ -594,8 +716,32 @@ fun CharSequence.dissembleHangul(): CharSequence {
 
 /**
  * 초성을 [cho] 문자로, 중성을 [jung] 문자로, 종성을 [jong] 문자로 갖는 한글 문자를 재구성합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * assembleHangul('ᄁ', 'ᅡ') // "까"
+ * ```
+ *
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * assembleHangul('ᄁ', 'ᅡ') // "까"
+ * ```
+ *
+ * ### Java
+ * ```java
+ * ExtUtil.assembleHangul('ᄁ', 'ᅡ') // "까"
+ * ```
+ *
+ * @since 2.0.0
+ * @param cho 초성 문자 (0x1100-1112)
+ * @param jung 종성 문자 (0x1161-1175)
+ * @param jong 종성 문자 (0x11a8-11c2) 또는 null
+ * @throws[IllegalArgumentException] 초성, 중성, 종성이 지정된 범위가 아닌 경우 발생합니다.
+ * @return 초성, 중성, 종성을 조합하여 문자를 만듭니다.
  */
 @JvmOverloads
+@Throws(IllegalArgumentException::class)
 fun assembleHangul(cho: Char, jung: Char, jong: Char? = null): Char {
     if (cho.isChosungJamo() && jung.isJungsungJamo()) {
         if (jong != null && jong.isJongsungJamo()) {
@@ -612,12 +758,57 @@ fun assembleHangul(cho: Char, jung: Char, jong: Char? = null): Char {
 
 /**
  * 초성을 [Triple.first] 문자로, 중성을 [Triple.second] 문자로, 종성을 [Triple.third] 문자로 갖는 한글 문자를 재구성합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * Triple('ᄁ', 'ᅡ', null as Char?).assembleHangul() // "까"
+ * ```
+ *
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
+ * ('ᄁ', 'ᅡ', null.as[Char]).assembleHangul // "까"
+ * ```
+ *
+ * ### Java
+ * ```java
+ * ExtUtil.assembleHangul(new Triple<Character, Character, Character>('ᄁ', 'ᅡ', null)) // "까"
+ * ```
+ *
+ * @since 2.0.0
+ * @throws[IllegalArgumentException] 초성, 중성, 종성이 지정된 범위가 아닌 경우 발생합니다.
+ * @return 초성, 중성, 종성을 조합하여 문자를 만듭니다.
  */
+@Throws(IllegalArgumentException::class)
 fun Triple<Char, Char, Char?>.assembleHangul(): Char =
         assembleHangul(this.first, this.second, this.third)
 
 /**
  * 주어진 문자열에서 초성, 중성, 종성이 연달아 나오는 경우 이를 조합하여 한글 문자를 재구성합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * // 왼쪽 문자열은 조합형 문자열임.
+ * "까?ABC".assembleHangul() // "까?ABC"
+ * ```
+ *
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
+ * // 왼쪽 문자열은 조합형 문자열임.
+ * "까?ABC".assembleHangul // "까?ABC"
+ * ```
+ *
+ * ### Java
+ * ```java
+ * // 인자로 들어가는 문자열은 조합형 문자열임.
+ * ExtUtil.assembleHangul("까?ABC") // "까?ABC"
+ * ```
+ *
+ * @since 2.0.0
+ * @return 조합형 문자들이 조합된 문자열. 조합이 불가능한 문자는 그대로 남습니다.
  */
 fun CharSequence.assembleHangul(): CharSequence {
     val buffer = StringBuffer()
@@ -718,9 +909,29 @@ private val startsWithAh by lazy { charStartsWithMo(HanSecondList[0]) }
 private val startsWithUh by lazy { charStartsWithMo(HanSecondList[4]) }
 
 /**
- * 주어진 용언의 원형 [verb]이 뒷 부분 [rest]와 같이 어미가 붙어 활용될 때, 불규칙 활용 용언과 모음조화를 교정함.
+ * 주어진 용언의 원형 [verb]이 뒷 부분 [rest]와 같이 어미가 붙어 활용될 때, 불규칙 활용 용언과 모음조화를 교정합니다.
  *
- * 동사인 경우 [isVerb] = true이어야 하며, 형용사인 경우 false이어야 함.
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * correctVerbApply("듣", true, "어") // 동사 "듣다"에 어미 "-어"가 붙으면 "들어"가 됩니다.
+ * ```
+ *
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * correctVerbApply("듣", true, "어")
+ * ```
+ *
+ * ### Java
+ * ```java
+ * ExtUtil.correctVerbApply("듣", true, "어")
+ * ```
+ *
+ * @since 2.0.0
+ * @param verb 용언 원형인 어근을 표현한 String. '-다.' 와 같은 어미는 없는 어근 상태입니다.
+ * @param isVerb 동사인지 형용사인지 나타내는 지시자. 동사이면 true.
+ * @param rest 어근에 붙일 어미를 표현한 String.
+ * @return 모음조화나 불규칙 활용이 교정된 원형+어미 결합
  */
 fun correctVerbApply(verb: String, isVerb: Boolean, rest: String): String =
         if (rest.isEmpty()) verb

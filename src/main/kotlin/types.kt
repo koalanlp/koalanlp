@@ -1,7 +1,18 @@
+@file:JvmName("Utils")
+
 /**
  * # Package kr.bydelta.koala
  *
  * KoalaNLP의 공통 부분을 담은 패키지입니다.
+ *
+ * ## 자바 및 스칼라 개발자를 위한 노트
+ * 1. 여기 수록된 항목 중에서 Types는 Java의 Class를 의미합니다.
+ *
+ * 2. 여기 수록된 항목 중에서 Extensions, Properties, Functions 항목에 있는 내용들은 (만약 있다면),
+ *    Java와 Scala에서 `kr.bydelta.koala.Utils`의 Static Member로 참조됩니다.
+ *
+ * 3. 만약, Scala의 경우 [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/) 패키지를 사용한다면,
+ *    Extensions에 수록된 Implicit 변환을 Kotlin에서와 동일하게 사용할 수 있습니다.
  */
 package kr.bydelta.koala
 

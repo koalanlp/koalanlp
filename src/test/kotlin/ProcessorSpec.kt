@@ -1,5 +1,7 @@
 package kr.bydelta.koala
 
+import kr.bydelta.koala.data.*
+import kr.bydelta.koala.proc.*
 import org.amshove.kluent.`should be equal to`
 import org.amshove.kluent.`should be`
 import org.amshove.kluent.`should equal`

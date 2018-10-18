@@ -3,6 +3,9 @@ package kr.bydelta.koala
 import kotlinx.coroutines.experimental.Dispatchers
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.runBlocking
+import kr.bydelta.koala.dic.CanCompileDict
+import kr.bydelta.koala.dic.CanExtractResource
+import kr.bydelta.koala.dic.DicEntry
 import org.amshove.kluent.*
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe

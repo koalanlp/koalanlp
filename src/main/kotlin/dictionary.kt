@@ -1,3 +1,19 @@
+@file:JvmName("DicUtil")
+
+/**
+ * # Package kr.bydelta.koala.dic
+ *
+ * 사전 관련 작업을 지원하는 interface들입니다.
+ *
+ * ## 자바 및 스칼라 개발자를 위한 노트
+ * 1. 여기 수록된 항목 중에서 Types는 Java의 Class를 의미합니다.
+ *
+ * 2. 여기 수록된 항목 중에서 Extensions, Properties, Functions 항목에 있는 내용들은 (만약 있다면),
+ *    Java와 Scala에서 `kr.bydelta.koala.dic.DicUtil`의 Static Member로 참조됩니다.
+ *
+ * 3. 만약, Scala의 경우 [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/) 패키지를 사용한다면,
+ *    Extensions에 수록된 Implicit 변환을 Kotlin에서와 동일하게 사용할 수 있습니다.
+ */
 package kr.bydelta.koala.dic
 
 import kr.bydelta.koala.POS
@@ -6,24 +22,26 @@ import java.io.FileOutputStream
 import java.util.zip.ZipInputStream
 
 /** Dictionary Entry 타입: 표면형을 나타내는 [String] 값과, 품사태그를 나타내는 [POS]값으로 구성.*/
-typealias DicEntry = Pair<String, POS>
+internal typealias DicEntry = Pair<String, POS>
 
 /**
- * 사용자 사전추가 기능을 위한 interface.
+ * 사용자 사전추가 기능을 위한 interface입니다.
+ *
+ * @since 1.x
  */
 abstract class CanCompileDict {
     /**
-     * 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.
+     * 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가합니다.
      *
-     * @param dict 추가할 (표면형,품사)의 순서쌍.
+     * @param dict 추가할 (표면형, 품사)의 순서쌍들 (가변인자). 즉, [Pair]<[String], [POS]>들
      */
     abstract fun addUserDictionary(vararg dict: DicEntry)
 
     /**
-     * 사용자 사전에, 표면형과 그 품사를 추가.
+     * 사용자 사전에, 표면형과 그 품사를 추가합니다.
      *
-     * @param morph 표면형.
-     * @param tag   품사.
+     * @param morph 표면형 [String]
+     * @param tag   품사: [POS] Enum 값.
      */
     fun addUserDictionary(morph: String, tag: POS) = addUserDictionary(morph to tag)
 
@@ -39,7 +57,7 @@ abstract class CanCompileDict {
     /**
      * 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.
      *
-     * @param dict 추가할 (표면형,품사)의 순서쌍.
+     * @param dict 추가할 (표면형,품사)의 순서쌍. 즉, [Pair]<[String], [POS]>.
      */
     operator fun plusAssign(entry: DicEntry) = addUserDictionary(entry)
 
@@ -62,7 +80,7 @@ abstract class CanCompileDict {
      * 사전에 등재되어 있는지 확인합니다.
      *
      * @param word   확인할 형태소
-     * @param posTag 품사들(기본값: NNP 고유명사, NNG 일반명사)
+     * @param posTag 품사들(기본값: [POS.NNP] 고유명사, [POS.NNG] 일반명사)
      */
     @JvmOverloads
     fun contains(word: String, posTag: Set<POS> = setOf(POS.NNP, POS.NNG)): Boolean =
@@ -74,7 +92,7 @@ abstract class CanCompileDict {
      *
      * @param onlySystemDic 시스템 사전에서만 검색할지 결정합니다.
      * @param word          확인할 (형태소, 품사)들.
-     * @return 사전에 없는 단어들.
+     * @return 사전에 없는 단어들, 즉, [Pair]<[String], [POS]>들.
      */
     abstract fun getNotExists(onlySystemDic: Boolean, vararg word: DicEntry): Array<DicEntry>
 
@@ -83,7 +101,7 @@ abstract class CanCompileDict {
      *
      * @param dict       참조할 사전
      * @param fastAppend 선택된 사전에 존재하는지를 검사하지 않고, 빠르게 추가하고자 할 때 (기본값 false)
-     * @param filter     추가할 품사를 지정하는 함수. (기본값 isNoun)
+     * @param filter     추가할 품사를 지정하는 함수. (기본값 [POS.isNoun])
      */
     @JvmOverloads
     fun importFrom(dict: CanCompileDict,
@@ -104,6 +122,7 @@ abstract class CanCompileDict {
  * 파일단위 압축해제를 위한 재귀함수.
  *
  * @param zis 압축해제할 Zip 입력 스트림.
+ * @param outpath 압축 해제할 위치의 File 값
  */
 private fun unzipStream(zis: ZipInputStream, outpath: File) {
     val entry = zis.nextEntry
@@ -134,16 +153,20 @@ private fun unzipStream(zis: ZipInputStream, outpath: File) {
 
 
 /**
- * Jar Resource에 포함된 모형을 임시디렉터리에 압축해제하기 위한 interface
+ * Jar Resource에 포함된 모형을 임시디렉터리에 압축해제하기 위한 interface입니다.
+ *
+ * @since 1.x
  */
 abstract class CanExtractResource {
     /**
-     * 모델의 명칭.
+     * 모델의 명칭입니다.
      */
     protected abstract val modelName: String
 
     /**
-     * 압축해제할 임시 디렉터리.
+     * 압축해제할 임시 디렉터리입니다.
+     *
+     * 임시 디렉터리를 계산하면서 실제로 압축 해제 작업도 수행합니다.
      */
     private val PATH by lazy {
         val path = File(System.getProperty("java.io.tmpdir"), "koalanlp-$modelName")
@@ -162,14 +185,14 @@ abstract class CanExtractResource {
     }
 
     /**
-     * 압축해제 작업
+     * 압축해제 작업을 수행합니다.
      *
      * @return 압축해제된 임시 디렉터리의 절대경로
      */
     fun extractResource(): String = PATH
 
     /**
-     * 압축해제된 임시 디렉터리의 위치.
+     * 압축해제된 임시 디렉터리의 위치입니다.
      *
      * @return 임시 디렉터리의 절대경로 String.
      */

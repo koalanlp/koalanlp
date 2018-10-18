@@ -1,0 +1,130 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>kr.bydelta.koala.data - </title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="./index.html">kr.bydelta.koala.data</a><br/>
+<br/>
+<h2>Package kr.bydelta.koala.data</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-dep-tree/index.html">DepTree</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">DepTree</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">&lt;</span><a href="-dep-tree/index.html"><span class="identifier">DepTree</span></a><span class="symbol">&gt;</span></code>
+<p>의존구문구조 분석의 결과.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-entity/index.html">Entity</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Entity</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property/index.html"><span class="identifier">Property</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-word/index.html"><span class="identifier">Word</span></a><span class="symbol">&gt;</span></code>
+<p>개체명 분석 결과를 저장할 <a href="-property/index.html">Property</a> class</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-int-property/index.html">IntProperty</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">IntProperty</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property/index.html"><span class="identifier">Property</span></a></code>
+<p>정수형 값을 저장할 <a href="-property/index.html">Property</a> class.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-list-property/index.html">ListProperty</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ListProperty</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property/index.html"><span class="identifier">Property</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property/index.html"><span class="identifier">Property</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-list-property/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p>목록형 값을 저장할 <a href="-property/index.html">Property</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-morpheme/index.html">Morpheme</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Morpheme</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property/index.html"><span class="identifier">Property</span></a></code>
+<p>형태소를 저장하는 <a href="-property/index.html">Property</a> class입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-property/index.html">Property</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">Property</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/io/Serializable.html"><span class="identifier">Serializable</span></a></code>
+<p>텍스트 분석 과정에서 얻어지는 여러가지 값들을 표현하는 class.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-role-tree/index.html">RoleTree</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">RoleTree</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">&lt;</span><a href="-role-tree/index.html"><span class="identifier">RoleTree</span></a><span class="symbol">&gt;</span></code>
+<p>의미역 구조 분석의 결과.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-sentence/index.html">Sentence</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Sentence</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property/index.html"><span class="identifier">Property</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-word/index.html"><span class="identifier">Word</span></a><span class="symbol">&gt;</span></code>
+<p>문장을 표현하는 <a href="-property/index.html">Property</a> class입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-syntax-tree/index.html">SyntaxTree</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SyntaxTree</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">&lt;</span><a href="-syntax-tree/index.html"><span class="identifier">SyntaxTree</span></a><span class="symbol">&gt;</span></code>
+<p>구문구조 분석의 결과를 저장할 <a href="-property/index.html">Property</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-tree/index.html">Tree</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Tree</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">&lt;</span><a href="-tree/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property/index.html"><span class="identifier">Property</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-tree/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p><a href="-tree/index.html#T">T</a>-type들의 트리 또는 DAG 구조를 저장할 <a href="-property/index.html">Property</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-word/index.html">Word</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Word</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property/index.html"><span class="identifier">Property</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-morpheme/index.html"><span class="identifier">Morpheme</span></a><span class="symbol">&gt;</span></code>
+<p>어절을 표현하는 <a href="-property/index.html">Property</a> class입니다.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Exceptions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-already-set-i-d-exception/index.html">AlreadySetIDException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">AlreadySetIDException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span class="identifier">Exception</span></a></code>
+<p>ID가 이미 설정되었을 때 발생하는 Exception</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

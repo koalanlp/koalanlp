@@ -8,13 +8,13 @@
 | [kr.bydelta.koala.proc.CanAnalyzeProperty](../kr.bydelta.koala.proc/-can-analyze-property/index.md) | [Sentence](../kr.bydelta.koala.data/-sentence/index.md) 객체에 property를 추가할 수 있는 interface |
 | [kr.bydelta.koala.proc.CanAnalyzeSentenceProperty](../kr.bydelta.koala.proc/-can-analyze-sentence-property/index.md) | [Sentence](../kr.bydelta.koala.data/-sentence/index.md) 객체에 property를 추가할 수 있는 interface |
 | [kr.bydelta.koala.dic.CanCompileDict](../kr.bydelta.koala.dic/-can-compile-dict/index.md) | 사용자 사전추가 기능을 위한 interface. |
-| [kr.bydelta.koala.proc.CanDepParse](../kr.bydelta.koala.proc/-can-dep-parse.md) | 의존구문분석 Interface |
+| [kr.bydelta.koala.proc.CanParseDependency](../kr.bydelta.koala.proc/-can-dep-parse.md) | 의존구문분석 Interface |
 | [kr.bydelta.koala.proc.CanDisambiguateSense](../kr.bydelta.koala.proc/-can-disambiguate-sense/index.md) | 다의어 분별 (Word sense disambiguation) Interface |
 | [kr.bydelta.koala.dic.CanExtractResource](../kr.bydelta.koala.dic/-can-extract-resource/index.md) | Jar Resource에 포함된 모형을 임시디렉터리에 압축해제하기 위한 interface |
 | [kr.bydelta.koala.proc.CanLabelSemanticRole](../kr.bydelta.koala.proc/-can-label-semantic-role.md) | 의미역 분석(Semantic Role Labeling) Interface |
 | [kr.bydelta.koala.proc.CanRecognizeEntity](../kr.bydelta.koala.proc/-can-recognize-entity.md) | 개체명 인식 (Named Entity Recognition) Interface |
 | [kr.bydelta.koala.proc.CanSplitSentence](../kr.bydelta.koala.proc/-can-split-sentence/index.md) | 문장분리기 Interface |
-| [kr.bydelta.koala.proc.CanSyntaxParse](../kr.bydelta.koala.proc/-can-syntax-parse.md) | 구문분석 Interface |
+| [kr.bydelta.koala.proc.CanParseSyntax](../kr.bydelta.koala.proc/-can-syntax-parse.md) | 구문분석 Interface |
 | [kr.bydelta.koala.proc.CanTag](../kr.bydelta.koala.proc/-can-tag/index.md) | 품사분석기 interface |
 | [kr.bydelta.koala.proc.CanTagAParagraph](../kr.bydelta.koala.proc/-can-tag-a-paragraph/index.md) | 문단1개, 문장1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 [S](../kr.bydelta.koala.proc/-can-tag-a-paragraph/index.md#S) 타입으로 돌려줌. |
 | [kr.bydelta.koala.proc.CanTagASentence](../kr.bydelta.koala.proc/-can-tag-a-sentence/index.md) | 문장 1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 [S](../kr.bydelta.koala.proc/-can-tag-a-sentence/index.md#S) 타입으로 돌려줌. |

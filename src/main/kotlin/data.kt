@@ -1,7 +1,18 @@
+@file:JvmName("DataUtil")
+
 /**
  * # Package kr.bydelta.koala.data
  *
  * KoalaNLP가 사용하는, 또는 사용할 Data Representation들이 담겨있는 패키지입니다.
+ *
+ * ## 자바 및 스칼라 개발자를 위한 노트
+ * 1. 여기 수록된 항목 중에서 Types는 Java의 Class를 의미합니다.
+ *
+ * 2. 여기 수록된 항목 중에서 Extensions, Properties, Functions 항목에 있는 내용들은 (만약 있다면),
+ *    Java와 Scala에서 `kr.bydelta.koala.data.DataUtil`의 Static Member로 참조됩니다.
+ *
+ * 3. 만약, Scala의 경우 [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/) 패키지를 사용한다면,
+ *    Extensions에 수록된 Implicit 변환을 Kotlin에서와 동일하게 사용할 수 있습니다.
  */
 package kr.bydelta.koala.data
 
@@ -109,7 +120,7 @@ abstract class Property : Serializable {
      * @throws[IllegalArgumentException] 속성이 KoalaNLP 내부에서 정의된 범위를 벗어날 때
      */
     @Throws(IllegalStateException::class, IllegalArgumentException::class)
-    fun <T : Property> setProperty(property: T) {
+    internal fun <T : Property> setProperty(property: T) {
         val key = getPropertyKey(property)
         setProperty(key, property)
     }
@@ -123,7 +134,7 @@ abstract class Property : Serializable {
      * @param[properties] 리스트로 저장할 속성값들 (가변변수)
      */
     @Throws(IllegalStateException::class)
-    fun <T : Property> setListProperty(vararg properties: T) {
+    internal fun <T : Property> setListProperty(vararg properties: T) {
         val listProp = ListProperty(properties.asList())
         val key = getPropertyKey(listProp)
         setProperty(key, listProp)
@@ -424,7 +435,7 @@ open class Tree<T : Tree<T>>(val leaf: Word?,
  * * 먹었고, 쌌다: 용언구
  *
  * 아래를 참고해보세요.
- * * [kr.bydelta.koala.proc.CanSyntaxParse] 구문구조 분석을 수행하는 interface.
+ * * [kr.bydelta.koala.proc.CanParseSyntax] 구문구조 분석을 수행하는 interface.
  * * [Word.getPhrase] 어절이 직접 속하는 가장 작은 구구조 [SyntaxTree]를 가져오는 API
  * * [Sentence.getSyntaxTree] 전체 문장을 분석한 [SyntaxTree]를 가져오는 API
  * * [PhraseTag] 구구조의 형태 분류를 갖는 Enum 값
@@ -502,7 +513,7 @@ class SyntaxTree constructor(val type: PhraseTag,
  * * '짐을'은 '쌌다'의 목적어로 기능합니다.
  *
  * 아래를 참고해보세요.
- * * [kr.bydelta.koala.proc.CanDepParse] 의존구조 분석을 수행하는 interface.
+ * * [kr.bydelta.koala.proc.CanParseDependency] 의존구조 분석을 수행하는 interface.
  * * [Word.getDependency] 어절이 직접 지배하는 하위 의존구조 [DepTree]를 가져오는 API
  * * [Sentence.getDependencyTree] 전체 문장을 분석한 의존구조 [DepTree]를 가져오는 API
  * * [PhraseTag] 의존구조의 형태 분류를 갖는 Enum 값 (구구조 분류와 같음)
@@ -982,7 +993,7 @@ class Word @Throws(AlreadySetIDException::class) internal constructor(val surfac
      * * 먹었고, 쌌다: 용언구
      *
      * 아래를 참고해보세요.
-     * * [kr.bydelta.koala.proc.CanSyntaxParse] 구문구조 분석을 수행하는 interface.
+     * * [kr.bydelta.koala.proc.CanParseSyntax] 구문구조 분석을 수행하는 interface.
      * * [Sentence.getSyntaxTree] 전체 문장을 분석한 [SyntaxTree]를 가져오는 API
      * * [SyntaxTree] 구문구조를 저장하는 형태
      * * [PhraseTag] 구구조의 형태 분류를 갖는 Enum 값
@@ -1008,7 +1019,7 @@ class Word @Throws(AlreadySetIDException::class) internal constructor(val surfac
      * * '짐을'은 '쌌다'의 목적어로 기능합니다.
      *
      * 아래를 참고해보세요.
-     * * [kr.bydelta.koala.proc.CanDepParse] 의존구조 분석을 수행하는 interface.
+     * * [kr.bydelta.koala.proc.CanParseDependency] 의존구조 분석을 수행하는 interface.
      * * [Sentence.getDependencyTree] 전체 문장을 분석한 의존구조 [DepTree]를 가져오는 API
      * * [DepTree] 의존구문구조의 저장형태
      * * [PhraseTag] 의존구조의 형태 분류를 갖는 Enum 값 (구구조 분류와 같음)
@@ -1139,7 +1150,7 @@ class Sentence(private val words: List<Word>) : Property(), List<Word> by words 
      * * 먹었고, 쌌다: 용언구
      *
      * 아래를 참고해보세요.
-     * * [kr.bydelta.koala.proc.CanSyntaxParse] 구문구조 분석을 수행하는 interface.
+     * * [kr.bydelta.koala.proc.CanParseSyntax] 구문구조 분석을 수행하는 interface.
      * * [Word.getPhrase] 어절의 직속 상위 [SyntaxTree]를 가져오는 API
      * * [SyntaxTree] 구문구조를 저장하는 형태
      * * [PhraseTag] 구구조의 형태 분류를 갖는 Enum 값
@@ -1165,7 +1176,7 @@ class Sentence(private val words: List<Word>) : Property(), List<Word> by words 
      * * '짐을'은 '쌌다'의 목적어로 기능합니다.
      *
      * 아래를 참고해보세요.
-     * * [kr.bydelta.koala.proc.CanDepParse] 의존구조 분석을 수행하는 interface.
+     * * [kr.bydelta.koala.proc.CanParseDependency] 의존구조 분석을 수행하는 interface.
      * * [Word.getDependency] 각 어절이 지배하는 의존구조 [DepTree]를 가져오는 API
      * * [DepTree] 의존구문구조의 저장형태
      * * [PhraseTag] 의존구조의 형태 분류를 갖는 Enum 값 (구구조 분류와 같음)
@@ -1286,7 +1297,7 @@ class Sentence(private val words: List<Word>) : Property(), List<Word> by words 
      * 표면형과 더불어, 포함된 어절과 형태소의 배열 순서가 같은지 확인합니다. (reference 기준의 동일함 판단이 아닙니다)
      *
      * ## 참고
-     * * 각 어절의 [id]가 다르더라도 형태소와 표면형이 같으면 같다고 판단합니다.
+     * * [Word.id]나 [Morpheme.id]가 다르더라도 형태소와 표면형이 같으면 같다고 판단합니다.
      * * 세부 동작은 [Word.equals]와 [Morpheme.equals] 참고
      *
      * @return 모두 같으면 true.

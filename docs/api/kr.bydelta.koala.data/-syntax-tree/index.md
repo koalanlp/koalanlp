@@ -20,7 +20,7 @@
 
 아래를 참고해보세요.
 
-* [kr.bydelta.koala.proc.CanSyntaxParse](../../kr.bydelta.koala.proc/-can-syntax-parse.md) 구문구조 분석을 수행하는 interface.
+* [kr.bydelta.koala.proc.CanParseSyntax](../../kr.bydelta.koala.proc/-can-syntax-parse.md) 구문구조 분석을 수행하는 interface.
 * [Word.getPhrase](../-word/get-phrase.md) 어절이 직접 속하는 가장 작은 구구조 [SyntaxTree](./index.md)를 가져오는 API
 * [Sentence.getSyntaxTree](../-sentence/get-syntax-tree.md) 전체 문장을 분석한 [SyntaxTree](./index.md)를 가져오는 API
 * [PhraseTag](../../kr.bydelta.koala/-phrase-tag/index.md) 구구조의 형태 분류를 갖는 Enum 값

@@ -1,0 +1,22 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>CanCompileDict.importFrom - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kr.bydelta.koala.dic</a>&nbsp;/&nbsp;<a href="index.html">CanCompileDict</a>&nbsp;/&nbsp;<a href="./import-from.html">importFrom</a><br/>
+<br/>
+<h1>importFrom</h1>
+<a name="kr.bydelta.koala.dic.CanCompileDict$importFrom(kr.bydelta.koala.dic.CanCompileDict, kotlin.Boolean, kotlin.Function1((kr.bydelta.koala.POS, kotlin.Boolean)))"></a>
+<code><span class="identifier">@JvmOverloads</span> <span class="keyword">fun </span><span class="identifier">importFrom</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.dic.CanCompileDict$importFrom(kr.bydelta.koala.dic.CanCompileDict, kotlin.Boolean, kotlin.Function1((kr.bydelta.koala.POS, kotlin.Boolean)))/dict">dict</span><span class="symbol">:</span>&nbsp;<a href="index.html"><span class="identifier">CanCompileDict</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.dic.CanCompileDict$importFrom(kr.bydelta.koala.dic.CanCompileDict, kotlin.Boolean, kotlin.Function1((kr.bydelta.koala.POS, kotlin.Boolean)))/fastAppend">fastAppend</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.dic.CanCompileDict$importFrom(kr.bydelta.koala.dic.CanCompileDict, kotlin.Boolean, kotlin.Function1((kr.bydelta.koala.POS, kotlin.Boolean)))/filter">filter</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="../../kr.bydelta.koala/-p-o-s/index.html"><span class="identifier">POS</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{ it.isNoun() }<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>다른 사전을 참조하여, 선택된 사전에 없는 단어를 사용자사전으로 추가합니다.</p>
+<h3>Parameters</h3>
+<p><a name="dict"></a>
+<code>dict</code> - 참조할 사전</p>
+<p><a name="fastAppend"></a>
+<code>fastAppend</code> - 선택된 사전에 존재하는지를 검사하지 않고, 빠르게 추가하고자 할 때 (기본값 false)</p>
+<p><a name="filter"></a>
+<code>filter</code> - 추가할 품사를 지정하는 함수. (기본값 <a href="../../kr.bydelta.koala/-p-o-s/is-noun.html">POS.isNoun</a>)</p>
+</BODY>
+</HTML>

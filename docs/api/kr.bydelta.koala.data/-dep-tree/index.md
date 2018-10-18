@@ -20,7 +20,7 @@
 
 아래를 참고해보세요.
 
-* [kr.bydelta.koala.proc.CanDepParse](../../kr.bydelta.koala.proc/-can-dep-parse.md) 의존구조 분석을 수행하는 interface.
+* [kr.bydelta.koala.proc.CanParseDependency](../../kr.bydelta.koala.proc/-can-dep-parse.md) 의존구조 분석을 수행하는 interface.
 * [Word.getDependency](../-word/get-dependency.md) 어절이 직접 지배하는 하위 의존구조 [DepTree](./index.md)를 가져오는 API
 * [Sentence.getDependencyTree](../-sentence/get-dependency-tree.md) 전체 문장을 분석한 의존구조 [DepTree](./index.md)를 가져오는 API
 * [PhraseTag](../../kr.bydelta.koala/-phrase-tag/index.md) 의존구조의 형태 분류를 갖는 Enum 값 (구구조 분류와 같음)

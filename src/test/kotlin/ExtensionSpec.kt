@@ -1,11 +1,10 @@
 package kr.bydelta.koala
 
-import org.amshove.kluent.`should be equal to`
-import org.amshove.kluent.`should be`
-import org.amshove.kluent.`should equal`
-import org.amshove.kluent.shouldContainSame
+import kr.bydelta.koala.ext.*
+import org.amshove.kluent.*
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
+import java.lang.IllegalArgumentException
 import java.util.*
 
 object ExtensionSpec : Spek({
@@ -476,7 +475,9 @@ object ExtensionSpec : Spek({
 
                 str.dissembleHangul().map { it.toInt() } shouldContainSame code.flatMap { if (it.third != null) it.toList() else listOf(it.first, it.second) }.map { it?.toInt() }
                 str.first().dissembleHangul() `should equal` code[0]
-            }
+            };
+
+            { assembleHangul('a', 'b') } `should throw` IllegalArgumentException::class
         }
     }
 

@@ -1,0 +1,147 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>kr.bydelta.koala.ext - </title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="./index.html">kr.bydelta.koala.ext</a><br/>
+<br/>
+<h2>Package kr.bydelta.koala.ext</h2>
+<h3>Extensions for External Classes</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="kotlin.-char/index.html">kotlin.Char</a></p>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kotlin.-char-sequence/index.html">kotlin.CharSequence</a></p>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kotlin.-triple/index.html">kotlin.Triple</a></p>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-a-l-p-h-a-b-e-t_-r-e-a-d-i-n-g.html">ALPHABET_READING</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">ALPHABET_READING</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html"><span class="identifier">Pair</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>알파벳의 독음방법</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-cho-to-jong.html">ChoToJong</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">ChoToJong</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span class="symbol">&gt;</span></code>
+<p>초성 문자를 종성 조합형 문자로 변경</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-h-a-n-g-u-l_-e-n-d.html">HANGUL_END</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">HANGUL_END</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a></code>
+<p>'힣'(hih) 위치</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-h-a-n-g-u-l_-s-t-a-r-t.html">HANGUL_START</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">HANGUL_START</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a></code>
+<p>'가'(ga) 위치</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-han-first-list.html">HanFirstList</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">HanFirstList</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span class="symbol">&gt;</span></code>
+<p>초성 조합형 문자열 리스트 (UNICODE 순서)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-han-last-list.html">HanLastList</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">HanLastList</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span class="symbol">?</span><span class="symbol">&gt;</span></code>
+<p>종성 조합형 문자열 리스트 (UNICODE 순서). 가장 첫번째는 null (받침 없음)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-han-second-list.html">HanSecondList</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">HanSecondList</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span class="symbol">&gt;</span></code>
+<p>중성 조합형 문자열 리스트 (UNICODE 순서)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-j-o-n-g-s-u-n-g_-r-a-n-g-e.html">JONGSUNG_RANGE</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">JONGSUNG_RANGE</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>종성 범위의 폭</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-j-u-n-g-s-u-n-g_-r-a-n-g-e.html">JUNGSUNG_RANGE</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">JUNGSUNG_RANGE</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>중성 범위의 폭</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="assemble-hangul.html">assembleHangul</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">assembleHangul</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.ext$assembleHangul(kotlin.Char, kotlin.Char, kotlin.Char)/cho">cho</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.ext$assembleHangul(kotlin.Char, kotlin.Char, kotlin.Char)/jung">jung</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.ext$assembleHangul(kotlin.Char, kotlin.Char, kotlin.Char)/jong">jong</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a></code>
+<p>초성을 <a href="assemble-hangul.html#kr.bydelta.koala.ext$assembleHangul(kotlin.Char, kotlin.Char, kotlin.Char)/cho">cho</a> 문자로, 중성을 <a href="assemble-hangul.html#kr.bydelta.koala.ext$assembleHangul(kotlin.Char, kotlin.Char, kotlin.Char)/jung">jung</a> 문자로, 종성을 <a href="assemble-hangul.html#kr.bydelta.koala.ext$assembleHangul(kotlin.Char, kotlin.Char, kotlin.Char)/jong">jong</a> 문자로 갖는 한글 문자를 재구성합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="correct-verb-apply.html">correctVerbApply</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">correctVerbApply</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.ext$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/verb">verb</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.ext$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/isVerb">isVerb</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.ext$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/rest">rest</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>주어진 용언의 원형 <a href="correct-verb-apply.html#kr.bydelta.koala.ext$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/verb">verb</a>이 뒷 부분 <a href="correct-verb-apply.html#kr.bydelta.koala.ext$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/rest">rest</a>와 같이 어미가 붙어 활용될 때, 불규칙 활용 용언과 모음조화를 교정합니다.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

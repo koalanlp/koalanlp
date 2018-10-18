@@ -1,0 +1,39 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Sentence.getDependencyTree - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kr.bydelta.koala.data</a>&nbsp;/&nbsp;<a href="index.html">Sentence</a>&nbsp;/&nbsp;<a href="./get-dependency-tree.html">getDependencyTree</a><br/>
+<br/>
+<h1>getDependencyTree</h1>
+<a name="kr.bydelta.koala.data.Sentence$getDependencyTree()"></a>
+<code><span class="keyword">fun </span><span class="identifier">getDependencyTree</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-dep-tree/index.html"><span class="identifier">DepTree</span></a></code>
+<p>의존구문분석을 했다면, 최상위 의존구문 구조의 값을 돌려줍니다.</p>
+<h2>참고</h2>
+<p><strong>의존구조 분석</strong>은 문장의 구성 어절들이 의존 또는 기능하는 관계를 분석하는 방법입니다.
+예) '나는 밥을 먹었고, 영희는 짐을 쌌다'라는 문장에는
+가장 마지막 단어인 '쌌다'가 핵심 어구가 되며,</p>
+<ul><li>'먹었고'가 '쌌다'와 대등하게 연결되고</li>
+<li>'나는'은 '먹었고'의 주어로 기능하며</li>
+<li>'밥을'은 '먹었고'의 목적어로 기능합니다.</li>
+<li>'영희는'은 '쌌다'의 주어로 기능하고,</li>
+<li>'짐을'은 '쌌다'의 목적어로 기능합니다.</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul><li><a href="../../kr.bydelta.koala.proc/-can-parse-dependency.html">kr.bydelta.koala.proc.CanParseDependency</a> 의존구조 분석을 수행하는 interface.</li>
+<li><a href="../-word/get-dependency.html">Word.getDependency</a> 각 어절이 지배하는 의존구조 <a href="../-dep-tree/index.html">DepTree</a>를 가져오는 API</li>
+<li><a href="../-dep-tree/index.html">DepTree</a> 의존구문구조의 저장형태</li>
+<li><a href="../../kr.bydelta.koala/-phrase-tag/index.html">PhraseTag</a> 의존구조의 형태 분류를 갖는 Enum 값 (구구조 분류와 같음)</li>
+<li><a href="../../kr.bydelta.koala/-dependency-tag/index.html">DependencyTag</a> 의존구조의 기능 분류를 갖는 Enum 값</li>
+</ul>
+<h3>Exceptions</h3>
+<p><a name="UninitializedPropertyAccessException"></a>
+<code>UninitializedPropertyAccessException</code> - 분석을 하지 않은 경우 발생합니다.</p>
+<p><strong>Since</strong><br/>
+2.0.0</p>
+<p><strong>Return</strong><br/>
+최상위 의존구문구조 <a href="../-dep-tree/index.html">DepTree</a></p>
+</BODY>
+</HTML>

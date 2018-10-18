@@ -1,9 +1,7 @@
 package kr.bydelta.koala
 
-import org.amshove.kluent.AnyException
-import org.amshove.kluent.`should be`
-import org.amshove.kluent.`should not throw`
-import org.amshove.kluent.`should throw`
+import kr.bydelta.koala.data.*
+import org.amshove.kluent.*
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import java.io.ByteArrayInputStream
@@ -446,7 +444,7 @@ object DataSpec : Spek({
 
             // setProperty, getSyntaxTree, getDependencyTree, getRoleTree, getEntities
             it("should provide proper way to set a property") {
-                { sent.getNamedEntities() } `should throw` UninitializedPropertyAccessException::class
+                { sent.getEntities() } `should throw` UninitializedPropertyAccessException::class
                 { sent.getSyntaxTree() } `should throw` UninitializedPropertyAccessException::class
                 { sent.getDependencyTree() } `should throw` UninitializedPropertyAccessException::class
                 { sent.getSemRoleTree() } `should throw` UninitializedPropertyAccessException::class
@@ -466,7 +464,7 @@ object DataSpec : Spek({
                         RoleTree(sent[0], RoleType.ARG0)
                 ))
 
-                sent.getNamedEntities()[0].fineType `should be equal to` "PS_OTHER"
+                sent.getEntities()[0].fineType `should be equal to` "PS_OTHER"
                 sent.getSyntaxTree().type `should equal` PhraseTag.S
                 sent.getDependencyTree().depType `should equal` DependencyTag.ROOT
                 sent.getSemRoleTree().type `should equal` RoleType.HEAD

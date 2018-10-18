@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>correctVerbApply - </title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="index.html">kr.bydelta.koala.ext</a>&nbsp;/&nbsp;<a href="./correct-verb-apply.html">correctVerbApply</a><br/>
+<br/>
+<h1>correctVerbApply</h1>
+<a name="kr.bydelta.koala.ext$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)"></a>
+<code><span class="keyword">fun </span><span class="identifier">correctVerbApply</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.ext$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/verb">verb</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.ext$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/isVerb">isVerb</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.ext$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/rest">rest</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>주어진 용언의 원형 <a href="correct-verb-apply.html#kr.bydelta.koala.ext$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/verb">verb</a>이 뒷 부분 <a href="correct-verb-apply.html#kr.bydelta.koala.ext$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/rest">rest</a>와 같이 어미가 붙어 활용될 때, 불규칙 활용 용언과 모음조화를 교정합니다.</p>
+<h2>사용법</h2>
+<h3>Kotlin</h3>
+<pre><code class="lang-kotlin">correctVerbApply("듣", true, "어") // 동사 "듣다"에 어미 "-어"가 붙으면 "들어"가 됩니다.
+</code></pre>
+<h3>Scala + <a href="https://koalanlp.github.io/wrapper-scala/">koalanlp-scala</a></h3>
+<pre><code class="lang-scala">correctVerbApply("듣", true, "어")
+</code></pre>
+<h3>Java</h3>
+<pre><code class="lang-java">ExtUtil.correctVerbApply("듣", true, "어")
+</code></pre>
+<h3>Parameters</h3>
+<p><a name="verb"></a>
+<code>verb</code> - 용언 원형인 어근을 표현한 String. '-다.' 와 같은 어미는 없는 어근 상태입니다.</p>
+<p><a name="isVerb"></a>
+<code>isVerb</code> - 동사인지 형용사인지 나타내는 지시자. 동사이면 true.</p>
+<p><a name="rest"></a>
+<code>rest</code> - 어근에 붙일 어미를 표현한 String.</p>
+<p><strong>Since</strong><br/>
+2.0.0</p>
+<p><strong>Return</strong><br/>
+모음조화나 불규칙 활용이 교정된 원형+어미 결합</p>
+</BODY>
+</HTML>
