@@ -1,0 +1,175 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>CanTagOnlyAParagraph - </title>
+    <link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kr.bydelta.koala</a>&nbsp;/&nbsp;<a href="./index.html">CanTagOnlyAParagraph</a><br/>
+<br/>
+<h1>CanTagOnlyAParagraph</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CanTagOnlyAParagraph</span><span
+        class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span
+        class="symbol">:</span>&nbsp;<a href="../-can-tag/index.html"><span class="identifier">CanTag</span></a></code>
+<p>문장1개는 불가하지만, 문단1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 <a href="index.html#S">S</a> 타입으로 돌려줍니다.</p>
+<h2>참고</h2>
+<p><strong>형태소</strong>는 의미를 가지는 요소로서는 더 이상 분석할 수 없는 가장 작은 말의 단위로 정의됩니다.</p>
+<p><strong>형태소 분석</strong>은 문장을 형태소의 단위로 나누는 작업을 의미합니다.
+    예) '문장을 형태소로 나눠봅시다'의 경우,</p>
+<ul>
+    <li>문장/일반명사, -을/조사,</li>
+    <li>형태소/일반명사, -로/조사,</li>
+    <li>나누-(다)/동사, -어-/어미, 보-(다)/동사, -ㅂ시다/어미
+        로 대략 나눌 수 있습니다.
+    </li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+    <li><a href="../-morpheme/index.html">Morpheme</a> 형태소를 저장하는 클래스입니다.</li>
+    <li><a href="../-p-o-s/index.html">POS</a> 형태소의 분류를 담은 Enum class</li>
+</ul>
+<h2>사용법 예제</h2>
+<p>분석기 <code>Tagger</code>가 <code>CanTagOnlyAParagraph</code>를 상속받았다면,</p>
+<h3>Kotlin</h3>
+<pre><code class="lang-kotlin">val tagger = Tagger()
+val sentence = tagger.tagSentence("문장 1개입니다.")
+val sentences = tagger.tag("문장들입니다. 결과는 목록이 됩니다.")
+// 또는
+val sentences = tagger("문장들입니다. 결과는 목록이 됩니다.")
+</code></pre>
+<h3>Scala + <a href="https://koalanlp.github.io/wrapper-scala/">koalanlp-scala</a></h3>
+<pre><code class="lang-scala">import kr.bydelta.koala.Implicits._
+val tagger = new Tagger()
+val sentence = tagger.tagSentence("문장 1개입니다.")
+val sentences = tagger.tag("문장들입니다. 결과는 목록이 됩니다.")
+// 또는
+val sentences = tagger("문장들입니다. 결과는 목록이 됩니다.")
+</code></pre>
+<h3>Java</h3>
+<pre><code class="lang-java">Tagger tagger = new Tagger()
+Sentence sentence = tagger.tagSentence("문장 1개입니다.")
+List&lt;Sentence&gt; sentences = tagger.tag("문장들입니다. 결과는 목록이 됩니다.")
+// 또는
+List&lt;Sentence&gt; sentences = tagger("문장들입니다. 결과는 목록이 됩니다.")
+</code></pre>
+<p><strong>Since</strong><br/>
+    1.x</p>
+<h3>Constructors</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="-init-.html">&lt;init&gt;</a></p>
+        </td>
+        <td>
+            <code><span class="identifier">CanTagOnlyAParagraph</span><span class="symbol">(</span><span class="symbol">)</span></code>
+            <p>문장1개는 불가하지만, 문단1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 <a href="index.html#S">S</a> 타입으로 돌려줍니다.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="convert-sentence.html">convertSentence</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">convertSentence</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="kr.bydelta.koala.proc.CanTagOnlyAParagraph$convertSentence(kr.bydelta.koala.proc.CanTagOnlyAParagraph.S)/result">result</span><span
+                    class="symbol">:</span>&nbsp;<a href="index.html#S"><span class="identifier">S</span></a><span
+                    class="symbol">)</span><span class="symbol">: </span><a href="../-sentence/index.html"><span
+                    class="identifier">Sentence</span></a></code>
+            <p><a href="index.html#S">S</a> 타입의 분석결과 <a
+                    href="convert-sentence.html#kr.bydelta.koala.proc.CanTagOnlyAParagraph$convertSentence(kr.bydelta.koala.proc.CanTagOnlyAParagraph.S)/result">result</a>를
+                변환, <a href="../-sentence/index.html">Sentence</a>를 구성합니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="tag.html">tag</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">tag</span><span class="symbol">(</span><span
+                    class="identifier"
+                    id="kr.bydelta.koala.proc.CanTagOnlyAParagraph$tag(kotlin.String)/text">text</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-sentence/index.html"><span
+                    class="identifier">Sentence</span></a><span class="symbol">&gt;</span></code>
+            <p>주어진 문단 <a href="tag.html#kr.bydelta.koala.proc.CanTagOnlyAParagraph$tag(kotlin.String)/text">text</a>을
+                분석하여 품사를 부착하고, 결과로 <a
+                        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a
+                        href="../-sentence/index.html">Sentence</a>&gt; 객체를 돌려줍니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="tag-paragraph-original.html">tagParagraphOriginal</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">tagParagraphOriginal</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="kr.bydelta.koala.proc.CanTagOnlyAParagraph$tagParagraphOriginal(kotlin.String)/text">text</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a href="index.html#S"><span
+                    class="identifier">S</span></a><span class="symbol">&gt;</span></code>
+            <p>변환되지않은, <a
+                    href="tag-paragraph-original.html#kr.bydelta.koala.proc.CanTagOnlyAParagraph$tagParagraphOriginal(kotlin.String)/text">text</a>의
+                분석결과 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a
+                        href="index.html#S">S</a>&gt;를 반환합니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="tag-sentence.html">tagSentence</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">tagSentence</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="kr.bydelta.koala.proc.CanTagOnlyAParagraph$tagSentence(kotlin.String)/text">text</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="../-sentence/index.html"><span class="identifier">Sentence</span></a></code>
+            <p>주어진 문장 <a
+                    href="tag-sentence.html#kr.bydelta.koala.proc.CanTagOnlyAParagraph$tagSentence(kotlin.String)/text">text</a>을
+                분석하여 품사를 부착하고, 결과로 <a href="../-sentence/index.html">Sentence</a> 객체를 돌려줍니다.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Inherited Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="../-can-tag/invoke.html">invoke</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">open</span> <span class="keyword">operator</span> <span
+                    class="keyword">fun </span><span class="identifier">invoke</span><span class="symbol">(</span><span
+                    class="identifier" id="kr.bydelta.koala.proc.CanTag$invoke(kotlin.String)/text">text</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-sentence/index.html"><span
+                    class="identifier">Sentence</span></a><span class="symbol">&gt;</span></code>
+            <p>주어진 문단 <a href="../-can-tag/invoke.html#kr.bydelta.koala.proc.CanTag$invoke(kotlin.String)/text">text</a>을
+                분석하여 품사를 부착하고, 결과로 <a
+                        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a
+                        href="../-sentence/index.html">Sentence</a>&gt; 객체를 돌려줍니다.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</BODY>
+</HTML>

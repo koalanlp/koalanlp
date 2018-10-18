@@ -41,6 +41,7 @@ dependencies {
 dokka {
     outputFormat = "html"
     outputDirectory = "$buildDir/javadoc"
+    reportUndocumented = true
 
     linkMapping {
         dir = "src/main/kotlin"
@@ -52,12 +53,16 @@ dokka {
 task githubDoc(type: org.jetbrains.dokka.gradle.DokkaTask){
     outputFormat = "html"
     outputDirectory = "$rootDir/docs/api"
+    reportUndocumented = true
+    skipDeprecated = true
 
     linkMapping {
         dir = "src/main/kotlin"
         url = "https://github.com/koalanlp/${gitBaseName}/blob/${gitBranch}/src/main/kotlin"
         suffix = "#L"
     }
+
+    includes = ["overview.md"]
 }
 
 task dokkaJar(type: org.gradle.jvm.tasks.Jar, dependsOn: dokka){
