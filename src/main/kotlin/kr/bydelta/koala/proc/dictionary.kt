@@ -8,7 +8,7 @@ import java.io.FileOutputStream
 import java.util.zip.ZipInputStream
 
 /** Dictionary Entry 타입: 표면형을 나타내는 [String] 값과, 품사태그를 나타내는 [POS]값으로 구성.*/
-internal typealias DicEntry = Pair<String, POS>
+typealias DicEntry = Pair<String, POS>
 
 /**
  * 사용자 사전추가 기능을 위한 interface입니다.
