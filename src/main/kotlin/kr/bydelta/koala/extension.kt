@@ -551,7 +551,7 @@ fun Char.isJongsungEnding(): Boolean = this.isCompleteHangul() && (this - HANGUL
  * */
 fun CharSequence.isJongsungEnding(): Boolean = this.last().isJongsungEnding()
 
-/** 현재 문자에서 초성 자음문자를 분리합니다. 초성이 없으면 null. 
+/** 현재 문자에서 초성 자음문자를 분리합니다. 초성이 없으면 null.
  *
  * ## 사용법
  * ### Kotlin
@@ -578,7 +578,7 @@ fun Char.getChosung(): Char? =
         else if (this.isChosungJamo()) this
         else null
 
-/** 현재 문자에서 중성 모음문자를 분리합니다. 중성이 없으면 null. 
+/** 현재 문자에서 중성 모음문자를 분리합니다. 중성이 없으면 null.
  *
  * ## 사용법
  * ### Kotlin
@@ -605,8 +605,8 @@ fun Char.getJungsung(): Char? =
         else if (this.isJungsungJamo()) this
         else null
 
-/** 현재 문자에서 종성 자음문자를 분리합니다. 종성이 없으면 null. 
- * 
+/** 현재 문자에서 종성 자음문자를 분리합니다. 종성이 없으면 null.
+ *
  * ## 사용법
  * ### Kotlin
  * ```kotlin
@@ -826,6 +826,7 @@ val HanFirstList by lazy { (0x1100..0x1112).map { it.toChar() }.toTypedArray() }
 //'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
 /** 중성 조합형 문자열 리스트 (UNICODE 순서) */
 val HanSecondList by lazy { (0x1161..0x1175).map { it.toChar() }.toTypedArray() }
+// 0    1     2    3     4    5    6      7    8    9    10    11    12   13    14   15   16    17   18    19    20
 //'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ'
 /** 종성 조합형 문자열 리스트 (UNICODE 순서). 가장 첫번째는 null (받침 없음) */
 val HanLastList by lazy { (listOf<Char?>(null) + (0x11A8..0x11C2).map { it.toChar() }.toList<Char?>()).toTypedArray() }
@@ -869,28 +870,68 @@ val ChoToJong by lazy {
     )
 }
 
+/** 자모 index */
+private fun Char?.getHIndex(default: Int = -1): Int =
+        if (this == null) default
+        else if (this.isChosungJamo()) HanFirstList.indexOf(this.getChosung()!!)
+        else if (this.isJungsungJamo()) HanSecondList.indexOf(this.getJungsung()!!)
+        else if (this.isJongsungJamo()) HanLastList.indexOf(this.getJongsung())
+        else if (this in ChoToJong) HanLastList.indexOf(ChoToJong[this])
+        else default
+
+private fun Char?.hasHIndex(vararg index: Int): Boolean = this.getHIndex() in index
+/** Index -> 자모 */
+private fun Int.getJungsung() = HanSecondList[this]
+
+/** 종성 삭제 */
+private fun Char.removeJongsung(): Char = this - this.getJongsung().getHIndex(0)
+
 /** 모음조화용 양성모음 */
-private val SecondPos by lazy { listOf(HanSecondList[0], HanSecondList[2]) }
+private val SecondPos by lazy { listOf(0, 1, 2, 3) }
 /** 모음조화용 음성모음 */
-private val SecondNeg by lazy { listOf(HanSecondList[4], HanSecondList[6]) }
+private val SecondNeg by lazy { listOf(4, 5, 6, 7) }
 /** 종성 ㄹ로 종료 */
-private val endsWithL by lazy { charEndsWith(HanLastList[8]!!) }
+private fun Char.isEndByL(): Boolean = this.getJongsung().hasHIndex(8)
 /** 모음 ㅡ로 종료 */
-private val endsWithEu by lazy { charEndsWithMo(HanSecondList[18]) }
+private fun Char.isEndByEu(): Boolean = !this.isJongsungEnding() && this.getJungsung().hasHIndex(18)
 /** 모음 ㅏ로 종료 */
-private val endsWithAh by lazy { charEndsWithMo(HanSecondList[0]) }
-/** ㄴ으로 시작 */
-private val startsWithN by lazy { charStartsWith(HanFirstList[2]) }
-/** ㅂ으로 시작 */
-private val startsWithB by lazy { charStartsWith(HanFirstList[7]) }
+private fun Char.isEndByAhUh(): Boolean = !this.isJongsungEnding() && this.getJungsung().hasHIndex(0, 4)
+
+/** 모음 ㅜ로 종료 */
+private fun Char.isEndByOhWoo(): Boolean = !this.isJongsungEnding() && this.getJungsung().hasHIndex(8, 13)
+
+/** ㄴ */
+private fun Char.isStartByN(): Boolean = this.getChosung().hasHIndex(2)
+
+/** ㅂ */
+private fun Char.isStartByB(): Boolean = this.getChosung().hasHIndex(7)
 /** ㅅ으로 시작 */
-private val startsWithS by lazy { charStartsWith(HanFirstList[9]) }
-/** '오'로 시작 */
-private val startsWithOh by lazy { charStartsWithMo(HanSecondList[8]) }
+private fun Char.isStartByS(): Boolean = this.getChosung().hasHIndex(9)
 /** '으'로 시작 */
-private val startsWithEu by lazy { charStartsWithMo(HanSecondList[18]) }
+private fun Char.isStartByEu(): Boolean = this.getChosung().hasHIndex(11) && this.getJungsung().hasHIndex(18)
 /** '아/어'로 시작 */
-private val startsWithAhUh by lazy { charStartsWithMo(HanSecondList[0], HanSecondList[4]) }
+private fun Char.isStartByAhUh(): Boolean = this.getChosung().hasHIndex(11) && this.getJungsung().hasHIndex(0, 4)
+
+/** '오' */
+private fun Char.isOh(): Boolean = this == '오'
+
+/** ㅗ 모음 첨가 */
+private fun Char.addOh(): Char =
+        this + (when (this.getJungsung().getHIndex()) {
+            0 -> 9 // ㅏ -> ㅘ
+            4 -> 5 // ㅓ -> ㅘ
+            18 -> -5 // ㅡ -> ㅜ
+            else -> 0
+        }) * JONGSUNG_RANGE
+
+/** ㅜ 모음 첨가 */
+private fun Char.addWoo(): Char =
+        this + (when (this.getJungsung().getHIndex()) {
+            0 -> 14 // ㅏ -> ㅝ
+            4 -> 10 // ㅓ -> ㅝ
+            18 -> -5 // ㅡ -> ㅜ
+            else -> 0
+        }) * JONGSUNG_RANGE
 
 /**
  * 주어진 용언의 원형 [verb]이 뒷 부분 [rest]와 같이 어미가 붙어 활용될 때, 불규칙 활용 용언과 모음조화를 교정합니다.
@@ -928,184 +969,216 @@ fun correctVerbApply(verb: String, isVerb: Boolean, rest: String): String =
         if (rest.isEmpty()) verb
         else {
             val char = verb.last()
-            val next = rest[0]
+            val next = when {
+                rest[0].isJungsungJamo() -> assembleHangul(HanFirstList[11], rest[0])
+                rest[0].isJongsungJamo() -> assembleHangul(HanFirstList[11], HanSecondList[18], rest[0])
+                rest[0] in ChoToJong -> assembleHangul(HanFirstList[11], HanSecondList[18], ChoToJong[rest[0]])
+                else -> rest[0]
+            }
+
             val front = verb.dropLast(1)
             val tail = rest.drop(1)
 
+            val isAdjective = !isVerb
+
             if (!next.isHangul()) {
-                verb + rest
-            } else if (next.getChosung() == HanFirstList[11] || next.isIncompleteHangul()) {
-                if ((verb.matches(Regex("^벗|솟|씻|뺏$")) && isVerb) ||
-                        (char != '낫' && char.getJongsung() == HanLastList[19] && !isVerb))
-                    verb + harmony(verb, rest)
-                else if (char.getJongsung() == HanLastList[19]) // 종성: ㅅ
-                    (char - 19) + harmony(verb, rest)
-                else if (verb.matches(Regex("^듣|깨닫|붇|눋|겯|싣|일컫|걷$")))
-                //참고: 묻다-물어는 묻다-묻어보다 어깨번호가 낮으므로 제외
-                    front + (char + 1) + harmony(verb, rest)
-                else if (verb.matches(Regex("^돕|곱$")))
-                    (char - 17) + (addOh(next) + tail)
-                else if (verb.matches(Regex("^굽|뽑|씹|업|입|잡|접|좁|집$")))
-                    verb + harmony(verb, rest)
-                else if (char.getJongsung() == HanLastList[17]) // 종성: ㅂ
-                    front + ((char - 17) + (addWoo(next) + tail))
-                else if (verb.matches(Regex("^치르|따르|다다르|우러르|들르$")) && startsWithAhUh(next))
-                    front + harmony(front,
-                            assembleHangul(char.getChosung()!!, next.getJungsung()!!, next.getJongsung()) +
-                                    tail, forced = true)
-                else if (verb.matches(Regex("^푸르|이르|노르$")) && startsWithAhUh(next))
-                    verb + harmony(verb, (next - 6 * JUNGSUNG_RANGE) + rest.drop(1), forced = true)
-                else if (verb == "푸" && startsWithAhUh(next))
-                    ('퍼' + ((next.getJongsung()?.toInt() ?: 0x11A7) - 0x11A7)) + tail
-                else if (char == '르' && startsWithAhUh(next) && verb.length > 1)
-                    front.dropLast(1) + ((front.last() + 8) +
-                            harmony(front, (next - 6 * JUNGSUNG_RANGE) + tail, forced = true))
-                else if (char == '하' && startsWithAhUh(next))
-                    verb + harmony("어", (next + 2 * JONGSUNG_RANGE) + tail) //force "ㅕ"
-                else if (verb == "다" && rest == "아")
-                    "다오"
-                else if (!isVerb && char.getJongsung() == HanLastList.last() && char != '좋') {
-                    // 종성: ㅎ
-                    if (next.isIncompleteHangul()) {
-                        front + ((char - 27 + HanLastList.indexOf(ChoToJong.getOrDefault(next, next))) + tail)
-                    } else if (next.getJungsung() == HanSecondList[18]) {
-                        // "ㅡ"
-                        front + ((char - 27 + HanLastList.indexOf(next.getJongsung())) + tail)
-                    } else if (startsWithAhUh(next)) {
-                        front + (assembleHangul(char.getChosung()!!,
-                                next.getJungsung()!! + 1, next.getJongsung()) + tail)
-                    } else
-                        verb + harmony(verb, rest)
-                } else if (endsWithEu(char) && startsWithAhUh(next)) {
-                    // 규칙적탈락: 어간 'ㅡ'탈락. 'ㅡ'가 'ㅏ/ㅓ'앞에서 탈락.
-                    front + harmony(front,
-                            assembleHangul(char.getChosung()!!,
-                                    next.getJungsung()!!, next.getJongsung()) + tail, forced = true)
-                } else if (endsWithL(char) && startsWithOh(next)) {
+
+                verb + next + tail
+
+            } else if (next.getChosung().hasHIndex(11)) {
+                // 불규칙 활용이 가능한 영역
+                // 참고: 동사 어근만 verb에 들어온다고 가정 (접두어는 제외)
+                val jong = char.getJongsung()
+
+                if (jong.hasHIndex(19) &&
+                        !(isVerb && verb.length == 1 && char in "벗솟씻뺏") && // 예외 동사
+                        !(isAdjective && verb != "낫")) { //예외 형용사
+                    // ㅅ 불규칙: 모음 앞에서 ㅅ은 탈락.
+
+                    front + char.removeJongsung() + harmony(verb, next + tail)
+
+                } else if ((verb.length == 1 && char in "듣붇눋겯싣걷") || verb == "깨닫" || verb == "일컫") {
+                    // ㄷ 불규칙: 모음 앞에서 ㄷ은 ㄹ로.겯
+
+                    front + (char + 1) + harmony(verb, next + tail)
+
+                } else if (verb.length == 1 && char in "돕곱") {
+                    // ㅂ 불규칙 (1): 모음 앞에서 ㅂ은 탈락하고 ㅗ 추가
+
+                    front + char.removeJongsung() + (next.addOh() + tail)
+
+                } else if (jong.hasHIndex(17) &&
+                        !(verb.length == 1 && char in "굽뽑씹업입잡접좁집")) { // ㅂ 불규칙이 적용되지 않는 동
+                    // ㅂ 불규칙 (2): 모음 앞에서 ㅂ은 탈락하고  추가
+
+                    front + char.removeJongsung() + (next.addWoo() + tail)
+
+                } else if (next.isStartByAhUh()) {
+                    // 후속 어미가 -아/-어 일때.
+                    if (verb.matches("^치르|따르|다다르|우러르|들르$".toRegex())) {
+                        // ㅡ 불규칙이 적용되는 '르' 용언: ㅡ 탈락후 어미와 결합
+                        // ㅇ(11)과 ㄹ(5)은 6만큼 떨어짐
+
+                        front + harmony(front, (next - JUNGSUNG_RANGE * 6) + tail, forced = true)
+
+                    } else if (verb.matches("^푸르|이르|노르$".toRegex())) {
+                        // 러 불규칙이 적용되는 '르' 용언: '어' -> '러'
+
+                        verb + harmony(verb, (next - JUNGSUNG_RANGE * 6) + tail, forced = true)
+
+                    } else if (front.isNotEmpty() && !front.last().isJongsungEnding() && char == '르') {
+                        // 르 불규칙: 르 탈락, 어간과 어미에 ㄹ 첨가
+
+                        front.dropLast(1) + (front.last() + 8) +
+                                harmony(front, (next - JUNGSUNG_RANGE * 6) + tail, forced = true)
+
+                    } else if (isAdjective && char != '좋' && jong.hasHIndex(HanLastList.size - 1)) {
+                        // ㅎ 불규칙: ㅎ + 아/어 = 해/헤
+
+                        val middle = if (verb == "그렇") assembleHangul(char.getChosung()!!, 1.getJungsung(), next.getJongsung())
+                        else assembleHangul(char.getChosung()!!, char.getJungsung()!! + 1, next.getJongsung())
+                        front + (middle + tail)
+
+                    } else if (verb == "푸") {
+                        // 우 불규칙: 푸다 + 어 -> 퍼
+
+                        ('퍼' + next.getJongsung().getHIndex(0)) + tail
+                    } else if (char == '하') {
+                        // 하 + 아/어 = 하여
+                        // 'ㅕ'로 강제함
+
+                        verb + harmony("어", (next + 2 * JONGSUNG_RANGE) + tail)
+
+                    } else if (verb == "다" || (verb == "달" && tail == "라")) {
+                        // 다 + 아 = 다오
+
+                        "다오"
+                    } else if (char.isEndByEu()) {
+                        // 규칙적 탈락: 어간 ㅡ + ㅏ/ㅓ: ㅡ 탈락
+
+                        val middle = assembleHangul(char.getChosung()!!, next.getJungsung()!!, next.getJongsung())
+                        front + harmony(front, middle + tail)
+                    } else if (!char.isJongsungEnding() && char.getJungsung().hasHIndex(HanSecondList.size - 1)) {
+                        // 축약형 ㅣ + ㅏ/ㅓ = ㅕ
+
+                        front + (assembleHangul(char.getChosung()!!, 6.getJungsung(), next.getJongsung()) + tail)
+                    } else if (!char.isJongsungEnding() && char.isEndByAhUh()) {
+                        // 축약형 ㅏ + ㅏ = ㅏ, ㅓ + ㅓ = ㅓ
+
+                        val middle = char + next.getJongsung().getHIndex(0)
+                        front + (middle + tail)
+                    } else if (!char.isJongsungEnding() && char.isEndByOhWoo() && (verb != "주" || tail != "지다")) {
+                        // 축약: ㅜ + ㅓ = ㅝ, ㅗ + ㅏ = ㅘ
+
+                        front + (char + JONGSUNG_RANGE) + tail
+                    } else {
+                        // 어디에도 해당하지 않는 경우 모음조화만 수행
+
+                        verb + harmony(verb, next + tail)
+                    }
+                } else if (isAdjective && char != '좋' && jong.hasHIndex(HanLastList.size - 1)) {
+                    // ㅎ 불규칙: ㅎ + 'ㄴ/ㄹ' -> ㅎ 탈락.
+                    // 이미 '은/을'로 변형되어 있음
+
+                    if (next.isStartByEu()) {
+                        front + ((char.removeJongsung() + next.getJongsung().getHIndex(0)) + tail)
+                    } else {
+                        // 기본 규칙 적용.
+                        verb + harmony(verb, next + tail)
+                    }
+                } else if (char.isEndByL() && next in "은읍오") {
                     // 규칙적탈락: 어간 'ㄹ'탈락. 'ㄹ'이 'ㄴㅂㅅ오'앞에서 탈락.
-                    front + ((char - HanLastList.indexOf(char.getJongsung())) + rest)
-                } else if (char.isJongsungEnding() && !endsWithL(char)) {
+                    // 앞서 배정하면서 '은/네/니/..., 읍, 시, 오' 형태로 정리됨
+
+                    if (next.isStartByEu()) // 이 경우 받침으로 추가해야 함
+                        front + (char.removeJongsung() + next.getJongsung().getHIndex()) + harmony(verb, tail)
+                    else
+                        front + char.removeJongsung() + harmony(verb, (next + tail))
+
+                } else if (char.isJongsungEnding() && !char.isEndByL() && next in "은을오") {
                     // 규칙적첨가: ('ㄹ'이외의 종료 어간) + '-ㄴ,-ㄹ,-오,-시,-며.'
-                    if (next == 'ㄴ' || next == HanLastList[4]) {
-                        verb + harmony(verb,
-                                assembleHangul(cho = HanFirstList[11],
-                                        jung = HanSecondList[18],
-                                        jong = HanLastList[4]) + tail, forced = true)
-                    } else if (next == 'ㄹ' || next == HanLastList[8]) {
-                        verb + harmony(verb,
-                                assembleHangul(cho = HanFirstList[11],
-                                        jung = HanSecondList[18],
-                                        jong = HanLastList[8]) + tail, forced = true)
-                    } else if (next == '오') {
-                        verb + harmony(verb, "으$rest")
-                    } else
-                        verb + harmony(verb, rest)
-                } else if (char.getJungsung() == HanFirstList.last() && startsWithAhUh(next)) {
-                    // ㅣ + ㅓ = ㅕ
-                    front + (assembleHangul(char.getChosung()!!, HanSecondList[6], next.getJongsung()) + tail)
-                } else if (endsWithAh(char) && startsWithAhUh(next)) {
-                    front + (assembleHangul(char.getChosung()!!, char.getJungsung()!!, next.getJongsung()) + tail)
-                } else if (!char.isJongsungEnding() && (next.isIncompleteHangul() || startsWithEu(next))) {
-                    val nextJong =
-                            if (startsWithEu(next)) next.getJongsung()?.toInt() ?: 0x11A7
-                            else ChoToJong.getOrDefault(next, next).toInt()
-                    front + (char + (nextJong - 0x11A7)) + tail
+                    // 이미 '은/을'로 변경되어 있음
+                    // 여기서는 '은, 을
+
+                    when {
+                        next.isStartByEu() ->
+                            verb + harmony(verb, next + tail, forced = true)
+                        next.isOh() ->
+                            verb + harmony(verb, "으$next$tail")
+                        else ->
+                            // Illegal state
+                            throw IllegalStateException()
+                    }
+                } else if (!char.isJongsungEnding() && next.isStartByEu()) {
+                    // 축약: 모음으로 끝난 어간에 '으'로 시작하는 어미가 붙는 경우, 받침만 이동
+
+                    front + (char + next.getJongsung().getHIndex(0)) + tail
                 } else {
-                    verb + harmony(verb, rest)
+                    // 어디에도 적용되지 않는 경우
+
+                    verb + harmony(verb, next + tail)
                 }
-            } else if (endsWithL(char) &&
-                    (startsWithB(next) || startsWithN(next) || startsWithS(next))) {
+            } else if (char.isEndByL() && (next.isStartByB() || next.isStartByN() || next.isStartByS())) {
                 // 규칙적탈락: 어간 'ㄹ'탈락. 'ㄹ'이 'ㄴㅂㅅ오'앞에서 탈락.
-                front + harmony(front, (char - HanLastList.indexOf(char.getJongsung())) + rest, forced = true)
-            } else if (char.isJongsungEnding() && !endsWithL(char)) {
+                // 앞서 배정하면서 '은/네/니/..., 읍, 시, 오' 형태로 정리됨
+
+                front + char.removeJongsung() + harmony(verb, (next + tail))
+
+            } else if (char.isJongsungEnding() && !char.isEndByL() && next in "시며") {
                 // 규칙적첨가: ('ㄹ'이외의 종료 어간) + '-ㄴ,-ㄹ,-오,-시,-며.'
-                if (next == '시' || next == '며') {
-                    verb + harmony(verb, "으$rest")
-                } else
-                    verb + harmony(verb, rest)
+                // 이미 '은/을'로 변경되어 있음
+                // 여기서는 '은, 을
+
+                verb + harmony(verb, "으$next$tail")
+
             } else {
-                verb + harmony(verb, rest)
+                // 어미가 'ㅇ'으로 시작하지 않을 때.
+
+                verb + harmony(verb, next + tail)
             }
         }
-
-/** ㅗ 모음 첨가 */
-private fun addOh(ch: Char): Char {
-    val jcode = ch.getJungsung()?.let { HanSecondList.indexOf(it) } ?: -1
-    return if (ch.isIncompleteHangul()) {
-        assembleHangul(cho = HanFirstList[11], jung = HanSecondList[13], jong = ChoToJong.getOrDefault(ch, ch))
-    } else if (jcode == 18) // ㅡ->ㅜ
-        ch - JONGSUNG_RANGE * 5
-    else if (jcode == 0) //ㅏ->ㅘ
-        ch + JONGSUNG_RANGE * 9
-    else if (jcode == 4) //ㅓ->ㅘ
-        ch + JONGSUNG_RANGE * 5
-    else
-        ch
-}
-
-/** ㅜ 모음 첨가 */
-private fun addWoo(ch: Char): Char {
-    val jcode = ch.getJungsung()?.let { HanSecondList.indexOf(it) } ?: -1
-    return if (ch.isIncompleteHangul())
-        assembleHangul(cho = HanFirstList[11], jung = HanSecondList[13], jong = ChoToJong.getOrDefault(ch, ch))
-    else if (jcode == 18) // ㅡ->ㅜ
-        ch - JONGSUNG_RANGE * 5
-    else if (jcode == 0) //ㅏ->ㅝ
-        ch + JONGSUNG_RANGE * 14
-    else if (jcode == 4) //ㅓ->ㅝ
-        ch + JONGSUNG_RANGE * 10
-    else
-        ch
-}
 
 /** 모음조화 계산 */
 private fun harmony(front: String, rest: String, forced: Boolean = false): String =
-        if (!rest.first().isCompleteHangul() && rest.first().isHangul()) {
-            val ch = rest.first()
-            if (ch.isJungsungJamo()) {
-                assembleHangul(HanFirstList[11], ch) + rest.drop(1)
-            } else {
-                assembleHangul(HanFirstList[11], HanSecondList[18], ChoToJong.getOrDefault(ch, ch)) + rest.drop(1)
-            }
-        } else if (!rest.first().isCompleteHangul() || (front.isNotEmpty() && !front.first().isCompleteHangul()))
+        if (front.isNotEmpty() && !front.first().isHangul())
             rest
         else if (front.isEmpty()) {
-            val restJung = rest.first().getJungsung()!!
-            val ch = rest.first()
-            if (SecondPos.contains(restJung))
-                assembleHangul(ch.getChosung()!!,
-                        SecondNeg[SecondPos.indexOf(restJung)],
-                        ch.getJongsung()) + rest.drop(1)
-            else
+            // 어근의 나머지 부분이 비어있다면.
+            val ch = rest[0]
+            val jung = rest[0].getJungsung().getHIndex()
+
+            if (jung in SecondPos) {
+                // 기본값: 음성모음으로 변경
+
+                val delta = (SecondNeg[SecondPos.indexOf(jung)] - jung) * JONGSUNG_RANGE
+                (ch + delta) + rest.drop(1)
+
+            } else {
+                // 음성 모음이면 유지
+
                 rest
+            }
         } else {
-            val frontJung = front.last().getJungsung()
-            val isTheCase = HanSecondList.indexOf(frontJung) in listOf(0, 2, 8)
-            val ch = rest.first()
-            val restJung = ch.getJungsung()
-            val restCho = forced || ch.getChosung() == HanFirstList[11]
-            if (isTheCase && SecondNeg.contains(restJung) && restCho) {
-                assembleHangul(ch.getChosung()!!,
-                        SecondPos[SecondNeg.indexOf(restJung)],
-                        ch.getJongsung()) + rest.substring(1)
-            } else if (!isTheCase && SecondPos.contains(restJung) && restCho) {
-                assembleHangul(ch.getChosung()!!,
-                        SecondNeg[SecondPos.indexOf(restJung)],
-                        ch.getJongsung()) + rest.drop(1)
-            } else
+            // 어근이 비어있지 않다면.
+            val isPositive = front.last().getJungsung().getHIndex() in listOf(0, 8)
+
+            val ch = rest[0]
+            val jung = ch.getJungsung().getHIndex()
+            val notStartWithSound = forced || ch.getChosung().hasHIndex(11)
+
+            if (notStartWithSound && isPositive && jung in SecondNeg) {
+                // 양성모음으로 변경
+
+                val delta = (SecondPos[SecondNeg.indexOf(jung)] - jung) * JONGSUNG_RANGE
+                (ch + delta) + rest.drop(1)
+
+            } else if (notStartWithSound && !isPositive && jung in SecondPos) {
+                // 음성모음으로 변경
+
+                val delta = (SecondNeg[SecondPos.indexOf(jung)] - jung) * JONGSUNG_RANGE
+                (ch + delta) + rest.drop(1)
+
+            } else {
                 rest
+            }
         }
-
-/** 초성 자모로 시작하는지 확인 */
-private fun charStartsWith(jamo: Char): (Char) -> Boolean = { it.getChosung() == jamo }
-
-/** 종성 자모로 종료하는지 확인 */
-private fun charEndsWith(jamo: Char): (Char) -> Boolean = { it.getJongsung() == jamo }
-
-/** 초성 음가 없이 모음으로 시작하는지 확인 */
-private fun charStartsWithMo(vararg mo: Char?): (Char) -> Boolean =
-        { it in mo || (it.getChosung() == HanFirstList[11] && it.getJungsung() in mo) }
-
-/** 받침 없이 지정된 모음으로 종료하는지 확인 */
-private fun charEndsWithMo(mo: Char): (Char) -> Boolean =
-        { !it.isJongsungEnding() && it.getJungsung() == mo }
