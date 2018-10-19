@@ -1,4 +1,5 @@
 @file:JvmName("DataUtil")
+
 package kr.bydelta.koala.data
 
 import kr.bydelta.koala.*
@@ -667,8 +668,8 @@ class RoleTree constructor(node: Word, val type: RoleType,
  * @param originalTag  원본 형태소 분석기의 품사 String
  * @param tag     세종 품사표기
  */
-class Morpheme internal constructor(val surface: String, val tag: POS,
-                                    val originalTag: String? = null) : Property() {
+class Morpheme constructor(val surface: String, val tag: POS,
+                           val originalTag: String? = null) : Property() {
     /****** Properties ******/
 
     /**
@@ -890,8 +891,8 @@ class Morpheme internal constructor(val surface: String, val tag: POS,
  * @param surface   어절의 표면형 String.
  * @param morphemes 어절에 포함된 형태소의 목록: List<[Morpheme]>.
  */
-class Word @Throws(AlreadySetIDException::class) internal constructor(val surface: String = "",
-                                                                      private val morphemes: List<Morpheme> = listOf()) :
+class Word @Throws(AlreadySetIDException::class) constructor(val surface: String = "",
+                                                             private val morphemes: List<Morpheme> = listOf()) :
         Property(), List<Morpheme> by morphemes {
 
     init {
