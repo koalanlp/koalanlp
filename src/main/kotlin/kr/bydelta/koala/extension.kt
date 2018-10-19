@@ -876,7 +876,6 @@ private fun Char?.getHIndex(default: Int = -1): Int =
         else if (this.isChosungJamo()) HanFirstList.indexOf(this.getChosung()!!)
         else if (this.isJungsungJamo()) HanSecondList.indexOf(this.getJungsung()!!)
         else if (this.isJongsungJamo()) HanLastList.indexOf(this.getJongsung())
-        else if (this in ChoToJong) HanLastList.indexOf(ChoToJong[this])
         else default
 
 private fun Char?.hasHIndex(vararg index: Int): Boolean = this.getHIndex() in index
@@ -911,10 +910,6 @@ private fun Char.isStartByS(): Boolean = this.getChosung().hasHIndex(9)
 private fun Char.isStartByEu(): Boolean = this.getChosung().hasHIndex(11) && this.getJungsung().hasHIndex(18)
 /** '아/어'로 시작 */
 private fun Char.isStartByAhUh(): Boolean = this.getChosung().hasHIndex(11) && this.getJungsung().hasHIndex(0, 4)
-
-/** '오' */
-private fun Char.isOh(): Boolean = this == '오'
-
 /** ㅗ 모음 첨가 */
 private fun Char.addOh(): Char =
         this + (when (this.getJungsung().getHIndex()) {
@@ -981,9 +976,12 @@ fun correctVerbApply(verb: String, isVerb: Boolean, rest: String): String =
 
             val isAdjective = !isVerb
 
-            if (!next.isHangul()) {
+            if (!next.isHangul() || !char.isHangul()) {
 
-                verb + next + tail
+                if (next == '읍')
+                    verb + "습$tail"
+                else
+                    verb + (next + tail)
 
             } else if (next.getChosung().hasHIndex(11)) {
                 // 불규칙 활용이 가능한 영역
@@ -1049,7 +1047,7 @@ fun correctVerbApply(verb: String, isVerb: Boolean, rest: String): String =
 
                         verb + harmony("어", (next + 2 * JONGSUNG_RANGE) + tail)
 
-                    } else if (verb == "다" || (verb == "달" && tail == "라")) {
+                    } else if ((verb == "다" && tail.isEmpty()) || (verb == "달" && tail == "라")) {
                         // 다 + 아 = 다오
 
                         "다오"
@@ -1076,16 +1074,13 @@ fun correctVerbApply(verb: String, isVerb: Boolean, rest: String): String =
 
                         verb + harmony(verb, next + tail)
                     }
-                } else if (isAdjective && char != '좋' && jong.hasHIndex(HanLastList.size - 1)) {
-                    // ㅎ 불규칙: ㅎ + 'ㄴ/ㄹ' -> ㅎ 탈락.
+                    //********* 아/어 끝 *********//
+                } else if (isAdjective && char != '좋' && jong.hasHIndex(HanLastList.size - 1) && next in "으은을음") {
+                    // ㅎ 불규칙: ㅎ + 'ㄴ/ㄹ/으' -> ㅎ 탈락.
                     // 이미 '은/을'로 변형되어 있음
+                    // ㅎ + 'ㅂ니다' 는 '습니다'가 되어야함.
 
-                    if (next.isStartByEu()) {
-                        front + ((char.removeJongsung() + next.getJongsung().getHIndex(0)) + tail)
-                    } else {
-                        // 기본 규칙 적용.
-                        verb + harmony(verb, next + tail)
-                    }
+                    front + ((char.removeJongsung() + next.getJongsung().getHIndex(0)) + tail)
                 } else if (char.isEndByL() && next in "은읍오") {
                     // 규칙적탈락: 어간 'ㄹ'탈락. 'ㄹ'이 'ㄴㅂㅅ오'앞에서 탈락.
                     // 앞서 배정하면서 '은/네/니/..., 읍, 시, 오' 형태로 정리됨
@@ -1103,16 +1098,22 @@ fun correctVerbApply(verb: String, isVerb: Boolean, rest: String): String =
                     when {
                         next.isStartByEu() ->
                             verb + harmony(verb, next + tail, forced = true)
-                        next.isOh() ->
-                            verb + harmony(verb, "으$next$tail")
                         else ->
-                            // Illegal state
-                            throw IllegalStateException()
+                            verb + harmony(verb, "으$next$tail")
                     }
                 } else if (!char.isJongsungEnding() && next.isStartByEu()) {
                     // 축약: 모음으로 끝난 어간에 '으'로 시작하는 어미가 붙는 경우, 받침만 이동
 
                     front + (char + next.getJongsung().getHIndex(0)) + tail
+                } else if (next.isStartByEu()) {
+                    // 축약: 모음 + 읍/은/을, 종성 +읍 = 종성+습
+
+                    if (!char.isJongsungEnding())
+                        front + (char + next.getJongsung().getHIndex(0)) + tail
+                    else if (next == '읍')
+                        verb + "습$tail"
+                    else
+                        verb + (next + tail)
                 } else {
                     // 어디에도 적용되지 않는 경우
 
@@ -1140,7 +1141,7 @@ fun correctVerbApply(verb: String, isVerb: Boolean, rest: String): String =
 
 /** 모음조화 계산 */
 private fun harmony(front: String, rest: String, forced: Boolean = false): String =
-        if (front.isNotEmpty() && !front.first().isHangul())
+        if (front.isNotEmpty() && !front.last().isHangul())
             rest
         else if (front.isEmpty()) {
             // 어근의 나머지 부분이 비어있다면.

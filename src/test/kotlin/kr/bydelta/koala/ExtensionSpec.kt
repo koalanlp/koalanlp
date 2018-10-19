@@ -358,6 +358,9 @@ object ExtensionSpec : Spek({
             '㹤'.isHanja() `should be` true
 
             '김'.isHanja() `should be` false
+
+            // 부수 보충
+            "⺀⺁⺂⻱⻲⻳".all { it.isHanja() } `should be` true
         }
     }
 
@@ -488,7 +491,7 @@ object ExtensionSpec : Spek({
 
             { assembleHangul('a', 'b') } `should throw` IllegalArgumentException::class
 
-            val sampleString = "SNS '인플루엔서' 쇼핑 피해 심각... 법적 안전장치 미비: ㄱ씨는 요즘 ㄴ SNS에서 갤럭시S"
+            val sampleString = "SNS '인플루엔서' 쇼핑 피해 심각... 법적 안전장치 미비: ㄱ씨는 요즘 ㄴ SNS에서 갤럭시S \u1100\u1100"
             sampleString.dissembleHangul().assembleHangul().toString() `should be equal to` sampleString
         }
     }
@@ -568,10 +571,11 @@ object ExtensionSpec : Spek({
                 |V 모으 아/어 모아
                 |V 쓰 이다 쓰이다
                 |V 아니하 았다/었다 아니하였다
-                |V 영원하 아/어 영원하여
+                |V 영원하 아/어 영원하여 았다/었다 영원하였다 ㄴ 영원한 ㄹ 영원할
                 |V 달 아라/어라 다오
-                |A 파랗 으면 파라면 은 파란 았/었 파랬 니 파랗니 네 파랗네
-                |A 동그랗 으면 동그라면 은 동그란 았/었 동그랬 니 동그랗니 네 동그랗네
+                |V 다 아 다오
+                |A 파랗 으면 파라면 은 파란 았/었 파랬 니 파랗니 네 파랗네 ㅂ니다 파랗습니다
+                |A 동그랗 으면 동그라면 은 동그란 았/었 동그랬 니 동그랗니 네 동그랗네 ㅂ니다 동그랗습니다
                 |A 그렇 으면 그러면 은 그런 았/었 그랬 아/어 그래 네 그렇네
                 |A 시퍼렇 으면 시퍼러면 은 시퍼런 아/어 시퍼레 네 시퍼렇네
                 |A 좋 으면 좋으면 아 좋아 네 좋네
@@ -581,14 +585,20 @@ object ExtensionSpec : Spek({
                 |V 주장하 면 주장하면 었다/았다 주장하였다
                 |V 연결지 었 연결졌
                 |V 갚 - 갚- 다 갚다 은/ㄴ 갚은
-                |V 쌓 으면 쌓으면 자고 쌓자고
-                |V 좇 으니 좇으니 ㄴ 좇은
-                |V 갖 ㄴ 갖은 ㄹ 갖을
+                |V 쌓 으면 쌓으면 자고 쌓자고 오 쌓으오 시 쌓으시 며 쌓으며
+                |V 좇 으니 좇으니 ㄴ 좇은 오 좇으오 시 좇으시 며 좇으며
+                |V 갖 ㄴ 갖은 ㄹ 갖을 오 갖으오 시 갖으시 며 갖으며
                 |V 불 니 부니 오 부오 시 부시
                 |V 끌 오 끄오 니 끄니 ㅂ니다 끕니다 시 끄시 네 끄네
                 |V 알 오 아오 니 아니 네 아네 ㅂ니다 압니다 시 아시
                 |V 사 ㄴ 산
                 |V 기 다 기다 어 겨 기 기기
+                |V google ㅂ니다 google습니다 ㄹ google을 하 google하
+                |V 하 ㅂ니다 합니다 다 하다 시 하시
+                |V 박 았다 박았다
+                |V 사 았다/었다 샀다 ㄴ 산 ㄹ 살
+                |V 서 았다/었다 섰다 ㄴ 선 ㄹ 설
+                |V 갚 ㄹ 갚을 았다 갚았다
                 |""".trimMargin().trim().split("\n").flatMap { verbs ->
                 val splits = verbs.split(" ")
                 val isVerb = splits[0] == "V"
