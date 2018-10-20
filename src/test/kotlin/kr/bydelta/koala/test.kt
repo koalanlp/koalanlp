@@ -3,6 +3,7 @@ package kr.bydelta.koala
 import kotlinx.coroutines.experimental.Dispatchers
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.runBlocking
+import kr.bydelta.koala.proc.CanAnalyzeProperty
 import kr.bydelta.koala.proc.CanCompileDict
 import kr.bydelta.koala.proc.CanSplitSentence
 import kr.bydelta.koala.proc.CanTag
@@ -160,24 +161,23 @@ fun SplitterSpek(getSplitter: () -> CanSplitSentence,
 /**
  * [CanTag]를 테스트합니다.
  */
-fun TaggerSpek(tagSentByOrig: (String) -> Pair<String, String>,
+fun TaggerSpek(getTagger: () -> CanTag,
+               tagSentByOrig: (String) -> Pair<String, String>,
                tagParaByOrig: (String) -> List<String>,
-               getTagger: () -> CanTag,
-               isSentenceSplitterImplemented: Boolean,
+               tagSentByKoala: (String, CanTag) -> Pair<String, String> = { str, tagger ->
+                   val tagged = tagger.tagSentence(str)
+                   val tag = tagged.joinToString(" ") {
+                       it.joinToString("+") { m ->
+                           m.surface + "/" + m.originalTag
+                       }
+                   }
+
+                   val surface = tagged.surfaceString()
+
+                   surface to tag
+               },
+               isSentenceSplitterImplemented: Boolean = false,
                isParagraphImplemented: Boolean = true): Root.() -> Unit {
-
-    fun tagSentByKoala(str: String, tagger: CanTag): Pair<String, String> {
-        val tagged = tagger.tagSentence(str)
-        val tag = tagged.joinToString(" ") {
-            it.joinToString("+") { m ->
-                m.surface + "/" + m.originalTag
-            }
-        }
-
-        val surface = tagged.surfaceString()
-
-        return surface to tag
-    }
 
     fun expectCorrectParse(str: String) {
         print("S")
@@ -282,9 +282,9 @@ data class Conversion(val tag: String,
 /**
  * 세종 태그 변환을 테스트합니다.
  */
-fun TagConversionSpek(getMapping: (POS) -> List<Conversion>,
-                      from: (String) -> POS,
-                      to: (POS) -> String): Root.() -> Unit {
+fun TagConversionSpek(from: (String) -> POS,
+                      to: (POS) -> String,
+                      getMapping: (POS) -> List<Conversion>): Root.() -> Unit {
     return {
         describe("TagConversion") {
             it("converts tags correctly") {
@@ -326,6 +326,77 @@ fun DictSpek(dict: CanCompileDict): Root.() -> Unit {
                 { dict.addUserDictionary("대애박", POS.MM) } `should not throw` AnyException
                 dict.getNotExists(false, "대애박" to POS.MM).size `should be equal to` 0
                 dict.getNotExists(false, "대애박" to POS.NNP).size `should be greater than` 0
+            }
+        }
+    }
+}
+
+/**
+ * [kr.bydelta.koala.proc.CanAnalyzeProperty]를 테스트합니다.
+ */
+fun <P : CanAnalyzeProperty<*, *>> ParserSpek(getParser: () -> P,
+                                              parseSentByOrig: (String) -> Pair<String, String>,
+                                              parseSentByKoala: (String, P) -> Pair<String, String>): Root.() -> Unit {
+
+    fun expectCorrectParse(str: String) {
+        print("S")
+        val parser = getParser()
+        val (oSurface, oTag) = parseSentByOrig(str)
+        val (tSurface, tTag) = parseSentByKoala(str, parser)
+
+        if (oTag.isNotEmpty())
+            tTag `should be equal to` oTag
+        if (oSurface.isNotEmpty())
+            tSurface `should be equal to` oSurface
+
+        tSurface `should be equal to` str
+    }
+
+    fun expectCorrectParses(str: List<String>) {
+        val parser = getParser()
+        val single = str.map { parseSentByKoala(it, parser) }
+        val multi = runBlocking {
+            str.map {
+                async(Dispatchers.Default) {
+                    parseSentByKoala(it, getParser())
+                }
+            }.map {
+                it.await()
+            }
+        }
+
+        single.zip(multi).forEach {
+            val (s, t) = it
+
+            s.first `should be equal to` t.first
+            s.second `should be equal to` t.second
+        }
+    }
+
+    return {
+        describe("Tagger") {
+            it("handles empty sentence") {
+                val sent = getParser().parse("")
+                sent.size `should be equal to` 0
+            }
+
+            it("parses a string paragraph") {
+                Examples.exampleSequence().forEach {
+                    expectCorrectParse(it.second)
+                }
+            }
+
+            it("parses a sentence instance") {
+                Examples.exampleSequence().filter { it.first == 1 }.forEach {
+                    val parser = getParser()
+                    val sentence = parser.convert(it.second)[0]
+
+                    parser.parse(it.second) `should equal` parser.parse(sentence)
+                }
+            }
+
+            it("should be thread-safe") {
+                expectCorrectParses(Examples.exampleSequence().filter { it.first == 1 }.map { it.second })
             }
         }
     }
