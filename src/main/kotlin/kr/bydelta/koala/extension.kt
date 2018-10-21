@@ -1141,7 +1141,7 @@ fun correctVerbApply(verb: String, isVerb: Boolean, rest: String): String =
 
 /** 모음조화 계산 */
 private fun harmony(front: String, rest: String, forced: Boolean = false): String =
-        if (front.isNotEmpty() && !front.last().isHangul())
+        if (rest.isEmpty() || (front.isNotEmpty() && !front.last().isHangul()))
             rest
         else if (front.isEmpty()) {
             // 어근의 나머지 부분이 비어있다면.
