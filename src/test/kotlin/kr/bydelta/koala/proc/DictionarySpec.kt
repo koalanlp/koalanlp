@@ -14,7 +14,7 @@ object DictionarySpec : Spek({
     describe("CanCompileDict Interface") {
         // addUserDictionary(3 types), plusAssign
         it("add user-defined words") {
-            val dict = object : CanCompileDict() {
+            val dict = object : CanCompileDict {
                 val words = mutableSetOf<Pair<String, POS>>()
 
                 override fun addUserDictionary(vararg dict: Pair<String, POS>) {
@@ -62,7 +62,7 @@ object DictionarySpec : Spek({
             dict.words `should contain` ("Aligator Sky" to POS.NNP)
         }
 
-        val dict1 = object : CanCompileDict() {
+        val dict1 = object : CanCompileDict {
             val words = mutableSetOf<Pair<String, POS>>("테팔" to POS.NNP,
                     "김종국" to POS.NNP, "사랑" to POS.NNG, "동병상련" to POS.NNG, "지나다" to POS.VV)
 
@@ -83,7 +83,7 @@ object DictionarySpec : Spek({
             }
         }
 
-        val dict2 = object : CanCompileDict() {
+        val dict2 = object : CanCompileDict {
             val words = mutableSetOf<Pair<String, POS>>()
 
             override fun addUserDictionary(vararg dict: Pair<String, POS>) {

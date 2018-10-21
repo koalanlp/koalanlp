@@ -15,13 +15,13 @@ typealias DicEntry = Pair<String, POS>
  *
  * @since 1.x
  */
-abstract class CanCompileDict {
+interface CanCompileDict {
     /**
      * 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가합니다.
      *
      * @param dict 추가할 (표면형, 품사)의 순서쌍들 (가변인자). 즉, [Pair]<[String], [POS]>들
      */
-    abstract fun addUserDictionary(vararg dict: DicEntry)
+    fun addUserDictionary(vararg dict: DicEntry)
 
     /**
      * 사용자 사전에, 표면형과 그 품사를 추가합니다.
@@ -52,7 +52,7 @@ abstract class CanCompileDict {
      *
      * @return (형태소, 통합품사)의 Sequence.
      */
-    abstract fun getItems(): Set<DicEntry>
+    fun getItems(): Set<DicEntry>
 
     /**
      * 원본 사전에 등재된 항목 중에서, 지정된 형태소의 항목만을 가져옵니다. (복합 품사 결합 형태는 제외)
@@ -60,7 +60,7 @@ abstract class CanCompileDict {
      * @param filter 가져올 품사인지 판단하는 함수.
      * @return (형태소, 품사)의 Iterator.
      */
-    abstract fun getBaseEntries(filter: (POS) -> Boolean): Iterator<DicEntry>
+    fun getBaseEntries(filter: (POS) -> Boolean): Iterator<DicEntry>
 
     /**
      * 사전에 등재되어 있는지 확인합니다.
@@ -68,7 +68,6 @@ abstract class CanCompileDict {
      * @param word   확인할 형태소
      * @param posTag 품사들(기본값: [POS.NNP] 고유명사, [POS.NNG] 일반명사)
      */
-    @JvmOverloads
     fun contains(word: String, posTag: Set<POS> = setOf(POS.NNP, POS.NNG)): Boolean =
             getNotExists(onlySystemDic = false,
                     word = *posTag.map { word to it }.toTypedArray()).size < posTag.size
@@ -80,7 +79,7 @@ abstract class CanCompileDict {
      * @param word          확인할 (형태소, 품사)들.
      * @return 사전에 없는 단어들, 즉, [Pair]<[String], [POS]>들.
      */
-    abstract fun getNotExists(onlySystemDic: Boolean, vararg word: DicEntry): Array<DicEntry>
+    fun getNotExists(onlySystemDic: Boolean, vararg word: DicEntry): Array<DicEntry>
 
     /**
      * 다른 사전을 참조하여, 선택된 사전에 없는 단어를 사용자사전으로 추가합니다.
@@ -89,7 +88,6 @@ abstract class CanCompileDict {
      * @param fastAppend 선택된 사전에 존재하는지를 검사하지 않고, 빠르게 추가하고자 할 때 (기본값 false)
      * @param filter     추가할 품사를 지정하는 함수. (기본값 [POS.isNoun])
      */
-    @JvmOverloads
     fun importFrom(dict: CanCompileDict,
                    fastAppend: Boolean = false,
                    filter: (POS) -> Boolean = { it.isNoun() }) {
