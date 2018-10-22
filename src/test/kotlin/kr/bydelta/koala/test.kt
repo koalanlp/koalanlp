@@ -307,7 +307,9 @@ fun TagConversionSpek(from: (String) -> POS,
 /**
  * [CanCompileDict]를 테스트합니다.
  */
-fun DictSpek(dict: CanCompileDict): Root.() -> Unit {
+fun DictSpek(dict: CanCompileDict,
+             verbOn: Boolean = true,
+             modifierOn: Boolean = true): Root.() -> Unit {
     return {
         describe("Dictionary") {
             it("adds a noun") {
@@ -316,16 +318,20 @@ fun DictSpek(dict: CanCompileDict): Root.() -> Unit {
                 dict.getNotExists(false, "갑질" to POS.VX).size `should be greater than` 0
             }
 
-            it("adds a verb") {
-                { dict.addUserDictionary("구글링", POS.VV) } `should not throw` AnyException
-                dict.getNotExists(false, "구글링" to POS.VV).size `should be equal to` 0
-                dict.getNotExists(false, "구글링" to POS.MM).size `should be greater than` 0
+            if (verbOn) {
+                it("adds a verb") {
+                    { dict.addUserDictionary("구글링", POS.VV) } `should not throw` AnyException
+                    dict.getNotExists(false, "구글링" to POS.VV).size `should be equal to` 0
+                    dict.getNotExists(false, "구글링" to POS.MM).size `should be greater than` 0
+                }
             }
 
-            it("adds a modifier") {
-                { dict.addUserDictionary("대애박", POS.MM) } `should not throw` AnyException
-                dict.getNotExists(false, "대애박" to POS.MM).size `should be equal to` 0
-                dict.getNotExists(false, "대애박" to POS.NNP).size `should be greater than` 0
+            if (modifierOn) {
+                it("adds a modifier") {
+                    { dict.addUserDictionary("대애박", POS.MM) } `should not throw` AnyException
+                    dict.getNotExists(false, "대애박" to POS.MM).size `should be equal to` 0
+                    dict.getNotExists(false, "대애박" to POS.NNP).size `should be greater than` 0
+                }
             }
         }
     }
@@ -334,7 +340,7 @@ fun DictSpek(dict: CanCompileDict): Root.() -> Unit {
 /**
  * [kr.bydelta.koala.proc.CanAnalyzeProperty]를 테스트합니다.
  */
-fun <P : CanAnalyzeProperty<*, *>> ParserSpek(getParser: () -> P,
+fun <O, P : CanAnalyzeProperty<O>> ParserSpek(getParser: () -> P,
                                               parseSentByOrig: (String) -> Pair<String, String>,
                                               parseSentByKoala: (String, P) -> Pair<String, String>): Root.() -> Unit {
 
@@ -376,7 +382,7 @@ fun <P : CanAnalyzeProperty<*, *>> ParserSpek(getParser: () -> P,
     return {
         describe("Tagger") {
             it("handles empty sentence") {
-                val sent = getParser().parse("")
+                val sent = getParser().analyze("")
                 sent.size `should be equal to` 0
             }
 
@@ -389,9 +395,9 @@ fun <P : CanAnalyzeProperty<*, *>> ParserSpek(getParser: () -> P,
             it("parses a sentence instance") {
                 Examples.exampleSequence().filter { it.first == 1 }.forEach {
                     val parser = getParser()
-                    val sentence = parser.convert(it.second)[0]
+                    val sentence = parser.convert(parser.convert(it.second)[0])
 
-                    parser.parse(it.second) `should equal` parser.parse(sentence)
+                    parser.analyze(it.second) `should equal` parser.analyze(sentence)
                 }
             }
 

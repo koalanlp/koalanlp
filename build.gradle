@@ -79,6 +79,20 @@ task sourceJar(type: org.gradle.jvm.tasks.Jar){
 
 // publishing
 
+sourceSets{
+    test{
+        kotlin{
+            exclude 'kr/bydelta/koala/*Spec.*'
+            exclude 'kr/bydelta/koala/data/**'
+            exclude 'kr/bydelta/koala/proc/**'
+            include 'kr/bydelta/koala/test.*'
+        }
+        resources{
+            exclude '**'
+        }
+    }
+}
+
 modifyPom {
     project {
         groupId group
@@ -119,10 +133,6 @@ extraArchive {
 
 nexus {
     sign = true
-}
-
-nexusStaging {
-    packageGroup = group //optional if packageGroup == project.getGroup()
 }
 
 // testing

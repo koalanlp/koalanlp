@@ -226,17 +226,17 @@ private val HANJA_READ_TABLE by lazy {
 }
 
 /** 두음법칙 예외조항이 적용되는 한자 */
-private val HEAD_CORRECTION_EXCLUSION = mapOf('兩' to '냥', '年' to '년', '里' to '리', '理' to '리', '輛' to '량')
+private val HEAD_CORRECTION_EXCLUSION by lazy { mapOf('兩' to '냥', '年' to '년', '里' to '리', '理' to '리', '輛' to '량') }
 
 /** 두음법칙이 적용될 초성 */
-private val HEAD_CORRECTION_TARGET_CHO = listOf('\u1102', '\u1105')
+private val HEAD_CORRECTION_TARGET_CHO by lazy { arrayOf('\u1102', '\u1105') }
 
 /** 두음법칙 적용 대상인 모음: ㅑ,ㅒ,ㅕ,ㅖ,ㅛ,ㅠ,ㅣ*/
-private val HEAD_CORRECTION_DOUBLE_TARGET = listOf('\u1163', '\u1164', '\u1167', '\u1168', '\u116d', '\u1172', '\u1175')
+private val HEAD_CORRECTION_DOUBLE_TARGET by lazy { arrayOf('\u1163', '\u1164', '\u1167', '\u1168', '\u116d', '\u1172', '\u1175') }
 /** 두음법칙 적용 대상 */
-private val HEAD_CORRECTION_IL = listOf('렬', '률')
+private val HEAD_CORRECTION_IL by lazy { arrayOf('렬', '률') }
 /** 不 발음 교정: ㄷ, ㅈ*/
-private val HANJA_BU_FIX = listOf('\u1103', '\u110C')
+private val HANJA_BU_FIX by lazy { arrayOf('\u1103', '\u110C') }
 
 /**
  * 국사편찬위원회 한자음가사전에 따라 한자 표기된 내용을 국문 표기로 전환합니다.
@@ -886,9 +886,9 @@ private fun Int.getJungsung() = HanSecondList[this]
 private fun Char.removeJongsung(): Char = this - this.getJongsung().getHIndex(0)
 
 /** 모음조화용 양성모음 */
-private val SecondPos by lazy { listOf(0, 1, 2, 3) }
+private val SecondPos by lazy { arrayOf(0, 1, 2, 3) }
 /** 모음조화용 음성모음 */
-private val SecondNeg by lazy { listOf(4, 5, 6, 7) }
+private val SecondNeg by lazy { arrayOf(4, 5, 6, 7) }
 /** 종성 ㄹ로 종료 */
 private fun Char.isEndByL(): Boolean = this.getJongsung().hasHIndex(8)
 /** 모음 ㅡ로 종료 */
@@ -1161,7 +1161,7 @@ private fun harmony(front: String, rest: String, forced: Boolean = false): Strin
             }
         } else {
             // 어근이 비어있지 않다면.
-            val isPositive = front.last().getJungsung().getHIndex() in listOf(0, 8)
+            val isPositive = front.last().getJungsung().getHIndex() in arrayOf(0, 8)
 
             val ch = rest[0]
             val jung = ch.getJungsung().getHIndex()

@@ -236,15 +236,25 @@ object ProcessorSpec : Spek({
     }
 
     describe("CanAnalyzeSentenceProperty Interface") {
-        val propertyAttacher = object : CanAnalyzeSentenceProperty<IntProperty> {
-            override fun getProperty(item: Sentence): IntProperty {
-                return IntProperty(1)
+        val propertyAttacher = object : CanAnalyzeProperty<List<String>> {
+            override fun attachProperty(item: List<String>): Sentence {
+                val sentence = convert(item)
+                sentence.setProperty(IntProperty(1))
+                return sentence
             }
 
-            override fun convert(sentence: String): List<Sentence> {
-                return listOf(Sentence(sentence.split(" ").map {
+            override fun convert(sentence: String): List<List<String>> {
+                return sentence.split("\n").map { it.split(" ") }
+            }
+
+            override fun convert(sentence: Sentence): List<String> {
+                return sentence.map { it.surface }
+            }
+
+            override fun convert(sentence: List<String>): Sentence {
+                return Sentence(sentence.map {
                     Word(it, listOf(Morpheme(it, POS.NNP, "NNP")))
-                }))
+                })
             }
         }
 
@@ -252,8 +262,8 @@ object ProcessorSpec : Spek({
         it("should parse a sentence, a paragraph, and a Sentence instance") {
             val sent = "안녕하세요.\n졸린 일요일입니다."
 
-            propertyAttacher.parse(sent) `should equal` propertyAttacher(sent)
-            propertyAttacher.parse(sent)[0].getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
+            propertyAttacher.analyze(sent) `should equal` propertyAttacher(sent)
+            propertyAttacher.analyze(sent)[0].getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
 
             val sentInst = Sentence(
                     listOf(
@@ -277,16 +287,12 @@ object ProcessorSpec : Spek({
                     )
             )
 
-            propertyAttacher.parse(sentInst).getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
+            propertyAttacher.analyze(sentInst).getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
             sentInst.removeProperty(KEY_WORDSENSE)
 
             propertyAttacher(sentInst).getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
             sentInst.removeProperty(KEY_WORDSENSE)
 
-            propertyAttacher.attachProperty(sentInst)
-            sentInst.getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
-            sentInst.removeProperty(KEY_WORDSENSE)
-
             val sentInst2 = Sentence(
                     listOf(
                             Word("나는",
@@ -304,7 +310,7 @@ object ProcessorSpec : Spek({
                     )
             )
 
-            propertyAttacher.parse(listOf(sentInst, sentInst2))
+            propertyAttacher.analyze(listOf(sentInst, sentInst2))
             sentInst.getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
             sentInst2.getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
             sentInst.removeProperty(KEY_WORDSENSE)
@@ -315,94 +321,6 @@ object ProcessorSpec : Spek({
             sentInst2.getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
             sentInst.removeProperty(KEY_WORDSENSE)
             sentInst2.removeProperty(KEY_WORDSENSE)
-        }
-    }
-
-    describe("CanDisambiguateSense Interface") {
-        val propertyAttacher = object : CanDisambiguateSense {
-            override fun getProperty(item: Sentence): Sentence {
-                item.forEach { w ->
-                    w.forEach {
-                        it.setProperty(IntProperty(1))
-                    }
-                }
-                return item
-            }
-
-            override fun convert(sentence: String): List<Sentence> {
-                return listOf(Sentence(sentence.split(" ").map {
-                    Word(it, listOf(Morpheme(it, POS.NNP, "NNP")))
-                }))
-            }
-        }
-
-        // parse, invoke, attachProperty
-        it("should parse a sentence, a paragraph, and a Sentence instance") {
-            val sent = "안녕하세요.\n졸린 일요일입니다."
-
-            propertyAttacher.parse(sent) `should equal` propertyAttacher(sent)
-            propertyAttacher.parse(sent)[0].all { w -> w.all { it.getWordSense() == 1 } } `should be` true
-
-            val sentInst = Sentence(
-                    listOf(
-                            Word("흰",
-                                    listOf(Morpheme("희", POS.VA, "VA"),
-                                            Morpheme("ㄴ", POS.ETM, "ETM"))
-                            ),
-                            Word("밥을",
-                                    listOf(Morpheme("밥", POS.NNG, "NNG"),
-                                            Morpheme("을", POS.JKO, "JKO"))
-                            ),
-                            Word("나는",
-                                    listOf(Morpheme("나", POS.NP, "NP"),
-                                            Morpheme("는", POS.JX, "JX"))
-                            ),
-                            Word("먹었다",
-                                    listOf(Morpheme("먹", POS.VV, "VV"),
-                                            Morpheme("었", POS.EP, "EP"),
-                                            Morpheme("다", POS.EF, "EF"))
-                            )
-                    )
-            )
-
-            propertyAttacher.parse(sentInst).all { w -> w.all { it.getWordSense() == 1 } } `should be` true
-            sentInst.forEach { w -> w.forEach { it.removeProperty(KEY_WORDSENSE) } }
-
-            propertyAttacher(sentInst).all { w -> w.all { it.getWordSense() == 1 } } `should be` true
-            sentInst.forEach { w -> w.forEach { it.removeProperty(KEY_WORDSENSE) } }
-
-            propertyAttacher.attachProperty(sentInst)
-            sentInst.all { w -> w.all { it.getWordSense() == 1 } } `should be` true
-            sentInst.forEach { w -> w.forEach { it.removeProperty(KEY_WORDSENSE) } }
-
-            val sentInst2 = Sentence(
-                    listOf(
-                            Word("나는",
-                                    listOf(
-                                            Morpheme("나", POS.NP, "NP"),
-                                            Morpheme("는", POS.JX, "JX")
-                                    )
-                            ),
-                            Word("밥을",
-                                    listOf(
-                                            Morpheme("밥", POS.NNG, "NNG"),
-                                            Morpheme("을", POS.JKO, "JKO")
-                                    )
-                            )
-                    )
-            )
-
-            propertyAttacher.parse(listOf(sentInst, sentInst2))
-            sentInst.all { w -> w.all { it.getWordSense() == 1 } } `should be` true
-            sentInst2.all { w -> w.all { it.getWordSense() == 1 } } `should be` true
-            sentInst.forEach { w -> w.forEach { it.removeProperty(KEY_WORDSENSE) } }
-            sentInst2.forEach { w -> w.forEach { it.removeProperty(KEY_WORDSENSE) } }
-
-            propertyAttacher(listOf(sentInst, sentInst2))
-            sentInst.all { w -> w.all { it.getWordSense() == 1 } } `should be` true
-            sentInst2.all { w -> w.all { it.getWordSense() == 1 } } `should be` true
-            sentInst.forEach { w -> w.forEach { it.removeProperty(KEY_WORDSENSE) } }
-            sentInst2.forEach { w -> w.forEach { it.removeProperty(KEY_WORDSENSE) } }
         }
     }
 })

@@ -3,6 +3,7 @@
 package kr.bydelta.koala.data
 
 import kr.bydelta.koala.*
+import kr.bydelta.koala.data.RoleTree.Companion.equals
 import java.io.Serializable
 
 internal const val KEY_WORDSENSE: Byte = 0
