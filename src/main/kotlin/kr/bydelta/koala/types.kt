@@ -509,8 +509,6 @@ operator fun Iterable<String>.contains(tag: DependencyTag): Boolean = this.any {
  * @since 2.0.0
  */
 enum class RoleType {
-    /** 주 동사 */
-    HEAD,
     /**
      * 동작주/행위자. 예: {"진흥왕은" 화랑도를 개편했다.}에서 __<진흥왕은>__.
      */

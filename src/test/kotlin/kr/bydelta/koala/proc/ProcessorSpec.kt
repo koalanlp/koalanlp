@@ -239,7 +239,7 @@ object ProcessorSpec : Spek({
         val propertyAttacher = object : CanAnalyzeProperty<List<String>> {
             override fun attachProperty(item: List<String>): Sentence {
                 val sentence = convert(item)
-                sentence.setProperty(IntProperty(1))
+                sentence.setProperty(Key.WORD_SENSE, WordSense(1))
                 return sentence
             }
 
@@ -263,7 +263,7 @@ object ProcessorSpec : Spek({
             val sent = "안녕하세요.\n졸린 일요일입니다."
 
             propertyAttacher.analyze(sent) `should equal` propertyAttacher(sent)
-            propertyAttacher.analyze(sent)[0].getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
+            propertyAttacher.analyze(sent)[0].getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` 1
 
             val sentInst = Sentence(
                     listOf(
@@ -287,11 +287,11 @@ object ProcessorSpec : Spek({
                     )
             )
 
-            propertyAttacher.analyze(sentInst).getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
-            sentInst.removeProperty(KEY_WORDSENSE)
+            propertyAttacher.analyze(sentInst).getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` 1
+            sentInst.removeProperty(Key.WORD_SENSE)
 
-            propertyAttacher(sentInst).getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
-            sentInst.removeProperty(KEY_WORDSENSE)
+            propertyAttacher(sentInst).getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` 1
+            sentInst.removeProperty(Key.WORD_SENSE)
 
             val sentInst2 = Sentence(
                     listOf(
@@ -310,17 +310,13 @@ object ProcessorSpec : Spek({
                     )
             )
 
-            propertyAttacher.analyze(listOf(sentInst, sentInst2))
-            sentInst.getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
-            sentInst2.getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
-            sentInst.removeProperty(KEY_WORDSENSE)
-            sentInst2.removeProperty(KEY_WORDSENSE)
+            val sents = propertyAttacher.analyze(listOf(sentInst, sentInst2))
+            sents[0].getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` 1
+            sents[1].getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` 1
 
-            propertyAttacher(listOf(sentInst, sentInst2))
-            sentInst.getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
-            sentInst2.getProperty<IntProperty>(KEY_WORDSENSE)?.value `should equal` 1
-            sentInst.removeProperty(KEY_WORDSENSE)
-            sentInst2.removeProperty(KEY_WORDSENSE)
+            val sents2 = propertyAttacher(listOf(sentInst, sentInst2))
+            sents2[0].getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` 1
+            sents2[1].getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` 1
         }
     }
 })

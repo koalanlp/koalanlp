@@ -3,16 +3,38 @@
 package kr.bydelta.koala.data
 
 import kr.bydelta.koala.*
-import kr.bydelta.koala.data.RoleTree.Companion.equals
 import java.io.Serializable
 
-internal const val KEY_WORDSENSE: Byte = 0
-internal const val KEY_NER: Byte = 10
-internal const val KEY_SYNTAXTREE: Byte = 20
-internal const val KEY_DEPTREE: Byte = 21
-internal const val KEY_SRL: Byte = 22
-internal const val KEY_CHILD: Byte = 30
-internal const val KEY_PARENT: Byte = 31
+/**
+ * 저장할 수 있는 [Property]의 유형입니다.
+ */
+internal enum class Key {
+    /** 다의어/동형이의어 의미번호 */
+    WORD_SENSE,
+
+    /** 개체명 (목록) */
+    NAMED_ENTITY,
+
+    /** 상위 구문구조 */
+    SYNTAX_PARENT,
+    /** 하위 구문구조 (목록) */
+    SYNTAX_CHILD,
+
+    /** 의존관계 지배소 */
+    DEP_GOVERNOR,
+    /** 의존관계 피지배소 (목록) */
+    DEP_DEPENDENT,
+
+    /** 의미역 구조의 동사 */
+    SRL_PREDICATE,
+    /** 의미역 구조의 하위 논항 (목록) */
+    SRL_ARGUMENT,
+
+    /** 공지시어/상호참조/대용어 분석의 지칭 대상 */
+    COREF_ENTITY,
+    /** 공지시어/상호참조/대용어 분석의 지시어/대용어 (목록) */
+    COREF_MENTION,
+}
 
 /**
  * ID가 이미 설정되었을 때 발생하는 Exception
@@ -22,25 +44,45 @@ internal const val KEY_PARENT: Byte = 31
 class AlreadySetIDException : Exception("The ID value was already initialized!")
 
 /**
- * 텍스트 분석 과정에서 얻어지는 여러가지 값들을 표현하는 class.
+ * 텍스트 분석 과정에서 얻어지는 여러가지 값들을 표현하는 타입입니다.
  *
- * 다음 값을 속성으로 갖습니다:
- * - [IntProperty] 정수형 값 속성
+ * 다음 값들로 구현됩니다:
+ * - [WordSense] 형태소 의미번호 속성
  * - [Entity] 개체명 정보 속성
  * - [SyntaxTree] 구문구조 속성
- * - [DepTree] 의존구문구조 속성
- * - [RoleTree] 의미역 구조 속성
+ * - [DepEdge] 의존구문구조 속성
+ * - [RoleEdge] 의미역 구조 속성
+ * - [CoreferenceGroup] 상호참조/공통 지시어 묶음 속성
+ * - [Morpheme] 형태소
+ * - [Word] 어절
+ * - [Sentence] 문장
  *
  * @since 2.0.0
  */
-abstract class Property : Serializable {
+interface Property : Serializable
+
+/**
+ * 텍스트 분석 과정에서 얻어지는 여러가지 값들을 표현하는 class.
+ *
+ * 다음 값들로 구현됩니다.
+ * - [Entity] 개체명 정보 속성
+ * - [SyntaxTree] 구문구조 속성
+ * - [DepEdge] 의존구문구조 속성
+ * - [RoleEdge] 의미역 구조 속성
+ * - [Morpheme] 형태소
+ * - [Word] 어절
+ * - [Sentence] 문장
+ *
+ * @since 2.0.0
+ */
+abstract class CanHaveProperty : Property {
     /**
-     * 가질 수 있는 속성값을 저장할 [MutableMap]
+     * 가질 수 있는 단일 속성값을 저장할 [MutableMap]
      *
      * @since 2.0.0
      */
-    protected val properties: MutableMap<Byte, Property> by lazy {
-        mutableMapOf<Byte, Property>()
+    private val properties: MutableMap<Key, Property> by lazy {
+        mutableMapOf<Key, Property>()
     }
 
     /**
@@ -49,17 +91,60 @@ abstract class Property : Serializable {
      * [key] 속성에 해당하는 [T]-type 값 [value]를 저장합니다.
      *
      * 만약, 이전에 저장을 한 적이 있다면, 덮어쓰기 하지 않고 [IllegalStateException]를 발생합니다.
+     * 만약, 목록형 변수에 값을 지정하려 한다면, 덮어쓰기 하지 않고 [UnsupportedOperationException]를 발생합니다.
      *
      * @since 2.0.0
-     * @param[key] 속성값을 구분할 키 값으로, [Byte]형입니다.
+     * @param[key] 속성값을 구분할 키 값으로, [Key]형입니다.
      * @param[value] 저장할 속성값. 속성값은 [Property]를 상속받아야 합니다.
      * @throws[IllegalStateException] 저장을 한 적이 있는 속성을 덮어씌우려는 경우
+     * @throws[UnsupportedOperationException] 목록형 변수가 필요한 곳에서 호출한 경우
      */
-    @Throws(IllegalStateException::class)
-    internal fun <T : Property> setProperty(key: Byte, value: T) {
-        if (key in properties)
-            throw IllegalStateException("There are more than two properties belong to the same key: $key")
-        properties[key] = value
+    @Throws(IllegalStateException::class, UnsupportedOperationException::class)
+    internal fun <T : Property> setProperty(key: Key, value: T) {
+        when (key) {
+            // 목록형 변수값이어야 하는 경우
+            Key.NAMED_ENTITY, Key.SYNTAX_CHILD, Key.DEP_DEPENDENT, Key.SRL_ARGUMENT, Key.COREF_MENTION ->
+                if (value is ListProperty<*>)
+                    properties[key] = value
+                else
+                    throw UnsupportedOperationException("You should use 'addProperty' to insert a property to $key")
+            else -> {
+                if (key in properties)
+                    throw IllegalStateException("There are more than two properties belong to the same key: $key")
+                properties[key] = value
+            }
+        }
+    }
+
+    /**
+     * (internal function)
+     *
+     * [key] 속성에 해당하는 [T]-type 값 [value]를 저장합니다.
+     *
+     * 만약, 목록형 변수가 아닌 곳에 값을 지정하려 한다면, 덮어쓰기 하지 않고 [UnsupportedOperationException]를 발생합니다.
+     *
+     * @since 2.0.0
+     * @param[key] 속성값을 구분할 키 값으로, [Key]형입니다.
+     * @param[value] 저장할 속성값. 속성값은 [Property]를 상속받아야 합니다.
+     * @throws[UnsupportedOperationException] 목록형 변수가 필요한 곳에서 호출한 경우
+     */
+    @Throws(UnsupportedOperationException::class)
+    @Suppress("UNCHECKED_CAST")
+    internal fun <T : Property> addProperty(key: Key, value: T) {
+        when (key) {
+            // 목록형 변수값이어야 하는 경우
+            Key.NAMED_ENTITY, Key.SYNTAX_CHILD, Key.DEP_DEPENDENT, Key.SRL_ARGUMENT, Key.COREF_MENTION -> {
+                val prop = properties[key] as? ListProperty<T>
+
+                if (prop == null) {
+                    properties[key] = ListProperty(value)
+                } else {
+                    prop.values.add(value)
+                }
+            }
+            else ->
+                throw UnsupportedOperationException("You should use 'setProperty' to insert a property to $key")
+        }
     }
 
     /**
@@ -67,64 +152,10 @@ abstract class Property : Serializable {
      * property를 삭제합니다.
      *
      * @since 2.0.0
-     * @param[key] 삭제할 키값 ([Byte] 형)
+     * @param[key] 삭제할 키값 ([Key] 형)
      */
-    internal fun removeProperty(key: Byte) {
+    internal fun removeProperty(key: Key) {
         properties.remove(key)
-    }
-
-    /**
-     * (private function)
-     * [property]의 타입에 맞는 키 값을 선택합니다.
-     *
-     * @since 2.0.0
-     * @param[property] 속성으로 저장할 값.
-     * @return [property]의 유형에 맞는 값을 전달합니다.
-     */
-    private tailrec fun <T : Property> getPropertyKey(property: T): Byte {
-        return when (property) {
-            is SyntaxTree -> KEY_SYNTAXTREE
-            is DepTree -> KEY_DEPTREE
-            is RoleTree -> KEY_SRL
-            is Entity -> KEY_NER
-            is IntProperty -> KEY_WORDSENSE
-            is ListProperty<*> ->
-                if (property.isNotEmpty()) getPropertyKey(property[0])
-                else KEY_CHILD
-            else -> throw IllegalArgumentException("Argument ${property::class} is not a proper property!")
-        }
-    }
-
-    /**
-     * [T]-type 값 [property]를 저장합니다.
-     *
-     * 만약, 이전에 저장을 한 적이 있다면, 덮어쓰기 하지 않고 [IllegalStateException]를 발생시킵니다.
-     * 적당한 키를 찾을 수 없다면, [IllegalArgumentException]를 발생시킵니다.
-     *
-     * @since 2.0.0
-     * @param[property] 속성으로 저장할 값입니다.
-     * @throws[IllegalStateException] 저장한 적이 있는 속성을 덮어씌우려 할 때
-     * @throws[IllegalArgumentException] 속성이 KoalaNLP 내부에서 정의된 범위를 벗어날 때
-     */
-    @Throws(IllegalStateException::class, IllegalArgumentException::class)
-    internal fun <T : Property> setProperty(property: T) {
-        val key = getPropertyKey(property)
-        setProperty(key, property)
-    }
-
-    /**
-     * [T]-type 값들을 가변변수로 하여 [properties]로 받은 뒤, 저장합니다.
-     *
-     * 만약, 이전에 저장을 한 적이 있다면, 덮어쓰기 하지 않고 [IllegalStateException]를 발생합니다.
-     *
-     * @since 2.0.0
-     * @param[properties] 리스트로 저장할 속성값들 (가변변수)
-     */
-    @Throws(IllegalStateException::class)
-    internal fun <T : Property> setListProperty(vararg properties: T) {
-        val listProp = ListProperty(properties.asList())
-        val key = getPropertyKey(listProp)
-        setProperty(key, listProp)
     }
 
     /**
@@ -135,7 +166,54 @@ abstract class Property : Serializable {
      * @param[key] 속성값을 가져올 키
      */
     @Suppress("UNCHECKED_CAST")
-    internal fun <T : Property> getProperty(key: Byte): T? = properties[key] as? T
+    internal fun <T : Property> getProperty(key: Key): T? = properties[key] as? T
+}
+
+/**
+ * 속성의 목록을 저장할, 불변형(immutable) 목록 속성 값
+ *
+ * @since 2.0.0
+ * @constructor 목록 속성을 생성합니다
+ * @param values 목록 속성에 포함되는 값들입니다.
+ */
+class ListProperty<T : Property> internal constructor(internal val values: MutableList<T> = mutableListOf()) :
+        Property, List<T> by values {
+
+    /**
+     * @constructor 목록 속성을 생성합니다
+     * @param values 목록 속성에 포함되는 값들입니다.
+     */
+    internal constructor(vararg values: T) : this(mutableListOf(*values))
+
+    /**
+     * Indicates whether some other object is "equal to" this one. Implementations must fulfil the following
+     * requirements:
+     *
+     * Note that the `==` operator in Kotlin code is translated into a call to [equals] when objects on both sides of the
+     * operator are not null.
+     */
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is ListProperty<*> -> this.size == other.size && this.zip(other).all { it.first == it.second }
+            else -> false
+        }
+    }
+
+    /**
+     * Returns a hash code value for the object.  The general contract of hashCode is:
+     *
+     * * Whenever it is invoked on the same object more than once, the hashCode method must consistently return the same integer, provided no information used in equals comparisons on the object is modified.
+     * * If two objects are equal according to the equals() method, then calling the hashCode method on each of the two objects must produce the same integer result.
+     */
+    override fun hashCode(): Int = this.sumBy { it.hashCode() }
+
+    /** Static Fields */
+    companion object {
+        /** Serialization Version ID: ver 2.0.0 (hexadecimal) */
+        @Suppress("unused")
+        @JvmStatic
+        private val serialVersionUid: Long = 0x200L
+    }
 }
 
 /**
@@ -163,10 +241,10 @@ abstract class Property : Serializable {
  * * [Morpheme.getWordSense] 형태소의 어깨번호/의미번호를 가져오는 API
  *
  * @since 2.0.0
- * @constructor 정수값을 저장하는  Property를 생성합니다.
- * @param[value] 저장될 정수 값
+ * @constructor 정수값을 저장하는 [Property]를 생성합니다.
+ * @param[id] 저장될 정수 값
  */
-data class IntProperty(val value: Int) : Property() {
+data class WordSense(val id: Int) : Property {
     /** Static Fields */
     companion object {
         /** Serialization Version ID: ver 2.0.0 (hexadecimal) */
@@ -201,14 +279,12 @@ data class IntProperty(val value: Int) : Property() {
  */
 class Entity(val type: CoarseEntityType,
              val fineType: String,
-             val words: List<Word>) : Property(), List<Word> by words {
+             words: List<Word>) : CanHaveProperty(), List<Word> by words {
     init {
         // 세부 개체명은 대분류 값에 소속되어야 합니다.
         assert(fineType.toUpperCase().startsWith(type.toString()))
-
-        // 각 어절에 Entity로 현재 대상을 지정합니다.
-        for (word in words) {
-            word.linkEntity(this)
+        for (word in this) {
+            word.addProperty(Key.NAMED_ENTITY, this)
         }
     }
 
@@ -218,6 +294,27 @@ class Entity(val type: CoarseEntityType,
      * @since 2.0.0
      */
     val surface: String by lazy { words.joinToString(separator = " ") { it.surface } }
+
+    /**
+     * 이 개체명과 공통된 대상을 지칭하는 공통 지시어 또는 대용어들의 묶음을 제공합니다.
+     *
+     * ## 참고
+     * **공지시어 해소**는 문장 내 또는 문장 간에 같은 대상을 지칭하는 어구를 찾아 묶는 분석과정입니다.
+     * 예) '삼성그룹의 계열사인 삼성물산은 같은 그룹의 계열사인 삼성생명과 함께'라는 문장에서
+     * * '삼성그룹'과 '같은 그룹'을 찾아 묶는 것을 말합니다.
+     *
+     * **영형대용어 분석**은 문장에서 생략된 기능어를 찾아 문장 내 또는 문장 간에 언급되어 있는 어구와 묶는 분석과정입니다.
+     * 예) '나는 밥을 먹었고, 영희도 먹었다'라는 문장에서,
+     * * '먹었다'의 목적어인 '밥을'이 생략되어 있음을 찾는 것을 말합니다.
+     *
+     * 아래를 참고해보세요.
+     * * [kr.bydelta.koala.proc.CanResolveCoref] 공지시어 해소, 대용어 분석기 interface
+     * * [Sentence.getCorefGroups] 문장 내에 포함된 개체명 묶음 [CoreferenceGroup]들의 목록을 반환하는 API
+     * * [CoreferenceGroup] 동일한 대상을 지칭하는 개체명을 묶는 API
+     *
+     * @return 공통된 대상을 묶은 [CoreferenceGroup]. 없다면 null.
+     */
+    fun getCorefGroup(): CoreferenceGroup? = getProperty(Key.COREF_ENTITY)
 
     /**
      * Returns a string representation of the object.
@@ -256,13 +353,33 @@ class Entity(val type: CoarseEntityType,
 }
 
 /**
- * 목록형 값을 저장할 [Property].
+ * 공지시어 해소 또는 대용어 분석 결과를 저장할 class입니다.
+ *
+ * ## 참고
+ * **공지시어 해소**는 문장 내 또는 문장 간에 같은 대상을 지칭하는 어구를 찾아 묶는 분석과정입니다.
+ * 예) '삼성그룹의 계열사인 삼성물산은 같은 그룹의 계열사인 삼성생명과 함께'라는 문장에서
+ * * '삼성그룹'과 '같은 그룹'을 찾아 묶는 것을 말합니다.
+ *
+ * **영형대용어 분석**은 문장에서 생략된 기능어를 찾아 문장 내 또는 문장 간에 언급되어 있는 어구와 묶는 분석과정입니다.
+ * 예) '나는 밥을 먹었고, 영희도 먹었다'라는 문장에서,
+ * * '먹었다'의 목적어인 '밥을'이 생략되어 있음을 찾는 것을 말합니다.
+ *
+ * 아래를 참고해보세요.
+ * * [kr.bydelta.koala.proc.CanResolveCoref] 공지시어 해소, 대용어 분석기 interface
+ * * [Sentence.getCorefGroups] 문장 내에 포함된 개체명 묶음 [CoreferenceGroup]들의 목록을 반환하는 API
+ * * [Entity.getCorefGroup] 각 개체명을 묶어 같은 지시 대상을 갖는 묶음인 [CoreferenceGroup]를 가져오는 API
  *
  * @since 2.0.0
- * @constructor 목록을 저장하기 위해 Property로 Wrapping합니다.
- * @param children 저장할 [T]-type 값의 목록
+ * @constructor 공지시어 해소 또는 대용어 분석 결과를 저장합니다.
+ * @param[children] 묶음에 포함되는 개체명들의 목록
  */
-class ListProperty<T : Property>(val children: List<T>) : Property(), List<T> by children {
+class CoreferenceGroup(children: List<Entity>) : Property, List<Entity> by children {
+    init {
+        for (child in this) {
+            child.setProperty(Key.COREF_ENTITY, this)
+        }
+    }
+
     /**
      * Indicates whether some other object is "equal to" this one.
      *
@@ -271,8 +388,7 @@ class ListProperty<T : Property>(val children: List<T>) : Property(), List<T> by
      */
     override fun equals(other: Any?): Boolean {
         return when (other) {
-            is ListProperty<*> -> this.children.size == other.children.size &&
-                    this.zip(other).all { it.first == it.second }
+            is CoreferenceGroup -> this.size == other.size && this.zip(other).all { it.first == it.second }
             else -> false
         }
     }
@@ -290,26 +406,26 @@ class ListProperty<T : Property>(val children: List<T>) : Property(), List<T> by
         /** Serialization Version ID: ver 2.0.0 (hexadecimal) */
         @Suppress("unused")
         @JvmStatic
-        private val serialVersionUid: Long = 0x200L // Version 2.0.0
+        private val serialVersionUid: Long = 0x200L
     }
 }
 
 /**
- * [T]-type들의 트리 또는 DAG 구조를 저장할 [Property]
+ * [T]-type들의 트리 구조를 저장할 [Property]입니다. [Word]를 묶어서 표현하는 구조에 적용됩니다.
  *
  * @since 2.0.0
- * @constructor 유향 그래프 형태의 구조를 저장합니다.
- * @param leaf 트리/DAG의 노드에서 연결되는 [Word]
+ * @constructor 트리 형태의 구조를 저장합니다.
+ * @param label 트리에 붙어있는 표지자입니다. Null일 수 없습니다.
+ * @param terminal 트리의 노드에서 연결되는 [Word]
  * @param children 트리/DAG의 자식 노드들
  */
-open class Tree<T : Tree<T>>(val leaf: Word?,
-                             val children: List<T>) : Property(), List<T> by children {
-    init {
-        // 부모 노드로 자신을 지정하게 함
-        for (child in children) {
-            child.setProperty(KEY_PARENT, this)
-        }
-    }
+abstract class Tree<L : Enum<*>, T : Tree<L, T>>(val label: L,
+                                                 val terminal: Word?,
+                                                 children: List<T>) : CanHaveProperty(), List<T> by children {
+    /** 부모 노드를 나타내는 키 */
+    internal abstract val PARENT_KEY: Key
+    /** 자식 노드를 나타내는 키 */
+    internal abstract val CHILD_KEY: Key
 
     /**
      * 부모 노드를 반환합니다.
@@ -319,7 +435,7 @@ open class Tree<T : Tree<T>>(val leaf: Word?,
      * @since 2.0.0
      * @return 같은 타입의 부모 노드 또는 null
      */
-    fun getParent() = getProperty<T>(KEY_PARENT)
+    fun getParent() = getProperty<T>(PARENT_KEY)
 
     /**
      * 이 노드가 최상위 노드인지 확인합니다.
@@ -330,29 +446,43 @@ open class Tree<T : Tree<T>>(val leaf: Word?,
     fun isRoot() = getParent() == null
 
     /**
-     * 이 노드가 (leaf node를 제외하고) 자식 노드를 갖는지 확인합니다.
+     * 이 노드가 (terminal node를 제외하고) 자식 노드를 갖는지 확인합니다.
      *
-     * * 구문분석 구조에서 leaf node는 [Word]가 됩니다.
-     * * SRL/의존구문분석 구조에서는 node에 대응하는 [Word]를 terminal node (leaf)로 별도 저장하고, 노드 사이의 DAG를 구성합니다.
+     * * 구문분석 구조에서 terminal node는 [Word]가 됩니다.
      *
      * @since 2.0.0
      * @return 자식노드가 있다면 true.
      */
-    fun hasNonTerminals() = children.isNotEmpty()
+    fun hasNonTerminals() = this.isNotEmpty()
 
     /**
-     * 이 노드의 자식노드들에 속하는 leaf/terminal node들을 모읍니다.
+     * 이 노드를 포함해 모든 하위 Non-terminal 노드들에 속하는 terminal node들을 모읍니다.
      *
      * * 구문분석 구조에서는 이 구문구조에 속하는 어절의 모음입니다.
-     * * SRL/의존구문분석 구조에서는 어절과 그 어절이 지배하는 하위 피지배소의 포함한 목록입니다.
      *
      * @since 2.0.0
      * @return Terminal node의 목록
      */
     fun getTerminals(): List<Word> {
-        val leaves = children.flatMap { it.getTerminals() }
-        return (if (leaf != null) leaves.plusElement(leaf) else leaves).sortedBy { it.id }
+        val leaves = this.flatMap { it.getTerminals() }
+        return (if (terminal != null) leaves.plusElement(terminal) else leaves).sortedBy { it.id }
     }
+
+    /**
+     * 이 노드의 Non-terminal 자식 노드를 모읍니다.
+     *
+     * * 이 함수는 읽기의 편의를 위한 syntactic sugar입니다. 즉 다음 구문은 동일합니다.
+     * ```kotlin
+     * for (item in x.getNonTerminals()){ ... }
+     * for (item in x){ ... }
+     * ```
+     *
+     * * 구문분석 구조에서는 이 구문구조에 속하는 하위 구문 구조입니다.
+     *
+     * @since 2.0.0
+     * @return Non-terminal node의 목록
+     */
+    fun getNonTerminals(): List<T> = this
 
     /**
      * Indicates whether some other object is "equal to" this one.
@@ -362,11 +492,9 @@ open class Tree<T : Tree<T>>(val leaf: Word?,
      */
     override fun equals(other: Any?): Boolean {
         return when (other) {
-            is Tree<*> -> {
-                val children1 = this.children
-                val children2 = other.children
-                this.leaf == other.leaf && children1.size == children2.size &&
-                        children1.zip(children2).all { it.first == it.second }
+            is Tree<*, *> -> {
+                this.label == other.label && this.terminal == other.terminal &&
+                        this.size == other.size && this.zip(other).all { it.first == it.second }
             }
             else -> false
         }
@@ -378,12 +506,13 @@ open class Tree<T : Tree<T>>(val leaf: Word?,
      * * Whenever it is invoked on the same object more than once, the hashCode method must consistently return the same integer, provided no information used in equals comparisons on the object is modified.
      * * If two objects are equal according to the equals() method, then calling the hashCode method on each of the two objects must produce the same integer result.
      */
-    override fun hashCode(): Int = (this.leaf?.hashCode() ?: 0) + this.children.sumBy { it.hashCode() }
+    override fun hashCode(): Int = this.label.hashCode() + (this.terminal?.hashCode()
+            ?: 0) + this.sumBy { it.hashCode() }
 
     /**
      * Returns a string representation of the object.
      */
-    override fun toString(): String = "Node(${leaf?.toString() ?: ""})"
+    override fun toString(): String = "$label-Node(${terminal?.toString() ?: ""})"
 
     /**
      * 이 트리구조를 표현하는 텍스트 표현을 [buffer]에 담아 반환합니다.
@@ -399,7 +528,7 @@ open class Tree<T : Tree<T>>(val leaf: Word?,
         buffer.append("| ".repeat(depth))
         buffer.append(toString())
 
-        for (child in children) {
+        for (child in this) {
             buffer.append('\n')
             child.getTreeString(depth + 1, buffer)
         }
@@ -429,42 +558,81 @@ open class Tree<T : Tree<T>>(val leaf: Word?,
  *
  * @since 2.0.0
  * @constructor 구문구조 분석의 결과를 생성합니다.
- * @param type 구구조 표지자입니다. [PhraseTag] Enum 값입니다.
- * @param node 현재 구구조에 직접 속하는 [Word]들. 중간 구문구조인 경우 leaf를 직접 포함하지 않으므로 null.
+ * @param label 구구조 표지자입니다. [PhraseTag] Enum 값입니다.
+ * @param terminal 현재 구구조에 직접 속하는 [Word]들. 중간 구문구조인 경우 leaf를 직접 포함하지 않으므로 null.
  * @param children 현재 구구조에 속하는 하위 구구조 [SyntaxTree]. 하위 구구조가 없다면 빈 리스트.
  */
-class SyntaxTree constructor(val type: PhraseTag,
-                             node: Word? = null,
-                             children: List<SyntaxTree> = emptyList()) : Tree<SyntaxTree>(node, children) {
+class SyntaxTree constructor(label: PhraseTag,
+                             terminal: Word? = null,
+                             children: List<SyntaxTree> = emptyList()) :
+        Tree<PhraseTag, SyntaxTree>(label, terminal, children) {
     init {
-        // 어절에 구구조 지정
-        node?.setProperty(KEY_SYNTAXTREE, this)
+        // terminal node에 부모로 지정
+        this.terminal?.setProperty(PARENT_KEY, this)
+
+        // non-terminal children node에 부모로 지정
+        for (child in this) {
+            child.setProperty(PARENT_KEY, this)
+            addProperty(CHILD_KEY, child)
+        }
     }
+
+    /** 부모 노드를 나타내는 키 */
+    override val PARENT_KEY: Key
+        get() = Key.SYNTAX_PARENT
+
+    /** 자식 노드를 나타내는 키 */
+    override val CHILD_KEY: Key
+        get() = Key.SYNTAX_CHILD
 
     /**
      * 구문구조 분석의 결과를 생성합니다.
      *
      * @since 2.0.0
-     * @param type 구구조 표지자
-     * @param node 현재 구구조에 직접 속하는 어절. 중간 구문구조인 경우 null.
+     * @param label 구구조 표지자
+     * @param terminal 현재 구구조에 직접 속하는 어절. 중간 구문구조인 경우 null.
      * @param children 현재 구구조에 속하는 하위 구구조
      */
-    constructor(type: PhraseTag, node: Word?, vararg children: SyntaxTree) : this(type, node, children.asList())
+    constructor(label: PhraseTag, terminal: Word?, vararg children: SyntaxTree) :
+            this(label, terminal, children.asList())
+
+    /** Static Fields */
+    companion object {
+        /** Serialization Version ID: ver 2.0.0 (hexadecimal) */
+        @Suppress("unused")
+        @JvmStatic
+        private val serialVersionUid: Long = 0x200L
+    }
+}
+
+/**
+ * [T]-type의 DAG Edge를 저장합니다.
+ *
+ * @since 2.0.0
+ * @constructor
+ * @param src Edge의 시작점. 의존구문분석인 경우 지배소, 의미역인 경우 동사.
+ * @param dest Edge의 종점. 의존구문분석인 경우 피지배소, 의미역인 경우 논항.
+ * @param label Edge가 나타내는 관계.
+ */
+abstract class DAGEdge<L : Enum<*>, T : Property> internal constructor(val src: T?,
+                                                                       val dest: T,
+                                                                       val label: L?) : CanHaveProperty() {
 
     /**
      * Returns a string representation of the object.
      */
-    override fun toString(): String = "$type-${super.toString()}"
+    override fun toString(): String = "${label ?: ""}('${src ?: "ROOT"}' → '$dest')"
 
     /**
-     * Indicates whether some other object is "equal to" this one.
+     * Indicates whether some other object is "equal to" this one. Implementations must fulfil the following
+     * requirements:
      *
      * Note that the `==` operator in Kotlin code is translated into a call to [equals] when objects on both sides of the
      * operator are not null.
      */
     override fun equals(other: Any?): Boolean {
         return when (other) {
-            is SyntaxTree -> this.type == other.type && super.equals(other)
+            is DAGEdge<*, *> -> this.label == other.label && this.src == other.src && this.dest == other.dest
             else -> false
         }
     }
@@ -475,15 +643,7 @@ class SyntaxTree constructor(val type: PhraseTag,
      * * Whenever it is invoked on the same object more than once, the hashCode method must consistently return the same integer, provided no information used in equals comparisons on the object is modified.
      * * If two objects are equal according to the equals() method, then calling the hashCode method on each of the two objects must produce the same integer result.
      */
-    override fun hashCode(): Int = this.type.hashCode() + super.hashCode()
-
-    /** Static Fields */
-    companion object {
-        /** Serialization Version ID: ver 2.0.0 (hexadecimal) */
-        @Suppress("unused")
-        @JvmStatic
-        private val serialVersionUid: Long = 0x200L
-    }
+    override fun hashCode(): Int = (this.label?.hashCode() ?: 0) + this.dest.hashCode() + (this.src?.hashCode() ?: 0)
 }
 
 /**
@@ -501,43 +661,35 @@ class SyntaxTree constructor(val type: PhraseTag,
  *
  * 아래를 참고해보세요.
  * * [kr.bydelta.koala.proc.CanParseDependency] 의존구조 분석을 수행하는 interface.
- * * [Word.getDependency] 어절이 직접 지배하는 하위 의존구조 [DepTree]를 가져오는 API
- * * [Sentence.getDependencyTree] 전체 문장을 분석한 의존구조 [DepTree]를 가져오는 API
+ * * [Word.getDependentEdges] 어절이 직접 지배하는 하위 의존구조 [DepEdge]의 목록을 가져오는 API
+ * * [Word.getGovernorEdge] 어절이 지배당하는 상위 의존구조 [DepEdge]를 가져오는 API
+ * * [Sentence.getDependencies] 전체 문장을 분석한 의존구조 [DepEdge]의 목록을 가져오는 API
  * * [PhraseTag] 의존구조의 형태 분류를 갖는 Enum 값 (구구조 분류와 같음)
  * * [DependencyTag] 의존구조의 기능 분류를 갖는 Enum 값
  *
  * @since 2.0.0
  * @constructor 의존구문구조 분석 결과를 생성합니다.
- * @param head 현재 의존구조의 지배소 [Word]
+ * @param governor 의존구조의 지배소 [Word]. 문장의 Root에 해당하는 경우 null.
+ * @param dependent 의존구조의 피지배소 [Word]
  * @param type 구구조 표지자, [PhraseTag] Enum 값 (ETRI 표준안은 구구조+의존기능으로 의존구문구조를 표기함)
  * @param depType 의존기능 표지자, [DependencyTag] Enum 값. 별도의 기능이 지정되지 않으면 null. (ETRI 표준안은 구구조+의존기능으로 의존구문구조를 표기함)
- * @param children 지배를 받는 다른 의존구조 [DepTree]의 목록
  */
-class DepTree constructor(val head: Word,
-                          val type: PhraseTag,
-                          val depType: DependencyTag? = null,
-                          children: List<DepTree> = emptyList()) : Tree<DepTree>(head, children) {
+class DepEdge @JvmOverloads constructor(val governor: Word?,
+                                        val dependent: Word,
+                                        val type: PhraseTag,
+                                        val depType: DependencyTag? = null) :
+        DAGEdge<DependencyTag, Word>(governor, dependent, depType) {
     init {
-        // 어절에 의존구조 지정
-        head.setProperty(KEY_DEPTREE, this)
+        // 지배소가 피지배소를 찾을 수 있게 지정
+        governor?.addProperty(Key.DEP_DEPENDENT, this)
+        // 피지배소가 지배소를 찾을 수 있게 지정
+        dependent.setProperty(Key.DEP_GOVERNOR, this)
     }
-
-    /**
-     * 의존구문구조 분석의 결과를 생성합니다.
-     *
-     * @since 2.0.0
-     * @param head 현재 의존구조의 지배소 [Word]
-     * @param type 구구조 표지자, [PhraseTag] Enum 값 (ETRI 표준안은 구구조+의존기능으로 의존구문구조를 표기함)
-     * @param depType 의존기능 표지자, [DependencyTag] Enum 값. 별도의 기능이 지정되지 않으면 null. (ETRI 표준안은 구구조+의존기능으로 의존구문구조를 표기함)
-     * @param children 지배를 받는 다른 의존구조 [DepTree]의 목록 (가변인자)
-     */
-    constructor(head: Word, type: PhraseTag, depType: DependencyTag?, vararg children: DepTree) :
-            this(head, type, depType, children.asList())
 
     /**
      * Returns a string representation of the object.
      */
-    override fun toString(): String = "$type${depType?.toString()?.let { "-$it" } ?: ""}-${super.toString()}"
+    override fun toString(): String = "$type${super.toString()}"
 
     /**
      * Indicates whether some other object is "equal to" this one.
@@ -547,7 +699,7 @@ class DepTree constructor(val head: Word,
      */
     override fun equals(other: Any?): Boolean {
         return when (other) {
-            is DepTree -> this.type == other.type && this.depType == other.depType && super.equals(other)
+            is DepEdge -> this.type == other.type && super.equals(other)
             else -> false
         }
     }
@@ -558,7 +710,7 @@ class DepTree constructor(val head: Word,
      * * Whenever it is invoked on the same object more than once, the hashCode method must consistently return the same integer, provided no information used in equals comparisons on the object is modified.
      * * If two objects are equal according to the equals() method, then calling the hashCode method on each of the two objects must produce the same integer result.
      */
-    override fun hashCode(): Int = this.type.hashCode() + (this.depType?.hashCode() ?: 0) + super.hashCode()
+    override fun hashCode(): Int = this.type.hashCode() + super.hashCode()
 
     /** Static Fields */
     companion object {
@@ -583,59 +735,26 @@ class DepTree constructor(val head: Word,
  *
  * 아래를 참고해보세요.
  * * [kr.bydelta.koala.proc.CanLabelSemanticRole] 의미역 분석을 수행하는 interface.
- * * [Word.getRole] 어절이 직접 지배하는 하위 의미역 구조 [RoleTree]를 가져오는 API
- * * [Sentence.getSemRoleTree] 전체 문장을 분석한 의미역 구조 [RoleTree]를 가져오는 API
+ * * [Word.getArgumentRoles] 어절이 술어인 논항들의 [RoleEdge] 목록을 가져오는 API
+ * * [Word.getPredicateRole] 어절이 논항인 [RoleEdge]의 술어를 가져오는 API
+ * * [Sentence.getRoles] 전체 문장을 분석한 의미역 구조 [RoleEdge]를 가져오는 API
  * * [RoleType] 의미역 분류를 갖는 Enum 값
  *
  * @since 2.0.0
  * @constructor 의미역 분석 결과를 생성합니다.
- * @param node 의미역 구조를 표현하는 지배소 [Word]
- * @param type 의미역 표지자, [RoleType] Enum 값
- * @param children 지배를 받는 다른 의미역 구조, [RoleTree]의 목록.
+ * @param predicate 의미역 구조에서 표현하는 동사 [Word]
+ * @param argument 의미역 구조에서 서술된 논항 [Word]
+ * @param label 의미역 표지자, [RoleType] Enum 값
  */
-class RoleTree constructor(node: Word, val type: RoleType,
-                           children: List<RoleTree> = emptyList()) : Tree<RoleTree>(node, children) {
+class RoleEdge constructor(val predicate: Word,
+                           val argument: Word,
+                           label: RoleType) : DAGEdge<RoleType, Word>(predicate, argument, label) {
     init {
-        // 어절에 의미역 구조 지정
-        node.setProperty(KEY_SRL, this)
+        // 동사가 논항을 찾을 수 있게 지정
+        predicate.addProperty(Key.SRL_ARGUMENT, this)
+        // 논항이 동사를 찾을 수 있게 지정
+        argument.setProperty(Key.SRL_PREDICATE, this)
     }
-
-    /**
-     * 의미역 분석 결과를 생성합니다.
-     *
-     * @since 2.0.0
-     * @param node 의미역 구조를 표현하는 지배소 [Word]
-     * @param type 의미역 표지자, [RoleType] Enum 값
-     * @param children 지배를 받는 다른 의미역 구조, [RoleTree]의 목록.
-     */
-    constructor(node: Word, type: RoleType, vararg children: RoleTree) :
-            this(node, type, children.asList())
-
-    /**
-     * Returns a string representation of the object.
-     */
-    override fun toString(): String = "$type-${super.toString()}"
-
-    /**
-     * Indicates whether some other object is "equal to" this one.
-     *
-     * Note that the `==` operator in Kotlin code is translated into a call to [equals] when objects on both sides of the
-     * operator are not null.
-     */
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
-            is RoleTree -> this.type == other.type && super.equals(other)
-            else -> false
-        }
-    }
-
-    /**
-     * Returns a hash code value for the object.  The general contract of hashCode is:
-     *
-     * * Whenever it is invoked on the same object more than once, the hashCode method must consistently return the same integer, provided no information used in equals comparisons on the object is modified.
-     * * If two objects are equal according to the equals() method, then calling the hashCode method on each of the two objects must produce the same integer result.
-     */
-    override fun hashCode(): Int = this.type.hashCode() + super.hashCode()
 
     /** Static Fields */
     companion object {
@@ -670,7 +789,7 @@ class RoleTree constructor(node: Word, val type: RoleType,
  * @param tag     세종 품사표기
  */
 class Morpheme constructor(val surface: String, val tag: POS,
-                           val originalTag: String? = null) : Property() {
+                           val originalTag: String? = null) : CanHaveProperty() {
     /****** Properties ******/
 
     /**
@@ -690,16 +809,19 @@ class Morpheme constructor(val surface: String, val tag: POS,
         }
 
     /**
+     * 이 형태소의 의미번호를 저장합니다.
+     */
+    fun setWordSense(id: Int) = setProperty(Key.WORD_SENSE, WordSense(id))
+
+    /**
      * 다의어 분석 결과인, 이 형태소의 사전 속 의미/어깨번호 값을 돌려줍니다.
      *
-     * 다의어 분석을 한 적이 없다면 [UninitializedPropertyAccessException]이 발생합니다.
+     * 다의어 분석을 한 적이 없다면 null을 돌려줍니다.
      *
      * @since 2.0.0
-     * @throws[UninitializedPropertyAccessException] 다의어 분석을 한 적이 없는데 호출한 경우
+     * @return 의미/어깨번호 값
      * */
-    @Throws(UninitializedPropertyAccessException::class)
-    fun getWordSense(): Int = getProperty<IntProperty>(KEY_WORDSENSE)?.value
-            ?: throw UninitializedPropertyAccessException()
+    fun getWordSense(): Int? = getProperty<WordSense>(Key.WORD_SENSE)?.id
 
     /****** Tag checkers ******/
 
@@ -894,7 +1016,7 @@ class Morpheme constructor(val surface: String, val tag: POS,
  */
 class Word @Throws(AlreadySetIDException::class) constructor(val surface: String = "",
                                                              private val morphemes: List<Morpheme> = listOf()) :
-        Property(), List<Morpheme> by morphemes {
+        CanHaveProperty(), List<Morpheme> by morphemes {
 
     init {
         // ID 값 배정
@@ -919,29 +1041,6 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
         }
 
     /**
-     * 개체명 분석 결과로 얻은 [entity]를 등록합니다.
-     *
-     * @since 2.0.0
-     * @param[entity] 이 단어를 포함하는 [Entity]
-     */
-    internal fun linkEntity(entity: Entity) {
-        if (KEY_NER in properties) {
-            val entities = getEntities()
-            if (entities is MutableList<Entity>) {
-                entities.add(entity)
-            } else {
-                val mutableEntities = entities.toMutableList()
-                mutableEntities.add(entity)
-
-                val mutableListProperty = ListProperty(mutableEntities)
-                properties[KEY_NER] = mutableListProperty
-            }
-        } else {
-            properties[KEY_NER] = ListProperty(mutableListOf(entity))
-        }
-    }
-
-    /**
      * 개체명 분석을 했다면, 현재 어절이 속한 개체명 값을 돌려줍니다.
      *
      * ## 참고
@@ -959,12 +1058,9 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
      * * [CoarseEntityType] [Entity]의 대분류 개체명 분류구조 Enum 값
      *
      * @since 2.0.0
-     * @throws[UninitializedPropertyAccessException] 분석을 하지 않은 경우 발생합니다.
-     * @return [Entity]의 목록입니다.
+     * @return [Entity]의 목록입니다. 분석 결과가 없으면 null.
      * */
-    @Throws(UninitializedPropertyAccessException::class)
-    fun getEntities() =
-            getProperty<ListProperty<Entity>>(KEY_NER)?.children ?: throw UninitializedPropertyAccessException()
+    fun getEntities() = getProperty<ListProperty<Entity>>(Key.NAMED_ENTITY)?.values
 
     /**
      * 구문분석을 했다면, 현재 어절이 속한 직속 상위 구구조(Phrase)를 돌려줍니다.
@@ -986,11 +1082,9 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
      * * [PhraseTag] 구구조의 형태 분류를 갖는 Enum 값
      *
      * @since 2.0.0
-     * @throws[UninitializedPropertyAccessException] 분석을 하지 않은 경우 발생합니다.
-     * @return 어절의 상위 구구조 [SyntaxTree]
+     * @return 어절의 상위 구구조 [SyntaxTree]. 분석 결과가 없으면 null
      * */
-    @Throws(UninitializedPropertyAccessException::class)
-    fun getPhrase() = getProperty<SyntaxTree>(KEY_SYNTAXTREE) ?: throw UninitializedPropertyAccessException()
+    fun getPhrase() = getProperty<SyntaxTree>(Key.SYNTAX_PARENT)
 
     /**
      * 의존구문분석을 했다면, 현재 어절이 지배소인 의존구문 구조의 값을 돌려줍니다.
@@ -1007,17 +1101,42 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
      *
      * 아래를 참고해보세요.
      * * [kr.bydelta.koala.proc.CanParseDependency] 의존구조 분석을 수행하는 interface.
-     * * [Sentence.getDependencyTree] 전체 문장을 분석한 의존구조 [DepTree]를 가져오는 API
-     * * [DepTree] 의존구문구조의 저장형태
+     * * [Word.getGovernorEdge] 어절이 지배당하는 상위 의존구조 [DepEdge]를 가져오는 API
+     * * [Sentence.getDependencies] 전체 문장을 분석한 의존구조 [DepEdge]의 목록을 가져오는 API
+     * * [DepEdge] 의존구문구조의 저장형태
      * * [PhraseTag] 의존구조의 형태 분류를 갖는 Enum 값 (구구조 분류와 같음)
      * * [DependencyTag] 의존구조의 기능 분류를 갖는 Enum 값
      *
      * @since 2.0.0
-     * @throws[UninitializedPropertyAccessException] 분석을 하지 않은 경우 발생합니다.
-     * @return 어절이 지배하는 의존구문구조 [DepTree]
+     * @return 어절이 지배하는 의존구문구조 [DepEdge]의 목록. 분석 결과가 없으면 null
      * */
-    @Throws(UninitializedPropertyAccessException::class)
-    fun getDependency() = getProperty<DepTree>(KEY_DEPTREE) ?: throw UninitializedPropertyAccessException()
+    fun getDependentEdges(): List<DepEdge>? = getProperty<ListProperty<DepEdge>>(Key.DEP_DEPENDENT)?.values
+
+    /**
+     * 의존구문분석을 했다면, 현재 어절이 지배소인 의존구문 구조의 값을 돌려줍니다.
+     *
+     * ## 참고
+     * **의존구조 분석**은 문장의 구성 어절들이 의존 또는 기능하는 관계를 분석하는 방법입니다.
+     * 예) '나는 밥을 먹었고, 영희는 짐을 쌌다'라는 문장에는
+     * 가장 마지막 단어인 '쌌다'가 핵심 어구가 되며,
+     * * '먹었고'가 '쌌다'와 대등하게 연결되고
+     * * '나는'은 '먹었고'의 주어로 기능하며
+     * * '밥을'은 '먹었고'의 목적어로 기능합니다.
+     * * '영희는'은 '쌌다'의 주어로 기능하고,
+     * * '짐을'은 '쌌다'의 목적어로 기능합니다.
+     *
+     * 아래를 참고해보세요.
+     * * [kr.bydelta.koala.proc.CanParseDependency] 의존구조 분석을 수행하는 interface.
+     * * [Word.getDependentEdges] 어절이 직접 지배하는 하위 의존구조 [DepEdge]의 목록를 가져오는 API
+     * * [Sentence.getDependencies] 전체 문장을 분석한 의존구조 [DepEdge]의 목록을 가져오는 API
+     * * [DepEdge] 의존구문구조의 저장형태
+     * * [PhraseTag] 의존구조의 형태 분류를 갖는 Enum 값 (구구조 분류와 같음)
+     * * [DependencyTag] 의존구조의 기능 분류를 갖는 Enum 값
+     *
+     * @since 2.0.0
+     * @return 어절이 지배하는 의존구문구조 [DepEdge]. 분석 결과가 없으면 null.
+     * */
+    fun getGovernorEdge() = getProperty<DepEdge>(Key.DEP_GOVERNOR)
 
     /**
      * 의미역 분석을 했다면, 현재 어절이 지배하는 의미역 구조를 돌려줌.
@@ -1033,16 +1152,39 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
      *
      * 아래를 참고해보세요.
      * * [kr.bydelta.koala.proc.CanLabelSemanticRole] 의미역 분석을 수행하는 interface.
-     * * [Sentence.getSemRoleTree] 전체 문장을 분석한 의미역 구조 [RoleTree]를 가져오는 API
-     * * [RoleTree] 의미역 구조를 저장하는 형태
+     * * [Word.getArgumentRoles] 어절이 술어인 논항들의 [RoleEdge] 목록을 가져오는 API
+     * * [Sentence.getRoles] 전체 문장을 분석한 의미역 구조 [RoleEdge]를 가져오는 API
+     * * [RoleEdge] 의미역 구조를 저장하는 형태
      * * [RoleType] 의미역 분류를 갖는 Enum 값
      *
      * @since 2.0.0
-     * @throws[UninitializedPropertyAccessException] 분석을 하지 않았거나 의미역 구조에 이 어절이 포함되지 않는 경우 발생합니다.
-     * @return 어절이 지배하는 의미역 구조 [RoleTree]
+     * @return 어절이 지배하는 의미역 구조 [RoleEdge]. 분석 결과가 없으면 null.
      * */
-    @Throws(UninitializedPropertyAccessException::class)
-    fun getRole() = getProperty<RoleTree>(KEY_SRL) ?: throw UninitializedPropertyAccessException()
+    fun getPredicateRole() = getProperty<RoleEdge>(Key.SRL_PREDICATE)
+
+    /**
+     * 의미역 분석을 했다면, 현재 어절이 지배하는 의미역 구조를 돌려줌.
+     *
+     * ## 참고
+     * **의미역 결정**은 문장의 구성 어절들의 역할/기능을 분석하는 방법입니다.
+     * 예) '나는 밥을 어제 집에서 먹었다'라는 문장에는
+     * 동사 '먹었다'를 중심으로
+     * * '나는'은 동작의 주체를,
+     * * '밥을'은 동작의 대상을,
+     * * '어제'는 동작의 시점을
+     * * '집에서'는 동작의 장소를 나타냅니다.
+     *
+     * 아래를 참고해보세요.
+     * * [kr.bydelta.koala.proc.CanLabelSemanticRole] 의미역 분석을 수행하는 interface.
+     * * [Word.getPredicateRole] 어절이 논항인 [RoleEdge]의 술어를 가져오는 API
+     * * [Sentence.getRoles] 전체 문장을 분석한 의미역 구조 [RoleEdge]를 가져오는 API
+     * * [RoleEdge] 의미역 구조를 저장하는 형태
+     * * [RoleType] 의미역 분류를 갖는 Enum 값
+     *
+     * @since 2.0.0
+     * @return 어절이 지배하는 의미역 구조 [RoleEdge]의 목록. 분석 결과가 없으면 null.
+     * */
+    fun getArgumentRoles(): List<RoleEdge>? = getProperty<ListProperty<RoleEdge>>(Key.SRL_ARGUMENT)?.values
 
     /********** Equalities **********/
 
@@ -1113,7 +1255,7 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
  * @constructor 문장을 구성합니다.
  * @param words 문장에 포함되는 어절 [Word]의 목록
  */
-class Sentence(private val words: List<Word>) : Property(), List<Word> by words {
+class Sentence(private val words: List<Word>) : CanHaveProperty(), List<Word> by words {
     init {
         // ID 값 배정
         for ((index, value) in words.withIndex()) {
@@ -1122,6 +1264,21 @@ class Sentence(private val words: List<Word>) : Property(), List<Word> by words 
     }
 
     /********** Access property values **********/
+
+    /** 최상위 구구조를 지정합니다 */
+    fun setSyntaxTree(tree: SyntaxTree) = setProperty(Key.SYNTAX_PARENT, tree)
+
+    /** 의존구문분석 결과인 edge들을 저장합니다. */
+    fun setDepEdges(edges: List<DepEdge>) = setProperty(Key.DEP_DEPENDENT, ListProperty(edges.toMutableList()))
+
+    /** 의미역 분석 결과인 edge들을 저장합니다. */
+    fun setRoleEdges(edges: List<RoleEdge>) = setProperty(Key.SRL_ARGUMENT, ListProperty(edges.toMutableList()))
+
+    /** 개체명 분석 결과로 얻은 개체명들을 저장합니다. */
+    fun setEntities(entities: List<Entity>) = setProperty(Key.NAMED_ENTITY, ListProperty(entities.toMutableList()))
+
+    /** 상호참조 분석/대용어 분석 결과로 얻은 개체명의 묶음들을 저장합니다. */
+    fun setCorefGroups(groups: List<CoreferenceGroup>) = setProperty(Key.COREF_MENTION, ListProperty(groups.toMutableList()))
 
     /**
      * 구문분석을 했다면, 최상위 구구조(Phrase)를 돌려줍니다.
@@ -1143,11 +1300,9 @@ class Sentence(private val words: List<Word>) : Property(), List<Word> by words 
      * * [PhraseTag] 구구조의 형태 분류를 갖는 Enum 값
      *
      * @since 2.0.0
-     * @throws[UninitializedPropertyAccessException] 분석을 하지 않은 경우 발생합니다.
-     * @return 최상위 구구조 [SyntaxTree]
+     * @return 최상위 구구조 [SyntaxTree]. 분석 결과가 없으면 null.
      * */
-    @Throws(UninitializedPropertyAccessException::class)
-    fun getSyntaxTree() = getProperty<SyntaxTree>(KEY_SYNTAXTREE) ?: throw UninitializedPropertyAccessException()
+    fun getSyntaxTree() = getProperty<SyntaxTree>(Key.SYNTAX_PARENT)
 
     /**
      * 의존구문분석을 했다면, 최상위 의존구문 구조의 값을 돌려줍니다.
@@ -1164,17 +1319,16 @@ class Sentence(private val words: List<Word>) : Property(), List<Word> by words 
      *
      * 아래를 참고해보세요.
      * * [kr.bydelta.koala.proc.CanParseDependency] 의존구조 분석을 수행하는 interface.
-     * * [Word.getDependency] 각 어절이 지배하는 의존구조 [DepTree]를 가져오는 API
-     * * [DepTree] 의존구문구조의 저장형태
+     * * [Word.getDependentEdges] 어절이 직접 지배하는 하위 의존구조 [DepEdge]의 목록을 가져오는 API
+     * * [Word.getGovernorEdge] 어절이 지배당하는 상위 의존구조 [DepEdge]를 가져오는 API
+     * * [DepEdge] 의존구문구조의 저장형태
      * * [PhraseTag] 의존구조의 형태 분류를 갖는 Enum 값 (구구조 분류와 같음)
      * * [DependencyTag] 의존구조의 기능 분류를 갖는 Enum 값
      *
      * @since 2.0.0
-     * @throws[UninitializedPropertyAccessException] 분석을 하지 않은 경우 발생합니다.
-     * @return 최상위 의존구문구조 [DepTree]
+     * @return 문장 내 모든 의존구문구조 [DepEdge]의 목록. 분석 결과가 없으면 null.
      * */
-    @Throws(UninitializedPropertyAccessException::class)
-    fun getDependencyTree() = getProperty<DepTree>(KEY_DEPTREE) ?: throw UninitializedPropertyAccessException()
+    fun getDependencies(): List<DepEdge>? = getProperty<ListProperty<DepEdge>>(Key.DEP_DEPENDENT)?.values
 
     /**
      * 의미역 분석을 했다면, 최상위 의미역 구조를 돌려줌.
@@ -1190,16 +1344,15 @@ class Sentence(private val words: List<Word>) : Property(), List<Word> by words 
      *
      * 아래를 참고해보세요.
      * * [kr.bydelta.koala.proc.CanLabelSemanticRole] 의미역 분석을 수행하는 interface.
-     * * [Word.getRole] 각 어절이 지배하는 의미역 구조 [RoleTree]를 가져오는 API
-     * * [RoleTree] 의미역 구조를 저장하는 형태
+     * * [Word.getArgumentRoles] 어절이 술어인 논항들의 [RoleEdge] 목록을 가져오는 API
+     * * [Word.getPredicateRole] 어절이 논항인 [RoleEdge]의 술어를 가져오는 API
+     * * [RoleEdge] 의미역 구조를 저장하는 형태
      * * [RoleType] 의미역 분류를 갖는 Enum 값
      *
      * @since 2.0.0
-     * @throws[UninitializedPropertyAccessException] 분석을 하지 않은 경우 발생합니다.
-     * @return 최상위 의미역 구조 [RoleTree]
+     * @return 문장 내 모든 의미역 구조 [RoleEdge]
      * */
-    @Throws(UninitializedPropertyAccessException::class)
-    fun getSemRoleTree() = getProperty<RoleTree>(KEY_SRL) ?: throw UninitializedPropertyAccessException()
+    fun getRoles(): List<RoleEdge>? = getProperty<ListProperty<RoleEdge>>(Key.SRL_ARGUMENT)?.values
 
     /**
      * 개체명 분석을 했다면, 문장의 모든 개체명 목록을 돌려줍니다.
@@ -1219,12 +1372,31 @@ class Sentence(private val words: List<Word>) : Property(), List<Word> by words 
      * * [CoarseEntityType] [Entity]의 대분류 개체명 분류구조 Enum 값
      *
      * @since 2.0.0
-     * @throws[UninitializedPropertyAccessException] 분석을 하지 않은 경우 발생합니다.
      * @return 문장에 포함된 모든 [Entity]의 목록입니다.
      * */
-    @Throws(UninitializedPropertyAccessException::class)
-    fun getEntities() = getProperty<ListProperty<Entity>>(KEY_NER)?.children
-            ?: throw UninitializedPropertyAccessException()
+    fun getEntities(): List<Entity>? = getProperty<ListProperty<Entity>>(Key.NAMED_ENTITY)?.values
+
+
+    /**
+     * 이 개체명과 공통된 대상을 지칭하는 공통 지시어 또는 대용어들의 묶음을 제공합니다.
+     *
+     * ## 참고
+     * **공지시어 해소**는 문장 내 또는 문장 간에 같은 대상을 지칭하는 어구를 찾아 묶는 분석과정입니다.
+     * 예) '삼성그룹의 계열사인 삼성물산은 같은 그룹의 계열사인 삼성생명과 함께'라는 문장에서
+     * * '삼성그룹'과 '같은 그룹'을 찾아 묶는 것을 말합니다.
+     *
+     * **영형대용어 분석**은 문장에서 생략된 기능어를 찾아 문장 내 또는 문장 간에 언급되어 있는 어구와 묶는 분석과정입니다.
+     * 예) '나는 밥을 먹었고, 영희도 먹었다'라는 문장에서,
+     * * '먹었다'의 목적어인 '밥을'이 생략되어 있음을 찾는 것을 말합니다.
+     *
+     * 아래를 참고해보세요.
+     * * [kr.bydelta.koala.proc.CanResolveCoref] 공지시어 해소, 대용어 분석기 interface
+     * * [Entity.getCorefGroup] 개체명과 동일한 대상을 지칭하는 대상들의 묶음인 [CoreferenceGroup]을 반환하는 API
+     * * [CoreferenceGroup] 동일한 대상을 지칭하는 개체명을 묶는 API
+     *
+     * @return 공통된 대상을 묶은 [CoreferenceGroup]. 분석 결과가 없으면 null.
+     */
+    fun getCorefGroups(): List<CoreferenceGroup>? = getProperty<ListProperty<CoreferenceGroup>>(Key.COREF_MENTION)?.values
 
     /********** Filter words by specific types **********/
 

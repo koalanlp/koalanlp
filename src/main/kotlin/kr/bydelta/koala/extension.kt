@@ -279,15 +279,15 @@ fun CharSequence.hanjaToHangul(headCorrection: Boolean = true): CharSequence {
             val next = if (this.length > index + 1) this[index + 1] else null
 
             // 不 발음 교정
-            if ((ch == '不' || ch == '不') && // 부 문자가 2개 있음
-                    next?.isCJKHanja() == true &&
+            if (ch in "不不" && // 부 문자가 2개 있음
+                    next != null &&
                     (next == '實' || HANJA_READ_TABLE.getOrDefault(next, next).getChosung() in HANJA_BU_FIX)) {
                 newChar = '부'
             }
 
             // 金 발음 교정 (앞에 한자가 있는 경우 성씨가 아닐 확률이 높으므로 '금'으로 표기)
-            if (ch == '金' && buffer.isNotEmpty() && this[index - 1].isCJKHanja()) {
-                newChar = '금'
+            if (ch in "金金" && (buffer.isEmpty() || !this[index - 1].isCJKHanja())) {
+                newChar = '김'
             }
 
             if (!headCorrection) {
@@ -302,12 +302,12 @@ fun CharSequence.hanjaToHangul(headCorrection: Boolean = true): CharSequence {
                     if (newChar.getJungsung() in HEAD_CORRECTION_DOUBLE_TARGET) {
                         // ㄴ이나 ㄹ이 ㅇ으로 바뀌는 경우:
                         // 한자음 '녀, 뇨, 뉴, 니, 랴, 려, 례, 료, 류, 리' 등 ㄴ 또는 ㄹ+ㅣ나 ㅣ로 시작하는 이중모음이 단어 첫머리에 올 때
-                        buffer.append(Triple('\u110B', newChar.getJungsung()!!, newChar.getJongsung())
+                        buffer.append(Triple('\u110B', newChar.getJungsung(), newChar.getJongsung())
                                 .assembleHangul())
                     } else if (newChar.getChosung() == '\u1105') {
                         // ㄹ이 ㄴ으로 바뀌는 경우:
                         // 한자음 '라, 래, 로, 뢰, 루, 르' 등 ㄹ+ㅣ를 제외한 단모음이 단어 첫머리에 올 때
-                        buffer.append(Triple('\u1102', newChar.getJungsung()!!, newChar.getJongsung())
+                        buffer.append(Triple('\u1102', newChar.getJungsung(), newChar.getJongsung())
                                 .assembleHangul())
                     } else {
                         buffer.append(newChar)
@@ -315,7 +315,7 @@ fun CharSequence.hanjaToHangul(headCorrection: Boolean = true): CharSequence {
                 } else if (newChar in HEAD_CORRECTION_IL &&
                         (!buffer.isJongsungEnding() || buffer.last().getJongsung() == '\u11AB')) {
                     //    모음이나 ㄴ 받침 뒤에 이어지는 '렬, 률'은 '열, 율'로 발음한다.
-                    buffer.append(Triple('\u110B', newChar.getJungsung()!!, newChar.getJongsung())
+                    buffer.append(Triple('\u110B', newChar.getJungsung(), newChar.getJongsung())
                             .assembleHangul())
                 } else {
                     buffer.append(newChar)
@@ -574,9 +574,11 @@ fun CharSequence.isJongsungEnding(): Boolean = this.last().isJongsungEnding()
  * @return [Char.isChosungJamo]가 참이면 문자를 그대로, [Char.isCompleteHangul]이 참이면 초성 문자를 분리해서 (0x1100-0x1112 대역), 아니라면 null.
  * */
 fun Char.getChosung(): Char? =
-        if (this.isCompleteHangul()) ((this - HANGUL_START) / JUNGSUNG_RANGE + 0x1100).toChar()
-        else if (this.isChosungJamo()) this
-        else null
+        when {
+            isCompleteHangul() -> ((this - HANGUL_START) / JUNGSUNG_RANGE + 0x1100).toChar()
+            isChosungJamo() -> this
+            else -> null
+        }
 
 /** 현재 문자에서 중성 모음문자를 분리합니다. 중성이 없으면 null.
  *
@@ -601,9 +603,11 @@ fun Char.getChosung(): Char? =
  * @return [Char.isJungsungJamo]가 참이면 문자를 그대로, [Char.isCompleteHangul]이 참이면 중성 문자를 분리해서 (0x1161-0x1175 대역), 아니라면 null.
  * */
 fun Char.getJungsung(): Char? =
-        if (this.isCompleteHangul()) ((this - HANGUL_START) % JUNGSUNG_RANGE / JONGSUNG_RANGE + 0x1161).toChar()
-        else if (this.isJungsungJamo()) this
-        else null
+        when {
+            isCompleteHangul() -> ((this - HANGUL_START) % JUNGSUNG_RANGE / JONGSUNG_RANGE + 0x1161).toChar()
+            isJungsungJamo() -> this
+            else -> null
+        }
 
 /** 현재 문자에서 종성 자음문자를 분리합니다. 종성이 없으면 null.
  *
@@ -628,10 +632,11 @@ fun Char.getJungsung(): Char? =
  * @return [Char.isJongsungJamo]가 참이면 문자를 그대로, [Char.isJongsungEnding]이 참이면 종성 문자를 분리해서 (0x11A7-0x11C2 대역), 아니라면 null.
  * */
 fun Char.getJongsung(): Char? =
-        if (this.isJongsungEnding())
-            ((this - HANGUL_START) % JONGSUNG_RANGE + 0x11A7).toChar()
-        else if (this.isJongsungJamo()) this
-        else null
+        when {
+            isJongsungEnding() -> ((this - HANGUL_START) % JONGSUNG_RANGE + 0x11A7).toChar()
+            isJongsungJamo() -> this
+            else -> null
+        }
 
 /** 현재 문자를 초성, 중성, 종성 자음문자로 분리해 [Triple]을 구성합니다. 종성이 없으면 [Triple.third] 값은 null.
  *
@@ -655,9 +660,13 @@ fun Char.getJongsung(): Char? =
  * @since 2.0.0
  * @return [Char.isCompleteHangul]이면 문자를 <초성, 중성, 종성?>으로 나누고, 아니라면 null.
  * */
-fun Char.dissembleHangul(): Triple<Char, Char, Char?>? =
-        if (this.isCompleteHangul()) Triple(this.getChosung()!!, this.getJungsung()!!, this.getJongsung())
-        else null
+fun Char.dissembleHangul(): Triple<Char, Char, Char?>? {
+    val cho = getChosung()
+    val jung = getJungsung()
+
+    return if (cho != null && jung != null) Triple(cho, jung, this.getJongsung())
+    else null
+}
 
 /**
  * 현재 문자열 [this]를 초성, 중성, 종성 자음문자로 분리하여 새 문자열을 만듭니다. 종성이 없으면 종성은 쓰지 않습니다.
@@ -685,8 +694,9 @@ fun Char.dissembleHangul(): Triple<Char, Char, Char?>? =
 fun CharSequence.dissembleHangul(): CharSequence {
     val buffer = StringBuffer()
     for (ch in this) {
-        if (ch.isCompleteHangul()) {
-            val (cho, jung, jong) = ch.dissembleHangul()!!
+        val dissem = ch.dissembleHangul()
+        if (dissem != null) {
+            val (cho, jung, jong) = dissem
             buffer.append(cho)
             buffer.append(jung)
             jong?.let { buffer.append(it) }
@@ -726,14 +736,16 @@ fun CharSequence.dissembleHangul(): CharSequence {
  */
 @JvmOverloads
 @Throws(IllegalArgumentException::class)
-fun assembleHangul(cho: Char, jung: Char, jong: Char? = null): Char {
-    if (cho.isChosungJamo() && jung.isJungsungJamo()) {
+fun assembleHangul(cho: Char? = null, jung: Char? = null, jong: Char? = null): Char {
+    val choCh = cho ?: HanFirstList[11] as Char
+    val jungCh = jung ?: HanSecondList[18] as Char
+    if (choCh.isChosungJamo() && jungCh.isJungsungJamo()) {
         if (jong != null && jong.isJongsungJamo()) {
-            return HANGUL_START + (cho.toInt() - 0x1100) * JUNGSUNG_RANGE +
-                    (jung.toInt() - 0x1161) * JONGSUNG_RANGE + (jong.toInt() - 0x11A7)
+            return HANGUL_START + (choCh.toInt() - 0x1100) * JUNGSUNG_RANGE +
+                    (jungCh.toInt() - 0x1161) * JONGSUNG_RANGE + (jong.toInt() - 0x11A7)
         } else if (jong == null) {
-            return HANGUL_START + (cho.toInt() - 0x1100) * JUNGSUNG_RANGE +
-                    (jung.toInt() - 0x1161) * JONGSUNG_RANGE
+            return HANGUL_START + (choCh.toInt() - 0x1100) * JUNGSUNG_RANGE +
+                    (jungCh.toInt() - 0x1161) * JONGSUNG_RANGE
         }
     }
 
@@ -765,8 +777,7 @@ fun assembleHangul(cho: Char, jung: Char, jong: Char? = null): Char {
  * @return 초성, 중성, 종성을 조합하여 문자를 만듭니다.
  */
 @Throws(IllegalArgumentException::class)
-fun Triple<Char, Char, Char?>.assembleHangul(): Char =
-        assembleHangul(this.first, this.second, this.third)
+fun Triple<Char?, Char?, Char?>.assembleHangul(): Char = assembleHangul(this.first, this.second, this.third)
 
 /**
  * 주어진 문자열에서 초성, 중성, 종성이 연달아 나오는 경우 이를 조합하여 한글 문자를 재구성합니다.
@@ -806,7 +817,7 @@ fun CharSequence.assembleHangul(): CharSequence {
             val last = buffer.last()
             buffer.deleteCharAt(buffer.length - 1)
             buffer.append(assembleHangul(last, ch))
-        } else if (ch.isJongsungJamo() && !buffer.last().isJongsungEnding()) {
+        } else if (ch.isJongsungJamo() && buffer.last().isCompleteHangul() && !buffer.last().isJongsungEnding()) {
             val last = buffer.last()
             buffer.deleteCharAt(buffer.length - 1)
             buffer.append(last + (ch.toInt() - 0x11A7))
@@ -822,14 +833,14 @@ fun CharSequence.assembleHangul(): CharSequence {
  ***** 동사 활용 재구성 *****
  **************************/
 /** 초성 조합형 문자열 리스트 (UNICODE 순서) */
-val HanFirstList by lazy { (0x1100..0x1112).map { it.toChar() }.toTypedArray() }
+val HanFirstList by lazy { (0x1100..0x1112).map { it.toChar() as Char? }.toTypedArray() }
 //'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
 /** 중성 조합형 문자열 리스트 (UNICODE 순서) */
-val HanSecondList by lazy { (0x1161..0x1175).map { it.toChar() }.toTypedArray() }
+val HanSecondList by lazy { (0x1161..0x1175).map { it.toChar() as Char? }.toTypedArray() }
 // 0    1     2    3     4    5    6      7    8    9    10    11    12   13    14   15   16    17   18    19    20
 //'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ'
 /** 종성 조합형 문자열 리스트 (UNICODE 순서). 가장 첫번째는 null (받침 없음) */
-val HanLastList by lazy { (listOf<Char?>(null) + (0x11A8..0x11C2).map { it.toChar() }.toList<Char?>()).toTypedArray() }
+val HanLastList by lazy { (listOf<Char?>(null) + (0x11A8..0x11C2).map { it.toChar() as Char? }).toTypedArray() }
 //null, 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
 /** 초성 문자를 종성 조합형 문자로 변경 */
 val ChoToJong by lazy {
@@ -873,8 +884,8 @@ val ChoToJong by lazy {
 /** 자모 index */
 private fun Char?.getHIndex(default: Int = -1): Int =
         if (this == null) default
-        else if (this.isChosungJamo()) HanFirstList.indexOf(this.getChosung()!!)
-        else if (this.isJungsungJamo()) HanSecondList.indexOf(this.getJungsung()!!)
+        else if (this.isChosungJamo()) HanFirstList.indexOf(this.getChosung())
+        else if (this.isJungsungJamo()) HanSecondList.indexOf(this.getJungsung())
         else if (this.isJongsungJamo()) HanLastList.indexOf(this.getJongsung())
         else default
 
@@ -965,9 +976,9 @@ fun correctVerbApply(verb: String, isVerb: Boolean, rest: String): String =
         else {
             val char = verb.last()
             val next = when {
-                rest[0].isJungsungJamo() -> assembleHangul(HanFirstList[11], rest[0])
-                rest[0].isJongsungJamo() -> assembleHangul(HanFirstList[11], HanSecondList[18], rest[0])
-                rest[0] in ChoToJong -> assembleHangul(HanFirstList[11], HanSecondList[18], ChoToJong[rest[0]])
+                rest[0].isJungsungJamo() -> assembleHangul(null, rest[0])
+                rest[0].isJongsungJamo() -> assembleHangul(null, null, rest[0])
+                rest[0] in ChoToJong -> assembleHangul(null, null, ChoToJong[rest[0]])
                 else -> rest[0]
             }
 
@@ -985,28 +996,27 @@ fun correctVerbApply(verb: String, isVerb: Boolean, rest: String): String =
 
             } else if (next.getChosung().hasHIndex(11)) {
                 // 불규칙 활용이 가능한 영역
-                // 참고: 동사 어근만 verb에 들어온다고 가정 (접두어는 제외)
+                // 참고: 동사 어근만 verb에 들어온다고 가정
                 val jong = char.getJongsung()
 
                 if (jong.hasHIndex(19) &&
-                        !(isVerb && verb.length == 1 && char in "벗솟씻뺏") && // 예외 동사
+                        !(isVerb && char in "벗솟씻뺏앗") && // 예외 동사
                         !(isAdjective && verb != "낫")) { //예외 형용사
                     // ㅅ 불규칙: 모음 앞에서 ㅅ은 탈락.
 
                     front + char.removeJongsung() + harmony(verb, next + tail)
 
-                } else if ((verb.length == 1 && char in "듣붇눋겯싣걷") || verb == "깨닫" || verb == "일컫") {
+                } else if (char in "듣붇눋겯싣걷" || verb == "깨닫" || verb == "일컫") {
                     // ㄷ 불규칙: 모음 앞에서 ㄷ은 ㄹ로.겯
 
                     front + (char + 1) + harmony(verb, next + tail)
 
-                } else if (verb.length == 1 && char in "돕곱") {
+                } else if (char in "돕곱") {
                     // ㅂ 불규칙 (1): 모음 앞에서 ㅂ은 탈락하고 ㅗ 추가
 
                     front + char.removeJongsung() + (next.addOh() + tail)
 
-                } else if (jong.hasHIndex(17) &&
-                        !(verb.length == 1 && char in "굽뽑씹업입잡접좁집")) { // ㅂ 불규칙이 적용되지 않는 동
+                } else if (jong.hasHIndex(17) && char !in "굽뽑씹업입잡접좁집") { // ㅂ 불규칙이 적용되지 않는 동
                     // ㅂ 불규칙 (2): 모음 앞에서 ㅂ은 탈락하고  추가
 
                     front + char.removeJongsung() + (next.addWoo() + tail)
@@ -1033,8 +1043,8 @@ fun correctVerbApply(verb: String, isVerb: Boolean, rest: String): String =
                     } else if (isAdjective && char != '좋' && jong.hasHIndex(HanLastList.size - 1)) {
                         // ㅎ 불규칙: ㅎ + 아/어 = 해/헤
 
-                        val middle = if (verb == "그렇") assembleHangul(char.getChosung()!!, 1.getJungsung(), next.getJongsung())
-                        else assembleHangul(char.getChosung()!!, char.getJungsung()!! + 1, next.getJongsung())
+                        val middle = if (verb == "그렇") assembleHangul(char.getChosung(), 1.getJungsung(), next.getJongsung())
+                        else assembleHangul(char.getChosung(), char.getJungsung()?.plus(1), next.getJongsung())
                         front + (middle + tail)
 
                     } else if (verb == "푸") {
@@ -1054,12 +1064,12 @@ fun correctVerbApply(verb: String, isVerb: Boolean, rest: String): String =
                     } else if (char.isEndByEu()) {
                         // 규칙적 탈락: 어간 ㅡ + ㅏ/ㅓ: ㅡ 탈락
 
-                        val middle = assembleHangul(char.getChosung()!!, next.getJungsung()!!, next.getJongsung())
+                        val middle = assembleHangul(char.getChosung(), next.getJungsung(), next.getJongsung())
                         front + harmony(front, middle + tail)
                     } else if (!char.isJongsungEnding() && char.getJungsung().hasHIndex(HanSecondList.size - 1)) {
                         // 축약형 ㅣ + ㅏ/ㅓ = ㅕ
 
-                        front + (assembleHangul(char.getChosung()!!, 6.getJungsung(), next.getJongsung()) + tail)
+                        front + (assembleHangul(char.getChosung(), 6.getJungsung(), next.getJongsung()) + tail)
                     } else if (!char.isJongsungEnding() && char.isEndByAhUh()) {
                         // 축약형 ㅏ + ㅏ = ㅏ, ㅓ + ㅓ = ㅓ
 

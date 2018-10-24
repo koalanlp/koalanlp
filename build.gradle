@@ -32,7 +32,6 @@ dependencies {
         exclude group: 'org.jetbrains.kotlin'
     }
     testRuntimeOnly('org.spekframework.spek2:spek-runner-junit5:2.0.0-alpha.1') {
-//        exclude group: 'org.junit.platform'
         exclude group: 'org.jetbrains.kotlin'
     }
 }
@@ -40,21 +39,8 @@ dependencies {
 // documentation
 dokka {
     outputFormat = "html"
-    outputDirectory = "$buildDir/javadoc"
+    outputDirectory = "$buildDir/docs/api"
     reportUndocumented = true
-
-    linkMapping {
-        dir = "src/main/kotlin"
-        url = "https://github.com/koalanlp/${gitBaseName}/blob/${gitBranch}/src/main/kotlin"
-        suffix = "#L"
-    }
-}
-
-task githubDoc(type: org.jetbrains.dokka.gradle.DokkaTask){
-    outputFormat = "html"
-    outputDirectory = "$rootDir/docs/api"
-    reportUndocumented = true
-    skipDeprecated = true
 
     linkMapping {
         dir = "src/main/kotlin"
@@ -78,20 +64,6 @@ task sourceJar(type: org.gradle.jvm.tasks.Jar){
 }
 
 // publishing
-
-sourceSets{
-    test{
-        kotlin{
-            exclude 'kr/bydelta/koala/*Spec.*'
-            exclude 'kr/bydelta/koala/data/**'
-            exclude 'kr/bydelta/koala/proc/**'
-            include 'kr/bydelta/koala/test.*'
-        }
-        resources{
-            exclude '**'
-        }
-    }
-}
 
 modifyPom {
     project {

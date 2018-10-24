@@ -101,9 +101,9 @@ interface CanSplitSentence {
  * @since 1.x
  */
 object SentenceSplitter {
-    private val quoteRegex = "\'\"＇＂"
-    private val openParenRegex = "([{‘“（［｛<〔〈《「『【"
-    private val closeParenRegex = ")]}’”）］｝>〕〉》」』】"
+    private const val quoteRegex = "\'\"＇＂"
+    private const val openParenRegex = "([{‘“（［｛<〔〈《「『【"
+    private const val closeParenRegex = ")]}’”）］｝>〕〉》」』】"
 
     /**
      * 분석결과를 토대로 문장을 분리함.
@@ -115,7 +115,7 @@ object SentenceSplitter {
     operator fun invoke(para: Iterable<Word>): List<Sentence> {
         val sentences = mutableListOf<Sentence>()
         val parenStack = Stack<Char>()
-        val it = para.toList()
+        val it = para.filter { it.isNotEmpty() }.toList()
         var begin = 0
 
         for (pos in 0 until it.size) {
@@ -553,6 +553,7 @@ abstract class CanTagOnlyAParagraph<S> : CanTag {
 
 /**
  * [Sentence] 객체에 property를 추가할 수 있는 interface입니다.
+ * [INTERMEDIATE]는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.
  *
  * 다음 분석의 기본 틀로 사용됩니다.
  * - 구문구조 분석 [CanParseSyntax]
@@ -663,6 +664,7 @@ interface CanAnalyzeProperty<INTERMEDIATE> {
 
 /**
  * 구문분석을 수행하는 Interface입니다.
+ * 매개변수 [T]는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.
  *
  * ## 참고
  * **구문구조 분석**은 문장의 구성요소들(어절, 구, 절)이 이루는 문법적 구조를 분석하는 방법입니다.
@@ -687,14 +689,14 @@ interface CanAnalyzeProperty<INTERMEDIATE> {
  * ```kotlin
  * // 문장에서 바로 분석할 때
  * val parser = Parser()
- * val sentences = parser.parse("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+ * val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
  *
  * // 타 분석기에서 분석한 다음 이어서 분석할 때
  * val taggedSentence: Sentence = ...
- * val sentence = parser.parse(taggedSentence) // 또는 parser(taggedSentence)
+ * val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
  *
  * val taggedSentList: List<Sentence> = ...
- * val sentences = parser.parse(taggedSentList) // 또는 parser(taggedSentList)
+ * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
  * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
@@ -702,28 +704,28 @@ interface CanAnalyzeProperty<INTERMEDIATE> {
  * import kr.bydelta.koala.Implicits._
  * // 문장에서 바로 분석할 때
  * val parser = new Parser()
- * val sentences = parser.parse("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+ * val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
  *
  * // 타 분석기에서 분석한 다음 이어서 분석할 때
  * val taggedSentence: Sentence = ...
- * val sentence = parser.parse(taggedSentence) // 또는 parser(taggedSentence)
+ * val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
  *
  * val taggedSentList: java.util.List[Sentence] = ...
- * val sentences = parser.parse(taggedSentList) // 또는 parser(taggedSentList)
+ * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
  * ### Java
  * ```java
  * // 문장에서 바로 분석할 때
  * Parser parser = Parser()
- * List<Sentence> sentences = parser.parse("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser.invoke("문장 2개입니다. 결과는 목록이 됩니다.")
+ * List<Sentence> sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser.invoke("문장 2개입니다. 결과는 목록이 됩니다.")
  *
  * // 타 분석기에서 분석한 다음 이어서 분석할 때
  * Sentence taggedSentence = ...
- * Sentence sentence = parser.parse(taggedSentence) // 또는 parser.invoke(taggedSentence)
+ * Sentence sentence = parser.analyze(taggedSentence) // 또는 parser.invoke(taggedSentence)
  *
  * List<Sentence> taggedSentList = ...
- * List<Sentence> sentences = parser.parse(taggedSentList) // 또는 parser.invoke(taggedSentList)
+ * List<Sentence> sentences = parser.analyze(taggedSentList) // 또는 parser.invoke(taggedSentList)
  * ```
  *
  * @since 2.0.0
@@ -732,6 +734,7 @@ interface CanParseSyntax<T> : CanAnalyzeProperty<T>
 
 /**
  * 의존구문분석을 수행하는 Interface입니다.
+ * 매개변수 [T]는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.
  *
  * ## 참고
  * **의존구조 분석**은 문장의 구성 어절들이 의존 또는 기능하는 관계를 분석하는 방법입니다.
@@ -744,9 +747,10 @@ interface CanParseSyntax<T> : CanAnalyzeProperty<T>
  * * '짐을'은 '쌌다'의 목적어로 기능합니다.
  *
  * 아래를 참고해보세요.
- * * [Word.getDependency] 어절이 직접 지배하는 하위 의존구조 [DepTree]를 가져오는 API
- * * [Sentence.getDependencyTree] 전체 문장을 분석한 의존구조 [DepTree]를 가져오는 API
- * * [DepTree] 의존구조를 저장하는 형태
+ * * [Word.getDependentEdges] 어절이 직접 지배하는 하위 의존구조 [DepEdge]의 목록을 가져오는 API
+ * * [Word.getGovernorEdge] 어절이 지배당하는 상위 의존구조 [DepEdge]를 가져오는 API
+ * * [Sentence.getDependencies] 전체 문장을 분석한 의존구조 [DepEdge]의 목록을 가져오는 API
+ * * [DepEdge] 의존구조를 저장하는 형태
  * * [PhraseTag] 의존구조의 형태 분류를 갖는 Enum 값 (구구조 분류와 같음)
  * * [DependencyTag] 의존구조의 기능 분류를 갖는 Enum 값
  *
@@ -757,14 +761,14 @@ interface CanParseSyntax<T> : CanAnalyzeProperty<T>
  * ```kotlin
  * // 문장에서 바로 분석할 때
  * val parser = Parser()
- * val sentences = parser.parse("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+ * val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
  *
  * // 타 분석기에서 분석한 다음 이어서 분석할 때
  * val taggedSentence: Sentence = ...
- * val sentence = parser.parse(taggedSentence) // 또는 parser(taggedSentence)
+ * val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
  *
  * val taggedSentList: List<Sentence> = ...
- * val sentences = parser.parse(taggedSentList) // 또는 parser(taggedSentList)
+ * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
  * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
@@ -772,28 +776,28 @@ interface CanParseSyntax<T> : CanAnalyzeProperty<T>
  * import kr.bydelta.koala.Implicits._
  * // 문장에서 바로 분석할 때
  * val parser = new Parser()
- * val sentences = parser.parse("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+ * val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
  *
  * // 타 분석기에서 분석한 다음 이어서 분석할 때
  * val taggedSentence: Sentence = ...
- * val sentence = parser.parse(taggedSentence) // 또는 parser(taggedSentence)
+ * val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
  *
  * val taggedSentList: java.util.List[Sentence] = ...
- * val sentences = parser.parse(taggedSentList) // 또는 parser(taggedSentList)
+ * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
  * ### Java
  * ```java
  * // 문장에서 바로 분석할 때
  * Parser parser = Parser()
- * List<Sentence> sentences = parser.parse("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser.invoke("문장 2개입니다. 결과는 목록이 됩니다.")
+ * List<Sentence> sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser.invoke("문장 2개입니다. 결과는 목록이 됩니다.")
  *
  * // 타 분석기에서 분석한 다음 이어서 분석할 때
  * Sentence taggedSentence = ...
- * Sentence sentence = parser.parse(taggedSentence) // 또는 parser.invoke(taggedSentence)
+ * Sentence sentence = parser.analyze(taggedSentence) // 또는 parser.invoke(taggedSentence)
  *
  * List<Sentence> taggedSentList = ...
- * List<Sentence> sentences = parser.parse(taggedSentList) // 또는 parser.invoke(taggedSentList)
+ * List<Sentence> sentences = parser.analyze(taggedSentList) // 또는 parser.invoke(taggedSentList)
  * ```
  *
  * @since 2.0.0
@@ -802,6 +806,7 @@ interface CanParseDependency<T> : CanAnalyzeProperty<T>
 
 /**
  * 의미역 분석(Semantic Role Labeling)을 수행하는 Interface입니다.
+ * 매개변수 [T]는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.
  *
  * ## 참고
  * **의미역 결정**은 문장의 구성 어절들의 역할/기능을 분석하는 방법입니다.
@@ -813,9 +818,10 @@ interface CanParseDependency<T> : CanAnalyzeProperty<T>
  * * '집에서'는 동작의 장소를 나타냅니다.
  *
  * 아래를 참고해보세요.
- * * [Word.getRole] 어절이 직접 지배하는 하위 의미역 구조 [RoleTree]를 가져오는 API
- * * [Sentence.getSemRoleTree] 전체 문장을 분석한 의미역 구조 [RoleTree]를 가져오는 API
- * * [RoleTree] 의미역 구조를 저장하는 형태
+ * * [Word.getArgumentRoles] 어절이 술어인 논항들의 [RoleEdge] 목록을 가져오는 API
+ * * [Word.getPredicateRole] 어절이 논항인 [RoleEdge]의 술어를 가져오는 API
+ * * [Sentence.getRoles] 전체 문장을 분석한 의미역 구조 [RoleEdge]를 가져오는 API
+ * * [RoleEdge] 의미역 구조를 저장하는 형태
  * * [RoleType] 의미역 분류를 갖는 Enum 값
  *
  * ## 사용법 예제
@@ -825,14 +831,14 @@ interface CanParseDependency<T> : CanAnalyzeProperty<T>
  * ```kotlin
  * // 문장에서 바로 분석할 때
  * val parser = Parser()
- * val sentences = parser.parse("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+ * val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
  *
  * // 타 분석기에서 분석한 다음 이어서 분석할 때
  * val taggedSentence: Sentence = ...
- * val sentence = parser.parse(taggedSentence) // 또는 parser(taggedSentence)
+ * val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
  *
  * val taggedSentList: List<Sentence> = ...
- * val sentences = parser.parse(taggedSentList) // 또는 parser(taggedSentList)
+ * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
  * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
@@ -840,28 +846,28 @@ interface CanParseDependency<T> : CanAnalyzeProperty<T>
  * import kr.bydelta.koala.Implicits._
  * // 문장에서 바로 분석할 때
  * val parser = new Parser()
- * val sentences = parser.parse("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+ * val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
  *
  * // 타 분석기에서 분석한 다음 이어서 분석할 때
  * val taggedSentence: Sentence = ...
- * val sentence = parser.parse(taggedSentence) // 또는 parser(taggedSentence)
+ * val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
  *
  * val taggedSentList: java.util.List[Sentence] = ...
- * val sentences = parser.parse(taggedSentList) // 또는 parser(taggedSentList)
+ * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
  * ### Java
  * ```java
  * // 문장에서 바로 분석할 때
  * Parser parser = Parser()
- * List<Sentence> sentences = parser.parse("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser.invoke("문장 2개입니다. 결과는 목록이 됩니다.")
+ * List<Sentence> sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser.invoke("문장 2개입니다. 결과는 목록이 됩니다.")
  *
  * // 타 분석기에서 분석한 다음 이어서 분석할 때
  * Sentence taggedSentence = ...
- * Sentence sentence = parser.parse(taggedSentence) // 또는 parser.invoke(taggedSentence)
+ * Sentence sentence = parser.analyze(taggedSentence) // 또는 parser.invoke(taggedSentence)
  *
  * List<Sentence> taggedSentList = ...
- * List<Sentence> sentences = parser.parse(taggedSentList) // 또는 parser.invoke(taggedSentList)
+ * List<Sentence> sentences = parser.analyze(taggedSentList) // 또는 parser.invoke(taggedSentList)
  * ```
  *
  * @since 2.0.0
@@ -870,6 +876,7 @@ interface CanLabelSemanticRole<T> : CanAnalyzeProperty<T>
 
 /**
  * 개체명 인식 (Named Entity Recognition)을 수행하는 Interface입니다.
+ * 매개변수 [T]는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.
  *
  * ## 참고
  * **개체명 인식**은 문장에서 인물, 장소, 기관, 대상 등을 인식하는 기술입니다.
@@ -892,14 +899,14 @@ interface CanLabelSemanticRole<T> : CanAnalyzeProperty<T>
  * ```kotlin
  * // 문장에서 바로 분석할 때
  * val parser = Parser()
- * val sentences = parser.parse("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+ * val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
  *
  * // 타 분석기에서 분석한 다음 이어서 분석할 때
  * val taggedSentence: Sentence = ...
- * val sentence = parser.parse(taggedSentence) // 또는 parser(taggedSentence)
+ * val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
  *
  * val taggedSentList: List<Sentence> = ...
- * val sentences = parser.parse(taggedSentList) // 또는 parser(taggedSentList)
+ * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
  * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
@@ -907,28 +914,28 @@ interface CanLabelSemanticRole<T> : CanAnalyzeProperty<T>
  * import kr.bydelta.koala.Implicits._
  * // 문장에서 바로 분석할 때
  * val parser = new Parser()
- * val sentences = parser.parse("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+ * val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
  *
  * // 타 분석기에서 분석한 다음 이어서 분석할 때
  * val taggedSentence: Sentence = ...
- * val sentence = parser.parse(taggedSentence) // 또는 parser(taggedSentence)
+ * val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
  *
  * val taggedSentList: java.util.List[Sentence] = ...
- * val sentences = parser.parse(taggedSentList) // 또는 parser(taggedSentList)
+ * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
  * ### Java
  * ```java
  * // 문장에서 바로 분석할 때
  * Parser parser = Parser()
- * List<Sentence> sentences = parser.parse("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser.invoke("문장 2개입니다. 결과는 목록이 됩니다.")
+ * List<Sentence> sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser.invoke("문장 2개입니다. 결과는 목록이 됩니다.")
  *
  * // 타 분석기에서 분석한 다음 이어서 분석할 때
  * Sentence taggedSentence = ...
- * Sentence sentence = parser.parse(taggedSentence) // 또는 parser.invoke(taggedSentence)
+ * Sentence sentence = parser.analyze(taggedSentence) // 또는 parser.invoke(taggedSentence)
  *
  * List<Sentence> taggedSentList = ...
- * List<Sentence> sentences = parser.parse(taggedSentList) // 또는 parser.invoke(taggedSentList)
+ * List<Sentence> sentences = parser.analyze(taggedSentList) // 또는 parser.invoke(taggedSentList)
  * ```
  *
  * @since 2.0.0
@@ -937,6 +944,7 @@ interface CanRecognizeEntity<T> : CanAnalyzeProperty<T>
 
 /**
  * 다의어 분별 (Word sense disambiguation)을 수행하는 Interface입니다.
+ * 매개변수 [T]는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.
  *
  * ## 참고
  * **다의어 분별**은 동일한 단어의 여러 의미를 구분하는 작업입니다.
@@ -954,7 +962,7 @@ interface CanRecognizeEntity<T> : CanAnalyzeProperty<T>
  * ...
  *
  * 아래를 참고해보세요.
- * * [CanDisambiguateSense] 동형이의어/다의어 분별 interface
+ * * [WordSense] 동형이의어/다의어의 의미번호를 저장하는 형태
  * * [Morpheme.getWordSense] 형태소의 어깨번호/의미번호를 가져오는 API
  *
  * ## 사용법 예제
@@ -964,14 +972,14 @@ interface CanRecognizeEntity<T> : CanAnalyzeProperty<T>
  * ```kotlin
  * // 문장에서 바로 분석할 때
  * val parser = Parser()
- * val sentences = parser.parse("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+ * val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
  *
  * // 타 분석기에서 분석한 다음 이어서 분석할 때
  * val taggedSentence: Sentence = ...
- * val sentence = parser.parse(taggedSentence) // 또는 parser(taggedSentence)
+ * val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
  *
  * val taggedSentList: List<Sentence> = ...
- * val sentences = parser.parse(taggedSentList) // 또는 parser(taggedSentList)
+ * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
  * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
@@ -979,30 +987,98 @@ interface CanRecognizeEntity<T> : CanAnalyzeProperty<T>
  * import kr.bydelta.koala.Implicits._
  * // 문장에서 바로 분석할 때
  * val parser = new Parser()
- * val sentences = parser.parse("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+ * val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
  *
  * // 타 분석기에서 분석한 다음 이어서 분석할 때
  * val taggedSentence: Sentence = ...
- * val sentence = parser.parse(taggedSentence) // 또는 parser(taggedSentence)
+ * val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
  *
  * val taggedSentList: java.util.List[Sentence] = ...
- * val sentences = parser.parse(taggedSentList) // 또는 parser(taggedSentList)
+ * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
  * ### Java
  * ```java
  * // 문장에서 바로 분석할 때
  * Parser parser = Parser()
- * List<Sentence> sentences = parser.parse("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser.invoke("문장 2개입니다. 결과는 목록이 됩니다.")
+ * List<Sentence> sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser.invoke("문장 2개입니다. 결과는 목록이 됩니다.")
  *
  * // 타 분석기에서 분석한 다음 이어서 분석할 때
  * Sentence taggedSentence = ...
- * Sentence sentence = parser.parse(taggedSentence) // 또는 parser.invoke(taggedSentence)
+ * Sentence sentence = parser.analyze(taggedSentence) // 또는 parser.invoke(taggedSentence)
  *
  * List<Sentence> taggedSentList = ...
- * List<Sentence> sentences = parser.parse(taggedSentList) // 또는 parser.invoke(taggedSentList)
+ * List<Sentence> sentences = parser.analyze(taggedSentList) // 또는 parser.invoke(taggedSentList)
  * ```
  *
  * @since 2.0.0
  */
 interface CanDisambiguateSense<T> : CanAnalyzeProperty<T>
+
+
+/**
+ * 상호참조 해소, 공지시어 해소 (Coreference Resolution) 또는 대용어 분석 (Anaphora Resolution)을 수행하는 Interface입니다.
+ *
+ * ## 참고
+ * **공지시어 해소**는 문장 내 또는 문장 간에 같은 대상을 지칭하는 어구를 찾아 묶는 분석과정입니다.
+ * 예) '삼성그룹의 계열사인 삼성물산은 같은 그룹의 계열사인 삼성생명과 함께'라는 문장에서
+ * * '삼성그룹'과 '같은 그룹'을 찾아 묶는 것을 말합니다.
+ *
+ * **영형대용어 분석**은 문장에서 생략된 기능어를 찾아 문장 내 또는 문장 간에 언급되어 있는 어구와 묶는 분석과정입니다.
+ * 예) '나는 밥을 먹었고, 영희도 먹었다'라는 문장에서,
+ * * '먹었다'의 목적어인 '밥을'이 생략되어 있음을 찾는 것을 말합니다.
+ *
+ * 아래를 참고해보세요.
+ * * [Sentence.getCorefGroups] 문장 내에 포함된 개체명 묶음 [CoreferenceGroup]들의 목록을 반환하는 API
+ * * [Entity.getCorefGroup] 각 개체명이 속하는 [CoreferenceGroup]을 가져오는 API
+ * * [CoreferenceGroup] 동일한 대상을 지칭하는 개체명을 묶는 API
+ *
+ * ## 사용법 예제
+ * 분석기 `Parser`가 `CanResolveCoref`를 상속받았다면,
+ *
+ * ### Kotlin
+ * ```kotlin
+ * // 문장에서 바로 분석할 때
+ * val parser = Parser()
+ * val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+ *
+ * // 타 분석기에서 분석한 다음 이어서 분석할 때
+ * val taggedSentence: Sentence = ...
+ * val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
+ *
+ * val taggedSentList: List<Sentence> = ...
+ * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
+ * ```
+ *
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
+ * // 문장에서 바로 분석할 때
+ * val parser = new Parser()
+ * val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+ *
+ * // 타 분석기에서 분석한 다음 이어서 분석할 때
+ * val taggedSentence: Sentence = ...
+ * val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
+ *
+ * val taggedSentList: java.util.List[Sentence] = ...
+ * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
+ * ```
+ *
+ * ### Java
+ * ```java
+ * // 문장에서 바로 분석할 때
+ * Parser parser = Parser()
+ * List<Sentence> sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser.invoke("문장 2개입니다. 결과는 목록이 됩니다.")
+ *
+ * // 타 분석기에서 분석한 다음 이어서 분석할 때
+ * Sentence taggedSentence = ...
+ * Sentence sentence = parser.analyze(taggedSentence) // 또는 parser.invoke(taggedSentence)
+ *
+ * List<Sentence> taggedSentList = ...
+ * List<Sentence> sentences = parser.analyze(taggedSentList) // 또는 parser.invoke(taggedSentList)
+ * ```
+ *
+ * @since 2.0.0
+ */
+interface CanResolveCoref<T> : CanAnalyzeProperty<T>

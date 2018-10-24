@@ -78,6 +78,30 @@ object DataSpec : Spek({
             )
         }
 
+        val sent4 by memoized {
+            Sentence(
+                    listOf(
+                            Word("칠한",
+                                    listOf(Morpheme("칠", POS.NNG, "NN"),
+                                            Morpheme("하", POS.XSV, "XSV"),
+                                            Morpheme("ㄴ", POS.ETM, "ETM"))
+                            ),
+                            Word("밥을",
+                                    listOf(Morpheme("밥", POS.NNG, "NNG"),
+                                            Morpheme("을", POS.JKO, "JKO"))
+                            ),
+                            Word("너는",
+                                    listOf(Morpheme("너", POS.NP, "NP"),
+                                            Morpheme("는", POS.JX, "JX"))
+                            ),
+                            Word("먹음",
+                                    listOf(Morpheme("먹", POS.VV, "VV"),
+                                            Morpheme("음", POS.ETN, "ETN"))
+                            )
+                    )
+            )
+        }
+
         describe("Morpheme") {
             val dummy1 by memoized { Morpheme("밥", POS.NNP, "NNP") }
             val dummy2 by memoized { Morpheme("밥", POS.NNG, "ncn") }
@@ -120,15 +144,15 @@ object DataSpec : Spek({
 
             // getWordSense, setProperty(T), setProperty(K, T),
             it("can save WordSense property") {
-                { dummy1.setProperty(IntProperty(1)) } `should not throw` AnyException
-                { dummy2.setProperty(IntProperty(2)) } `should not throw` AnyException
+                { dummy1.setWordSense(1) } `should not throw` AnyException
+                { dummy2.setWordSense(2) } `should not throw` AnyException
 
-                { sent2[0][0].getWordSense() } `should throw` UninitializedPropertyAccessException::class
-                dummy1.getWordSense() `should be equal to` 1
-                dummy2.getWordSense() `should be equal to` 2
+                sent2[0][0].getWordSense() `should be` null
+                dummy1.getWordSense() `should equal` 1
+                dummy2.getWordSense() `should equal` 2
 
-                dummy1.getWordSense() `should be` dummy1.getProperty<IntProperty>(KEY_WORDSENSE)?.value
-                dummy2.getWordSense() `should be` dummy2.getProperty<IntProperty>(KEY_WORDSENSE)?.value
+                dummy1.getWordSense() `should be` dummy1.getProperty<WordSense>(Key.WORD_SENSE)?.id
+                dummy2.getWordSense() `should be` dummy2.getProperty<WordSense>(Key.WORD_SENSE)?.id
             }
 
             // isNoun, isPredicate, isModifier, isJosa,
@@ -331,23 +355,27 @@ object DataSpec : Spek({
 
             // setProperty, getEntity, getPhrase, getDependency, getRole
             it("should provide proper way to set a property") {
-                { dummy1.getEntities() } `should throw` UninitializedPropertyAccessException::class
-                { dummy1.getPhrase() } `should throw` UninitializedPropertyAccessException::class
-                { dummy1.getDependency() } `should throw` UninitializedPropertyAccessException::class
-                { dummy1.getRole() } `should throw` UninitializedPropertyAccessException::class
+                dummy1.getEntities() `should be` null
+                dummy1.getPhrase() `should be` null
+                dummy1.getArgumentRoles() `should be` null
+                dummy1.getPredicateRole() `should be` null
+                dummy1.getDependentEdges() `should be` null
+                dummy1.getGovernorEdge() `should be` null
 
                 // All these trees automatically set pointers on the words.
                 Entity(CoarseEntityType.PS, "PS_OTHER", listOf(dummy1))
                 Entity(CoarseEntityType.PS, "PS_SOME", listOf(dummy1))
                 Entity(CoarseEntityType.PS, "PS_ANOTHER", listOf(dummy1))
-                SyntaxTree(PhraseTag.NP, dummy1)
-                DepTree(dummy1, PhraseTag.NP, DependencyTag.SBJ)
-                RoleTree(dummy1, RoleType.ARG0)
+                val tree = SyntaxTree(PhraseTag.NP, dummy1)
+                val dep = DepEdge(dummy1, dummy2, PhraseTag.NP, DependencyTag.SBJ)
+                val role = RoleEdge(dummy1, dummy2, RoleType.ARG0)
 
-                dummy1.getEntities()[0].fineType `should be equal to` "PS_OTHER"
-                dummy1.getPhrase().type `should equal` PhraseTag.NP
-                dummy1.getDependency().depType `should equal` DependencyTag.SBJ
-                dummy1.getRole().type `should equal` RoleType.ARG0
+                dummy1.getEntities()?.get(0)?.fineType `should equal` "PS_OTHER"
+                dummy1.getPhrase() `should equal` tree
+                dummy1.getArgumentRoles()?.get(0) `should equal` role
+                dummy2.getPredicateRole() `should equal` role
+                dummy1.getDependentEdges()?.get(0) `should equal` dep
+                dummy2.getGovernorEdge() `should equal` dep
             }
 
             // equals, hashcode, equalsWithoutTag
@@ -446,39 +474,45 @@ object DataSpec : Spek({
 
             // setProperty, getSyntaxTree, getDependencyTree, getRoleTree, getEntities
             it("should provide proper way to set a property") {
-                { sent.getEntities() } `should throw` UninitializedPropertyAccessException::class
-                { sent.getSyntaxTree() } `should throw` UninitializedPropertyAccessException::class
-                { sent.getDependencyTree() } `should throw` UninitializedPropertyAccessException::class
-                { sent.getSemRoleTree() } `should throw` UninitializedPropertyAccessException::class
+                sent.getCorefGroups() `should be` null
+                sent.getEntities() `should be` null
+                sent.getSyntaxTree() `should be` null
+                sent.getDependencies() `should be` null
+                sent.getRoles() `should be` null
 
                 // All these trees automatically set pointers on the words.
-                sent.setListProperty(Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent[0])))
-                sent.setProperty(SyntaxTree(PhraseTag.S, children = listOf(
-                        SyntaxTree(PhraseTag.NP, sent[0]),
-                        SyntaxTree(PhraseTag.NP, sent[1])
-                )))
-                sent.setProperty(DepTree(
-                        sent[1], PhraseTag.S, DependencyTag.ROOT,
-                        DepTree(sent[0], PhraseTag.NP, DependencyTag.SBJ)
-                ))
-                sent.setProperty(RoleTree(
-                        sent[1], RoleType.HEAD,
-                        RoleTree(sent[0], RoleType.ARG0)
-                ))
+                {
+                    sent.setEntities(listOf(Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent[0]))))
+                    sent.setCorefGroups(listOf(CoreferenceGroup(listOf(sent.getEntities()!!.get(0)))))
+                    sent.setSyntaxTree(SyntaxTree(PhraseTag.S, children = listOf(
+                            SyntaxTree(PhraseTag.NP, sent[0]),
+                            SyntaxTree(PhraseTag.NP, sent[1])
+                    )))
+                    sent.setDepEdges(listOf(
+                            DepEdge(null, sent[1], PhraseTag.S, DependencyTag.ROOT),
+                            DepEdge(sent[1], sent[0], PhraseTag.S, DependencyTag.ROOT)
+                    ))
+                    sent.setRoleEdges(listOf(
+                            RoleEdge(sent[1], sent[0], RoleType.ARG0)
+                    ))
+                } `should not throw` AnyException
 
-                sent.getEntities()[0].fineType `should be equal to` "PS_OTHER"
-                sent.getSyntaxTree().type `should equal` PhraseTag.S
-                sent.getDependencyTree().depType `should equal` DependencyTag.ROOT
-                sent.getSemRoleTree().type `should equal` RoleType.HEAD
+                sent.getCorefGroups()?.get(0)?.get(0) `should equal` sent.getEntities()?.get(0)
+                sent.getEntities()?.get(0)?.fineType `should equal` "PS_OTHER"
+                sent.getSyntaxTree()?.label `should equal` PhraseTag.S
+                sent.getDependencies()?.get(0)?.depType `should equal` DependencyTag.ROOT
+                sent.getRoles()?.get(0)?.label `should equal` RoleType.ARG0
             }
 
             // getNouns, getModifiers, getVerbs
             it("should provide proper list of nouns") {
                 sent2.getNouns() `should contain all` listOf(sent2[1], sent2[2])
+                sent4.getNouns() `should contain all` sent4
             }
 
             it("should provide proper list of verbs") {
                 sent2.getVerbs() `should contain all` listOf(sent2[0], sent2[3])
+                sent4.getVerbs() `should contain all` listOf(sent4[0], sent4[3])
             }
 
             it("should provide proper list of modifiers") {
@@ -508,7 +542,7 @@ object DataSpec : Spek({
                 sent2 `should equal` sent2
                 // Symmetry
                 sent `should not equal` sent2
-                sent2 `should not equal` sent
+                sent2 `should not equal` sent4
 
                 sent2 `should equal` sent3
                 sent3 `should equal` sent2
@@ -550,31 +584,31 @@ object DataSpec : Spek({
             }
         }
 
-        describe("IntProperty") {
+        describe("WordSense") {
             // value
             it("should contain an integer value") {
-                val value = IntProperty(5)
-                value.value `should be equal to` 5
+                val value = WordSense(5)
+                value.id `should be equal to` 5
 
-                val value2 = IntProperty(7)
-                value2.value `should be equal to` 7
+                val value2 = WordSense(7)
+                value2.id `should be equal to` 7
             }
 
             // data class
             it("should be a data class") {
-                val value = IntProperty(5)
-                value.toString() `should be equal to` "IntProperty(value=5)"
+                val value = WordSense(5)
+                value.toString() `should be equal to` "WordSense(id=5)"
 
                 val (comp) = value
                 comp `should be equal to` 5
 
-                value.copy(value = 6) `should equal` IntProperty(6)
+                value.copy(id = 6) `should equal` WordSense(6)
             }
 
             // Serializable
             it("can be serialized") {
                 var outputBytes: ByteArray? = null
-                val value = IntProperty(5);
+                val value = WordSense(5);
 
                 {
                     val output = ByteArrayOutputStream(10240)
@@ -588,23 +622,23 @@ object DataSpec : Spek({
 
                 {
                     val serializer = ObjectInputStream(ByteArrayInputStream(outputBytes))
-                    serializer.readObject() as IntProperty `should equal` value
+                    serializer.readObject() as WordSense `should equal` value
                     serializer.close()
                 } `should not throw` AnyException
             }
         }
 
         describe("ListProperty") {
-            val dummy1 = ListProperty(listOf(IntProperty(1), IntProperty(2), IntProperty(3)))
-            val dummy2 = ListProperty(listOf(IntProperty(1), IntProperty(2), IntProperty(3)))
-            val dummy3 = ListProperty(listOf(IntProperty(1), IntProperty(3), IntProperty(2)))
-            val dummy4 = ListProperty(listOf(IntProperty(1), IntProperty(3)))
+            val dummy1 = ListProperty(mutableListOf(WordSense(1), WordSense(2), WordSense(3)))
+            val dummy2 = ListProperty(mutableListOf(WordSense(1), WordSense(2), WordSense(3)))
+            val dummy3 = ListProperty(mutableListOf(WordSense(1), WordSense(3), WordSense(2)))
+            val dummy4 = ListProperty(mutableListOf(WordSense(1), WordSense(3)))
 
             // children
             it("should correctly handle children") {
-                dummy1[0] `should equal` IntProperty(1)
-                dummy1[1] `should equal` IntProperty(2)
-                dummy1[2] `should equal` IntProperty(3)
+                dummy1[0] `should equal` WordSense(1)
+                dummy1[1] `should equal` WordSense(2)
+                dummy1[2] `should equal` WordSense(3)
                 dummy1[0] `should not equal` dummy1[1]
             }
 
@@ -622,7 +656,7 @@ object DataSpec : Spek({
                 dummy1.lastIndexOf(dummy3[1]) `should be equal to` 2
 
                 (dummy2[0] in dummy1) `should be` true
-                (IntProperty(7) in dummy1) `should be` false
+                (WordSense(7) in dummy1) `should be` false
             }
 
             // equal, hashcode
@@ -666,8 +700,8 @@ object DataSpec : Spek({
                 @Suppress("UNCHECKED_CAST")
                 {
                     val serializer = ObjectInputStream(ByteArrayInputStream(outputBytes))
-                    serializer.readObject() as ListProperty<IntProperty> `should equal` dummy1
-                    serializer.readObject() as ListProperty<IntProperty> `should equal` dummy2
+                    serializer.readObject() as ListProperty<WordSense> `should equal` dummy1
+                    serializer.readObject() as ListProperty<WordSense> `should equal` dummy2
                     serializer.close()
                 } `should not throw` AnyException
             }
@@ -714,8 +748,8 @@ object DataSpec : Spek({
             }
 
             it("should provide list of words forming it") {
-                dummy1.words `should equal` listOf(sent2[2])
-                dummy3.words `should equal` listOf(sent2[0], sent2[1])
+                dummy1.toList() `should equal` listOf(sent2[2])
+                dummy3.toList() `should equal` listOf(sent2[0], sent2[1])
 
                 dummy1[0] `should equal` sent2[2]
                 dummy3[1] `should equal` sent2[1]
@@ -812,9 +846,9 @@ object DataSpec : Spek({
 
             // getChildren, getParent, isRoot, hasNonTerminals, getTerminals
             it("should provide ways to access its children") {
-                dummy1[0].type `should equal` PhraseTag.NP
-                dummy1[1].type `should equal` PhraseTag.VP
-                dummy1[0][0].type `should equal` PhraseTag.DP
+                dummy1[0].label `should equal` PhraseTag.NP
+                dummy1[1].label `should equal` PhraseTag.VP
+                dummy1[0][0].label `should equal` PhraseTag.DP
 
                 dummy1[0].hasNonTerminals() `should be` true
                 dummy1[0][0].hasNonTerminals() `should be` false
@@ -841,12 +875,14 @@ object DataSpec : Spek({
             it("can discriminate each other") {
                 // Reflexive
                 dummy1 `should equal` dummy1
+                dummy1 shouldContainSame dummy1.getNonTerminals()
 
                 // Symmetry
                 dummy1 `should equal` dummy2
                 dummy2 `should equal` dummy1
 
                 dummy1 `should not equal` dummy1[0]
+                dummy1[0] `should not equal` dummy1[1]
                 dummy1 `should not equal` sent2[0]
             }
 
@@ -900,11 +936,11 @@ object DataSpec : Spek({
 
             // type, leaf
             it("should have correct information") {
-                dummy1.type `should equal` PhraseTag.S
+                dummy1.label `should equal` PhraseTag.S
 
-                dummy1.leaf `should equal` null
-                dummy1[0].leaf `should equal` null
-                dummy1[0][0].leaf `should equal` sent2[0]
+                dummy1.terminal `should equal` null
+                dummy1[0].terminal `should equal` null
+                dummy1[0][0].terminal `should equal` sent2[0]
             }
 
             // Serializable
@@ -932,52 +968,33 @@ object DataSpec : Spek({
             }
         }
 
-        describe("DepTree") {
-            val dummy1 = DepTree(
-                    sent2[3],
-                    PhraseTag.S,
-                    DependencyTag.ROOT,
-                    DepTree(sent2[1], PhraseTag.NP, DependencyTag.OBJ,
-                            DepTree(sent2[0], PhraseTag.DP)
-                    ),
-                    DepTree(sent2[2], PhraseTag.NP, DependencyTag.SBJ)
-            )
+        describe("DepEdge") {
+            val dummy1 = DepEdge(sent2[3], sent2[1], PhraseTag.NP, DependencyTag.OBJ)
+            val dummy2 = DepEdge(sent3[3], sent3[1], PhraseTag.NP, DependencyTag.OBJ)
+            val dummy3 = DepEdge(sent3[3], sent3[2], PhraseTag.NP, DependencyTag.SBJ)
+            val dummy4 = DepEdge(sent3[1], sent3[0], PhraseTag.DP)
+            val dummy5 = DepEdge(null, sent3[3], PhraseTag.VP, DependencyTag.ROOT)
 
-            val dummy2 = DepTree(
-                    sent3[3],
-                    PhraseTag.S,
-                    DependencyTag.ROOT,
-                    DepTree(sent3[1], PhraseTag.NP, DependencyTag.OBJ,
-                            DepTree(sent3[0], PhraseTag.DP)
-                    ),
-                    DepTree(sent3[2], PhraseTag.NP, DependencyTag.SBJ)
-            )
+            // governor, dependent, type, depTag
+            // label, src, dest
+            it("should handle its property") {
+                dummy1.src `should equal` sent2[3]
+                dummy1.governor `should equal` dummy1.src
 
-            // getChildren, getParent, isRoot, hasNonTerminals, getTerminals
-            it("should provide ways to access its children") {
-                dummy1[0].type `should equal` PhraseTag.NP
-                dummy1[1].type `should equal` PhraseTag.NP
-                dummy1[0][0].type `should equal` PhraseTag.DP
+                dummy1.dest `should equal` sent2[1]
+                dummy1.dependent `should equal` dummy1.dest
 
-                dummy1[0].hasNonTerminals() `should be` true
-                dummy1[0][0].hasNonTerminals() `should be` false
+                dummy1.type `should equal` PhraseTag.NP
+                dummy1.depType `should equal` DependencyTag.OBJ
+                dummy1.label `should equal` DependencyTag.OBJ
             }
 
-            it("should provide ways to access its parents") {
-                dummy1.isRoot() `should be` true
-                dummy1[0].isRoot() `should be` false
-                dummy1[0][0].isRoot() `should be` false
-
-                dummy1[0].getParent() `should equal` dummy1
-                dummy1[0][0].getParent() `should equal` dummy1[0]
-                dummy1[1].getParent() `should equal` dummy1
-            }
-
-            it("provide ways to access terminal nodes, i.e. words") {
-                dummy1.getTerminals() `should contain all` sent2
-                dummy1[0].getTerminals() `should contain all` sent2.subList(0, 2)
-                dummy1[1].getTerminals() `should contain all` listOf(sent2[2])
-                dummy1[0][0].getTerminals() `should contain all` listOf(sent2[0])
+            // toString
+            it("should provide the correct string representation") {
+                dummy1.toString() `should be equal to` "NPOBJ('먹었다 = 먹/VV+었/EP+다/EF' → '밥을 = 밥/NNG+을/JKO')"
+                dummy3.toString() `should be equal to` "NPSBJ('먹었다 = 먹/VV+었/EP+다/EF' → '나는 = 나/NP+는/JX')"
+                dummy4.toString() `should be equal to` "DP('밥을 = 밥/NNG+을/JKO' → '흰 = 희/VA+ㄴ/ETM')"
+                dummy5.toString() `should be equal to` "VPROOT('ROOT' → '먹었다 = 먹/VV+었/EP+다/EF')"
             }
 
             // equal, hashcode
@@ -989,54 +1006,14 @@ object DataSpec : Spek({
                 dummy1 `should equal` dummy2
                 dummy2 `should equal` dummy1
 
-                dummy1 `should not equal` dummy1[0]
-                dummy1 `should not equal` dummy1.leaf
-
-                dummy1[0] `should not equal` dummy1[1]
-
-                dummy1[0][0] `should equal` dummy2[0][0]
+                dummy1 `should not equal` dummy3
+                dummy1 `should not equal` dummy4
+                dummy1 `should not equal` dummy1.src
             }
 
             it("can provide correct hashcode") {
                 dummy1.hashCode() `should be equal to` dummy1.hashCode()
                 dummy1.hashCode() `should be equal to` dummy2.hashCode()
-            }
-
-            // toString, getTreeString
-            it("should provide the correct string representation") {
-                dummy1.toString() `should be equal to` "S-ROOT-Node(먹었다 = 먹/VV+었/EP+다/EF)"
-                dummy1[0].toString() `should be equal to` "NP-OBJ-Node(밥을 = 밥/NNG+을/JKO)"
-                dummy1[0][0].toString() `should be equal to` "DP-Node(흰 = 희/VA+ㄴ/ETM)"
-            }
-
-            it("should provide tree representation") {
-                dummy1.getTreeString().toString() `should be equal to` """
-                    >S-ROOT-Node(먹었다 = 먹/VV+었/EP+다/EF)
-                    >| NP-OBJ-Node(밥을 = 밥/NNG+을/JKO)
-                    >| | DP-Node(흰 = 희/VA+ㄴ/ETM)
-                    >| NP-SBJ-Node(나는 = 나/NP+는/JX)
-                """.trimMargin(">").trim()
-
-                dummy1[0].getTreeString().toString() `should be equal to` """
-                    >NP-OBJ-Node(밥을 = 밥/NNG+을/JKO)
-                    >| DP-Node(흰 = 희/VA+ㄴ/ETM)
-                """.trimMargin(">").trim()
-            }
-
-            // type, depType, leaf, head
-            it("should have correct information") {
-                dummy1.type `should equal` PhraseTag.S
-                dummy1.depType `should equal` DependencyTag.ROOT
-                dummy1[0].depType `should equal` DependencyTag.OBJ
-                dummy1[0][0].depType `should equal` null
-
-                dummy1.leaf `should equal` sent2[3]
-                dummy1[0].leaf `should equal` sent2[1]
-                dummy1[0][0].leaf `should equal` sent2[0]
-
-                dummy1.leaf `should equal` dummy1.head
-                dummy1[0].leaf `should equal` dummy1[0].head
-                dummy1[0][0].leaf `should equal` dummy1[0][0].head
             }
 
             // Serializable
@@ -1057,57 +1034,36 @@ object DataSpec : Spek({
                 @Suppress("UNCHECKED_CAST")
                 {
                     val serializer = ObjectInputStream(ByteArrayInputStream(outputBytes))
-                    serializer.readObject() as DepTree `should equal` dummy1
-                    serializer.readObject() as DepTree `should equal` dummy2
+                    serializer.readObject() as DepEdge `should equal` dummy1
+                    serializer.readObject() as DepEdge `should equal` dummy2
                     serializer.close()
                 } `should not throw` AnyException
             }
         }
 
-        describe("RoleTree") {
-            val dummy1 = RoleTree(
-                    sent2[3],
-                    RoleType.HEAD,
-                    RoleTree(sent2[1], RoleType.ARG1,
-                            RoleTree(sent2[0], RoleType.ARGM_PRD)
-                    ),
-                    RoleTree(sent2[2], RoleType.ARG0)
-            )
+        describe("RoleEdge") {
+            val dummy1 = RoleEdge(sent2[3], sent2[1], RoleType.ARG1)
+            val dummy2 = RoleEdge(sent3[3], sent3[1], RoleType.ARG1)
+            val dummy3 = RoleEdge(sent3[3], sent3[2], RoleType.ARG0)
+            val dummy4 = RoleEdge(sent3[1], sent3[0], RoleType.ARGM_PRD)
 
-            val dummy2 = RoleTree(
-                    sent3[3],
-                    RoleType.HEAD,
-                    RoleTree(sent3[1], RoleType.ARG1,
-                            RoleTree(sent3[0], RoleType.ARGM_PRD)
-                    ),
-                    RoleTree(sent3[2], RoleType.ARG0)
-            )
+            // predicate, argument, label
+            // label, src, dest
+            it("should handle its property") {
+                dummy1.src `should equal` sent2[3]
+                dummy1.predicate `should equal` dummy1.src
 
-            // getChildren, getParent, isRoot, hasNonTerminals, getTerminals
-            it("should provide ways to access its children") {
-                dummy1[0].type `should equal` RoleType.ARG1
-                dummy1[1].type `should equal` RoleType.ARG0
-                dummy1[0][0].type `should equal` RoleType.ARGM_PRD
+                dummy1.dest `should equal` sent2[1]
+                dummy1.argument `should equal` dummy1.dest
 
-                dummy1[0].hasNonTerminals() `should be` true
-                dummy1[0][0].hasNonTerminals() `should be` false
+                dummy1.label `should equal` RoleType.ARG1
             }
 
-            it("should provide ways to access its parents") {
-                dummy1.isRoot() `should be` true
-                dummy1[0].isRoot() `should be` false
-                dummy1[0][0].isRoot() `should be` false
-
-                dummy1[0].getParent() `should equal` dummy1
-                dummy1[0][0].getParent() `should equal` dummy1[0]
-                dummy1[1].getParent() `should equal` dummy1
-            }
-
-            it("provide ways to access terminal nodes, i.e. words") {
-                dummy1.getTerminals() `should contain all` sent2
-                dummy1[0].getTerminals() `should contain all` sent2.subList(0, 2)
-                dummy1[1].getTerminals() `should contain all` listOf(sent2[2])
-                dummy1[0][0].getTerminals() `should contain all` listOf(sent2[0])
+            // toString
+            it("should provide the correct string representation") {
+                dummy1.toString() `should be equal to` "ARG1('먹었다 = 먹/VV+었/EP+다/EF' → '밥을 = 밥/NNG+을/JKO')"
+                dummy3.toString() `should be equal to` "ARG0('먹었다 = 먹/VV+었/EP+다/EF' → '나는 = 나/NP+는/JX')"
+                dummy4.toString() `should be equal to` "ARGM_PRD('밥을 = 밥/NNG+을/JKO' → '흰 = 희/VA+ㄴ/ETM')"
             }
 
             // equal, hashcode
@@ -1119,43 +1075,14 @@ object DataSpec : Spek({
                 dummy1 `should equal` dummy2
                 dummy2 `should equal` dummy1
 
-                dummy1 `should not equal` dummy1[0]
-                dummy1 `should not equal` dummy1.leaf
+                dummy1 `should not equal` dummy3
+                dummy1 `should not equal` dummy4
+                dummy1 `should not equal` dummy1.src
             }
 
             it("can provide correct hashcode") {
                 dummy1.hashCode() `should be equal to` dummy1.hashCode()
                 dummy1.hashCode() `should be equal to` dummy2.hashCode()
-            }
-
-            // toString, getTreeString
-            it("should provide the correct string representation") {
-                dummy1.toString() `should be equal to` "HEAD-Node(먹었다 = 먹/VV+었/EP+다/EF)"
-                dummy1[0].toString() `should be equal to` "ARG1-Node(밥을 = 밥/NNG+을/JKO)"
-                dummy1[0][0].toString() `should be equal to` "ARGM_PRD-Node(흰 = 희/VA+ㄴ/ETM)"
-            }
-
-            it("should provide tree representation") {
-                dummy1.getTreeString().toString() `should be equal to` """
-                    >HEAD-Node(먹었다 = 먹/VV+었/EP+다/EF)
-                    >| ARG1-Node(밥을 = 밥/NNG+을/JKO)
-                    >| | ARGM_PRD-Node(흰 = 희/VA+ㄴ/ETM)
-                    >| ARG0-Node(나는 = 나/NP+는/JX)
-                >""".trimMargin(">").trim()
-
-                dummy1[0].getTreeString().toString() `should be equal to` """
-                    >ARG1-Node(밥을 = 밥/NNG+을/JKO)
-                    >| ARGM_PRD-Node(흰 = 희/VA+ㄴ/ETM)
-                """.trimMargin(">").trim()
-            }
-
-            // type, leaf
-            it("should have correct information") {
-                dummy1.type `should equal` RoleType.HEAD
-
-                dummy1.leaf `should equal` sent2[3]
-                dummy1[0].leaf `should equal` sent2[1]
-                dummy1[0][0].leaf `should equal` sent2[0]
             }
 
             // Serializable
@@ -1176,32 +1103,137 @@ object DataSpec : Spek({
                 @Suppress("UNCHECKED_CAST")
                 {
                     val serializer = ObjectInputStream(ByteArrayInputStream(outputBytes))
-                    serializer.readObject() as RoleTree `should equal` dummy1
-                    serializer.readObject() as RoleTree `should equal` dummy2
+                    serializer.readObject() as RoleEdge `should equal` dummy1
+                    serializer.readObject() as RoleEdge `should equal` dummy2
                     serializer.close()
                 } `should not throw` AnyException
             }
         }
-    }
 
-    describe("Property") {
-        it("should set proper property") {
-            val prop = Word();
+        describe("Entity") {
+            val dummy1 = Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2]))
+            val dummy2 = Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2]))
+            val dummy3 = Entity(CoarseEntityType.PS, "PS_DIFF", listOf(sent3[2]))
+            val dummy4 = Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent3[0], sent3[1]))
 
-            {
-                prop.setProperty(Entity(CoarseEntityType.EV, "EV_OTHER", listOf(prop)))
-                prop.setProperty(ListProperty(emptyList<DepTree>()))
-                prop.setProperty(ListProperty(listOf(IntProperty(1))))
-            } `should not throw` IllegalArgumentException::class
+            //type, fineType
+            //words
+            //surface
+            it("has correct property") {
+                dummy1.type `should equal` CoarseEntityType.PS
+                dummy1.fineType `should be equal to` "PS_OTHER"
+                dummy1[0] `should equal` sent3[2]
+                dummy1.surface `should equal` "나는"
+                dummy4.surface `should equal` "흰 밥을"
 
-            {
-                prop.setProperty(prop)
-            } `should throw` IllegalArgumentException::class
+                (sent3[2] in dummy1) `should be` true
+                (sent3[1] in dummy1) `should be` false
 
-            {
-                prop.getProperty<ListProperty<*>>(KEY_CHILD)
-            } `should not throw` IllegalStateException::class
+                dummy1.getCorefGroup() `should equal` null
+            }
 
+            // equal, hashcode
+            it("can discriminate each other") {
+                // Reflexive
+                dummy1 `should equal` dummy1
+
+                // Symmetry
+                dummy1 `should equal` dummy2
+                dummy2 `should equal` dummy1
+
+                dummy1 `should not equal` dummy3
+                dummy1 `should not equal` dummy4
+                dummy1 `should not equal` dummy1[0]
+            }
+
+            it("can provide correct hashcode") {
+                dummy1.hashCode() `should be equal to` dummy1.hashCode()
+                dummy1.hashCode() `should be equal to` dummy2.hashCode()
+            }
+
+            //getCorefGroup
+            it("can be serialized") {
+                var outputBytes: ByteArray? = null
+
+                {
+                    val output = ByteArrayOutputStream(10240)
+                    val serializer = ObjectOutputStream(output)
+                    serializer.writeObject(dummy1)
+                    serializer.writeObject(dummy4)
+                    serializer.close()
+
+                    outputBytes = output.toByteArray()
+                    output.close()
+                } `should not throw` AnyException
+
+                @Suppress("UNCHECKED_CAST")
+                {
+                    val serializer = ObjectInputStream(ByteArrayInputStream(outputBytes))
+                    serializer.readObject() as Entity `should equal` dummy1
+                    serializer.readObject() as Entity `should equal` dummy4
+                    serializer.close()
+                } `should not throw` AnyException
+            }
+        }
+
+        describe("CorefrerenceGroup") {
+            val dummy1 = CoreferenceGroup(listOf(Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2]))))
+            val dummy2 = CoreferenceGroup(listOf(Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2]))))
+            val dummy3 = CoreferenceGroup(listOf(Entity(CoarseEntityType.PS, "PS_DIFF", listOf(sent3[2]))))
+            val dummy4 = CoreferenceGroup(listOf(Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent3[0], sent3[1]))))
+
+            it("should inherit list") {
+                (dummy1[0] in dummy1) `should be` true
+                (dummy3[0] in dummy1) `should be` false
+                dummy1.indexOf(dummy1[0]) `should equal` 0
+                dummy1.lastIndexOf(dummy1[0]) `should equal` 0
+            }
+
+            // equal, hashcode
+            it("can discriminate each other") {
+                // Reflexive
+                dummy1 `should equal` dummy1
+
+                // Symmetry
+                dummy1 `should equal` dummy2
+                dummy2 `should equal` dummy1
+
+                dummy1 `should not equal` dummy3
+                dummy1 `should not equal` dummy4
+                dummy1 `should not equal` dummy1[0]
+
+                dummy1[0].getCorefGroup() `should equal` dummy1
+                dummy1[0].getCorefGroup() `should equal` dummy2
+            }
+
+            it("can provide correct hashcode") {
+                dummy1.hashCode() `should be equal to` dummy1.hashCode()
+                dummy1.hashCode() `should be equal to` dummy2.hashCode()
+            }
+
+            //Serializable
+            it("can be serialized") {
+                var outputBytes: ByteArray? = null
+
+                {
+                    val output = ByteArrayOutputStream(10240)
+                    val serializer = ObjectOutputStream(output)
+                    serializer.writeObject(dummy1)
+                    serializer.writeObject(dummy4)
+                    serializer.close()
+
+                    outputBytes = output.toByteArray()
+                    output.close()
+                } `should not throw` AnyException
+
+                @Suppress("UNCHECKED_CAST")
+                {
+                    val serializer = ObjectInputStream(ByteArrayInputStream(outputBytes))
+                    serializer.readObject() as CoreferenceGroup `should equal` dummy1
+                    serializer.readObject() as CoreferenceGroup `should equal` dummy4
+                    serializer.close()
+                } `should not throw` AnyException
+            }
         }
     }
 })
