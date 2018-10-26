@@ -8,8 +8,26 @@ cache:
   directories:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
+before_script:
+- export DISPLAY=:99.0
 script:
-- "./gradlew clean check"
+- ./gradlew clean
+- ./gradlew ":koalanlp-core:check"
+- ./gradlew ":koalanlp-arirang:check" --tests "kr.bydelta.koala.test*"
+- ./gradlew ":koalanlp-daon:check" --tests "kr.bydelta.koala.test*"
+- ./gradlew ":koalanlp-etri:check" --tests "kr.bydelta.koala.test*"
+- ./gradlew ":koalanlp-eunjeon:check" --tests "kr.bydelta.koala.test*"
+- ./gradlew ":koalanlp-komoran:check" --tests "kr.bydelta.koala.test*"
+- ./gradlew ":koalanlp-okt:check" --tests "kr.bydelta.koala.test*"
+- ./gradlew ":koalanlp-rhino:clean"
+- sh -e /etc/init.d/xvfb start
+- sleep 3
+- ./gradlew ":koalanlp-rhino:test" --tests "*OriginTest"
+- sh -e /etc/init.d/xvfb stop
+- ./gradlew ":koalanlp-rhino:test" --tests "*CLITest"
+- ./gradlew ":koalanlp-rhino:jacocoTestReport"
+- ./gradlew ":koalanlp-kkma:check" --tests "kr.bydelta.koala.test*"
+- ./gradlew ":koalanlp-hannanum:check" --tests "kr.bydelta.koala.test*"
 after_success:
 - bash ./git-manage.sh
 before_install:

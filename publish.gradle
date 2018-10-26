@@ -1,0 +1,58 @@
+modifyPom {
+    project {
+        groupId project.group
+        artifactId project.name
+        version project.version
+        
+        packaging "jar"
+        url "http://koalanlp.github.io/koalanlp"
+
+        scm {
+            connection "scm:git:git@github.com:koalanlp/koalanlp.git"
+            developerConnection "scm:git:git@github.com:koalanlp/koalanlp.git"
+            url "https://github.com/koalanlp/koalanlp"
+        }
+
+        licenses {
+            license {
+                name "MIT License"
+                url "https://tldrlegal.com/license/mit-license"
+            }
+        }
+
+        developers {
+            developer {
+                id "nearbydelta"
+                name "Bugeun Kim"
+                url "http://bydelta.kr"
+            }
+        }
+    }
+}
+
+dokka {
+    outputFormat = "html"
+    outputDirectory = javadoc.destinationDir
+    reportUndocumented = true
+
+    linkMapping {
+        dir = "src/main/kotlin"
+        url = "https://github.com/koalanlp/koalanlp/blob/master/${projectDir.name}/src/main/kotlin"
+        suffix = "#L"
+    }
+
+    includes = ["overview.md"]
+}
+
+extraArchive {
+    sources = true
+    tests = project.name.endsWith('core')
+    javadoc = true
+}
+
+nexus {
+    sign = true
+}
+
+tasks.javadoc.enabled = false
+tasks.javadoc.dependsOn tasks.dokka

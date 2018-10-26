@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id "org.jetbrains.kotlin.jvm"
+    id "org.jetbrains.dokka"
+    id "com.bmuschko.nexus"
+}
+
+group 'kr.bydelta'
+version '2.0.0-SNAPSHOT'
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "kr.bydelta:koalanlp-core:${rootProject.version}"
+    implementation "ch.qos.logback:logback-classic:1.1.7" // Daon Core
+    implementation "com.google.protobuf:protobuf-java:3.0.0" // Daon Core
+    compile fileTree(dir: 'lib', include: '*.jar')
+
+    testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect"
+    testImplementation "kr.bydelta:koalanlp-core:${rootProject.version}:tests"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2"
+    testImplementation "org.amshove.kluent:kluent:1.42"
+    testImplementation('org.spekframework.spek2:spek-dsl-jvm:2.0.0-alpha.1') {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    testRuntimeOnly('org.spekframework.spek2:spek-runner-junit5:2.0.0-alpha.1') {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+}
+
+task fatJar(type: Jar) {
+    classifier = "assembly"
+    from {
+        configurations.compile.filter { !it.isDirectory() }.collect { zipTree(it) }
+    }
+    with jar
+}
+
+apply from: rootProject.file('test.gradle')
+apply from: rootProject.file('publish.gradle')
+tasks.jar.dependsOn tasks.fatJar

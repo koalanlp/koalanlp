@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>Word.getPredicateRole - koalanlp</title>
+    <link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.data</a>&nbsp;/&nbsp;<a
+        href="index.html">Word</a>&nbsp;/&nbsp;<a href="./get-predicate-role.html">getPredicateRole</a><br/>
+<br/>
+<h1>getPredicateRole</h1>
+<a name="kr.bydelta.koala.data.Word$getPredicateRole()"></a>
+<code><span class="keyword">fun </span><span class="identifier">getPredicateRole</span><span
+        class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+        href="../-role-edge/index.html"><span class="identifier">RoleEdge</span></a><span class="symbol">?</span></code>
+<p>의미역 분석을 했다면, 현재 어절이 지배하는 의미역 구조를 돌려줌.</p>
+<h2>참고</h2>
+<p><strong>의미역 결정</strong>은 문장의 구성 어절들의 역할/기능을 분석하는 방법입니다.
+    예) '나는 밥을 어제 집에서 먹었다'라는 문장에는
+    동사 '먹었다'를 중심으로</p>
+<ul>
+    <li>'나는'은 동작의 주체를,</li>
+    <li>'밥을'은 동작의 대상을,</li>
+    <li>'어제'는 동작의 시점을</li>
+    <li>'집에서'는 동작의 장소를 나타냅니다.</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+    <li>
+        <a href="../../kr.bydelta.koala.proc/-can-label-semantic-role.html">kr.bydelta.koala.proc.CanLabelSemanticRole</a>
+        의미역 분석을 수행하는 interface.
+    </li>
+    <li><a href="get-argument-roles.html">Word.getArgumentRoles</a> 어절이 술어인 논항들의 <a href="../-role-edge/index.html">RoleEdge</a>
+        목록을 가져오는 API
+    </li>
+    <li><a href="../-sentence/get-roles.html">Sentence.getRoles</a> 전체 문장을 분석한 의미역 구조 <a
+            href="../-role-edge/index.html">RoleEdge</a>를 가져오는 API
+    </li>
+    <li><a href="../-role-edge/index.html">RoleEdge</a> 의미역 구조를 저장하는 형태</li>
+    <li><a href="../../kr.bydelta.koala/-role-type/index.html">RoleType</a> 의미역 분류를 갖는 Enum 값</li>
+</ul>
+<p><strong>Since</strong><br/>
+    2.0.0</p>
+<p><strong>Return</strong><br/>
+    어절이 지배하는 의미역 구조 <a href="../-role-edge/index.html">RoleEdge</a>. 분석 결과가 없으면 null.</p>
+</BODY>
+</HTML>

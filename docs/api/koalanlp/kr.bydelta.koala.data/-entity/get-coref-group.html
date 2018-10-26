@@ -1,0 +1,41 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>Entity.getCorefGroup - koalanlp</title>
+    <link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.data</a>&nbsp;/&nbsp;<a
+        href="index.html">Entity</a>&nbsp;/&nbsp;<a href="./get-coref-group.html">getCorefGroup</a><br/>
+<br/>
+<h1>getCorefGroup</h1>
+<a name="kr.bydelta.koala.data.Entity$getCorefGroup()"></a>
+<code><span class="keyword">fun </span><span class="identifier">getCorefGroup</span><span class="symbol">(</span><span
+        class="symbol">)</span><span class="symbol">: </span><a href="../-coreference-group/index.html"><span
+        class="identifier">CoreferenceGroup</span></a><span class="symbol">?</span></code>
+<p>이 개체명과 공통된 대상을 지칭하는 공통 지시어 또는 대용어들의 묶음을 제공합니다.</p>
+<h2>참고</h2>
+<p><strong>공지시어 해소</strong>는 문장 내 또는 문장 간에 같은 대상을 지칭하는 어구를 찾아 묶는 분석과정입니다.
+    예) '삼성그룹의 계열사인 삼성물산은 같은 그룹의 계열사인 삼성생명과 함께'라는 문장에서</p>
+<ul>
+    <li>'삼성그룹'과 '같은 그룹'을 찾아 묶는 것을 말합니다.</li>
+</ul>
+<p><strong>영형대용어 분석</strong>은 문장에서 생략된 기능어를 찾아 문장 내 또는 문장 간에 언급되어 있는 어구와 묶는 분석과정입니다.
+    예) '나는 밥을 먹었고, 영희도 먹었다'라는 문장에서,</p>
+<ul>
+    <li>'먹었다'의 목적어인 '밥을'이 생략되어 있음을 찾는 것을 말합니다.</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+    <li><a href="../../kr.bydelta.koala.proc/-can-resolve-coref.html">kr.bydelta.koala.proc.CanResolveCoref</a> 공지시어 해소,
+        대용어 분석기 interface
+    </li>
+    <li><a href="../-sentence/get-coref-groups.html">Sentence.getCorefGroups</a> 문장 내에 포함된 개체명 묶음 <a
+            href="../-coreference-group/index.html">CoreferenceGroup</a>들의 목록을 반환하는 API
+    </li>
+    <li><a href="../-coreference-group/index.html">CoreferenceGroup</a> 동일한 대상을 지칭하는 개체명을 묶는 API</li>
+</ul>
+<p><strong>Return</strong><br/>
+    공통된 대상을 묶은 <a href="../-coreference-group/index.html">CoreferenceGroup</a>. 없다면 null.</p>
+</BODY>
+</HTML>

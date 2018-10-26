@@ -1,0 +1,181 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>Entity - koalanlp</title>
+    <link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.data</a>&nbsp;/&nbsp;<a
+        href="./index.html">Entity</a><br/>
+<br/>
+<h1>Entity</h1>
+<code><span class="keyword">class </span><span class="identifier">Entity</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
+        href="../-can-have-property/index.html"><span class="identifier">CanHaveProperty</span></a><span class="symbol">, </span><a
+        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+        class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-word/index.html"><span
+        class="identifier">Word</span></a><span class="symbol">&gt;</span></code>
+<p>개체명 분석 결과를 저장할 <a href="../-property.html">Property</a> class</p>
+<h2>참고</h2>
+<p><strong>개체명 인식</strong>은 문장에서 인물, 장소, 기관, 대상 등을 인식하는 기술입니다.
+    예) '철저한 진상 조사를 촉구하는 국제사회의 목소리가 커지고 있는 가운데, 트럼프 미국 대통령은 되레 사우디를 감싸고 나섰습니다.'에서, 다음을 인식하는 기술입니다.</p>
+<ul>
+    <li>'트럼프': 인물</li>
+    <li>'미국' : 국가</li>
+    <li>'대통령' : 직위</li>
+    <li>'사우디' : 국가</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+    <li><a href="../../kr.bydelta.koala.proc/-can-recognize-entity.html">kr.bydelta.koala.proc.CanRecognizeEntity</a>
+        개체명 인식기 interface
+    </li>
+    <li><a href="../-word/get-entities.html">Word.getEntities</a> 어절이 속하는 <a href="./index.html">Entity</a>를 가져오는 API
+    </li>
+    <li><a href="../-sentence/get-entities.html">Sentence.getEntities</a> 문장에 포함된 모든 <a href="./index.html">Entity</a>를
+        가져오는 API
+    </li>
+    <li><a href="./index.html">CoarseEntityType</a>의 대분류 개체명 분류구조 Enum 값</li>
+</ul>
+<p><strong>Since</strong><br/>
+    2.0.0</p>
+<h3>Constructors</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="-init-.html">&lt;init&gt;</a></p>
+        </td>
+        <td>
+            <code><span class="identifier">Entity</span><span class="symbol">(</span><span class="identifier"
+                                                                                           id="kr.bydelta.koala.data.Entity$<init>(kr.bydelta.koala.CoarseEntityType, kotlin.String, kotlin.collections.List((kr.bydelta.koala.data.Word)), kotlin.String)/label">label</span><span
+                    class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala/-coarse-entity-type/index.html"><span
+                    class="identifier">CoarseEntityType</span></a><span class="symbol">, </span><span class="identifier"
+                                                                                                      id="kr.bydelta.koala.data.Entity$<init>(kr.bydelta.koala.CoarseEntityType, kotlin.String, kotlin.collections.List((kr.bydelta.koala.data.Word)), kotlin.String)/fineLabel">fineLabel</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">, </span><span class="identifier"
+                                                                                            id="kr.bydelta.koala.data.Entity$<init>(kr.bydelta.koala.CoarseEntityType, kotlin.String, kotlin.collections.List((kr.bydelta.koala.data.Word)), kotlin.String)/words">words</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                    href="../-word/index.html"><span class="identifier">Word</span></a><span
+                    class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier"
+                                                                                  id="kr.bydelta.koala.data.Entity$<init>(kr.bydelta.koala.CoarseEntityType, kotlin.String, kotlin.collections.List((kr.bydelta.koala.data.Word)), kotlin.String)/originalLabel">originalLabel</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span
+                    class="symbol">)</span></code>
+            <p>개체명 분석 결과를 저장합니다.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Properties</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="fine-label.html">fineLabel</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">fineLabel</span><span
+                    class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a></code>
+            <p>개체명 세분류 값으로, <a href="label.html">label</a>으로 시작하는 문자열.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="label.html">label</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">label</span><span class="symbol">: </span><a
+                    href="../../kr.bydelta.koala/-coarse-entity-type/index.html"><span class="identifier">CoarseEntityType</span></a></code>
+            <p>개체명 대분류 값, <a href="../../kr.bydelta.koala/-coarse-entity-type/index.html">CoarseEntityType</a>에 기록된 개체명
+                중 하나.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="original-label.html">originalLabel</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">originalLabel</span><span
+                    class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">?</span></code>
+            <p>원본 분석기가 제시한 개체명 분류의 값. 기본값은 null.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="surface.html">surface</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">surface</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a></code>
+            <p>개체명의 표면형입니다.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="equals.html">equals</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">equals</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="kr.bydelta.koala.data.Entity$equals(kotlin.Any)/other">other</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span
+                    class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span
+                    class="identifier">Boolean</span></a></code>
+            <p>Indicates whether some other object is "equal to" this one.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="get-coref-group.html">getCorefGroup</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">getCorefGroup</span><span
+                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="../-coreference-group/index.html"><span class="identifier">CoreferenceGroup</span></a><span
+                    class="symbol">?</span></code>
+            <p>이 개체명과 공통된 대상을 지칭하는 공통 지시어 또는 대용어들의 묶음을 제공합니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="hash-code.html">hashCode</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">hashCode</span><span class="symbol">(</span><span
+                    class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+            <p>Returns a hash code value for the object. The general contract of hashCode is:</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="to-string.html">toString</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">toString</span><span class="symbol">(</span><span
+                    class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a></code>
+            <p>Returns a string representation of the object.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</BODY>
+</HTML>

@@ -7,126 +7,77 @@ plugins {
     id "io.codearte.nexus-staging" version "0.12.0"
 }
 
-def baseName = archivesBaseName as String ?: 'koalanlp-x'
-def kotlin_version = '1.2.71'
-def gitBaseName = archivesBaseName.endsWith('core') ? 'KoalaNLP-core' : baseName.replace('koalanlp', 'wrapper')
-def gitBranch = properties.'branch' as String ?: '2.x'
+allprojects {
+    compileKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url "https://dl.bintray.com/spekframework/spek-dev" }
+        maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://jitpack.io" }
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            cacheChangingModulesFor 10, 'minutes'
+        }
+    }
+}
 
 ext.nexusUsername = properties.'ossrhUsername' as String ?: 'Foo'
 ext.nexusPassword = properties.'ossrhPassword' as String ?: 'Foo'
 
-repositories {
-    mavenCentral()
-    jcenter()
-    maven { url "https://dl.bintray.com/spekframework/spek-dev" }
-    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
-}
-
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
-    testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2"
-    testImplementation "org.amshove.kluent:kluent:1.42"
-    testImplementation('org.spekframework.spek2:spek-dsl-jvm:2.0.0-alpha.1') {
-        exclude group: 'org.jetbrains.kotlin'
-    }
-    testRuntimeOnly('org.spekframework.spek2:spek-runner-junit5:2.0.0-alpha.1') {
-        exclude group: 'org.jetbrains.kotlin'
-    }
-}
-
-// documentation
+// Dokka aggregation
 dokka {
+    moduleName = "$rootProject.name"
+    outputDirectory = "$rootDir/docs/api"
     outputFormat = "html"
-    outputDirectory = "$buildDir/docs/api"
-    reportUndocumented = true
+    jdkVersion = 8
 
-    linkMapping {
-        dir = "src/main/kotlin"
-        url = "https://github.com/koalanlp/${gitBaseName}/blob/${gitBranch}/src/main/kotlin"
-        suffix = "#L"
+    doFirst {
+        sourceDirs = files(subprojects.collect { it.sourceSets.main.allSource.srcDirs })
+        file(outputDirectory).deleteDir()
     }
-
-    includes = ["overview.md"]
+    
+    includes = ["**/overview.md"]
 }
 
-task dokkaJar(type: org.gradle.jvm.tasks.Jar, dependsOn: dokka){
-    group = JavaBasePlugin.DOCUMENTATION_GROUP
-    description = "Assembles Kotlin docs with Dokka"
-    classifier = "javadoc"
-    from "$buildDir/javadoc"
-}
+// Test Report Aggregation
+task aggregateTestReport(type: JacocoReport) {
+    sourceDirectories = files()
+    classDirectories = files()
+    executionData = files()
 
-task sourceJar(type: org.gradle.jvm.tasks.Jar){
-    classifier = "sources"
-    from sourceSets.'main'.allSource
-}
-
-// publishing
-
-modifyPom {
-    project {
-        groupId group
-        artifactId archivesBaseName
-        version version
-
-        packaging "jar"
-        url "http://koalanlp.github.io/$gitBaseName"
-
-        scm {
-            connection "scm:git:git@github.com:koalanlp/${gitBaseName}.git"
-            developerConnection "scm:git:git@github.com:koalanlp/${gitBaseName}.git"
-            url "https://github.com/koalanlp/$gitBaseName"
-        }
-
-        licenses{
-            license{
-                name "MIT License"
-                url "https://tldrlegal.com/license/mit-license"
-            }
-        }
-
-        developers{
-            developer{
-                id "nearbydelta"
-                name "Bugeun Kim"
-                url "http://bydelta.kr"
-            }
-        }
-    }
-}
-
-extraArchive {
-    sources = true
-    tests = true
-    javadoc = true
-}
-
-nexus {
-    sign = true
-}
-
-// testing
-
-test {
-    useJUnitPlatform {
-        includeEngines 'spek2'
-    }
-}
-
-jacoco {
-    toolVersion = "0.8.2"
-}
-
-jacocoTestReport {
     reports {
-        xml.enabled = true
         html.enabled = true
+        xml.enabled = true
+        csv.enabled = false
+    }
+
+    onlyIf = {
+        true
+    }
+
+    doFirst {
+        subprojects.findAll { subproject ->
+            subproject.pluginManager.hasPlugin('java')
+        }.each { subproject ->
+            additionalSourceDirs files((Set<File>) subproject.sourceSets.main.allJava.srcDirs)
+            additionalClassDirs ((FileCollection) subproject.sourceSets.main.output)
+            if (subproject.pluginManager.hasPlugin('jacoco')) {
+                executionData subproject.tasks.jacocoTestReport.executionData
+            }
+        }
+
+        executionData = files(executionData.findAll {
+            it.exists()
+        })
     }
 }
-
-check.dependsOn jacocoTestReport
-javadoc.dependsOn dokkaJar
-
-defaultTasks 'clean'

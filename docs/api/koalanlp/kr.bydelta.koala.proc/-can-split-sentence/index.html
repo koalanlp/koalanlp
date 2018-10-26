@@ -1,0 +1,112 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>CanSplitSentence - koalanlp</title>
+    <link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.proc</a>&nbsp;/&nbsp;<a
+        href="./index.html">CanSplitSentence</a><br/>
+<br/>
+<h1>CanSplitSentence</h1>
+<code><span class="keyword">interface </span><span class="identifier">CanSplitSentence</span></code>
+<p>문장분리기 Interface</p>
+<p>텍스트를 받아서 텍스트 문장들로 분리합니다.</p>
+<h2>사용법 예제</h2>
+<p>문장분리기 <code>SentenceSplitter</code>가 <code>CanSplitSentence</code>를 상속받았다면,</p>
+<h3>Kotlin</h3>
+<pre><code class="lang-kotlin">val splitter = SentenceSplitter()
+val sentence = "분석할 문장을 적었습니다."
+val split = splitter.sentences(sentence)
+// 또는
+val split = splitter(sentence)
+</code></pre>
+<h3>Scala + <a href="https://koalanlp.github.io/wrapper-scala/">koalanlp-scala</a></h3>
+<pre><code class="lang-scala">import kr.bydelta.koala.Implicits._
+val splitter = new SentenceSplitter()
+val sentence = "분석할 문장을 적었습니다."
+val split = splitter.sentences(sentence)
+// 또는
+val split = splitter(sentence)
+</code></pre>
+<h3>Java</h3>
+<pre><code class="lang-java">SentenceSplitter splitter = new SentenceSplitter();
+String sentence = "분석할 문장을 적었습니다.";
+List&lt;String&gt; split = splitter.sentences(sentence);
+// 또는
+List&lt;String&gt; split = splitter.invoke(sentence);
+</code></pre>
+<p><strong>Since</strong><br/>
+    1.x</p>
+<h3>Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="invoke.html">invoke</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">open</span> <span class="keyword">operator</span> <span
+                    class="keyword">fun </span><span class="identifier">invoke</span><span class="symbol">(</span><span
+                    class="identifier"
+                    id="kr.bydelta.koala.proc.CanSplitSentence$invoke(kotlin.String)/text">text</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+            <p>주어진 문단 <a href="invoke.html#kr.bydelta.koala.proc.CanSplitSentence$invoke(kotlin.String)/text">text</a>를
+                문장단위로 분리합니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="sentences.html">sentences</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">sentences</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="kr.bydelta.koala.proc.CanSplitSentence$sentences(kotlin.String)/text">text</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+            <p>주어진 문단 <a
+                    href="sentences.html#kr.bydelta.koala.proc.CanSplitSentence$sentences(kotlin.String)/text">text</a>를
+                문장단위로 분리합니다.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="../../kr.bydelta.koala.hnn/-sentence-splitter/index.html">SentenceSplitter</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">SentenceSplitter</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">CanSplitSentence</span></a></code>
+            <p>한나눔 문장분리기의 KoalaNLP Wrapper입니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="../../kr.bydelta.koala.okt/-sentence-splitter/index.html">SentenceSplitter</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">SentenceSplitter</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">CanSplitSentence</span></a></code>
+            <p>트위터 문장분리기 인터페이스를 제공합니다.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</BODY>
+</HTML>

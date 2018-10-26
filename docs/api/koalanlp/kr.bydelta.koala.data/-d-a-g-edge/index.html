@@ -1,0 +1,138 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>DAGEdge - koalanlp</title>
+    <link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.data</a>&nbsp;/&nbsp;<a
+        href="./index.html">DAGEdge</a><br/>
+<br/>
+<h1>DAGEdge</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span
+        class="identifier">DAGEdge</span><span class="symbol">&lt;</span><span class="identifier">L</span>&nbsp;<span
+        class="symbol">:</span>&nbsp;<a
+        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span
+        class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span
+        class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-property.html"><span
+        class="identifier">Property</span></a><span class="symbol">&gt;</span>&nbsp;<span
+        class="symbol">:</span>&nbsp;<a href="../-can-have-property/index.html"><span
+        class="identifier">CanHaveProperty</span></a></code>
+<p><a href="index.html#T">T</a>-type의 DAG Edge를 저장합니다.</p>
+<p><strong>Since</strong><br/>
+    2.0.0</p>
+<h3>Properties</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="dest.html">dest</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">dest</span><span class="symbol">: </span><a
+                    href="index.html#T"><span class="identifier">T</span></a></code>
+            <p>Edge의 종점. 의존구문분석인 경우 피지배소, 의미역인 경우 논항.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="label.html">label</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">label</span><span class="symbol">: </span><a
+                    href="index.html#L"><span class="identifier">L</span></a><span class="symbol">?</span></code>
+            <p>Edge가 나타내는 관계.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="src.html">src</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">src</span><span class="symbol">: </span><a
+                    href="index.html#T"><span class="identifier">T</span></a><span class="symbol">?</span></code>
+            <p>Edge의 시작점. 의존구문분석인 경우 지배소, 의미역인 경우 동사.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="equals.html">equals</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">open</span> <span class="keyword">fun </span><span
+                    class="identifier">equals</span><span class="symbol">(</span><span class="identifier"
+                                                                                       id="kr.bydelta.koala.data.DAGEdge$equals(kotlin.Any)/other">other</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span
+                    class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span
+                    class="identifier">Boolean</span></a></code>
+            <p>Indicates whether some other object is "equal to" this one. Implementations must fulfil the following
+                requirements:</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="hash-code.html">hashCode</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">open</span> <span class="keyword">fun </span><span
+                    class="identifier">hashCode</span><span class="symbol">(</span><span class="symbol">)</span><span
+                    class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+            <p>Returns a hash code value for the object. The general contract of hashCode is:</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="to-string.html">toString</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">open</span> <span class="keyword">fun </span><span
+                    class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span
+                    class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a></code>
+            <p>Returns a string representation of the object.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="../-dep-edge/index.html">DepEdge</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">DepEdge</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">DAGEdge</span></a><span
+                    class="symbol">&lt;</span><a href="../../kr.bydelta.koala/-dependency-tag/index.html"><span
+                    class="identifier">DependencyTag</span></a><span class="symbol">,</span>&nbsp;<a
+                    href="../-word/index.html"><span class="identifier">Word</span></a><span class="symbol">&gt;</span></code>
+            <p>의존구문구조 분석의 결과.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="../-role-edge/index.html">RoleEdge</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">RoleEdge</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
+                    href="./index.html"><span class="identifier">DAGEdge</span></a><span class="symbol">&lt;</span><a
+                    href="../../kr.bydelta.koala/-role-type/index.html"><span
+                    class="identifier">RoleType</span></a><span class="symbol">,</span>&nbsp;<a
+                    href="../-word/index.html"><span class="identifier">Word</span></a><span class="symbol">&gt;</span></code>
+            <p>의미역 구조 분석의 결과.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</BODY>
+</HTML>

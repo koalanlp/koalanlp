@@ -1,0 +1,244 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>CanResolveCoref - koalanlp</title>
+    <link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="index.html">kr.bydelta.koala.proc</a>&nbsp;/&nbsp;<a
+        href="./-can-resolve-coref.html">CanResolveCoref</a><br/>
+<br/>
+<h1>CanResolveCoref</h1>
+<code><span class="keyword">interface </span><span class="identifier">CanResolveCoref</span><span
+        class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span
+        class="symbol">:</span>&nbsp;<a href="-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span
+        class="symbol">&lt;</span><a href="-can-resolve-coref.html#T"><span class="identifier">T</span></a><span
+        class="symbol">&gt;</span></code>
+<p>상호참조 해소, 공지시어 해소 (Coreference Resolution) 또는 대용어 분석 (Anaphora Resolution)을 수행하는 Interface입니다.</p>
+<h2>참고</h2>
+<p><strong>공지시어 해소</strong>는 문장 내 또는 문장 간에 같은 대상을 지칭하는 어구를 찾아 묶는 분석과정입니다.
+    예) '삼성그룹의 계열사인 삼성물산은 같은 그룹의 계열사인 삼성생명과 함께'라는 문장에서</p>
+<ul>
+    <li>'삼성그룹'과 '같은 그룹'을 찾아 묶는 것을 말합니다.</li>
+</ul>
+<p><strong>영형대용어 분석</strong>은 문장에서 생략된 기능어를 찾아 문장 내 또는 문장 간에 언급되어 있는 어구와 묶는 분석과정입니다.
+    예) '나는 밥을 먹었고, 영희도 먹었다'라는 문장에서,</p>
+<ul>
+    <li>'먹었다'의 목적어인 '밥을'이 생략되어 있음을 찾는 것을 말합니다.</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+    <li><a href="../kr.bydelta.koala.data/-sentence/get-coref-groups.html">Sentence.getCorefGroups</a> 문장 내에 포함된 개체명 묶음
+        <a href="../kr.bydelta.koala.data/-coreference-group/index.html">CoreferenceGroup</a>들의 목록을 반환하는 API
+    </li>
+    <li><a href="../kr.bydelta.koala.data/-entity/get-coref-group.html">Entity.getCorefGroup</a> 각 개체명이 속하는 <a
+            href="../kr.bydelta.koala.data/-coreference-group/index.html">CoreferenceGroup</a>을 가져오는 API
+    </li>
+    <li><a href="../kr.bydelta.koala.data/-coreference-group/index.html">CoreferenceGroup</a> 동일한 대상을 지칭하는 개체명을 묶는 API
+    </li>
+</ul>
+<h2>사용법 예제</h2>
+<p>분석기 <code>Parser</code>가 <code>CanResolveCoref</code>를 상속받았다면,</p>
+<h3>Kotlin</h3>
+<pre><code class="lang-kotlin">// 문장에서 바로 분석할 때
+val parser = Parser()
+val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+
+// 타 분석기에서 분석한 다음 이어서 분석할 때
+val taggedSentence: Sentence = ...
+val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
+
+val taggedSentList: List&lt;Sentence&gt; = ...
+val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
+</code></pre>
+<h3>Scala + <a href="https://koalanlp.github.io/wrapper-scala/">koalanlp-scala</a></h3>
+<pre><code class="lang-scala">import kr.bydelta.koala.Implicits._
+// 문장에서 바로 분석할 때
+val parser = new Parser()
+val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+
+// 타 분석기에서 분석한 다음 이어서 분석할 때
+val taggedSentence: Sentence = ...
+val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
+
+val taggedSentList: java.util.List[Sentence] = ...
+val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
+</code></pre>
+<h3>Java</h3>
+<pre><code class="lang-java">// 문장에서 바로 분석할 때
+Parser parser = Parser()
+List&lt;Sentence&gt; sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser.invoke("문장 2개입니다. 결과는 목록이 됩니다.")
+
+// 타 분석기에서 분석한 다음 이어서 분석할 때
+Sentence taggedSentence = ...
+Sentence sentence = parser.analyze(taggedSentence) // 또는 parser.invoke(taggedSentence)
+
+List&lt;Sentence&gt; taggedSentList = ...
+List&lt;Sentence&gt; sentences = parser.analyze(taggedSentList) // 또는 parser.invoke(taggedSentList)
+</code></pre>
+<p><strong>Since</strong><br/>
+    2.0.0</p>
+<h3>Inherited Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="-can-analyze-property/analyze.html">analyze</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">open</span> <span class="keyword">fun </span><span
+                    class="identifier">analyze</span><span class="symbol">(</span><span class="identifier"
+                                                                                        id="kr.bydelta.koala.proc.CanAnalyzeProperty$analyze(kotlin.String)/sentence">sentence</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                    href="../kr.bydelta.koala.data/-sentence/index.html"><span
+                    class="identifier">Sentence</span></a><span class="symbol">&gt;</span></code>
+            <p>String <a
+                    href="-can-analyze-property/analyze.html#kr.bydelta.koala.proc.CanAnalyzeProperty$analyze(kotlin.String)/sentence">sentence</a>를
+                분석함. 결과는 각 <a href="../kr.bydelta.koala.data/-sentence/index.html">Sentence</a>의 property로 저장합니다.</p>
+            <code><span class="keyword">open</span> <span class="keyword">fun </span><span
+                    class="identifier">analyze</span><span class="symbol">(</span><span class="identifier"
+                                                                                        id="kr.bydelta.koala.proc.CanAnalyzeProperty$analyze(kr.bydelta.koala.data.Sentence)/sentence">sentence</span><span
+                    class="symbol">:</span>&nbsp;<a href="../kr.bydelta.koala.data/-sentence/index.html"><span
+                    class="identifier">Sentence</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="../kr.bydelta.koala.data/-sentence/index.html"><span
+                    class="identifier">Sentence</span></a></code>
+            <p>
+                <a href="-can-analyze-property/analyze.html#kr.bydelta.koala.proc.CanAnalyzeProperty$analyze(kr.bydelta.koala.data.Sentence)/sentence">sentence</a>를
+                분석함. 결과는 각 <a href="../kr.bydelta.koala.data/-sentence/index.html">Sentence</a>의 property로 저장됨.</p>
+            <code><span class="keyword">open</span> <span class="keyword">fun </span><span
+                    class="identifier">analyze</span><span class="symbol">(</span><span class="identifier"
+                                                                                        id="kr.bydelta.koala.proc.CanAnalyzeProperty$analyze(kotlin.collections.List((kr.bydelta.koala.data.Sentence)))/sentences">sentences</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                    href="../kr.bydelta.koala.data/-sentence/index.html"><span
+                    class="identifier">Sentence</span></a><span class="symbol">&gt;</span><span
+                    class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                    href="../kr.bydelta.koala.data/-sentence/index.html"><span
+                    class="identifier">Sentence</span></a><span class="symbol">&gt;</span></code>
+            <p>
+                <a href="-can-analyze-property/analyze.html#kr.bydelta.koala.proc.CanAnalyzeProperty$analyze(kotlin.collections.List((kr.bydelta.koala.data.Sentence)))/sentences">sentences</a>를
+                분석함. 결과는 각 <a href="../kr.bydelta.koala.data/-sentence/index.html">Sentence</a>의 property로 저장됨.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-can-analyze-property/attach-property.html">attachProperty</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">attachProperty</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="kr.bydelta.koala.proc.CanAnalyzeProperty$attachProperty(kr.bydelta.koala.proc.CanAnalyzeProperty.INTERMEDIATE, kotlin.String)/item">item</span><span
+                    class="symbol">:</span>&nbsp;<a href="-can-analyze-property/index.html#INTERMEDIATE"><span
+                    class="identifier">INTERMEDIATE</span></a><span class="symbol">, </span><span class="identifier"
+                                                                                                  id="kr.bydelta.koala.proc.CanAnalyzeProperty$attachProperty(kr.bydelta.koala.proc.CanAnalyzeProperty.INTERMEDIATE, kotlin.String)/sentence">sentence</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="../kr.bydelta.koala.data/-sentence/index.html"><span
+                    class="identifier">Sentence</span></a></code>
+            <p>
+                <a href="-can-analyze-property/attach-property.html#kr.bydelta.koala.proc.CanAnalyzeProperty$attachProperty(kr.bydelta.koala.proc.CanAnalyzeProperty.INTERMEDIATE, kotlin.String)/item">item</a>을
+                분석하여 property 값을 반환합니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-can-analyze-property/convert.html">convert</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">convert</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="kr.bydelta.koala.proc.CanAnalyzeProperty$convert(kotlin.String)/sentence">sentence</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span
+                    class="symbol">&lt;</span><a href="-can-analyze-property/index.html#INTERMEDIATE"><span
+                    class="identifier">INTERMEDIATE</span></a><span class="symbol">,</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+            <p>String <a
+                    href="-can-analyze-property/convert.html#kr.bydelta.koala.proc.CanAnalyzeProperty$convert(kotlin.String)/sentence">sentence</a>를
+                품사 분석하여 분석기가 받아들이는 <a
+                        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Pair&lt;<a
+                        href="-can-analyze-property/index.html#INTERMEDIATE">INTERMEDIATE</a>, String&gt;&gt;으로 변환합니다.
+            </p>
+            <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">convert</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="kr.bydelta.koala.proc.CanAnalyzeProperty$convert(kr.bydelta.koala.data.Sentence)/sentence">sentence</span><span
+                    class="symbol">:</span>&nbsp;<a href="../kr.bydelta.koala.data/-sentence/index.html"><span
+                    class="identifier">Sentence</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="-can-analyze-property/index.html#INTERMEDIATE"><span
+                    class="identifier">INTERMEDIATE</span></a></code>
+            <p>Sentence <a
+                    href="-can-analyze-property/convert.html#kr.bydelta.koala.proc.CanAnalyzeProperty$convert(kr.bydelta.koala.data.Sentence)/sentence">sentence</a>를
+                해체하여 분석기가 받아들이는 <a href="-can-analyze-property/index.html#INTERMEDIATE">INTERMEDIATE</a>로 변환합니다.</p>
+            <code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">convert</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="kr.bydelta.koala.proc.CanAnalyzeProperty$convert(kr.bydelta.koala.proc.CanAnalyzeProperty.INTERMEDIATE)/sentence">sentence</span><span
+                    class="symbol">:</span>&nbsp;<a href="-can-analyze-property/index.html#INTERMEDIATE"><span
+                    class="identifier">INTERMEDIATE</span></a><span class="symbol">)</span><span
+                    class="symbol">: </span><a href="../kr.bydelta.koala.data/-sentence/index.html"><span
+                    class="identifier">Sentence</span></a></code>
+            <p>분석기의 중간 결과인 <a
+                    href="-can-analyze-property/convert.html#kr.bydelta.koala.proc.CanAnalyzeProperty$convert(kr.bydelta.koala.proc.CanAnalyzeProperty.INTERMEDIATE)/sentence">sentence</a>를
+                조합하여 <a href="../kr.bydelta.koala.data/-sentence/index.html">Sentence</a> 객체로 변환합니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-can-analyze-property/invoke.html">invoke</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">open</span> <span class="keyword">operator</span> <span
+                    class="keyword">fun </span><span class="identifier">invoke</span><span class="symbol">(</span><span
+                    class="identifier" id="kr.bydelta.koala.proc.CanAnalyzeProperty$invoke(kotlin.String)/sentence">sentence</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                    href="../kr.bydelta.koala.data/-sentence/index.html"><span
+                    class="identifier">Sentence</span></a><span class="symbol">&gt;</span></code><br/>
+            <code><span class="keyword">open</span> <span class="keyword">operator</span> <span
+                    class="keyword">fun </span><span class="identifier">invoke</span><span class="symbol">(</span><span
+                    class="identifier"
+                    id="kr.bydelta.koala.proc.CanAnalyzeProperty$invoke(kr.bydelta.koala.data.Sentence)/sentence">sentence</span><span
+                    class="symbol">:</span>&nbsp;<a href="../kr.bydelta.koala.data/-sentence/index.html"><span
+                    class="identifier">Sentence</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="../kr.bydelta.koala.data/-sentence/index.html"><span
+                    class="identifier">Sentence</span></a></code>
+            <p>
+                <a href="-can-analyze-property/invoke.html#kr.bydelta.koala.proc.CanAnalyzeProperty$invoke(kotlin.String)/sentence">sentence</a>를
+                분석함. 결과는 각 <a href="../kr.bydelta.koala.data/-sentence/index.html">Sentence</a>의 property로 저장됨.</p>
+            <code><span class="keyword">open</span> <span class="keyword">operator</span> <span
+                    class="keyword">fun </span><span class="identifier">invoke</span><span class="symbol">(</span><span
+                    class="identifier"
+                    id="kr.bydelta.koala.proc.CanAnalyzeProperty$invoke(kotlin.collections.List((kr.bydelta.koala.data.Sentence)))/sentences">sentences</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                    href="../kr.bydelta.koala.data/-sentence/index.html"><span
+                    class="identifier">Sentence</span></a><span class="symbol">&gt;</span><span
+                    class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                    href="../kr.bydelta.koala.data/-sentence/index.html"><span
+                    class="identifier">Sentence</span></a><span class="symbol">&gt;</span></code>
+            <p>
+                <a href="-can-analyze-property/invoke.html#kr.bydelta.koala.proc.CanAnalyzeProperty$invoke(kotlin.collections.List((kr.bydelta.koala.data.Sentence)))/sentences">sentences</a>를
+                분석함. 결과는 각 <a href="../kr.bydelta.koala.data/-sentence/index.html">Sentence</a>의 property로 저장됨.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id "org.jetbrains.kotlin.jvm"
+    id "org.jetbrains.dokka"
+    id "com.bmuschko.nexus"
+}
+
+group 'kr.bydelta'
+version rootProject.version
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2"
+    testImplementation "org.amshove.kluent:kluent:1.42"
+    testImplementation('org.spekframework.spek2:spek-dsl-jvm:2.0.0-alpha.1') {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    testRuntimeOnly('org.spekframework.spek2:spek-runner-junit5:2.0.0-alpha.1') {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+}
+
+apply from: rootProject.file('test.gradle')
+apply from: rootProject.file('publish.gradle')

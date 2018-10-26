@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>Tagger.
+        <init> - koalanlp
+    </title>
+    <link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.kkma</a>&nbsp;/&nbsp;<a
+        href="index.html">Tagger</a>&nbsp;/&nbsp;<a href="./-init-.html">&lt;init&gt;</a><br/>
+<br/>
+<h1>&lt;init&gt;</h1>
+<a name="kr.bydelta.koala.kkma.Tagger$&lt;init&gt;()"></a>
+<code><span class="identifier">Tagger</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>꼬꼬마 형태소분석기의 KoalaNLP Wrapper입니다.</p>
+<h2>참고</h2>
+<p><strong>형태소</strong>는 의미를 가지는 요소로서는 더 이상 분석할 수 없는 가장 작은 말의 단위로 정의됩니다.</p>
+<p><strong>형태소 분석</strong>은 문장을 형태소의 단위로 나누는 작업을 의미합니다.
+    예) '문장을 형태소로 나눠봅시다'의 경우,</p>
+<ul>
+    <li>문장/일반명사, -을/조사,</li>
+    <li>형태소/일반명사, -로/조사,</li>
+    <li>나누-(다)/동사, -어-/어미, 보-(다)/동사, -ㅂ시다/어미
+        로 대략 나눌 수 있습니다.
+    </li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+    <li><a href="../../kr.bydelta.koala.data/-morpheme/index.html">Morpheme</a> 형태소를 저장하는 클래스입니다.</li>
+    <li><a href="../../kr.bydelta.koala/-p-o-s/index.html">POS</a> 형태소의 분류를 담은 Enum class</li>
+</ul>
+<h2>사용법 예제</h2>
+<h3>Kotlin</h3>
+<pre><code class="lang-kotlin">val tagger = Tagger()
+val sentence = tagger.tagSentence("문장 1개입니다.")
+val sentences = tagger.tag("문장들입니다. 결과는 목록이 됩니다.")
+// 또는
+val sentences = tagger("문장들입니다. 결과는 목록이 됩니다.")
+</code></pre>
+<h3>Scala + <a href="https://koalanlp.github.io/wrapper-scala/">koalanlp-scala</a></h3>
+<pre><code class="lang-scala">import kr.bydelta.koala.Implicits._
+val tagger = new Tagger()
+val sentence = tagger.tagSentence("문장 1개입니다.")
+val sentences = tagger.tag("문장들입니다. 결과는 목록이 됩니다.")
+// 또는
+val sentences = tagger("문장들입니다. 결과는 목록이 됩니다.")
+</code></pre>
+<h3>Java</h3>
+<pre><code class="lang-java">Tagger tagger = new Tagger()
+Sentence sentence = tagger.tagSentence("문장 1개입니다.")
+List&lt;Sentence&gt; sentences = tagger.tag("문장들입니다. 결과는 목록이 됩니다.")
+// 또는
+List&lt;Sentence&gt; sentences = tagger.invoke("문장들입니다. 결과는 목록이 됩니다.")
+</code></pre>
+<p><strong>Since</strong><br/>
+    1.x</p>
+</BODY>
+</HTML>

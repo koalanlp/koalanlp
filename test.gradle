@@ -1,0 +1,20 @@
+test {
+//    failFast true
+    useJUnitPlatform {
+        includeEngines 'spek2'
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.2"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
+tasks.check.dependsOn tasks.clean
+tasks.check.dependsOn tasks.jacocoTestReport

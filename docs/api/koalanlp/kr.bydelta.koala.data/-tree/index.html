@@ -1,0 +1,231 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>Tree - koalanlp</title>
+    <link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.data</a>&nbsp;/&nbsp;<a
+        href="./index.html">Tree</a><br/>
+<br/>
+<h1>Tree</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">Tree</span><span
+        class="symbol">&lt;</span><span class="identifier">L</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
+        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span
+        class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span
+        class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span
+        class="identifier">Tree</span></a><span class="symbol">&lt;</span><a href="index.html#L"><span
+        class="identifier">L</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#T"><span
+        class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span>&nbsp;<span
+        class="symbol">:</span>&nbsp;<a href="../-can-have-property/index.html"><span
+        class="identifier">CanHaveProperty</span></a><span class="symbol">, </span><a
+        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+        class="identifier">List</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span
+        class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+<p><a href="index.html#T">T</a>-type들의 트리 구조를 저장할 <a href="../-property.html">Property</a>입니다. <a
+        href="../-word/index.html">Word</a>를 묶어서 표현하는 구조에 적용됩니다.</p>
+<p><strong>Since</strong><br/>
+    2.0.0</p>
+<h3>Constructors</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="-init-.html">&lt;init&gt;</a></p>
+        </td>
+        <td>
+            <code><span class="identifier">Tree</span><span class="symbol">(</span><span class="identifier"
+                                                                                         id="kr.bydelta.koala.data.Tree$<init>(kr.bydelta.koala.data.Tree.L, kr.bydelta.koala.data.Word, kotlin.collections.List((kr.bydelta.koala.data.Tree.T)))/label">label</span><span
+                    class="symbol">:</span>&nbsp;<a href="index.html#L"><span class="identifier">L</span></a><span
+                    class="symbol">, </span><span class="identifier"
+                                                  id="kr.bydelta.koala.data.Tree$<init>(kr.bydelta.koala.data.Tree.L, kr.bydelta.koala.data.Word, kotlin.collections.List((kr.bydelta.koala.data.Tree.T)))/terminal">terminal</span><span
+                    class="symbol">:</span>&nbsp;<a href="../-word/index.html"><span
+                    class="identifier">Word</span></a><span class="symbol">?</span><span class="symbol">, </span><span
+                    class="identifier"
+                    id="kr.bydelta.koala.data.Tree$<init>(kr.bydelta.koala.data.Tree.L, kr.bydelta.koala.data.Word, kotlin.collections.List((kr.bydelta.koala.data.Tree.T)))/children">children</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span
+                    class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">)</span></code>
+            <p>트리 형태의 구조를 저장합니다.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Properties</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="label.html">label</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">label</span><span class="symbol">: </span><a
+                    href="index.html#L"><span class="identifier">L</span></a></code>
+            <p>트리에 붙어있는 표지자입니다. Null일 수 없습니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="terminal.html">terminal</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">terminal</span><span
+                    class="symbol">: </span><a href="../-word/index.html"><span class="identifier">Word</span></a><span
+                    class="symbol">?</span></code>
+            <p>트리의 노드에서 연결되는 <a href="../-word/index.html">Word</a></p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="equals.html">equals</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">open</span> <span class="keyword">fun </span><span
+                    class="identifier">equals</span><span class="symbol">(</span><span class="identifier"
+                                                                                       id="kr.bydelta.koala.data.Tree$equals(kotlin.Any)/other">other</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span
+                    class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span
+                    class="identifier">Boolean</span></a></code>
+            <p>Indicates whether some other object is "equal to" this one.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="get-non-terminals.html">getNonTerminals</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">getNonTerminals</span><span
+                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a href="index.html#T"><span
+                    class="identifier">T</span></a><span class="symbol">&gt;</span></code>
+            <p>이 노드의 Non-terminal 자식 노드를 모읍니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="get-parent.html">getParent</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">getParent</span><span
+                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="index.html#T"><span class="identifier">T</span></a><span class="symbol">?</span></code>
+            <p>부모 노드를 반환합니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="get-terminals.html">getTerminals</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">getTerminals</span><span
+                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                    href="../-word/index.html"><span class="identifier">Word</span></a><span class="symbol">&gt;</span></code>
+            <p>이 노드를 포함해 모든 하위 Non-terminal 노드들에 속하는 terminal node들을 모읍니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="get-tree-string.html">getTreeString</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">getTreeString</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="kr.bydelta.koala.data.Tree$getTreeString(kotlin.Int, java.lang.StringBuffer)/depth">depth</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span
+                    class="symbol">=</span>&nbsp;0<span class="symbol">, </span><span class="identifier"
+                                                                                      id="kr.bydelta.koala.data.Tree$getTreeString(kotlin.Int, java.lang.StringBuffer)/buffer">buffer</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuffer.html"><span
+                    class="identifier">StringBuffer</span></a>&nbsp;<span
+                    class="symbol">=</span>&nbsp;StringBuffer()<span class="symbol">)</span><span
+                    class="symbol">: </span><a
+                    href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuffer.html"><span
+                    class="identifier">StringBuffer</span></a></code>
+            <p>이 트리구조를 표현하는 텍스트 표현을 <a
+                    href="get-tree-string.html#kr.bydelta.koala.data.Tree$getTreeString(kotlin.Int, java.lang.StringBuffer)/buffer">buffer</a>에
+                담아 반환합니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="has-non-terminals.html">hasNonTerminals</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">hasNonTerminals</span><span
+                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span
+                    class="identifier">&lt;ERROR CLASS&gt;</span></code>
+            <p>이 노드가 (terminal node를 제외하고) 자식 노드를 갖는지 확인합니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="hash-code.html">hashCode</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">open</span> <span class="keyword">fun </span><span
+                    class="identifier">hashCode</span><span class="symbol">(</span><span class="symbol">)</span><span
+                    class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+            <p>Returns a hash code value for the object. The general contract of hashCode is:</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="is-root.html">isRoot</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">isRoot</span><span
+                    class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span
+                    class="identifier">Boolean</span></a></code>
+            <p>이 노드가 최상위 노드인지 확인합니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="to-string.html">toString</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">open</span> <span class="keyword">fun </span><span
+                    class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span
+                    class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a></code>
+            <p>Returns a string representation of the object.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="../-syntax-tree/index.html">SyntaxTree</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">SyntaxTree</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Tree</span></a><span
+                    class="symbol">&lt;</span><a href="../../kr.bydelta.koala/-phrase-tag/index.html"><span
+                    class="identifier">PhraseTag</span></a><span class="symbol">,</span>&nbsp;<a
+                    href="../-syntax-tree/index.html"><span class="identifier">SyntaxTree</span></a><span
+                    class="symbol">&gt;</span></code>
+            <p>구문구조 분석의 결과를 저장할 <a href="../-property.html">Property</a>.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</BODY>
+</HTML>
