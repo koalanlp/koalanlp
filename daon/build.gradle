@@ -38,4 +38,7 @@ task fatJar(type: Jar) {
 
 apply from: rootProject.file('test.gradle')
 apply from: rootProject.file('publish.gradle')
-tasks.jar.dependsOn tasks.fatJar
+
+artifacts{
+    archives fatJar
+}

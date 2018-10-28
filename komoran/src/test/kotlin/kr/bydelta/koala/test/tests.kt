@@ -33,6 +33,30 @@ object KomoranTaggerTest : Spek(TaggerSpek(getTagger = { Tagger() },
             str to tag
         }, isSentenceSplitterImplemented = true))
 
+object KomoranLightTaggerTest : Spek(TaggerSpek(getTagger = { Tagger(useLightTagger = true) },
+        tagSentByOrig = {
+            val komoran = Komoran(DEFAULT_MODEL.LIGHT)
+            val original = komoran.analyze(it)
+            val tag = StringBuffer()
+            var prev = 0
+
+            for (token in original.tokenList) {
+                if (token.beginIndex > prev) {
+                    tag.append(" ")
+                }
+                tag.append("${token.morph}/${token.pos}")
+                prev = token.endIndex
+            }
+
+            "" to tag.toString()
+        }, tagParaByOrig = { emptyList() },
+        tagSentByKoala = { str, tagger ->
+            val tagged = tagger.tagSentence(str)
+            val tag = tagged.joinToString(" ") { w -> w.joinToString("") { "${it.surface}/${it.originalTag}" } }
+
+            str to tag
+        }, isSentenceSplitterImplemented = true))
+
 object KomoranDictTest : Spek(DictSpek(dict = Dictionary))
 
 object KomoranTagConversionTest : Spek(TagConversionSpek(from = { it.toSejongPOS() },

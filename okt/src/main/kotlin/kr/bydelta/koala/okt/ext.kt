@@ -81,6 +81,7 @@ fun POS.fromSejongPOS(): String =
  */
 fun String?.toSejongPOS(): POS =
         when (this) {
+            null -> POS.NA
             "Noun" -> POS.NNG
             "ProperNoun" -> POS.NNP
             "Number" -> POS.NR

@@ -1,5 +1,10 @@
 test {
 //    failFast true
+
+    if (project.hasProperty('excludeTests')) {
+        exclude project.property('excludeTests')
+    }
+
     useJUnitPlatform {
         includeEngines 'spek2'
     }

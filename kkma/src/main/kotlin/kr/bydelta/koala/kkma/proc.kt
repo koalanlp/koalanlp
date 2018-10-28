@@ -168,7 +168,23 @@ class Parser : CanParseDependency<org.snu.ids.kkma.ma.Sentence> {
         val sent = org.snu.ids.kkma.ma.Sentence()
         sentence.forEach { word ->
             val cand = MCandidate.create(word.surface,
-                    word.joinToString("+") { "${it.surface}/${it.tag.fromSejongPOS()}" })
+                    word.joinToString("+") {
+                        "${it.surface.replace("[", LSB) // []가 surface에 있는 경우 피함
+                                .replace("]", RSB)
+                                .replace("+", PLUS)
+                                .replace("/", SLASH)}/${it.tag.fromSejongPOS()}"
+                    })
+
+            /** 대괄호 복원 */
+            for (morph in cand) {
+                if ("----" in morph.string) {
+                    morph.string = morph.string.replace(LSB, "[")
+                            .replace(RSB, "]")
+                            .replace(PLUS, "+")
+                            .replace(SLASH, "/")
+                }
+            }
+
             sent.add(Eojeol(cand))
         }
 
@@ -203,5 +219,17 @@ class Parser : CanParseDependency<org.snu.ids.kkma.ma.Sentence> {
         })
 
         return result
+    }
+
+    /** Static fields */
+    companion object {
+        /** 왼쪽 대괄호 표시자 **/
+        private const val LSB = "----LSB----"
+        /** 오른쪽 대괄호 표시자 **/
+        private const val RSB = "----RSB----"
+        /** 덧셈기호 표시자 **/
+        private const val PLUS = "----PLS----"
+        /** Slash 표시자 **/
+        private const val SLASH = "----SLS----"
     }
 }

@@ -10,7 +10,7 @@ object OKTSplitterTest : Spek(SplitterSpek(getSplitter = { SentenceSplitter() },
             OpenKoreanTextProcessor.splitSentences(para).length()
         }))
 
-object OKTDictionaryTest : Spek(DictSpek(Dictionary, verbOn = false))
+object OKTDictionaryTest : Spek(DictSpek(Dictionary, verbOn = false, importFilter = { !it.isPredicate() }))
 
 object OKTTagConversionTest : Spek(TagConversionSpek(from = { it.toSejongPOS() },
         to = { it.fromSejongPOS() },

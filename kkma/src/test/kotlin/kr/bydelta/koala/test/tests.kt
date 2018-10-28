@@ -102,22 +102,18 @@ object KKMAParserTest : Spek(ParserSpek(
                 kkpa.parse(x)
             }
 
-            val dependencies = trees.joinToString("\n") { tree ->
-                tree.edgeList.map { edge -> edge.getOriginalString(tree.nodeList) }.sorted().joinToString()
+            trees.map {
+                it.sentenec to it.edgeList.map { edge -> edge.getOriginalString(it.nodeList) }.sorted().joinToString()
             }
-            val original = trees.joinToString("\n") { tree -> tree.sentenec }
-
-            original to dependencies
         },
         parseSentByKoala = { sent, parser ->
             val result = parser.analyze(sent)
 
-            val dependencies = result.joinToString("\n") { s ->
+            result.map { s ->
                 val deps = s.getDependencies()
-                deps?.asSequence()?.map { it.getOriginalString() }?.sorted()?.joinToString() ?: ""
-            }
-            val original = result.joinToString("\n") { it.surfaceString() }
+                val depStr = deps?.asSequence()?.map { it.getOriginalString() }?.sorted()?.joinToString() ?: ""
 
-            original to dependencies
+                s.surfaceString() to depStr
+            }
         }
 ))

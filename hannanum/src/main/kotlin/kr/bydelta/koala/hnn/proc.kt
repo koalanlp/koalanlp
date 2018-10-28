@@ -354,11 +354,12 @@ class Parser : CanParseDependency<Sentence>, CanParseSyntax<Sentence> {
     /** 한나눔의 구문분석 결과인 TreeNode 1개를 하위구조를 분석하여 Syntax Tree 1개로 변환합니다. */
     private fun TreeNode.rollupPhrases(terminals: Map<NonterminalNode, SyntaxTree>): SyntaxTree =
             when (this) {
-                is NonterminalNode ->
+                is NonterminalNode -> {
                     terminals[this] ?: // Terminal node에 포함되어 있는 경우, terminal 그대로 제공, 아니라면 새 syntax tree 구성
                     SyntaxTree(phraseTag.toETRIPhraseTag(), null,
                             children.map { it.rollupPhrases(terminals) },
                             originalLabel = phraseTag.split("-")[0])
+                }
                 else ->
                     throw IllegalStateException()
             }
@@ -399,8 +400,7 @@ class Parser : CanParseDependency<Sentence>, CanParseSyntax<Sentence> {
             else {
                 val tree = parseTreeOf(item)
                 val depTree: DTree = converter.convert(tree)
-
-                val phrases = depTree.nodeList.map { it.correspondingPhrase }
+                val phrases = tree.prePreTerminalNodes
                 val result = kr.bydelta.koala.data.Sentence(phrases.toWordsWith())
 
                 result.setSyntaxTree(phrases.toSyntaxTreeOn(result))
@@ -415,23 +415,22 @@ class Parser : CanParseDependency<Sentence>, CanParseSyntax<Sentence> {
      * @param sentence 분석할 한나눔 문장.
      * @return 구문분석트리.
      */
-    private fun parseTreeOf(sentence: Sentence): ParseTree =
+    internal fun parseTreeOf(sentence: Sentence): ParseTree =
             if (sentence.eojeols.isEmpty()) ParseTree("", "", 0, true)
             else
                 ParseTree(
                         sentence.plainEojeols.joinToString(" "),
                         converter.StringforDepformat(
                                 Converter.functionTagReForm(
-                                        wrapper.parseForced(encodeParenthesis(sentence)
-                                        )
+                                        wrapper.parseForced(sentence.withEncodedParen())
                                 )
                         ), 0, true)
 
     /**
      * 분석 오류를 발생시키는 괄호 ()를 LRB, RRB로 변경.
      */
-    private fun encodeParenthesis(sentence: Sentence): Sentence {
-        sentence.eojeols.forEach {
+    private fun Sentence.withEncodedParen(): Sentence {
+        eojeols.forEach {
             val morphs = it.morphemes
             morphs.forEachIndexed { index, m ->
                 if (m.matches("^.*[()]+.*$".toRegex())) {
@@ -440,7 +439,7 @@ class Parser : CanParseDependency<Sentence>, CanParseSyntax<Sentence> {
             }
         }
 
-        return sentence
+        return this
     }
 
     /**
@@ -480,7 +479,7 @@ internal class BerkeleyParserWrap {
             return p
         }
 
-    fun parseForced(data: Sentence): String? {
+    fun parseForced(data: Sentence): String {
         val testSentence = MorphemeAnalyzerWrap.getSpacedResult(data)
 
         return Trees.PennTreeRenderer.render(
@@ -563,6 +562,7 @@ internal object MorphemeAnalyzerWrap {
             var eachAnal = "$analResult+"
             val tokTmp = ArrayList<kaist.cilab.parser.berkeleyadaptation.Eojeol.Token>()
             while (eachAnal.isNotEmpty()) {
+
                 val match = TOKENS.find(eachAnal)
                 if (match == null)
                     throw IllegalStateException()

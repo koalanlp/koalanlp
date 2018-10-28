@@ -50,6 +50,10 @@ dokka {
 }
 
 // Test Report Aggregation
+jacoco {
+    toolVersion = "0.8.2"
+}
+
 task aggregateTestReport(type: JacocoReport) {
     sourceDirectories = files()
     classDirectories = files()

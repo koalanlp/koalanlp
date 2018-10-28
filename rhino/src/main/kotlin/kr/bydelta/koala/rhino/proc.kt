@@ -57,14 +57,14 @@ internal object RHINOTagger {
             } else {
                 val (head, eogan, eomi) = interf.FindMorph(i, inputArr[i])
                 val full = head?.replace("/NA \\+ /NA \\+ /NA$".toRegex(), "/NA")
-                        ?.replace("/NNG \\+ (하|되)/(VV|VX|XSV)".toRegex(), "$1/VV") ?: "NA"
+                        ?.replace("/NNG \\+ ([하되])/(VV|VX|XSV)".toRegex(), "$1/VV") ?: "NA"
 
                 outputArr[i] = full
 
                 if (eogan != null && eomi != null) {
                     if (RETAGGING_CONTAIN.containsMatchIn(eomi)) {
                         val eomiForm =
-                                eomi.split(" \\+ ".toRegex()).joinToString("") { it.substring(0, it.indexOf("/")) }
+                                eomi.split(" + ").joinToString("") { it.substring(0, it.indexOf("/")) }
 
                         if (eomiForm.matches(RETAGGING_EQUAL)) {
                             val newEomi =

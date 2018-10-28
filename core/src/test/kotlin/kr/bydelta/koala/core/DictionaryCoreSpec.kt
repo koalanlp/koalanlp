@@ -112,6 +112,9 @@ object DictionaryCoreSpec : Spek({
             dict1.contains("지나다", setOf(POS.VA)) `should be` false
             dict1.contains("지나다", setOf(POS.VV)) `should be` true
             dict1.contains("김종국", setOf(POS.NNB, POS.NNP, POS.NNG)) `should be` true
+            (("지나다" to POS.VA) in dict1) `should be` false
+            (("지나다" to POS.VV) in dict1) `should be` true
+            (("김종국" to POS.NNP) in dict1) `should be` true
         }
 
         // importFrom
@@ -119,7 +122,7 @@ object DictionaryCoreSpec : Spek({
             dict2.importFrom(dict1) { it.isModifier() }
             dict2.words.size `should be equal to` 0
 
-            dict2.importFrom(dict1)
+            dict2.importFrom(dict1, fastAppend = true)
             dict2.words.size `should be equal to` 4
             dict2.contains("테팔", setOf(POS.NNP, POS.NNG)) `should be` true
             dict2.contains("김종국", setOf(POS.NNP, POS.NNG)) `should be` true

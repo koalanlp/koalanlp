@@ -149,7 +149,7 @@ object Dictionary : CanExtractResource(), CanCompileDict {
 
                     if (value.any { it != null }) {
                         val wordstr = unitparser.combine(word.joinToString(""))
-                        baseEntries.add(wordstr to value.mapNotNull { it?.tag?.toSejongPOS() })
+                        baseEntries.add(wordstr to value.mapNotNull { it?.tag.toSejongPOS() })
                     }
 
                     top.children?.forEach {

@@ -23,5 +23,16 @@ dependencies {
     }
 }
 
+task coreTestJar(type: Jar, dependsOn: compileTestKotlin){
+    classifier = 'tests'
+    from sourceSets.test.output
+    exclude '**/*CoreSpec*'
+    exclude '*.zip'
+}
+
 apply from: rootProject.file('test.gradle')
 apply from: rootProject.file('publish.gradle')
+
+artifacts{
+    archives coreTestJar
+}

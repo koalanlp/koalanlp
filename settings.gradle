@@ -2,16 +2,18 @@ rootProject.name = archivesBaseName
 
 include 'java'
 include 'kotlin'
-include 'core'
-include 'komoran'
-include 'eunjeon'
-include 'daon'
-include 'etri'
-include 'hannanum'
-include 'kkma'
-include 'okt'
-include 'rhino'
-include 'arirang'
+
+include 'core' //Core API package
+
+include 'komoran' // Komoran 3.x by Shineware
+include 'eunjeon' // SEunjeon (Mecab-ko의 변형)
+include 'daon'    // Daon-core by Rasoio
+include 'etri'    // ETRI REST API by ETRI
+include 'hannanum' // Hannanum + NLPHub by KAIST Semantic Web group
+include 'kkma'    // KKMA by SNU IDS Lab
+include 'okt'     // Open Korean Text (Twitter-korean의 후속)
+include 'rhino'   // RHINO by 최석재
+include 'arirang' // Arirang by 이수명
 
 findProject(':core')?.name = 'koalanlp-core'
 findProject(':komoran')?.name = 'koalanlp-kmr'

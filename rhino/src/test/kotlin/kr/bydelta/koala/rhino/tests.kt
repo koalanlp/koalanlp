@@ -9,7 +9,7 @@ import rhino.FileAnalyzer
 import rhino.MainClass
 import rhino.PreProcess
 
-object RhinoTaggerOriginTest : Spek(TaggerSpek(
+object RhinoOriginTaggerTest : Spek(TaggerSpek(
         getTagger = { Tagger() },
         tagSentByOrig = {
             val rhino = MainClass(it, DictionaryReader.combiMethods_List,
@@ -35,41 +35,7 @@ object RhinoTaggerOriginTest : Spek(TaggerSpek(
         isSentenceSplitterImplemented = true
 ))
 
-object RhinoExtraOriginTest : Spek({
-    describe("RHINOTagger") {
-        it("split sentence as the same way") {
-            Examples.exampleSequence().forEach { pair ->
-                val sent = pair.second
-                val preproc = PreProcess(sent).GetOutput()
-                val implemented = RHINOTagger.split(sent)
-
-                implemented.filter { it.second }.joinToString("//") { it.first } `should be equal to` preproc.joinToString("//")
-            }
-        }
-    }
-})
-
-object RhinoCLITest : Spek({
-    describe("RhinoTagger") {
-        it("tag sentences") {
-            { Tagger() } `should not throw` AnyException
-
-            val tagger = Tagger()
-
-            Examples.exampleSequence().forEach {
-                val sent = it.second
-                { tagger.tag(sent) } `should not throw` AnyException
-
-                if (it.first == 1) {
-                    { tagger.tagSentence(sent) } `should not throw` AnyException
-                }
-            }
-        }
-    }
-})
-
-
-object DictionaryReaderOriginTest : Spek({
+object RhinoOriginDictionaryReaderTest : Spek({
     val fa = FileAnalyzer("./src/main/resources/rhino/")
 
     describe("DictionaryReader") {
@@ -134,6 +100,40 @@ object DictionaryReaderOriginTest : Spek({
         it("read Num:ending_List") {
             fa.GetAspNum("ending_List.txt").zip(DictionaryReader.aspgEnding).forEach {
                 it.first `should be equal to` it.second
+            }
+        }
+    }
+})
+
+
+object RhinoOriginExtraTest : Spek({
+    describe("RHINOTagger") {
+        it("split sentence as the same way") {
+            Examples.exampleSequence().forEach { pair ->
+                val sent = pair.second
+                val preproc = PreProcess(sent).GetOutput()
+                val implemented = RHINOTagger.split(sent)
+
+                implemented.filter { it.second }.joinToString("//") { it.first } `should be equal to` preproc.joinToString("//")
+            }
+        }
+    }
+})
+
+object RhinoCLITest : Spek({
+    describe("RhinoTagger") {
+        it("tag sentences") {
+            { Tagger() } `should not throw` AnyException
+
+            val tagger = Tagger()
+
+            Examples.exampleSequence().forEach {
+                val sent = it.second
+                { tagger.tag(sent) } `should not throw` AnyException
+
+                if (it.first == 1) {
+                    { tagger.tagSentence(sent) } `should not throw` AnyException
+                }
             }
         }
     }

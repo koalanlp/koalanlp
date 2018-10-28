@@ -62,9 +62,9 @@ import kr.co.shineware.nlp.komoran.model.KomoranResult
  *
  * @since 1.x
  * @constructor
- * @param useLightTagger KOMORAN Light Tagger를 사용할 것인지 확인합니다. 사용시 true.
+ * @param useLightTagger KOMORAN Light Tagger를 사용할 것인지 확인합니다. 기본값 false. 사용시 true.
  */
-class Tagger @JvmOverloads constructor(useLightTagger: Boolean = false) : CanTagOnlyASentence<KomoranResult?>() {
+class Tagger @JvmOverloads constructor(useLightTagger: Boolean = false) : CanTagOnlyASentence<KomoranResult>() {
     /**
      * 코모란 분석기 객체.
      * @since 1.x
@@ -85,7 +85,7 @@ class Tagger @JvmOverloads constructor(useLightTagger: Boolean = false) : CanTag
      * @param text 분석할 String.
      * @return 원본 분석기의 결과인 문장 1개
      */
-    override fun tagSentenceOriginal(text: String): KomoranResult? = komoran.analyze(text)
+    override fun tagSentenceOriginal(text: String): KomoranResult = komoran.analyze(text)
 
     /**
      * KomoranResult 타입의 분석결과 [result]를 변환, [Sentence]를 구성합니다.
@@ -95,8 +95,8 @@ class Tagger @JvmOverloads constructor(useLightTagger: Boolean = false) : CanTag
      * @param result 변환할 분석결과.
      * @return 변환된 [Sentence] 객체
      */
-    override fun convertSentence(text: String, result: KomoranResult?): Sentence =
-            if (result != null) {
+    override fun convertSentence(text: String, result: KomoranResult): Sentence =
+            if (result.tokenList.isNotEmpty()) {
                 val words = mutableListOf<Word>()
                 var morphs = mutableListOf<Morpheme>()
                 var lastIdx = 0

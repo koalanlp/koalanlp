@@ -36,22 +36,16 @@ internal object DictionaryReader {
             }
 
     private fun read2DArray(stream: InputStream, splitByTwo: Boolean): Array<Array<String?>> =
-            try {
-                readArray(stream).map { line ->
-                    if (splitByTwo) {
-                        val splits = line.trim().split("\t".toRegex(), 2)
-                        if (splits.size > 1) arrayOf(splits[0], splits[1], null)
-                        else arrayOf(splits[0], null, "-1")
-                    } else {
-                        //stem_List.txt; ending_List.txt; afterNumber_List.txt; complexStem_List.txt; stem_short_List.txt
-                        val splits = line.trim().split("\t".toRegex(), 3)
-                        if (splits.size > 2) splits.toTypedArray<String?>()
-                        else arrayOf<String?>(splits[0], splits[1], "-1")
-                    }
-                }.toTypedArray()
-            } catch (_: Throwable) {
-                emptyArray()
-            }
+            readArray(stream).map { line ->
+                if (splitByTwo) {
+                    val splits = line.trim().split("\t", limit = 2)
+                    arrayOf(splits[0], splits.getOrNull(1), null)
+                } else {
+                    //stem_List.txt; ending_List.txt; afterNumber_List.txt; complexStem_List.txt; stem_short_List.txt
+                    val splits = line.trim().split("\t", limit = 3)
+                    arrayOf<String?>(splits[0], splits[1], splits.getOrNull(2) ?: "-1")
+                }
+            }.toTypedArray()
 
     private fun readArray(stream: InputStream) =
             try {

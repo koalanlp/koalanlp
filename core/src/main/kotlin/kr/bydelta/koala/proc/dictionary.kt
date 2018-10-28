@@ -63,14 +63,21 @@ interface CanCompileDict {
     fun getBaseEntries(filter: (POS) -> Boolean): Iterator<DicEntry>
 
     /**
-     * 사전에 등재되어 있는지 확인합니다.
+     * 사전에 등재되어 있는지 확인합니다. 품사 후보 [posTag] 중의 하나라도 참이면 참이라고 판정합니다.
      *
      * @param word   확인할 형태소
-     * @param posTag 품사들(기본값: [POS.NNP] 고유명사, [POS.NNG] 일반명사)
+     * @param posTag 품사들 후보(기본값: [POS.NNP] 고유명사, [POS.NNG] 일반명사)
      */
     fun contains(word: String, posTag: Set<POS> = setOf(POS.NNP, POS.NNG)): Boolean =
             getNotExists(onlySystemDic = false,
                     word = *posTag.map { word to it }.toTypedArray()).size < posTag.size
+
+    /**
+     * 사전에 등재되어 있는지 확인합니다.
+     *
+     * @param entry 확인할 형태소, 품사의 순서쌍
+     */
+    operator fun contains(entry: DicEntry): Boolean = contains(entry.first, setOf(entry.second))
 
     /**
      * 사전에 등재되어 있는지 확인하고, 사전에 없는단어만 반환합니다.

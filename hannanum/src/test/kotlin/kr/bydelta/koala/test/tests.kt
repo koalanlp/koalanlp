@@ -10,10 +10,9 @@ import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.InformalSenten
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.SentenceSegmentor.SentenceSegmentor
 import kaist.cilab.parser.berkeleyadaptation.BerkeleyParserWrapper
 import kaist.cilab.parser.berkeleyadaptation.Configuration
+import kaist.cilab.parser.berkeleyadaptation.HanNanumMorphAnalWrapper
 import kaist.cilab.parser.corpusconverter.sejong2treebank.sejongtree.NonterminalNode
 import kaist.cilab.parser.corpusconverter.sejong2treebank.sejongtree.ParseTree
-import kaist.cilab.parser.corpusconverter.sejong2treebank.sejongtree.TerminalNode
-import kaist.cilab.parser.corpusconverter.sejong2treebank.sejongtree.TreeNode
 import kaist.cilab.parser.dependency.DNode
 import kaist.cilab.parser.psg2dg.Converter
 import kr.bydelta.koala.*
@@ -22,7 +21,9 @@ import kr.bydelta.koala.data.SyntaxTree
 import kr.bydelta.koala.hnn.*
 import kr.bydelta.koala.proc.CanParseDependency
 import kr.bydelta.koala.proc.CanParseSyntax
+import org.amshove.kluent.`should be equal to`
 import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import java.io.File
 
 object HNNDictTest : Spek(DictSpek(Dictionary))
@@ -153,8 +154,6 @@ val taggerWorkflow by lazy {
     }
 }
 
-val prevEnd by lazy { Dictionary.userDic.search_end }
-
 object HNNTaggerTest : Spek(TaggerSpek(
         getTagger = { Tagger() },
         isSentenceSplitterImplemented = false,
@@ -198,33 +197,90 @@ object HNNTaggerTest : Spek(TaggerSpek(
 
 val parser by lazy { BerkeleyParserWrapper(Configuration.parserModel) }
 
-fun SyntaxTree.getDFSString(buffer: StringBuffer): StringBuffer {
-    buffer.append("${this.originalLabel}{${this.terminal?.joinToString(",") {
-        it.tag.toString()
-    }?.plus(",") ?: ""}")
-    for (child in this) {
-        child.getDFSString(buffer)
-        buffer.append(',')
+fun SyntaxTree.getDFSString(buffer: StringBuffer, depth: Int = 0): StringBuffer {
+    buffer.append("\n")
+    buffer.append("| ".repeat(depth))
+    buffer.append("${this.originalLabel}")
+    if (this.terminal != null) {
+        buffer.append("(")
+        buffer.append(this.terminal!!.joinToString("+") { it.originalTag!! })
+        buffer.append(")")
+    } else {
+        for (child in this) {
+            child.getDFSString(buffer, depth + 1)
+        }
     }
-    buffer.append('}')
     return buffer
 }
 
-fun TreeNode.getDFSString(buffer: StringBuffer): StringBuffer {
-    return if (this is NonterminalNode) {
-        buffer.append("${this.phraseTag.split("-")[0]}{")
+fun NonterminalNode.getDFSString(buffer: StringBuffer, depth: Int = 0): StringBuffer {
+    buffer.append("\n")
+    buffer.append("| ".repeat(depth))
+    buffer.append(this.phraseTag.split("-")[0])
+    if (this in this.tree.prePreTerminalNodes) {
+        buffer.append("(")
+        buffer.append(this.myTerminals!!.joinToString("+") { it.pos })
+        buffer.append(")")
+    } else {
         for (child in this.children) {
-            child.getDFSString(buffer)
-            buffer.append(',')
+            (child as NonterminalNode).getDFSString(buffer, depth + 1)
         }
-        buffer.append('}')
-        buffer
-    } else if (this is TerminalNode) {
-        buffer.append(this.pos)
-        buffer
-    } else
-        buffer
+    }
+    return buffer
 }
+
+object HNNSyntaxParserTest : Spek(ParserSpek<Sentence, CanParseSyntax<Sentence>>(
+        getParser = { Parser() },
+        parseSentByKoala = { sent, parser ->
+            if (sent.any { it in "+()" }) {
+                // '+()'가 포함된 어절의 분석결과는 한나눔이 오류를 발생시킴 (+가 누락되거나, ()가 제대로 처리되지 않음)
+                // 따라서 비교 과정에서 무시함
+                emptyList()
+            } else {
+                val result = parser.analyze(sent)
+
+                result.map { s ->
+                    // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
+                    "" to s.getSyntaxTree()?.getDFSString(StringBuffer()).toString()
+                }
+            }
+        },
+        parseSentByOrig = {
+            if (it.any { ch -> ch in "+()" }) {
+                // '+()'가 포함된 어절의 분석결과는 한나눔이 오류를 발생시킴 (+가 누락되거나, ()가 제대로 처리되지 않음)
+                // 따라서 비교 과정에서 무시함
+                emptyList()
+            } else {
+                taggerWorkflow.analyze(it)
+                val tagged = mutableListOf<Sentence>()
+                var isEnded = false
+
+                while (!isEnded) {
+                    val sent = taggerWorkflow.getResultOfSentence(Sentence(0, 0, false))
+                    isEnded = sent.isEndOfDocument
+                    tagged.add(sent)
+                }
+
+                val conv = Converter()
+                val trees =
+                        tagged.map { s ->
+                            val surface = s.plainEojeols.joinToString(" ")
+                                    .replace("(", "-LRB-").replace(")", "-RRB-")
+                            val exp = conv.StringforDepformat(Converter.functionTagReForm(parser.parse(surface)))
+                            val tree = ParseTree(surface, exp, 0, true)
+
+                            conv.convert(tree) // 한나눔 코드가 의존구문분석을 위한 분석 과정에서 Tree를 변경하고 있음
+                            tree
+                        }
+
+
+                trees.map {
+                    // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
+                    "" to (it.head as NonterminalNode).getDFSString(StringBuffer()).toString()
+                }
+            }
+        }
+))
 
 fun DepEdge.getOriginalString() = "${this.originalLabel}(${this.governor?.id ?: -1}, ${this.dependent.id})"
 
@@ -232,87 +288,103 @@ fun DNode.getOriginalString() =
         "${this.correspondingPhrase.phraseTag.split("-")[0]}_${this.getdType()}(${this.head?.wordIdx
                 ?: -1}, ${this.wordIdx})"
 
-object HNNSyntaxParserTest : Spek(ParserSpek<Sentence, CanParseSyntax<Sentence>>(
-        getParser = { Parser() },
-        parseSentByKoala = { sent, parser ->
-            val result = parser.analyze(sent)
-
-            val tree = result.joinToString("\n") { s ->
-                s.getSyntaxTree()?.getDFSString(StringBuffer()).toString()
-            }
-
-            // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
-            "" to tree
-        },
-        parseSentByOrig = {
-            taggerWorkflow.analyze(it)
-            val tagged = mutableListOf<Sentence>()
-            var isEnded = false
-
-            while (!isEnded) {
-                val sent = taggerWorkflow.getResultOfSentence(Sentence(0, 0, false))
-                isEnded = sent.isEndOfDocument
-                tagged.add(sent)
-            }
-
-            val conv = Converter()
-            val trees =
-                    tagged.map { s ->
-                        val surface = s.plainEojeols.joinToString(" ")
-                                .replace("(", "-LRB-").replace(")", "-RRB-")
-                        val exp = conv.StringforDepformat(Converter.functionTagReForm(parser.parse(surface)))
-                        ParseTree(surface, exp, 0, true)
-                    }
-
-
-            val tree = trees.joinToString("\n") { t ->
-                t.head.getDFSString(StringBuffer()).toString()
-            }
-
-            // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
-            "" to tree
-        }
-))
-
 object HNNDepParserTest : Spek(ParserSpek<Sentence, CanParseDependency<Sentence>>(
         getParser = { Parser() },
         parseSentByKoala = { sent, parser ->
-            val result = parser.analyze(sent)
+            if (sent.any { it in "+()" }) {
+                // '+()'가 포함된 어절의 분석결과는 한나눔이 오류를 발생시킴 (+가 누락되거나, ()가 제대로 처리되지 않음)
+                // 따라서 비교 과정에서 무시함
+                emptyList()
+            } else {
+                val result = parser.analyze(sent)
 
-            val dependencies = result.joinToString("\n") { s ->
-                val deps = s.getDependencies()
-                deps?.asSequence()?.map { it.getOriginalString() }?.sorted()?.joinToString() ?: ""
+                result.map { s ->
+                    val deps = s.getDependencies()
+                    val depString = deps?.asSequence()?.map { it.getOriginalString() }?.sorted()?.joinToString() ?: ""
+
+                    // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
+                    "" to depString
+                }
             }
-
-            // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
-            "" to dependencies
         },
         parseSentByOrig = { sent ->
-            taggerWorkflow.analyze(sent)
-            val tagged = mutableListOf<Sentence>()
-            var isEnded = false
+            if (sent.any { it in "+()" }) {
+                // '+()'가 포함된 어절의 분석결과는 한나눔이 오류를 발생시킴 (+가 누락되거나, ()가 제대로 처리되지 않음)
+                // 따라서 비교 과정에서 무시함
+                emptyList()
+            } else {
+                taggerWorkflow.analyze(sent)
+                val tagged = mutableListOf<Sentence>()
+                var isEnded = false
 
-            while (!isEnded) {
-                val s = taggerWorkflow.getResultOfSentence(Sentence(0, 0, false))
-                isEnded = s.isEndOfDocument
-                tagged.add(s)
+                while (!isEnded) {
+                    val s = taggerWorkflow.getResultOfSentence(Sentence(0, 0, false))
+                    isEnded = s.isEndOfDocument
+                    tagged.add(s)
+                }
+
+                val conv = Converter()
+                val trees =
+                        tagged.map { s ->
+                            val surface = s.plainEojeols.joinToString(" ")
+                                    .replace("(", "-LRB-").replace(")", "-RRB-")
+                            val exp = conv.StringforDepformat(Converter.functionTagReForm(parser.parse(surface)))
+                            val tree = ParseTree(surface, exp, 0, true)
+                            conv.convert(tree)
+                        }
+
+                trees.map { t ->
+                    // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
+                    "" to t.nodeList.map { it.getOriginalString() }.sorted().joinToString()
+                }
             }
-
-            val conv = Converter()
-            val trees =
-                    tagged.map { s ->
-                        val surface = s.plainEojeols.joinToString(" ")
-                                .replace("(", "-LRB-").replace(")", "-RRB-")
-                        val exp = conv.StringforDepformat(Converter.functionTagReForm(parser.parse(surface)))
-                        val tree = ParseTree(surface, exp, 0, true)
-                        conv.convert(tree)
-                    }
-
-            val tree = trees.joinToString("\n") { t ->
-                t.nodeList.map { it.getOriginalString() }.sorted().joinToString()
-            }
-
-            // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
-            "" to tree
         }
 ))
+
+
+object HNNOriginalWrapperTest : Spek({
+    val tagger = Tagger()
+
+    describe("MorphemeAnalyzerWrap") {
+        it("should provide exactly same result with HanNanumMorphemeAnalyzerWrap") {
+            Examples.exampleSequence().forEach { pair ->
+                val sent = pair.second
+                tagger.tagParagraphOriginal(sent).forEach { s ->
+                    Configuration.hanBaseDir = "./"
+                    print('a')
+
+                    val original = HanNanumMorphAnalWrapper.getInstance().getAnalysisResult(s.plainEojeols.joinToString(" "))
+                    val reproduced = MorphemeAnalyzerWrap.getAnalysisResult(s)
+
+                    reproduced.zip(original).forEach {
+                        if ('+' !in it.first.origEojeol) {
+                            // '+'가 포함된 어절의 분석결과는 한나눔이 오류임 (+가 누락됨)
+                            it.first.toString() `should be equal to` it.second.toString()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    describe("BerkeleyParserWrap") {
+        it("should provide exactly same result with BerkeleyParserWrapper") {
+            Configuration.hanBaseDir = "./"
+            val parser = BerkeleyParserWrapper(Configuration.parserModel)
+            val wrap = BerkeleyParserWrap()
+            Examples.exampleSequence().forEach { pair ->
+                val sent = pair.second
+                tagger.tagParagraphOriginal(sent).forEach { s ->
+                    print('w')
+                    val original = parser.parse(s.plainEojeols.joinToString(" "))
+                    val reproduced = wrap.parseForced(s)
+
+                    if ('+' !in reproduced) {
+                        // '+'가 포함된 어절의 분석결과는 한나눔이 오류임 (+가 누락됨)
+                        original `should be equal to` reproduced
+                    }
+                }
+            }
+        }
+    }
+})

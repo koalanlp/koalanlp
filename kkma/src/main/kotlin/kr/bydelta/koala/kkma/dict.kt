@@ -36,16 +36,6 @@ internal class UserDicReader : SimpleDicReader, Iterator<String?> {
     }
 
     /**
-     * 사전에 형태소-품사를 추가.
-     *
-     * @param morph 추가할 형태소.
-     * @param tag   형태소의 품사.
-     */
-    operator fun plusAssign(pair: Pair<String, String>) {
-        morphemes.add("${pair.first}/${pair.second}")
-    }
-
-    /**
      * 사전 초기화 함수
      */
     override fun cleanup() {}

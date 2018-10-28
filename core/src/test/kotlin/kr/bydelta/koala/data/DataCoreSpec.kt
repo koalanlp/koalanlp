@@ -1,7 +1,6 @@
-package kr.bydelta.koala.core
+package kr.bydelta.koala.data
 
 import kr.bydelta.koala.*
-import kr.bydelta.koala.data.*
 import org.amshove.kluent.*
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
@@ -508,16 +507,17 @@ object DataCoreSpec : Spek({
             // getNouns, getModifiers, getVerbs
             it("should provide proper list of nouns") {
                 sent2.getNouns() `should contain all` listOf(sent2[1], sent2[2])
-                sent4.getNouns() `should contain all` sent4
+                sent4.getNouns() `should contain all` sent4.subList(1, 4)
             }
 
             it("should provide proper list of verbs") {
-                sent2.getVerbs() `should contain all` listOf(sent2[0], sent2[3])
-                sent4.getVerbs() `should contain all` listOf(sent4[0], sent4[3])
+                sent2.getVerbs() `should contain all` listOf(sent2[3])
+                sent4.getVerbs().size `should be equal to` 0
             }
 
             it("should provide proper list of modifiers") {
                 sent2.getModifiers() `should contain all` listOf(sent2[0])
+                sent4.getModifiers() `should contain all` listOf(sent4[0])
             }
 
             // toString, surfaceString, singleLineString

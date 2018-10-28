@@ -21,22 +21,26 @@ import org.bitbucket.eunjeon.seunjeon.NngUtil
  * @since 1.x
  */
 object Dictionary : CanCompileDict {
-    private val leftIDMap by lazy {
+    private val leftIDMap: Map<String, Short> by lazy {
         NngUtil::class.java.classLoader.getResourceAsStream(DictBuilder.LEFT_ID_DEF().drop(1)).bufferedReader().lines()
                 .iterator().asSequence()
                 .map {
                     val splits = it.split(" ")
                     splits[1].replace("^([^,]+,[^,]+),.*".toRegex(), "$1") to splits[0].toShort()
-                }.groupBy { it.first }.mapValues { it.value.maxBy { x -> x.second }?.second }
+                }.groupBy { it.first }
+                .filterValues { it.isNotEmpty() }
+                .mapValues { it.value.maxBy { x -> x.second }!!.second }
     }
 
-    private val rightIDMap by lazy {
+    private val rightIDMap: Map<String, Short> by lazy {
         NngUtil::class.java.classLoader.getResourceAsStream(DictBuilder.RIGHT_ID_DEF().drop(1)).bufferedReader().lines()
                 .iterator().asSequence()
                 .map {
                     val splits = it.split(" ")
                     splits[1].replace("^([^,]+,[^,]+,[^,]+),.*".toRegex(), "$1") to splits[0].toShort()
-                }.groupBy { it.first }.mapValues { it.value.maxBy { x -> x.second }?.second }
+                }.groupBy { it.first }
+                .filterValues { it.isNotEmpty() }
+                .mapValues { it.value.maxBy { x -> x.second }!!.second }
     }
 
     /**
@@ -67,13 +71,13 @@ object Dictionary : CanCompileDict {
      * 사용자사전에 등재되기 전의 리스트.
      * @since 1.x
      */
-    internal val rawDict = mutableSetOf<String>()
+    private val rawDict = mutableSetOf<String>()
 
     /**
      * 사용자사전 변경여부.
      * @since 1.x
      */
-    internal var isDicChanged = false
+    private var isDicChanged = false
 
     /**
      * 사전에 항목이 있는지 확인.
@@ -94,16 +98,11 @@ object Dictionary : CanCompileDict {
             val (word, tag) = entry
             val oTag = tag.fromSejongPOS()
 
-            try {
-                if (word.isHangulEnding()) {
-                    val jong = if (word.isJongsungEnding()) "T" else "F"
-                    "$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
-                } else {
-                    "$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*"
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                throw e
+            if (word.isHangulEnding()) {
+                val jong = if (word.isJongsungEnding()) "T" else "F"
+                "$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
+            } else {
+                "$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*"
             }
         })
 
@@ -119,7 +118,7 @@ object Dictionary : CanCompileDict {
      * @return Left ID
      */
     private fun getLeftId(tag: String = "NNG"): Short {
-        return leftIDMap["$tag,*"] ?: leftIDMap.filterKeys { it.startsWith(tag) }.values.maxBy { it!! }!!
+        return leftIDMap["$tag,*"] ?: leftIDMap.values.max()!!
     }
 
     /**
@@ -132,7 +131,7 @@ object Dictionary : CanCompileDict {
      * @return Right ID
      */
     private fun getRightId(tag: String = "NNG", hasJongsung: String = "*"): Short {
-        return rightIDMap["$tag,*,$hasJongsung"] ?: rightIDMap.filterKeys { it.startsWith(tag) }.values.maxBy { it!! }!!
+        return rightIDMap["$tag,*,$hasJongsung"] ?: leftIDMap.values.max()!!
     }
 
     /**
@@ -196,7 +195,7 @@ object Dictionary : CanCompileDict {
      * @return (형태소, 품사)의 Iterator.
      */
     override fun getBaseEntries(filter: (POS) -> Boolean): Iterator<DicEntry> =
-            lexiconDict.termDict().mapNotNull {
+            lexiconDict.termDict().asSequence().mapNotNull {
                 val converted = convertMorpheme(it)
                 if (converted.size == 1 && filter(converted[0].tag)) converted[0].surface to converted[0].tag
                 else null

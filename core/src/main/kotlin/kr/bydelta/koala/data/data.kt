@@ -1399,7 +1399,9 @@ class Sentence(private val words: List<Word>) : CanHaveProperty(), List<Word> by
 
     /**
      * 체언(명사, 수사, 대명사) 및 체언 성격의 어휘를 포함하는 어절들을 가져옵니다.
-     * (명사형 전성어미 [POS.ETN], 명사 파생 접미사 [POS.XSN] 포함)
+     * - 포함: 체언, 명사형 전성어미 [POS.ETN], 명사 파생 접미사 [POS.XSN]
+     * - 제외: 관형형 전성어미 [POS.ETM], 동사/형용사/부사 파생 접미사 [POS.XSV], [POS.XSA], [POS.XSM]
+     * - 가장 마지막에 적용되는 어미/접미사를 기준으로 판정함
      *
      * ## 참고
      * **전성어미**는 용언 따위에 붙어 다른 품사의 기능을 수행하도록 변경하는 어미입니다.
@@ -1411,12 +1413,16 @@ class Sentence(private val words: List<Word>) : CanHaveProperty(), List<Word> by
      * @return 체언 또는 체언 성격의 어휘를 포함하는 어절의 목록
      */
     fun getNouns(): List<Word> = words.filter { w ->
-        w.any { it.isNoun() || it.hasTagOneOf("ETN", "XSN") }
+        val inclusion = w.indexOfLast { it.isNoun() || it.hasTagOneOf("ETN", "XSN") }
+        val exclusion = w.indexOfLast { it.hasTagOneOf("XSV", "XSA", "XSM") }
+        inclusion != -1 && (exclusion == -1 || inclusion > exclusion)
     }
 
     /**
      * 용언(동사, 형용사) 및 용언 성격의 어휘를 포함하는 어절들을 가져옵니다.
-     * (용언의 활용형: V+E, 동사/형용사 파생 접미사 [POS.XSV], [POS.XSM] 포함)
+     * - 포함: 용언, 동사 파생 접미사 [POS.XSV]
+     * - 제외: 명사형/관형형 전성어미 [POS.ETN], [POS.ETM], 명사/형용사/부사 파생 접미사 [POS.XSN], [POS.XSA], [POS.XSM]
+     * - 가장 마지막에 적용되는 어미/접미사를 기준으로 판정함
      *
      * ## 참고
      * **전성어미**는 용언 따위에 붙어 다른 품사의 기능을 수행하도록 변경하는 어미입니다.
@@ -1428,12 +1434,16 @@ class Sentence(private val words: List<Word>) : CanHaveProperty(), List<Word> by
      * @return 체언 또는 체언 성격의 어휘를 포함하는 어절의 목록
      */
     fun getVerbs(): List<Word> = words.filter { w ->
-        w.any { it.isPredicate() || it.hasTagOneOf("XSV", "XSM") }
+        val inclusion = w.indexOfLast { it.isPredicate() || it.tag == POS.XSV }
+        val exclusion = w.indexOfLast { it.hasTagOneOf("ETN", "ETM", "XSN", "XSA", "XSM") }
+        inclusion != -1 && (exclusion == -1 || inclusion > exclusion)
     }
 
     /**
      * 수식언(관형사, 부사) 및 수식언 성격의 어휘를 포함하는 어절들을 가져옵니다.
-     * (관형형 전성어미 [POS.ETM], 부사 파생 접미사 [POS.XSA] 포함)
+     * - 포함: 수식언, 관형형 전성어미 [POS.ETM], 형용사/부사 파생 접미사 [POS.XSA], [POS.XSM]
+     * - 제외: 명사형 전성어미 [POS.ETN], 명사/동사 파생 접미사 [POS.XSN], [POS.XSV]
+     * - 가장 마지막에 적용되는 어미/접미사를 기준으로 판정함
      *
      * ## 참고
      * **전성어미**는 용언 따위에 붙어 다른 품사의 기능을 수행하도록 변경하는 어미입니다.
@@ -1445,7 +1455,9 @@ class Sentence(private val words: List<Word>) : CanHaveProperty(), List<Word> by
      * @return 체언 또는 체언 성격의 어휘를 포함하는 어절의 목록
      */
     fun getModifiers(): List<Word> = words.filter { w ->
-        w.any { it.isModifier() || it.hasTagOneOf("ETM", "XSA") }
+        val inclusion = w.indexOfLast { it.isNoun() || it.hasTagOneOf("ETM", "XSA", "XSM") }
+        val exclusion = w.indexOfLast { it.hasTagOneOf("ETN", "XSN", "XSV") }
+        inclusion != -1 && (exclusion == -1 || inclusion > exclusion)
     }
     /********** Equalities **********/
 

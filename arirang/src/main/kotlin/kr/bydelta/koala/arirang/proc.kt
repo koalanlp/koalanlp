@@ -49,7 +49,9 @@ class Tagger : CanTagOnlyASentence<List<AnalysisOutput>>() {
                 morphCandidates.add(0, Morpheme(token, POS.NA, " "))
                 surfaceCandidate = token + surfaceCandidate //Note: Order changed!
             }
-            morphCandidates.addAll(interpretOutput(word))
+            morphCandidates.addAll(interpretOutput(word).map {
+                Morpheme(it.first.trim(), it.second, it.third)
+            })
             pos = newPos + surfaceCandidate.length
 
             // Find Special characters and separate them as morphemes
@@ -128,10 +130,10 @@ class Tagger : CanTagOnlyASentence<List<AnalysisOutput>>() {
      * **참고** 아리랑 분석기는 분석 결과를 형태소 형태로 들고 있지 않지만,
      * 내부에서는 형태소 분석을 수행하므로, 이를 복원하는 게 필요함.
      * */
-    private fun interpretOutput(o: AnalysisOutput): List<Morpheme> {
-        val morphs = mutableListOf<Morpheme>()
+    private fun interpretOutput(o: AnalysisOutput): List<Triple<String, POS, String>> {
+        val morphs = mutableListOf<Triple<String, POS, String>>()
 
-        morphs.add(Morpheme(o.stem.trim(), when (o.pos) {
+        morphs.add(Triple<String, POS, String>(o.stem, when (o.pos) {
             PatternConstants.POS_NPXM -> POS.NNG
             PatternConstants.POS_VJXV -> POS.VV
             PatternConstants.POS_AID -> POS.MAG
@@ -140,122 +142,122 @@ class Tagger : CanTagOnlyASentence<List<AnalysisOutput>>() {
 
         if (o.nsfx != null) {
             //NounSuffix
-            morphs.add(Morpheme(o.nsfx.trim(), POS.XSN, "_s"))
+            morphs.add(Triple<String, POS, String>(o.nsfx, POS.XSN, "_s"))
         }
 
         when (o.patn) {
             2, 22 -> {
-                morphs.add(Morpheme(o.josa.trim(), POS.JX, "_j"))
+                morphs.add(Triple<String, POS, String>(o.josa, POS.JX, "_j"))
             }
 
             3 -> {
                 //* 체언 + 용언화접미사 + 어미 */
-                morphs.add(Morpheme(o.vsfx.trim(), POS.XSV, "_t"))
+                morphs.add(Triple<String, POS, String>(o.vsfx, POS.XSV, "_t"))
                 if (o.pomi != null) {
-                    morphs.add(Morpheme(o.pomi.trim(), POS.EP, "_f"))
+                    morphs.add(Triple<String, POS, String>(o.pomi, POS.EP, "_f"))
                 }
 
-                morphs.add(Morpheme(o.eomi.trim(), POS.EF, "_e"))
+                morphs.add(Triple<String, POS, String>(o.eomi, POS.EF, "_e"))
             }
 
             4 -> {
                 //* 체언 + 용언화접미사 + '음/기' + 조사 */
-                morphs.add(Morpheme(o.vsfx.trim(), POS.XSV, "_t"))
+                morphs.add(Triple<String, POS, String>(o.vsfx, POS.XSV, "_t"))
                 if (o.pomi != null) {
-                    morphs.add(Morpheme(o.pomi.trim(), POS.EP, "_f"))
+                    morphs.add(Triple<String, POS, String>(o.pomi, POS.EP, "_f"))
                 }
 
-                morphs.add(Morpheme(o.elist[0].trim(), POS.ETN, "_n"))
-                morphs.add(Morpheme(o.josa.trim(), POS.JX, "_j"))
+                morphs.add(Triple<String, POS, String>(o.elist[0], POS.ETN, "_n"))
+                morphs.add(Triple<String, POS, String>(o.josa, POS.JX, "_j"))
             }
 
             5 -> {
                 //* 체언 + 용언화접미사 + '아/어' + 보조용언 + 어미 */
-                morphs.add(Morpheme(o.vsfx.trim(), POS.XSV, "_t"))
-                morphs.add(Morpheme(o.elist[0].trim(), POS.EC, "_c"))
-                morphs.add(Morpheme(o.xverb.trim(), POS.VX, "_W"))
+                morphs.add(Triple<String, POS, String>(o.vsfx, POS.XSV, "_t"))
+                morphs.add(Triple<String, POS, String>(o.elist[0], POS.EC, "_c"))
+                morphs.add(Triple<String, POS, String>(o.xverb, POS.VX, "_W"))
                 if (o.pomi != null) {
-                    morphs.add(Morpheme(o.pomi.trim(), POS.EP, "_f"))
+                    morphs.add(Triple<String, POS, String>(o.pomi, POS.EP, "_f"))
                 }
 
-                morphs.add(Morpheme(o.eomi.trim(), POS.EF, "_e"))
+                morphs.add(Triple<String, POS, String>(o.eomi, POS.EF, "_e"))
             }
 
             6 -> {
                 //* 체언 + '에서/부터/에서부터' + '이' + 어미 */
-                morphs.add(Morpheme(o.josa.trim(), POS.JKB, "_j"))
-                morphs.add(Morpheme(o.elist[0].trim(), POS.VCP, "_t"))
+                morphs.add(Triple<String, POS, String>(o.josa, POS.JKB, "_j"))
+                morphs.add(Triple<String, POS, String>(o.elist[0], POS.VCP, "_t"))
                 if (o.pomi != null) {
-                    morphs.add(Morpheme(o.pomi.trim(), POS.EP, "_f"))
+                    morphs.add(Triple<String, POS, String>(o.pomi, POS.EP, "_f"))
                 }
 
-                morphs.add(Morpheme(o.eomi.trim(), POS.EF, "_e"))
+                morphs.add(Triple<String, POS, String>(o.eomi, POS.EF, "_e"))
             }
 
             7 -> {
                 //* 체언 + 용언화접미사 + '아/어' + 보조용언 + '음/기' + 조사 */
-                morphs.add(Morpheme(o.vsfx.trim(), POS.XSV, "_t"))
-                morphs.add(Morpheme(o.elist[0].trim(), POS.EC, "_c"))
-                morphs.add(Morpheme(o.xverb.trim(), POS.VX, "_W"))
+                morphs.add(Triple<String, POS, String>(o.vsfx, POS.XSV, "_t"))
+                morphs.add(Triple<String, POS, String>(o.elist[0], POS.EC, "_c"))
+                morphs.add(Triple<String, POS, String>(o.xverb, POS.VX, "_W"))
                 if (o.pomi != null) {
-                    morphs.add(Morpheme(o.pomi.trim(), POS.EP, "_f"))
+                    morphs.add(Triple<String, POS, String>(o.pomi, POS.EP, "_f"))
                 }
 
-                morphs.add(Morpheme(o.elist[0].trim(), POS.ETN, "_n"))
-                morphs.add(Morpheme(o.josa.trim(), POS.JX, "_j"))
+                morphs.add(Triple<String, POS, String>(o.elist[0], POS.ETN, "_n"))
+                morphs.add(Triple<String, POS, String>(o.josa, POS.JX, "_j"))
             }
 
             11 -> {
                 //* 용언 + 어미 */
                 if (o.pomi != null) {
-                    morphs.add(Morpheme(o.pomi.trim(), POS.EP, "_f"))
+                    morphs.add(Triple<String, POS, String>(o.pomi, POS.EP, "_f"))
                 }
 
-                morphs.add(Morpheme(o.eomi.trim(), POS.EF, "_e"))
+                morphs.add(Triple<String, POS, String>(o.eomi, POS.EF, "_e"))
             }
 
             12 -> {
                 //* 용언 + '음/기' + 조사 */
                 if (o.pomi != null) {
-                    morphs.add(Morpheme(o.pomi.trim(), POS.EP, "_f"))
+                    morphs.add(Triple<String, POS, String>(o.pomi, POS.EP, "_f"))
                 }
 
-                morphs.add(Morpheme(o.elist[0].trim(), POS.ETN, "_n"))
-                morphs.add(Morpheme(o.josa.trim(), POS.JX, "_j"))
+                morphs.add(Triple<String, POS, String>(o.elist[0], POS.ETN, "_n"))
+                morphs.add(Triple<String, POS, String>(o.josa, POS.JX, "_j"))
             }
 
             13 -> {
                 //* 용언 + '음/기' + '이' + 어미 */
-                morphs.add(Morpheme(o.elist[0].trim(), POS.ETN, "_n"))
-                morphs.add(Morpheme(o.elist[1].trim(), POS.VCP, "_s"))
+                morphs.add(Triple<String, POS, String>(o.elist[0], POS.ETN, "_n"))
+                morphs.add(Triple<String, POS, String>(o.elist[1], POS.VCP, "_s"))
                 if (o.pomi != null) {
-                    morphs.add(Morpheme(o.pomi.trim(), POS.EP, "_f"))
+                    morphs.add(Triple<String, POS, String>(o.pomi, POS.EP, "_f"))
                 }
 
-                morphs.add(Morpheme(o.eomi.trim(), POS.EF, "_e"))
+                morphs.add(Triple<String, POS, String>(o.eomi, POS.EF, "_e"))
             }
 
             14 -> {
                 //* 용언 + '아/어' + 보조용언 + 어미 */
-                morphs.add(Morpheme(o.elist[0].trim(), POS.EC, "_c"))
-                morphs.add(Morpheme(o.xverb.trim(), POS.VX, "_W"))
+                morphs.add(Triple<String, POS, String>(o.elist[0], POS.EC, "_c"))
+                morphs.add(Triple<String, POS, String>(o.xverb, POS.VX, "_W"))
                 if (o.pomi != null) {
-                    morphs.add(Morpheme(o.pomi.trim(), POS.EP, "_f"))
+                    morphs.add(Triple<String, POS, String>(o.pomi, POS.EP, "_f"))
                 }
 
-                morphs.add(Morpheme(o.eomi.trim(), POS.EF, "_e"))
+                morphs.add(Triple<String, POS, String>(o.eomi, POS.EF, "_e"))
             }
 
             15 -> {
                 //* 용언 + '아/어' + 보조용언 + '음/기' + 조사 */
-                morphs.add(Morpheme(o.elist[1].trim(), POS.EC, "_c"))
-                morphs.add(Morpheme(o.xverb.trim(), POS.VX, "_W"))
+                morphs.add(Triple<String, POS, String>(o.elist[1], POS.EC, "_c"))
+                morphs.add(Triple<String, POS, String>(o.xverb, POS.VX, "_W"))
                 if (o.pomi != null) {
-                    morphs.add(Morpheme(o.pomi.trim(), POS.EP, "_f"))
+                    morphs.add(Triple<String, POS, String>(o.pomi, POS.EP, "_f"))
                 }
 
-                morphs.add(Morpheme(o.elist[0].trim(), POS.ETN, "_n"))
-                morphs.add(Morpheme(o.josa.trim(), POS.JX, "_j"))
+                morphs.add(Triple<String, POS, String>(o.elist[0], POS.ETN, "_n"))
+                morphs.add(Triple<String, POS, String>(o.josa, POS.JX, "_j"))
             }
 
             else -> {
@@ -276,8 +278,6 @@ class Tagger : CanTagOnlyASentence<List<AnalysisOutput>>() {
         /** 종결부호, 문장부호, 괄호 등으로 segmentize하는 Regex */
         private val punctuationsSplit =
                 "(?U)((?<=[,.:;?!/·\\s\'\"(\\[{<〔〈《「『【‘“)\\]}>〕〉》」』】’”])|(?=[,.:;?!/·\\s\'\"(\\[{<〔〈《「『【‘“)\\]}>〕〉》」』】’”]+))".toRegex()
-        /** 괄호가 아닌 문자 필터 */
-        private val filterRegex = "(?U)[^\'\"(\\[{<〔〈《「『【‘“)\\]}>〕〉》」』】’”]+".toRegex()
         /** 괄호 */
         private val SSRegex = "(?U)[\'\"(\\[{<〔〈《「『【‘“)\\]}>〕〉》」』】’”]+".toRegex()
     }

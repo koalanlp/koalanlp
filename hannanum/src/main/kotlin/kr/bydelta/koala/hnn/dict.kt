@@ -8,7 +8,6 @@ import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.datastructure.TagS
 import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.datastructure.Trie
 import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.resource.AnalyzedDic
 import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.resource.Connection
-import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.resource.ConnectionNot
 import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.resource.NumberAutomata
 import kr.bydelta.koala.POS
 import kr.bydelta.koala.proc.CanCompileDict
@@ -39,13 +38,6 @@ object Dictionary : CanCompileDict, CanExtractResource() {
         connection.init(fileConnections, tagSet.tagCount, tagSet)
         connection
     }
-    /** 연결 불가능 */
-    internal val connectionNot: ConnectionNot by lazy {
-        val connectionNot = ConnectionNot()
-        val fileConnectionsNot: String = extractResource() + File.separator + "data/kE/connections_not.txt"
-        connectionNot.init(fileConnectionsNot, tagSet)
-        connectionNot
-    }
     /** 기 분석 사전 */
     internal val analyzedDic: AnalyzedDic by lazy {
         val fileDicAnalyzed: String = extractResource() + File.separator + "data/kE/dic_analyzed.txt"
@@ -61,7 +53,7 @@ object Dictionary : CanCompileDict, CanExtractResource() {
         systemDic
     }
     /** 사용자 사전 파일 */
-    internal val usrDicPath: File by lazy {
+    private val usrDicPath: File by lazy {
         val f = File(extractResource() + File.separator + "data/kE/dic_user.txt")
         f.createNewFile()
         f.deleteOnExit()
@@ -74,7 +66,7 @@ object Dictionary : CanCompileDict, CanExtractResource() {
     /** 시스템 사전 (Koala) */
     private val baseEntries = mutableListOf<Pair<String, List<POS>>>()
     /** 사용자 사전 (Koala) */
-    internal val usrBuffer = mutableSetOf<Pair<String, POS>>()
+    private val usrBuffer = mutableSetOf<Pair<String, POS>>()
     /** 마지막 사용자사전 업데이트 시각 */
     private var dicLastUpdate = 0L
 
@@ -88,6 +80,7 @@ object Dictionary : CanCompileDict, CanExtractResource() {
         val writer = FileOutputStream(usrDicPath, true).bufferedWriter()
         dict.forEach {
             val (morph, tag) = it
+
             writer.write("$morph\t${tag.fromSejongPOS().toLowerCase()}\n")
         }
         writer.close()
@@ -113,10 +106,10 @@ object Dictionary : CanCompileDict, CanExtractResource() {
             // filter out existing morphemes!
             if (morph == null) tags // The case of not found.
             else {
-                val found = morph.info_list.map { m -> m.tag }
-                tags.filterNot {
-                    found.contains(tagSet.getTagID(it.second.fromSejongPOS().toLowerCase()))
-                }
+                val found = morph.info_list.map { m ->
+                    tagSet.getTagName(m.tag).toSejongPOS()
+                }.toSet()
+                tags.filterNot { m -> m.second in found }
             }
         }.toTypedArray()
     }
@@ -174,7 +167,7 @@ object Dictionary : CanCompileDict, CanExtractResource() {
                 while (stack.isNotEmpty()) {
                     val (prefix, top) = stack.pop()
 
-                    val word = prefix + top.key
+                    val word = if (top.key.toInt() != 0) prefix + top.key else prefix
                     val value = top.info_list
 
                     if (value != null) {

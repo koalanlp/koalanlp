@@ -46,7 +46,7 @@ dokka {
 
 extraArchive {
     sources = true
-    tests = project.name.endsWith('core')
+    tests = false
     javadoc = true
 }
 
