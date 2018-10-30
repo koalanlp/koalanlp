@@ -41,7 +41,7 @@ import org.openkoreantext.processor.tokenizer.KoreanTokenizer
  * val sentences = tagger("문장들입니다. 결과는 목록이 됩니다.")
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * val tagger = new Tagger()
@@ -130,7 +130,7 @@ class Tagger : CanTagAParagraph<List<KoreanTokenizer.KoreanToken>>() {
  * val split = splitter(sentence)
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * val splitter = new SentenceSplitter()

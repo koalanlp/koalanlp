@@ -37,7 +37,7 @@ val ALPHABET_READING = mapOf(
  * "ABC".alphaToHangul()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * "ABC".alphaToHangul
@@ -73,7 +73,7 @@ fun CharSequence.alphaToHangul(): CharSequence {
  * "에이비씨".hangulToAlpha()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * "에이비씨".hangulToAlpha
@@ -119,7 +119,7 @@ fun CharSequence.hangulToAlpha(): CharSequence {
  * "에이비씨".isAlphaPronounced()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * "에이비씨".isAlphaPronounced
@@ -159,7 +159,7 @@ fun CharSequence.isAlphaPronounced(): Boolean {
  * '樂'.isHanja()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * '樂'.isHanja
@@ -190,7 +190,7 @@ fun Char.isHanja(): Boolean {
  * '樂'.isCJKHanja()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * '樂'.isCJKHanja
@@ -255,7 +255,7 @@ private val HANJA_BU_FIX by lazy { arrayOf('\u1103', '\u110C') }
  * "可口可樂".hanjaToHangul()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * "可口可樂".hanjaToHangul
@@ -343,7 +343,7 @@ fun CharSequence.hanjaToHangul(headCorrection: Boolean = true): CharSequence {
  * '가'.isCompleteHangul()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * '가'.isCompleteHangul
@@ -367,7 +367,7 @@ fun Char.isCompleteHangul(): Boolean = this in HANGUL_START..HANGUL_END
  * '가'.isIncompleteHangul()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * '가'.isIncompleteHangul
@@ -391,7 +391,7 @@ fun Char.isIncompleteHangul(): Boolean = this.toInt() in 0x1100..0x11FF || this.
  * '가'.isHangul()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * '가'.isHangul
@@ -415,7 +415,7 @@ fun Char.isHangul(): Boolean = this.isCompleteHangul() || this.isIncompleteHangu
  * "가나다".isHangulEnding()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * "가나다".isHangulEnding
@@ -439,7 +439,7 @@ fun CharSequence.isHangulEnding(): Boolean = this.last().isHangul()
  * '가'.isChosungJamo()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * '가'.isChosungJamo
@@ -463,7 +463,7 @@ fun Char.isChosungJamo(): Boolean = this.toInt() in 0x1100..0x1112
  * '가'.isJungsungJamo()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * '가'.isJungsungJamo
@@ -487,7 +487,7 @@ fun Char.isJungsungJamo(): Boolean = this.toInt() in 0x1161..0x1175
  * '가'.isJongsungJamo()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * '가'.isJongsungJamo
@@ -511,7 +511,7 @@ fun Char.isJongsungJamo(): Boolean = this.toInt() in 0x11A8..0x11C2
  * '가'.isJongsungEnding()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * '가'.isJongsungEnding
@@ -535,7 +535,7 @@ fun Char.isJongsungEnding(): Boolean = this.isCompleteHangul() && (this - HANGUL
  * "가나다".isJongsungEnding()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * "가나다".isJongsungEnding
@@ -559,7 +559,7 @@ fun CharSequence.isJongsungEnding(): Boolean = this.last().isJongsungEnding()
  * '가'.getChosung()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * '가'.getChosung
@@ -588,7 +588,7 @@ fun Char.getChosung(): Char? =
  * '가'.getJungsung()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * '가'.getJungsung
@@ -617,7 +617,7 @@ fun Char.getJungsung(): Char? =
  * '가'.getJongsung()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * '가'.getJongsung
@@ -646,7 +646,7 @@ fun Char.getJongsung(): Char? =
  * '가'.dissembleHangul() // ㄱ, ㅏ, null
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * '가'.dissembleHangul // ㄱ, ㅏ, null
@@ -677,7 +677,7 @@ fun Char.dissembleHangul(): Triple<Char, Char, Char?>? {
  * "가나다".dissembleHangul() // "ㄱㅏㄴㅏㄷㅏ"
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * "가나다".dissembleHangul // "ㄱㅏㄴㅏㄷㅏ"
@@ -717,7 +717,7 @@ fun CharSequence.dissembleHangul(): CharSequence {
  * assembleHangul('ᄁ', 'ᅡ') // "까"
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * assembleHangul('ᄁ', 'ᅡ') // "까"
  * ```
@@ -761,7 +761,7 @@ fun assembleHangul(cho: Char? = null, jung: Char? = null, jong: Char? = null): C
  * Triple('ᄁ', 'ᅡ', null as Char?).assembleHangul() // "까"
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * ('ᄁ', 'ᅡ', null.as[Char]).assembleHangul // "까"
@@ -789,7 +789,7 @@ fun Triple<Char?, Char?, Char?>.assembleHangul(): Char = assembleHangul(this.fir
  * "까?ABC".assembleHangul() // "까?ABC"
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * // 왼쪽 문자열은 조합형 문자열임.
@@ -948,7 +948,7 @@ private fun Char.addWoo(): Char =
  * correctVerbApply("듣", true, "어") // 동사 "듣다"에 어미 "-어"가 붙으면 "들어"가 됩니다.
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * correctVerbApply("듣", true, "어")
  * ```

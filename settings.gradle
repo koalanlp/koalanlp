@@ -1,8 +1,5 @@
 rootProject.name = archivesBaseName
 
-include 'java'
-include 'kotlin'
-
 include 'core' //Core API package
 
 include 'komoran' // Komoran 3.x by Shineware

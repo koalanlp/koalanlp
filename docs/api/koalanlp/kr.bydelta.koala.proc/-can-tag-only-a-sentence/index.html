@@ -12,6 +12,7 @@
 <code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CanTagOnlyASentence</span><span
         class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span
         class="symbol">:</span>&nbsp;<a href="../-can-tag/index.html"><span class="identifier">CanTag</span></a></code>
+<a href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/proc/processors.kt#L439">(source)</a>
 <p>문단1개는 불가하지만, 문장1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 <a href="index.html#S">S</a> 타입으로 돌려줍니다.</p>
 <h2>참고</h2>
 <p><strong>형태소</strong>는 의미를 가지는 요소로서는 더 이상 분석할 수 없는 가장 작은 말의 단위로 정의됩니다.</p>
@@ -38,7 +39,7 @@ val sentences = tagger.tag("문장들입니다. 결과는 목록이 됩니다.")
 // 또는
 val sentences = tagger("문장들입니다. 결과는 목록이 됩니다.")
 </code></pre>
-<h3>Scala + <a href="https://koalanlp.github.io/wrapper-scala/">koalanlp-scala</a></h3>
+<h3>Scala + <a href="https://koalanlp.github.io/scala-support/">koalanlp-scala</a></h3>
 <pre><code class="lang-scala">import kr.bydelta.koala.Implicits._
 val tagger = new Tagger()
 val sentence = tagger.tagSentence("문장 1개입니다.")
@@ -230,8 +231,7 @@ List&lt;Sentence&gt; sentences = tagger.invoke("문장들입니다. 결과는 �
             <code><span class="keyword">class </span><span class="identifier">Tagger</span>&nbsp;<span
                     class="symbol">:</span>&nbsp;<a href="./index.html"><span
                     class="identifier">CanTagOnlyASentence</span></a><span class="symbol">&lt;</span><span
-                    class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">?</span><span
-                    class="symbol">&gt;</span></code>
+                    class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">&gt;</span></code>
             <p>코모란 형태소분석기의 KoalaNLP Wrapper입니다.</p>
         </td>
     </tr>

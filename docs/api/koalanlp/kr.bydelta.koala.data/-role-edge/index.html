@@ -13,7 +13,8 @@
         href="../-d-a-g-edge/index.html"><span class="identifier">DAGEdge</span></a><span class="symbol">&lt;</span><a
         href="../../kr.bydelta.koala/-role-type/index.html"><span class="identifier">RoleType</span></a><span
         class="symbol">,</span>&nbsp;<a href="../-word/index.html"><span class="identifier">Word</span></a><span
-        class="symbol">&gt;</span></code>
+        class="symbol">&gt;</span></code> <a
+        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/data/data.kt#L745">(source)</a>
 <p>의미역 구조 분석의 결과.</p>
 <h2>참고</h2>
 <p><strong>의미역 결정</strong>은 문장의 구성 어절들의 역할/기능을 분석하는 방법입니다.
@@ -53,16 +54,22 @@
         </td>
         <td>
             <code><span class="identifier">RoleEdge</span><span class="symbol">(</span><span class="identifier"
-                                                                                             id="kr.bydelta.koala.data.RoleEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.RoleType, kotlin.String)/predicate">predicate</span><span
+                                                                                             id="kr.bydelta.koala.data.RoleEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.RoleType, kotlin.collections.List((kr.bydelta.koala.data.Word)), kotlin.String)/predicate">predicate</span><span
                     class="symbol">:</span>&nbsp;<a href="../-word/index.html"><span
                     class="identifier">Word</span></a><span class="symbol">, </span><span class="identifier"
-                                                                                          id="kr.bydelta.koala.data.RoleEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.RoleType, kotlin.String)/argument">argument</span><span
+                                                                                          id="kr.bydelta.koala.data.RoleEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.RoleType, kotlin.collections.List((kr.bydelta.koala.data.Word)), kotlin.String)/argument">argument</span><span
                     class="symbol">:</span>&nbsp;<a href="../-word/index.html"><span
                     class="identifier">Word</span></a><span class="symbol">, </span><span class="identifier"
-                                                                                          id="kr.bydelta.koala.data.RoleEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.RoleType, kotlin.String)/label">label</span><span
+                                                                                          id="kr.bydelta.koala.data.RoleEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.RoleType, kotlin.collections.List((kr.bydelta.koala.data.Word)), kotlin.String)/label">label</span><span
                     class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala/-role-type/index.html"><span
                     class="identifier">RoleType</span></a><span class="symbol">, </span><span class="identifier"
-                                                                                              id="kr.bydelta.koala.data.RoleEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.RoleType, kotlin.String)/originalLabel">originalLabel</span><span
+                                                                                              id="kr.bydelta.koala.data.RoleEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.RoleType, kotlin.collections.List((kr.bydelta.koala.data.Word)), kotlin.String)/modifiers">modifiers</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                    href="../-word/index.html"><span class="identifier">Word</span></a><span class="symbol">&gt;</span>&nbsp;<span
+                    class="symbol">=</span>&nbsp;emptyList()<span class="symbol">, </span><span class="identifier"
+                                                                                                id="kr.bydelta.koala.data.RoleEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.RoleType, kotlin.collections.List((kr.bydelta.koala.data.Word)), kotlin.String)/originalLabel">originalLabel</span><span
                     class="symbol">:</span>&nbsp;<a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
                     class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span
@@ -84,6 +91,19 @@
                     class="symbol">: </span><a href="../-word/index.html"><span
                     class="identifier">Word</span></a></code>
             <p>의미역 구조에서 서술된 논항 <a href="../-word/index.html">Word</a></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="modifiers.html">modifiers</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">val </span><span class="identifier">modifiers</span><span
+                    class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                    href="../-word/index.html"><span class="identifier">Word</span></a><span class="symbol">&gt;</span></code>
+            <p>논항의 수식어구들</p>
         </td>
     </tr>
     <tr>
@@ -148,6 +168,23 @@
     </tr>
     </tbody>
 </table>
+<h3>Functions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="to-string.html">toString</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">fun </span><span class="identifier">toString</span><span class="symbol">(</span><span
+                    class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a></code>
+            <p>Returns a string representation of the object.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
 <h3>Inherited Functions</h3>
 <table>
     <tbody>
@@ -178,19 +215,6 @@
                     class="symbol">: </span><a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
             <p>Returns a hash code value for the object. The general contract of hashCode is:</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="../-d-a-g-edge/to-string.html">toString</a></p>
-        </td>
-        <td>
-            <code><span class="keyword">open</span> <span class="keyword">fun </span><span
-                    class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span
-                    class="symbol">: </span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-                    class="identifier">String</span></a></code>
-            <p>Returns a string representation of the object.</p>
         </td>
     </tr>
     </tbody>

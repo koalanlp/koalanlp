@@ -10,9 +10,9 @@
 <br/>
 <h1>assembleHangul</h1>
 <a name="kr.bydelta.koala$assembleHangul(kotlin.Char, kotlin.Char, kotlin.Char)"></a>
-<code><span class="keyword">fun </span><span class="identifier">assembleHangul</span><span class="symbol">(</span><span
-        class="identifier"
-        id="kr.bydelta.koala$assembleHangul(kotlin.Char, kotlin.Char, kotlin.Char)/cho">cho</span><span
+<code><span class="identifier">@JvmOverloads</span> <span class="keyword">fun </span><span class="identifier">assembleHangul</span><span
+        class="symbol">(</span><span class="identifier"
+                                     id="kr.bydelta.koala$assembleHangul(kotlin.Char, kotlin.Char, kotlin.Char)/cho">cho</span><span
         class="symbol">:</span>&nbsp;<a
         href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span
         class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span
@@ -27,7 +27,8 @@
         href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span
         class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span
         class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span
-        class="identifier">Char</span></a></code>
+        class="identifier">Char</span></a></code> <a
+        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/extension.kt#L739">(source)</a>
 <p>초성을 <a href="assemble-hangul.html#kr.bydelta.koala$assembleHangul(kotlin.Char, kotlin.Char, kotlin.Char)/cho">cho</a>
     문자로, 중성을 <a href="assemble-hangul.html#kr.bydelta.koala$assembleHangul(kotlin.Char, kotlin.Char, kotlin.Char)/jung">jung</a>
     문자로, 종성을 <a href="assemble-hangul.html#kr.bydelta.koala$assembleHangul(kotlin.Char, kotlin.Char, kotlin.Char)/jong">jong</a>
@@ -36,7 +37,7 @@
 <h3>Kotlin</h3>
 <pre><code class="lang-kotlin">assembleHangul('ᄁ', 'ᅡ') // "까"
 </code></pre>
-<h3>Scala + <a href="https://koalanlp.github.io/wrapper-scala/">koalanlp-scala</a></h3>
+<h3>Scala + <a href="https://koalanlp.github.io/scala-support/">koalanlp-scala</a></h3>
 <pre><code class="lang-scala">assembleHangul('ᄁ', 'ᅡ') // "까"
 </code></pre>
 <h3>Java</h3>
@@ -49,36 +50,6 @@
     <code>jung</code> - 종성 문자 (0x1161-1175)</p>
 <p><a name="jong"></a>
     <code>jong</code> - 종성 문자 (0x11a8-11c2) 또는 null</p>
-<h3>Exceptions</h3>
-<p><a name="IllegalArgumentException"></a>
-    <code>IllegalArgumentException</code> - 초성, 중성, 종성이 지정된 범위가 아닌 경우 발생합니다.</p>
-<p><strong>Since</strong><br/>
-    2.0.0</p>
-<p><strong>Return</strong><br/>
-    초성, 중성, 종성을 조합하여 문자를 만듭니다.</p>
-<a name="kr.bydelta.koala$assembleHangul(((kotlin.Char, , )))"></a>
-<code><span class="keyword">fun </span><span class="identifier">&lt;ERROR CLASS&gt;</span><span
-        class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span
-        class="identifier">Char</span></a><span class="symbol">?</span><span class="symbol">,</span>&nbsp;<a
-        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span
-        class="symbol">?</span><span class="symbol">,</span>&nbsp;<a
-        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span
-        class="symbol">?</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">assembleHangul</span><span
-        class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a
-        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a></code>
-<p>초성을 <a href="#">Triple.first</a> 문자로, 중성을 <a href="#">Triple.second</a> 문자로, 종성을 <a href="#">Triple.third</a> 문자로 갖는
-    한글 문자를 재구성합니다.</p>
-<h2>사용법</h2>
-<h3>Kotlin</h3>
-<pre><code class="lang-kotlin">Triple('ᄁ', 'ᅡ', null as Char?).assembleHangul() // "까"
-</code></pre>
-<h3>Scala + <a href="https://koalanlp.github.io/wrapper-scala/">koalanlp-scala</a></h3>
-<pre><code class="lang-scala">import kr.bydelta.koala.Implicits._
-('ᄁ', 'ᅡ', null.as[Char]).assembleHangul // "까"
-</code></pre>
-<h3>Java</h3>
-<pre><code class="lang-java">ExtUtil.assembleHangul(new Triple&lt;Character, Character, Character&gt;('ᄁ', 'ᅡ', null)) // "까"
-</code></pre>
 <h3>Exceptions</h3>
 <p><a name="IllegalArgumentException"></a>
     <code>IllegalArgumentException</code> - 초성, 중성, 종성이 지정된 범위가 아닌 경우 발생합니다.</p>

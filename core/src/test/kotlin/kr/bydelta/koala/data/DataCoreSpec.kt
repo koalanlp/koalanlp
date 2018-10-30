@@ -363,14 +363,14 @@ object DataCoreSpec : Spek({
                 dummy1.getGovernorEdge() `should be` null
 
                 // All these trees automatically set pointers on the words.
-                Entity(CoarseEntityType.PS, "PS_OTHER", listOf(dummy1))
-                Entity(CoarseEntityType.PS, "PS_SOME", listOf(dummy1))
-                Entity(CoarseEntityType.PS, "PS_ANOTHER", listOf(dummy1))
+                Entity("밥", CoarseEntityType.PS, "PS_OTHER", listOf(dummy1[0]))
+                Entity("밥", CoarseEntityType.PS, "PS_SOME", listOf(dummy1[0]))
+                Entity("밥", CoarseEntityType.PS, "PS_ANOTHER", listOf(dummy1[0]))
                 val tree = SyntaxTree(PhraseTag.NP, dummy1)
                 val dep = DepEdge(dummy1, dummy2, PhraseTag.NP, DependencyTag.SBJ)
                 val role = RoleEdge(dummy1, dummy2, RoleType.ARG0)
 
-                dummy1.getEntities()?.get(0)?.fineLabel `should equal` "PS_OTHER"
+                dummy1.getEntities().map { it.fineLabel } `should contain` "PS_OTHER"
                 dummy1.getPhrase() `should equal` tree
                 dummy1.getArgumentRoles()?.get(0) `should equal` role
                 dummy2.getPredicateRole() `should equal` role
@@ -388,6 +388,9 @@ object DataCoreSpec : Spek({
 
                 dummy1 `should equal` sent[1]
                 sent[1] `should equal` dummy1
+
+                dummy1[0].getWord() `should equal` dummy1
+                dummy2[0].getWord() `should equal` dummy2
 
                 dummy1 `should not equal` dummy1[0]
                 sent.count { it == dummy1 } `should be equal to` 1
@@ -482,7 +485,7 @@ object DataCoreSpec : Spek({
 
                 // All these trees automatically set pointers on the words.
                 {
-                    sent.setEntities(listOf(Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent[0]))))
+                    sent.setEntities(listOf(Entity("나", CoarseEntityType.PS, "PS_OTHER", listOf(sent[0][0]))))
                     sent.setCorefGroups(listOf(CoreferenceGroup(listOf(sent.getEntities()!!.get(0)))))
                     sent.setSyntaxTree(SyntaxTree(PhraseTag.S, children = listOf(
                             SyntaxTree(PhraseTag.NP, sent[0]),
@@ -942,8 +945,8 @@ object DataCoreSpec : Spek({
         }
 
         describe("RoleEdge") {
-            val dummy1 = RoleEdge(sent2[3], sent2[1], RoleType.ARG1)
-            val dummy2 = RoleEdge(sent3[3], sent3[1], RoleType.ARG1, "ARG-1")
+            val dummy1 = RoleEdge(sent2[3], sent2[1], RoleType.ARG1, modifiers = listOf(sent2[0]))
+            val dummy2 = RoleEdge(sent3[3], sent3[1], RoleType.ARG1, originalLabel = "ARG-1")
             val dummy3 = RoleEdge(sent3[3], sent3[2], RoleType.ARG0)
             val dummy4 = RoleEdge(sent3[1], sent3[0], RoleType.ARGM_PRD)
 
@@ -958,15 +961,17 @@ object DataCoreSpec : Spek({
 
                 dummy1.label `should equal` RoleType.ARG1
 
+                dummy1.modifiers[0] `should equal` sent2[0]
+
                 dummy1.originalLabel `should be` null
                 dummy2.originalLabel `should equal` "ARG-1"
             }
 
             // toString
             it("should provide the correct string representation") {
-                dummy1.toString() `should be equal to` "ARG1('먹었다 = 먹/VV+었/EP+다/EF' → '밥을 = 밥/NNG+을/JKO')"
-                dummy3.toString() `should be equal to` "ARG0('먹었다 = 먹/VV+었/EP+다/EF' → '나는 = 나/NP+는/JX')"
-                dummy4.toString() `should be equal to` "ARGM_PRD('밥을 = 밥/NNG+을/JKO' → '흰 = 희/VA+ㄴ/ETM')"
+                dummy1.toString() `should be equal to` "ARG1('먹었다' → '밥을/흰')"
+                dummy3.toString() `should be equal to` "ARG0('먹었다' → '나는')"
+                dummy4.toString() `should be equal to` "ARGM_PRD('밥을' → '흰')"
             }
 
             // equal, hashcode
@@ -1014,10 +1019,10 @@ object DataCoreSpec : Spek({
         }
 
         describe("Entity") {
-            val dummy1 = Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2]))
-            val dummy2 = Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2]))
-            val dummy3 = Entity(CoarseEntityType.PS, "PS_DIFF", listOf(sent3[2]))
-            val dummy4 = Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent3[0], sent3[1]))
+            val dummy1 = Entity("나", CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2][0]))
+            val dummy2 = Entity("나", CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2][0]))
+            val dummy3 = Entity("나", CoarseEntityType.PS, "PS_DIFF", listOf(sent3[2][0]))
+            val dummy4 = Entity("흰 밥", CoarseEntityType.PS, "PS_OTHER", sent3[0] + sent3[1])
 
             //type, fineType
             //words
@@ -1025,12 +1030,13 @@ object DataCoreSpec : Spek({
             it("has correct property") {
                 dummy1.label `should equal` CoarseEntityType.PS
                 dummy1.fineLabel `should be equal to` "PS_OTHER"
-                dummy1[0] `should equal` sent3[2]
-                dummy1.surface `should equal` "나는"
-                dummy4.surface `should equal` "흰 밥을"
+                dummy1[0] `should equal` sent3[2][0]
 
-                (sent3[2] in dummy1) `should be` true
-                (sent3[1] in dummy1) `should be` false
+                dummy1.surface `should equal` "나"
+                dummy4.surface `should equal` "흰 밥"
+
+                (sent3[2][0] in dummy1) `should be` true
+                (sent3[1][0] in dummy1) `should be` false
 
                 dummy1.getCorefGroup() `should equal` null
             }
@@ -1080,10 +1086,10 @@ object DataCoreSpec : Spek({
         }
 
         describe("CorefrerenceGroup") {
-            val dummy1 = CoreferenceGroup(listOf(Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2]))))
-            val dummy2 = CoreferenceGroup(listOf(Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2]))))
-            val dummy3 = CoreferenceGroup(listOf(Entity(CoarseEntityType.PS, "PS_DIFF", listOf(sent3[2]))))
-            val dummy4 = CoreferenceGroup(listOf(Entity(CoarseEntityType.PS, "PS_OTHER", listOf(sent3[0], sent3[1]))))
+            val dummy1 = CoreferenceGroup(listOf(Entity("나", CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2][0]))))
+            val dummy2 = CoreferenceGroup(listOf(Entity("나", CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2][0]))))
+            val dummy3 = CoreferenceGroup(listOf(Entity("나", CoarseEntityType.PS, "PS_DIFF", listOf(sent3[2][0]))))
+            val dummy4 = CoreferenceGroup(listOf(Entity("흰 밥", CoarseEntityType.PS, "PS_OTHER", sent3[0] + sent3[1])))
 
             it("should inherit list") {
                 (dummy1[0] in dummy1) `should be` true

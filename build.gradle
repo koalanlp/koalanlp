@@ -34,19 +34,37 @@ allprojects {
 ext.nexusUsername = properties.'ossrhUsername' as String ?: 'Foo'
 ext.nexusPassword = properties.'ossrhPassword' as String ?: 'Foo'
 
+// Dokka aggregation을 위한 library
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+}
+
 // Dokka aggregation
 dokka {
     moduleName = "$rootProject.name"
     outputDirectory = "$rootDir/docs/api"
     outputFormat = "html"
     jdkVersion = 8
+    noStdlibLink = false
 
     doFirst {
-        sourceDirs = files(subprojects.collect { it.sourceSets.main.allSource.srcDirs })
+        sourceDirs = files(subprojects.collect { p ->
+            def path = new File(p.projectDir, "/src/main/kotlin")
+
+            def relativePath = rootDir.toPath().relativize(path.toPath()).toString()
+            linkMapping {
+                dir = path
+                url = "https://github.com/koalanlp/koalanlp/blob/master/blob/master/$relativePath"
+                suffix = "#L"
+            }
+
+            return path
+        })
+        
+        includes = ['docs/index.md', *subprojects.collect { "${it.projectDir}/index.md" }]
+        
         file(outputDirectory).deleteDir()
     }
-    
-    includes = ["**/overview.md"]
 }
 
 // Test Report Aggregation

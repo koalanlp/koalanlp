@@ -10,7 +10,8 @@
 <br/>
 <h1>CanAnalyzeProperty</h1>
 <code><span class="keyword">interface </span><span class="identifier">CanAnalyzeProperty</span><span
-        class="symbol">&lt;</span><span class="identifier">INTERMEDIATE</span><span class="symbol">&gt;</span></code>
+        class="symbol">&lt;</span><span class="identifier">INTERMEDIATE</span><span class="symbol">&gt;</span></code> <a
+        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/proc/processors.kt#L567">(source)</a>
 <p><a href="../../kr.bydelta.koala.data/-sentence/index.html">Sentence</a> 객체에 property를 추가할 수 있는 interface입니다.
     <a href="index.html#INTERMEDIATE">INTERMEDIATE</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
 <p>다음 분석의 기본 틀로 사용됩니다.</p>
@@ -101,8 +102,9 @@
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
                     class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
-                    class="identifier">List</span></a><span class="symbol">&lt;</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span
-                    class="symbol">&lt;</span><a href="index.html#INTERMEDIATE"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html"><span
+                    class="identifier">Pair</span></a><span class="symbol">&lt;</span><a href="index.html#INTERMEDIATE"><span
                     class="identifier">INTERMEDIATE</span></a><span class="symbol">,</span>&nbsp;<a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
                     class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
@@ -235,6 +237,21 @@
                     class="symbol">&gt;</span></code>
             <p>구문분석을 수행하는 Interface입니다.
                 매개변수 <a href="../-can-parse-syntax.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="../../kr.bydelta.koala.etri/-can-parse-with-e-t-r-i/index.html">CanParseWithETRI</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">interface </span><span class="identifier">CanParseWithETRI</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a
+                    href="../../kr.bydelta.koala.etri/-can-communicate-e-t-r-i-api/index.html"><span class="identifier">CanCommunicateETRIApi</span></a><span
+                    class="symbol">, </span><a href="./index.html"><span
+                    class="identifier">CanAnalyzeProperty</span></a><span class="symbol">&lt;</span><a
+                    href="../../kr.bydelta.koala.etri/-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a><span
+                    class="symbol">&gt;</span></code>
+            <p>ETRI API와 통신을 하는 <a href="./index.html">CanAnalyzeProperty</a> 인터페이스입니다.</p>
         </td>
     </tr>
     <tr>

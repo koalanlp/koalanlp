@@ -11,7 +11,8 @@
 <h1>Dictionary</h1>
 <code><span class="keyword">object </span><span class="identifier">Dictionary</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
         href="../../kr.bydelta.koala.proc/-can-compile-dict/index.html"><span
-        class="identifier">CanCompileDict</span></a></code>
+        class="identifier">CanCompileDict</span></a></code> <a
+        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/okt/src/main/kotlin/kr/bydelta/koala/okt/dict.kt#L20">(source)</a>
 <p>트위터 분석기 사용자사전 인터페이스를 제공합니다.</p>
 <p><strong>Since</strong><br/>
     1.x</p>
@@ -25,13 +26,9 @@
         <td>
             <code><span class="keyword">fun </span><span class="identifier">addUserDictionary</span><span
                     class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier"
-                                                                                     id="kr.bydelta.koala.okt.Dictionary$addUserDictionary(kotlin.Array((((kotlin.String, kr.bydelta.koala.POS)))))/dict">dict</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span
-                    class="symbol">&lt;</span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-                    class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a
-                    href="../../kr.bydelta.koala/-p-o-s/index.html"><span class="identifier">POS</span></a><span
-                    class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a
+                                                                                     id="kr.bydelta.koala.okt.Dictionary$addUserDictionary(kotlin.Array((kotlin.Pair((kotlin.String, kr.bydelta.koala.POS)))))/dict">dict</span><span
+                    class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala.proc/-dic-entry.html"><span
+                    class="identifier">DicEntry</span></a><span class="symbol">)</span><span class="symbol">: </span><a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span
                     class="identifier">Unit</span></a></code>
             <p>사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가합니다.</p>
@@ -51,12 +48,9 @@
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span
                     class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/index.html"><span
-                    class="identifier">Iterator</span></a><span class="symbol">&lt;</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span
-                    class="symbol">&lt;</span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-                    class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a
-                    href="../../kr.bydelta.koala/-p-o-s/index.html"><span class="identifier">POS</span></a><span
-                    class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+                    class="identifier">Iterator</span></a><span class="symbol">&lt;</span><a
+                    href="../../kr.bydelta.koala.proc/-dic-entry.html"><span class="identifier">DicEntry</span></a><span
+                    class="symbol">&gt;</span></code>
             <p>원본 사전에 등재된 항목 중에서, 지정된 형태소의 항목만을 가져옵니다. (복합 품사 결합 형태는 제외)</p>
         </td>
     </tr>
@@ -68,12 +62,9 @@
             <code><span class="keyword">fun </span><span class="identifier">getItems</span><span class="symbol">(</span><span
                     class="symbol">)</span><span class="symbol">: </span><a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html"><span
-                    class="identifier">Set</span></a><span class="symbol">&lt;</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span
-                    class="symbol">&lt;</span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-                    class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a
-                    href="../../kr.bydelta.koala/-p-o-s/index.html"><span class="identifier">POS</span></a><span
-                    class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+                    class="identifier">Set</span></a><span class="symbol">&lt;</span><a
+                    href="../../kr.bydelta.koala.proc/-dic-entry.html"><span class="identifier">DicEntry</span></a><span
+                    class="symbol">&gt;</span></code>
             <p>사용자 사전에 등재된 모든 Item을 불러옵니다.</p>
         </td>
     </tr>
@@ -84,25 +75,18 @@
         <td>
             <code><span class="keyword">fun </span><span class="identifier">getNotExists</span><span
                     class="symbol">(</span><span class="identifier"
-                                                 id="kr.bydelta.koala.okt.Dictionary$getNotExists(kotlin.Boolean, kotlin.Array((((kotlin.String, kr.bydelta.koala.POS)))))/onlySystemDic">onlySystemDic</span><span
+                                                 id="kr.bydelta.koala.okt.Dictionary$getNotExists(kotlin.Boolean, kotlin.Array((kotlin.Pair((kotlin.String, kr.bydelta.koala.POS)))))/onlySystemDic">onlySystemDic</span><span
                     class="symbol">:</span>&nbsp;<a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span
                     class="identifier">Boolean</span></a><span class="symbol">, </span><span
                     class="keyword">vararg</span> <span class="identifier"
-                                                        id="kr.bydelta.koala.okt.Dictionary$getNotExists(kotlin.Boolean, kotlin.Array((((kotlin.String, kr.bydelta.koala.POS)))))/word">word</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span
-                    class="symbol">&lt;</span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-                    class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a
-                    href="../../kr.bydelta.koala/-p-o-s/index.html"><span class="identifier">POS</span></a><span
-                    class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a
+                                                        id="kr.bydelta.koala.okt.Dictionary$getNotExists(kotlin.Boolean, kotlin.Array((kotlin.Pair((kotlin.String, kr.bydelta.koala.POS)))))/word">word</span><span
+                    class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala.proc/-dic-entry.html"><span
+                    class="identifier">DicEntry</span></a><span class="symbol">)</span><span class="symbol">: </span><a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span
-                    class="identifier">Array</span></a><span class="symbol">&lt;</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span
-                    class="symbol">&lt;</span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-                    class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a
-                    href="../../kr.bydelta.koala/-p-o-s/index.html"><span class="identifier">POS</span></a><span
-                    class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+                    class="identifier">Array</span></a><span class="symbol">&lt;</span><a
+                    href="../../kr.bydelta.koala.proc/-dic-entry.html"><span class="identifier">DicEntry</span></a><span
+                    class="symbol">&gt;</span></code>
             <p>사전에 등재되어 있는지 확인하고, 사전에 없는단어만 반환합니다.</p>
         </td>
     </tr>
@@ -169,6 +153,17 @@
                     class="symbol">)</span><span class="symbol">: </span><a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span
                     class="identifier">Boolean</span></a></code>
+            <p>사전에 등재되어 있는지 확인합니다. 품사 후보 <a
+                    href="../../kr.bydelta.koala.proc/-can-compile-dict/contains.html#kr.bydelta.koala.proc.CanCompileDict$contains(kotlin.String, kotlin.collections.Set((kr.bydelta.koala.POS)))/posTag">posTag</a>
+                중의 하나라도 참이면 참이라고 판정합니다.</p>
+            <code><span class="keyword">open</span> <span class="keyword">operator</span> <span
+                    class="keyword">fun </span><span class="identifier">contains</span><span
+                    class="symbol">(</span><span class="identifier"
+                                                 id="kr.bydelta.koala.proc.CanCompileDict$contains(kotlin.Pair((kotlin.String, kr.bydelta.koala.POS)))/entry">entry</span><span
+                    class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala.proc/-dic-entry.html"><span
+                    class="identifier">DicEntry</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span
+                    class="identifier">Boolean</span></a></code>
             <p>사전에 등재되어 있는지 확인합니다.</p>
         </td>
     </tr>
@@ -208,13 +203,9 @@
             <code><span class="keyword">open</span> <span class="keyword">operator</span> <span
                     class="keyword">fun </span><span class="identifier">plusAssign</span><span
                     class="symbol">(</span><span class="identifier"
-                                                 id="kr.bydelta.koala.proc.CanCompileDict$plusAssign(((kotlin.String, kr.bydelta.koala.POS)))/entry">entry</span><span
-                    class="symbol">:</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span
-                    class="symbol">&lt;</span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-                    class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a
-                    href="../../kr.bydelta.koala/-p-o-s/index.html"><span class="identifier">POS</span></a><span
-                    class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a
+                                                 id="kr.bydelta.koala.proc.CanCompileDict$plusAssign(kotlin.Pair((kotlin.String, kr.bydelta.koala.POS)))/entry">entry</span><span
+                    class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala.proc/-dic-entry.html"><span
+                    class="identifier">DicEntry</span></a><span class="symbol">)</span><span class="symbol">: </span><a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span
                     class="identifier">Unit</span></a></code>
             <p>사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가.</p>

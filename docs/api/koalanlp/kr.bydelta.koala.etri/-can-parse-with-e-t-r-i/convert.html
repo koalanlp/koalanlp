@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>CanParseWithETRI.convert - koalanlp</title>
+    <link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.etri</a>&nbsp;/&nbsp;<a
+        href="index.html">CanParseWithETRI</a>&nbsp;/&nbsp;<a href="./convert.html">convert</a><br/>
+<br/>
+<h1>convert</h1>
+<a name="kr.bydelta.koala.etri.CanParseWithETRI$convert(kr.bydelta.koala.etri.SentenceResponse)"></a>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">convert</span><span
+        class="symbol">(</span><span class="identifier"
+                                     id="kr.bydelta.koala.etri.CanParseWithETRI$convert(kr.bydelta.koala.etri.SentenceResponse)/sentence">sentence</span><span
+        class="symbol">:</span>&nbsp;<a href="../-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a><span
+        class="symbol">)</span><span class="symbol">: </span><a href="../../kr.bydelta.koala.data/-sentence/index.html"><span
+        class="identifier">Sentence</span></a></code> <a
+        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/etri/src/main/kotlin/kr/bydelta/koala/etri/proc.kt#L96">(source)</a>
+<p>Overrides <a href="../../kr.bydelta.koala.proc/-can-analyze-property/convert.html">CanAnalyzeProperty.convert</a></p>
+<p>분석기의 중간 결과인 <a
+        href="convert.html#kr.bydelta.koala.etri.CanParseWithETRI$convert(kr.bydelta.koala.etri.SentenceResponse)/sentence">sentence</a>를
+    조합하여 <a href="../../kr.bydelta.koala.data/-sentence/index.html">Sentence</a> 객체로 변환합니다.</p>
+<h3>Parameters</h3>
+<p><a name="sentence"></a>
+    <code>sentence</code> - 변환할 문장입니다.</p>
+<p><strong>Since</strong><br/>
+    2.0.0</p>
+<p><strong>Return</strong><br/>
+    <a href="../../kr.bydelta.koala.data/-sentence/index.html">Sentence</a> 객체입니다.</p>
+<a name="kr.bydelta.koala.etri.CanParseWithETRI$convert(kotlin.String)"></a>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">convert</span><span
+        class="symbol">(</span><span class="identifier"
+                                     id="kr.bydelta.koala.etri.CanParseWithETRI$convert(kotlin.String)/sentence">sentence</span><span
+        class="symbol">:</span>&nbsp;<a
+        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+        class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
+        class="identifier">List</span></a><span class="symbol">&lt;</span><a
+        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html"><span class="identifier">Pair</span></a><span
+        class="symbol">&lt;</span><a href="../-sentence-response/index.html"><span
+        class="identifier">SentenceResponse</span></a><span class="symbol">,</span>&nbsp;<a
+        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+        class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code> <a
+        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/etri/src/main/kotlin/kr/bydelta/koala/etri/proc.kt#L105">(source)</a>
+<p>Overrides <a href="../../kr.bydelta.koala.proc/-can-analyze-property/convert.html">CanAnalyzeProperty.convert</a></p>
+<p>String <a href="convert.html#kr.bydelta.koala.etri.CanParseWithETRI$convert(kotlin.String)/sentence">sentence</a>를 품사
+    분석하여 분석기가 받아들이는 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;Pair&lt;<a
+            href="../-sentence-response/index.html">SentenceResponse</a>, String&gt;&gt;으로 변환합니다.</p>
+<h3>Parameters</h3>
+<p><a name="sentence"></a>
+    <code>sentence</code> - 텍스트에서 변환할 문장입니다.</p>
+<p><strong>Since</strong><br/>
+    2.0.0</p>
+<p><strong>Return</strong><br/>
+    분석기가 받아들일 수 있는 형태의 데이터입니다. 각 Pair의 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/first.html">Pair.first</a>
+    값은 변환된 문장 객체이며, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/second.html">Pair.second</a> 값은
+    해당 문장의 String 값입니다.</p>
+<a name="kr.bydelta.koala.etri.CanParseWithETRI$convert(kr.bydelta.koala.data.Sentence)"></a>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">convert</span><span
+        class="symbol">(</span><span class="identifier"
+                                     id="kr.bydelta.koala.etri.CanParseWithETRI$convert(kr.bydelta.koala.data.Sentence)/sentence">sentence</span><span
+        class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala.data/-sentence/index.html"><span
+        class="identifier">Sentence</span></a><span class="symbol">)</span><span class="symbol">: </span><a
+        href="../-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a></code> <a
+        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/etri/src/main/kotlin/kr/bydelta/koala/etri/proc.kt#L118">(source)</a>
+<p>Overrides <a href="../../kr.bydelta.koala.proc/-can-analyze-property/convert.html">CanAnalyzeProperty.convert</a></p>
+<p>Sentence <a
+        href="convert.html#kr.bydelta.koala.etri.CanParseWithETRI$convert(kr.bydelta.koala.data.Sentence)/sentence">sentence</a>를
+    해체하여 분석기가 받아들이는 <a href="../-sentence-response/index.html">SentenceResponse</a>로 변환합니다.</p>
+<h3>Parameters</h3>
+<p><a name="sentence"></a>
+    <code>sentence</code> - 변환할 문장입니다.</p>
+<p><strong>Since</strong><br/>
+    2.0.0</p>
+<p><strong>Return</strong><br/>
+    분석기가 받아들일 수 있는 형태의 데이터입니다.</p>
+</BODY>
+</HTML>

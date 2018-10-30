@@ -15,7 +15,8 @@
         href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
         class="identifier">List</span></a><span class="symbol">&lt;</span><a
         href="../../kr.bydelta.koala.data/-word/index.html"><span class="identifier">Word</span></a><span
-        class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+        class="symbol">&gt;</span><span class="symbol">&gt;</span></code> <a
+        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/rhino/src/main/kotlin/kr/bydelta/koala/rhino/proc.kt#L196">(source)</a>
 <p>라이노 형태소 분석기의 KoalaNLP Wrapper입니다.</p>
 <h2>참고</h2>
 <p><strong>형태소</strong>는 의미를 가지는 요소로서는 더 이상 분석할 수 없는 가장 작은 말의 단위로 정의됩니다.</p>
@@ -41,7 +42,7 @@ val sentences = tagger.tag("문장들입니다. 결과는 목록이 됩니다.")
 // 또는
 val sentences = tagger("문장들입니다. 결과는 목록이 됩니다.")
 </code></pre>
-<h3>Scala + <a href="https://koalanlp.github.io/wrapper-scala/">koalanlp-scala</a></h3>
+<h3>Scala + <a href="https://koalanlp.github.io/scala-support/">koalanlp-scala</a></h3>
 <pre><code class="lang-scala">import kr.bydelta.koala.Implicits._
 val tagger = new Tagger()
 val sentence = tagger.tagSentence("문장 1개입니다.")

@@ -26,7 +26,9 @@ import kaist.cilab.parser.corpusconverter.sejong2treebank.sejongtree.TreeNode
 import kaist.cilab.parser.dependency.DNode
 import kaist.cilab.parser.dependency.DTree
 import kaist.cilab.parser.psg2dg.Converter
+import kr.bydelta.koala.DependencyTag
 import kr.bydelta.koala.POS
+import kr.bydelta.koala.PhraseTag
 import kr.bydelta.koala.correctVerbApply
 import kr.bydelta.koala.data.DepEdge
 import kr.bydelta.koala.data.Morpheme
@@ -280,7 +282,87 @@ internal class SafeChartMorphAnalyzer : MorphAnalyzer {
 }
 
 /**
- * 한나눔 통합 구문분석기
+ * 한나눔 구문구조 및 의존구문 분석기
+ *
+ * ## 참고
+ * **구문구조 분석**은 문장의 구성요소들(어절, 구, 절)이 이루는 문법적 구조를 분석하는 방법입니다.
+ * 예) '나는 밥을 먹었고, 영희는 짐을 쌌다'라는 문장에는
+ * 2개의 절이 있습니다
+ * * 나는 밥을 먹었고
+ * * 영희는 짐을 쌌다
+ * 각 절은 3개의 구를 포함합니다
+ * * 나는, 밥을, 영희는, 짐을: 체언구
+ * * 먹었고, 쌌다: 용언구
+ *
+ * 아래를 참고해보세요.
+ * * [Word.getPhrase] 어절이 직접 속하는 가장 작은 구구조 [SyntaxTree]를 가져오는 API
+ * * [kr.bydelta.koala.data.Sentence.getSyntaxTree] 전체 문장을 분석한 [SyntaxTree]를 가져오는 API
+ * * [SyntaxTree] 구구조를 저장하는 형태
+ * * [PhraseTag] 구구조의 형태 분류를 갖는 Enum 값
+ *
+ * **의존구조 분석**은 문장의 구성 어절들이 의존 또는 기능하는 관계를 분석하는 방법입니다.
+ * 예) '나는 밥을 먹었고, 영희는 짐을 쌌다'라는 문장에는
+ * 가장 마지막 단어인 '쌌다'가 핵심 어구가 되며,
+ * * '먹었고'가 '쌌다'와 대등하게 연결되고
+ * * '나는'은 '먹었고'의 주어로 기능하며
+ * * '밥을'은 '먹었고'의 목적어로 기능합니다.
+ * * '영희는'은 '쌌다'의 주어로 기능하고,
+ * * '짐을'은 '쌌다'의 목적어로 기능합니다.
+ *
+ * 아래를 참고해보세요.
+ * * [Word.getDependentEdges] 어절이 직접 지배하는 하위 의존구조 [DepEdge]의 목록을 가져오는 API
+ * * [Word.getGovernorEdge] 어절이 지배당하는 상위 의존구조 [DepEdge]를 가져오는 API
+ * * [kr.bydelta.koala.data.Sentence.getDependencies] 전체 문장을 분석한 의존구조 [DepEdge]의 목록을 가져오는 API
+ * * [DepEdge] 의존구조를 저장하는 형태
+ * * [PhraseTag] 의존구조의 형태 분류를 갖는 Enum 값 (구구조 분류와 같음)
+ * * [DependencyTag] 의존구조의 기능 분류를 갖는 Enum 값
+ *
+ * ## 사용법 예제
+ *
+ * ### Kotlin
+ * ```kotlin
+ * // 문장에서 바로 분석할 때
+ * val parser = Parser()
+ * val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+ *
+ * // 타 분석기에서 분석한 다음 이어서 분석할 때
+ * val taggedSentence: Sentence = ...
+ * val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
+ *
+ * val taggedSentList: List<Sentence> = ...
+ * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
+ * ```
+ *
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
+ * // 문장에서 바로 분석할 때
+ * val parser = new Parser()
+ * val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+ *
+ * // 타 분석기에서 분석한 다음 이어서 분석할 때
+ * val taggedSentence: Sentence = ...
+ * val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
+ *
+ * val taggedSentList: java.util.List[Sentence] = ...
+ * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
+ * ```
+ *
+ * ### Java
+ * ```java
+ * // 문장에서 바로 분석할 때
+ * Parser parser = Parser()
+ * List<Sentence> sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser.invoke("문장 2개입니다. 결과는 목록이 됩니다.")
+ *
+ * // 타 분석기에서 분석한 다음 이어서 분석할 때
+ * Sentence taggedSentence = ...
+ * Sentence sentence = parser.analyze(taggedSentence) // 또는 parser.invoke(taggedSentence)
+ *
+ * List<Sentence> taggedSentList = ...
+ * List<Sentence> sentences = parser.analyze(taggedSentList) // 또는 parser.invoke(taggedSentList)
+ * ```
+ *
+ * @since 2.0.0
  */
 class Parser : CanParseDependency<Sentence>, CanParseSyntax<Sentence> {
     /**

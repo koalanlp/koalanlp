@@ -13,7 +13,8 @@
         class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
         href="-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span
         class="symbol">&lt;</span><a href="-can-label-semantic-role.html#T"><span class="identifier">T</span></a><span
-        class="symbol">&gt;</span></code>
+        class="symbol">&gt;</span></code> <a
+        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/proc/processors.kt#L876">(source)</a>
 <p>의미역 분석(Semantic Role Labeling)을 수행하는 Interface입니다.
     매개변수 <a href="-can-label-semantic-role.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
 <h2>참고</h2>
@@ -54,7 +55,7 @@ val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
 val taggedSentList: List&lt;Sentence&gt; = ...
 val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
 </code></pre>
-<h3>Scala + <a href="https://koalanlp.github.io/wrapper-scala/">koalanlp-scala</a></h3>
+<h3>Scala + <a href="https://koalanlp.github.io/scala-support/">koalanlp-scala</a></h3>
 <pre><code class="lang-scala">import kr.bydelta.koala.Implicits._
 // 문장에서 바로 분석할 때
 val parser = new Parser()
@@ -163,8 +164,10 @@ List&lt;Sentence&gt; sentences = parser.analyze(taggedSentList) // 또는 parser
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
                     class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
-                    class="identifier">List</span></a><span class="symbol">&lt;</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span
-                    class="symbol">&lt;</span><a href="-can-analyze-property/index.html#INTERMEDIATE"><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html"><span
+                    class="identifier">Pair</span></a><span class="symbol">&lt;</span><a
+                    href="-can-analyze-property/index.html#INTERMEDIATE"><span
                     class="identifier">INTERMEDIATE</span></a><span class="symbol">,</span>&nbsp;<a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
                     class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
@@ -239,6 +242,25 @@ List&lt;Sentence&gt; sentences = parser.analyze(taggedSentList) // 또는 parser
             <p>
                 <a href="-can-analyze-property/invoke.html#kr.bydelta.koala.proc.CanAnalyzeProperty$invoke(kotlin.collections.List((kr.bydelta.koala.data.Sentence)))/sentences">sentences</a>를
                 분석함. 결과는 각 <a href="../kr.bydelta.koala.data/-sentence/index.html">Sentence</a>의 property로 저장됨.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="../kr.bydelta.koala.etri/-role-labeler/index.html">RoleLabeler</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">RoleLabeler</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="./-can-label-semantic-role.html"><span class="identifier">CanLabelSemanticRole</span></a><span
+                    class="symbol">&lt;</span><a href="../kr.bydelta.koala.etri/-sentence-response/index.html"><span
+                    class="identifier">SentenceResponse</span></a><span class="symbol">&gt;</span><span
+                    class="symbol">, </span><a href="../kr.bydelta.koala.etri/-can-parse-with-e-t-r-i/index.html"><span
+                    class="identifier">CanParseWithETRI</span></a></code>
+            <p>의미역 분석(Semantic Role Labeling)을 수행하는 Interface입니다.</p>
         </td>
     </tr>
     </tbody>

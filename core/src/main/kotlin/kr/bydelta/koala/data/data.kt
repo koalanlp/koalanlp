@@ -12,6 +12,9 @@ internal enum class Key {
     /** 다의어/동형이의어 의미번호 */
     WORD_SENSE,
 
+    /** 형태소가 속하는 어절 **/
+    WORD,
+
     /** 개체명 (목록) */
     NAMED_ENTITY,
 
@@ -267,21 +270,24 @@ data class WordSense(val id: Int) : Property {
  *
  * 아래를 참고해보세요.
  * * [kr.bydelta.koala.proc.CanRecognizeEntity] 개체명 인식기 interface
- * * [Word.getEntities] 어절이 속하는 [Entity]를 가져오는 API
+ * * [Morpheme.getEntities] 형태소가 속하는 [Entity]를 가져오는 API
+ * * [Word.getEntities] 어절에 연관된 모든 [Entity]를 가져오는 API
  * * [Sentence.getEntities] 문장에 포함된 모든 [Entity]를 가져오는 API
  * * [CoarseEntityType] [Entity]의 대분류 개체명 분류구조 Enum 값
  *
  * @since 2.0.0
  * @constructor 개체명 분석 결과를 저장합니다.
+ * @param[surface] 개체명의 표면형 문자열.
  * @param[label] 개체명 대분류 값, [CoarseEntityType]에 기록된 개체명 중 하나.
  * @param[fineLabel] 개체명 세분류 값으로, [label]으로 시작하는 문자열.
- * @param[words] 개체명을 이루는 어절의 목록
+ * @param[morphemes] 개체명을 이루는 형태소의 목록
  * @param[originalLabel] 원본 분석기가 제시한 개체명 분류의 값. 기본값은 null.
  */
-class Entity(val label: CoarseEntityType,
+class Entity(val surface: String,
+             val label: CoarseEntityType,
              val fineLabel: String,
-             words: List<Word>,
-             val originalLabel: String? = null) : CanHaveProperty(), List<Word> by words {
+             morphemes: List<Morpheme>,
+             val originalLabel: String? = null) : CanHaveProperty(), List<Morpheme> by morphemes {
     init {
         // 세부 개체명은 대분류 값에 소속되어야 합니다.
         assert(fineLabel.toUpperCase().startsWith(label.toString()))
@@ -289,13 +295,6 @@ class Entity(val label: CoarseEntityType,
             word.addProperty(Key.NAMED_ENTITY, this)
         }
     }
-
-    /**
-     * 개체명의 표면형입니다.
-     *
-     * @since 2.0.0
-     */
-    val surface: String by lazy { words.joinToString(separator = " ") { it.surface } }
 
     /**
      * 이 개체명과 공통된 대상을 지칭하는 공통 지시어 또는 대용어들의 묶음을 제공합니다.
@@ -740,11 +739,13 @@ class DepEdge constructor(val governor: Word?,
  * @param predicate 의미역 구조에서 표현하는 동사 [Word]
  * @param argument 의미역 구조에서 서술된 논항 [Word]
  * @param label 의미역 표지자, [RoleType] Enum 값
+ * @param modifiers 논항의 수식어구들
  * @param originalLabel 원본 분석기의 표지자 String 값. 기본값은 null.
  */
 class RoleEdge constructor(val predicate: Word,
                            val argument: Word,
                            label: RoleType,
+                           val modifiers: List<Word> = emptyList(),
                            val originalLabel: String? = null) : DAGEdge<RoleType, Word>(predicate, argument, label) {
     init {
         // 동사가 논항을 찾을 수 있게 지정
@@ -752,6 +753,12 @@ class RoleEdge constructor(val predicate: Word,
         // 논항이 동사를 찾을 수 있게 지정
         argument.setProperty(Key.SRL_PREDICATE, this)
     }
+
+    /**
+     * Returns a string representation of the object.
+     */
+    override fun toString(): String = "${label ?: ""}('${src?.surface
+            ?: "ROOT"}' → '${dest.surface}/${modifiers.joinToString(" ") { it.surface }}')"
 
     /** Static Fields */
     companion object {
@@ -819,6 +826,34 @@ class Morpheme constructor(val surface: String, val tag: POS,
      * @return 의미/어깨번호 값
      * */
     fun getWordSense(): Int? = getProperty<WordSense>(Key.WORD_SENSE)?.id
+
+    /**
+     * 개체명 분석을 했다면, 현재 형태소가 속한 개체명 값을 돌려줍니다.
+     *
+     * ## 참고
+     * **개체명 인식**은 문장에서 인물, 장소, 기관, 대상 등을 인식하는 기술입니다.
+     * 예) '철저한 진상 조사를 촉구하는 국제사회의 목소리가 커지고 있는 가운데, 트럼프 미국 대통령은 되레 사우디를 감싸고 나섰습니다.'에서, 다음을 인식하는 기술입니다.
+     * * '트럼프': 인물
+     * * '미국' : 국가
+     * * '대통령' : 직위
+     * * '사우디' : 국가
+     *
+     * 아래를 참고해보세요.
+     * * [kr.bydelta.koala.proc.CanRecognizeEntity] 개체명 인식기 interface
+     * * [Sentence.getEntities] 문장에 포함된 모든 [Entity]를 가져오는 API
+     * * [Word.getEntities] 어절에 연관된 모든 [Entity]를 가져오는 API
+     * * [Entity] 개체명을 저장하는 형태
+     * * [CoarseEntityType] [Entity]의 대분류 개체명 분류구조 Enum 값
+     *
+     * @since 2.0.0
+     * @return [Entity]의 목록입니다. 분석 결과가 없으면 null.
+     * */
+    fun getEntities() = getProperty<ListProperty<Entity>>(Key.NAMED_ENTITY)?.values
+
+    /**
+     * 이 형태소를 포함하는 단어를 돌려줍니다.
+     */
+    fun getWord() = getProperty<Word>(Key.WORD)
 
     /****** Tag checkers ******/
 
@@ -1019,6 +1054,7 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
         // ID 값 배정
         for ((index, value) in morphemes.withIndex()) {
             value.id = index
+            value.setProperty(Key.WORD, this)
         }
     }
 
@@ -1050,6 +1086,7 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
      *
      * 아래를 참고해보세요.
      * * [kr.bydelta.koala.proc.CanRecognizeEntity] 개체명 인식기 interface
+     * * [Morpheme.getEntities] 형태소를 포함하는 모든 [Entity]를 가져오는 API
      * * [Sentence.getEntities] 문장에 포함된 모든 [Entity]를 가져오는 API
      * * [Entity] 개체명을 저장하는 형태
      * * [CoarseEntityType] [Entity]의 대분류 개체명 분류구조 Enum 값
@@ -1057,7 +1094,7 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
      * @since 2.0.0
      * @return [Entity]의 목록입니다. 분석 결과가 없으면 null.
      * */
-    fun getEntities() = getProperty<ListProperty<Entity>>(Key.NAMED_ENTITY)?.values
+    fun getEntities() = this.mapNotNull { it.getEntities() }.flatten().toSet()
 
     /**
      * 구문분석을 했다면, 현재 어절이 속한 직속 상위 구구조(Phrase)를 돌려줍니다.

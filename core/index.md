@@ -1,20 +1,6 @@
-# Module KoalaNLP-core
-
-## KoalaNLP-core
-
-KoalaNLP는 한국어 처리의 통합 인터페이스를 지향하는 Java/Kotlin/Scala Library입니다.
-
-본 모듈은 KoalaNLP가 사용할 핵심 API와 데이터 구조를 정의합니다.
-
-## 패키지 구조 설명
-
-- [`kr.bydelta.koala`](./kr.bydelta.koala/index.html)  KoalaNLP가 제공하는 상수값 및 Utility function들을 정의합니다.
-- [`kr.bydelta.koala.data`](./kr.bydelta.koala.data/index.html) KoalaNLP가 사용하는 데이터 표현을 정의합니다.
-- [`kr.bydelta.koala.proc`](./kr.bydelta.koala.proc/index.html) KoalaNLP가 사용하는 API Interface를 정의합니다.
-
 # Package kr.bydelta.koala
 
-KoalaNLP가 제공하는 API가 담겨있는 상위 패키지입니다.
+KoalaNLP가 제공하는 상수값 및 Utility function들을 정의합니다.
 
 ## 자바 및 스칼라 개발자를 위한 노트
 

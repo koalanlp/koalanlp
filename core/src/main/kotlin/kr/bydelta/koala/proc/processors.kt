@@ -22,7 +22,7 @@ import java.util.*
  * val split = splitter(sentence)
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * val splitter = new SentenceSplitter()
@@ -81,7 +81,7 @@ interface CanSplitSentence {
  * val splitt = SentenceSplitter(sentence)
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * val sentence = ... //Tagged result
@@ -193,7 +193,7 @@ object SentenceSplitter {
  * val sentences = tagger("문장들입니다. 결과는 목록이 됩니다.")
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * val tagger = new Tagger()
@@ -272,7 +272,7 @@ interface CanTag {
  * val sentences = tagger("문장들입니다. 결과는 목록이 됩니다.")
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * val tagger = new Tagger()
@@ -348,7 +348,7 @@ abstract class CanTagASentence<S> : CanTag {
  * val sentences = tagger("문장들입니다. 결과는 목록이 됩니다.")
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * val tagger = new Tagger()
@@ -415,7 +415,7 @@ abstract class CanTagAParagraph<S> : CanTagASentence<S>() {
  * val sentences = tagger("문장들입니다. 결과는 목록이 됩니다.")
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * val tagger = new Tagger()
@@ -498,7 +498,7 @@ abstract class CanTagOnlyASentence<S> : CanTag {
  * val sentences = tagger("문장들입니다. 결과는 목록이 됩니다.")
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * val tagger = new Tagger()
@@ -700,7 +700,7 @@ interface CanAnalyzeProperty<INTERMEDIATE> {
  * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * // 문장에서 바로 분석할 때
@@ -772,7 +772,7 @@ interface CanParseSyntax<T> : CanAnalyzeProperty<T>
  * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * // 문장에서 바로 분석할 때
@@ -842,7 +842,7 @@ interface CanParseDependency<T> : CanAnalyzeProperty<T>
  * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * // 문장에서 바로 분석할 때
@@ -910,7 +910,7 @@ interface CanLabelSemanticRole<T> : CanAnalyzeProperty<T>
  * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * // 문장에서 바로 분석할 때
@@ -983,7 +983,7 @@ interface CanRecognizeEntity<T> : CanAnalyzeProperty<T>
  * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * // 문장에서 바로 분석할 때
@@ -1051,7 +1051,7 @@ interface CanDisambiguateSense<T> : CanAnalyzeProperty<T>
  * val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala/)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * // 문장에서 바로 분석할 때

@@ -10,7 +10,22 @@ import kr.bydelta.koala.PhraseTag
 /**
  * 한나눔의 의존구문분석 결과표지를 ETRI의 표준안으로 변경합니다.
  *
- * @param tag ETRI 의존구문 표지로 변경할 의존구문분석 결과.
+ * ## 사용 예
+ * ### Kotlin
+ * ```kotlin
+ * "SBJ".toSejongPOS()
+ * ```
+ *
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support)
+ * ```scala
+ * "SBJ".toSejongPOS()
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Util.toETRIDepTag("SBJ")
+ * ```
+ *
  * @return ETRI 의존구문 표지
  */
 fun String?.toETRIDepTag(): DependencyTag? =
@@ -25,7 +40,22 @@ fun String?.toETRIDepTag(): DependencyTag? =
 /**
  * 한나눔의 구문분석 결과표지를 ETRI의 표준안으로 변경합니다.
  *
- * @param tag ETRI 구문 표지로 변경할 구문분석 결과.
+ * ## 사용 예
+ * ### Kotlin
+ * ```kotlin
+ * "NP-SBJ".toSejongPOS()
+ * ```
+ *
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support)
+ * ```scala
+ * "NP-SBJ".toSejongPOS()
+ * ```
+ *
+ * ### Java
+ * ```java
+ * Util.toETRIPhraseTag("NP-SBJ")
+ * ```
+ *
  * @return ETRI 구문 표지
  */
 fun String?.toETRIPhraseTag(): PhraseTag {
@@ -48,7 +78,7 @@ fun String?.toETRIPhraseTag(): PhraseTag {
  * POS.NNG.fromSejongPOS()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support)
  * ```scala
  * POS.NNG.fromSejongPOS()
  * ```
@@ -110,7 +140,7 @@ fun POS.fromSejongPOS(): String =
  * "NNG".toSejongPOS()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support)
  * ```scala
  * "NNG".toSejongPOS()
  * ```

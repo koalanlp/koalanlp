@@ -89,7 +89,7 @@ fun String?.toETRIPhraseTag(): PhraseTag =
  * POS.NNG.fromSejongPOS()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support)
  * ```scala
  * POS.NNG.fromSejongPOS()
  * ```
@@ -134,7 +134,7 @@ fun POS.fromSejongPOS(): String =
  * "NNG".toSejongPOS()
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/wrapper-scala)
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support)
  * ```scala
  * "NNG".toSejongPOS()
  * ```

@@ -12,8 +12,73 @@
 <code><span class="keyword">class </span><span class="identifier">Parser</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
         href="../../kr.bydelta.koala.proc/-can-parse-dependency.html"><span class="identifier">CanParseDependency</span></a><span
         class="symbol">&lt;</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span
-        class="symbol">&gt;</span></code>
+        class="symbol">&gt;</span></code> <a
+        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/kkma/src/main/kotlin/kr/bydelta/koala/kkma/proc.kt#L200">(source)</a>
 <p>꼬꼬마 의존구문분석기의 KoalaNLP Wrapper입니다.</p>
+<h2>참고</h2>
+<p><strong>의존구조 분석</strong>은 문장의 구성 어절들이 의존 또는 기능하는 관계를 분석하는 방법입니다.
+    예) '나는 밥을 먹었고, 영희는 짐을 쌌다'라는 문장에는
+    가장 마지막 단어인 '쌌다'가 핵심 어구가 되며,</p>
+<ul>
+    <li>'먹었고'가 '쌌다'와 대등하게 연결되고</li>
+    <li>'나는'은 '먹었고'의 주어로 기능하며</li>
+    <li>'밥을'은 '먹었고'의 목적어로 기능합니다.</li>
+    <li>'영희는'은 '쌌다'의 주어로 기능하고,</li>
+    <li>'짐을'은 '쌌다'의 목적어로 기능합니다.</li>
+</ul>
+<p>아래를 참고해보세요.</p>
+<ul>
+    <li><a href="../../kr.bydelta.koala.data/-word/get-dependent-edges.html">Word.getDependentEdges</a> 어절이 직접 지배하는 하위
+        의존구조 <a href="../../kr.bydelta.koala.data/-dep-edge/index.html">DepEdge</a>의 목록을 가져오는 API
+    </li>
+    <li><a href="../../kr.bydelta.koala.data/-word/get-governor-edge.html">Word.getGovernorEdge</a> 어절이 지배당하는 상위 의존구조 <a
+            href="../../kr.bydelta.koala.data/-dep-edge/index.html">DepEdge</a>를 가져오는 API
+    </li>
+    <li><a href="../../kr.bydelta.koala.data/-sentence/get-dependencies.html">Sentence.getDependencies</a> 전체 문장을 분석한
+        의존구조 <a href="../../kr.bydelta.koala.data/-dep-edge/index.html">DepEdge</a>의 목록을 가져오는 API
+    </li>
+    <li><a href="../../kr.bydelta.koala.data/-dep-edge/index.html">DepEdge</a> 의존구조를 저장하는 형태</li>
+    <li><a href="../../kr.bydelta.koala/-phrase-tag/index.html">PhraseTag</a> 의존구조의 형태 분류를 갖는 Enum 값 (구구조 분류와 같음)</li>
+    <li><a href="../../kr.bydelta.koala/-dependency-tag/index.html">DependencyTag</a> 의존구조의 기능 분류를 갖는 Enum 값</li>
+</ul>
+<h2>사용법 예제</h2>
+<h3>Kotlin</h3>
+<pre><code class="lang-kotlin">// 문장에서 바로 분석할 때
+val parser = Parser()
+val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+
+// 타 분석기에서 분석한 다음 이어서 분석할 때
+val taggedSentence: Sentence = ...
+val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
+
+val taggedSentList: List&lt;Sentence&gt; = ...
+val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
+</code></pre>
+<h3>Scala + <a href="https://koalanlp.github.io/scala-support/">koalanlp-scala</a></h3>
+<pre><code class="lang-scala">import kr.bydelta.koala.Implicits._
+// 문장에서 바로 분석할 때
+val parser = new Parser()
+val sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser("문장 2개입니다. 결과는 목록이 됩니다.")
+
+// 타 분석기에서 분석한 다음 이어서 분석할 때
+val taggedSentence: Sentence = ...
+val sentence = parser.analyze(taggedSentence) // 또는 parser(taggedSentence)
+
+val taggedSentList: java.util.List[Sentence] = ...
+val sentences = parser.analyze(taggedSentList) // 또는 parser(taggedSentList)
+</code></pre>
+<h3>Java</h3>
+<pre><code class="lang-java">// 문장에서 바로 분석할 때
+Parser parser = Parser()
+List&lt;Sentence&gt; sentences = parser.analyze("문장 2개입니다. 결과는 목록이 됩니다.") // 또는 parser.invoke("문장 2개입니다. 결과는 목록이 됩니다.")
+
+// 타 분석기에서 분석한 다음 이어서 분석할 때
+Sentence taggedSentence = ...
+Sentence sentence = parser.analyze(taggedSentence) // 또는 parser.invoke(taggedSentence)
+
+List&lt;Sentence&gt; taggedSentList = ...
+List&lt;Sentence&gt; sentences = parser.analyze(taggedSentList) // 또는 parser.invoke(taggedSentList)
+</code></pre>
 <p><strong>Since</strong><br/>
     1.x</p>
 <h3>Constructors</h3>
@@ -50,7 +115,8 @@
         </td>
         <td>
             <code><span class="keyword">val </span><span class="identifier">tagger</span><span
-                    class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code>
+                    class="symbol">: </span><a href="../-tagger/index.html"><span
+                    class="identifier">Tagger</span></a></code>
             <p>형태소분석기</p>
         </td>
     </tr>
@@ -99,8 +165,9 @@
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
                     class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
-                    class="identifier">List</span></a><span class="symbol">&lt;</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span
-                    class="symbol">&lt;</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html"><span
+                    class="identifier">Pair</span></a><span class="symbol">&lt;</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span
                     class="symbol">,</span>&nbsp;<a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
                     class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>

@@ -1,0 +1,229 @@
+<HTML>
+<HEAD>
+    <meta charset="UTF-8">
+    <title>kr.bydelta.koala.etri - koalanlp</title>
+    <link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="./index.html">kr.bydelta.koala.etri</a><br/>
+<br/>
+<h2>Package kr.bydelta.koala.etri</h2>
+<p>ETRI 언어 분석 API의 Wrapper를 정의합니다.</p>
+<p>해당 API는 ETRI에서 연구개발한 것으로, 저작권은 ETRI에 있으며,
+    API 원본 문서는 <a href="http://aiopen.etri.re.kr/doc_language.php">공공 인공지능 Open API</a>에서 확인 가능합니다.</p>
+<p>KoalaNLP 코드의 저작권 조항은 MIT license를 따르며,
+    본 API는 무료 공공 API이나, ETRI API를 사용하기 위한 별도 키 발급 과정이 필요합니다.</p>
+<ul>
+    <li>사용권 조항은 <a href="http://aiopen.etri.re.kr/service_guide.php">여기</a>에서 확인 가능하며,</li>
+    <li>사용 신청은 <a href="http://aiopen.etri.re.kr/key_main.php">여기</a>에서 가능합니다.</li>
+</ul>
+<h2>자바 및 스칼라 개발자를 위한 노트</h2>
+<ul>
+    <li>여기 수록된 항목 중에서 Types는 Java의 Class를 의미합니다.</li>
+    <li>Exception은 예외 발생에 대한 항목입니다.</li>
+    <li>Extension은 Kotlin이 제공하는 Wrapper 기능입니다.
+        (만약 있다면), Java와 Scala에서 <code>kr.bydelta.koala.etri.Util</code>의 Static Member로 참조됩니다.
+    </li>
+    <li>Property는 지정된 상수값입니다.</li>
+    <li>Function은 Utility function의 모음입니다.
+        (만약 있다면), Java와 Scala에서 <code>kr.bydelta.koala.etri.Util</code>의 Static Member로 참조됩니다.
+    </li>
+</ul>
+<h3>Types</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="-can-communicate-e-t-r-i-api/index.html">CanCommunicateETRIApi</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">interface </span><span class="identifier">CanCommunicateETRIApi</span></code>
+            <p>ETRI Open API와 통신을 하는 부분입니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-can-parse-with-e-t-r-i/index.html">CanParseWithETRI</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">interface </span><span class="identifier">CanParseWithETRI</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="-can-communicate-e-t-r-i-api/index.html"><span
+                    class="identifier">CanCommunicateETRIApi</span></a><span class="symbol">, </span><a
+                    href="../kr.bydelta.koala.proc/-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span
+                    class="symbol">&lt;</span><a href="-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a><span
+                    class="symbol">&gt;</span></code>
+            <p>ETRI API와 통신을 하는 <a
+                    href="../kr.bydelta.koala.proc/-can-analyze-property/index.html">CanAnalyzeProperty</a> 인터페이스입니다.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-dependency-response/index.html">DependencyResponse</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">DependencyResponse</span></code>
+            <p>의존구문 분석 결과물</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-entity-recognizer/index.html">EntityRecognizer</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">EntityRecognizer</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="../kr.bydelta.koala.proc/-can-recognize-entity.html"><span
+                    class="identifier">CanRecognizeEntity</span></a><span class="symbol">&lt;</span><a
+                    href="-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a><span
+                    class="symbol">&gt;</span><span class="symbol">, </span><a
+                    href="-can-parse-with-e-t-r-i/index.html"><span
+                    class="identifier">CanParseWithETRI</span></a></code>
+            <p>개체명 인식 (Named Entity Recognition)을 수행하는 Interface입니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-entity-response/index.html">EntityResponse</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">EntityResponse</span></code>
+            <p>개체명 인식 결과물</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-morpheme-response/index.html">MorphemeResponse</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">MorphemeResponse</span></code>
+            <p>형태소 분석 결과물</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-parser/index.html">Parser</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">Parser</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="../kr.bydelta.koala.proc/-can-parse-dependency.html"><span
+                    class="identifier">CanParseDependency</span></a><span class="symbol">&lt;</span><a
+                    href="-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a><span
+                    class="symbol">&gt;</span><span class="symbol">, </span><a
+                    href="-can-parse-with-e-t-r-i/index.html"><span
+                    class="identifier">CanParseWithETRI</span></a></code>
+            <p>의존구문분석을 수행하는 Interface입니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-result-content/index.html">ResultContent</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">ResultContent</span></code>
+            <p>분석 결과 객체 (문장 정보 이외의 다른 정보는 무시)</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-result-payload/index.html">ResultPayload</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">ResultPayload</span></code>
+            <p>ETRI Open API의 분석 결과 Json을 해석한 객체</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-role-labeler/index.html">RoleLabeler</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">RoleLabeler</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a href="../kr.bydelta.koala.proc/-can-label-semantic-role.html"><span
+                    class="identifier">CanLabelSemanticRole</span></a><span class="symbol">&lt;</span><a
+                    href="-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a><span
+                    class="symbol">&gt;</span><span class="symbol">, </span><a
+                    href="-can-parse-with-e-t-r-i/index.html"><span
+                    class="identifier">CanParseWithETRI</span></a></code>
+            <p>의미역 분석(Semantic Role Labeling)을 수행하는 Interface입니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-s-r-l-argument/index.html">SRLArgument</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">SRLArgument</span></code>
+            <p>의미역 부착의 각 논항 결과</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-s-r-l-response/index.html">SRLResponse</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">SRLResponse</span></code>
+            <p>의미역 부착의 결과</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-sentence-response/index.html">SentenceResponse</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">SentenceResponse</span></code>
+            <p>분석 결과로 얻은 문장 1개를 표현하는 객체</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-tagger/index.html">Tagger</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">Tagger</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a
+                    href="../kr.bydelta.koala.proc/-can-tag-only-a-paragraph/index.html"><span class="identifier">CanTagOnlyAParagraph</span></a><span
+                    class="symbol">&lt;</span><a href="-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a><span
+                    class="symbol">&gt;</span><span class="symbol">, </span><a
+                    href="-can-communicate-e-t-r-i-api/index.html"><span class="identifier">CanCommunicateETRIApi</span></a></code>
+            <p>ETRI 품사 분석 API의 Wrapper입니다.</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-word-response/index.html">WordResponse</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">WordResponse</span></code>
+            <p>어절 분석 결과물</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="-word-sense-response/index.html">WordSenseResponse</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">WordSenseResponse</span></code>
+            <p>의미 분석 결과물</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Exceptions</h3>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p><a href="-a-p-i-exception/index.html">APIException</a></p>
+        </td>
+        <td>
+            <code><span class="keyword">class </span><span class="identifier">APIException</span>&nbsp;<span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span
+                    class="identifier">Exception</span></a></code>
+            <p>API 통신 과정에서 발생하는 문제를 담습니다.</p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</BODY>
+</HTML>

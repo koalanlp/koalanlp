@@ -13,19 +13,24 @@
 <code><span class="keyword">fun </span><a
         href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span
         class="symbol">.</span><span class="identifier">dissembleHangul</span><span class="symbol">(</span><span
-        class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span><span
-        class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span
-        class="identifier">Char</span></a><span class="symbol">,</span>&nbsp;<a
+        class="symbol">)</span><span class="symbol">: </span><a
+        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-triple/index.html"><span
+        class="identifier">Triple</span></a><span class="symbol">&lt;</span><a
         href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span
         class="symbol">,</span>&nbsp;<a
         href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span
-        class="symbol">?</span><span class="symbol">&gt;</span><span class="symbol">?</span></code>
-<p>현재 문자를 초성, 중성, 종성 자음문자로 분리해 <a href="#">Triple</a>을 구성합니다. 종성이 없으면 <a href="#">Triple.third</a> 값은 null.</p>
+        class="symbol">,</span>&nbsp;<a
+        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span
+        class="symbol">?</span><span class="symbol">&gt;</span><span class="symbol">?</span></code> <a
+        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/extension.kt#L663">(source)</a>
+<p>현재 문자를 초성, 중성, 종성 자음문자로 분리해 <a
+        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-triple/index.html">Triple</a>을 구성합니다. 종성이 없으면 <a
+        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-triple/third.html">Triple.third</a> 값은 null.</p>
 <h2>사용법</h2>
 <h3>Kotlin</h3>
 <pre><code class="lang-kotlin">'가'.dissembleHangul() // ㄱ, ㅏ, null
 </code></pre>
-<h3>Scala + <a href="https://koalanlp.github.io/wrapper-scala/">koalanlp-scala</a></h3>
+<h3>Scala + <a href="https://koalanlp.github.io/scala-support/">koalanlp-scala</a></h3>
 <pre><code class="lang-scala">import kr.bydelta.koala.Implicits._
 '가'.dissembleHangul // ㄱ, ㅏ, null
 </code></pre>

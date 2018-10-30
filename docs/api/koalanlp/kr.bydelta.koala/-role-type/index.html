@@ -10,7 +10,8 @@
 <br/>
 <h1>RoleType</h1>
 <code><span class="keyword">enum</span> <span class="keyword">class </span><span
-        class="identifier">RoleType</span></code>
+        class="identifier">RoleType</span></code> <a
+        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/types.kt#L511">(source)</a>
 <p>의미역(Semantic Role) 분석 표지를 담은 Enum class입니다.
     (ETRI 표준안)</p>
 <p><strong>Since</strong><br/>
@@ -23,7 +24,7 @@
             <p><a href="-a-r-g0.html">ARG0</a></p>
         </td>
         <td>
-            <p>동작주/행위자. 예: {"진흥왕은" 화랑도를 개편했다.}에서 <strong>&lt;진흥왕은&gt;</strong>.</p>
+            <p>(필수격) <strong>행동주, 경험자.</strong> 술어로 기술된 행동을 하거나 경험한 대상.</p>
         </td>
     </tr>
     <tr>
@@ -31,8 +32,8 @@
             <p><a href="-a-r-g1.html">ARG1</a></p>
         </td>
         <td>
-            <p>피동작주/대상. 예: {진흥왕은 "화랑도를" 개편했다.}에서 <strong>&lt;화랄도를&gt;</strong>, {"범인은" 사거리에서 발견되었다.}에서 <strong>&lt;범인은&gt;</strong>.
-            </p>
+            <p>(필수격) <strong>피동작주, 대상.</strong> 술어로 기술된 행동을 당한 대상 (주로 목적격, 피동작 대상). '이동'에 관한 행동에 의해서 위치의 변화가 되거나,
+                '생성/소멸' 사건의 결과로 존재가 변화하는 대상.</p>
         </td>
     </tr>
     <tr>
@@ -40,7 +41,7 @@
             <p><a href="-a-r-g2.html">ARG2</a></p>
         </td>
         <td>
-            <p>시작점/수혜자. 예: {영희가 "철수에게서" 그 선물을 받았다.}에서 <strong>&lt;철수에게서&gt;</strong>.</p>
+            <p>(필수격) <strong>시작점, 수혜자, 결과.</strong> 술어로 기술된 행동의 시작점, 행동으로 인해 수혜를 받는 대상, 행동을 기술하기 위해 필요한 장소.</p>
         </td>
     </tr>
     <tr>
@@ -48,7 +49,7 @@
             <p><a href="-a-r-g3.html">ARG3</a></p>
         </td>
         <td>
-            <p>착점. 예: {연이가 "동창회에" 참석했다.}에서 <strong>&lt;동창회에&gt;</strong>.</p>
+            <p>(필수격) <strong>착점.</strong> 술어로 기술된 행동의 도착점.</p>
         </td>
     </tr>
     <tr>
@@ -56,7 +57,7 @@
             <p><a href="-a-r-g-m_-l-o-c.html">ARGM_LOC</a></p>
         </td>
         <td>
-            <p>장소. 예: {친구들이 "서울에" 많이 산다.}에서 <strong>&lt;서울에&gt;</strong>.</p>
+            <p>(부가격) <strong>장소.</strong> 술어로 기술된 행동이 발생하는 공간. 주로 술어가 '이동'이 아닌 상태를 나타내고, '~에(서)' 조사와 함께 쓰이는 경우.</p>
         </td>
     </tr>
     <tr>
@@ -64,7 +65,7 @@
             <p><a href="-a-r-g-m_-d-i-r.html">ARGM_DIR</a></p>
         </td>
         <td>
-            <p>방향. 예: {달이 "서쪽으로" 기울었다.}에서 <strong>&lt;서쪽으로&gt;</strong>.</p>
+            <p>(부가격) <strong>방향.</strong> 술어가 '이동' 상태를 나타낼 때, '~(으)로' 조사와 함께 쓰이는 경우.</p>
         </td>
     </tr>
     <tr>
@@ -72,7 +73,8 @@
             <p><a href="-a-r-g-m_-c-n-d.html">ARGM_CND</a></p>
         </td>
         <td>
-            <p>조건. 예: {"과세 대상 금액이 많을수록" 높은 세율을 적용한다.}에서 <strong>&lt;많을수록&gt;</strong>.</p>
+            <p>(부가격) <strong>조건.</strong> 술어의 행동이 발생되는 조건이나 인물, 사물 따위의 자격을 나타내는 경우. 주로 '~중에', '~가운데에', '~보다', '~에 대해'
+            </p>
         </td>
     </tr>
     <tr>
@@ -80,7 +82,8 @@
             <p><a href="-a-r-g-m_-m-n-r.html">ARGM_MNR</a></p>
         </td>
         <td>
-            <p>방법. 예: {그는 "큰 소리로" 떠들었다.}에서 <strong>&lt;소리로&gt;</strong>.</p>
+            <p>(부가격) <strong>방법.</strong> 술어의 행동을 수행하는 방법. 또는 술어가 특정 언어에 의한 것을 나타낼 때, 그 언어. (구체적인 사물이 등장하는 경우는 <a
+                    href="-a-r-g-m_-i-n-s.html">ARGM_INS</a> 참고)</p>
         </td>
     </tr>
     <tr>
@@ -88,7 +91,7 @@
             <p><a href="-a-r-g-m_-t-m-p.html">ARGM_TMP</a></p>
         </td>
         <td>
-            <p>시간. 예: {진달래는 "이른 봄에" 핀다.}에서 <strong>&lt;봄에&gt;</strong>.</p>
+            <p>(부가격) <strong>시간.</strong> 술어의 행동이 발생한 시간 등과 같이 술어와 관련된 시간. 명확한 날짜, 시기, 시대를 지칭하는 경우.</p>
         </td>
     </tr>
     <tr>
@@ -96,7 +99,7 @@
             <p><a href="-a-r-g-m_-e-x-t.html">ARGM_EXT</a></p>
         </td>
         <td>
-            <p>범위. 예: {그 악기는 "4개의" 현을 가진다.}에서 <strong>&lt;4개의&gt;</strong>.</p>
+            <p>(부가격) <strong>범위.</strong> 크기 또는 높이 등의 수치나 정도를 논하는 경우. '가장', '최고', '매우', '더욱' 등을 나타내는 경우.</p>
         </td>
     </tr>
     <tr>
@@ -104,7 +107,8 @@
             <p><a href="-a-r-g-m_-p-r-d.html">ARGM_PRD</a></p>
         </td>
         <td>
-            <p>보조서술. 예: {석회암 지대에서 "깔대기 모양으로" 파인 웅덩이가 생겼다.}에서 <strong>&lt;모양으로&gt;</strong>.</p>
+            <p>(부가격) <strong>보조서술.</strong> 대상과 같은 의미이거나 대상의 상태를 나타내면서 술어를 수식하는 것. 주로 '~로서'. 또는 '최초로'와 같이 술어의 정해진 순서를
+                나타내는 경우.</p>
         </td>
     </tr>
     <tr>
@@ -112,7 +116,8 @@
             <p><a href="-a-r-g-m_-p-r-p.html">ARGM_PRP</a></p>
         </td>
         <td>
-            <p>목적. 예: {주나라의 백이와 숙제는 "절개를 지키고자" 수양산에 거처했다.}에서 <strong>&lt;지키고자&gt;</strong>.</p>
+            <p>(부가격) <strong>목적.</strong> 술어의 주체가 가진 목표. 또는 행위의 의도. 주로 '~를 위해'. 발생 이유(<a href="-a-r-g-m_-c-a-u.html">ARGM_CAU</a>)와
+                유사함에 주의.</p>
         </td>
     </tr>
     <tr>
@@ -120,7 +125,8 @@
             <p><a href="-a-r-g-m_-c-a-u.html">ARGM_CAU</a></p>
         </td>
         <td>
-            <p>발생 이유. 예: {지난 밤 "강픙으로" 가로수가 넘어졌다.}에서 <strong>&lt;강픙으로&gt;</strong>.</p>
+            <p>(부가격) <strong>발생 이유.</strong> 술어가 발생한 이유. '~때문에'를 대신할 수 있는 조사가 붙은 경우. 목적(<a href="-a-r-g-m_-p-r-p.html">ARGM_PRP</a>)과
+                혼동되나, 목적은 아닌 것.</p>
         </td>
     </tr>
     <tr>
@@ -128,7 +134,7 @@
             <p><a href="-a-r-g-m_-d-i-s.html">ARGM_DIS</a></p>
         </td>
         <td>
-            <p>담화 연결. 예: {"하지만" 여기서 동, 서는 중국과 유럽을 뜻한다.}에서 <strong>&lt;하지만&gt;</strong>.</p>
+            <p>(부가격) <strong>담화 연결.</strong> 문장 접속 부사. (그러나, 그리고, 즉 등.)</p>
         </td>
     </tr>
     <tr>
@@ -136,7 +142,7 @@
             <p><a href="-a-r-g-m_-a-d-v.html">ARGM_ADV</a></p>
         </td>
         <td>
-            <p>부사적 어구. 예: {산의 능선이 "마치" 닭벼슬을 쓴 용의 형상을 닮았다.}에서 <strong>&lt;마치&gt;</strong>.</p>
+            <p>(부가격) <strong>부사적 어구.</strong> ('마치', '물론', '역시' 등)</p>
         </td>
     </tr>
     <tr>
@@ -144,7 +150,7 @@
             <p><a href="-a-r-g-m_-n-e-g.html">ARGM_NEG</a></p>
         </td>
         <td>
-            <p>부정. 예: {산은 불에 타지 "않았다."}에서 <strong>&lt;않았다.&gt;</strong>.</p>
+            <p>(부가격) <strong>부정.</strong> 술어에 부정의 의미를 더하는 경우.</p>
         </td>
     </tr>
     <tr>
@@ -152,7 +158,8 @@
             <p><a href="-a-r-g-m_-i-n-s.html">ARGM_INS</a></p>
         </td>
         <td>
-            <p>도구. 예: {"하얀 천으로" 상자를 덮었다.}에서 <strong>&lt;천으로&gt;</strong>.</p>
+            <p>(부가격) <strong>도구.</strong> 술어의 행동을 할 때 사용되는 도구. 방법(<a href="-a-r-g-m_-m-n-r.html">ARGM_MNR</a>)보다 구체적인
+                사물이 등장할 때.</p>
         </td>
     </tr>
     </tbody>

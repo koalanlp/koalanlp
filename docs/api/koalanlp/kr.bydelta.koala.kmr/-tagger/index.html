@@ -11,8 +11,9 @@
 <h1>Tagger</h1>
 <code><span class="keyword">class </span><span class="identifier">Tagger</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
         href="../../kr.bydelta.koala.proc/-can-tag-only-a-sentence/index.html"><span class="identifier">CanTagOnlyASentence</span></a><span
-        class="symbol">&lt;</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">?</span><span
-        class="symbol">&gt;</span></code>
+        class="symbol">&lt;</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span
+        class="symbol">&gt;</span></code> <a
+        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/komoran/src/main/kotlin/kr/bydelta/koala/kmr/proc.kt#L67">(source)</a>
 <p>코모란 형태소분석기의 KoalaNLP Wrapper입니다.</p>
 <h2>참고</h2>
 <p><strong>형태소</strong>는 의미를 가지는 요소로서는 더 이상 분석할 수 없는 가장 작은 말의 단위로 정의됩니다.</p>
@@ -38,7 +39,7 @@ val sentences = tagger.tag("문장들입니다. 결과는 목록이 됩니다.")
 // 또는
 val sentences = tagger("문장들입니다. 결과는 목록이 됩니다.")
 </code></pre>
-<h3>Scala + <a href="https://koalanlp.github.io/wrapper-scala/">koalanlp-scala</a></h3>
+<h3>Scala + <a href="https://koalanlp.github.io/scala-support/">koalanlp-scala</a></h3>
 <pre><code class="lang-scala">import kr.bydelta.koala.Implicits._
 val tagger = new Tagger()
 val sentence = tagger.tagSentence("문장 1개입니다.")
@@ -103,7 +104,7 @@ List&lt;Sentence&gt; sentences = tagger.invoke("문장들입니다. 결과는 �
                     class="identifier">String</span></a><span class="symbol">, </span><span class="identifier"
                                                                                             id="kr.bydelta.koala.kmr.Tagger$convertSentence(kotlin.String, )/result">result</span><span
                     class="symbol">:</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span
-                    class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a
+                    class="symbol">)</span><span class="symbol">: </span><a
                     href="../../kr.bydelta.koala.data/-sentence/index.html"><span class="identifier">Sentence</span></a></code>
             <p>KomoranResult 타입의 분석결과 <a
                     href="convert-sentence.html#kr.bydelta.koala.kmr.Tagger$convertSentence(kotlin.String, )/result">result</a>를
@@ -121,7 +122,7 @@ List&lt;Sentence&gt; sentences = tagger.invoke("문장들입니다. 결과는 �
                     class="symbol">:</span>&nbsp;<a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
                     class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span
-                    class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">?</span></code>
+                    class="identifier">&lt;ERROR CLASS&gt;</span></code>
             <p>변환되지않은, <a
                     href="tag-sentence-original.html#kr.bydelta.koala.kmr.Tagger$tagSentenceOriginal(kotlin.String)/text">text</a>의
                 분석결과 KomoranResult를 반환합니다.</p>

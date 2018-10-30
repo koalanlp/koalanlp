@@ -12,8 +12,9 @@
 <code><span class="keyword">class </span><span class="identifier">Entity</span>&nbsp;<span class="symbol">:</span>&nbsp;<a
         href="../-can-have-property/index.html"><span class="identifier">CanHaveProperty</span></a><span class="symbol">, </span><a
         href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
-        class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-word/index.html"><span
-        class="identifier">Word</span></a><span class="symbol">&gt;</span></code>
+        class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-morpheme/index.html"><span
+        class="identifier">Morpheme</span></a><span class="symbol">&gt;</span></code> <a
+        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/data/data.kt#L286">(source)</a>
 <p>개체명 분석 결과를 저장할 <a href="../-property.html">Property</a> class</p>
 <h2>참고</h2>
 <p><strong>개체명 인식</strong>은 문장에서 인물, 장소, 기관, 대상 등을 인식하는 기술입니다.
@@ -29,7 +30,10 @@
     <li><a href="../../kr.bydelta.koala.proc/-can-recognize-entity.html">kr.bydelta.koala.proc.CanRecognizeEntity</a>
         개체명 인식기 interface
     </li>
-    <li><a href="../-word/get-entities.html">Word.getEntities</a> 어절이 속하는 <a href="./index.html">Entity</a>를 가져오는 API
+    <li><a href="../-morpheme/get-entities.html">Morpheme.getEntities</a> 형태소가 속하는 <a href="./index.html">Entity</a>를
+        가져오는 API
+    </li>
+    <li><a href="../-word/get-entities.html">Word.getEntities</a> 어절에 연관된 모든 <a href="./index.html">Entity</a>를 가져오는 API
     </li>
     <li><a href="../-sentence/get-entities.html">Sentence.getEntities</a> 문장에 포함된 모든 <a href="./index.html">Entity</a>를
         가져오는 API
@@ -47,20 +51,24 @@
         </td>
         <td>
             <code><span class="identifier">Entity</span><span class="symbol">(</span><span class="identifier"
-                                                                                           id="kr.bydelta.koala.data.Entity$<init>(kr.bydelta.koala.CoarseEntityType, kotlin.String, kotlin.collections.List((kr.bydelta.koala.data.Word)), kotlin.String)/label">label</span><span
-                    class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala/-coarse-entity-type/index.html"><span
-                    class="identifier">CoarseEntityType</span></a><span class="symbol">, </span><span class="identifier"
-                                                                                                      id="kr.bydelta.koala.data.Entity$<init>(kr.bydelta.koala.CoarseEntityType, kotlin.String, kotlin.collections.List((kr.bydelta.koala.data.Word)), kotlin.String)/fineLabel">fineLabel</span><span
+                                                                                           id="kr.bydelta.koala.data.Entity$<init>(kotlin.String, kr.bydelta.koala.CoarseEntityType, kotlin.String, kotlin.collections.List((kr.bydelta.koala.data.Morpheme)), kotlin.String)/surface">surface</span><span
                     class="symbol">:</span>&nbsp;<a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
                     class="identifier">String</span></a><span class="symbol">, </span><span class="identifier"
-                                                                                            id="kr.bydelta.koala.data.Entity$<init>(kr.bydelta.koala.CoarseEntityType, kotlin.String, kotlin.collections.List((kr.bydelta.koala.data.Word)), kotlin.String)/words">words</span><span
+                                                                                            id="kr.bydelta.koala.data.Entity$<init>(kotlin.String, kr.bydelta.koala.CoarseEntityType, kotlin.String, kotlin.collections.List((kr.bydelta.koala.data.Morpheme)), kotlin.String)/label">label</span><span
+                    class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala/-coarse-entity-type/index.html"><span
+                    class="identifier">CoarseEntityType</span></a><span class="symbol">, </span><span class="identifier"
+                                                                                                      id="kr.bydelta.koala.data.Entity$<init>(kotlin.String, kr.bydelta.koala.CoarseEntityType, kotlin.String, kotlin.collections.List((kr.bydelta.koala.data.Morpheme)), kotlin.String)/fineLabel">fineLabel</span><span
+                    class="symbol">:</span>&nbsp;<a
+                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
+                    class="identifier">String</span></a><span class="symbol">, </span><span class="identifier"
+                                                                                            id="kr.bydelta.koala.data.Entity$<init>(kotlin.String, kr.bydelta.koala.CoarseEntityType, kotlin.String, kotlin.collections.List((kr.bydelta.koala.data.Morpheme)), kotlin.String)/morphemes">morphemes</span><span
                     class="symbol">:</span>&nbsp;<a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
-                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
-                    href="../-word/index.html"><span class="identifier">Word</span></a><span
-                    class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier"
-                                                                                  id="kr.bydelta.koala.data.Entity$<init>(kr.bydelta.koala.CoarseEntityType, kotlin.String, kotlin.collections.List((kr.bydelta.koala.data.Word)), kotlin.String)/originalLabel">originalLabel</span><span
+                    class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-morpheme/index.html"><span
+                    class="identifier">Morpheme</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span
+                    class="identifier"
+                    id="kr.bydelta.koala.data.Entity$<init>(kotlin.String, kr.bydelta.koala.CoarseEntityType, kotlin.String, kotlin.collections.List((kr.bydelta.koala.data.Morpheme)), kotlin.String)/originalLabel">originalLabel</span><span
                     class="symbol">:</span>&nbsp;<a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
                     class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span
@@ -116,7 +124,7 @@
             <code><span class="keyword">val </span><span class="identifier">surface</span><span class="symbol">: </span><a
                     href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
                     class="identifier">String</span></a></code>
-            <p>개체명의 표면형입니다.</p>
+            <p>개체명의 표면형 문자열.</p>
         </td>
     </tr>
     </tbody>

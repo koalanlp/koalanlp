@@ -34,6 +34,7 @@ dokka {
     outputFormat = "html"
     outputDirectory = javadoc.destinationDir
     reportUndocumented = true
+    noStdlibLink = false
 
     linkMapping {
         dir = "src/main/kotlin"
@@ -41,7 +42,7 @@ dokka {
         suffix = "#L"
     }
 
-    includes = ["overview.md"]
+    includes = ["index.md"]
 }
 
 extraArchive {
