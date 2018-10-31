@@ -1,50 +1,35 @@
 <HTML>
 <HEAD>
-    <meta charset="UTF-8">
-    <title>Morpheme.hasTagOneOf - koalanlp</title>
-    <link rel="stylesheet" href="../../../style.css">
+<meta charset="UTF-8">
+<title>Morpheme.hasTagOneOf - koalanlp</title>
+<link rel="stylesheet" href="../../../style.css">
 </HEAD>
 <BODY>
-<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.data</a>&nbsp;/&nbsp;<a
-        href="index.html">Morpheme</a>&nbsp;/&nbsp;<a href="./has-tag-one-of.html">hasTagOneOf</a><br/>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.data</a>&nbsp;/&nbsp;<a href="index.html">Morpheme</a>&nbsp;/&nbsp;<a href="./has-tag-one-of.html">hasTagOneOf</a><br/>
 <br/>
 <h1>hasTagOneOf</h1>
 <a name="kr.bydelta.koala.data.Morpheme$hasTagOneOf(kotlin.Array((kotlin.String)))"></a>
-<code><span class="keyword">fun </span><span class="identifier">hasTagOneOf</span><span class="symbol">(</span><span
-        class="keyword">vararg</span> <span class="identifier"
-                                            id="kr.bydelta.koala.data.Morpheme$hasTagOneOf(kotlin.Array((kotlin.String)))/tags">tags</span><span
-        class="symbol">:</span>&nbsp;<a
-        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-        class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
-        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span
-        class="identifier">Boolean</span></a></code> <a
-        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/data/data.kt#L936">(source)</a>
-<p>세종 품사 <a href="tag.html">tag</a>가 주어진 품사 표기들 <a
-        href="has-tag-one-of.html#kr.bydelta.koala.data.Morpheme$hasTagOneOf(kotlin.Array((kotlin.String)))/tags">tags</a>
-    묶음들 중 하나에 포함되는지 확인합니다.</p>
+<code><span class="keyword">fun </span><span class="identifier">hasTagOneOf</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="kr.bydelta.koala.data.Morpheme$hasTagOneOf(kotlin.Array((kotlin.String)))/tags">tags</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code> <a href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/data/data.kt#L936">(source)</a>
+<p>세종 품사 <a href="tag.html">tag</a>가 주어진 품사 표기들 <a href="has-tag-one-of.html#kr.bydelta.koala.data.Morpheme$hasTagOneOf(kotlin.Array((kotlin.String)))/tags">tags</a> 묶음들 중 하나에 포함되는지 확인합니다.</p>
 <p>예) List("N", "MM")의 경우, 체언 또는 관형사인지 확인합니다.</p>
 <h2>단축명령</h2>
-<ul>
-    <li>체언(명사, 수사, 대명사) <a href="is-noun.html">isNoun</a></li>
-    <li>용언(동사, 형용사)는 <a href="is-predicate.html">isPredicate</a></li>
-    <li>수식언(관형사, 부사)는 <a href="is-modifier.html">isModifier</a></li>
-    <li>관계언(조사)는 <a href="is-josa.html">isJosa</a></li>
+<ul><li>체언(명사, 수사, 대명사) <a href="is-noun.html">isNoun</a></li>
+<li>용언(동사, 형용사)는 <a href="is-predicate.html">isPredicate</a></li>
+<li>수식언(관형사, 부사)는 <a href="is-modifier.html">isModifier</a></li>
+<li>관계언(조사)는 <a href="is-josa.html">isJosa</a></li>
 </ul>
 <h2>참고</h2>
-<ul>
-    <li>분석불능범주(NA, NV, NF)는 체언(N) 범주에 포함되지 않습니다.</li>
-    <li>세종 품사표기는 <a href="../../kr.bydelta.koala/-p-o-s/index.html">POS</a>를 참고하세요.</li>
-    <li>품사 표기는 <a
-            href="https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing">비교표</a>
-        에서 확인가능합니다.
-    </li>
+<ul><li>분석불능범주(NA, NV, NF)는 체언(N) 범주에 포함되지 않습니다.</li>
+<li>세종 품사표기는 <a href="../../kr.bydelta.koala/-p-o-s/index.html">POS</a>를 참고하세요.</li>
+<li>품사 표기는 <a href="https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing">비교표</a>
+에서 확인가능합니다.</li>
 </ul>
 <h3>Parameters</h3>
 <p><a name="tags"></a>
-    <code>tags</code> - 포함 여부를 확인할 상위 형태소 분류 품사표기들</p>
+<code>tags</code> - 포함 여부를 확인할 상위 형태소 분류 품사표기들</p>
 <p><strong>Since</strong><br/>
-    1.x</p>
+1.x</p>
 <p><strong>Return</strong><br/>
-    하나라도 포함되는 경우 true.</p>
+하나라도 포함되는 경우 true.</p>
 </BODY>
 </HTML>

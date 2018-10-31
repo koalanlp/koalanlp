@@ -1,21 +1,18 @@
 <HTML>
 <HEAD>
-    <meta charset="UTF-8">
-    <title>SentenceSplitter - koalanlp</title>
-    <link rel="stylesheet" href="../../../style.css">
+<meta charset="UTF-8">
+<title>SentenceSplitter - koalanlp</title>
+<link rel="stylesheet" href="../../../style.css">
 </HEAD>
 <BODY>
-<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.proc</a>&nbsp;/&nbsp;<a
-        href="./index.html">SentenceSplitter</a><br/>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.proc</a>&nbsp;/&nbsp;<a href="./index.html">SentenceSplitter</a><br/>
 <br/>
 <h1>SentenceSplitter</h1>
-<code><span class="keyword">object </span><span class="identifier">SentenceSplitter</span></code> <a
-        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/proc/processors.kt#L103">(source)</a>
+<code><span class="keyword">object </span><span class="identifier">SentenceSplitter</span></code> <a href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/proc/processors.kt#L103">(source)</a>
 <p>세종 태그셋에 기반한 Heuristic 문장분리기</p>
 <p>다음 조건에 따라 문장을 분리합니다:</p>
-<ol>
-    <li>열린 괄호나 인용부호가 없고,</li>
-    <li>숫자나 외국어로 둘러싸이지 않은 문장부호(<a href="../../kr.bydelta.koala/-p-o-s/-s-f.html">POS.SF</a>)가 어절의 마지막에 왔을 경우.</li>
+<ol><li>열린 괄호나 인용부호가 없고,</li>
+<li>숫자나 외국어로 둘러싸이지 않은 문장부호(<a href="../../kr.bydelta.koala/-p-o-s/-s-f.html">POS.SF</a>)가 어절의 마지막에 왔을 경우.</li>
 </ol>
 <h2>사용법 예제</h2>
 <p><code>SentenceSplitter</code>는 이미 singleton object이므로 초기화가 필요하지 않습니다.</p>
@@ -39,31 +36,20 @@ List&lt;Sentence&gt; splitt = SentenceSplitter.sentences(sentence);
 List&lt;Sentence&gt; splitt = SentenceSplitter.invoke(sentence);
 </code></pre>
 <p><strong>Since</strong><br/>
-    1.x</p>
+1.x</p>
 <h3>Functions</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <p><a href="invoke.html">invoke</a></p>
-        </td>
-        <td>
-            <code><span class="keyword">operator</span> <span class="keyword">fun </span><span
-                    class="identifier">invoke</span><span class="symbol">(</span><span class="identifier"
-                                                                                       id="kr.bydelta.koala.proc.SentenceSplitter$invoke(kotlin.collections.Iterable((kr.bydelta.koala.data.Word)))/para">para</span><span
-                    class="symbol">:</span>&nbsp;<a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span
-                    class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a
-                    href="../../kr.bydelta.koala.data/-word/index.html"><span class="identifier">Word</span></a><span
-                    class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
-                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
-                    href="../../kr.bydelta.koala.data/-sentence/index.html"><span class="identifier">Sentence</span></a><span
-                    class="symbol">&gt;</span></code>
-            <p>분석결과를 토대로 문장을 분리함.</p>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<p><a href="invoke.html">invoke</a></p>
+</td>
+<td>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">invoke</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.proc.SentenceSplitter$invoke(kotlin.collections.Iterable((kr.bydelta.koala.data.Word)))/para">para</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html"><span class="identifier">Iterable</span></a><span class="symbol">&lt;</span><a href="../../kr.bydelta.koala.data/-word/index.html"><span class="identifier">Word</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../kr.bydelta.koala.data/-sentence/index.html"><span class="identifier">Sentence</span></a><span class="symbol">&gt;</span></code>
+<p>분석결과를 토대로 문장을 분리함.</p>
+</td>
+</tr>
+</tbody>
 </table>
 </BODY>
 </HTML>

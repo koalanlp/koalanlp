@@ -1,37 +1,16 @@
 <HTML>
 <HEAD>
-    <meta charset="UTF-8">
-    <title>correctVerbApply - koalanlp</title>
-    <link rel="stylesheet" href="../../style.css">
+<meta charset="UTF-8">
+<title>correctVerbApply - koalanlp</title>
+<link rel="stylesheet" href="../../style.css">
 </HEAD>
 <BODY>
-<a href="../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="index.html">kr.bydelta.koala</a>&nbsp;/&nbsp;<a
-        href="./correct-verb-apply.html">correctVerbApply</a><br/>
+<a href="../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="index.html">kr.bydelta.koala</a>&nbsp;/&nbsp;<a href="./correct-verb-apply.html">correctVerbApply</a><br/>
 <br/>
 <h1>correctVerbApply</h1>
 <a name="kr.bydelta.koala$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)"></a>
-<code><span class="keyword">fun </span><span class="identifier">correctVerbApply</span><span
-        class="symbol">(</span><span class="identifier"
-                                     id="kr.bydelta.koala$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/verb">verb</span><span
-        class="symbol">:</span>&nbsp;<a
-        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-        class="identifier">String</span></a><span class="symbol">, </span><span class="identifier"
-                                                                                id="kr.bydelta.koala$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/isVerb">isVerb</span><span
-        class="symbol">:</span>&nbsp;<a
-        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span
-        class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier"
-                                                                                 id="kr.bydelta.koala$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/rest">rest</span><span
-        class="symbol">:</span>&nbsp;<a
-        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-        class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a
-        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-        class="identifier">String</span></a></code> <a
-        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/extension.kt#L974">(source)</a>
-<p>주어진 용언의 원형 <a
-        href="correct-verb-apply.html#kr.bydelta.koala$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/verb">verb</a>이
-    뒷 부분
-    <a href="correct-verb-apply.html#kr.bydelta.koala$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/rest">rest</a>와
-    같이 어미가 붙어 활용될 때, 불규칙 활용 용언과 모음조화를 교정합니다.</p>
+<code><span class="keyword">fun </span><span class="identifier">correctVerbApply</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/verb">verb</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/isVerb">isVerb</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/rest">rest</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code> <a href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/extension.kt#L974">(source)</a>
+<p>주어진 용언의 원형 <a href="correct-verb-apply.html#kr.bydelta.koala$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/verb">verb</a>이 뒷 부분 <a href="correct-verb-apply.html#kr.bydelta.koala$correctVerbApply(kotlin.String, kotlin.Boolean, kotlin.String)/rest">rest</a>와 같이 어미가 붙어 활용될 때, 불규칙 활용 용언과 모음조화를 교정합니다.</p>
 <h2>사용법</h2>
 <h3>Kotlin</h3>
 <pre><code class="lang-kotlin">correctVerbApply("듣", true, "어") // 동사 "듣다"에 어미 "-어"가 붙으면 "들어"가 됩니다.
@@ -43,24 +22,22 @@
 <pre><code class="lang-java">ExtUtil.correctVerbApply("듣", true, "어")
 </code></pre>
 <h2>적용되지 않는 불규칙변형</h2>
-<ul>
-    <li>묻다(질문하다)의 변형 '물어, 물으니, 물어서' 등은 묻다(파묻다)보다 어깨번호가 낮으므로 제외</li>
-    <li>이르다(말하다)의 변형 '일러' 등은 이르다(다다르다)보다 어깨번호가 낮으므로 제외</li>
+<ul><li>묻다(질문하다)의 변형 '물어, 물으니, 물어서' 등은 묻다(파묻다)보다 어깨번호가 낮으므로 제외</li>
+<li>이르다(말하다)의 변형 '일러' 등은 이르다(다다르다)보다 어깨번호가 낮으므로 제외</li>
 </ul>
 <h2>적용되지 않는 규칙변형</h2>
-<ul>
-    <li>걷다(수집하다)는 걷다(보행하다)보다 어깨번호가 낮아, 불규칙 변형 '걸어, 걸으니, 걸어서'가 적용됨</li>
+<ul><li>걷다(수집하다)는 걷다(보행하다)보다 어깨번호가 낮아, 불규칙 변형 '걸어, 걸으니, 걸어서'가 적용됨</li>
 </ul>
 <h3>Parameters</h3>
 <p><a name="verb"></a>
-    <code>verb</code> - 용언 원형인 어근을 표현한 String. '-다.' 와 같은 어미는 없는 어근 상태입니다.</p>
+<code>verb</code> - 용언 원형인 어근을 표현한 String. '-다.' 와 같은 어미는 없는 어근 상태입니다.</p>
 <p><a name="isVerb"></a>
-    <code>isVerb</code> - 동사인지 형용사인지 나타내는 지시자. 동사이면 true.</p>
+<code>isVerb</code> - 동사인지 형용사인지 나타내는 지시자. 동사이면 true.</p>
 <p><a name="rest"></a>
-    <code>rest</code> - 어근에 붙일 어미를 표현한 String.</p>
+<code>rest</code> - 어근에 붙일 어미를 표현한 String.</p>
 <p><strong>Since</strong><br/>
-    2.0.0</p>
+2.0.0</p>
 <p><strong>Return</strong><br/>
-    모음조화나 불규칙 활용이 교정된 원형+어미 결합</p>
+모음조화나 불규칙 활용이 교정된 원형+어미 결합</p>
 </BODY>
 </HTML>

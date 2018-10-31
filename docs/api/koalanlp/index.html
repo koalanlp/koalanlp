@@ -1,8 +1,8 @@
 <HTML>
 <HEAD>
-    <meta charset="UTF-8">
-    <title>koalanlp</title>
-    <link rel="stylesheet" href="../style.css">
+<meta charset="UTF-8">
+<title>koalanlp</title>
+<link rel="stylesheet" href="../style.css">
 </HEAD>
 <BODY>
 <a href="./index.html">koalanlp</a><br/>
@@ -10,164 +10,154 @@
 <h2>KoalaNLP</h2>
 <p>KoalaNLP는 한국어 처리의 통합 인터페이스를 지향하는 Java/Kotlin/Scala Library입니다.</p>
 <p>이 프로젝트는 <strong>서로 다른 형태의 형태소 분석기를</strong> 모아,
-    <strong>동일한 인터페이스</strong> 아래에서 사용할 수 있도록 하는 것이 목적입니다.</p>
-<ul>
-    <li>KAIST의 <a href="http://kldp.net/projects/hannanum/">한나눔 형태소 분석기</a>와 <a
-            href="http://semanticweb.kaist.ac.kr/home/index.php/NLP_HUB">NLP_HUB 구문분석기</a></li>
-    <li>서울대의 <a href="http://kkma.snu.ac.kr/documents/index.jsp">꼬꼬마 형태소/구문 분석기 v2.1</a></li>
-    <li>Shineware의 <a href="https://github.com/shin285/KOMORAN">코모란 v3.3.4</a></li>
-    <li>OpenKoreanText의 <a href="http://openkoreantext.org">오픈 소스 한국어 처리기 v2.2.0</a> (구 Twitter 한국어 분석기)</li>
-    <li>은전한닢 프로젝트의 <a href="https://bitbucket.org/eunjeon/seunjeon">SEunjeon(S은전)</a> (Mecab-ko의 Scala/Java 판본)</li>
-    <li>이수명님의 <a href="http://cafe.naver.com/korlucene">Arirang Morpheme Analyzer</a> 1-1</li>
-    <li>최석재님의 <a href="https://github.com/SukjaeChoi/RHINO">RHINO v2.5.4</a></li>
-    <li>김상준님의 <a href="https://github.com/rasoio/daon/tree/master/daon-core">Daon 분석기</a></li>
-    <li>ETRI의 <a href="http://aiopen.etri.re.kr/doc_language.php">공공 인공지능 Open API</a></li>
+<strong>동일한 인터페이스</strong> 아래에서 사용할 수 있도록 하는 것이 목적입니다.</p>
+<ul><li>KAIST의 <a href="http://kldp.net/projects/hannanum/">한나눔 형태소 분석기</a>와 <a href="http://semanticweb.kaist.ac.kr/home/index.php/NLP_HUB">NLP_HUB 구문분석기</a></li>
+<li>서울대의 <a href="http://kkma.snu.ac.kr/documents/index.jsp">꼬꼬마 형태소/구문 분석기 v2.1</a></li>
+<li>Shineware의 <a href="https://github.com/shin285/KOMORAN">코모란 v3.3.4</a></li>
+<li>OpenKoreanText의 <a href="http://openkoreantext.org">오픈 소스 한국어 처리기 v2.2.0</a> (구 Twitter 한국어 분석기)</li>
+<li>은전한닢 프로젝트의 <a href="https://bitbucket.org/eunjeon/seunjeon">SEunjeon(S은전)</a> (Mecab-ko의 Scala/Java 판본)</li>
+<li>이수명님의 <a href="http://cafe.naver.com/korlucene">Arirang Morpheme Analyzer</a> 1-1</li>
+<li>최석재님의 <a href="https://github.com/SukjaeChoi/RHINO">RHINO v2.5.4</a></li>
+<li>김상준님의 <a href="https://github.com/rasoio/daon/tree/master/daon-core">Daon 분석기</a></li>
+<li>ETRI의 <a href="http://aiopen.etri.re.kr/doc_language.php">공공 인공지능 Open API</a></li>
 </ul>
 <p>주1-1 Arirang 분석기의 출력을 형태소분석에 적합하게 조금 다듬었으므로, 원본과 약간 다른 결과를 낼 수도 있습니다.</p>
 <p>분석기의 개선이나 추가 등을 하고 싶으시다면,</p>
-<ul>
-    <li>개발이 직접 가능하시다면 pull request를 보내주세요. 테스트 후 반영할 수 있도록 하겠습니다.</li>
-    <li>개발이 어렵다면 issue tracker에 등록해주세요. 검토 후 답변해드리겠습니다.</li>
+<ul><li>개발이 직접 가능하시다면 pull request를 보내주세요. 테스트 후 반영할 수 있도록 하겠습니다.</li>
+<li>개발이 어렵다면 issue tracker에 등록해주세요. 검토 후 답변해드리겠습니다.</li>
 </ul>
 <h2>특징</h2>
 <p>KoalaNLP는 다음과 같은 특징을 가지고 있습니다.</p>
-<ol>
-    <li>
-        <p>복잡한 설정이 필요없는 텍스트 분석:</p>
+<ol><li>
+<p>복잡한 설정이 필요없는 텍스트 분석:</p>
+   
+<p>모델은 자동으로 Maven으로 배포되기 때문에, 각 모델을 별도로 설치할 필요가 없습니다.</p>
+</li>
 
-        <p>모델은 자동으로 Maven으로 배포되기 때문에, 각 모델을 별도로 설치할 필요가 없습니다.</p>
-    </li>
+<li>
+<p>코드 2~3 줄로 수행하는 텍스트 처리:</p>
+   
+<p>모델마다 다른 복잡한 설정 과정, 초기화 과정은 필요하지 않습니다. Dependency에 추가하고, 객체를 생성하고, 분석 메소드를 호출하는 3줄이면 끝납니다.</p>
+</li>
 
-    <li>
-        <p>코드 2~3 줄로 수행하는 텍스트 처리:</p>
+<li>
+<p>모델에 상관 없는 동일한 코드, 동일한 결과:</p>
+   
+<p>모델마다 실행 방법, 실행 결과를 표현하는 형태가 다릅니다. KoalaNLP는 이를 정부 및 관계기관의 표준안에 따라 표준화합니다. 따라서 모델에 독립적으로 응용 프로그램 개발이 가능합니다.</p>
+</li>
 
-        <p>모델마다 다른 복잡한 설정 과정, 초기화 과정은 필요하지 않습니다. Dependency에 추가하고, 객체를 생성하고, 분석 메소드를 호출하는 3줄이면 끝납니다.</p>
-    </li>
-
-    <li>
-        <p>모델에 상관 없는 동일한 코드, 동일한 결과:</p>
-
-        <p>모델마다 실행 방법, 실행 결과를 표현하는 형태가 다릅니다. KoalaNLP는 이를 정부 및 관계기관의 표준안에 따라 표준화합니다. 따라서 모델에 독립적으로 응용 프로그램 개발이
-            가능합니다.</p>
-    </li>
-
-    <li>
-        <p>Java, Kotlin, <a href="https://koalanlp.github.io/scala-support">Scala</a>, <a
-                href="https://koalanlp.github.io/python-support">Python 3</a>, <a
-                href="https://koalanlp.github.io/nodejs-support">NodeJS</a>에서 크게 다르지 않은 코드:</p>
-
-        <p>KoalaNLP는 여러 프로그래밍 언어에서 사용할 수 있습니다. 어디서 개발을 하더라도 크게 코드가 다르지 않습니다. </p>
-    </li>
+<li>
+<p>Java, Kotlin, <a href="https://koalanlp.github.io/scala-support">Scala</a>, <a href="https://koalanlp.github.io/python-support">Python 3</a>, <a href="https://koalanlp.github.io/nodejs-support">NodeJS</a>에서 크게 다르지 않은 코드:</p>
+   
+<p>KoalaNLP는 여러 프로그래밍 언어에서 사용할 수 있습니다. 어디서 개발을 하더라도 크게 코드가 다르지 않습니다. </p>
+</li>
 </ol>
 <h2>참고</h2>
 <p>모든 코드는 Kotlin으로 작성되어 있습니다. Java나 Scala에 비해서 유지 보수에 편리하다고 판단하여 변경하였습니다.</p>
-<ul>
-    <li>Kotlin의 사용법은 <a href="https://try.kotlinlang.org/">Try Kotlin (공식)</a>에서 학습하실 수 있습니다.</li>
-    <li>모든 코드는 Java와 Kotlin에서 완벽히 상호 호환됩니다.</li>
-    <li>더불어 기존 1.x의 Scala 사용을 지원하기 위해서 <a
-            href="https://koalanlp.github.io/scala-support"><code>koalanlp-scala</code></a>를 통해 Implicit 변환을 지원합니다.
-    </li>
+<ul><li>Kotlin의 사용법은 <a href="https://try.kotlinlang.org/">Try Kotlin (공식)</a>에서 학습하실 수 있습니다.</li>
+<li>모든 코드는 Java와 Kotlin에서 완벽히 상호 호환됩니다.</li>
+<li>더불어 기존 1.x의 Scala 사용을 지원하기 위해서 <a href="https://koalanlp.github.io/scala-support"><code>koalanlp-scala</code></a>를 통해 Implicit 변환을 지원합니다. </li>
 </ul>
 <h3>Packages</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <p><a href="kr.bydelta.koala/index.html">kr.bydelta.koala</a></p>
-        </td>
-        <td>
-            <p>KoalaNLP가 제공하는 상수값 및 Utility function들을 정의합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="kr.bydelta.koala.arirang/index.html">kr.bydelta.koala.arirang</a></p>
-        </td>
-        <td>
-            <p>아리랑 형태소분석기의 Wrapper를 정의합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="kr.bydelta.koala.daon/index.html">kr.bydelta.koala.daon</a></p>
-        </td>
-        <td>
-            <p>Daon 형태소분석기의 Wrapper를 정의합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="kr.bydelta.koala.data/index.html">kr.bydelta.koala.data</a></p>
-        </td>
-        <td>
-            <p>KoalaNLP가 사용하는, 또는 사용할 데이터 표현을 정의합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="kr.bydelta.koala.etri/index.html">kr.bydelta.koala.etri</a></p>
-        </td>
-        <td>
-            <p>ETRI 언어 분석 API의 Wrapper를 정의합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="kr.bydelta.koala.eunjeon/index.html">kr.bydelta.koala.eunjeon</a></p>
-        </td>
-        <td>
-            <p>SEunjeon 형태소분석기의 Wrapper를 정의합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="kr.bydelta.koala.hnn/index.html">kr.bydelta.koala.hnn</a></p>
-        </td>
-        <td>
-            <p>한나눔 형태소분석기와 NLP_HUB 구문/의존구문 분석기의 Wrapper를 정의합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="kr.bydelta.koala.kkma/index.html">kr.bydelta.koala.kkma</a></p>
-        </td>
-        <td>
-            <p>꼬꼬마 형태소/의존구문 분석기의 Wrapper를 정의합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="kr.bydelta.koala.kmr/index.html">kr.bydelta.koala.kmr</a></p>
-        </td>
-        <td>
-            <p>SEunjeon 형태소분석기의 Wrapper를 정의합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="kr.bydelta.koala.okt/index.html">kr.bydelta.koala.okt</a></p>
-        </td>
-        <td>
-            <p>Open Korean Text 형태소분석기의 Wrapper를 정의합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="kr.bydelta.koala.proc/index.html">kr.bydelta.koala.proc</a></p>
-        </td>
-        <td>
-            <p>KoalaNLP가 사용하는, 또는 사용할 API Interface를 정의합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="kr.bydelta.koala.rhino/index.html">kr.bydelta.koala.rhino</a></p>
-        </td>
-        <td>
-            <p>Open Korean Text 형태소분석기의 Wrapper를 정의합니다.</p>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<p><a href="kr.bydelta.koala/index.html">kr.bydelta.koala</a></p>
+</td>
+<td>
+<p>KoalaNLP가 제공하는 상수값 및 Utility function들을 정의합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kr.bydelta.koala.arirang/index.html">kr.bydelta.koala.arirang</a></p>
+</td>
+<td>
+<p>아리랑 형태소분석기의 Wrapper를 정의합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kr.bydelta.koala.daon/index.html">kr.bydelta.koala.daon</a></p>
+</td>
+<td>
+<p>Daon 형태소분석기의 Wrapper를 정의합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kr.bydelta.koala.data/index.html">kr.bydelta.koala.data</a></p>
+</td>
+<td>
+<p>KoalaNLP가 사용하는, 또는 사용할 데이터 표현을 정의합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kr.bydelta.koala.etri/index.html">kr.bydelta.koala.etri</a></p>
+</td>
+<td>
+<p>ETRI 언어 분석 API의 Wrapper를 정의합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kr.bydelta.koala.eunjeon/index.html">kr.bydelta.koala.eunjeon</a></p>
+</td>
+<td>
+<p>SEunjeon 형태소분석기의 Wrapper를 정의합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kr.bydelta.koala.hnn/index.html">kr.bydelta.koala.hnn</a></p>
+</td>
+<td>
+<p>한나눔 형태소분석기와 NLP_HUB 구문/의존구문 분석기의 Wrapper를 정의합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kr.bydelta.koala.kkma/index.html">kr.bydelta.koala.kkma</a></p>
+</td>
+<td>
+<p>꼬꼬마 형태소/의존구문 분석기의 Wrapper를 정의합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kr.bydelta.koala.kmr/index.html">kr.bydelta.koala.kmr</a></p>
+</td>
+<td>
+<p>SEunjeon 형태소분석기의 Wrapper를 정의합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kr.bydelta.koala.okt/index.html">kr.bydelta.koala.okt</a></p>
+</td>
+<td>
+<p>Open Korean Text 형태소분석기의 Wrapper를 정의합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kr.bydelta.koala.proc/index.html">kr.bydelta.koala.proc</a></p>
+</td>
+<td>
+<p>KoalaNLP가 사용하는, 또는 사용할 API Interface를 정의합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kr.bydelta.koala.rhino/index.html">kr.bydelta.koala.rhino</a></p>
+</td>
+<td>
+<p>Open Korean Text 형태소분석기의 Wrapper를 정의합니다.</p>
+</td>
+</tr>
+</tbody>
 </table>
 <h3>Index</h3>
 <a href="alltypes/index.html">All Types</a>

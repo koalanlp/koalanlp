@@ -1,46 +1,35 @@
 <HTML>
 <HEAD>
-    <meta charset="UTF-8">
-    <title>Word.getPhrase - koalanlp</title>
-    <link rel="stylesheet" href="../../../style.css">
+<meta charset="UTF-8">
+<title>Word.getPhrase - koalanlp</title>
+<link rel="stylesheet" href="../../../style.css">
 </HEAD>
 <BODY>
-<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.data</a>&nbsp;/&nbsp;<a
-        href="index.html">Word</a>&nbsp;/&nbsp;<a href="./get-phrase.html">getPhrase</a><br/>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.data</a>&nbsp;/&nbsp;<a href="index.html">Word</a>&nbsp;/&nbsp;<a href="./get-phrase.html">getPhrase</a><br/>
 <br/>
 <h1>getPhrase</h1>
 <a name="kr.bydelta.koala.data.Word$getPhrase()"></a>
-<code><span class="keyword">fun </span><span class="identifier">getPhrase</span><span class="symbol">(</span><span
-        class="symbol">)</span><span class="symbol">: </span><a href="../-syntax-tree/index.html"><span
-        class="identifier">SyntaxTree</span></a><span class="symbol">?</span></code> <a
-        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/data/data.kt#L1121">(source)</a>
+<code><span class="keyword">fun </span><span class="identifier">getPhrase</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-syntax-tree/index.html"><span class="identifier">SyntaxTree</span></a><span class="symbol">?</span></code> <a href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/data/data.kt#L1121">(source)</a>
 <p>구문분석을 했다면, 현재 어절이 속한 직속 상위 구구조(Phrase)를 돌려줍니다.</p>
 <h2>참고</h2>
 <p><strong>구문구조 분석</strong>은 문장의 구성요소들(어절, 구, 절)이 이루는 문법적 구조를 분석하는 방법입니다.
-    예) '나는 밥을 먹었고, 영희는 짐을 쌌다'라는 문장에는
-    2개의 절이 있습니다</p>
-<ul>
-    <li>나는 밥을 먹었고</li>
-    <li>영희는 짐을 쌌다
-        각 절은 3개의 구를 포함합니다
-    </li>
-    <li>나는, 밥을, 영희는, 짐을: 체언구</li>
-    <li>먹었고, 쌌다: 용언구</li>
+예) '나는 밥을 먹었고, 영희는 짐을 쌌다'라는 문장에는
+2개의 절이 있습니다</p>
+<ul><li>나는 밥을 먹었고</li>
+<li>영희는 짐을 쌌다
+각 절은 3개의 구를 포함합니다</li>
+<li>나는, 밥을, 영희는, 짐을: 체언구</li>
+<li>먹었고, 쌌다: 용언구</li>
 </ul>
 <p>아래를 참고해보세요.</p>
-<ul>
-    <li><a href="../../kr.bydelta.koala.proc/-can-parse-syntax.html">kr.bydelta.koala.proc.CanParseSyntax</a> 구문구조 분석을
-        수행하는 interface.
-    </li>
-    <li><a href="../-sentence/get-syntax-tree.html">Sentence.getSyntaxTree</a> 전체 문장을 분석한 <a
-            href="../-syntax-tree/index.html">SyntaxTree</a>를 가져오는 API
-    </li>
-    <li><a href="../-syntax-tree/index.html">SyntaxTree</a> 구문구조를 저장하는 형태</li>
-    <li><a href="../../kr.bydelta.koala/-phrase-tag/index.html">PhraseTag</a> 구구조의 형태 분류를 갖는 Enum 값</li>
+<ul><li><a href="../../kr.bydelta.koala.proc/-can-parse-syntax.html">kr.bydelta.koala.proc.CanParseSyntax</a> 구문구조 분석을 수행하는 interface.</li>
+<li><a href="../-sentence/get-syntax-tree.html">Sentence.getSyntaxTree</a> 전체 문장을 분석한 <a href="../-syntax-tree/index.html">SyntaxTree</a>를 가져오는 API</li>
+<li><a href="../-syntax-tree/index.html">SyntaxTree</a> 구문구조를 저장하는 형태</li>
+<li><a href="../../kr.bydelta.koala/-phrase-tag/index.html">PhraseTag</a> 구구조의 형태 분류를 갖는 Enum 값</li>
 </ul>
 <p><strong>Since</strong><br/>
-    2.0.0</p>
+2.0.0</p>
 <p><strong>Return</strong><br/>
-    어절의 상위 구구조 <a href="../-syntax-tree/index.html">SyntaxTree</a>. 분석 결과가 없으면 null</p>
+어절의 상위 구구조 <a href="../-syntax-tree/index.html">SyntaxTree</a>. 분석 결과가 없으면 null</p>
 </BODY>
 </HTML>

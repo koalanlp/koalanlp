@@ -166,7 +166,7 @@ class Tagger : CanTagOnlyAParagraph<Sentence>() {
      * @param result 변환할 분석결과.
      * @return 변환된 [kr.bydelta.koala.data.Sentence] 객체
      */
-    override fun convertSentence(result: Sentence): kr.bydelta.koala.data.Sentence = Tagger.convertSentence(result)
+    override fun convertSentence(result: Sentence): kr.bydelta.koala.data.Sentence = Tagger.convert(result)
 
 
     /** static fields */
@@ -182,7 +182,8 @@ class Tagger : CanTagOnlyAParagraph<Sentence>() {
          * @param result 변환할 분석결과.
          * @return 변환된 [Sentence] 객체
          */
-        fun convertSentence(result: Sentence): kr.bydelta.koala.data.Sentence =
+        @JvmStatic
+        fun convert(result: Sentence): kr.bydelta.koala.data.Sentence =
                 kr.bydelta.koala.data.Sentence(
                         result.eojeols.zip(result.plainEojeols).map {
                             val (eojeol, plain) = it
@@ -395,7 +396,7 @@ class Parser : CanParseDependency<Sentence>, CanParseSyntax<Sentence> {
      * @param sentence 변환할 문장입니다.
      * @return [kr.bydelta.koala.data.Sentence] 객체입니다.
      */
-    override fun convert(sentence: Sentence): kr.bydelta.koala.data.Sentence = Tagger.convertSentence(sentence)
+    override fun convert(sentence: Sentence): kr.bydelta.koala.data.Sentence = Tagger.convert(sentence)
 
     /** Parse의 결과인 Non-terminal Node의 목록으로부터 단어 정보를 읽어 Koala의 Word 목록으로 바꿉니다.
      *

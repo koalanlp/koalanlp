@@ -1,195 +1,134 @@
 <HTML>
 <HEAD>
-    <meta charset="UTF-8">
-    <title>EntityResponse - koalanlp</title>
-    <link rel="stylesheet" href="../../../style.css">
+<meta charset="UTF-8">
+<title>EntityResponse - koalanlp</title>
+<link rel="stylesheet" href="../../../style.css">
 </HEAD>
 <BODY>
-<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.etri</a>&nbsp;/&nbsp;<a
-        href="./index.html">EntityResponse</a><br/>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.etri</a>&nbsp;/&nbsp;<a href="./index.html">EntityResponse</a><br/>
 <br/>
 <h1>EntityResponse</h1>
-<code><span class="keyword">data</span> <span class="keyword">class </span><span
-        class="identifier">EntityResponse</span></code> <a
-        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/etri/src/main/kotlin/kr/bydelta/koala/etri/data.kt#L86">(source)</a>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">EntityResponse</span></code> <a href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/etri/src/main/kotlin/kr/bydelta/koala/etri/data.kt#L86">(source)</a>
 <p>개체명 인식 결과물</p>
 <h3>Parameters</h3>
 <p><a name="id"></a>
-    <code>id</code> - 개체명 순번</p>
+<code>id</code> - 개체명 순번</p>
 <p><a name="text"></a>
-    <code>text</code> - 개체명 표면형</p>
+<code>text</code> - 개체명 표면형</p>
 <p><a name="type"></a>
-    <code>type</code> - 개체명의 유형 (세분류)</p>
+<code>type</code> - 개체명의 유형 (세분류)</p>
 <p><a name="begin"></a>
-    <code>begin</code> - 개체명 분석 결과의 시작 형태소 번호</p>
+<code>begin</code> - 개체명 분석 결과의 시작 형태소 번호</p>
 <p><a name="end"></a>
-    <code>end</code> - 개체명 분석 결과의 끝 형태소 번호</p>
+<code>end</code> - 개체명 분석 결과의 끝 형태소 번호</p>
 <p><a name="weight"></a>
-    <code>weight</code> - 개체명 분석 결과의 신뢰도</p>
+<code>weight</code> - 개체명 분석 결과의 신뢰도</p>
 <p><a name="commonNoun"></a>
-    <code>commonNoun</code> - 개체명 분석 결과가 일반명사이면 1, 고유명사이면 0</p>
+<code>commonNoun</code> - 개체명 분석 결과가 일반명사이면 1, 고유명사이면 0</p>
 <h3>Constructors</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <p><a href="-init-.html">&lt;init&gt;</a></p>
-        </td>
-        <td>
-            <code><span class="identifier">EntityResponse</span><span class="symbol">(</span><span class="identifier"
-                                                                                                   id="kr.bydelta.koala.etri.EntityResponse$<init>(kotlin.Int, kotlin.String, kotlin.String, kotlin.Double, kotlin.Int, kotlin.Int, kotlin.Int)/id">id</span><span
-                    class="symbol">:</span>&nbsp;<a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="kr.bydelta.koala.etri.EntityResponse$<init>(kotlin.Int, kotlin.String, kotlin.String, kotlin.Double, kotlin.Int, kotlin.Int, kotlin.Int)/text">text</span><span
-                    class="symbol">:</span>&nbsp;<a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-                    class="identifier">String</span></a><span class="symbol">, </span><span class="identifier"
-                                                                                            id="kr.bydelta.koala.etri.EntityResponse$<init>(kotlin.Int, kotlin.String, kotlin.String, kotlin.Double, kotlin.Int, kotlin.Int, kotlin.Int)/type">type</span><span
-                    class="symbol">:</span>&nbsp;<a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-                    class="identifier">String</span></a><span class="symbol">, </span><span class="identifier"
-                                                                                            id="kr.bydelta.koala.etri.EntityResponse$<init>(kotlin.Int, kotlin.String, kotlin.String, kotlin.Double, kotlin.Int, kotlin.Int, kotlin.Int)/weight">weight</span><span
-                    class="symbol">:</span>&nbsp;<a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span
-                    class="identifier">Double</span></a><span class="symbol">, </span><span class="identifier"
-                                                                                            id="kr.bydelta.koala.etri.EntityResponse$<init>(kotlin.Int, kotlin.String, kotlin.String, kotlin.Double, kotlin.Int, kotlin.Int, kotlin.Int)/begin">begin</span><span
-                    class="symbol">:</span>&nbsp;<a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="kr.bydelta.koala.etri.EntityResponse$<init>(kotlin.Int, kotlin.String, kotlin.String, kotlin.Double, kotlin.Int, kotlin.Int, kotlin.Int)/end">end</span><span
-                    class="symbol">:</span>&nbsp;<a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span
-                    class="symbol">, </span><span class="identifier"
-                                                  id="kr.bydelta.koala.etri.EntityResponse$<init>(kotlin.Int, kotlin.String, kotlin.String, kotlin.Double, kotlin.Int, kotlin.Int, kotlin.Int)/commonNoun">commonNoun</span><span
-                    class="symbol">:</span>&nbsp;<a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span
-                    class="symbol">)</span></code>
-            <p>개체명 인식 결과물</p>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">EntityResponse</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.etri.EntityResponse$<init>(kotlin.Int, kotlin.String, kotlin.String, kotlin.Double, kotlin.Int, kotlin.Int, kotlin.Int)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.etri.EntityResponse$<init>(kotlin.Int, kotlin.String, kotlin.String, kotlin.Double, kotlin.Int, kotlin.Int, kotlin.Int)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.etri.EntityResponse$<init>(kotlin.Int, kotlin.String, kotlin.String, kotlin.Double, kotlin.Int, kotlin.Int, kotlin.Int)/type">type</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.etri.EntityResponse$<init>(kotlin.Int, kotlin.String, kotlin.String, kotlin.Double, kotlin.Int, kotlin.Int, kotlin.Int)/weight">weight</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.etri.EntityResponse$<init>(kotlin.Int, kotlin.String, kotlin.String, kotlin.Double, kotlin.Int, kotlin.Int, kotlin.Int)/begin">begin</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.etri.EntityResponse$<init>(kotlin.Int, kotlin.String, kotlin.String, kotlin.Double, kotlin.Int, kotlin.Int, kotlin.Int)/end">end</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.etri.EntityResponse$<init>(kotlin.Int, kotlin.String, kotlin.String, kotlin.Double, kotlin.Int, kotlin.Int, kotlin.Int)/commonNoun">commonNoun</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span></code>
+<p>개체명 인식 결과물</p>
+</td>
+</tr>
+</tbody>
 </table>
 <h3>Properties</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <p><a href="begin.html">begin</a></p>
-        </td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">begin</span><span class="symbol">: </span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
-            <p>개체명 분석 결과의 시작 형태소 번호</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="common-noun.html">commonNoun</a></p>
-        </td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">commonNoun</span><span
-                    class="symbol">: </span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
-            <p>개체명 분석 결과가 일반명사이면 1, 고유명사이면 0</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="end.html">end</a></p>
-        </td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">end</span><span class="symbol">: </span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
-            <p>개체명 분석 결과의 끝 형태소 번호</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="id.html">id</a></p>
-        </td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">id</span><span class="symbol">: </span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
-            <p>개체명 순번</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="text.html">text</a></p>
-        </td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">text</span><span class="symbol">: </span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-                    class="identifier">String</span></a></code>
-            <p>개체명 표면형</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="type.html">type</a></p>
-        </td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">type</span><span class="symbol">: </span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-                    class="identifier">String</span></a></code>
-            <p>개체명의 유형 (세분류)</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="weight.html">weight</a></p>
-        </td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">weight</span><span
-                    class="symbol">: </span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span
-                    class="identifier">Double</span></a></code>
-            <p>개체명 분석 결과의 신뢰도</p>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<p><a href="begin.html">begin</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">begin</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>개체명 분석 결과의 시작 형태소 번호</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="common-noun.html">commonNoun</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">commonNoun</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>개체명 분석 결과가 일반명사이면 1, 고유명사이면 0</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="end.html">end</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">end</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>개체명 분석 결과의 끝 형태소 번호</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="id.html">id</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">id</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>개체명 순번</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="text.html">text</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">text</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>개체명 표면형</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="type.html">type</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">type</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>개체명의 유형 (세분류)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="weight.html">weight</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">weight</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a></code>
+<p>개체명 분석 결과의 신뢰도</p>
+</td>
+</tr>
+</tbody>
 </table>
 <h3>Functions</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <p><a href="to-entity.html">toEntity</a></p>
-        </td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">toEntity</span><span class="symbol">(</span><span
-                    class="identifier"
-                    id="kr.bydelta.koala.etri.EntityResponse$toEntity(kotlin.collections.List((kr.bydelta.koala.etri.WordSenseResponse)))/senses">senses</span><span
-                    class="symbol">:</span>&nbsp;<a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
-                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
-                    href="../-word-sense-response/index.html"><span class="identifier">WordSenseResponse</span></a><span
-                    class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a
-                    href="../../kr.bydelta.koala.data/-entity/index.html"><span
-                    class="identifier">Entity</span></a></code>
-            <p>개체명 <a href="../../kr.bydelta.koala.data/-entity/index.html">Entity</a>로 변환합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="to-entity-with-morph.html">toEntityWithMorph</a></p>
-        </td>
-        <td>
-            <code><span class="keyword">fun </span><span class="identifier">toEntityWithMorph</span><span
-                    class="symbol">(</span><span class="identifier"
-                                                 id="kr.bydelta.koala.etri.EntityResponse$toEntityWithMorph(kotlin.collections.List((kr.bydelta.koala.etri.MorphemeResponse)))/senses">senses</span><span
-                    class="symbol">:</span>&nbsp;<a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span
-                    class="identifier">List</span></a><span class="symbol">&lt;</span><a
-                    href="../-morpheme-response/index.html"><span class="identifier">MorphemeResponse</span></a><span
-                    class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a
-                    href="../../kr.bydelta.koala.data/-entity/index.html"><span
-                    class="identifier">Entity</span></a></code>
-            <p>개체명 <a href="../../kr.bydelta.koala.data/-entity/index.html">Entity</a>로 변환합니다.</p>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<p><a href="to-entity.html">toEntity</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toEntity</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.etri.EntityResponse$toEntity(kotlin.collections.List((kr.bydelta.koala.etri.WordSenseResponse)))/senses">senses</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-word-sense-response/index.html"><span class="identifier">WordSenseResponse</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../kr.bydelta.koala.data/-entity/index.html"><span class="identifier">Entity</span></a></code>
+<p>개체명 <a href="../../kr.bydelta.koala.data/-entity/index.html">Entity</a>로 변환합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="to-entity-with-morph.html">toEntityWithMorph</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toEntityWithMorph</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.etri.EntityResponse$toEntityWithMorph(kotlin.collections.List((kr.bydelta.koala.etri.MorphemeResponse)))/senses">senses</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-morpheme-response/index.html"><span class="identifier">MorphemeResponse</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../kr.bydelta.koala.data/-entity/index.html"><span class="identifier">Entity</span></a></code>
+<p>개체명 <a href="../../kr.bydelta.koala.data/-entity/index.html">Entity</a>로 변환합니다.</p>
+</td>
+</tr>
+</tbody>
 </table>
 </BODY>
 </HTML>

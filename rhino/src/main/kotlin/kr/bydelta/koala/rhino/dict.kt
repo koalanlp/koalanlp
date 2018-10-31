@@ -59,12 +59,12 @@ internal object DictionaryReader {
             try {
                 val sizemap =
                         array.mapNotNull { it[0] }.mapIndexed { index, s -> s.length to index + 1 }
-                                .groupBy { it.first }.map {
+                                .groupBy { it.first }.asSequence().associate {
                                     val (wordlen, lines) = it
 
                                     if (wordlen <= 7) wordlen to (lines.minBy { w -> w.second }?.second ?: 0)
                                     else wordlen to 0
-                                }.toMap()
+                                }
 
                 (0 until 10).map { k -> sizemap[k] ?: 0 }.toIntArray()
             } catch (_: Throwable) {

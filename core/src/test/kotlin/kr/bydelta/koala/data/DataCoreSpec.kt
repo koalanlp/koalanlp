@@ -424,6 +424,13 @@ object DataCoreSpec : Spek({
             it("can be serialized") {
                 var outputBytes: ByteArray? = null
 
+                Entity("밥", CoarseEntityType.PS, "PS_OTHER", listOf(dummy2[0]))
+                Entity("밥", CoarseEntityType.PS, "PS_SOME", listOf(dummy2[0]))
+                Entity("밥", CoarseEntityType.PS, "PS_ANOTHER", listOf(dummy2[0]))
+                val tree = SyntaxTree(PhraseTag.NP, dummy2)
+                val dep = DepEdge(dummy2, dummy1, PhraseTag.NP, DependencyTag.SBJ)
+                val role = RoleEdge(dummy2, dummy1, RoleType.ARG0);
+
                 {
                     val output = ByteArrayOutputStream(1024)
                     val serializer = ObjectOutputStream(output)
@@ -438,7 +445,19 @@ object DataCoreSpec : Spek({
                 {
                     val serializer = ObjectInputStream(ByteArrayInputStream(outputBytes))
                     serializer.readObject() as Word `should equal` dummy1
-                    serializer.readObject() as Word `should equal` dummy2
+
+                    val reconst = serializer.readObject() as Word
+                    reconst `should equal` dummy2
+                    reconst.getGovernorEdge()!! `should equal`  dummy2.getGovernorEdge()!!
+                    reconst.getArgumentRoles()!! shouldContainSame dummy2.getArgumentRoles()!!
+                    reconst.getPhrase()!! `should equal`  dummy2.getPhrase()!!
+                    reconst.getEntities() shouldContainSame dummy2.getEntities()
+
+                    reconst.getEntities().map { it.fineLabel } `should contain` "PS_OTHER"
+                    reconst.getPhrase() `should equal` tree
+                    reconst.getArgumentRoles()?.get(0) `should equal` role
+                    reconst.getDependentEdges()?.get(0) `should equal` dep
+
                     serializer.close()
                 } `should not throw` AnyException
             }
@@ -563,6 +582,20 @@ object DataCoreSpec : Spek({
             it("can be serialized") {
                 var outputBytes: ByteArray? = null
 
+                sent2.setEntities(listOf(Entity("나", CoarseEntityType.PS, "PS_OTHER", listOf(sent2[0][0]))))
+                sent2.setCorefGroups(listOf(CoreferenceGroup(listOf(sent2.getEntities()!!.get(0)))))
+                sent2.setSyntaxTree(SyntaxTree(PhraseTag.S, children = listOf(
+                        SyntaxTree(PhraseTag.NP, sent2[0]),
+                        SyntaxTree(PhraseTag.NP, sent2[1])
+                )))
+                sent2.setDepEdges(listOf(
+                        DepEdge(null, sent2[1], PhraseTag.S, DependencyTag.ROOT),
+                        DepEdge(sent2[1], sent2[0], PhraseTag.S, DependencyTag.ROOT)
+                ))
+                sent2.setRoleEdges(listOf(
+                        RoleEdge(sent2[1], sent2[0], RoleType.ARG0)
+                ));
+
                 {
                     val output = ByteArrayOutputStream(10240)
                     val serializer = ObjectOutputStream(output)
@@ -577,7 +610,20 @@ object DataCoreSpec : Spek({
                 {
                     val serializer = ObjectInputStream(ByteArrayInputStream(outputBytes))
                     serializer.readObject() as Sentence `should equal` sent
-                    serializer.readObject() as Sentence `should equal` sent2
+
+                    val reconst = serializer.readObject() as Sentence
+                    reconst `should equal` sent2
+                    reconst.getRoles()!! shouldContainSame sent2.getRoles()!!
+                    reconst.getDependencies()!! shouldContainSame sent2.getDependencies()!!
+                    reconst.getSyntaxTree()!! `should equal`  sent2.getSyntaxTree()!!
+                    reconst.getEntities()!! shouldContainSame sent2.getEntities()!!
+
+                    reconst.getCorefGroups()?.get(0)?.get(0) `should equal` reconst.getEntities()?.get(0)
+                    reconst.getEntities()?.get(0)?.fineLabel `should equal` "PS_OTHER"
+                    reconst.getSyntaxTree()?.label `should equal` PhraseTag.S
+                    reconst.getDependencies()?.get(0)?.depType `should equal` DependencyTag.ROOT
+                    reconst.getRoles()?.get(0)?.label `should equal` RoleType.ARG0
+
                     serializer.close()
                 } `should not throw` AnyException
             }

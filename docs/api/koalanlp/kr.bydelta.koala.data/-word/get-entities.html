@@ -1,48 +1,34 @@
 <HTML>
 <HEAD>
-    <meta charset="UTF-8">
-    <title>Word.getEntities - koalanlp</title>
-    <link rel="stylesheet" href="../../../style.css">
+<meta charset="UTF-8">
+<title>Word.getEntities - koalanlp</title>
+<link rel="stylesheet" href="../../../style.css">
 </HEAD>
 <BODY>
-<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.data</a>&nbsp;/&nbsp;<a
-        href="index.html">Word</a>&nbsp;/&nbsp;<a href="./get-entities.html">getEntities</a><br/>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.data</a>&nbsp;/&nbsp;<a href="index.html">Word</a>&nbsp;/&nbsp;<a href="./get-entities.html">getEntities</a><br/>
 <br/>
 <h1>getEntities</h1>
 <a name="kr.bydelta.koala.data.Word$getEntities()"></a>
-<code><span class="keyword">fun </span><span class="identifier">getEntities</span><span class="symbol">(</span><span
-        class="symbol">)</span><span class="symbol">: </span><a
-        href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html"><span class="identifier">Set</span></a><span
-        class="symbol">&lt;</span><a href="../-entity/index.html"><span class="identifier">Entity</span></a><span
-        class="symbol">&gt;</span></code> <a
-        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/data/data.kt#L1097">(source)</a>
+<code><span class="keyword">fun </span><span class="identifier">getEntities</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html"><span class="identifier">Set</span></a><span class="symbol">&lt;</span><a href="../-entity/index.html"><span class="identifier">Entity</span></a><span class="symbol">&gt;</span></code> <a href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/core/src/main/kotlin/kr/bydelta/koala/data/data.kt#L1097">(source)</a>
 <p>개체명 분석을 했다면, 현재 어절이 속한 개체명 값을 돌려줍니다.</p>
 <h2>참고</h2>
 <p><strong>개체명 인식</strong>은 문장에서 인물, 장소, 기관, 대상 등을 인식하는 기술입니다.
-    예) '철저한 진상 조사를 촉구하는 국제사회의 목소리가 커지고 있는 가운데, 트럼프 미국 대통령은 되레 사우디를 감싸고 나섰습니다.'에서, 다음을 인식하는 기술입니다.</p>
-<ul>
-    <li>'트럼프': 인물</li>
-    <li>'미국' : 국가</li>
-    <li>'대통령' : 직위</li>
-    <li>'사우디' : 국가</li>
+예) '철저한 진상 조사를 촉구하는 국제사회의 목소리가 커지고 있는 가운데, 트럼프 미국 대통령은 되레 사우디를 감싸고 나섰습니다.'에서, 다음을 인식하는 기술입니다.</p>
+<ul><li>'트럼프': 인물</li>
+<li>'미국' : 국가</li>
+<li>'대통령' : 직위</li>
+<li>'사우디' : 국가</li>
 </ul>
 <p>아래를 참고해보세요.</p>
-<ul>
-    <li><a href="../../kr.bydelta.koala.proc/-can-recognize-entity.html">kr.bydelta.koala.proc.CanRecognizeEntity</a>
-        개체명 인식기 interface
-    </li>
-    <li><a href="../-morpheme/get-entities.html">Morpheme.getEntities</a> 형태소를 포함하는 모든 <a href="../-entity/index.html">Entity</a>를
-        가져오는 API
-    </li>
-    <li><a href="../-sentence/get-entities.html">Sentence.getEntities</a> 문장에 포함된 모든 <a href="../-entity/index.html">Entity</a>를
-        가져오는 API
-    </li>
-    <li><a href="../-entity/index.html">Entity</a> 개체명을 저장하는 형태</li>
-    <li><a href="../-entity/index.html">CoarseEntityType</a>의 대분류 개체명 분류구조 Enum 값</li>
+<ul><li><a href="../../kr.bydelta.koala.proc/-can-recognize-entity.html">kr.bydelta.koala.proc.CanRecognizeEntity</a> 개체명 인식기 interface</li>
+<li><a href="../-morpheme/get-entities.html">Morpheme.getEntities</a> 형태소를 포함하는 모든 <a href="../-entity/index.html">Entity</a>를 가져오는 API</li>
+<li><a href="../-sentence/get-entities.html">Sentence.getEntities</a> 문장에 포함된 모든 <a href="../-entity/index.html">Entity</a>를 가져오는 API</li>
+<li><a href="../-entity/index.html">Entity</a> 개체명을 저장하는 형태</li>
+<li><a href="../-entity/index.html">CoarseEntityType</a>의 대분류 개체명 분류구조 Enum 값</li>
 </ul>
 <p><strong>Since</strong><br/>
-    2.0.0</p>
+2.0.0</p>
 <p><strong>Return</strong><br/>
-    <a href="../-entity/index.html">Entity</a>의 목록입니다. 분석 결과가 없으면 null.</p>
+<a href="../-entity/index.html">Entity</a>의 목록입니다. 분석 결과가 없으면 null.</p>
 </BODY>
 </HTML>

@@ -101,7 +101,7 @@ class Tagger : CanTagOnlyAParagraph<org.snu.ids.kkma.ma.Sentence>() {
      * @param result 변환할 분석결과.
      * @return 변환된 [Sentence] 객체
      */
-    override fun convertSentence(result: org.snu.ids.kkma.ma.Sentence): Sentence = Tagger.convertSentence(result)
+    override fun convertSentence(result: org.snu.ids.kkma.ma.Sentence): Sentence = Tagger.convert(result)
 
     companion object {
         /**
@@ -111,7 +111,8 @@ class Tagger : CanTagOnlyAParagraph<org.snu.ids.kkma.ma.Sentence>() {
          * @param result 변환할 분석결과.
          * @return 변환된 [Sentence] 객체
          */
-        internal fun convertSentence(result: org.snu.ids.kkma.ma.Sentence): Sentence =
+        @JvmStatic
+        internal fun convert(result: org.snu.ids.kkma.ma.Sentence): Sentence =
                 Sentence(
                         result.map { eojeol ->
                             Word(
@@ -210,7 +211,7 @@ class Parser : CanParseDependency<org.snu.ids.kkma.ma.Sentence> {
      * @param sentence 변환할 문장입니다.
      * @return 변환된 문장입니다.
      */
-    override fun convert(sentence: org.snu.ids.kkma.ma.Sentence): Sentence = Tagger.convertSentence(sentence)
+    override fun convert(sentence: org.snu.ids.kkma.ma.Sentence): Sentence = Tagger.convert(sentence)
 
     /**
      * String [sentence]를 품사 분석하여 [List]<Pair<org.snu.ids.kkma.ma.Sentence, String>>로 변환합니다.

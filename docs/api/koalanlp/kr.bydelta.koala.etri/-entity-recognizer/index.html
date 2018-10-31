@@ -1,49 +1,33 @@
 <HTML>
 <HEAD>
-    <meta charset="UTF-8">
-    <title>EntityRecognizer - koalanlp</title>
-    <link rel="stylesheet" href="../../../style.css">
+<meta charset="UTF-8">
+<title>EntityRecognizer - koalanlp</title>
+<link rel="stylesheet" href="../../../style.css">
 </HEAD>
 <BODY>
-<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.etri</a>&nbsp;/&nbsp;<a
-        href="./index.html">EntityRecognizer</a><br/>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.etri</a>&nbsp;/&nbsp;<a href="./index.html">EntityRecognizer</a><br/>
 <br/>
 <h1>EntityRecognizer</h1>
-<code><span class="keyword">class </span><span class="identifier">EntityRecognizer</span>&nbsp;<span
-        class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala.proc/-can-recognize-entity.html"><span
-        class="identifier">CanRecognizeEntity</span></a><span class="symbol">&lt;</span><a
-        href="../-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a><span
-        class="symbol">&gt;</span><span class="symbol">, </span><a href="../-can-parse-with-e-t-r-i/index.html"><span
-        class="identifier">CanParseWithETRI</span></a></code> <a
-        href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/etri/src/main/kotlin/kr/bydelta/koala/etri/proc.kt#L440">(source)</a>
+<code><span class="keyword">class </span><span class="identifier">EntityRecognizer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala.proc/-can-recognize-entity.html"><span class="identifier">CanRecognizeEntity</span></a><span class="symbol">&lt;</span><a href="../-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../-can-parse-with-e-t-r-i/index.html"><span class="identifier">CanParseWithETRI</span></a></code> <a href="https://github.com/koalanlp/koalanlp/blob/master/blob/master/etri/src/main/kotlin/kr/bydelta/koala/etri/proc.kt#L440">(source)</a>
 <p>개체명 인식 (Named Entity Recognition)을 수행하는 Interface입니다.</p>
-<ul>
-    <li>개체명 인식을 수행하면 자동으로 <a href="../-tagger/index.html">Tagger</a>가 함께 호출됩니다.</li>
-    <li>개체명 인식은 <a href="../-role-labeler/index.html">RoleLabeler</a>, <a href="../-parser/index.html">Parser</a>를 하기 위한
-        기초 분석 과정이므로, 두 분석을 수행하면 의존구문분석이 자동으로 진행됩니다.
-    </li>
+<ul><li>개체명 인식을 수행하면 자동으로 <a href="../-tagger/index.html">Tagger</a>가 함께 호출됩니다.</li>
+<li>개체명 인식은 <a href="../-role-labeler/index.html">RoleLabeler</a>, <a href="../-parser/index.html">Parser</a>를 하기 위한 기초 분석 과정이므로, 두 분석을 수행하면 의존구문분석이 자동으로 진행됩니다.</li>
 
-    <li>Open API 통신 과정에서 <a href="../-a-p-i-exception/index.html">APIException</a>이 발생할 수 있습니다.</li>
+<li>Open API 통신 과정에서 <a href="../-a-p-i-exception/index.html">APIException</a>이 발생할 수 있습니다.</li>
 </ul>
 <h2>참고</h2>
 <p><strong>개체명 인식</strong>은 문장에서 인물, 장소, 기관, 대상 등을 인식하는 기술입니다.
-    예) '철저한 진상 조사를 촉구하는 국제사회의 목소리가 커지고 있는 가운데, 트럼프 미국 대통령은 되레 사우디를 감싸고 나섰습니다.'에서, 다음을 인식하는 기술입니다.</p>
-<ul>
-    <li>'트럼프': 인물</li>
-    <li>'미국' : 국가</li>
-    <li>'대통령' : 직위</li>
-    <li>'사우디' : 국가</li>
+예) '철저한 진상 조사를 촉구하는 국제사회의 목소리가 커지고 있는 가운데, 트럼프 미국 대통령은 되레 사우디를 감싸고 나섰습니다.'에서, 다음을 인식하는 기술입니다.</p>
+<ul><li>'트럼프': 인물</li>
+<li>'미국' : 국가</li>
+<li>'대통령' : 직위</li>
+<li>'사우디' : 국가</li>
 </ul>
 <p>아래를 참고해보세요.</p>
-<ul>
-    <li><a href="../../kr.bydelta.koala.data/-word/get-entities.html">Word.getEntities</a> 어절이 속하는 <a
-            href="../../kr.bydelta.koala.data/-entity/index.html">Entity</a>를 가져오는 API
-    </li>
-    <li><a href="../../kr.bydelta.koala.data/-sentence/get-entities.html">Sentence.getEntities</a> 문장에 포함된 모든 <a
-            href="../../kr.bydelta.koala.data/-entity/index.html">Entity</a>를 가져오는 API
-    </li>
-    <li><a href="../../kr.bydelta.koala.data/-entity/index.html">Entity</a> 개체명을 저장하는 형태</li>
-    <li><a href="../../kr.bydelta.koala.data/-entity/index.html">CoarseEntityType</a>의 대분류 개체명 분류구조 Enum 값</li>
+<ul><li><a href="../../kr.bydelta.koala.data/-word/get-entities.html">Word.getEntities</a> 어절이 속하는 <a href="../../kr.bydelta.koala.data/-entity/index.html">Entity</a>를 가져오는 API</li>
+<li><a href="../../kr.bydelta.koala.data/-sentence/get-entities.html">Sentence.getEntities</a> 문장에 포함된 모든 <a href="../../kr.bydelta.koala.data/-entity/index.html">Entity</a>를 가져오는 API</li>
+<li><a href="../../kr.bydelta.koala.data/-entity/index.html">Entity</a> 개체명을 저장하는 형태</li>
+<li><a href="../../kr.bydelta.koala.data/-entity/index.html">CoarseEntityType</a>의 대분류 개체명 분류구조 Enum 값</li>
 </ul>
 <h2>사용법 예제</h2>
 <p>분석기 <code>Parser</code>가 <code>CanRecognizeEntity</code>를 상속받았다면,</p>
@@ -85,53 +69,43 @@ List&lt;Sentence&gt; taggedSentList = ...
 List&lt;Sentence&gt; sentences = parser.analyze(taggedSentList) // 또는 parser.invoke(taggedSentList)
 </code></pre>
 <p><strong>Since</strong><br/>
-    2.0.0</p>
+2.0.0</p>
 <h3>Constructors</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <p><a href="-init-.html">&lt;init&gt;</a></p>
-        </td>
-        <td>
-            <code><span class="identifier">EntityRecognizer</span><span class="symbol">(</span><span class="identifier"
-                                                                                                     id="kr.bydelta.koala.etri.EntityRecognizer$<init>(kotlin.String)/apiKey">apiKey</span><span
-                    class="symbol">:</span>&nbsp;<a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-                    class="identifier">String</span></a><span class="symbol">)</span></code>
-            <p>분석기를 생성합니다.</p>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">EntityRecognizer</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.etri.EntityRecognizer$<init>(kotlin.String)/apiKey">apiKey</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span></code>
+<p>분석기를 생성합니다.</p>
+</td>
+</tr>
+</tbody>
 </table>
 <h3>Properties</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <p><a href="api-key.html">apiKey</a></p>
-        </td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">apiKey</span><span
-                    class="symbol">: </span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-                    class="identifier">String</span></a></code>
-            <p>ETRI Open API Access token</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><a href="request-type.html">requestType</a></p>
-        </td>
-        <td>
-            <code><span class="keyword">val </span><span class="identifier">requestType</span><span
-                    class="symbol">: </span><a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span
-                    class="identifier">String</span></a></code>
-            <p>분석을 요청할 유형</p>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<p><a href="api-key.html">apiKey</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">apiKey</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>ETRI Open API Access token</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="request-type.html">requestType</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">requestType</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>분석을 요청할 유형</p>
+</td>
+</tr>
+</tbody>
 </table>
 </BODY>
 </HTML>

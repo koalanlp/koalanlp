@@ -1,649 +1,588 @@
 <HTML>
 <HEAD>
-    <meta charset="UTF-8">
-    <title>alltypes - koalanlp</title>
-    <link rel="stylesheet" href="../../style.css">
+<meta charset="UTF-8">
+<title>alltypes - koalanlp</title>
+<link rel="stylesheet" href="../../style.css">
 </HEAD>
 <BODY>
 <h2>KoalaNLP</h2>
 <h3>All Types</h3>
 <table>
-    <tbody>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-a-p-i-exception/index.html">kr.bydelta.koala.etri.APIException</a></td>
-        <td>
-            <p>API 통신 과정에서 발생하는 문제를 담습니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.data/-already-set-i-d-exception/index.html">kr.bydelta.koala.data.AlreadySetIDException</a>
-        </td>
-        <td>
-            <p>ID가 이미 설정되었을 때 발생하는 Exception</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-can-analyze-property/index.html">kr.bydelta.koala.proc.CanAnalyzeProperty</a>
-        </td>
-        <td>
-            <p><a href="../kr.bydelta.koala.data/-sentence/index.html">Sentence</a> 객체에 property를 추가할 수 있는 interface입니다.
-                <a href="../kr.bydelta.koala.proc/-can-analyze-property/index.html#INTERMEDIATE">INTERMEDIATE</a>는 각
-                분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-can-communicate-e-t-r-i-api/index.html">kr.bydelta.koala.etri.CanCommunicateETRIApi</a>
-        </td>
-        <td>
-            <p>ETRI Open API와 통신을 하는 부분입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-can-compile-dict/index.html">kr.bydelta.koala.proc.CanCompileDict</a>
-        </td>
-        <td>
-            <p>사용자 사전추가 기능을 위한 interface입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-can-disambiguate-sense.html">kr.bydelta.koala.proc.CanDisambiguateSense</a>
-        </td>
-        <td>
-            <p>다의어 분별 (Word sense disambiguation)을 수행하는 Interface입니다.
-                매개변수 <a href="../kr.bydelta.koala.proc/-can-disambiguate-sense.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간
-                형태, 즉 분석기의 입력 형태입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-can-extract-resource/index.html">kr.bydelta.koala.proc.CanExtractResource</a>
-        </td>
-        <td>
-            <p>Jar Resource에 포함된 모형을 임시디렉터리에 압축해제하기 위한 interface입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.data/-can-have-property/index.html">kr.bydelta.koala.data.CanHaveProperty</a>
-        </td>
-        <td>
-            <p>텍스트 분석 과정에서 얻어지는 여러가지 값들을 표현하는 class.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-can-label-semantic-role.html">kr.bydelta.koala.proc.CanLabelSemanticRole</a>
-        </td>
-        <td>
-            <p>의미역 분석(Semantic Role Labeling)을 수행하는 Interface입니다.
-                매개변수 <a href="../kr.bydelta.koala.proc/-can-label-semantic-role.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간
-                형태, 즉 분석기의 입력 형태입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-can-parse-dependency.html">kr.bydelta.koala.proc.CanParseDependency</a>
-        </td>
-        <td>
-            <p>의존구문분석을 수행하는 Interface입니다.
-                매개변수 <a href="../kr.bydelta.koala.proc/-can-parse-dependency.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태,
-                즉 분석기의 입력 형태입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-can-parse-syntax.html">kr.bydelta.koala.proc.CanParseSyntax</a></td>
-        <td>
-            <p>구문분석을 수행하는 Interface입니다.
-                매개변수 <a href="../kr.bydelta.koala.proc/-can-parse-syntax.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉
-                분석기의 입력 형태입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-can-parse-with-e-t-r-i/index.html">kr.bydelta.koala.etri.CanParseWithETRI</a>
-        </td>
-        <td>
-            <p>ETRI API와 통신을 하는 <a
-                    href="../kr.bydelta.koala.proc/-can-analyze-property/index.html">CanAnalyzeProperty</a> 인터페이스입니다.
-            </p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-can-recognize-entity.html">kr.bydelta.koala.proc.CanRecognizeEntity</a>
-        </td>
-        <td>
-            <p>개체명 인식 (Named Entity Recognition)을 수행하는 Interface입니다.
-                매개변수 <a href="../kr.bydelta.koala.proc/-can-recognize-entity.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태,
-                즉 분석기의 입력 형태입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-can-resolve-coref.html">kr.bydelta.koala.proc.CanResolveCoref</a></td>
-        <td>
-            <p>상호참조 해소, 공지시어 해소 (Coreference Resolution) 또는 대용어 분석 (Anaphora Resolution)을 수행하는 Interface입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-can-split-sentence/index.html">kr.bydelta.koala.proc.CanSplitSentence</a>
-        </td>
-        <td>
-            <p>문장분리기 Interface</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-can-tag/index.html">kr.bydelta.koala.proc.CanTag</a></td>
-        <td>
-            <p>품사분석기의 최상위 인터페이스입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-can-tag-a-paragraph/index.html">kr.bydelta.koala.proc.CanTagAParagraph</a>
-        </td>
-        <td>
-            <p>문단1개, 문장1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 <a
-                    href="../kr.bydelta.koala.proc/-can-tag-a-paragraph/index.html#S">S</a> 타입으로 돌려줍니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-can-tag-a-sentence/index.html">kr.bydelta.koala.proc.CanTagASentence</a>
-        </td>
-        <td>
-            <p>문장 1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 <a
-                    href="../kr.bydelta.koala.proc/-can-tag-a-sentence/index.html#S">S</a> 타입으로 돌려줍니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-can-tag-only-a-paragraph/index.html">kr.bydelta.koala.proc.CanTagOnlyAParagraph</a>
-        </td>
-        <td>
-            <p>문장1개는 불가하지만, 문단1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 <a
-                    href="../kr.bydelta.koala.proc/-can-tag-only-a-paragraph/index.html#S">S</a> 타입으로 돌려줍니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-can-tag-only-a-sentence/index.html">kr.bydelta.koala.proc.CanTagOnlyASentence</a>
-        </td>
-        <td>
-            <p>문단1개는 불가하지만, 문장1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 <a
-                    href="../kr.bydelta.koala.proc/-can-tag-only-a-sentence/index.html#S">S</a> 타입으로 돌려줍니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala/kotlin.-char/index.html">kotlin.Char</a> (extensions in package
-            kr.bydelta.koala)
-        </td>
-        <td>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala/kotlin.-char-sequence/index.html">kotlin.CharSequence</a> (extensions in
-            package kr.bydelta.koala)
-        </td>
-        <td>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala/-coarse-entity-type/index.html">kr.bydelta.koala.CoarseEntityType</a></td>
-        <td>
-            <p>대분류 개체명(Named Entity) 유형을 담은 Enum class입니다.
-                (ETRI 표준안)</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.data/-coreference-group/index.html">kr.bydelta.koala.data.CoreferenceGroup</a>
-        </td>
-        <td>
-            <p>공지시어 해소 또는 대용어 분석 결과를 저장할 class입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.data/-d-a-g-edge/index.html">kr.bydelta.koala.data.DAGEdge</a></td>
-        <td>
-            <p><a href="../kr.bydelta.koala.data/-d-a-g-edge/index.html#T">T</a>-type의 DAG Edge를 저장합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.data/-dep-edge/index.html">kr.bydelta.koala.data.DepEdge</a></td>
-        <td>
-            <p>의존구문구조 분석의 결과.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-dependency-response/index.html">kr.bydelta.koala.etri.DependencyResponse</a>
-        </td>
-        <td>
-            <p>의존구문 분석 결과물</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala/-dependency-tag/index.html">kr.bydelta.koala.DependencyTag</a></td>
-        <td>
-            <p>의존구문구조 기능표지자를 담은 Enum class입니다.
-                (ETRI 표준안)</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-dic-entry.html">kr.bydelta.koala.proc.DicEntry</a></td>
-        <td>
-            <p>Dictionary Entry 타입: 표면형을 나타내는 <a
-                    href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> 값과, 품사태그를
-                나타내는 <a href="../kr.bydelta.koala/-p-o-s/index.html">POS</a>값으로 구성.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.arirang/-dictionary/index.html">kr.bydelta.koala.arirang.Dictionary</a></td>
-        <td>
-            <p>Arirang 분석기의 사전 인터페이스입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.eunjeon/-dictionary/index.html">kr.bydelta.koala.eunjeon.Dictionary</a></td>
-        <td>
-            <p>은전한닢 사용자사전 인터페이스입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.hnn/-dictionary/index.html">kr.bydelta.koala.hnn.Dictionary</a></td>
-        <td>
-            <p>한나눔 사용자사전 인터페이스입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.kkma/-dictionary/index.html">kr.bydelta.koala.kkma.Dictionary</a></td>
-        <td>
-            <p>꼬꼬마 사용자사전을 제공하는 인터페이스입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.kmr/-dictionary/index.html">kr.bydelta.koala.kmr.Dictionary</a></td>
-        <td>
-            <p>코모란 분석기 사용자사전 인터페이스를 제공합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.okt/-dictionary/index.html">kr.bydelta.koala.okt.Dictionary</a></td>
-        <td>
-            <p>트위터 분석기 사용자사전 인터페이스를 제공합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.data/-entity/index.html">kr.bydelta.koala.data.Entity</a></td>
-        <td>
-            <p>개체명 분석 결과를 저장할 <a href="../kr.bydelta.koala.data/-property.html">Property</a> class</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-entity-recognizer/index.html">kr.bydelta.koala.etri.EntityRecognizer</a>
-        </td>
-        <td>
-            <p>개체명 인식 (Named Entity Recognition)을 수행하는 Interface입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-entity-response/index.html">kr.bydelta.koala.etri.EntityResponse</a></td>
-        <td>
-            <p>개체명 인식 결과물</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala/kotlin.collections.-iterable/index.html">kotlin.collections.Iterable</a>
-            (extensions in package kr.bydelta.koala)
-        </td>
-        <td>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.data/-list-property/index.html">kr.bydelta.koala.data.ListProperty</a></td>
-        <td>
-            <p>속성의 목록을 저장할, 불변형(immutable) 목록 속성 값</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.data/-morpheme/index.html">kr.bydelta.koala.data.Morpheme</a></td>
-        <td>
-            <p>형태소를 저장하는 <a href="../kr.bydelta.koala.data/-property.html">Property</a> class입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-morpheme-response/index.html">kr.bydelta.koala.etri.MorphemeResponse</a>
-        </td>
-        <td>
-            <p>형태소 분석 결과물</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala/-p-o-s/index.html">kr.bydelta.koala.POS</a></td>
-        <td>
-            <p>세종 품사표기 표준안을 Enum Class로 담았습니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-parser/index.html">kr.bydelta.koala.etri.Parser</a></td>
-        <td>
-            <p>의존구문분석을 수행하는 Interface입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.hnn/-parser/index.html">kr.bydelta.koala.hnn.Parser</a></td>
-        <td>
-            <p>한나눔 구문구조 및 의존구문 분석기</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.kkma/-parser/index.html">kr.bydelta.koala.kkma.Parser</a></td>
-        <td>
-            <p>꼬꼬마 의존구문분석기의 KoalaNLP Wrapper입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala/-phrase-tag/index.html">kr.bydelta.koala.PhraseTag</a></td>
-        <td>
-            <p>세종 구문구조 표지자를 Enum class로 담았습니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.data/-property.html">kr.bydelta.koala.data.Property</a></td>
-        <td>
-            <p>텍스트 분석 과정에서 얻어지는 여러가지 값들을 표현하는 타입입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-result-content/index.html">kr.bydelta.koala.etri.ResultContent</a></td>
-        <td>
-            <p>분석 결과 객체 (문장 정보 이외의 다른 정보는 무시)</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-result-payload/index.html">kr.bydelta.koala.etri.ResultPayload</a></td>
-        <td>
-            <p>ETRI Open API의 분석 결과 Json을 해석한 객체</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.data/-role-edge/index.html">kr.bydelta.koala.data.RoleEdge</a></td>
-        <td>
-            <p>의미역 구조 분석의 결과.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-role-labeler/index.html">kr.bydelta.koala.etri.RoleLabeler</a></td>
-        <td>
-            <p>의미역 분석(Semantic Role Labeling)을 수행하는 Interface입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala/-role-type/index.html">kr.bydelta.koala.RoleType</a></td>
-        <td>
-            <p>의미역(Semantic Role) 분석 표지를 담은 Enum class입니다.
-                (ETRI 표준안)</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-s-r-l-argument/index.html">kr.bydelta.koala.etri.SRLArgument</a></td>
-        <td>
-            <p>의미역 부착의 각 논항 결과</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-s-r-l-response/index.html">kr.bydelta.koala.etri.SRLResponse</a></td>
-        <td>
-            <p>의미역 부착의 결과</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.data/-sentence/index.html">kr.bydelta.koala.data.Sentence</a></td>
-        <td>
-            <p>문장을 표현하는 <a href="../kr.bydelta.koala.data/-property.html">Property</a> class입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-sentence-response/index.html">kr.bydelta.koala.etri.SentenceResponse</a>
-        </td>
-        <td>
-            <p>분석 결과로 얻은 문장 1개를 표현하는 객체</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.proc/-sentence-splitter/index.html">kr.bydelta.koala.proc.SentenceSplitter</a>
-        </td>
-        <td>
-            <p>세종 태그셋에 기반한 Heuristic 문장분리기</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.hnn/-sentence-splitter/index.html">kr.bydelta.koala.hnn.SentenceSplitter</a>
-        </td>
-        <td>
-            <p>한나눔 문장분리기의 KoalaNLP Wrapper입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.okt/-sentence-splitter/index.html">kr.bydelta.koala.okt.SentenceSplitter</a>
-        </td>
-        <td>
-            <p>트위터 문장분리기 인터페이스를 제공합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.daon/kotlin.-string/index.html">kotlin.String</a> (extensions in package
-            kr.bydelta.koala.daon)
-        </td>
-        <td>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.eunjeon/kotlin.-string/index.html">kotlin.String</a> (extensions in package
-            kr.bydelta.koala.eunjeon)
-        </td>
-        <td>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.hnn/kotlin.-string/index.html">kotlin.String</a> (extensions in package
-            kr.bydelta.koala.hnn)
-        </td>
-        <td>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.kkma/kotlin.-string/index.html">kotlin.String</a> (extensions in package
-            kr.bydelta.koala.kkma)
-        </td>
-        <td>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.kmr/kotlin.-string/index.html">kotlin.String</a> (extensions in package
-            kr.bydelta.koala.kmr)
-        </td>
-        <td>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.okt/kotlin.-string/index.html">kotlin.String</a> (extensions in package
-            kr.bydelta.koala.okt)
-        </td>
-        <td>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.data/-syntax-tree/index.html">kr.bydelta.koala.data.SyntaxTree</a></td>
-        <td>
-            <p>구문구조 분석의 결과를 저장할 <a href="../kr.bydelta.koala.data/-property.html">Property</a>.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.arirang/-tagger/index.html">kr.bydelta.koala.arirang.Tagger</a></td>
-        <td>
-            <p>아리랑 형태소 분석기입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.daon/-tagger/index.html">kr.bydelta.koala.daon.Tagger</a></td>
-        <td>
-            <p>Daon 형태소 분석기의 KoalaNLP Wrapper입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-tagger/index.html">kr.bydelta.koala.etri.Tagger</a></td>
-        <td>
-            <p>ETRI 품사 분석 API의 Wrapper입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.eunjeon/-tagger/index.html">kr.bydelta.koala.eunjeon.Tagger</a></td>
-        <td>
-            <p>은전한닢 형태소분석기의 KoalaNLP Wrapper입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.hnn/-tagger/index.html">kr.bydelta.koala.hnn.Tagger</a></td>
-        <td>
-            <p>한나눔 품사분석기의 KoalaNLP Wrapper입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.kkma/-tagger/index.html">kr.bydelta.koala.kkma.Tagger</a></td>
-        <td>
-            <p>꼬꼬마 형태소분석기의 KoalaNLP Wrapper입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.kmr/-tagger/index.html">kr.bydelta.koala.kmr.Tagger</a></td>
-        <td>
-            <p>코모란 형태소분석기의 KoalaNLP Wrapper입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.okt/-tagger/index.html">kr.bydelta.koala.okt.Tagger</a></td>
-        <td>
-            <p>트위터 품사분석기 인터페이스를 제공합니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.rhino/-tagger/index.html">kr.bydelta.koala.rhino.Tagger</a></td>
-        <td>
-            <p>라이노 형태소 분석기의 KoalaNLP Wrapper입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.data/-tree/index.html">kr.bydelta.koala.data.Tree</a></td>
-        <td>
-            <p><a href="../kr.bydelta.koala.data/-tree/index.html#T">T</a>-type들의 트리 구조를 저장할 <a
-                    href="../kr.bydelta.koala.data/-property.html">Property</a>입니다. <a
-                    href="../kr.bydelta.koala.data/-word/index.html">Word</a>를 묶어서 표현하는 구조에 적용됩니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala/kotlin.-triple/index.html">kotlin.Triple</a> (extensions in package
-            kr.bydelta.koala)
-        </td>
-        <td>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.data/-word/index.html">kr.bydelta.koala.data.Word</a></td>
-        <td>
-            <p>어절을 표현하는 <a href="../kr.bydelta.koala.data/-property.html">Property</a> class입니다.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-word-response/index.html">kr.bydelta.koala.etri.WordResponse</a></td>
-        <td>
-            <p>어절 분석 결과물</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.data/-word-sense/index.html">kr.bydelta.koala.data.WordSense</a></td>
-        <td>
-            <p>정수형 값을 저장할 <a href="../kr.bydelta.koala.data/-property.html">Property</a> class.</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="../kr.bydelta.koala.etri/-word-sense-response/index.html">kr.bydelta.koala.etri.WordSenseResponse</a>
-        </td>
-        <td>
-            <p>의미 분석 결과물</p>
-        </td>
-    </tr>
-    </tbody>
+<tbody>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-a-p-i-exception/index.html">kr.bydelta.koala.etri.APIException</a></td>
+<td>
+<p>API 통신 과정에서 발생하는 문제를 담습니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.data/-already-set-i-d-exception/index.html">kr.bydelta.koala.data.AlreadySetIDException</a></td>
+<td>
+<p>ID가 이미 설정되었을 때 발생하는 Exception</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-can-analyze-property/index.html">kr.bydelta.koala.proc.CanAnalyzeProperty</a></td>
+<td>
+<p><a href="../kr.bydelta.koala.data/-sentence/index.html">Sentence</a> 객체에 property를 추가할 수 있는 interface입니다.
+<a href="../kr.bydelta.koala.proc/-can-analyze-property/index.html#INTERMEDIATE">INTERMEDIATE</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-can-communicate-e-t-r-i-api/index.html">kr.bydelta.koala.etri.CanCommunicateETRIApi</a></td>
+<td>
+<p>ETRI Open API와 통신을 하는 부분입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-can-compile-dict/index.html">kr.bydelta.koala.proc.CanCompileDict</a></td>
+<td>
+<p>사용자 사전추가 기능을 위한 interface입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-can-disambiguate-sense.html">kr.bydelta.koala.proc.CanDisambiguateSense</a></td>
+<td>
+<p>다의어 분별 (Word sense disambiguation)을 수행하는 Interface입니다.
+매개변수 <a href="../kr.bydelta.koala.proc/-can-disambiguate-sense.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-can-extract-resource/index.html">kr.bydelta.koala.proc.CanExtractResource</a></td>
+<td>
+<p>Jar Resource에 포함된 모형을 임시디렉터리에 압축해제하기 위한 interface입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.data/-can-have-property/index.html">kr.bydelta.koala.data.CanHaveProperty</a></td>
+<td>
+<p>텍스트 분석 과정에서 얻어지는 여러가지 값들을 표현하는 class.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-can-label-semantic-role.html">kr.bydelta.koala.proc.CanLabelSemanticRole</a></td>
+<td>
+<p>의미역 분석(Semantic Role Labeling)을 수행하는 Interface입니다.
+매개변수 <a href="../kr.bydelta.koala.proc/-can-label-semantic-role.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-can-parse-dependency.html">kr.bydelta.koala.proc.CanParseDependency</a></td>
+<td>
+<p>의존구문분석을 수행하는 Interface입니다.
+매개변수 <a href="../kr.bydelta.koala.proc/-can-parse-dependency.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-can-parse-syntax.html">kr.bydelta.koala.proc.CanParseSyntax</a></td>
+<td>
+<p>구문분석을 수행하는 Interface입니다.
+매개변수 <a href="../kr.bydelta.koala.proc/-can-parse-syntax.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-can-parse-with-e-t-r-i/index.html">kr.bydelta.koala.etri.CanParseWithETRI</a></td>
+<td>
+<p>ETRI API와 통신을 하는 <a href="../kr.bydelta.koala.proc/-can-analyze-property/index.html">CanAnalyzeProperty</a> 인터페이스입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-can-recognize-entity.html">kr.bydelta.koala.proc.CanRecognizeEntity</a></td>
+<td>
+<p>개체명 인식 (Named Entity Recognition)을 수행하는 Interface입니다.
+매개변수 <a href="../kr.bydelta.koala.proc/-can-recognize-entity.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-can-resolve-coref.html">kr.bydelta.koala.proc.CanResolveCoref</a></td>
+<td>
+<p>상호참조 해소, 공지시어 해소 (Coreference Resolution) 또는 대용어 분석 (Anaphora Resolution)을 수행하는 Interface입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-can-split-sentence/index.html">kr.bydelta.koala.proc.CanSplitSentence</a></td>
+<td>
+<p>문장분리기 Interface</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-can-tag/index.html">kr.bydelta.koala.proc.CanTag</a></td>
+<td>
+<p>품사분석기의 최상위 인터페이스입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-can-tag-a-paragraph/index.html">kr.bydelta.koala.proc.CanTagAParagraph</a></td>
+<td>
+<p>문단1개, 문장1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 <a href="../kr.bydelta.koala.proc/-can-tag-a-paragraph/index.html#S">S</a> 타입으로 돌려줍니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-can-tag-a-sentence/index.html">kr.bydelta.koala.proc.CanTagASentence</a></td>
+<td>
+<p>문장 1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 <a href="../kr.bydelta.koala.proc/-can-tag-a-sentence/index.html#S">S</a> 타입으로 돌려줍니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-can-tag-only-a-paragraph/index.html">kr.bydelta.koala.proc.CanTagOnlyAParagraph</a></td>
+<td>
+<p>문장1개는 불가하지만, 문단1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 <a href="../kr.bydelta.koala.proc/-can-tag-only-a-paragraph/index.html#S">S</a> 타입으로 돌려줍니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-can-tag-only-a-sentence/index.html">kr.bydelta.koala.proc.CanTagOnlyASentence</a></td>
+<td>
+<p>문단1개는 불가하지만, 문장1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 <a href="../kr.bydelta.koala.proc/-can-tag-only-a-sentence/index.html#S">S</a> 타입으로 돌려줍니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala/kotlin.-char/index.html">kotlin.Char</a> (extensions in package kr.bydelta.koala)</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala/kotlin.-char-sequence/index.html">kotlin.CharSequence</a> (extensions in package kr.bydelta.koala)</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala/-coarse-entity-type/index.html">kr.bydelta.koala.CoarseEntityType</a></td>
+<td>
+<p>대분류 개체명(Named Entity) 유형을 담은 Enum class입니다.
+(ETRI 표준안)</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.data/-coreference-group/index.html">kr.bydelta.koala.data.CoreferenceGroup</a></td>
+<td>
+<p>공지시어 해소 또는 대용어 분석 결과를 저장할 class입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.data/-d-a-g-edge/index.html">kr.bydelta.koala.data.DAGEdge</a></td>
+<td>
+<p><a href="../kr.bydelta.koala.data/-d-a-g-edge/index.html#T">T</a>-type의 DAG Edge를 저장합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.data/-dep-edge/index.html">kr.bydelta.koala.data.DepEdge</a></td>
+<td>
+<p>의존구문구조 분석의 결과.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-dependency-response/index.html">kr.bydelta.koala.etri.DependencyResponse</a></td>
+<td>
+<p>의존구문 분석 결과물</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala/-dependency-tag/index.html">kr.bydelta.koala.DependencyTag</a></td>
+<td>
+<p>의존구문구조 기능표지자를 담은 Enum class입니다.
+(ETRI 표준안)</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-dic-entry.html">kr.bydelta.koala.proc.DicEntry</a></td>
+<td>
+<p>Dictionary Entry 타입: 표면형을 나타내는 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> 값과, 품사태그를 나타내는 <a href="../kr.bydelta.koala/-p-o-s/index.html">POS</a>값으로 구성.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.arirang/-dictionary/index.html">kr.bydelta.koala.arirang.Dictionary</a></td>
+<td>
+<p>Arirang 분석기의 사전 인터페이스입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.eunjeon/-dictionary/index.html">kr.bydelta.koala.eunjeon.Dictionary</a></td>
+<td>
+<p>은전한닢 사용자사전 인터페이스입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.hnn/-dictionary/index.html">kr.bydelta.koala.hnn.Dictionary</a></td>
+<td>
+<p>한나눔 사용자사전 인터페이스입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.kkma/-dictionary/index.html">kr.bydelta.koala.kkma.Dictionary</a></td>
+<td>
+<p>꼬꼬마 사용자사전을 제공하는 인터페이스입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.kmr/-dictionary/index.html">kr.bydelta.koala.kmr.Dictionary</a></td>
+<td>
+<p>코모란 분석기 사용자사전 인터페이스를 제공합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.okt/-dictionary/index.html">kr.bydelta.koala.okt.Dictionary</a></td>
+<td>
+<p>트위터 분석기 사용자사전 인터페이스를 제공합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.data/-entity/index.html">kr.bydelta.koala.data.Entity</a></td>
+<td>
+<p>개체명 분석 결과를 저장할 <a href="../kr.bydelta.koala.data/-property.html">Property</a> class</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-entity-recognizer/index.html">kr.bydelta.koala.etri.EntityRecognizer</a></td>
+<td>
+<p>개체명 인식 (Named Entity Recognition)을 수행하는 Interface입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-entity-response/index.html">kr.bydelta.koala.etri.EntityResponse</a></td>
+<td>
+<p>개체명 인식 결과물</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala/kotlin.collections.-iterable/index.html">kotlin.collections.Iterable</a> (extensions in package kr.bydelta.koala)</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.data/-list-property/index.html">kr.bydelta.koala.data.ListProperty</a></td>
+<td>
+<p>속성의 목록을 저장할, 불변형(immutable) 목록 속성 값</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.data/-morpheme/index.html">kr.bydelta.koala.data.Morpheme</a></td>
+<td>
+<p>형태소를 저장하는 <a href="../kr.bydelta.koala.data/-property.html">Property</a> class입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-morpheme-response/index.html">kr.bydelta.koala.etri.MorphemeResponse</a></td>
+<td>
+<p>형태소 분석 결과물</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala/-p-o-s/index.html">kr.bydelta.koala.POS</a></td>
+<td>
+<p>세종 품사표기 표준안을 Enum Class로 담았습니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-parser/index.html">kr.bydelta.koala.etri.Parser</a></td>
+<td>
+<p>의존구문분석을 수행하는 Interface입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.hnn/-parser/index.html">kr.bydelta.koala.hnn.Parser</a></td>
+<td>
+<p>한나눔 구문구조 및 의존구문 분석기</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.kkma/-parser/index.html">kr.bydelta.koala.kkma.Parser</a></td>
+<td>
+<p>꼬꼬마 의존구문분석기의 KoalaNLP Wrapper입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala/-phrase-tag/index.html">kr.bydelta.koala.PhraseTag</a></td>
+<td>
+<p>세종 구문구조 표지자를 Enum class로 담았습니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.data/-property.html">kr.bydelta.koala.data.Property</a></td>
+<td>
+<p>텍스트 분석 과정에서 얻어지는 여러가지 값들을 표현하는 타입입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-result-content/index.html">kr.bydelta.koala.etri.ResultContent</a></td>
+<td>
+<p>분석 결과 객체 (문장 정보 이외의 다른 정보는 무시)</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-result-payload/index.html">kr.bydelta.koala.etri.ResultPayload</a></td>
+<td>
+<p>ETRI Open API의 분석 결과 Json을 해석한 객체</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.data/-role-edge/index.html">kr.bydelta.koala.data.RoleEdge</a></td>
+<td>
+<p>의미역 구조 분석의 결과.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-role-labeler/index.html">kr.bydelta.koala.etri.RoleLabeler</a></td>
+<td>
+<p>의미역 분석(Semantic Role Labeling)을 수행하는 Interface입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala/-role-type/index.html">kr.bydelta.koala.RoleType</a></td>
+<td>
+<p>의미역(Semantic Role) 분석 표지를 담은 Enum class입니다.
+(ETRI 표준안)</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-s-r-l-argument/index.html">kr.bydelta.koala.etri.SRLArgument</a></td>
+<td>
+<p>의미역 부착의 각 논항 결과</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-s-r-l-response/index.html">kr.bydelta.koala.etri.SRLResponse</a></td>
+<td>
+<p>의미역 부착의 결과</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.data/-sentence/index.html">kr.bydelta.koala.data.Sentence</a></td>
+<td>
+<p>문장을 표현하는 <a href="../kr.bydelta.koala.data/-property.html">Property</a> class입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-sentence-response/index.html">kr.bydelta.koala.etri.SentenceResponse</a></td>
+<td>
+<p>분석 결과로 얻은 문장 1개를 표현하는 객체</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.proc/-sentence-splitter/index.html">kr.bydelta.koala.proc.SentenceSplitter</a></td>
+<td>
+<p>세종 태그셋에 기반한 Heuristic 문장분리기</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.hnn/-sentence-splitter/index.html">kr.bydelta.koala.hnn.SentenceSplitter</a></td>
+<td>
+<p>한나눔 문장분리기의 KoalaNLP Wrapper입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.okt/-sentence-splitter/index.html">kr.bydelta.koala.okt.SentenceSplitter</a></td>
+<td>
+<p>트위터 문장분리기 인터페이스를 제공합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.daon/kotlin.-string/index.html">kotlin.String</a> (extensions in package kr.bydelta.koala.daon)</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.eunjeon/kotlin.-string/index.html">kotlin.String</a> (extensions in package kr.bydelta.koala.eunjeon)</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.hnn/kotlin.-string/index.html">kotlin.String</a> (extensions in package kr.bydelta.koala.hnn)</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.kkma/kotlin.-string/index.html">kotlin.String</a> (extensions in package kr.bydelta.koala.kkma)</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.kmr/kotlin.-string/index.html">kotlin.String</a> (extensions in package kr.bydelta.koala.kmr)</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.okt/kotlin.-string/index.html">kotlin.String</a> (extensions in package kr.bydelta.koala.okt)</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.data/-syntax-tree/index.html">kr.bydelta.koala.data.SyntaxTree</a></td>
+<td>
+<p>구문구조 분석의 결과를 저장할 <a href="../kr.bydelta.koala.data/-property.html">Property</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.arirang/-tagger/index.html">kr.bydelta.koala.arirang.Tagger</a></td>
+<td>
+<p>아리랑 형태소 분석기입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.daon/-tagger/index.html">kr.bydelta.koala.daon.Tagger</a></td>
+<td>
+<p>Daon 형태소 분석기의 KoalaNLP Wrapper입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-tagger/index.html">kr.bydelta.koala.etri.Tagger</a></td>
+<td>
+<p>ETRI 품사 분석 API의 Wrapper입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.eunjeon/-tagger/index.html">kr.bydelta.koala.eunjeon.Tagger</a></td>
+<td>
+<p>은전한닢 형태소분석기의 KoalaNLP Wrapper입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.hnn/-tagger/index.html">kr.bydelta.koala.hnn.Tagger</a></td>
+<td>
+<p>한나눔 품사분석기의 KoalaNLP Wrapper입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.kkma/-tagger/index.html">kr.bydelta.koala.kkma.Tagger</a></td>
+<td>
+<p>꼬꼬마 형태소분석기의 KoalaNLP Wrapper입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.kmr/-tagger/index.html">kr.bydelta.koala.kmr.Tagger</a></td>
+<td>
+<p>코모란 형태소분석기의 KoalaNLP Wrapper입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.okt/-tagger/index.html">kr.bydelta.koala.okt.Tagger</a></td>
+<td>
+<p>트위터 품사분석기 인터페이스를 제공합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.rhino/-tagger/index.html">kr.bydelta.koala.rhino.Tagger</a></td>
+<td>
+<p>라이노 형태소 분석기의 KoalaNLP Wrapper입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.data/-tree/index.html">kr.bydelta.koala.data.Tree</a></td>
+<td>
+<p><a href="../kr.bydelta.koala.data/-tree/index.html#T">T</a>-type들의 트리 구조를 저장할 <a href="../kr.bydelta.koala.data/-property.html">Property</a>입니다. <a href="../kr.bydelta.koala.data/-word/index.html">Word</a>를 묶어서 표현하는 구조에 적용됩니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala/kotlin.-triple/index.html">kotlin.Triple</a> (extensions in package kr.bydelta.koala)</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.data/-word/index.html">kr.bydelta.koala.data.Word</a></td>
+<td>
+<p>어절을 표현하는 <a href="../kr.bydelta.koala.data/-property.html">Property</a> class입니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-word-response/index.html">kr.bydelta.koala.etri.WordResponse</a></td>
+<td>
+<p>어절 분석 결과물</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.data/-word-sense/index.html">kr.bydelta.koala.data.WordSense</a></td>
+<td>
+<p>정수형 값을 저장할 <a href="../kr.bydelta.koala.data/-property.html">Property</a> class.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../kr.bydelta.koala.etri/-word-sense-response/index.html">kr.bydelta.koala.etri.WordSenseResponse</a></td>
+<td>
+<p>의미 분석 결과물</p>
+</td>
+</tr>
+</tbody>
 </table>
 </BODY>
 </HTML>
