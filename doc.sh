@@ -3,7 +3,6 @@
 JAR_VER=$(cat gradle.properties | grep "version=" | cut -d= -f2 | cut -d- -f1)
 DATE=`date +%D`
 
-git rm -rf docs/api
-./gradlew githubDoc
+./gradlew dokka
 git add docs/api
 git commit -a -m "Documentation of v$JAR_VER at $DATE"

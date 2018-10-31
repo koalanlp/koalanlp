@@ -23,7 +23,7 @@ object Examples {
             """01 1+1은 2이고, 3*3은 9이다.
               |01 RHINO는 말줄임표를... 확인해야함... ^^ 이것도 확인해야.
               |03 식사함은 식사에서부터인지 식사에서부터이었는지 살펴봄. 보기에는 살펴봄이 아리랑을 위한 시험임을 지나쳤음에. 사랑하였음은 사랑해봄은 보고싶기에 써보기에 써보았기에.
-              |02 먹음이니. 먹음이었으니. 사면되어보았기에.
+              |03 먹음이니. 먹음이었으니. 사면되어보았기에.
               |01 a/b는 분수이다.
               |01 | 기호는 분리기호이다.
               |02 ▶ 오늘의 날씨입니다. ◆ 기온 23도는 낮부터임.
@@ -365,7 +365,6 @@ fun DictSpek(dict: CanCompileDict,
                     print('.')
                     val entry = nvms[rand.nextInt(nvms.size)]
                     val (surface, pos) = entry
-                    print(entry)
                     dict.contains(surface, setOf(pos)) `should be` true
                     dict.getNotExists(true, entry).isEmpty() `should be` true
                 }

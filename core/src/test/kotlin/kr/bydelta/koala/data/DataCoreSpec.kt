@@ -355,7 +355,7 @@ object DataCoreSpec : Spek({
 
             // setProperty, getEntity, getPhrase, getDependency, getRole
             it("should provide proper way to set a property") {
-                dummy1.getEntities() `should be` null
+                dummy1.getEntities().size `should be equal to` 0
                 dummy1.getPhrase() `should be` null
                 dummy1.getArgumentRoles() `should be` null
                 dummy1.getPredicateRole() `should be` null
@@ -970,8 +970,8 @@ object DataCoreSpec : Spek({
             // toString
             it("should provide the correct string representation") {
                 dummy1.toString() `should be equal to` "ARG1('먹었다' → '밥을/흰')"
-                dummy3.toString() `should be equal to` "ARG0('먹었다' → '나는')"
-                dummy4.toString() `should be equal to` "ARGM_PRD('밥을' → '흰')"
+                dummy3.toString() `should be equal to` "ARG0('먹었다' → '나는/')"
+                dummy4.toString() `should be equal to` "ARGM_PRD('밥을' → '흰/')"
             }
 
             // equal, hashcode

@@ -1,8 +1,10 @@
 modifyPom {
     project {
+        name project.name
         groupId project.group
         artifactId project.name
         version project.version
+        description "KoalaNLP는 한국어 처리의 통합 인터페이스를 지향하는 Java/Kotlin/Scala Library의 묶음입니다."
         
         packaging "jar"
         url "http://koalanlp.github.io/koalanlp"
@@ -24,7 +26,7 @@ modifyPom {
             developer {
                 id "nearbydelta"
                 name "Bugeun Kim"
-                url "http://bydelta.kr"
+                url "http://github.com/nearbydelta"
             }
         }
     }

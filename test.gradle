@@ -1,5 +1,5 @@
 test {
-//    failFast true
+    failFast true
 
     if (project.hasProperty('excludeTests')) {
         exclude project.property('excludeTests')

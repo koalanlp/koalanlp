@@ -4,7 +4,6 @@ jdk:
 os:
 - linux
 - osx
-- windows
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -17,13 +16,13 @@ install:
 before_script:
 - export DISPLAY=:99.0
 script:
-- "./gradlew clean"
-- ./gradlew check "-PexcludeTests=**/RhinoOrigin*"
+- ./gradlew clean
+- ./gradlew check -PexcludeTests=**/RhinoOrigin* --info
 - sh -e /etc/init.d/xvfb start
 - sleep 3
-- ./gradlew ":koalanlp-rhino:test" --tests "*OriginTest"
+- ./gradlew :koalanlp-rhino:test --tests OriginTest --info
 - sh -e /etc/init.d/xvfb stop
-- ./gradlew ":koalanlp-rhino:jacocoTestReport"
+- ./gradlew :koalanlp-rhino:jacocoTestReport
 after_success:
 - bash ./git-manage.sh
 before_install:
