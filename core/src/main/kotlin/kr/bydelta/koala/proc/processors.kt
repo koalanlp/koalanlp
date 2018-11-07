@@ -162,6 +162,15 @@ object SentenceSplitter {
 
         return sentences.filter { it.isNotEmpty() }
     }
+
+    /**
+     * 분석결과를 토대로 문장을 분리함.
+     *
+     * @since 2.0.0
+     * @param para 분리할 문단.
+     * @return 문장단위로 분리된 결과
+     */
+    fun sentences(para: Iterable<Word>) = invoke(para)
 }
 
 /**

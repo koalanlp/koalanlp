@@ -23,7 +23,7 @@ object EunjeonTagConversionTest : Spek(TagConversionSpek(from = { it.toSejongPOS
             }
         }))
 
-object EunjeonDictionaryTest : Spek(DictSpek(Dictionary))
+object EunjeonDictionaryTest : Spek(DictSpek(Dictionary, getTagger = { Tagger() }))
 
 object EunjeonTaggerTest : Spek(TaggerSpek(getTagger = { Tagger() },
         isSentenceSplitterImplemented = true,

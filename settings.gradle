@@ -1,4 +1,4 @@
-rootProject.name = archivesBaseName
+rootProject.name = 'koalanlp'
 
 include 'core' //Core API package
 

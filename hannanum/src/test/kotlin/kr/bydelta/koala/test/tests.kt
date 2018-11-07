@@ -26,7 +26,7 @@ import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import java.io.File
 
-object HNNDictTest : Spek(DictSpek(Dictionary))
+object HNNDictTest : Spek(DictSpek(Dictionary, getTagger = { Tagger() }))
 
 val splitterFlow by lazy {
     synchronized(Configuration.hanBaseDir) {

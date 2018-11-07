@@ -180,7 +180,7 @@ class Tagger : CanTagOnlyAParagraph<Sentence>() {
          *
          * @since 1.x
          * @param result 변환할 분석결과.
-         * @return 변환된 [Sentence] 객체
+         * @return 변환된 [kr.bydelta.koala.data.Sentence] 객체
          */
         @JvmStatic
         fun convert(result: Sentence): kr.bydelta.koala.data.Sentence =

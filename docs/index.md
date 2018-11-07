@@ -70,6 +70,8 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 
 ## Java 패키지 목록
 
+다음과 같은 하위 패키지가 있습니다.
+
 | 패키지명            | 설명                                                                 |  버전    | License (원본)     |
 | ------------------ | ------------------------------------------------------------------ | ------- | ------------ |
 | `koalanlp-core`    | 통합 인터페이스의 정의가 등재된 중심 묶음입니다.                            | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core.svg?style=flat-square&label=r)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core%22) | MIT |

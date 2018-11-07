@@ -46,17 +46,12 @@ interface CanCommunicateETRIApi {
         val (_, resp, res) = "http://aiopen.etri.re.kr:8000/WiseNLU".httpPost()
                 .jsonBody(requestBody).responseString()
 
-        try {
-            val resString = res.get().replace("\\.0([,}]+)".toRegex(), "$1")
-            val json = klaxon.parse<ResultPayload>(resString)
-            if (json?.code == 0) {
-                return json.result
-            } else {
-                throw APIException(resp.statusCode, json?.msg ?: "HTTP Status code ${resp.statusCode}")
-            }
-        } catch (e: Throwable) {
-            e.printStackTrace()
-            throw e
+        val resString = res.get().replace("\\.0([,}]+)".toRegex(), "$1")
+        val json = klaxon.parse<ResultPayload>(resString)
+        if (json?.code == 0) {
+            return json.result
+        } else {
+            throw APIException(resp.statusCode, json?.msg ?: "HTTP Status code ${resp.statusCode}")
         }
     }
 

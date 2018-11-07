@@ -266,9 +266,9 @@ fun TaggerSpek(getTagger: () -> CanTag,
 
                 isParagraphImplemented -> {
                     it("tags paragraphs") {
-                        print("4")
                         val tagger = getTagger()
                         Examples.exampleSequence().forEach {
+                            print("4")
                             val splits = tagger(it.second)
                             val orig = tagParaByOrig(it.second)
 
@@ -326,6 +326,7 @@ fun TagConversionSpek(from: (String?) -> POS,
  * [CanCompileDict]를 테스트합니다.
  */
 fun DictSpek(dict: CanCompileDict,
+             getTagger: () -> CanTag,
              verbOn: Boolean = true,
              modifierOn: Boolean = true,
              importFilter: (POS) -> Boolean = { true }): Root.() -> Unit {
@@ -431,6 +432,16 @@ fun DictSpek(dict: CanCompileDict,
             // importFrom
             it("import from other dictionary") {
                 val itemNotExists = dict.getNotExists(true, *dictSample.words.toTypedArray())
+                val tagger = getTagger()
+
+                val sentenceItems = itemNotExists.filter {
+                    if(it.second.isNoun()){
+                        val sentence = "우리가 가진 ${it.first}, 그것이 해답이었다."
+                        val tagged = tagger.tagSentence(sentence)
+
+                        tagged[2][0].surface != it.first || tagged[2][0].tag != it.second
+                    }else false
+                }
 
                 dict.importFrom(dictSample) { it.isNoun() }
                 dict.getItems() `should contain all` itemNotExists
@@ -439,7 +450,14 @@ fun DictSpek(dict: CanCompileDict,
                     println("Import Testing: $it")
                     dict.contains(it.first, setOf(it.second)) `should be` true
                     ((it.first to it.second) in dict) `should be` true
-                }
+                };
+
+                {
+                    sentenceItems.forEach {
+                        val sentence = "우리가 가진 ${it.first}, 그것이 해답이었다."
+                        tagger.tagSentence(sentence)
+                    }
+                } `should not throw` AnyException
             }
         }
     }

@@ -57,7 +57,7 @@ object KomoranLightTaggerTest : Spek(TaggerSpek(getTagger = { Tagger(useLightTag
             str to tag
         }, isSentenceSplitterImplemented = true))
 
-object KomoranDictTest : Spek(DictSpek(dict = Dictionary))
+object KomoranDictTest : Spek(DictSpek(dict = Dictionary, getTagger = { Tagger() }))
 
 object KomoranTagConversionTest : Spek(TagConversionSpek(from = { it.toSejongPOS() },
         to = { it.fromSejongPOS() },

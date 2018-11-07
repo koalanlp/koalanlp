@@ -4,9 +4,9 @@ KoalaNLP
 [![API Doc](https://img.shields.io/badge/doc-Java,Kotlin,Scala-blue.svg?style=flat-square)](http://koalanlp.github.io/KoalaNLP/api/koalanlp/index)
 [![분석기별 품사비교표](https://img.shields.io/badge/%ED%92%88%EC%82%AC-%EB%B9%84%EA%B5%90%ED%91%9C-blue.svg?style=flat-square)](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)
 
-[![Build Status](https://img.shields.io/travis/koalanlp/KoalaNLP.svg?style=flat-square&branch=master)](https://travis-ci.org/koalanlp/KoalaNLP)
-[![Code coverage](https://img.shields.io/codecov/c/github/koalanlp/KoalaNLP.svg?style=flat-square)](https://codecov.io/gh/koalanlp/KoalaNLP)
-[![Known Vulnerabilities](https://snyk.io/test/github/koalanlp/KoalaNLP/badge.svg?style=flat-square)](https://snyk.io/test/github/koalanlp/KoalaNLP)
+[![Build Status](https://img.shields.io/travis/koalanlp/koalanlp.svg?style=flat-square&branch=master)](https://travis-ci.org/koalanlp/koalanlp)
+[![Code coverage](https://img.shields.io/codecov/c/github/koalanlp/koalanlp.svg?style=flat-square)](https://codecov.io/gh/koalanlp/koalanlp)
+[![Known Vulnerabilities](https://snyk.io/test/github/koalanlp/koalanlp/badge.svg?style=flat-square)](https://snyk.io/test/github/koalanlp/koalanlp)
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 [![nodejs-koalanlp](https://img.shields.io/badge/Nodejs-KoalaNLP-blue.svg?style=flat-square)](https://koalanlp.github.io/nodejs-support)

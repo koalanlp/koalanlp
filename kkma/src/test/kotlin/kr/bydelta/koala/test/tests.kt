@@ -48,7 +48,7 @@ object KKMATagConversionTest : Spek(TagConversionSpek(
 ))
 
 
-object KKMADictTest : Spek(DictSpek(Dictionary))
+object KKMADictTest : Spek(DictSpek(Dictionary, getTagger = { Tagger() }))
 
 object KKMATaggerTest : Spek(TaggerSpek(
         getTagger = { Tagger() },

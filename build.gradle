@@ -54,7 +54,7 @@ dokka {
             def relativePath = rootDir.toPath().relativize(path.toPath()).toString()
             linkMapping {
                 dir = path
-                url = "https://github.com/koalanlp/koalanlp/blob/master/blob/master/$relativePath"
+                url = "https://github.com/koalanlp/koalanlp/blob/master/$relativePath"
                 suffix = "#L"
             }
 
@@ -70,36 +70,4 @@ dokka {
 // Test Report Aggregation
 jacoco {
     toolVersion = "0.8.2"
-}
-
-task aggregateTestReport(type: JacocoReport) {
-    sourceDirectories = files()
-    classDirectories = files()
-    executionData = files()
-
-    reports {
-        html.enabled = true
-        xml.enabled = true
-        csv.enabled = false
-    }
-
-    onlyIf = {
-        true
-    }
-
-    doFirst {
-        subprojects.findAll { subproject ->
-            subproject.pluginManager.hasPlugin('java')
-        }.each { subproject ->
-            additionalSourceDirs files((Set<File>) subproject.sourceSets.main.allJava.srcDirs)
-            additionalClassDirs ((FileCollection) subproject.sourceSets.main.output)
-            if (subproject.pluginManager.hasPlugin('jacoco')) {
-                executionData subproject.tasks.jacocoTestReport.executionData
-            }
-        }
-
-        executionData = files(executionData.findAll {
-            it.exists()
-        })
-    }
 }
