@@ -270,15 +270,20 @@ class Tagger : CanTagOnlyASentence<List<AnalysisOutput>>() {
     /** Static fields */
     companion object {
         /** 분리가 필요한 특수문자 */
+        @JvmStatic
         private val checkSet = listOf(POS.SF, POS.SP, POS.SS, POS.TEMP)
         /** 종결부호 */
+        @JvmStatic
         private val SFRegex = "(?U)[.?!]+".toRegex()
         /** 문장부호 */
+        @JvmStatic
         private val SPRegex = "(?U)[,:;·/]+".toRegex()
         /** 종결부호, 문장부호, 괄호 등으로 segmentize하는 Regex */
+        @JvmStatic
         private val punctuationsSplit =
                 "(?U)((?<=[,.:;?!/·\\s\'\"(\\[{<〔〈《「『【‘“)\\]}>〕〉》」』】’”])|(?=[,.:;?!/·\\s\'\"(\\[{<〔〈《「『【‘“)\\]}>〕〉》」』】’”]+))".toRegex()
         /** 괄호 */
+        @JvmStatic
         private val SSRegex = "(?U)[\'\"(\\[{<〔〈《「『【‘“)\\]}>〕〉》」』】’”]+".toRegex()
     }
 }

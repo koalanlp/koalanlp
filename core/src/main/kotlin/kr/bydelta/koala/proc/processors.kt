@@ -112,6 +112,7 @@ object SentenceSplitter {
      * @param para 분리할 문단.
      * @return 문장단위로 분리된 결과
      */
+    @JvmStatic
     operator fun invoke(para: Iterable<Word>): List<Sentence> {
         val sentences = mutableListOf<Sentence>()
         val parenStack = Stack<Char>()
@@ -170,6 +171,7 @@ object SentenceSplitter {
      * @param para 분리할 문단.
      * @return 문장단위로 분리된 결과
      */
+    @JvmStatic
     fun sentences(para: Iterable<Word>) = invoke(para)
 }
 

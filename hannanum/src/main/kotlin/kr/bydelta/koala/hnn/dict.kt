@@ -25,6 +25,7 @@ import java.util.*
  */
 object Dictionary : CanCompileDict, CanExtractResource() {
     /** 품사표기 집합 */
+    @JvmStatic
     internal val tagSet: TagSet by lazy {
         val tagSet = TagSet()
         val fileTagSet: String = extractResource() + File.separator + "data/kE/tag_set.txt"
@@ -32,6 +33,7 @@ object Dictionary : CanCompileDict, CanExtractResource() {
         tagSet
     }
     /** 연결가능 */
+    @JvmStatic
     internal val connection: Connection by lazy {
         val connection = Connection()
         val fileConnections: String = extractResource() + File.separator + "data/kE/connections.txt"
@@ -39,6 +41,7 @@ object Dictionary : CanCompileDict, CanExtractResource() {
         connection
     }
     /** 기 분석 사전 */
+    @JvmStatic
     internal val analyzedDic: AnalyzedDic by lazy {
         val fileDicAnalyzed: String = extractResource() + File.separator + "data/kE/dic_analyzed.txt"
         val analyzedDic = AnalyzedDic()
@@ -46,6 +49,7 @@ object Dictionary : CanCompileDict, CanExtractResource() {
         analyzedDic
     }
     /** 시스템 사전 */
+    @JvmStatic
     internal val systemDic: Trie by lazy {
         val fileDicSystem: String = extractResource() + File.separator + "data/kE/dic_system.txt"
         val systemDic = Trie(Trie.DEFAULT_TRIE_BUF_SIZE_SYS)
@@ -53,6 +57,7 @@ object Dictionary : CanCompileDict, CanExtractResource() {
         systemDic
     }
     /** 사용자 사전 파일 */
+    @JvmStatic
     private val usrDicPath: File by lazy {
         val f = File(extractResource() + File.separator + "data/kE/dic_user.txt")
         f.createNewFile()
@@ -60,14 +65,19 @@ object Dictionary : CanCompileDict, CanExtractResource() {
         f
     }
     /** 사용자 사전 (한나눔) **/
+    @JvmStatic
     internal val userDic: Trie by lazy { Trie(Trie.DEFAULT_TRIE_BUF_SIZE_USER) }
     /** 숫자 처리 */
+    @JvmStatic
     internal val numAutomata: NumberAutomata by lazy { NumberAutomata() }
     /** 시스템 사전 (Koala) */
+    @JvmStatic
     private val baseEntries = mutableListOf<Pair<String, List<POS>>>()
     /** 사용자 사전 (Koala) */
+    @JvmStatic
     private val usrBuffer = mutableSetOf<Pair<String, POS>>()
     /** 마지막 사용자사전 업데이트 시각 */
+    @JvmStatic
     private var dicLastUpdate = 0L
 
     /**
@@ -132,6 +142,7 @@ object Dictionary : CanCompileDict, CanExtractResource() {
     /**
      * 사전을 다시 불러옵니다.
      */
+    @JvmStatic
     internal fun loadDictionary(): Unit =
             synchronized(userDic) {
                 if (dicLastUpdate < usrDicPath.lastModified()) {
@@ -158,6 +169,7 @@ object Dictionary : CanCompileDict, CanExtractResource() {
     /**
      * 시스템 사전의 내용을 불러옵니다.
      */
+    @JvmStatic
     private fun extractBaseEntries(): List<Pair<String, List<POS>>> =
             if (baseEntries.isNotEmpty()) baseEntries
             else synchronized(this) {

@@ -139,7 +139,7 @@ $ npm install --save koalanlp
 ```
 
 ### 지원 API 유형
-각 형태소 분석기는 별도의 패키지로 나뉘어 있습니다. 패키지 이름은 `koalanlp.util.TYPES`에 상수로 정의되어 있습니다.
+각 형태소 분석기는 별도의 패키지로 나뉘어 있습니다. 패키지 이름은 `koalanlp.API`에 상수로 정의되어 있습니다.
 
 | 패키지명            | 설명                                                                 |  버전    | License (원본)     |
 | ------------------ | ------------------------------------------------------------------ | ------- | ------------ |
@@ -160,7 +160,7 @@ $ npm install --save koalanlp
 초기화 과정에서 KoalaNLP는 필요한 Java Library를 자동으로 다운로드하여 설치합니다. 설치에는 시간이 다소 소요됩니다.
 때문에, 프로그램 실행시 최초 1회에 한하여 초기화 작업이 필요합니다.
 
-```javascript 1.7
+```javascript
 let koalanlp = require('koalanlp');
 let TYPES = koalanlp.util.TYPES;
 
@@ -172,6 +172,7 @@ koalanlp.initialize({
   debug: true,
 })
 ```
+
 * 첫번째 인자는 초기화 option입니다.
   * `packages` 인자는 Python 프로그램에서 사용할 모든 패키지의 array입니다. (상단 표 참고)
   * `version` 인자는 다운로드할 해당 패키지의 버전 string입니다. (상단 표 참고)
@@ -184,6 +185,7 @@ koalanlp.initialize({
 ## Python3
 우선 Java 8 이상을 설치하고, `JAVA_HOME`을 환경변수에 등록해주십시오.
 그런 다음, 아래와 같이 설치하십시오.
+
 ```bash
 $ pip install Cython # Cython은 별도 설치가 필요합니다.
 $ pip install koalanlp

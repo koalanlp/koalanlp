@@ -176,24 +176,34 @@ enum class POS {
      */
     companion object {
         /** 전체 **/
+        @JvmStatic
         val ALL = values().toSet()
         /** 체언 **/
+        @JvmStatic
         val NOUNS = setOf(NNG, NNP, NNB, NNM, NR, NP)
         /** 용언 **/
+        @JvmStatic
         val PREDICATES = setOf(VV, VA, VX, VCP, VCN)
         /** 수식언 **/
+        @JvmStatic
         val MODIFIERS = setOf(MM, MAG, MAJ)
         /** 관계언(조사) **/
+        @JvmStatic
         val POSTPOSITIONS = setOf(JKS, JKC, JKG, JKO, JKB, JKV, JKQ, JC, JX)
         /** 어미 **/
+        @JvmStatic
         val ENDINGS = setOf(EP, EF, EC, ETN, ETM)
         /** 접사 **/
+        @JvmStatic
         val AFFIXES = setOf(XPN, XPV, XSN, XSV, XSM, XSA, XSO)
         /** 접미사 **/
+        @JvmStatic
         val SUFFIXES = setOf(XSN, XSV, XSM, XSA, XSO)
         /** 기호 **/
+        @JvmStatic
         val SYMBOLS = setOf(SF, SP, SS, SE, SW, SO)
         /** 미확인 단어 **/
+        @JvmStatic
         val UNKNOWNS = setOf(NF, NV, NA)
     }
 

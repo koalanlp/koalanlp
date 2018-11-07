@@ -20,6 +20,12 @@
     
     1. [사전 사용하기](./Dictionary.md)
 
+1. 기타 편의기능
+
+    1. [한글 분해/조립](./HangulAssembly.md)
+    
+    1. [한자/영문 음독](./ReadingForeign.md)
+
 1. 참고할 것들
 
     1. [Kotlin/Java/Scala Doc](https://koalanlp.github.io/koalanlp/api/koalanlp/index.html)

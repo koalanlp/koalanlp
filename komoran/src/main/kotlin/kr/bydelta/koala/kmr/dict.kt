@@ -27,6 +27,7 @@ object Dictionary : CanExtractResource(), CanCompileDict {
      *
      * @since 1.x
      */
+    @JvmStatic
     internal val userDict by lazy {
         val file = File(extractResource(), "koala.dict")
         file.createNewFile()
@@ -39,6 +40,7 @@ object Dictionary : CanExtractResource(), CanCompileDict {
      *
      * @since 1.x
      */
+    @JvmStatic
     private val systemdic by lazy {
         val o = Observation()
         o.load(o::class.java.classLoader.getResourceAsStream("models_full" + File.separator + "observation.model"))
@@ -46,10 +48,13 @@ object Dictionary : CanExtractResource(), CanCompileDict {
     }
 
     /** 한글 분해/합성 */
+    @JvmStatic
     private val unitparser by lazy { KoreanUnitParser() }
     /** 사용자 사전 버퍼 */
+    @JvmStatic
     private val userBuffer = mutableListOf<DicEntry>()
     /** 사전 항목 버퍼 */
+    @JvmStatic
     private var baseEntries = mutableListOf<Pair<String, List<POS>>>()
 
     /**
@@ -136,6 +141,7 @@ object Dictionary : CanExtractResource(), CanCompileDict {
     }
 
     /** 사전 등재 항목 디코딩 */
+    @JvmStatic
     private fun extractBaseEntries(): List<Pair<String, List<POS>>> =
             if (baseEntries.isNotEmpty()) baseEntries
             else synchronized(this) {

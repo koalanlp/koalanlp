@@ -258,7 +258,7 @@ private val HANJA_BU_FIX by lazy { arrayOf('\u1103', '\u110C') }
  * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
- * "可口可樂".hanjaToHangul
+ * "可口可樂".hanjaToHangul()
  * ```
  *
  * ### Java
@@ -649,7 +649,7 @@ fun Char.getJongsung(): Char? =
  * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
- * '가'.dissembleHangul // ㄱ, ㅏ, null
+ * '가'.dissembleHangul // ㄱ, ㅏ, None
  * ```
  *
  * ### Java
@@ -717,12 +717,7 @@ fun CharSequence.dissembleHangul(): CharSequence {
  * assembleHangul('ᄁ', 'ᅡ') // "까"
  * ```
  *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
- * ```scala
- * assembleHangul('ᄁ', 'ᅡ') // "까"
- * ```
- *
- * ### Java
+ * ### Scala, Java
  * ```java
  * ExtUtil.assembleHangul('ᄁ', 'ᅡ') // "까"
  * ```
@@ -764,7 +759,7 @@ fun assembleHangul(cho: Char? = null, jung: Char? = null, jong: Char? = null): C
  * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
- * ('ᄁ', 'ᅡ', null.as[Char]).assembleHangul // "까"
+ * ('ᄁ', 'ᅡ', None.as[Option[Char]]).assembleHangul // "까"
  * ```
  *
  * ### Java
@@ -862,13 +857,24 @@ val ChoToJong by lazy {
             '\u1111' to '\u11C1', // ㅍ
             '\u1112' to '\u11C2', // ㅎ
             // 아래는 완성형 문자
-            'ㄱ' to '\u11A8', //ㄱ
-            'ㄲ' to '\u11A9', //ㄲ
-            'ㄴ' to '\u11AB', //ㄴ
-            'ㄷ' to '\u11AE', //ㄷ
+            'ㄱ' to '\u11A8', // ㄱ
+            'ㄲ' to '\u11A9',
+            'ㄳ' to '\u11AA',
+            'ㄴ' to '\u11AB', // ㄴ
+            'ㄵ' to '\u11AC',
+            'ㄶ' to '\u11AD',
+            'ㄷ' to '\u11AE', // ㄷ
             'ㄹ' to '\u11AF', // ㄹ
+            'ㄺ' to '\u11B0',
+            'ㄻ' to '\u11B1',
+            'ㄼ' to '\u11B2',
+            'ㄽ' to '\u11B3',
+            'ㄾ' to '\u11B4',
+            'ㄿ' to '\u11B5',
+            'ㅀ' to '\u11B6',
             'ㅁ' to '\u11B7', // ㅁ
             'ㅂ' to '\u11B8', // ㅂ
+            'ㅄ' to '\u11B9',
             'ㅅ' to '\u11BA', // ㅅ
             'ㅆ' to '\u11BB', // ㅆ
             'ㅇ' to '\u11BC', // ㅇ

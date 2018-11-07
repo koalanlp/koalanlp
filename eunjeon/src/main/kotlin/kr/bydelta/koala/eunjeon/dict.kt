@@ -21,6 +21,7 @@ import org.bitbucket.eunjeon.seunjeon.NngUtil
  * @since 1.x
  */
 object Dictionary : CanCompileDict {
+    @JvmStatic
     private val leftIDMap: Map<String, Short> by lazy {
         NngUtil::class.java.classLoader.getResourceAsStream(DictBuilder.LEFT_ID_DEF().drop(1)).bufferedReader().lines()
                 .iterator().asSequence()
@@ -32,6 +33,7 @@ object Dictionary : CanCompileDict {
                 .mapValues { it.value.maxBy { x -> x.second }!!.second }
     }
 
+    @JvmStatic
     private val rightIDMap: Map<String, Short> by lazy {
         NngUtil::class.java.classLoader.getResourceAsStream(DictBuilder.RIGHT_ID_DEF().drop(1)).bufferedReader().lines()
                 .iterator().asSequence()
@@ -47,36 +49,42 @@ object Dictionary : CanCompileDict {
      * Check whether compression required
      * @since 1.x
      */
+    @JvmStatic
     internal val needCompress = Runtime.getRuntime().freeMemory() / 1024.0 / 1024.0 / 1024.0 < 1.0
 
     /**
      * 은전한닢 어휘사전.
      * @since 1.x
      */
+    @JvmStatic
     internal val lexiconDict by lazy { LexiconDict().load(needCompress) }
 
     /**
      * 은전한닢 연결성 사전.
      * @since 1.x
      */
+    @JvmStatic
     internal val connectionCostDict = ConnectionCostDict().load()
 
     /**
      * 은전한닢 사용자사전 객체
      * @since 1.x
      */
+    @JvmStatic
     internal val userDict = LexiconDict().loadFromIterator(emptyList<String>().asScala(), false)
 
     /**
      * 사용자사전에 등재되기 전의 리스트.
      * @since 1.x
      */
+    @JvmStatic
     private val rawDict = mutableSetOf<String>()
 
     /**
      * 사용자사전 변경여부.
      * @since 1.x
      */
+    @JvmStatic
     private var isDicChanged = false
 
     /**
@@ -85,6 +93,7 @@ object Dictionary : CanCompileDict {
      * @since 1.x
      * @return True: 항목이 있을 때.
      */
+    @JvmStatic
     internal fun isNotEmpty(): Boolean = rawDict.isNotEmpty()
 
     /**
@@ -117,6 +126,7 @@ object Dictionary : CanCompileDict {
      * @param tag Left ID를 찾을 Tag
      * @return Left ID
      */
+    @JvmStatic
     private fun getLeftId(tag: String = "NNG"): Short {
         return leftIDMap["$tag,*"] ?: leftIDMap.values.max()!!
     }
@@ -130,6 +140,7 @@ object Dictionary : CanCompileDict {
      * @param hasJongsung 종성이 있으면 "T", 없으면 "F", 해당없는 문자는 "*"
      * @return Right ID
      */
+    @JvmStatic
     private fun getRightId(tag: String = "NNG", hasJongsung: String = "*"): Short {
         return rightIDMap["$tag,*,$hasJongsung"] ?: leftIDMap.values.max()!!
     }
@@ -180,6 +191,7 @@ object Dictionary : CanCompileDict {
      *
      * @since 1.x
      */
+    @JvmStatic
     internal fun reloadDic(): Unit = synchronized(this) {
         if (isDicChanged) {
             userDict.loadFromIterator(rawDict.asScala(), false)
@@ -208,6 +220,7 @@ object Dictionary : CanCompileDict {
      * @param m: 은전한닢에서 생성한 형태소 객체
      * @return KoalaNLP의 [Morpheme] 객체 목록. 만약 복합명사였을 경우 복합명사는 모두 분리됨.
      */
+    @JvmStatic
     fun convertMorpheme(m: org.bitbucket.eunjeon.seunjeon.Morpheme): List<Morpheme> {
         val array = m.feature.split(",")
         val compoundTag = array[0]

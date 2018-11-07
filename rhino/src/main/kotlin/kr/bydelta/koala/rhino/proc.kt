@@ -19,12 +19,18 @@ import java.util.*
  * 이 코드의 원본은 `rhino.MainClass`이며, 본 object 코드의 저작권은 RHINO의 저작자에게 귀속됩니다.
  */
 internal object RHINOTagger {
+    @JvmStatic
     val SPECIALS = "([■▶◀◆▲◇◈☎【】]+)".toRegex()
+    @JvmStatic
     val TOKENIZE = " .?!。‘’“”`\'\"(){}[]─,ㆍ·:;/…_~∼∽□+-=±÷×*^><｜|％%&￦₩\\＄$¥￥£￡°㎞㎏@©ⓒ↑|#♥♡★☆♪♬■▶◀◆▲◇◈☎【】"
+    @JvmStatic
     val RETAGGING_CONTAIN = "(는|은|을|세|야|자라고)".toRegex()
+    @JvmStatic
     val RETAGGING_EQUAL = "^(는|은|을|세|야|자라고)$".toRegex()
+    @JvmStatic
     val MORPH_MATCH = "([^\\s]+)/([A-Z]{2,3})".toRegex()
 
+    @JvmStatic
     fun tag(input: String): List<Word> {
         val arr = split(input)
         val inputArr = arr.filter { it.second }.map { it.first }.toTypedArray()
@@ -120,6 +126,7 @@ internal object RHINOTagger {
         /***** 여기까지 추가수정이었습니다. ******/
     }
 
+    @JvmStatic
     private fun translateOutputMorpheme(morphStr: String) =
             MORPH_MATCH.findAll(morphStr).map {
                 val surf = it.groupValues[1]
@@ -128,6 +135,7 @@ internal object RHINOTagger {
                 Morpheme(surf.trim(), POS.valueOf(raw), raw)
             }.toList()
 
+    @JvmStatic
     internal fun split(input: String): List<Pair<String, Boolean>> {
         val tokens = StringTokenizer(input.replace("\\s+".toRegex(), " "), TOKENIZE, true)
         val buffer = mutableListOf<Pair<String, Boolean>>()

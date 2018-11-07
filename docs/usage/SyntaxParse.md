@@ -50,8 +50,11 @@ println(parsed[0].getSyntaxTree().getTreeString()) // 첫번째 문장의 구문
 Reference: [CanParseSyntax](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.proc/-can-parse-syntax/index.html),
 [Parser](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.hnn/-parser/index.html)
 
+* [koalanlp-scala](https://koalanlp.github.io/scala-support)가 dependency로 포함되었다고 가정합니다.
+
 ```scala
 import kr.bydelta.koala.hnn.Parser
+import kr.bydelta.koala.Implicits._
 
 val parser = new Parser()
 
@@ -62,8 +65,9 @@ println(parsed(0).getSyntaxTree().getTreeString()) // 첫번째 문장의 구문
 ```
 
 #### Java
-Reference: [CanTag](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.proc/-can-tag/index.html) 및 
-이를 상속한 class들.
+Reference: [CanParseSyntax](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.proc/-can-parse-syntax/index.html),
+           [Parser](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.hnn/-parser/index.html)
+
 ```java
 import kr.bydelta.koala.hnn.Parser;
 import kr.bydelta.koala.data.Sentence;
@@ -76,9 +80,10 @@ List<Sentence> parsed = parser.analyze("이 문단을 분석합니다. 문단 �
 System.out.println(parsed.get(0).getSyntaxTree().getTreeString()); // 첫번째 문장의 구문구조 트리를 출력합니다.
 ```
 
-#### JavaScript
+#### JavaScript (구현중)
 Reference: [Parser](https://koalanlp.github.io/nodejs-support/module-koalanlp.Parser.html)
-```javascript 1.7
+
+```javascript
 let Parser = koalanlp.Parser;
 let parser = new Parser(API.HNN);
 
@@ -94,8 +99,9 @@ let parsed = parser.analyzeSync("이 문단을 분석합니다. 문단 구분은
 console.log(parsed[0].getSyntaxTree().getTreeString());  // 첫번째 문장의 구문구조 트리를 출력합니다.
 ```
 
-#### Python
+#### Python (구현중)
 Reference: [Parser](https://koalanlp.github.io/python-support/build/html/koalanlp.api.html#koalanlp.api.Parser)
+
 ```python
 from koalanlp import *
 

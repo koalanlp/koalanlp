@@ -58,8 +58,11 @@ Reference: [CanParseDependency](https://koalanlp.github.io/koalanlp/api/koalanlp
            꼬꼬마 [Parser](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.kkma/-parser/index.html),
            ETRI [Parser](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.etri/-parser/index.html)
 
+* [koalanlp-scala](https://koalanlp.github.io/scala-support)가 dependency로 포함되었다고 가정합니다.
+
 ```scala
 import kr.bydelta.koala.hnn.Parser // 또는 kkma.Parser, etri.Parser
+import kr.bydelta.koala.Implicits._
 
 val parser = new Parser()
 // ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: new Parser(API_KEY)
@@ -78,6 +81,7 @@ Reference: [CanParseDependency](https://koalanlp.github.io/koalanlp/api/koalanlp
            한나눔 [Parser](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.hnn/-parser/index.html),
            꼬꼬마 [Parser](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.kkma/-parser/index.html),
            ETRI [Parser](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.etri/-parser/index.html)
+
 ```java
 import kr.bydelta.koala.hnn.Parser; // 또는 kkma.Parser, etri.Parser
 import kr.bydelta.koala.data.Sentence;
@@ -95,9 +99,10 @@ for(DepEdge dep: parsed[0].getDependencies()){
 }
 ```
 
-#### JavaScript
+#### JavaScript (구현중)
 Reference: [Parser](https://koalanlp.github.io/nodejs-support/module-koalanlp.Parser.html)
-```javascript 1.7
+
+```javascript
 let Parser = koalanlp.Parser;
 let parser = new Parser(API.HNN); // 또는 API.KKMA, API.ETRI
 // ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: new Parser(API.ETRI, {'apiKey': API_KEY})
@@ -117,8 +122,9 @@ let parsed = parser.analyzeSync("이 문단을 분석합니다. 문단 구분은
 parsed[0].getDependencies().forEach((dep) => console.log(dep));
 ```
 
-#### Python
+#### Python (구현중)
 Reference: [Parser](https://koalanlp.github.io/python-support/build/html/koalanlp.api.html#koalanlp.api.Parser)
+
 ```python
 from koalanlp import *
 

@@ -51,8 +51,11 @@ parsed[0].getEntities().forEach{ entity ->
 Reference: [CanRecognizeEntity](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.proc/-can-recognize-entity/index.html),
            ETRI [EntityRecognizer](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.etri/-entity-recognizer/index.html)
 
+* [koalanlp-scala](https://koalanlp.github.io/scala-support)가 dependency로 포함되었다고 가정합니다.
+
 ```scala
 import kr.bydelta.koala.etri.EntityRecognizer
+import kr.bydelta.koala.Implicits._
 
 val API_KEY = /** ETRI에서 발급받은 키 **/
 val recognizer = new EntityRecognizer(API_KEY)
@@ -69,6 +72,7 @@ parsed[0].getEntities().forEach{ entity =>
 #### Java
 Reference: [CanRecognizeEntity](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.proc/-can-recognize-entity/index.html),
            ETRI [EntityRecognizer](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.etri/-entity-recognizer/index.html)
+
 ```java
 import kr.bydelta.koala.etri.EntityRecognizer;
 import kr.bydelta.koala.data.Sentence;
@@ -86,9 +90,10 @@ for(Entity entity : parsed[0].getEntities()) {
 }
 ```
 
-#### JavaScript
+#### JavaScript (구현중)
 Reference: [EntityRecognizer](https://koalanlp.github.io/nodejs-support/module-koalanlp.EntityRecognizer.html)
-```javascript 1.7
+
+```javascript
 let EntityRecognizer = koalanlp.EntityRecognizer;
 let recognizer = new EntityRecognizer(API.ETRI, {'apiKey': API_KEY});
 
@@ -107,8 +112,9 @@ let parsed = recognizer.analyzeSync("이 문단을 분석합니다. 문단 구�
 parsed[0].getEntities().forEach((entity) => console.log(entity));
 ```
 
-#### Python
+#### Python (구현중)
 Reference: [EntityRecognizer](https://koalanlp.github.io/python-support/build/html/koalanlp.api.html#koalanlp.api.EntityRecognizer)
+
 ```python
 from koalanlp import *
 

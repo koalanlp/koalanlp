@@ -80,6 +80,7 @@ internal class UserDicReader : SimpleDicReader, Iterator<String?> {
  */
 object Dictionary : CanCompileDict {
     /** 원본사전의 어휘목록 **/
+    @JvmStatic
     private val systemDicByTag by lazy {
         org.snu.ids.kkma.dic.Dictionary.getInstance().asList.flatMap {
             it.filter { m -> m.tag != null }
@@ -88,10 +89,12 @@ object Dictionary : CanCompileDict {
     }
 
     /** 사용자사전 Reader **/
-    internal val userdic = UserDicReader()
+    @JvmStatic
+    private val userdic = UserDicReader()
 
     /** 사전 목록의 변화여부 **/
-    internal var isDicChanged = false
+    @JvmStatic
+    private var isDicChanged = false
 
     /**
      * 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가합니다.
@@ -167,6 +170,7 @@ object Dictionary : CanCompileDict {
      * 사전 다시읽기.
      * @since 1.x
      */
+    @JvmStatic
     internal fun reloadDic() {
         synchronized(userdic) {
             if (isDicChanged) {

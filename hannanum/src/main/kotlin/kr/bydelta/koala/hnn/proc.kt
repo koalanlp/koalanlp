@@ -92,6 +92,7 @@ class SentenceSplitter : CanSplitSentence {
     /** static fields */
     companion object {
         /** 한나눔의 빈 문장 */
+        @JvmStatic
         private val SENTENCE_TYPE = PlainSentence(0, 0, false)
     }
 }
@@ -172,6 +173,7 @@ class Tagger : CanTagOnlyAParagraph<Sentence>() {
     /** static fields */
     companion object {
         /** 한나눔의 빈 문장 */
+        @JvmStatic
         private val SENTENCE_TYPE = Sentence(0, 0, false)
 
         /**
@@ -213,20 +215,18 @@ class Tagger : CanTagOnlyAParagraph<Sentence>() {
  */
 internal class SafeChartMorphAnalyzer : MorphAnalyzer {
     /** 분석된 어절 목록 */
-    private val eojeolList by lazy { LinkedList<Eojeol>() }
+    private val eojeolList = LinkedList<Eojeol>()
     /** 후처리 기능 */
-    private val postProc by lazy { PostProcessor() }
+    private val postProc = PostProcessor()
     /** 형태소 차트 분석 */
-    private val chart by lazy {
+    private val chart: MorphemeChart
+        get() {
         val simti = Simti()
         simti.init()
 
-        MorphemeChart(Dictionary.tagSet, Dictionary.connection,
+            return MorphemeChart(Dictionary.tagSet, Dictionary.connection,
                 Dictionary.systemDic, Dictionary.userDic, Dictionary.numAutomata, simti, eojeolList)
     }
-
-    /** 모델 이름 */
-    fun getName(): String = "MorphAnalyzer"
 
     override fun shutdown() {}
 
@@ -554,10 +554,10 @@ class Parser : CanParseDependency<Sentence>, CanParseSyntax<Sentence> {
 internal class BerkeleyParserWrap {
     private val parser: CoarseToFineMaxRuleParser
         get() {
-            val p = CoarseToFineMaxRuleParser(BerkeleyParserWrap.grammar, BerkeleyParserWrap.lexicon,
-                    BerkeleyParserWrap.opts.unaryPenalty, BerkeleyParserWrap.finalLevel,
-                    BerkeleyParserWrap.viterbiParse, false, false, BerkeleyParserWrap.opts.accurate,
-                    BerkeleyParserWrap.doVariational, BerkeleyParserWrap.useGoldPOS, true)
+            val p = CoarseToFineMaxRuleParser(BerkeleyParserWrap.pData.grammar, BerkeleyParserWrap.pData.lexicon,
+                    BerkeleyParserWrap.opts.unaryPenalty, BerkeleyParserWrap.opts.finalLevel,
+                    BerkeleyParserWrap.opts.viterbi, false, false, BerkeleyParserWrap.opts.accurate,
+                    false, BerkeleyParserWrap.opts.useGoldPOS, true)
             p.binarization = BerkeleyParserWrap.pData.binarization
             return p
         }
@@ -574,28 +574,18 @@ internal class BerkeleyParserWrap {
 
     /** Static fields **/
     companion object {
-        val args: String by lazy { "-in " + Configuration.parserModel }
-        val opts: GrammarTester.Options by lazy {
+        @JvmStatic
+        private val opts: GrammarTester.Options =
             OptionParser(GrammarTester.Options::class.java)
-                    .parse(args.split(" ").toTypedArray(), true) as GrammarTester.Options
-        }
-        val finalLevel: Int by lazy { opts.finalLevel }
-        val viterbiParse: Boolean by lazy { opts.viterbi }
-        val doVariational: Boolean by lazy { false }
-        val useGoldPOS: Boolean by lazy { opts.useGoldPOS }
+                    .parse(arrayOf("-in", Configuration.parserModel), true) as GrammarTester.Options
 
-        val inFileName: String by lazy { Dictionary.extractResource() + File.separator + opts.inFileName }
-        val pData: ParserData by lazy {
-            val p = ParserData.Load(inFileName)
+        @JvmStatic
+        private val pData: ParserData by lazy {
+            val p = ParserData.Load(Dictionary.extractResource() + File.separator + opts.inFileName)
             Numberer.setNumberers(p.numbs)
+            p.grammar.splitRules()
             p
         }
-        val grammar: Grammar by lazy {
-            val g = pData.grammar
-            g.splitRules()
-            g
-        }
-        val lexicon: Lexicon by lazy { pData.lexicon }
     }
 }
 
@@ -608,16 +598,19 @@ internal class BerkeleyParserWrap {
  * 원본의 Copyright: KAIST 한나눔 개발팀.
  */
 internal object MorphemeAnalyzerWrap {
+    @JvmStatic
     private val TOKENS = "^(\\+*[^+]*)/([a-z]+)\\+".toRegex()
 
     /**
      * 띄어쓰기 된 token으로 변환
      */
+    @JvmStatic
     fun getSpacedResult(sent: Sentence) = this.getAnalysisResult(sent).flatMap { it.tokenList.map { w -> w.word } }
 
     /**
      * 파서가 이해할 수 있게 분석 결과 변환
      */
+    @JvmStatic
     fun getAnalysisResult(raw: Sentence): List<kaist.cilab.parser.berkeleyadaptation.Eojeol> {
         /******* 수정된 부분 시작 *******/
         val txt = raw.plainEojeols
@@ -680,6 +673,7 @@ internal object MorphemeAnalyzerWrap {
      * 동일 품사 결과 통합
      * (코드 간결하게 재작성됨)
      */
+    @JvmStatic
     private fun integrateSamePOS(e: kaist.cilab.parser.berkeleyadaptation.Eojeol, pos: String) {
         val tokens = mutableListOf<kaist.cilab.parser.berkeleyadaptation.Eojeol.Token>()
         var merged = false
@@ -704,6 +698,7 @@ internal object MorphemeAnalyzerWrap {
     }
 
     /** 특수 분석결과 변환 (코드 재작성) */
+    @JvmStatic
     private fun modifySenLevelPOSResult(result: String): String =
             result.replace("가/pvg+아/ecx+지/px", "가지/pvg")
                     .replace("입/pvg+니다/ef", "이/jp+ㅂ니다/ef")

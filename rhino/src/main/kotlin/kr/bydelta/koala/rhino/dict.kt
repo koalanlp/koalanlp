@@ -15,19 +15,32 @@ import java.io.InputStream
  * @since 1.x
  */
 internal object DictionaryReader {
+    @JvmStatic
     val combiMethods_List = readMethodsList("rhino.lexicon.combi.combi")
+    @JvmStatic
     val endingMethods_List = readMethodsList("rhino.lexicon.ending.ending")
+    @JvmStatic
     val complexStem_MethodDeleted = readArray(javaClass.getResourceAsStream("/rhino/complexStem_MethodDeleted.txt"))
+    @JvmStatic
     val stem_MethodDeleted = readArray(javaClass.getResourceAsStream("/rhino/stem_MethodDeleted.txt"))
+    @JvmStatic
     val ending_MethodDeleted = readArray(javaClass.getResourceAsStream("/rhino/ending_MethodDeleted.txt"))
+    @JvmStatic
     val afterNumber_MethodDeleted = readArray(javaClass.getResourceAsStream("/rhino/afterNumber_MethodDeleted.txt"))
+    @JvmStatic
     val stem_List = read2DArray(javaClass.getResourceAsStream("/rhino/stem_List.txt"), splitByTwo = false)
+    @JvmStatic
     val ending_List = read2DArray(javaClass.getResourceAsStream("/rhino/ending_List.txt"), splitByTwo = false)
+    @JvmStatic
     val afterNumber_List = read2DArray(javaClass.getResourceAsStream("/rhino/afterNumber_List.txt"), splitByTwo = false)
+    @JvmStatic
     val nonEndingList = read2DArray(javaClass.getResourceAsStream("/rhino/_auto_managed_nonEndingList.txt"), splitByTwo = true)
+    @JvmStatic
     val aspgStem = getMapOfLengths(stem_List)
+    @JvmStatic
     val aspgEnding = getMapOfLengths(ending_List)
 
+    @JvmStatic
     private fun readMethodsList(lexicon: String) =
             try {
                 Class.forName(lexicon).declaredMethods.map { it.name }.toTypedArray()
@@ -35,6 +48,7 @@ internal object DictionaryReader {
                 emptyArray<String>()
             }
 
+    @JvmStatic
     private fun read2DArray(stream: InputStream, splitByTwo: Boolean): Array<Array<String?>> =
             readArray(stream).map { line ->
                 if (splitByTwo) {
@@ -47,6 +61,7 @@ internal object DictionaryReader {
                 }
             }.toTypedArray()
 
+    @JvmStatic
     private fun readArray(stream: InputStream) =
             try {
                 stream.bufferedReader().lines().iterator().asSequence()
@@ -55,6 +70,7 @@ internal object DictionaryReader {
                 emptyArray<String>()
             }
 
+    @JvmStatic
     private fun getMapOfLengths(array: Array<Array<String?>>) =
             try {
                 val sizemap =

@@ -150,6 +150,7 @@ class Tagger @JvmOverloads constructor(useLightTagger: Boolean = false) : CanTag
          * 코모란 분석기 객체.
          * @since 1.x
          */
+        @JvmStatic
         private fun taggerFull(): Komoran {
             Dictionary.extractResource()
             return Komoran(DEFAULT_MODEL.FULL)
@@ -159,6 +160,7 @@ class Tagger @JvmOverloads constructor(useLightTagger: Boolean = false) : CanTag
          * 코모란 분석기 객체.
          * @since 1.x
          */
+        @JvmStatic
         private fun taggerLight(): Komoran {
             Dictionary.extractResource()
             return Komoran(DEFAULT_MODEL.LIGHT)

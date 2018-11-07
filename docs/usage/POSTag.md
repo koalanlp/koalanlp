@@ -28,6 +28,7 @@
 ### Kotlin
 Reference: [CanTag](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.proc/-can-tag/index.html) 및 
 이를 상속한 class들.
+
 ```kotlin
 import kr.bydelta.koala.eunjeon.Tagger
 // 또는 eunjeon 대신 다른 분석기 가능: arirang, daon, etri, eunjeon, hnn, kkma, kmr, okt, rhino 
@@ -45,9 +46,13 @@ println(taggedParagraph[0].singleLineString()) // "문단을 분석합니다."�
 
 #### Scala
 Reference: [CanTag](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.proc/-can-tag/index.html) 및 
-이를 상속한 class들.
+이를 상속한 클래스들.
+
+* [koalanlp-scala](https://koalanlp.github.io/scala-support)가 dependency로 포함되었다고 가정합니다.
+
 ```scala
 import kr.bydelta.koala.eunjeon.Tagger
+import kr.bydelta.koala.Implicits._
 // 또는 eunjeon 대신 다른 분석기 가능: arirang, daon, etri, eunjeon, hnn, kkma, kmr, okt, rhino 
 
 val tagger = new Tagger()
@@ -65,6 +70,7 @@ println(taggedParagraph(0).singleLineString()) // "문단을 분석합니다."�
 #### Java
 Reference: [CanTag](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.proc/-can-tag/index.html) 및 
 이를 상속한 class들.
+
 ```java
 import kr.bydelta.koala.eunjeon.Tagger;
 import kr.bydelta.koala.data.Sentence;
@@ -82,9 +88,10 @@ List<Sentence> taggedParagraph = tagger.tag("문단을 분석합니다. 자동�
 println(taggedParagraph.get(0).singleLineString()) // "문단을 분석합니다."의 품사분석 결과 출력
 ```
 
-#### JavaScript
+#### JavaScript (구현중)
 Reference: [Tagger](https://koalanlp.github.io/nodejs-support/module-koalanlp.Tagger.html)
-```javascript 1.7
+
+```javascript
 let Tagger = koalanlp.Tagger;
 let tagger = new Tagger(API.EUNJEON); // 또는 다른 API 값.
 // 코모란 분석기는 경량 분석기를 사용하는 옵션이 있습니다. 예: new Tagger(API.KMR, {'useLightTagger: true})
@@ -102,8 +109,9 @@ let taggedParagraph = tagger.tagSync("문단을 분석합니다. 자동으로 �
 console.log(taggedParagraph[0].singleLineString()); // "문단을 분석합니다."의 품사분석 결과 출력
 ```
 
-#### Python
+#### Python (구현중)
 Reference: [Tagger](https://koalanlp.github.io/python-support/build/html/koalanlp.api.html#koalanlp.api.Tagger)
+
 ```python
 from koalanlp import *
 

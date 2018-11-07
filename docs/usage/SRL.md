@@ -52,8 +52,11 @@ parsed[0].getRoles().forEach{ role ->
 Reference: [CanLabelSemanticRole](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.proc/-can-label-semantic-role/index.html),
            ETRI [RoleLabeler](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.etri/-role-labeler/index.html)
 
+* [koalanlp-scala](https://koalanlp.github.io/scala-support)가 dependency로 포함되었다고 가정합니다.
+
 ```scala
 import kr.bydelta.koala.etri.EntityRecognizer
+import kr.bydelta.koala.Implicits._
 
 val API_KEY = /** ETRI에서 발급받은 키 **/
 val recognizer = new RoleLabeler(API_KEY)
@@ -70,6 +73,7 @@ parsed[0].getRoles().forEach{ role =>
 #### Java
 Reference: [CanLabelSemanticRole](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.proc/-can-label-semantic-role/index.html),
            ETRI [RoleLabeler](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.etri/-role-labeler/index.html)
+
 ```java
 import kr.bydelta.koala.etri.RoleLabeler;
 import kr.bydelta.koala.data.Sentence;
@@ -87,9 +91,10 @@ for(RoleEdge role : parsed[0].getRoles()) {
 }
 ```
 
-#### JavaScript
+#### JavaScript (구현중)
 Reference: [RoleLabeler](https://koalanlp.github.io/nodejs-support/module-koalanlp.RoleLabeler.html)
-```javascript 1.7
+
+```javascript
 let RoleLabeler = koalanlp.RoleLabeler;
 let recognizer = new RoleLabeler(API.ETRI, {'apiKey': API_KEY});
 
@@ -108,8 +113,9 @@ let parsed = recognizer.analyzeSync("이 문단을 분석합니다. 문단 구�
 parsed[0].getRoles().forEach((role) => console.log(role));
 ```
 
-#### Python
+#### Python (구현중)
 Reference: [RoleLabeler](https://koalanlp.github.io/python-support/build/html/koalanlp.api.html#koalanlp.api.RoleLabeler)
+
 ```python
 from koalanlp import *
 

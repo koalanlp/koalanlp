@@ -18,6 +18,7 @@ import scala.Enumeration
  * @since 1.x
  */
 object Dictionary : CanCompileDict {
+    @JvmStatic
     private val userDict = mutableSetOf<DicEntry>()
 
     /**
@@ -40,6 +41,7 @@ object Dictionary : CanCompileDict {
      * @param tag   POS Tag
      * @param morph Morpheme sequence.
      */
+    @JvmStatic
     private fun add(tag: Enumeration.Value, morph: List<String>) {
         when (tag) {
             KoreanPos.ProperNoun() ->
@@ -57,6 +59,7 @@ object Dictionary : CanCompileDict {
         }
     }
 
+    @JvmStatic
     private fun dictContainsKey(tag: Enumeration.Value): Boolean =
             KoreanDictionaryProvider.koreanDictionary().containsKey(tag)
 
@@ -97,6 +100,7 @@ object Dictionary : CanCompileDict {
      * @since 1.x
      * @param tag 사전을 조회할 품사; [POS] Enum 값
      */
+    @JvmStatic
     private fun dictGet(tag: Enumeration.Value): CharArraySet? = KoreanDictionaryProvider.koreanDictionary()[tag]
 
     /**

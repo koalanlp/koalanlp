@@ -35,9 +35,12 @@ println(paragraph[1]) //== 간단하죠?
 Reference: [CanSplitSentence](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.proc/-can-split-sentence/index.html), 
 [한나눔](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.hnn/-sentence-splitter/index.html), 
 [OpenKoreanText](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.okt/-sentence-splitter/index.html)
+
 * [koalanlp-scala](https://koalanlp.github.io/scala-support)가 dependency로 포함되었다고 가정합니다.
+
 ```scala
 import kr.bydelta.koala.hnn.SentenceSplitter // 또는 okt.SentenceSplitter
+import kr.bydelta.koala.Implicit._
 
 val splitter = new SentenceSplitter
 
@@ -66,7 +69,7 @@ System.out.println(paragraph.get(1)); //== 간단하죠?
 
 #### JavaScript
 Reference: [SentenceSplitter](https://koalanlp.github.io/nodejs-support/module-koalanlp.SentenceSplitter.html)
-```javascript 1.7
+```javascript
 let SentenceSplitter = koalanlp.SentenceSplitter;
 let splitter = new SentenceSplitter(API.HANNANUM); // 또는 API.OKT
 
@@ -100,7 +103,9 @@ KoalaNLP는 Heuristic한 방법을 사용하여 문장을 구분하는 기능을
 
 #### Kotlin, Scala
 Reference: [SentenceSplitter](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.proc/-sentence-splitter/index.html)
-* Scala의 경우 [koalanlp-scala](https://koalanlp.github.io/scala-support)가 dependency로 포함되었다고 가정합니다.
+
+* Scala의 경우 [koalanlp-scala](https://koalanlp.github.io/scala-support)가 dependency로 포함되고, `kr.bydelta.koala.Implicits._`를 import했다고 가정합니다.
+
 ```kotlin
 import kr.bydelta.koala.proc.SentenceSplitter
 import kr.bydelta.koala.data.Sentence
@@ -129,7 +134,7 @@ System.out.println(paragraph[0].singleLineString()); // taggedSentence가 List<S
 
 #### JavaScript 
 Reference: [SentenceSplitter](https://koalanlp.github.io/nodejs-support/module-koalanlp.SentenceSplitter.html)
-```javascript 1.7
+```javascript
 let tagger; /** 품사분석기 **/
 let SentenceSplitter = koalanlp.SentenceSplitter;
 let taggedSentence = tagger.tagSentenceSync("무엇인가 품사분석을 수행할 문단");

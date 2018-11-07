@@ -18,8 +18,11 @@ import org.apache.lucene.analysis.ko.utils.KoreanEnv
  * @see CanCompileDict
  */
 object Dictionary : CanCompileDict {
-    internal val userItems = mutableListOf<DicEntry>()
-    internal val systemdic = mutableMapOf<POS, Set<String>>()
+    @JvmStatic
+    private val userItems = mutableListOf<DicEntry>()
+
+    @JvmStatic
+    private val systemdic = mutableMapOf<POS, Set<String>>()
 
     /**
      * 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가합니다.
@@ -27,7 +30,6 @@ object Dictionary : CanCompileDict {
      * @since 1.x
      * @param dict 추가할 (표면형, 품사)의 순서쌍들 (가변인자). 즉, [Pair]<[String], [POS]>들
      */
-
     override fun addUserDictionary(vararg dict: DicEntry) {
         userItems.addAll(dict)
         dict.forEach {
@@ -89,7 +91,8 @@ object Dictionary : CanCompileDict {
     }
 
     /** 사전 불러오기 **/
-    private fun load(): Unit {
+    @JvmStatic
+    private fun load() {
         synchronized(this) {
             readAuxDict("josa.dic", POS.JX)
             readAuxDict("eomi.dic", POS.EP)
@@ -100,6 +103,7 @@ object Dictionary : CanCompileDict {
     }
 
     /** 보조 사전 불러오기 */
+    @JvmStatic
     private fun readAuxDict(dic: String, tag: POS) {
         val path = KoreanEnv.getInstance().getValue(dic)
 
@@ -110,6 +114,7 @@ object Dictionary : CanCompileDict {
     }
 
     /** 사전 읽기 */
+    @JvmStatic
     private fun readDict() {
         try {
             val list = FileUtil.readLines(KoreanEnv.getInstance().getValue("dictionary.dic"), "UTF-8")
@@ -137,6 +142,7 @@ object Dictionary : CanCompileDict {
     }
 
     /** 아리랑 태그 변환 */
+    @JvmStatic
     private fun mapToTag(tag: POS): POS =
             when {
                 tag.isPostPosition() -> POS.JX
