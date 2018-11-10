@@ -2,7 +2,7 @@ KoalaNLP
 ==============
 [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core.svg?style=flat-square&label=release)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core%22)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
-[![API Doc](https://img.shields.io/badge/doc-Java,Kotlin,Scala-blue.svg?style=flat-square)](http://koalanlp.github.io/KoalaNLP/api/koalanlp/index)
+[![API Doc](https://img.shields.io/badge/doc-Java,Kotlin,Scala-blue.svg?style=flat-square)](http://koalanlp.github.io/koalanlp/api/koalanlp/index)
 
 [![Build Status](https://img.shields.io/travis/koalanlp/koalanlp.svg?style=flat-square&branch=master)](https://travis-ci.org/koalanlp/koalanlp)
 [![Code coverage](https://img.shields.io/codecov/c/github/koalanlp/koalanlp.svg?style=flat-square)](https://codecov.io/gh/koalanlp/koalanlp)
