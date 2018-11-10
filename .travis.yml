@@ -10,8 +10,6 @@ cache:
   directories:
   - $HOME/.gradle/caches/
   - $HOME/.gradle/wrapper/
-install:
-- cp -r hannanum/hnnModels/* hannanum/
 before_script:
 - export DISPLAY=:99.0
 script:

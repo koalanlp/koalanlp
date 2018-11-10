@@ -1,16 +1,17 @@
 KoalaNLP
 ==============
-[![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp.svg?style=flat-square&label=release)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp%22)
+[![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core.svg?style=flat-square&label=release)](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22koalanlp-core%22)
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 [![API Doc](https://img.shields.io/badge/doc-Java,Kotlin,Scala-blue.svg?style=flat-square)](http://koalanlp.github.io/KoalaNLP/api/koalanlp/index)
-[![분석기별 품사비교표](https://img.shields.io/badge/%ED%92%88%EC%82%AC-%EB%B9%84%EA%B5%90%ED%91%9C-blue.svg?style=flat-square)](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)
 
 [![Build Status](https://img.shields.io/travis/koalanlp/koalanlp.svg?style=flat-square&branch=master)](https://travis-ci.org/koalanlp/koalanlp)
 [![Code coverage](https://img.shields.io/codecov/c/github/koalanlp/koalanlp.svg?style=flat-square)](https://codecov.io/gh/koalanlp/koalanlp)
 [![Known Vulnerabilities](https://snyk.io/test/github/koalanlp/koalanlp/badge.svg?style=flat-square)](https://snyk.io/test/github/koalanlp/koalanlp)
 
-[![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
-[![nodejs-koalanlp](https://img.shields.io/badge/Nodejs-KoalaNLP-blue.svg?style=flat-square)](https://koalanlp.github.io/nodejs-support)
-[![py-koalanlp](https://img.shields.io/badge/Python-KoalaNLP-blue.svg?style=flat-square)](https://koalanlp.github.io/python-support)
+[![분석기별 품사비교표](https://img.shields.io/badge/%ED%92%88%EC%82%AC-%EB%B9%84%EA%B5%90%ED%91%9C-blue.svg?style=flat-square)](https://docs.google.com/spreadsheets/d/1OGM4JDdLk6URuegFKXg1huuKWynhg_EQnZYgTmG4h0s/edit?usp=sharing)
+[![nodeJS](https://img.shields.io/badge/NodeJS-Support-blue.svg?style=flat-square)](https://koalanlp.github.io/nodejs-support)
+[![python](https://img.shields.io/badge/Python-Supprt-blue.svg?style=flat-square)](https://koalanlp.github.io/python-support)
+[![scala](https://img.shields.io/badge/Scala-Support-blue.svg?style=flat-square)](https://koalanlp.github.io/scala-support)
 
 # 소개
 
@@ -50,7 +51,7 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 
    모델마다 실행 방법, 실행 결과를 표현하는 형태가 다릅니다. KoalaNLP는 이를 정부 및 관계기관의 표준안에 따라 표준화합니다. 따라서 모델에 독립적으로 응용 프로그램 개발이 가능합니다.
 
-4. Java, Kotlin, [Scala](https://koalanlp.github.io/scala-support), [Python 3](https://koalanlp.github.io/python-support), [NodeJS](https://koalanlp.github.io/nodejs-support)에서 크게 다르지 않은 코드:
+4. [Java, Kotlin](https://koalanlp.github.io/koalanlp), [Scala](https://koalanlp.github.io/scala-support), [Python 3](https://koalanlp.github.io/python-support), [NodeJS](https://koalanlp.github.io/nodejs-support)에서 크게 다르지 않은 코드:
 
    KoalaNLP는 여러 프로그래밍 언어에서 사용할 수 있습니다. 어디서 개발을 하더라도 크게 코드가 다르지 않습니다. 
 
@@ -274,4 +275,4 @@ for(String line : sentences){
 ```
 
 # 품사분석기별 결과 비교
-[Usage: 결과비교](https://koalanlp.github.io/koalanlp/usage/4-비교.md)를 참조해주세요.
+[Sample: 결과비교](https://koalanlp.github.io/sample/comparison.md)를 참조해주세요.
