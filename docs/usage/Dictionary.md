@@ -132,7 +132,8 @@ KDict.getBaseEntries(POS.isNoun); // 시스템 사전 항목
 Reference: [Dictionary](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.Dictionary)
 
 ```python
-from koalanlp import API, POS
+from koalanlp import API
+from koalanlp.types import POS
 from koalanlp.proc import Dictionary
 
 KDict = Dictionary(API.KKMA)
