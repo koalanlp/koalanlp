@@ -11,7 +11,7 @@
 결과물은 Sentence 객체가 됩니다.
 - [Java, Scala, Kotlin의 Sentence](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.data/-sentence/index.html)
 - [NodeJS의 Sentence](https://koalanlp.github.io/nodejs-support/module-koalanlp_data.Sentence.html)
-- [Python의 Sentence](https://koalanlp.github.io/python-support/build/html/koalanlp.data.html#koalanlp.data.Sentence)
+- [Python의 Sentence](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.data.Sentence)
 
 아래 분석 예시는 **'문단'** 을 기준으로 분석한 결과들입니다. 문장 1개를 분석하고 싶은 경우 `tag` 대신에 `tagSentence`를 사용하면 됩니다. 
 
@@ -109,20 +109,21 @@ let taggedParagraph = tagger.tagSync("문단을 분석합니다. 자동으로 �
 console.log(taggedParagraph[0].singleLineString()); // "문단을 분석합니다."의 품사분석 결과 출력
 ```
 
-#### Python (구현중)
-Reference: [Tagger](https://koalanlp.github.io/python-support/build/html/koalanlp.api.html#koalanlp.api.Tagger)
+#### Python 3
+Reference: [Tagger](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.Tagger)
 
 ```python
-from koalanlp import *
+from koalanlp import API
+from koalanlp.proc import Tagger
 
-tagger = Tagger(API.EUNJEON) 
-// 코모란 분석기는 경량 분석기를 사용하는 옵션이 있습니다. 예: Tagger(API.KMR, use_light_tagger=true)
-// ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: Tagger(API.ETRI, api_key=API_KEY)
+tagger = Tagger(API.EUNJEON)
+# 코모란 분석기는 경량 분석기를 사용하는 옵션이 있습니다. 예: Tagger(API.KMR, useLightTagger=true)
+# ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: Tagger(API.ETRI, apiKey=API_KEY)
 
-// 문단을 분석해서 문장들로 얻기 (각 API가 문단 분리를 지원하지 않아도, KoalaNLP가 자동으로 구분합니다)
+# 문단을 분석해서 문장들로 얻기 (각 API가 문단 분리를 지원하지 않아도, KoalaNLP가 자동으로 구분합니다)
 taggedParagraph = tagger.tag("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다.")
 
-print(taggedParagraph[0].singleLineString()); // "문단을 분석합니다."의 품사분석 결과 출력
+print(taggedParagraph[0].singleLineString()) # "문단을 분석합니다."의 품사분석 결과 출력
 ```
 
 --------

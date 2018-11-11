@@ -13,8 +13,8 @@
   [Entity](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.data/-entity/index.html)
 - [NodeJS의 Sentence](https://koalanlp.github.io/nodejs-support/module-koalanlp_data.Sentence.html),
   [Entity](https://koalanlp.github.io/nodejs-support/module-koalanlp_data.Entity.html)
-- [Python의 Sentence](https://koalanlp.github.io/python-support/build/html/koalanlp.data.html#koalanlp.data.Sentence),
-  [Entity](https://koalanlp.github.io/python-support/build/html/koalanlp.data.html#koalanlp.data.Entity)
+- [Python의 Sentence](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.data.Sentence),
+  [Entity](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.data.Entity)
 
 아래 분석 예시는 **'텍스트 문단'** 을 기준으로 분석한 결과들입니다. 
 이미 타 분석기에서 분석된 `Sentence` 객체나, `Sentence`의 List인 경우에도 같은 방식으로 호출이 가능합니다. 
@@ -112,17 +112,18 @@ let parsed = recognizer.analyzeSync("이 문단을 분석합니다. 문단 구�
 parsed[0].getEntities().forEach((entity) => console.log(entity));
 ```
 
-#### Python (구현중)
-Reference: [EntityRecognizer](https://koalanlp.github.io/python-support/build/html/koalanlp.api.html#koalanlp.api.EntityRecognizer)
+#### Python 3
+Reference: [EntityRecognizer](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.EntityRecognizer)
 
 ```python
-from koalanlp import *
+from koalanlp import API
+from koalanlp.proc import EntityRecognizer
 
 recognizer = EntityRecognizer(API.ETRI, apiKey=API_KEY)
 
 parsed = recognizer.analyze("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")
 
-// 첫번째 문장의 개체명들을 출력합니다.
+# 첫번째 문장의 개체명들을 출력합니다.
 for entity in parsed[0].getEntities():
     print(entity)
 ```

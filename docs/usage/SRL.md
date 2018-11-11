@@ -13,8 +13,8 @@
   [RoleEdge](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.data/-role-edge/index.html)
 - [NodeJS의 Sentence](https://koalanlp.github.io/nodejs-support/module-koalanlp_data.Sentence.html),
   [RoleEdge](https://koalanlp.github.io/nodejs-support/module-koalanlp_data.RoleEdge.html)
-- [Python의 Sentence](https://koalanlp.github.io/python-support/build/html/koalanlp.data.html#koalanlp.data.Sentence),
-  [RoleEdge](https://koalanlp.github.io/python-support/build/html/koalanlp.data.html#koalanlp.data.RoleEdge)
+- [Python의 Sentence](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.data.Sentence),
+  [RoleEdge](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.data.RoleEdge)
 
 아래 분석 예시는 **'텍스트 문단'** 을 기준으로 분석한 결과들입니다. 
 이미 타 분석기에서 분석된 `Sentence` 객체나, `Sentence`의 List인 경우에도 같은 방식으로 호출이 가능합니다. 
@@ -113,11 +113,12 @@ let parsed = recognizer.analyzeSync("이 문단을 분석합니다. 문단 구�
 parsed[0].getRoles().forEach((role) => console.log(role));
 ```
 
-#### Python (구현중)
-Reference: [RoleLabeler](https://koalanlp.github.io/python-support/build/html/koalanlp.api.html#koalanlp.api.RoleLabeler)
+#### Python 3
+Reference: [RoleLabeler](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.RoleLabeler)
 
 ```python
-from koalanlp import *
+from koalanlp import API
+from koalanlp.proc import EntityRecognizer
 
 recognizer = RoleLabeler(API.ETRI, apiKey=API_KEY)
 

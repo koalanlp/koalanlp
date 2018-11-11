@@ -113,11 +113,11 @@ ExtUtil.hanjaToHangul("300 兩의 돈"); // "300 냥의 돈"
 ExtUtil.hanjaToHangul("樂園"); // "낙원" (두음법칙)
 ```
 
-#### Python 3 (구현중)
-Reference: [ExtUtil](https://koalanlp.github.io/python-support/build/html/koalanlp.api.html#koalanlp.api.ExtUtil)
+#### Python 3
+Reference: [ExtUtil](https://koalanlp.github.io/python-support/html/koalanlp.html#module-koalanlp.ExtUtil)
 
 ```python
-from koalanlp import *
+from koalanlp import ExtUtil
 
 ExtUtil.alphaToHangul("ABCD") # "에이비씨디"
 ExtUtil.alphaToHangul("갤럭시S") # "갤럭시에스"
@@ -129,8 +129,8 @@ ExtUtil.isAlphaPronounced("갤럭시에스") # false
 ExtUtil.hangulToAlpha("갤럭시에스") # "갤럭시S"
 ExtUtil.hangulToAlpha("메이디에이치디") # "ADHD"
 
-ExtUtil.isHanja('國') # true
-ExtUtil.isCJKHanja('國') # true
+ExtUtil.isHanja('國ABC') # [true, false, false, false]
+ExtUtil.isCJKHanja('國') # [true]
 
 ExtUtil.hanjaToHangul("國篇") # "국편"
 ExtUtil.hanjaToHangul("國篇은 오늘") # "국편은 오늘"

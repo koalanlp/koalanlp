@@ -86,15 +86,17 @@ console.log(paragraph[0]); //== 분리할 문장을 이렇게 넣으면 문장�
 console.log(paragraph[1]); //== 간단하죠?
 ```
 
-#### Python
-Reference: [SentenceSplitter](https://koalanlp.github.io/python-support/build/html/koalanlp.api.html#koalanlp.api.SentenceSplitter)
+#### Python 3
+Reference: [SentenceSplitter](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.SentenceSplitter)
+
 ```python
-from koalanlp import *
+from koalanlp import API
+from koalanlp.proc import SentenceSplitter
 
 splitter = SentenceSplitter(splitter_type=API.HANNANUM)
 paragraph = splitter.sentences("분리할 문장을 이렇게 넣으면 문장이 분리됩니다. 간단하죠?")
-print(paragraph[0]) //== 분리할 문장을 이렇게 넣으면 문장이 분리됩니다.
-print(paragraph[1]) //== 간단하죠?
+print(paragraph[0]) # == 분리할 문장을 이렇게 넣으면 문장이 분리됩니다.
+print(paragraph[1]) # == 간단하죠?
 ```
 
 ### 품사 부착 후 분리 방법
@@ -148,14 +150,15 @@ let paragraph = SentenceSplitter.sentencesSync("분리할 문장을 이렇게 �
 // paragraph는 taggedSentence가 구분된 Sentence[]임.
 ```
 
-#### Python
-Reference: [sentences](https://koalanlp.github.io/python-support/build/html/koalanlp.api.html#koalanlp.api.sentences)
+#### Python 3
+Reference: [SentenceSplitter](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.SentenceSplitter)
+
 ```python
-from koalanlp import *
+from koalanlp.proc import SentenceSplitter
 
 tagger = ... ### 품사분석기 ###
 tagged_sentence = tagger.tagSentence("무엇인가 품사분석을 수행할 문단")
-paragraph = sentences(tagged_sentence) # tagged_sentence는 문장으로 구분된 List[Sentence]임.
+paragraph = SentenceSplitter.sentencesTagged(tagged_sentence) # tagged_sentence는 문장으로 구분된 List[Sentence]임.
 ```
 
 --------

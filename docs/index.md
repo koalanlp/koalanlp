@@ -22,6 +22,11 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 * 개발이 직접 가능하시다면 pull request를 보내주세요. 테스트 후 반영할 수 있도록 하겠습니다.
 * 개발이 어렵다면 issue tracker에 등록해주세요. 검토 후 답변해드리겠습니다.
 
+## 사용방법
+
+* [Usage](https://koalanlp.github.io/koalanlp/usage/)
+* [API Doc](http://koalanlp.github.io/koalanlp/api/koalanlp/index.html)
+
 ## 특징
 
 KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
@@ -197,8 +202,3 @@ Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 
   <version>2.0.0</version>
 </dependency>
 ```
-
-# 사용방법
-
-* [Usage](https://koalanlp.github.io/koalanlp/usage/)
-* [API Doc](http://koalanlp.github.io/koalanlp/api/koalanlp/index.html)

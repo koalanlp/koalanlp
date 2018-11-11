@@ -1121,7 +1121,7 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
     fun getPhrase() = getProperty<SyntaxTree>(Key.SYNTAX_PARENT)
 
     /**
-     * 의존구문분석을 했다면, 현재 어절이 지배소인 의존구문 구조의 값을 돌려줍니다.
+     * 의존구문분석을 했다면, 현재 어절이 지배소인 하위 의존구문 구조의 값을 돌려줍니다.
      *
      * ## 참고
      * **의존구조 분석**은 문장의 구성 어절들이 의존 또는 기능하는 관계를 분석하는 방법입니다.
@@ -1147,7 +1147,7 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
     fun getDependentEdges(): List<DepEdge>? = getProperty<ListProperty<DepEdge>>(Key.DEP_DEPENDENT)?.values
 
     /**
-     * 의존구문분석을 했다면, 현재 어절이 지배소인 의존구문 구조의 값을 돌려줍니다.
+     * 의존구문분석을 했다면, 현재 어절이 의존소인 상위 의존구문 구조의 값을 돌려줍니다.
      *
      * ## 참고
      * **의존구조 분석**은 문장의 구성 어절들이 의존 또는 기능하는 관계를 분석하는 방법입니다.
@@ -1168,12 +1168,12 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
      * * [DependencyTag] 의존구조의 기능 분류를 갖는 Enum 값
      *
      * @since 2.0.0
-     * @return 어절이 지배하는 의존구문구조 [DepEdge]. 분석 결과가 없으면 null.
+     * @return 어절이 지배당하는 의존구문구조 [DepEdge]. 분석 결과가 없으면 null.
      * */
     fun getGovernorEdge() = getProperty<DepEdge>(Key.DEP_GOVERNOR)
 
     /**
-     * 의미역 분석을 했다면, 현재 어절이 지배하는 의미역 구조를 돌려줌.
+     * 의미역 분석을 했다면, 현재 어절이 논항인 상위 의미역 구조를 돌려줌.
      *
      * ## 참고
      * **의미역 결정**은 문장의 구성 어절들의 역할/기능을 분석하는 방법입니다.
@@ -1192,12 +1192,12 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
      * * [RoleType] 의미역 분류를 갖는 Enum 값
      *
      * @since 2.0.0
-     * @return 어절이 지배하는 의미역 구조 [RoleEdge]. 분석 결과가 없으면 null.
+     * @return 어절이 논항인 상위 의미역 구조 [RoleEdge]. 분석 결과가 없으면 null.
      * */
     fun getPredicateRole() = getProperty<RoleEdge>(Key.SRL_PREDICATE)
 
     /**
-     * 의미역 분석을 했다면, 현재 어절이 지배하는 의미역 구조를 돌려줌.
+     * 의미역 분석을 했다면, 현재 어절이 술어로 기능하는 하위 의미역 구조의 목록을 돌려줌.
      *
      * ## 참고
      * **의미역 결정**은 문장의 구성 어절들의 역할/기능을 분석하는 방법입니다.
@@ -1216,7 +1216,7 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
      * * [RoleType] 의미역 분류를 갖는 Enum 값
      *
      * @since 2.0.0
-     * @return 어절이 지배하는 의미역 구조 [RoleEdge]의 목록. 분석 결과가 없으면 null.
+     * @return 어절이 술어로 기능하는 하위 의미역 구조 [RoleEdge]의 목록. 분석 결과가 없으면 null.
      * */
     fun getArgumentRoles(): List<RoleEdge>? = getProperty<ListProperty<RoleEdge>>(Key.SRL_ARGUMENT)?.values
 
@@ -1339,7 +1339,7 @@ class Sentence(private val words: List<Word>) : CanHaveProperty(), List<Word> by
     fun getSyntaxTree() = getProperty<SyntaxTree>(Key.SYNTAX_PARENT)
 
     /**
-     * 의존구문분석을 했다면, 최상위 의존구문 구조의 값을 돌려줍니다.
+     * 의존구문분석을 했다면, 문장에 포함된 모든 의존구조의 목록을 돌려줍니다.
      *
      * ## 참고
      * **의존구조 분석**은 문장의 구성 어절들이 의존 또는 기능하는 관계를 분석하는 방법입니다.
@@ -1365,7 +1365,7 @@ class Sentence(private val words: List<Word>) : CanHaveProperty(), List<Word> by
     fun getDependencies(): List<DepEdge>? = getProperty<ListProperty<DepEdge>>(Key.DEP_DEPENDENT)?.values
 
     /**
-     * 의미역 분석을 했다면, 최상위 의미역 구조를 돌려줌.
+     * 의미역 분석을 했다면, 문장에 포함된 의미역 구조의 목록을 돌려줌.
      *
      * ## 참고
      * **의미역 결정**은 문장의 구성 어절들의 역할/기능을 분석하는 방법입니다.
@@ -1412,7 +1412,7 @@ class Sentence(private val words: List<Word>) : CanHaveProperty(), List<Word> by
 
 
     /**
-     * 이 개체명과 공통된 대상을 지칭하는 공통 지시어 또는 대용어들의 묶음을 제공합니다.
+     * 문장 내에 포함된 공통 지시어 또는 대용어들의 묶음을 제공합니다.
      *
      * ## 참고
      * **공지시어 해소**는 문장 내 또는 문장 간에 같은 대상을 지칭하는 어구를 찾아 묶는 분석과정입니다.
@@ -1428,7 +1428,7 @@ class Sentence(private val words: List<Word>) : CanHaveProperty(), List<Word> by
      * * [Entity.getCorefGroup] 개체명과 동일한 대상을 지칭하는 대상들의 묶음인 [CoreferenceGroup]을 반환하는 API
      * * [CoreferenceGroup] 동일한 대상을 지칭하는 개체명을 묶는 API
      *
-     * @return 공통된 대상을 묶은 [CoreferenceGroup]. 분석 결과가 없으면 null.
+     * @return 공통된 대상을 묶은 [CoreferenceGroup]의 목록. 분석 결과가 없으면 null.
      */
     fun getCorefGroups(): List<CoreferenceGroup>? = getProperty<ListProperty<CoreferenceGroup>>(Key.COREF_MENTION)?.values
 

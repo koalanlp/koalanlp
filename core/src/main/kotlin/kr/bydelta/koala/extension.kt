@@ -3,13 +3,13 @@
 package kr.bydelta.koala
 
 /** '가'(ga) 위치 **/
-const val HANGUL_START = '가'
+private const val HANGUL_START = '가'
 /** '힣'(hih) 위치 **/
-const val HANGUL_END = '힣'
+private const val HANGUL_END = '힣'
 /** 종성 범위의 폭 **/
-const val JONGSUNG_RANGE = 0x001C
+private const val JONGSUNG_RANGE = 0x001C
 /** 중성 범위의 폭 **/
-const val JUNGSUNG_RANGE = 0x024C
+private const val JUNGSUNG_RANGE = 0x024C
 
 
 /*********************
@@ -19,7 +19,7 @@ const val JUNGSUNG_RANGE = 0x024C
 /**
  * 알파벳의 독음방법
  */
-val ALPHABET_READING = mapOf(
+private val ALPHABET_READING = mapOf(
         'H' to "에이치", 'W' to "더블유",
         'A' to "에이", 'F' to "에프", 'I' to "아이", 'J' to "제이", 'K' to "케이",
         'S' to "에스", 'V' to "브이", 'X' to "엑스", 'Y' to "와이", 'Z' to "제트",
