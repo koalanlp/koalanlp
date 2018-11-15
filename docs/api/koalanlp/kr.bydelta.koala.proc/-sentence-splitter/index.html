@@ -18,22 +18,22 @@
 <p><code>SentenceSplitter</code>는 이미 singleton object이므로 초기화가 필요하지 않습니다.</p>
 <h3>Kotlin</h3>
 <pre><code class="lang-kotlin">val sentence = ... //Tagged result
-val splitt = SentenceSplitter.sentences(sentence)
+val split = SentenceSplitter.sentences(sentence)
 // 또는
-val splitt = SentenceSplitter(sentence)
+val split = SentenceSplitter(sentence)
 </code></pre>
 <h3>Scala + <a href="https://koalanlp.github.io/scala-support/">koalanlp-scala</a></h3>
 <pre><code class="lang-scala">import kr.bydelta.koala.Implicits._
 val sentence = ... //Tagged result
-val splitt = SentenceSplitter.sentences(sentence)
+val split = SentenceSplitter.sentences(sentence)
 // 또는
-val splitt = SentenceSplitter(sentence)
+val split = SentenceSplitter(sentence)
 </code></pre>
 <h3>Java</h3>
 <pre><code class="lang-java">Sentence sentence = ... //Tagged result
-List&lt;Sentence&gt; splitt = SentenceSplitter.sentences(sentence);
+List&lt;Sentence&gt; split = SentenceSplitter.sentences(sentence);
 // 또는
-List&lt;Sentence&gt; splitt = SentenceSplitter.invoke(sentence);
+List&lt;Sentence&gt; split = SentenceSplitter.invoke(sentence);
 </code></pre>
 <p><strong>Since</strong><br/>
 1.x</p>
