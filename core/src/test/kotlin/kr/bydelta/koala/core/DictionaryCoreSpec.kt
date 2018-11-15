@@ -1,8 +1,8 @@
 package kr.bydelta.koala.core
 
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import kr.bydelta.koala.POS
 import kr.bydelta.koala.proc.CanCompileDict
 import kr.bydelta.koala.proc.CanExtractResource
@@ -119,10 +119,10 @@ object DictionaryCoreSpec : Spek({
 
         // importFrom
         it("import from other dictionary") {
-            dict2.importFrom(dict1) { it.isModifier() }
+            dict2.importFrom(dict1, false) { it.isModifier() }
             dict2.words.size `should be equal to` 0
 
-            dict2.importFrom(dict1, fastAppend = true)
+            dict2.importFrom(dict1)
             dict2.words.size `should be equal to` 4
             dict2.contains("테팔", setOf(POS.NNP, POS.NNG)) `should be` true
             dict2.contains("김종국", setOf(POS.NNP, POS.NNG)) `should be` true

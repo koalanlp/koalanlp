@@ -102,6 +102,18 @@ case ${ACTION} in
             ./gradlew closeAndReleaseRepository
         fi
 
+        ask_proceed "TEST PACKAGES"
+        if [ "${YN,,}" != "p" ]; then
+            for MODULE in $MODULES
+            do
+                if [ "$MODULE" != "core" ]; then
+                    read_module_name $MODULE
+                    echo ">>"$MODULE_NAME
+                    ./gradlew $MODULE_NAME:check --info
+                fi
+            done
+        fi
+
         ask_proceed "UPLOAD"
         if [ "${YN,,}" != "p" ]; then
             for MODULE in $MODULES

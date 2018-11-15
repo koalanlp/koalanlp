@@ -76,26 +76,26 @@ interface CanSplitSentence {
  * ### Kotlin
  * ```kotlin
  * val sentence = ... //Tagged result
- * val splitt = SentenceSplitter.sentences(sentence)
+ * val split = SentenceSplitter.sentences(sentence)
  * // 또는
- * val splitt = SentenceSplitter(sentence)
+ * val split = SentenceSplitter(sentence)
  * ```
  *
  * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
  * ```scala
  * import kr.bydelta.koala.Implicits._
  * val sentence = ... //Tagged result
- * val splitt = SentenceSplitter.sentences(sentence)
+ * val split = SentenceSplitter.sentences(sentence)
  * // 또는
- * val splitt = SentenceSplitter(sentence)
+ * val split = SentenceSplitter(sentence)
  * ```
  *
  * ### Java
  * ```java
  * Sentence sentence = ... //Tagged result
- * List<Sentence> splitt = SentenceSplitter.sentences(sentence);
+ * List<Sentence> split = SentenceSplitter.sentences(sentence);
  * // 또는
- * List<Sentence> splitt = SentenceSplitter.invoke(sentence);
+ * List<Sentence> split = SentenceSplitter.invoke(sentence);
  * ```
  *
  * @since 1.x

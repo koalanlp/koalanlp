@@ -1,8 +1,8 @@
 package kr.bydelta.koala
 
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import kr.bydelta.koala.proc.*
 import org.amshove.kluent.*
 import org.spekframework.spek2.dsl.Root
@@ -443,7 +443,7 @@ fun DictSpek(dict: CanCompileDict,
                     }else false
                 }
 
-                dict.importFrom(dictSample) { it.isNoun() }
+                dict.importFrom(dictSample)
                 dict.getItems() `should contain all` itemNotExists
 
                 dictSample.words.forEach {

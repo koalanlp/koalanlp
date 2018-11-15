@@ -117,10 +117,10 @@ ExtUtil.ChoToJong('ㄵ') // \u11AC
 
 /**** 한글 자모 결합 ****/
 ('\u1100', '\u1161', None).assembleHangul() // '가'
-('\u1100', '\u1161', '\u11A9').assembleHangul() // '간'
-"\u1100\u1161\u1101\u1161\u11a9".assembleHangul() // "가난"
+('\u1100', '\u1161', '\u11AB').assembleHangul() // '간'
+"\u1100\u1161\u1102\u1161\u11ab".assembleHangul() // "가난"
 ExtUtil.assembleHangul(null, '\u1161') // '아'
-ExtUtil.assembleHangul('\u1100', null, '\u11A8') // '윽'
+ExtUtil.assembleHangul('\u1100', null, '\u11A8') // '극'
 ```
 
 #### Java
@@ -160,7 +160,7 @@ ExtUtil.dissembleHangul('각'); // kotlin.Triple('\u1100', '\u1161', '\u11A8')
 ExtUtil.dissembleHangul("가각"); // "\u1100\u1161\u1100\u1161\u11A8" (문자 사이를 띄워서 표시하면: 'ᄀ ᅡ ᄀ ᅡ ᆨ')
 
 /**** 종성 한글 자모값으로 변환 ****/
-ChoToJong.get('ㄵ'); // \u11AC
+ExtUtil.getChoToJong().get('ㄵ'); // \u11AC
 
 /**** 한글 자모 범위에 속하는 초, 중, 종성인지 확인 ****/
 ExtUtil.isChosungJamo('ㄱ'); // false
@@ -172,10 +172,10 @@ ExtUtil.isJongsungJamo('\u11A8'); // true
 
 /**** 한글 자모 결합 ****/
 ExtUtil.assembleHangul(new kotlin.Triple<Character, Character, Character>('\u1100', '\u1161', null)); // '가'
-ExtUtil.assembleHangul(new kotlin.Triple('\u1100', '\u1161', '\u11A9')); // '간'
-ExtUtil.assembleHangul("\u1100\u1161\u1101\u1161\u11a9"); // "가난"
+ExtUtil.assembleHangul(new kotlin.Triple<Character, Character, Character>('\u1100', '\u1161', '\u11AB')); // '간'
+ExtUtil.assembleHangul("\u1100\u1161\u1102\u1161\u11ab"); // "가난"
 ExtUtil.assembleHangul(null, '\u1161'); // '아'
-ExtUtil.assembleHangul('\u1100', null, '\u11A8'); // '윽'
+ExtUtil.assembleHangul('\u1100', null, '\u11A8'); // '극'
 ```
 
 #### NodeJS (구현중)
@@ -224,9 +224,9 @@ ExtUtil.isJongsungJamo('ㄱ'); // false
 ExtUtil.isJongsungJamo('\u11A8'); // true
 
 /**** 한글 자모 결합 ****/
-ExtUtil.assembleHangul("\u1100\u1161\u1101\u1161\u11a9"); // "가난"
+ExtUtil.assembleHangul("\u1100\u1161\u1102\u1161\u11ab"); // "가난"
 ExtUtil.assembleHangul(null, '\u1161'); // '아'
-ExtUtil.assembleHangul('\u1100', null, '\u11A8'); // '윽'
+ExtUtil.assembleHangul('\u1100', null, '\u11A8'); // '극'
 ```
 
 #### Python 3
@@ -276,10 +276,10 @@ ExtUtil.isJongsungJamo('\u11A8,.') # [true, false, false]
 
 #### 한글 자모 결합 ####
 ExtUtil.assembleHangulTriple('\u1100', '\u1161', None) # '가'
-ExtUtil.assembleHangulTriple('\u1100', '\u1161', '\u11A9') # '간'
+ExtUtil.assembleHangulTriple('\u1100', '\u1161', '\u11AB') # '간'
 ExtUtil.assembleHangulTriple(None, '\u1161') # '아'
-ExtUtil.assembleHangulTriple('\u1100', None, '\u11A8') # '윽'
-ExtUtil.assembleHangul("\u1100\u1161\u1101\u1161\u11a9") # "가난"
+ExtUtil.assembleHangulTriple('\u1100', None, '\u11A8') # '극'
+ExtUtil.assembleHangul("\u1100\u1161\u1102\u1161\u11ab") # "가난"
 ```
 
 --------

@@ -104,6 +104,7 @@ object Dictionary : CanCompileDict, CanExtractResource() {
      * @param word          확인할 (형태소, 품사)들.
      * @return 사전에 없는 단어들, 즉, [Pair]<[String], [POS]>들.
      */
+    @JvmOverloads
     override fun getNotExists(onlySystemDic: Boolean, vararg word: DicEntry): Array<DicEntry> {
         val (_, system) =
                 if (onlySystemDic) Pair(emptyList(), word.toList())

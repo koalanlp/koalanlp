@@ -30,9 +30,9 @@ object HNNDictTest : Spek(DictSpek(Dictionary, getTagger = { Tagger() }))
 
 val splitterFlow by lazy {
     synchronized(Configuration.hanBaseDir) {
-        Configuration.hanBaseDir = "./"
+        Configuration.hanBaseDir = "./hnnModels"
         val workflow = Workflow()
-        val basePath = "./"
+        val basePath = "./hnnModels"
 
         workflow.appendPlainTextProcessor(SentenceSegmentor(),
                 basePath + File.separator + "conf" + File.separator + "SentenceSegment.json")
@@ -133,9 +133,9 @@ object HNNTagConversionTest : Spek(TagConversionSpek(
 
 val taggerWorkflow by lazy {
     synchronized(Configuration.hanBaseDir) {
-        Configuration.hanBaseDir = "./"
+        Configuration.hanBaseDir = "./hnnModels"
         val workflow = Workflow()
-        val basePath = "./"
+        val basePath = "./hnnModels"
 
         workflow.appendPlainTextProcessor(SentenceSegmentor(),
                 basePath + File.separator + "conf" + File.separator + "SentenceSegment.json")
@@ -143,12 +143,12 @@ val taggerWorkflow by lazy {
                 basePath + File.separator + "conf" + File.separator + "InformalSentenceFilter.json")
 
         workflow.setMorphAnalyzer(ChartMorphAnalyzer(),
-                basePath + File.separator + "conf" + File.separator + "ChartMorphAnalyzer.json")
+                basePath + File.separator + "conf" + File.separator + "ChartMorphAnalyzer.json", "./hnnModels/")
         workflow.appendMorphemeProcessor(UnknownProcessor(),
                 basePath + File.separator + "conf" + File.separator + "UnknownMorphProcessor.json")
 
         workflow.setPosTagger(HMMTagger(),
-                basePath + File.separator + "conf" + File.separator + "HmmPosTagger.json")
+                basePath + File.separator + "conf" + File.separator + "HmmPosTagger.json", "./hnnModels/")
         workflow.activateWorkflow(true)
         workflow
     }
@@ -195,7 +195,11 @@ object HNNTaggerTest : Spek(TaggerSpek(
         }
 ))
 
-val parser by lazy { BerkeleyParserWrapper(Configuration.parserModel) }
+val parser by lazy {
+    Configuration.parserModel = "./hnnModels/models/parser/KorGrammar_BerkF_ORIG"
+    Configuration.hanBaseDir = "./hnnModels/"
+    BerkeleyParserWrapper(Configuration.parserModel)
+}
 
 fun SyntaxTree.getDFSString(buffer: StringBuffer, depth: Int = 0): StringBuffer {
     buffer.append("\n")
@@ -251,32 +255,34 @@ object HNNSyntaxParserTest : Spek(ParserSpek<Sentence, CanParseSyntax<Sentence>>
                 // 따라서 비교 과정에서 무시함
                 emptyList()
             } else {
-                taggerWorkflow.analyze(it)
-                val tagged = mutableListOf<Sentence>()
-                var isEnded = false
+                synchronized(taggerWorkflow) {
+                    taggerWorkflow.analyze(it)
+                    val tagged = mutableListOf<Sentence>()
+                    var isEnded = false
 
-                while (!isEnded) {
-                    val sent = taggerWorkflow.getResultOfSentence(Sentence(0, 0, false))
-                    isEnded = sent.isEndOfDocument
-                    tagged.add(sent)
-                }
+                    while (!isEnded) {
+                        val sent = taggerWorkflow.getResultOfSentence(Sentence(0, 0, false))
+                        isEnded = sent.isEndOfDocument
+                        tagged.add(sent)
+                    }
 
-                val conv = Converter()
-                val trees =
-                        tagged.map { s ->
-                            val surface = s.plainEojeols.joinToString(" ")
-                                    .replace("(", "-LRB-").replace(")", "-RRB-")
-                            val exp = conv.StringforDepformat(Converter.functionTagReForm(parser.parse(surface)))
-                            val tree = ParseTree(surface, exp, 0, true)
+                    val conv = Converter()
+                    val trees =
+                            tagged.map { s ->
+                                val surface = s.plainEojeols.joinToString(" ")
+                                        .replace("(", "-LRB-").replace(")", "-RRB-")
+                                val exp = conv.StringforDepformat(Converter.functionTagReForm(parser.parse(surface)))
+                                val tree = ParseTree(surface, exp, 0, true)
 
-                            conv.convert(tree) // 한나눔 코드가 의존구문분석을 위한 분석 과정에서 Tree를 변경하고 있음
-                            tree
-                        }
+                                conv.convert(tree) // 한나눔 코드가 의존구문분석을 위한 분석 과정에서 Tree를 변경하고 있음
+                                tree
+                            }
 
 
-                trees.map {
-                    // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
-                    "" to (it.head as NonterminalNode).getDFSString(StringBuffer()).toString()
+                    trees.map {
+                        // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
+                        "" to (it.head as NonterminalNode).getDFSString(StringBuffer()).toString()
+                    }
                 }
             }
         }
@@ -313,29 +319,31 @@ object HNNDepParserTest : Spek(ParserSpek<Sentence, CanParseDependency<Sentence>
                 // 따라서 비교 과정에서 무시함
                 emptyList()
             } else {
-                taggerWorkflow.analyze(sent)
-                val tagged = mutableListOf<Sentence>()
-                var isEnded = false
+                synchronized(taggerWorkflow) {
+                    taggerWorkflow.analyze(sent)
+                    val tagged = mutableListOf<Sentence>()
+                    var isEnded = false
 
-                while (!isEnded) {
-                    val s = taggerWorkflow.getResultOfSentence(Sentence(0, 0, false))
-                    isEnded = s.isEndOfDocument
-                    tagged.add(s)
-                }
+                    while (!isEnded) {
+                        val s = taggerWorkflow.getResultOfSentence(Sentence(0, 0, false))
+                        isEnded = s.isEndOfDocument
+                        tagged.add(s)
+                    }
 
-                val conv = Converter()
-                val trees =
-                        tagged.map { s ->
-                            val surface = s.plainEojeols.joinToString(" ")
-                                    .replace("(", "-LRB-").replace(")", "-RRB-")
-                            val exp = conv.StringforDepformat(Converter.functionTagReForm(parser.parse(surface)))
-                            val tree = ParseTree(surface, exp, 0, true)
-                            conv.convert(tree)
-                        }
+                    val conv = Converter()
+                    val trees =
+                            tagged.map { s ->
+                                val surface = s.plainEojeols.joinToString(" ")
+                                        .replace("(", "-LRB-").replace(")", "-RRB-")
+                                val exp = conv.StringforDepformat(Converter.functionTagReForm(parser.parse(surface)))
+                                val tree = ParseTree(surface, exp, 0, true)
+                                conv.convert(tree)
+                            }
 
-                trees.map { t ->
-                    // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
-                    "" to t.nodeList.map { it.getOriginalString() }.sorted().joinToString()
+                    trees.map { t ->
+                        // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
+                        "" to t.nodeList.map { it.getOriginalString() }.sorted().joinToString()
+                    }
                 }
             }
         }
@@ -350,7 +358,7 @@ object HNNOriginalWrapperTest : Spek({
             Examples.exampleSequence().forEach { pair ->
                 val sent = pair.second
                 tagger.tagParagraphOriginal(sent).forEach { s ->
-                    Configuration.hanBaseDir = "./"
+                    Configuration.hanBaseDir = "./hnnModels/"
                     print('a')
 
                     val original = HanNanumMorphAnalWrapper.getInstance().getAnalysisResult(s.plainEojeols.joinToString(" "))
@@ -369,7 +377,8 @@ object HNNOriginalWrapperTest : Spek({
 
     describe("BerkeleyParserWrap") {
         it("should provide exactly same result with BerkeleyParserWrapper") {
-            Configuration.hanBaseDir = "./"
+            Configuration.parserModel = "./hnnModels/models/parser/KorGrammar_BerkF_ORIG"
+            Configuration.hanBaseDir = "./hnnModels/"
             val parser = BerkeleyParserWrapper(Configuration.parserModel)
             val wrap = BerkeleyParserWrap()
             Examples.exampleSequence().forEach { pair ->

@@ -267,7 +267,7 @@ private val HANJA_BU_FIX by lazy { arrayOf('\u1103', '\u110C') }
  * ```
  *
  * @since 2.0.0
- * @return 해당 범위의 한자라면 true
+ * @return 전환된 국문 표기
  */
 @JvmOverloads
 fun CharSequence.hanjaToHangul(headCorrection: Boolean = true): CharSequence {
@@ -723,8 +723,8 @@ fun CharSequence.dissembleHangul(): CharSequence {
  * ```
  *
  * @since 2.0.0
- * @param cho 초성 문자 (0x1100-1112)
- * @param jung 종성 문자 (0x1161-1175)
+ * @param cho 초성 문자 (0x1100-1112) 또는 null. (Null이 지정된 경우 'ㅇ' 적용)
+ * @param jung 종성 문자 (0x1161-1175) 또는 null. (Null이 지정된 경우 'ㅡ' 적용)
  * @param jong 종성 문자 (0x11a8-11c2) 또는 null
  * @throws[IllegalArgumentException] 초성, 중성, 종성이 지정된 범위가 아닌 경우 발생합니다.
  * @return 초성, 중성, 종성을 조합하여 문자를 만듭니다.
@@ -746,33 +746,6 @@ fun assembleHangul(cho: Char? = null, jung: Char? = null, jong: Char? = null): C
 
     throw IllegalArgumentException("($cho, $jung, $jong) cannot construct a hangul character!")
 }
-
-/**
- * 초성을 [Triple.first] 문자로, 중성을 [Triple.second] 문자로, 종성을 [Triple.third] 문자로 갖는 한글 문자를 재구성합니다.
- *
- * ## 사용법
- * ### Kotlin
- * ```kotlin
- * Triple('ᄁ', 'ᅡ', null as Char?).assembleHangul() // "까"
- * ```
- *
- * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
- * ```scala
- * import kr.bydelta.koala.Implicits._
- * ('ᄁ', 'ᅡ', None.as[Option[Char]]).assembleHangul // "까"
- * ```
- *
- * ### Java
- * ```java
- * ExtUtil.assembleHangul(new Triple<Character, Character, Character>('ᄁ', 'ᅡ', null)) // "까"
- * ```
- *
- * @since 2.0.0
- * @throws[IllegalArgumentException] 초성, 중성, 종성이 지정된 범위가 아닌 경우 발생합니다.
- * @return 초성, 중성, 종성을 조합하여 문자를 만듭니다.
- */
-@Throws(IllegalArgumentException::class)
-fun Triple<Char?, Char?, Char?>.assembleHangul(): Char = assembleHangul(this.first, this.second, this.third)
 
 /**
  * 주어진 문자열에서 초성, 중성, 종성이 연달아 나오는 경우 이를 조합하여 한글 문자를 재구성합니다.
@@ -824,20 +797,121 @@ fun CharSequence.assembleHangul(): CharSequence {
     return buffer
 }
 
+/**
+ * 초성을 [Triple.first] 문자로, 중성을 [Triple.second] 문자로, 종성을 [Triple.third] 문자로 갖는 한글 문자를 재구성합니다.
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * Triple('ᄁ', 'ᅡ', null as Char?).assembleHangul() // "까"
+ * ```
+ *
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
+ * ('ᄁ', 'ᅡ', Option.empty[Char]).assembleHangul // "까"
+ * ```
+ *
+ * ### Java
+ * ```java
+ * ExtUtil.assembleHangul(new Triple<Character, Character, Character>('ᄁ', 'ᅡ', null)) // "까"
+ * ```
+ *
+ * @since 2.0.0
+ * @throws[IllegalArgumentException] 초성, 중성, 종성이 지정된 범위가 아닌 경우 발생합니다.
+ * @return 초성, 중성, 종성을 조합하여 문자를 만듭니다.
+ */
+@Throws(IllegalArgumentException::class)
+fun Triple<Char?, Char?, Char?>.assembleHangul(): Char = assembleHangul(this.first, this.second, this.third)
+
 /**************************
  ***** 동사 활용 재구성 *****
  **************************/
-/** 초성 조합형 문자열 리스트 (UNICODE 순서) */
+/** 초성 조합형 문자열 리스트 (UNICODE 순서)
+ *
+ * - 'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * ExtUtil.HanFirstList[0] // 초성 문자 '\u1100'
+ * ```
+ *
+ * ### Scala
+ * ```scala
+ * ExtUtil.getHanFirstList.get(0) // 초성 문자 '\u1100'
+ * ```
+ *
+ * ### Java
+ * ```java
+ * ExtUtil.getHanFirstList().get(0); // 초성 문자 '\u1100'
+ * ```
+ * */
 val HanFirstList by lazy { (0x1100..0x1112).map { it.toChar() as Char? }.toTypedArray() }
-//'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
-/** 중성 조합형 문자열 리스트 (UNICODE 순서) */
+
+/** 중성 조합형 문자열 리스트 (UNICODE 순서)
+ *
+ * - 'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ'
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * ExtUtil.HanSecondList[0] // 중성 문자 '\u1161'
+ * ```
+ *
+ * ### Scala
+ * ```scala
+ * ExtUtil.getHanSecondList.get(0) // 중성 문자 '\u1161'
+ * ```
+ *
+ * ### Java
+ * ```java
+ * ExtUtil.getHanSecondList().get(0); // 중성 문자 '\u1161'
+ * ```
+ * */
 val HanSecondList by lazy { (0x1161..0x1175).map { it.toChar() as Char? }.toTypedArray() }
-// 0    1     2    3     4    5    6      7    8    9    10    11    12   13    14   15   16    17   18    19    20
-//'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ'
-/** 종성 조합형 문자열 리스트 (UNICODE 순서). 가장 첫번째는 null (받침 없음) */
+
+/** 종성 조합형 문자열 리스트 (UNICODE 순서). 가장 첫번째는 null (받침 없음)
+ *
+ * - null, 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * ExtUtil.HanLastList[1] // 종성 문자 '\u11A8'
+ * ```
+ *
+ * ### Scala
+ * ```scala
+ * ExtUtil.getHanLastList.get(1) // 종성 문자 '\u11A8'
+ * ```
+ *
+ * ### Java
+ * ```java
+ * ExtUtil.getHanLastList().get(1); // 종성 문자 '\u11A8'
+ * ```*/
 val HanLastList by lazy { (listOf<Char?>(null) + (0x11A8..0x11C2).map { it.toChar() as Char? }).toTypedArray() }
-//null, 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
-/** 초성 문자를 종성 조합형 문자로 변경 */
+
+/**
+ * 초성 문자를 종성 조합형 문자로 변경하는 Map
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * ExtUtil.ChoToJong['ㄱ'] // 받침 문자 '\u11A8'
+ * ```
+ *
+ * ### Scala
+ * ```scala
+ * ExtUtil.getChoToJong.get('ㄱ') // 받침 문자 '\u11A8'
+ * ```
+ *
+ * ### Java
+ * ```java
+ * ExtUtil.getChoToJong().get('ㄱ'); // 받침 문자 '\u11A8'
+ * ```
+ *
+ * */
 val ChoToJong by lazy {
     mapOf(
             '\u1100' to '\u11A8', //ㄱ

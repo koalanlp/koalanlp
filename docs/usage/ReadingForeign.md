@@ -24,7 +24,7 @@ import kr.bydelta.koala.*
 "갤럭시에스".isAlphaPronounced() // false
 
 "갤럭시에스".hangulToAlpha() // "갤럭시S"
-"메이디에이치디".hangulToAlpha() // "ADHD"
+"에이디에이치디".hangulToAlpha() // "ADHD"
 
 '國'.isHanja() // true
 '國'.isCJKHanja() // true
@@ -32,7 +32,7 @@ import kr.bydelta.koala.*
 "國篇".hanjaToHangul() // "국편"
 "國篇은 오늘".hanjaToHangul() // "국편은 오늘"
 "300 兩의 돈".hanjaToHangul() // "300 냥의 돈"
-"樂園".hanjaToHangul() // "낙원" (두음법칙)
+"樂園".hanjaToHangul() // "낙원" (두음법칙)
 ```
 
 #### Scala
@@ -52,7 +52,7 @@ import kr.bydelta.koala.Implicits._
 "갤럭시에스".isAlphaPronounced // false
 
 "갤럭시에스".hangulToAlpha // "갤럭시S"
-"메이디에이치디".hangulToAlpha // "ADHD"
+"에이디에이치디".hangulToAlpha // "ADHD"
 
 '國'.isHanja // true
 '國'.isCJKHanja // true
@@ -60,7 +60,7 @@ import kr.bydelta.koala.Implicits._
 "國篇".hanjaToHangul() // "국편"
 "國篇은 오늘".hanjaToHangul() // "국편은 오늘"
 "300 兩의 돈".hanjaToHangul() // "300 냥의 돈"
-"樂園".hanjaToHangul() // "낙원" (두음법칙)
+"樂園".hanjaToHangul() // "낙원" (두음법칙)
 ```
 
 #### Java
@@ -77,7 +77,7 @@ ExtUtil.isAlphaPronounced("에스비에스"); // true
 ExtUtil.isAlphaPronounced("갤럭시에스"); // false
 
 ExtUtil.hangulToAlpha("갤럭시에스"); // "갤럭시S"
-ExtUtil.hangulToAlpha("메이디에이치디"); // "ADHD"
+ExtUtil.hangulToAlpha("에이디에이치디"); // "ADHD"
 
 ExtUtil.isHanja('國'); // true
 ExtUtil.isCJKHanja('國'); // true
@@ -85,7 +85,7 @@ ExtUtil.isCJKHanja('國'); // true
 ExtUtil.hanjaToHangul("國篇"); // "국편"
 ExtUtil.hanjaToHangul("國篇은 오늘"); // "국편은 오늘"
 ExtUtil.hanjaToHangul("300 兩의 돈"); // "300 냥의 돈"
-ExtUtil.hanjaToHangul("樂園"); // "낙원" (두음법칙)
+ExtUtil.hanjaToHangul("樂園"); // "낙원" (두음법칙)
 ```
 
 #### NodeJS (구현중)
@@ -102,7 +102,7 @@ ExtUtil.isAlphaPronounced("에스비에스"); // true
 ExtUtil.isAlphaPronounced("갤럭시에스"); // false
 
 ExtUtil.hangulToAlpha("갤럭시에스"); // "갤럭시S"
-ExtUtil.hangulToAlpha("메이디에이치디"); // "ADHD"
+ExtUtil.hangulToAlpha("에이디에이치디"); // "ADHD"
 
 ExtUtil.isHanja('國'); // true
 ExtUtil.isCJKHanja('國'); // true
@@ -110,7 +110,7 @@ ExtUtil.isCJKHanja('國'); // true
 ExtUtil.hanjaToHangul("國篇"); // "국편"
 ExtUtil.hanjaToHangul("國篇은 오늘"); // "국편은 오늘"
 ExtUtil.hanjaToHangul("300 兩의 돈"); // "300 냥의 돈"
-ExtUtil.hanjaToHangul("樂園"); // "낙원" (두음법칙)
+ExtUtil.hanjaToHangul("樂園"); // "낙원" (두음법칙)
 ```
 
 #### Python 3
@@ -127,7 +127,7 @@ ExtUtil.isAlphaPronounced("에스비에스") # true
 ExtUtil.isAlphaPronounced("갤럭시에스") # false
 
 ExtUtil.hangulToAlpha("갤럭시에스") # "갤럭시S"
-ExtUtil.hangulToAlpha("메이디에이치디") # "ADHD"
+ExtUtil.hangulToAlpha("에이디에이치디") # "ADHD"
 
 ExtUtil.isHanja('國ABC') # [true, false, false, false]
 ExtUtil.isCJKHanja('國') # [true]
@@ -135,7 +135,7 @@ ExtUtil.isCJKHanja('國') # [true]
 ExtUtil.hanjaToHangul("國篇") # "국편"
 ExtUtil.hanjaToHangul("國篇은 오늘") # "국편은 오늘"
 ExtUtil.hanjaToHangul("300 兩의 돈") # "300 냥의 돈"
-ExtUtil.hanjaToHangul("樂園") # "낙원" (두음법칙)
+ExtUtil.hanjaToHangul("樂園") # "낙원" (두음법칙)
 ```
 
 --------

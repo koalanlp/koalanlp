@@ -9,6 +9,7 @@ import com.github.kittinunf.fuel.httpPost
 import kr.bydelta.koala.*
 import kr.bydelta.koala.data.*
 import kr.bydelta.koala.proc.*
+import java.net.ConnectException
 
 /**
  * API 통신 과정에서 발생하는 문제를 담습니다.
@@ -43,15 +44,19 @@ interface CanCommunicateETRIApi {
                 ))
         )).toJsonString()
 
-        val (_, resp, res) = "http://aiopen.etri.re.kr:8000/WiseNLU".httpPost()
-                .jsonBody(requestBody).responseString()
+        try {
+            val (_, resp, res) = "http://aiopen.etri.re.kr:8000/WiseNLU".httpPost()
+                    .jsonBody(requestBody).responseString()
 
-        val resString = res.get().replace("\\.0([,}]+)".toRegex(), "$1")
-        val json = klaxon.parse<ResultPayload>(resString)
-        if (json?.code == 0) {
-            return json.result
-        } else {
-            throw APIException(resp.statusCode, json?.msg ?: "HTTP Status code ${resp.statusCode}")
+            val resString = res.get().replace("\\.0([,}]+)".toRegex(), "$1")
+            val json = klaxon.parse<ResultPayload>(resString)
+            if (json?.code == 0) {
+                return json.result
+            } else {
+                throw APIException(resp.statusCode, json?.msg ?: "HTTP Status code ${resp.statusCode}")
+            }
+        }catch(e: ConnectException){
+            throw APIException(-1, "http://aiopen.etri.re.kr 로 접근할 수 있는지 확인해주십시오. ${e.message}")
         }
     }
 

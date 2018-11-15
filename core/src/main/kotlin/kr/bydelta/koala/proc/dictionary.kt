@@ -96,8 +96,8 @@ interface CanCompileDict {
      * @param filter     추가할 품사를 지정하는 함수. (기본값 [POS.isNoun])
      */
     fun importFrom(dict: CanCompileDict,
-                   fastAppend: Boolean = false,
-                   filter: (POS) -> Boolean = { it.isNoun() }) {
+                   fastAppend: Boolean,
+                   filter: (POS) -> Boolean) {
         val entries = dict.getBaseEntries(filter).asSequence()
 
         for (chunk in entries.chunked(10000)) {
@@ -107,6 +107,15 @@ interface CanCompileDict {
             this.addUserDictionary(*seq)
         }
     }
+
+    /**
+     * 다른 사전을 참조하여, 선택된 사전에 없는 체언([POS.isNoun]이 true인 값)을 사용자사전으로 추가합니다.
+     *
+     * - 추가시에 선택된 사전에 존재하는지를 검사하여, 없는 값만 삽입합니다.
+     *
+     * @param dict       참조할 사전
+     */
+    fun importFrom(dict: CanCompileDict) = importFrom(dict, false) { it.isNoun() }
 }
 
 /**

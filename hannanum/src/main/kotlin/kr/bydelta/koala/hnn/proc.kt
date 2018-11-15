@@ -15,6 +15,7 @@ import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.MorphemeChart
 import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.PostProcessor
 import kaist.cilab.jhannanum.morphanalyzer.chartmorphanalyzer.Simti
 import kaist.cilab.jhannanum.plugin.major.morphanalyzer.MorphAnalyzer
+import kaist.cilab.jhannanum.plugin.major.morphanalyzer.impl.ChartMorphAnalyzer
 import kaist.cilab.jhannanum.plugin.major.postagger.impl.HMMTagger
 import kaist.cilab.jhannanum.plugin.supplement.MorphemeProcessor.UnknownMorphProcessor.UnknownProcessor
 import kaist.cilab.jhannanum.plugin.supplement.PlainTextProcessor.InformalSentenceFilter.InformalSentenceFilter
@@ -112,19 +113,18 @@ class Tagger : CanTagOnlyAParagraph<Sentence>() {
         workflow.appendPlainTextProcessor(InformalSentenceFilter(),
                 basePath + File.separator + "conf" + File.separator + "InformalSentenceFilter.json")
 
-        workflow.setMorphAnalyzer(analyzer,
-                basePath + File.separator + "conf" + File.separator + "ChartMorphAnalyzer.json")
+        workflow.setMorphAnalyzer(SafeChartMorphAnalyzer(),
+                basePath + File.separator + "conf" + File.separator + "ChartMorphAnalyzer.json",
+                basePath + File.separator)
         workflow.appendMorphemeProcessor(UnknownProcessor(),
                 basePath + File.separator + "conf" + File.separator + "UnknownMorphProcessor.json")
 
         workflow.setPosTagger(HMMTagger(),
-                basePath + File.separator + "conf" + File.separator + "HmmPosTagger.json")
+                basePath + File.separator + "conf" + File.separator + "HmmPosTagger.json",
+                basePath + File.separator)
         workflow.activateWorkflow(false)
         workflow
     }
-
-    /** 한나눔 형태소분석기 (사용자사전 개량형) **/
-    private val analyzer by lazy { SafeChartMorphAnalyzer() }
 
     /**
      * 변환되지않은, [text]의 분석결과 [List]<kaist.cilab.jhannanum.common.communication.Sentence>를 반환합니다.
@@ -137,7 +137,7 @@ class Tagger : CanTagOnlyAParagraph<Sentence>() {
             if (text.isBlank()) emptyList()
             else {
                 try {
-                    synchronized(Dictionary) {
+                    synchronized(workflow) {
                         workflow.analyze(text)
 
                         val buffer = mutableListOf<Sentence>()
@@ -185,20 +185,21 @@ class Tagger : CanTagOnlyAParagraph<Sentence>() {
          * @return 변환된 [kr.bydelta.koala.data.Sentence] 객체
          */
         @JvmStatic
-        fun convert(result: Sentence): kr.bydelta.koala.data.Sentence =
-                kr.bydelta.koala.data.Sentence(
-                        result.eojeols.zip(result.plainEojeols).map {
-                            val (eojeol, plain) = it
+        fun convert(result: Sentence): kr.bydelta.koala.data.Sentence {
+            return kr.bydelta.koala.data.Sentence(
+                    result.eojeols.zip(result.plainEojeols).map {
+                        val (eojeol, plain) = it
 
-                            Word(
-                                    plain,
-                                    eojeol.morphemes.zip(eojeol.tags).map { pair ->
-                                        val (morph, tag) = pair
-                                        Morpheme(morph, tag.toSejongPOS(), tag)
-                                    }
-                            )
-                        }
-                )
+                        Word(
+                                plain,
+                                eojeol.morphemes.zip(eojeol.tags).map { pair ->
+                                    val (morph, tag) = pair
+                                    Morpheme(morph, tag.toSejongPOS(), tag)
+                                }
+                        )
+                    }
+            )
+        }
     }
 }
 
@@ -219,13 +220,14 @@ internal class SafeChartMorphAnalyzer : MorphAnalyzer {
     /** 후처리 기능 */
     private val postProc = PostProcessor()
     /** 형태소 차트 분석 */
-    private val chart: MorphemeChart
-        get() {
-        val simti = Simti()
-        simti.init()
+    private val chart: MorphemeChart by lazy {
+        synchronized(Dictionary) {
+            val simti = Simti()
+            simti.init()
 
-            return MorphemeChart(Dictionary.tagSet, Dictionary.connection,
-                Dictionary.systemDic, Dictionary.userDic, Dictionary.numAutomata, simti, eojeolList)
+            MorphemeChart(Dictionary.tagSet, Dictionary.connection,
+                    Dictionary.systemDic, Dictionary.userDic, Dictionary.numAutomata, simti, eojeolList)
+        }
     }
 
     override fun shutdown() {}
@@ -246,12 +248,18 @@ internal class SafeChartMorphAnalyzer : MorphAnalyzer {
                 this.eojeolList.add(Eojeol(morphemes.toTypedArray(), tags.toTypedArray()))
             }
         } else {
-            this.chart.init(plainEojeol)
-            this.chart.analyze()
-            this.chart.getResult()
+            try{
+                this.chart.init(plainEojeol)
+                this.chart.analyze()
+                this.chart.getResult()
+            }catch (_:Exception){
+                this.eojeolList.clear()
+                this.eojeolList.add(Eojeol(arrayOf(plainEojeol), arrayOf("nqq")))
+            }
         }
 
-        return this.eojeolList.toTypedArray()
+        return if (eojeolList.isEmpty() && plainEojeol.isNotEmpty()) arrayOf(Eojeol(arrayOf(plainEojeol), arrayOf("f")))
+            else this.eojeolList.toTypedArray()
     }
 
     /** 분석 수행 **/
@@ -498,7 +506,7 @@ class Parser : CanParseDependency<Sentence>, CanParseSyntax<Sentence> {
      * @param sentence 분석할 한나눔 문장.
      * @return 구문분석트리.
      */
-    internal fun parseTreeOf(sentence: Sentence): ParseTree =
+    private fun parseTreeOf(sentence: Sentence): ParseTree =
             if (sentence.eojeols.isEmpty()) ParseTree("", "", 0, true)
             else
                 ParseTree(
@@ -513,7 +521,7 @@ class Parser : CanParseDependency<Sentence>, CanParseSyntax<Sentence> {
      * 분석 오류를 발생시키는 괄호 ()를 LRB, RRB로 변경.
      */
     private fun Sentence.withEncodedParen(): Sentence {
-        eojeols.forEach {
+        eojeols.filterNotNull().forEach {
             val morphs = it.morphemes
             morphs.forEachIndexed { index, m ->
                 if (m.matches("^.*[()]+.*$".toRegex())) {
@@ -577,11 +585,13 @@ internal class BerkeleyParserWrap {
         @JvmStatic
         private val opts: GrammarTester.Options =
             OptionParser(GrammarTester.Options::class.java)
-                    .parse(arrayOf("-in", Configuration.parserModel), true) as GrammarTester.Options
+                    .parse(arrayOf("-in",
+                            Dictionary.extractResource() + "/models/parser/KorGrammar_BerkF_ORIG".replace("/", File.separator)
+                    ), true) as GrammarTester.Options
 
         @JvmStatic
         private val pData: ParserData by lazy {
-            val p = ParserData.Load(Dictionary.extractResource() + File.separator + opts.inFileName)
+            val p = ParserData.Load(opts.inFileName)
             Numberer.setNumberers(p.numbs)
             p.grammar.splitRules()
             p
