@@ -275,4 +275,4 @@ for(String line : sentences){
 ```
 
 # 품사분석기별 결과 비교
-[Sample: 결과비교](https://koalanlp.github.io/sample/comparison.md)를 참조해주세요.
+[Sample: 결과비교](https://koalanlp.github.io/sample/comparison)를 참조해주세요.
