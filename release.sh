@@ -134,20 +134,22 @@ case ${ACTION} in
 
         ask_proceed "SET NEXT"
         if [ "${YN,,}" != "p" ]; then
+            # GENERATE DOC
+            ./doc.sh
+            git tag v$JAR_VER_CURRENT
+
+            # SET NEXT
             for MODULE in $MODULES
             do
-                if [ "$MODULE" != "core" ]; then
-                    cd $MODULE
-                    add_incremental_ver
-                    set_version "$JAR_VER_NEXT-SNAPSHOT"
-                    cd ..
-                fi
+                cd $MODULE
+                add_incremental_ver
+                set_version "$JAR_VER_NEXT-SNAPSHOT"
+                cd ..
             done
         fi
 
         ask_proceed "COMMIT"
         if [ "${YN,,}" != "p" ]; then
-            git tag v$JAR_VER_CURRENT
             git commit -a -m "inital commit of v$JAR_VER_NEXT"
             git push origin master
             git push --tags
