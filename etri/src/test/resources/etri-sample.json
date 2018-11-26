@@ -12,6 +12,7 @@
       "NE": ""
     },
     "metaInfo": {},
+    "paragraphInfo": [],
     "sentence": [
       {
         "id": 0,
@@ -903,7 +904,7 @@
             "head": 1,
             "label": "NP",
             "mod": [],
-            "weight": 0.616581
+            "weight": 0.608774
           },
           {
             "id": 1,
@@ -913,7 +914,7 @@
             "mod": [
               0
             ],
-            "weight": 0.482412
+            "weight": 0.467139
           },
           {
             "id": 2,
@@ -921,7 +922,7 @@
             "head": 5,
             "label": "NP_AJT",
             "mod": [],
-            "weight": 0.645212
+            "weight": 0.550084
           },
           {
             "id": 3,
@@ -929,7 +930,7 @@
             "head": 5,
             "label": "NP_AJT",
             "mod": [],
-            "weight": 0.756335
+            "weight": 0.759309
           },
           {
             "id": 4,
@@ -937,7 +938,7 @@
             "head": 5,
             "label": "NP_OBJ",
             "mod": [],
-            "weight": 0.749606
+            "weight": 0.728306
           },
           {
             "id": 5,
@@ -950,7 +951,7 @@
               3,
               4
             ],
-            "weight": 0.695119
+            "weight": 0.581125
           },
           {
             "id": 6,
@@ -960,7 +961,7 @@
             "mod": [
               5
             ],
-            "weight": 0.780396
+            "weight": 0.652642
           },
           {
             "id": 7,
@@ -970,7 +971,7 @@
             "mod": [
               6
             ],
-            "weight": 0.719654
+            "weight": 0.76043
           },
           {
             "id": 8,
@@ -978,7 +979,7 @@
             "head": 9,
             "label": "NP",
             "mod": [],
-            "weight": 0.382592
+            "weight": 0.439829
           },
           {
             "id": 9,
@@ -988,7 +989,7 @@
             "mod": [
               8
             ],
-            "weight": 0.0444466
+            "weight": 0.213347
           },
           {
             "id": 10,
@@ -998,7 +999,7 @@
             "mod": [
               9
             ],
-            "weight": 0.583352
+            "weight": 0.488654
           },
           {
             "id": 11,
@@ -1008,7 +1009,7 @@
             "mod": [
               10
             ],
-            "weight": 0.580011
+            "weight": 0.50681
           },
           {
             "id": 12,
@@ -1018,7 +1019,7 @@
             "mod": [
               11
             ],
-            "weight": 0.678132
+            "weight": 0.713346
           },
           {
             "id": 13,
@@ -1026,7 +1027,7 @@
             "head": 14,
             "label": "NP",
             "mod": [],
-            "weight": 0.706388
+            "weight": 0.565201
           },
           {
             "id": 14,
@@ -1036,7 +1037,7 @@
             "mod": [
               13
             ],
-            "weight": 0.664831
+            "weight": 0.578199
           },
           {
             "id": 15,
@@ -1046,7 +1047,7 @@
             "mod": [
               14
             ],
-            "weight": 0.77025
+            "weight": 0.738773
           },
           {
             "id": 16,
@@ -1054,7 +1055,7 @@
             "head": 17,
             "label": "AP",
             "mod": [],
-            "weight": 0.66911
+            "weight": 0.708444
           },
           {
             "id": 17,
@@ -1066,7 +1067,7 @@
               15,
               16
             ],
-            "weight": 0.770188
+            "weight": 0.730651
           },
           {
             "id": 18,
@@ -1076,7 +1077,7 @@
             "mod": [
               17
             ],
-            "weight": 0.838935
+            "weight": 0.636787
           },
           {
             "id": 19,
@@ -1087,7 +1088,7 @@
               7,
               18
             ],
-            "weight": 0.0000211828
+            "weight": 0.0000226787
           }
         ],
         "SRL": [
@@ -1095,31 +1096,31 @@
             "verb": "요구",
             "sense": 1,
             "word_id": 5,
-            "weight": 0.417929,
+            "weight": 0.173536,
             "argument": [
               {
                 "type": "ARG0",
                 "word_id": 1,
                 "text": "중국 관영매체",
-                "weight": 0.356099
+                "weight": 0.164409
               },
               {
                 "type": "ARGM-TMP",
                 "word_id": 2,
                 "text": "그동안",
-                "weight": 0.465365
+                "weight": 0.180215
               },
               {
                 "type": "ARG2",
                 "word_id": 3,
                 "text": "북한",
-                "weight": 0.411191
+                "weight": 0.142641
               },
               {
                 "type": "ARG1",
                 "word_id": 4,
                 "text": "자제",
-                "weight": 0.439059
+                "weight": 0.20688
               }
             ]
           },
@@ -1127,13 +1128,13 @@
             "verb": "있",
             "sense": 1,
             "word_id": 7,
-            "weight": 0.205684,
+            "weight": 0.161867,
             "argument": [
               {
                 "type": "ARG1",
                 "word_id": 6,
                 "text": "적",
-                "weight": 0.205684
+                "weight": 0.161867
               }
             ]
           },
@@ -1141,833 +1142,25 @@
             "verb": "제시",
             "sense": 1,
             "word_id": 17,
-            "weight": 0.452475,
+            "weight": 0.183956,
             "argument": [
+              {
+                "type": "ARGM-MNR",
+                "word_id": 12,
+                "text": "함께",
+                "weight": 0.150996
+              },
               {
                 "type": "ARG1",
                 "word_id": 15,
                 "text": "유엔 안보리 제재안",
-                "weight": 0.579976
+                "weight": 0.25613
               },
-              {
-                "type": "ARGM-ADV",
-                "word_id": 16,
-                "text": "먼저",
-                "weight": 1
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 1,
-        "reserve_str": "",
-        "text": " 미·중 빅딜에 따른 대북압박 공조 가능성이 제기되는 가운데 북한이 어떤 반응을 보일지 관심이 쏠립니다.",
-        "morp": [
-          {
-            "id": 0,
-            "lemma": "미",
-            "type": "NNP",
-            "position": 208,
-            "weight": 0.0694527
-          },
-          {
-            "id": 1,
-            "lemma": "·",
-            "type": "SP",
-            "position": 211,
-            "weight": 1
-          },
-          {
-            "id": 2,
-            "lemma": "중",
-            "type": "NNP",
-            "position": 213,
-            "weight": 0.00233405
-          },
-          {
-            "id": 3,
-            "lemma": "빅딜",
-            "type": "NNG",
-            "position": 217,
-            "weight": 0.9
-          },
-          {
-            "id": 4,
-            "lemma": "에",
-            "type": "JKB",
-            "position": 223,
-            "weight": 0.153364
-          },
-          {
-            "id": 5,
-            "lemma": "따르",
-            "type": "VV",
-            "position": 227,
-            "weight": 0.9
-          },
-          {
-            "id": 6,
-            "lemma": "ㄴ",
-            "type": "ETM",
-            "position": 230,
-            "weight": 0.304215
-          },
-          {
-            "id": 7,
-            "lemma": "대북",
-            "type": "NNG",
-            "position": 234,
-            "weight": 0.658022
-          },
-          {
-            "id": 8,
-            "lemma": "압박",
-            "type": "NNG",
-            "position": 240,
-            "weight": 0.9
-          },
-          {
-            "id": 9,
-            "lemma": "공조",
-            "type": "NNG",
-            "position": 247,
-            "weight": 0.9
-          },
-          {
-            "id": 10,
-            "lemma": "가능",
-            "type": "NNG",
-            "position": 254,
-            "weight": 0.184025
-          },
-          {
-            "id": 11,
-            "lemma": "성",
-            "type": "XSN",
-            "position": 260,
-            "weight": 0.0161708
-          },
-          {
-            "id": 12,
-            "lemma": "이",
-            "type": "JKS",
-            "position": 263,
-            "weight": 0.0731805
-          },
-          {
-            "id": 13,
-            "lemma": "제기",
-            "type": "NNG",
-            "position": 267,
-            "weight": 0.198781
-          },
-          {
-            "id": 14,
-            "lemma": "되",
-            "type": "XSV",
-            "position": 273,
-            "weight": 0.000224177
-          },
-          {
-            "id": 15,
-            "lemma": "는",
-            "type": "ETM",
-            "position": 276,
-            "weight": 0.238503
-          },
-          {
-            "id": 16,
-            "lemma": "가운데",
-            "type": "NNG",
-            "position": 280,
-            "weight": 0.9
-          },
-          {
-            "id": 17,
-            "lemma": "북한",
-            "type": "NNP",
-            "position": 290,
-            "weight": 0.00674901
-          },
-          {
-            "id": 18,
-            "lemma": "이",
-            "type": "JKS",
-            "position": 296,
-            "weight": 0.0234517
-          },
-          {
-            "id": 19,
-            "lemma": "어떤",
-            "type": "MM",
-            "position": 300,
-            "weight": 0.0247473
-          },
-          {
-            "id": 20,
-            "lemma": "반응",
-            "type": "NNG",
-            "position": 307,
-            "weight": 0.9
-          },
-          {
-            "id": 21,
-            "lemma": "을",
-            "type": "JKO",
-            "position": 313,
-            "weight": 0.129611
-          },
-          {
-            "id": 22,
-            "lemma": "보이",
-            "type": "VV",
-            "position": 317,
-            "weight": 0.776105
-          },
-          {
-            "id": 23,
-            "lemma": "ㄹ지",
-            "type": "EC",
-            "position": 320,
-            "weight": 0.422638
-          },
-          {
-            "id": 24,
-            "lemma": "관심",
-            "type": "NNG",
-            "position": 327,
-            "weight": 0.9
-          },
-          {
-            "id": 25,
-            "lemma": "이",
-            "type": "JKS",
-            "position": 333,
-            "weight": 0.0360723
-          },
-          {
-            "id": 26,
-            "lemma": "쏠리",
-            "type": "VV",
-            "position": 337,
-            "weight": 0.9
-          },
-          {
-            "id": 27,
-            "lemma": "ㅂ니다",
-            "type": "EF",
-            "position": 340,
-            "weight": 0.0793776
-          },
-          {
-            "id": 28,
-            "lemma": ".",
-            "type": "SF",
-            "position": 349,
-            "weight": 1
-          }
-        ],
-        "WSD": [
-          {
-            "id": 0,
-            "text": "미",
-            "type": "NNP",
-            "scode": "14",
-            "weight": 3,
-            "position": 208,
-            "begin": 0,
-            "end": 0
-          },
-          {
-            "id": 1,
-            "text": "·",
-            "type": "SP",
-            "scode": "00",
-            "weight": 1,
-            "position": 211,
-            "begin": 1,
-            "end": 1
-          },
-          {
-            "id": 2,
-            "text": "중",
-            "type": "NNP",
-            "scode": "05",
-            "weight": 2,
-            "position": 213,
-            "begin": 2,
-            "end": 2
-          },
-          {
-            "id": 3,
-            "text": "빅딜",
-            "type": "NNG",
-            "scode": "00",
-            "weight": 0,
-            "position": 217,
-            "begin": 3,
-            "end": 3
-          },
-          {
-            "id": 4,
-            "text": "에",
-            "type": "JKB",
-            "scode": "00",
-            "weight": 1,
-            "position": 223,
-            "begin": 4,
-            "end": 4
-          },
-          {
-            "id": 5,
-            "text": "따르",
-            "type": "VV",
-            "scode": "01",
-            "weight": 5.5,
-            "position": 227,
-            "begin": 5,
-            "end": 5
-          },
-          {
-            "id": 6,
-            "text": "ㄴ",
-            "type": "ETM",
-            "scode": "00",
-            "weight": 1,
-            "position": 230,
-            "begin": 6,
-            "end": 6
-          },
-          {
-            "id": 7,
-            "text": "대북",
-            "type": "NNG",
-            "scode": "02",
-            "weight": 4,
-            "position": 234,
-            "begin": 7,
-            "end": 7
-          },
-          {
-            "id": 8,
-            "text": "압박",
-            "type": "NNG",
-            "scode": "00",
-            "weight": 0,
-            "position": 240,
-            "begin": 8,
-            "end": 8
-          },
-          {
-            "id": 9,
-            "text": "공조",
-            "type": "NNG",
-            "scode": "05",
-            "weight": 1.75,
-            "position": 247,
-            "begin": 9,
-            "end": 9
-          },
-          {
-            "id": 10,
-            "text": "가능성",
-            "type": "NNG",
-            "scode": "00",
-            "weight": 0,
-            "position": 254,
-            "begin": 10,
-            "end": 11
-          },
-          {
-            "id": 11,
-            "text": "이",
-            "type": "JKS",
-            "scode": "00",
-            "weight": 1,
-            "position": 263,
-            "begin": 12,
-            "end": 12
-          },
-          {
-            "id": 12,
-            "text": "제기되",
-            "type": "VV",
-            "scode": "00",
-            "weight": 0,
-            "position": 267,
-            "begin": 13,
-            "end": 14
-          },
-          {
-            "id": 13,
-            "text": "는",
-            "type": "ETM",
-            "scode": "00",
-            "weight": 1,
-            "position": 276,
-            "begin": 15,
-            "end": 15
-          },
-          {
-            "id": 14,
-            "text": "가운데",
-            "type": "NNG",
-            "scode": "00",
-            "weight": 0,
-            "position": 280,
-            "begin": 16,
-            "end": 16
-          },
-          {
-            "id": 15,
-            "text": "북한",
-            "type": "NNP",
-            "scode": "03",
-            "weight": 4,
-            "position": 290,
-            "begin": 17,
-            "end": 17
-          },
-          {
-            "id": 16,
-            "text": "이",
-            "type": "JKS",
-            "scode": "00",
-            "weight": 1,
-            "position": 296,
-            "begin": 18,
-            "end": 18
-          },
-          {
-            "id": 17,
-            "text": "어떤",
-            "type": "MM",
-            "scode": "00",
-            "weight": 0,
-            "position": 300,
-            "begin": 19,
-            "end": 19
-          },
-          {
-            "id": 18,
-            "text": "반응",
-            "type": "NNG",
-            "scode": "00",
-            "weight": 0,
-            "position": 307,
-            "begin": 20,
-            "end": 20
-          },
-          {
-            "id": 19,
-            "text": "을",
-            "type": "JKO",
-            "scode": "00",
-            "weight": 1,
-            "position": 313,
-            "begin": 21,
-            "end": 21
-          },
-          {
-            "id": 20,
-            "text": "보이",
-            "type": "VV",
-            "scode": "01",
-            "weight": 4.90768,
-            "position": 317,
-            "begin": 22,
-            "end": 22
-          },
-          {
-            "id": 21,
-            "text": "ㄹ지",
-            "type": "EC",
-            "scode": "00",
-            "weight": 1,
-            "position": 320,
-            "begin": 23,
-            "end": 23
-          },
-          {
-            "id": 22,
-            "text": "관심",
-            "type": "NNG",
-            "scode": "01",
-            "weight": 4.2,
-            "position": 327,
-            "begin": 24,
-            "end": 24
-          },
-          {
-            "id": 23,
-            "text": "이",
-            "type": "JKS",
-            "scode": "00",
-            "weight": 1,
-            "position": 333,
-            "begin": 25,
-            "end": 25
-          },
-          {
-            "id": 24,
-            "text": "쏠리",
-            "type": "VV",
-            "scode": "00",
-            "weight": 0,
-            "position": 337,
-            "begin": 26,
-            "end": 26
-          },
-          {
-            "id": 25,
-            "text": "ㅂ니다",
-            "type": "EF",
-            "scode": "00",
-            "weight": 1,
-            "position": 340,
-            "begin": 27,
-            "end": 27
-          },
-          {
-            "id": 26,
-            "text": ".",
-            "type": "SF",
-            "scode": "00",
-            "weight": 1,
-            "position": 349,
-            "begin": 28,
-            "end": 28
-          }
-        ],
-        "word": [
-          {
-            "id": 0,
-            "text": "미·중",
-            "type": "",
-            "begin": 0,
-            "end": 2
-          },
-          {
-            "id": 1,
-            "text": "빅딜에",
-            "type": "",
-            "begin": 3,
-            "end": 4
-          },
-          {
-            "id": 2,
-            "text": "따른",
-            "type": "",
-            "begin": 5,
-            "end": 6
-          },
-          {
-            "id": 3,
-            "text": "대북압박",
-            "type": "",
-            "begin": 7,
-            "end": 8
-          },
-          {
-            "id": 4,
-            "text": "공조",
-            "type": "",
-            "begin": 9,
-            "end": 9
-          },
-          {
-            "id": 5,
-            "text": "가능성이",
-            "type": "",
-            "begin": 10,
-            "end": 12
-          },
-          {
-            "id": 6,
-            "text": "제기되는",
-            "type": "",
-            "begin": 13,
-            "end": 15
-          },
-          {
-            "id": 7,
-            "text": "가운데",
-            "type": "",
-            "begin": 16,
-            "end": 16
-          },
-          {
-            "id": 8,
-            "text": "북한이",
-            "type": "",
-            "begin": 17,
-            "end": 18
-          },
-          {
-            "id": 9,
-            "text": "어떤",
-            "type": "",
-            "begin": 19,
-            "end": 19
-          },
-          {
-            "id": 10,
-            "text": "반응을",
-            "type": "",
-            "begin": 20,
-            "end": 21
-          },
-          {
-            "id": 11,
-            "text": "보일지",
-            "type": "",
-            "begin": 22,
-            "end": 23
-          },
-          {
-            "id": 12,
-            "text": "관심이",
-            "type": "",
-            "begin": 24,
-            "end": 25
-          },
-          {
-            "id": 13,
-            "text": "쏠립니다.",
-            "type": "",
-            "begin": 26,
-            "end": 28
-          }
-        ],
-        "NE": [
-          {
-            "id": 0,
-            "text": "미",
-            "type": "LCP_COUNTRY",
-            "begin": 0,
-            "end": 0,
-            "weight": 0.394309,
-            "common_noun": 0
-          },
-          {
-            "id": 1,
-            "text": "북한",
-            "type": "LCP_COUNTRY",
-            "begin": 17,
-            "end": 17,
-            "weight": 0.722874,
-            "common_noun": 0
-          }
-        ],
-        "dependency": [
-          {
-            "id": 0,
-            "text": "미·중",
-            "head": 1,
-            "label": "NP",
-            "mod": [],
-            "weight": 0.722246
-          },
-          {
-            "id": 1,
-            "text": "빅딜에",
-            "head": 2,
-            "label": "NP_AJT",
-            "mod": [
-              0
-            ],
-            "weight": 0.652159
-          },
-          {
-            "id": 2,
-            "text": "따른",
-            "head": 5,
-            "label": "VP_MOD",
-            "mod": [
-              1
-            ],
-            "weight": 0.487228
-          },
-          {
-            "id": 3,
-            "text": "대북압박",
-            "head": 4,
-            "label": "NP",
-            "mod": [],
-            "weight": 0.23511
-          },
-          {
-            "id": 4,
-            "text": "공조",
-            "head": 5,
-            "label": "NP",
-            "mod": [
-              3
-            ],
-            "weight": 0.463054
-          },
-          {
-            "id": 5,
-            "text": "가능성이",
-            "head": 6,
-            "label": "NP_SBJ",
-            "mod": [
-              2,
-              4
-            ],
-            "weight": 0.805538
-          },
-          {
-            "id": 6,
-            "text": "제기되는",
-            "head": 7,
-            "label": "VP_MOD",
-            "mod": [
-              5
-            ],
-            "weight": 0.738844
-          },
-          {
-            "id": 7,
-            "text": "가운데",
-            "head": 11,
-            "label": "NP_AJT",
-            "mod": [
-              6
-            ],
-            "weight": 0.611063
-          },
-          {
-            "id": 8,
-            "text": "북한이",
-            "head": 11,
-            "label": "NP_SBJ",
-            "mod": [],
-            "weight": 0.73252
-          },
-          {
-            "id": 9,
-            "text": "어떤",
-            "head": 10,
-            "label": "DP",
-            "mod": [],
-            "weight": 0.717998
-          },
-          {
-            "id": 10,
-            "text": "반응을",
-            "head": 11,
-            "label": "NP_OBJ",
-            "mod": [
-              9
-            ],
-            "weight": 0.796132
-          },
-          {
-            "id": 11,
-            "text": "보일지",
-            "head": 13,
-            "label": "VP",
-            "mod": [
-              7,
-              8,
-              10
-            ],
-            "weight": 0.660606
-          },
-          {
-            "id": 12,
-            "text": "관심이",
-            "head": 13,
-            "label": "NP_SBJ",
-            "mod": [],
-            "weight": 0.815303
-          },
-          {
-            "id": 13,
-            "text": "쏠립니다.",
-            "head": -1,
-            "label": "VP",
-            "mod": [
-              11,
-              12
-            ],
-            "weight": 0.00164668
-          }
-        ],
-        "SRL": [
-          {
-            "verb": "따르",
-            "sense": 2,
-            "word_id": 2,
-            "weight": 0.51106,
-            "argument": [
-              {
-                "type": "ARG2",
-                "word_id": 1,
-                "text": "미·중 빅딜",
-                "weight": 0.51106
-              }
-            ]
-          },
-          {
-            "verb": "제기",
-            "sense": 1,
-            "word_id": 6,
-            "weight": 0.154678,
-            "argument": [
-              {
-                "type": "ARG1",
-                "word_id": 5,
-                "text": "대북압박 공조 가능성",
-                "weight": 0.154678
-              }
-            ]
-          },
-          {
-            "verb": "보이",
-            "sense": 1,
-            "word_id": 11,
-            "weight": 0.323977,
-            "argument": [
               {
                 "type": "ARGM-TMP",
-                "word_id": 7,
-                "text": "가운데",
-                "weight": 0.239575
-              },
-              {
-                "type": "ARGA",
-                "word_id": 8,
-                "text": "북한",
-                "weight": 0.386884
-              },
-              {
-                "type": "ARG1",
-                "word_id": 10,
-                "text": "어떤 반응",
-                "weight": 0.345472
-              }
-            ]
-          },
-          {
-            "verb": "쏠리",
-            "sense": 1,
-            "word_id": 13,
-            "weight": 0.377569,
-            "argument": [
-              {
-                "type": "ARGM-CAU",
-                "word_id": 11,
-                "text": "보일지",
-                "weight": 0.111156
-              },
-              {
-                "type": "ARG1",
-                "word_id": 12,
-                "text": "관심",
-                "weight": 0.643981
+                "word_id": 16,
+                "text": "먼저",
+                "weight": 0.144741
               }
             ]
           }
