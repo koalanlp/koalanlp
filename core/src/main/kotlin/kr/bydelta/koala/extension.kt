@@ -213,7 +213,8 @@ fun Char.isCJKHanja(): Boolean {
 
 /** 한자 음독 테이블 (국사편찬위원회) */
 private val HANJA_READ_TABLE by lazy {
-    Object::class.java
+    // 당연하게도.. 같은 Jar 파일에 있는 class가 필요함
+    POS::class.java
             .getResourceAsStream("/hanjaToHangul.csv").bufferedReader()
             .lines()
             .filter { !it.startsWith('#') && !it.isEmpty() }
@@ -796,6 +797,36 @@ fun CharSequence.assembleHangul(): CharSequence {
 
     return buffer
 }
+
+/**
+ * 주어진 문자열에서 초성, 중성, 종성이 연달아 나오는 경우 이를 조합하여 한글 문자를 재구성합니다.
+ *
+ * (Python, NodeJS를 위한 Method)
+ *
+ * ## 사용법
+ * ### Kotlin
+ * ```kotlin
+ * // 왼쪽 문자열은 조합형 문자열임.
+ * "까?ABC".assembleHangul() // "까?ABC"
+ * ```
+ *
+ * ### Scala + [koalanlp-scala](https://koalanlp.github.io/scala-support/)
+ * ```scala
+ * import kr.bydelta.koala.Implicits._
+ * // 왼쪽 문자열은 조합형 문자열임.
+ * "까?ABC".assembleHangul // "까?ABC"
+ * ```
+ *
+ * ### Java
+ * ```java
+ * // 인자로 들어가는 문자열은 조합형 문자열임.
+ * ExtUtil.assembleHangul("까?ABC") // "까?ABC"
+ * ```
+ *
+ * @since 2.0.0
+ * @return 조합형 문자들이 조합된 문자열. 조합이 불가능한 문자는 그대로 남습니다.
+ */
+fun CharSequence.assembleHangulString(): CharSequence = this.assembleHangul()
 
 /**
  * 초성을 [Triple.first] 문자로, 중성을 [Triple.second] 문자로, 종성을 [Triple.third] 문자로 갖는 한글 문자를 재구성합니다.

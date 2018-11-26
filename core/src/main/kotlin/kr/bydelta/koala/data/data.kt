@@ -986,7 +986,7 @@ class Morpheme constructor(val surface: String, val tag: POS,
     /**
      * Returns a hash code value for the object.  The general contract of hashCode is:
      */
-    override fun hashCode(): Int = (POS_SIZE + surface.hashCode()) * POS_SIZE + tag.hashCode()
+    override fun hashCode(): Int = surface.hashCode() * POS_SIZE + tag.hashCode()
 
     /********* String representation *********/
 
@@ -1468,7 +1468,7 @@ class Sentence(private val words: List<Word>) : CanHaveProperty(), List<Word> by
      * **파생접미사**는 용언의 어근이나 단어 따위에 붙어서 명사로 파생되도록 하는 접미사입니다.
      * 예) 역시 '살다'를 '삶'으로 바꾸는 명사파생 접미사 '-ㅁ'이 있습니다. 이 경우 명사이므로 '멋진 삶'과 같이 형용사의 수식을 받습니다.
      *
-     * @return 체언 또는 체언 성격의 어휘를 포함하는 어절의 목록
+     * @return 용언 또는 용언 성격의 어휘를 포함하는 어절의 목록
      */
     fun getVerbs(): List<Word> = words.filter { w ->
         val inclusion = w.indexOfLast { it.isPredicate() || it.tag == POS.XSV }
@@ -1489,7 +1489,7 @@ class Sentence(private val words: List<Word>) : CanHaveProperty(), List<Word> by
      * **파생접미사**는 용언의 어근이나 단어 따위에 붙어서 명사로 파생되도록 하는 접미사입니다.
      * 예) 역시 '살다'를 '삶'으로 바꾸는 명사파생 접미사 '-ㅁ'이 있습니다. 이 경우 명사이므로 '멋진 삶'과 같이 형용사의 수식을 받습니다.
      *
-     * @return 체언 또는 체언 성격의 어휘를 포함하는 어절의 목록
+     * @return 수식언 또는 수식언 성격의 어휘를 포함하는 어절의 목록
      */
     fun getModifiers(): List<Word> = words.filter { w ->
         val inclusion = w.indexOfLast { it.isNoun() || it.hasTagOneOf("ETM", "XSA", "XSM") }

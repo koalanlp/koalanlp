@@ -41,7 +41,7 @@ class Tagger : CanTagOnlyASentence<List<AnalysisOutput>>() {
             var surfaceCandidate = word.source.trim()
             val morphCandidates = mutableListOf<Morpheme>()
 
-            val newPos = maxOf(pos, text.indexOf(surfaceCandidate, startIndex = pos))
+            val newPos = minOf(maxOf(pos, text.indexOf(surfaceCandidate, startIndex = pos)), text.length)
             val token = text.substring(pos, newPos).trim()
 
             // 혹시 이 문자열 앞에 다른 문자가 있었다면, 누락된 것이므로 복원함

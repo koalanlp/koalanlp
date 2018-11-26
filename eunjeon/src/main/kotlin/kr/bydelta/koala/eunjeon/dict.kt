@@ -94,7 +94,7 @@ object Dictionary : CanCompileDict {
      * @return True: 항목이 있을 때.
      */
     @JvmStatic
-    internal fun isNotEmpty(): Boolean = rawDict.isNotEmpty()
+    internal fun isNotEmpty(): Boolean = synchronized(rawDict) { rawDict.isNotEmpty() }
 
     /**
      * 사용자 사전에, (표면형,품사)의 여러 순서쌍을 추가합니다.
@@ -103,19 +103,21 @@ object Dictionary : CanCompileDict {
      * @param dict 추가할 (표면형, 품사)의 순서쌍들 (가변인자). 즉, [Pair]<[String], [POS]>들
      */
     override fun addUserDictionary(vararg dict: DicEntry) {
-        rawDict.addAll(dict.map { entry ->
-            val (word, tag) = entry
-            val oTag = tag.fromSejongPOS()
+        synchronized(rawDict) {
+            rawDict.addAll(dict.map { entry ->
+                val (word, tag) = entry
+                val oTag = tag.fromSejongPOS()
 
-            if (word.isHangulEnding()) {
-                val jong = if (word.isJongsungEnding()) "T" else "F"
-                "$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
-            } else {
-                "$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*"
-            }
-        })
+                if (word.isHangulEnding()) {
+                    val jong = if (word.isJongsungEnding()) "T" else "F"
+                    "$word,${getLeftId(oTag)},${getRightId(oTag, jong)},0,$oTag,*,$jong,$word,*,*,*,*"
+                } else {
+                    "$word,${getLeftId(oTag)},${getRightId(oTag)},0,$oTag,*,*,$word,*,*,*,*"
+                }
+            })
 
-        isDicChanged = true
+            isDicChanged = true
+        }
     }
 
     /**
@@ -193,7 +195,7 @@ object Dictionary : CanCompileDict {
      * @since 1.x
      */
     @JvmStatic
-    internal fun reloadDic(): Unit = synchronized(this) {
+    internal fun reloadDic(): Unit = synchronized(rawDict) {
         if (isDicChanged) {
             userDict.loadFromIterator(rawDict.asScala(), false)
             isDicChanged = false

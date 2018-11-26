@@ -30,7 +30,7 @@ import kr.bydelta.koala.PhraseTag
  */
 fun String?.toETRIDepTag(): DependencyTag? =
         when (this) {
-            "VMOD", "NMOD", "MOD" -> DependencyTag.MOD
+            "VMOD", "NMOD", "AMOD", "MOD" -> DependencyTag.MOD
             "ADV" -> DependencyTag.AJT
             "INT" -> null
             "PRN", null -> DependencyTag.UNDEF

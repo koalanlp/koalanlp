@@ -55,7 +55,7 @@ interface CanCommunicateETRIApi {
             } else {
                 throw APIException(resp.statusCode, json?.msg ?: "HTTP Status code ${resp.statusCode}")
             }
-        }catch(e: ConnectException){
+        } catch (e: ConnectException) {
             throw APIException(-1, "http://aiopen.etri.re.kr 로 접근할 수 있는지 확인해주십시오. ${e.message}")
         }
     }
@@ -177,8 +177,9 @@ interface CanParseWithETRI : CanCommunicateETRIApi, CanAnalyzeProperty<SentenceR
  * @param apiKey ETRI Open API Access token
  * @param analysisType 품사 분석을 위한 분석 타입: "wsd"(동형이의어 분석), "wsd_poly"(다의어 분석), "morp"(형태소 분석)이며, 기본값은 "wsd"입니다.
  */
-class Tagger(override val apiKey: String,
-             val analysisType: String = "wsd") : CanTagOnlyAParagraph<SentenceResponse>(), CanCommunicateETRIApi {
+class Tagger @JvmOverloads constructor(override val apiKey: String,
+                                       val analysisType: String = "wsd") :
+        CanTagOnlyAParagraph<SentenceResponse>(), CanCommunicateETRIApi {
     init {
         assert(analysisType in listOf("wsd", "wsd_poly", "morp"))
     }
