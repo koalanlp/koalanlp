@@ -184,7 +184,7 @@ koalanlp.initialize({
 
 ## Python 3
 우선 Java 8 이상을 설치하고, `JAVA_HOME`을 환경변수에 등록해주십시오.
-그런 다음, 아래와 같이 설치하십시오.
+그런 다음, 아래와 같이 설치하십시오. (현재 python-koalanlp 버전은 [![PyPI](https://img.shields.io/pypi/v/koalanlp.svg?style=flat-square)](https://github.com/koalanlp/py-koalanlp)입니다.)
 
 ```bash
 $ pip install Cython # Cython은 별도 설치가 필요합니다.
@@ -217,15 +217,13 @@ $ pip install koalanlp
 from koalanlp.Util import initialize
 
 # 꼬꼬마와 은전한닢 분석기의 2.0.0 버전을 참조합니다.
-initialize(packages=[API.KKMA, API.EUNJEON], version="2.0.0", java_options="-Xmx4g")
+initialize(java_options="-Xmx4g", KKMA="2.0.2", ETRI="2.0.2")
 ```
 
-* `packages` 인자는 Python 프로그램에서 사용할 모든 패키지의 list입니다. (상단 표 참고)
-* `version` 인자는 다운로드할 해당 패키지의 버전 string입니다. (상단 표 참고)
 * `java_options` 인자는 JVM을 실행하기 위한 option string입니다.
-* 아래 문서는 초기화 과정이 모두 완료되었다고 보고 진행합니다.
+* 이후 인자들은 keyword argument들로, 상단 표를 참고하여 지정하실 수 있습니다.
+* 나머지 문서는 초기화 과정이 모두 완료되었다고 보고 진행합니다.
 * API 참고: [initialize](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.Util.initialize)
-
 
 --------
 
