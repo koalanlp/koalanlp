@@ -44,6 +44,14 @@ set_version()
     fi    
 }
 
+set_publish_version()
+{
+    cat gradle.properties | sed -e 's/corePublishedVer=\s*.*/corePublishedVer='$1'/g' > gradle.properties.new
+    rm gradle.properties
+    mv gradle.properties.new gradle.properties
+    git add gradle.properties
+}
+
 read_module_name()
 {
     MODULE_NAME=$(cat settings.gradle | grep ":$1" | cut -d\' -f4)
@@ -104,6 +112,8 @@ case ${ACTION} in
 
         ask_proceed "TEST PACKAGES"
         if [ "${YN,,}" != "p" ]; then
+            set_publish_version $JAR_VER_CURRENT
+
             for MODULE in $MODULES
             do
                 if [ "$MODULE" != "core" ]; then

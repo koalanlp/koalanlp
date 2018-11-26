@@ -11,12 +11,12 @@ version "2.0.3-SNAPSHOT"
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation "kr.bydelta:koalanlp-core:${rootProject.version}"
+    implementation "kr.bydelta:koalanlp-core:${corePublishedVer}"
     implementation "ch.qos.logback:logback-classic:1.1.7" // Daon Core
     implementation "com.google.protobuf:protobuf-java:3.0.0" // Daon Core
     compile fileTree(dir: 'lib', include: '*.jar')
 
-    testImplementation "kr.bydelta:koalanlp-core:${rootProject.version}:tests"
+    testImplementation "kr.bydelta:koalanlp-core:${corePublishedVer}:tests"
     testRuntime "org.jetbrains.kotlin:kotlin-reflect"
     testRuntime "org.jetbrains.kotlin:kotlin-test"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"

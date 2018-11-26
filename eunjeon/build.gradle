@@ -11,13 +11,13 @@ version "2.0.3-SNAPSHOT"
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation "kr.bydelta:koalanlp-core:${rootProject.version}"
+    implementation "kr.bydelta:koalanlp-core:${corePublishedVer}"
     implementation("org.bitbucket.eunjeon:seunjeon_2.12:1.5.0") {
         exclude group: 'com.jsuereth'
     }
     implementation 'org.slf4j:slf4j-nop:1.7.12'
 
-    testImplementation "kr.bydelta:koalanlp-core:${rootProject.version}:tests"
+    testImplementation "kr.bydelta:koalanlp-core:${corePublishedVer}:tests"
     testRuntime "org.jetbrains.kotlin:kotlin-reflect"
     testRuntime "org.jetbrains.kotlin:kotlin-test"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"

@@ -11,11 +11,11 @@ version "2.0.3-SNAPSHOT"
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation "kr.bydelta:koalanlp-core:${rootProject.version}"
+    implementation "kr.bydelta:koalanlp-core:${corePublishedVer}"
     implementation 'com.github.kittinunf.fuel:fuel:1.15.1'
     implementation 'com.beust:klaxon:3.0.1'
 
-    testImplementation "kr.bydelta:koalanlp-core:${rootProject.version}:tests"
+    testImplementation "kr.bydelta:koalanlp-core:${corePublishedVer}:tests"
     testRuntime "org.jetbrains.kotlin:kotlin-reflect"
     testRuntime "org.jetbrains.kotlin:kotlin-test"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
