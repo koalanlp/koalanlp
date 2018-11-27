@@ -41,7 +41,7 @@ object KlaxonTest : Spek({
                 sentences[0][5].getArgumentRoles()!!.map { it.argument } shouldContainSame sentences[0].subList(1, 5)
 
                 sentences[0].getEntities()!!.map { it.surface } shouldContainSame listOf("중국", "북한", "군사지원 의무제", "유엔 안보리")
-                sentences[0].getRoles()!!.size `should be equal to` 7
+                sentences[0].getRoles()!!.size `should be equal to` 8
                 sentences[0].getDependencies()!!.size `should be equal to` 20
             }
         }
