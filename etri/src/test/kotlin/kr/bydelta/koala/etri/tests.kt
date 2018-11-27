@@ -17,7 +17,7 @@ object KlaxonTest : Spek({
             payload `should not be` null
 
             if (payload != null) {
-                payload.result.sentences.size `should be equal to` 2
+                payload.result.sentences.size `should be equal to` 1
                 payload.result.sentences[0].morphemes.size `should be equal to` 45
                 payload.result.sentences[0].senses.size `should be equal to` 38
                 payload.result.sentences[0].words.size `should be equal to` 20
