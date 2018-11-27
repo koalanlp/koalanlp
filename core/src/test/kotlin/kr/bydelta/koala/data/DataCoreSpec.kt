@@ -358,7 +358,7 @@ object DataCoreSpec : Spek({
                 dummy1.getEntities().size `should be equal to` 0
                 dummy1.getPhrase() `should be` null
                 dummy1.getArgumentRoles() `should be` null
-                dummy1.getPredicateRole() `should be` null
+                dummy1.getPredicateRoles() `should be` null
                 dummy1.getDependentEdges() `should be` null
                 dummy1.getGovernorEdge() `should be` null
 
@@ -373,7 +373,7 @@ object DataCoreSpec : Spek({
                 dummy1.getEntities().map { it.fineLabel } `should contain` "PS_OTHER"
                 dummy1.getPhrase() `should equal` tree
                 dummy1.getArgumentRoles()?.get(0) `should equal` role
-                dummy2.getPredicateRole() `should equal` role
+                dummy2.getPredicateRoles()?.get(0) `should equal` role
                 dummy1.getDependentEdges()?.get(0) `should equal` dep
                 dummy2.getGovernorEdge() `should equal` dep
             }

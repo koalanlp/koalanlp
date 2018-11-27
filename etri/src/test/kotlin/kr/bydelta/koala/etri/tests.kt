@@ -1,6 +1,7 @@
 package kr.bydelta.koala.etri
 
 import com.beust.klaxon.Klaxon
+import kr.bydelta.koala.Examples
 import kr.bydelta.koala.POS
 import kr.bydelta.koala.data.Sentence
 import org.amshove.kluent.*
@@ -176,6 +177,24 @@ object ETRICommunicationTest : Spek({
             val analyzer = RoleLabeler("");
 
             { analyzer(testText) } `should throw` APIException::class
+        }
+    }
+})
+
+object RandomSentenceTest : Spek({
+    val API_KEY = System.getenv("ETRI_KEY")
+
+    describe("RoleLabeler") {
+        it("should not throw any exception") {
+            val analyzer = RoleLabeler(API_KEY)
+            val examples = Examples.exampleSequence(1).take(10)
+
+            for ((_, testText) in examples) {
+                // 반복 요청을 막기 위해 적절한 시간동안 멈춥니다.
+                Thread.sleep(1000 + Random().nextInt(10) * 100L);
+
+                { analyzer(testText)[0] } `should not throw` AnyException
+            }
         }
     }
 })

@@ -28,7 +28,7 @@ internal enum class Key {
     /** 의존관계 피지배소 (목록) */
     DEP_DEPENDENT,
 
-    /** 의미역 구조의 동사 */
+    /** 의미역 구조의 동사 (목록) */
     SRL_PREDICATE,
     /** 의미역 구조의 하위 논항 (목록) */
     SRL_ARGUMENT,
@@ -136,7 +136,7 @@ abstract class CanHaveProperty : Property {
     internal fun <T : Property> addProperty(key: Key, value: T) {
         when (key) {
             // 목록형 변수값이어야 하는 경우
-            Key.NAMED_ENTITY, Key.SYNTAX_CHILD, Key.DEP_DEPENDENT, Key.SRL_ARGUMENT, Key.COREF_MENTION -> {
+            Key.NAMED_ENTITY, Key.SYNTAX_CHILD, Key.DEP_DEPENDENT, Key.SRL_ARGUMENT, Key.SRL_PREDICATE, Key.COREF_MENTION -> {
                 val prop = properties[key] as? ListProperty<T>
 
                 if (prop == null) {
@@ -730,7 +730,7 @@ class DepEdge constructor(val governor: Word?,
  * 아래를 참고해보세요.
  * * [kr.bydelta.koala.proc.CanLabelSemanticRole] 의미역 분석을 수행하는 interface.
  * * [Word.getArgumentRoles] 어절이 술어인 논항들의 [RoleEdge] 목록을 가져오는 API
- * * [Word.getPredicateRole] 어절이 논항인 [RoleEdge]의 술어를 가져오는 API
+ * * [Word.getPredicateRoles] 어절이 논항인 [RoleEdge]의 술어를 가져오는 API
  * * [Sentence.getRoles] 전체 문장을 분석한 의미역 구조 [RoleEdge]를 가져오는 API
  * * [RoleType] 의미역 분류를 갖는 Enum 값
  *
@@ -751,7 +751,7 @@ class RoleEdge constructor(val predicate: Word,
         // 동사가 논항을 찾을 수 있게 지정
         predicate.addProperty(Key.SRL_ARGUMENT, this)
         // 논항이 동사를 찾을 수 있게 지정
-        argument.setProperty(Key.SRL_PREDICATE, this)
+        argument.addProperty(Key.SRL_PREDICATE, this)
     }
 
     /**
@@ -1194,7 +1194,7 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
      * @since 2.0.0
      * @return 어절이 논항인 상위 의미역 구조 [RoleEdge]. 분석 결과가 없으면 null.
      * */
-    fun getPredicateRole() = getProperty<RoleEdge>(Key.SRL_PREDICATE)
+    fun getPredicateRoles(): List<RoleEdge>? = getProperty<ListProperty<RoleEdge>>(Key.SRL_PREDICATE)?.values
 
     /**
      * 의미역 분석을 했다면, 현재 어절이 술어로 기능하는 하위 의미역 구조의 목록을 돌려줌.
@@ -1210,7 +1210,7 @@ class Word @Throws(AlreadySetIDException::class) constructor(val surface: String
      *
      * 아래를 참고해보세요.
      * * [kr.bydelta.koala.proc.CanLabelSemanticRole] 의미역 분석을 수행하는 interface.
-     * * [Word.getPredicateRole] 어절이 논항인 [RoleEdge]의 술어를 가져오는 API
+     * * [Word.getPredicateRoles] 어절이 논항인 [RoleEdge]의 술어를 가져오는 API
      * * [Sentence.getRoles] 전체 문장을 분석한 의미역 구조 [RoleEdge]를 가져오는 API
      * * [RoleEdge] 의미역 구조를 저장하는 형태
      * * [RoleType] 의미역 분류를 갖는 Enum 값
@@ -1379,7 +1379,7 @@ class Sentence(private val words: List<Word>) : CanHaveProperty(), List<Word> by
      * 아래를 참고해보세요.
      * * [kr.bydelta.koala.proc.CanLabelSemanticRole] 의미역 분석을 수행하는 interface.
      * * [Word.getArgumentRoles] 어절이 술어인 논항들의 [RoleEdge] 목록을 가져오는 API
-     * * [Word.getPredicateRole] 어절이 논항인 [RoleEdge]의 술어를 가져오는 API
+     * * [Word.getPredicateRoles] 어절이 논항인 [RoleEdge]의 술어를 가져오는 API
      * * [RoleEdge] 의미역 구조를 저장하는 형태
      * * [RoleType] 의미역 분류를 갖는 Enum 값
      *

@@ -161,15 +161,11 @@ data class SRLResponse(@Json(name = "word_id") val id: Int,
             val argWord = words[it.id]
             val wordCount = it.text.count { ch -> ch == ' ' }
             val modifiers = words.subList(it.id - wordCount, it.id).sortedBy { w -> w.id }
-            val modifierSurface = modifiers.joinToString(" ") { w -> w.surface } + " " + argWord.surface
 
             val type = RoleType.valueOf(when (it.type) {
                 "ARGA" -> "ARG0"
                 else -> it.type.replace('-', '_')
             })
-
-            // Modifier가 Text를 포함하는지 확인
-            assert(it.text in modifierSurface)
 
             RoleEdge(predicateWord, argWord, type, modifiers = modifiers, originalLabel = it.type)
         }

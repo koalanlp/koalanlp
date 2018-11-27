@@ -94,7 +94,9 @@ from koalanlp import API
 from koalanlp.proc import SentenceSplitter
 
 splitter = SentenceSplitter(splitter_type=API.HANNANUM)
-paragraph = splitter.sentences("분리할 문장을 이렇게 넣으면 문장이 분리됩니다. 간단하죠?")
+paragraph = splitter("분리할 문장을 이렇게 넣으면 문장이 분리됩니다. 간단하죠?")
+// 또는 splitter.sentences(...)
+
 print(paragraph[0]) # == 분리할 문장을 이렇게 넣으면 문장이 분리됩니다.
 print(paragraph[1]) # == 간단하죠?
 ```

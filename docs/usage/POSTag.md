@@ -121,7 +121,8 @@ tagger = Tagger(API.EUNJEON)
 # ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: Tagger(API.ETRI, apiKey=API_KEY)
 
 # 문단을 분석해서 문장들로 얻기 (각 API가 문단 분리를 지원하지 않아도, KoalaNLP가 자동으로 구분합니다)
-taggedParagraph = tagger.tag("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다.")
+taggedParagraph = tagger("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다.")
+// 또는 tagger.tag(...)
 
 print(taggedParagraph[0].singleLineString()) # "문단을 분석합니다."의 품사분석 결과 출력
 ```

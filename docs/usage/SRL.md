@@ -122,7 +122,8 @@ from koalanlp.proc import EntityRecognizer
 
 recognizer = RoleLabeler(API.ETRI, apiKey=API_KEY)
 
-parsed = recognizer.analyze("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")
+parsed = recognizer("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")
+// 또는 recognizer.analyze(...)
 
 // 첫번째 문장의 의미역들을 출력합니다.
 for role in parsed[0].getRoles():

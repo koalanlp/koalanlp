@@ -132,7 +132,8 @@ from koalanlp.proc import Parser
 parser = Parser(API.HNN) # 또는 API.KKMA, API.ETRI
 # ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: Parser(API.ETRI, apiKey=API_KEY)
 
-parsed = parser.analyze("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")
+parsed = parser("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")
+// 또는 parser.analyze(...)
 
 # 첫번째 문장의 의존구조를 출력합니다.
 for dep in parsed[0].getDependencies():

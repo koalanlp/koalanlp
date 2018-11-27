@@ -177,6 +177,7 @@ libraryDependencies += "kr.bydelta" % "koalanlp-kkma" % koalaVer classifier "ass
 libraryDependencies += "kr.bydelta" % "koalanlp-hannanum" % koalaVer classifier "assembly"
 
 // ETRI 분석기의 경우
+resolvers += Resolver.JCenterRepository
 libraryDependencies += "kr.bydelta" % "koalanlp-etri" % koalaVer
 
 // REST Server Service의 경우 (준비중)
@@ -211,7 +212,7 @@ Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 
 # 사용방법
 아래에는 대표적인 특징만 기술되어 있습니다.
 
-상세한 사항은 [Usage](https://koalanlp.github.io/koalanlp/usage/) 또는 [API Doc](http://koalanlp.github.io/koalanlp/api/koalanlp/index.html)을 참고하십시오.
+상세한 사항은 [Usage](https://koalanlp.github.io/koalanlp/usage/), [Sample](https://koalanlp.github.io/sample) 또는 [API Doc](http://koalanlp.github.io/koalanlp/api/koalanlp/index.html)을 참고하십시오.
 
 ## 여러 패키지의 사용
 통합 인터페이스는 여러 패키지간의 호환이 가능하게 설계되어 있습니다. 이론적으로는 타 패키지의 품사 분석 결과를 토대로 구문 분석이 가능합니다.

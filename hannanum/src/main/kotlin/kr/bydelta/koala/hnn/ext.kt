@@ -32,9 +32,16 @@ fun String?.toETRIDepTag(): DependencyTag? =
         when (this) {
             "VMOD", "NMOD", "AMOD", "MOD" -> DependencyTag.MOD
             "ADV" -> DependencyTag.AJT
+            "DEP" -> DependencyTag.UNDEF
             "INT" -> null
             "PRN", null -> DependencyTag.UNDEF
-            else -> DependencyTag.valueOf(this)
+            else ->
+                try {
+                    DependencyTag.valueOf(this)
+                } catch (_: Exception) {
+                    println("[WARN] Found an unlisted Dependency Tag: $this. Please report this.")
+                    DependencyTag.UNDEF
+                }
         }
 
 /**
@@ -63,7 +70,13 @@ fun String?.toETRIPhraseTag(): PhraseTag {
     return when (tag) {
         "Q", "W", "Y", "Z" -> PhraseTag.Q
         null -> PhraseTag.X
-        else -> PhraseTag.valueOf(tag)
+        else ->
+            try {
+                PhraseTag.valueOf(tag)
+            } catch (_: Exception) {
+                println("[WARN] Found an unlisted Phrase Tag: $tag. Please report this.")
+                PhraseTag.X
+            }
     }
 }
 

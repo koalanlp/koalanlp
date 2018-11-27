@@ -36,6 +36,6 @@
     
     1. [Scala 추가기능](https://koalanlp.github.io/scala-support)
     
-    1. [사용 예시](https://koalanlp.github.io/samples)
+    1. [사용 예시](https://koalanlp.github.io/sample)
     
-    1. [결과 비교](https://koalanlp.github.io/samples/결과-비교)
+    1. [결과 비교](https://koalanlp.github.io/sample/comparison)

@@ -26,6 +26,7 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 
 * [Usage](https://koalanlp.github.io/koalanlp/usage/)
 * [API Doc](http://koalanlp.github.io/koalanlp/api/koalanlp/index.html)
+* [Sample](https://koalanlp.github.io/sample)
 
 ## 특징
 
