@@ -6,9 +6,9 @@
 
 # 설치
 
-- [Java, Kotlin, Scala의 경우](#Java,-Kotlin,-Scala)
-- [NodeJS의 경우](#NodeJS)
-- [Python3의 경우](#Python3)
+- [Java, Kotlin, Scala의 경우](#java-kotlin-scala)
+- [NodeJS의 경우](#nodejs)
+- [Python3의 경우](#python-3)
 
 ## Java, Kotlin, Scala
 ### Java 패키지 목록

@@ -8,8 +8,17 @@
 
 문단 텍스트를 문장들로 분리할 수 있습니다. 이런 작업은 2가지 방법이 있습니다.
 
-1. 품사 분석 없이 문장을 분리하는 경우
-2. 품사 분석 결과를 토대로 문장을 분리하는 경우
+1. [품사 분석 없이 문장을 분리하는 경우](#품사-분석-없이-문장을-분리하는-경우)
+    - [Kotlin](#kotlin)
+    - [Scala](#scala)
+    - [Java](#java)
+    - [NodeJS](#javascript) (구현중)
+    - [Python 3](#python-3)
+2. [품사 분석 결과를 토대로 문장을 분리하는 경우](#품사-부착-후-분리-방법)
+    - [Kotlin, Scala](#kotlin-scala)
+    - [Java](#java-1)
+    - [NodeJS](#javascript-1) (구현중)
+    - [Python 3](#python-3-1)
 
 ### 품사 분석 없이 문장을 분리하는 경우
 품사 태깅을 거치지 않은 문장 분리는, 글의 표면 형태만을 토대로 문장을 나누는 것으로, 
@@ -139,7 +148,7 @@ System.out.println(paragraph[0].singleLineString()); // taggedSentence가 List<S
 #### JavaScript 
 Reference: [SentenceSplitter](https://koalanlp.github.io/nodejs-support/module-koalanlp.SentenceSplitter.html)
 ```javascript
-let tagger; /** 품사분석기 **/
+let tagger = new koalanlp.Tagger(...); /** 품사분석기 **/
 let SentenceSplitter = koalanlp.SentenceSplitter;
 let taggedSentence = tagger.tagSentenceSync("무엇인가 품사분석을 수행할 문단");
 
@@ -156,9 +165,9 @@ let paragraph = SentenceSplitter.sentencesSync("분리할 문장을 이렇게 �
 Reference: [SentenceSplitter](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.SentenceSplitter)
 
 ```python
-from koalanlp.proc import SentenceSplitter
+from koalanlp.proc import SentenceSplitter, Tagger
 
-tagger = ... ### 품사분석기 ###
+tagger = Tagger(...) ### 품사분석기 ###
 tagged_sentence = tagger.tagSentence("무엇인가 품사분석을 수행할 문단")
 paragraph = SentenceSplitter.sentencesTagged(tagged_sentence) # tagged_sentence는 문장으로 구분된 List[Sentence]임.
 ```
