@@ -104,7 +104,7 @@ from koalanlp.proc import SentenceSplitter
 
 splitter = SentenceSplitter(splitter_type=API.HANNANUM)
 paragraph = splitter("분리할 문장을 이렇게 넣으면 문장이 분리됩니다. 간단하죠?")
-// 또는 splitter.sentences(...)
+# 또는 splitter.sentences(...), splitter.invoke(...)
 
 print(paragraph[0]) # == 분리할 문장을 이렇게 넣으면 문장이 분리됩니다.
 print(paragraph[1]) # == 간단하죠?
@@ -169,7 +169,7 @@ from koalanlp.proc import SentenceSplitter, Tagger
 
 tagger = Tagger(...) ### 품사분석기 ###
 tagged_sentence = tagger.tagSentence("무엇인가 품사분석을 수행할 문단")
-paragraph = SentenceSplitter.sentencesTagged(tagged_sentence) # tagged_sentence는 문장으로 구분된 List[Sentence]임.
+paragraph = SentenceSplitter.sentencesTagged(tagged_sentence[0]) # tagged_sentence는 각 인자별로 한 문장으로 간주된 List[Sentence]임.
 ```
 
 --------

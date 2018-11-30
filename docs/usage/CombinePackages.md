@@ -118,7 +118,13 @@ let splits = splitter.sentencesSync("이 문단을 분석합니다. 문단 구�
 let tagged = splits.map((it) => tagger.tagSentenceSync(it));
 let parsed = parser.analyzeSync(tagged);
 
+
+
+
 parsed.forEach((sent) => {console.log(sent.getSyntaxTree().getTreeString())});
+
+
+
 ```
 
 #### Python 3
@@ -133,8 +139,8 @@ tagger = Tagger(API.KMR)
 parser = Parser(API.HNN)
 
 splits = splitter("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")
-tagged = [tagger.tagSentence(it) for it in splits]
-parsed = parser.analyze(tagged)
+tagged = tagger.tagSentence(*splits)
+parsed = parser(tagged)
 
 for sent in parsed:
     print(sent.getSyntaxTree().getTreeString())

@@ -119,6 +119,9 @@ promise.then(function(result){
 let parsed = recognizer.analyzeSync("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
 // 첫번째 문장의 의존구조를 출력합니다.
 parsed[0].getEntities().forEach((entity) => console.log(entity));
+
+
+
 ```
 
 #### Python 3
@@ -131,7 +134,7 @@ from koalanlp.proc import EntityRecognizer
 recognizer = EntityRecognizer(API.ETRI, apiKey=API_KEY)
 
 parsed = recognizer("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")
-// 또는 recognizer.analyze(...)
+# 또는 recognizer.analyze(...), recognizer.invoke(...)
 
 # 첫번째 문장의 개체명들을 출력합니다.
 for entity in parsed[0].getEntities():

@@ -216,12 +216,12 @@ $ pip install koalanlp
 ```python
 from koalanlp.Util import initialize
 
-# 꼬꼬마와 은전한닢 분석기의 2.0.0 버전을 참조합니다.
-initialize(java_options="-Xmx4g", KKMA="2.0.2", ETRI="2.0.2")
+# 꼬꼬마와 ETRI 분석기의 2.0.4 버전을 참조합니다.
+initialize(java_options="-Xmx4g", KKMA="2.0.4", ETRI="2.0.4")
 ```
 
 * `java_options` 인자는 JVM을 실행하기 위한 option string입니다.
-* 이후 인자들은 keyword argument들로, 상단 표를 참고하여 지정하실 수 있습니다.
+* 이후 인자들은 keyword argument들로, 상단 표를 참고하여 지정하실 수 있습니다. (항상 최신 버전을 사용하려면 `="LATEST"`를 사용하면 됩니다.)
 * 나머지 문서는 초기화 과정이 모두 완료되었다고 보고 진행합니다.
 * API 참고: [initialize](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.Util.initialize)
 
