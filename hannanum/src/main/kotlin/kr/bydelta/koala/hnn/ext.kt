@@ -34,7 +34,7 @@ fun String?.toETRIDepTag(): DependencyTag? =
             "ADV" -> DependencyTag.AJT
             "DEP" -> DependencyTag.UNDEF
             "INT" -> null
-            "PRN", null -> DependencyTag.UNDEF
+            null -> DependencyTag.UNDEF
             else ->
                 try {
                     DependencyTag.valueOf(this)

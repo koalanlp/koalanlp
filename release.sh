@@ -149,12 +149,15 @@ case ${ACTION} in
             git tag v$JAR_VER_CURRENT
 
             # SET NEXT
+            add_incremental_ver
+            set_version "$JAR_VER_NEXT-SNAPSHOT"
             for MODULE in $MODULES
             do
-                cd $MODULE
-                add_incremental_ver
-                set_version "$JAR_VER_NEXT-SNAPSHOT"
-                cd ..
+                if [ "$MODULE" != "core" ]; then
+                    cd $MODULE
+                    set_version "$JAR_VER_NEXT-SNAPSHOT"
+                    cd ..
+                fi
             done
         fi
 

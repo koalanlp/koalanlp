@@ -121,7 +121,7 @@ data class DependencyResponse(val id: Int, val text: String,
         val head = if (governor == -1) null else words[governor]
         val tags = label.split("_", limit = 2)
         val ptag = PhraseTag.valueOf(tags[0])
-        val dtype = if (tags.size > 1) DependencyTag.valueOf(tags[1]) else null
+        val dtype = if (tags.size > 1) DependencyTag.valueOf(tags[1].replace("PRN","UNDEF")) else null
 
         return DepEdge(head, words[id], ptag, dtype, originalLabel = label)
     }

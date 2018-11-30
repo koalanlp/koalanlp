@@ -470,7 +470,10 @@ enum class DependencyTag {
      * 접속격 체언(NP_CNJ) */
     CNJ,
 
-    /** 정의되지 않음: 기존 PRN(삽입어구) 포함 */
+    /** 삽입어구 */
+    PRN,
+
+    /** 정의되지 않음 */
     UNDEF,
 
     /** ROOT 지시자 */
@@ -699,7 +702,7 @@ enum class CoarseEntityType {
     /**
      * 식물의 이름
      */
-    PL,
+    PT,
 
     /**
      * 수량의 값, 서수 또는 이름
