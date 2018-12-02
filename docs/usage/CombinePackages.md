@@ -70,10 +70,6 @@ for(sent <- parsed){
 ```
 
 #### Java
-Reference: [CanParseDependency](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.proc/-can-parse-dependency/index.html),
-           한나눔 [Parser](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.hnn/-parser/index.html),
-           꼬꼬마 [Parser](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.kkma/-parser/index.html),
-           ETRI [Parser](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.koala.etri/-parser/index.html)
 
 ```java
 import kr.bydelta.koala.data.Sentence;
@@ -96,39 +92,66 @@ for(Sentence sent : parsed){
 }
 ```
 
-#### JavaScript (구현중)
-Reference: [Parser](https://koalanlp.github.io/nodejs-support/module-koalanlp.Parser.html)
+#### JavaScript
+
+* 아래 코드는 ES8과 호환되는 CommonJS (NodeJS > 8) 기준으로 작성되어 있습니다.
+
+##### Async/Await
 
 ```javascript
-let splitter = new koalanlp.SentenceSplitter(API.OKT)
-let tagger = new koalanlp.Tagger(API.KMR)
-let parser = new koalanlp.Parser(API.HNN)
+const {SentenceSplitter, Tagger, Parser} = require('koalanlp/proc');
+const {OKT, KMR, HNN} = require('koalanlp/API');
 
-/****** Asynchronous request ******/
-let promise = splitter.sentences("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")
-    .then(tagger.tagSentence)
-    .then(parser.analyze);
-promise.then(function(result){ 
+async function someAsyncFunction(){
+    // ....
+    
+    let splitter = new SentenceSplitter(OKT);
+    let tagger = new Tagger(KMR);
+    let parser = new Parser(HNN);
+    
+    let splits = await splitter("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
+    let tagged = await tagger.tagSentence(splits);
+    let parsed = await parser(tagged);
+    
     /* Result는 Sentence[] 타입입니다. */
-        result.forEach((sent) => {console.log(sent.getSyntaxTree().getTreeString())});
-});
+    for(const sent of parsed){
+        console.log(sent.getSyntaxTree().getTreeString())
+    }
+    
+    // ...
+}
 
-/****** Synchronous request ******/
-let splits = splitter.sentencesSync("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
-let tagged = splits.map((it) => tagger.tagSentenceSync(it));
-let parsed = parser.analyzeSync(tagged);
-
-
-
-
-parsed.forEach((sent) => {console.log(sent.getSyntaxTree().getTreeString())});
-
-
-
+someAsyncFunction().then(
+    () => console.log('After function finished'),
+    (error) => console.error('Error occurred!', error)
+);
 ```
 
+##### Promise
+
+```javascript
+const {SentenceSplitter, Tagger, Parser} = require('koalanlp/proc');
+const {OKT, KMR, HNN} = require('koalanlp/API');
+
+let splitter = new SentenceSplitter(OKT);
+let tagger = new Tagger(KMR);
+let parser = new Parser(HNN);
+
+splitter("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")
+    .then(tagger.tagSentence)
+    .then(parser)
+    .then((result) => {
+        /* Result는 Sentence[] 타입입니다. */
+        for(const sent of parsed){
+            console.log(sent.getSyntaxTree().getTreeString())
+        }
+    }, (error) => console.error('Error occurred!', error));
+```
+
+##### Synchronous Call (준비중)
+
+
 #### Python 3
-Reference: [Parser](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.Parser)
 
 ```python
 from koalanlp import API

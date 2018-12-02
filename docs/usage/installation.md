@@ -133,7 +133,7 @@ Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 
 ```
 
 ## NodeJS
-우선 Java 8 이상을 설치하시고, 아래와 같이 설치하십시오.
+우선 NodeJS 8 이상과 Java 8 이상을 설치하시고, 아래와 같이 설치하십시오.
 ```bash
 $ npm install --save koalanlp
 ```
@@ -160,27 +160,35 @@ $ npm install --save koalanlp
 초기화 과정에서 KoalaNLP는 필요한 Java Library를 자동으로 다운로드하여 설치합니다. 설치에는 시간이 다소 소요됩니다.
 때문에, 프로그램 실행시 최초 1회에 한하여 초기화 작업이 필요합니다.
 
-```javascript
-let koalanlp = require('koalanlp');
-let TYPES = koalanlp.util.TYPES;
+* 아래 코드는 ES8과 호환되는 CommonJS (NodeJS > 8) 기준으로 작성되어 있습니다.
+* 초기화 코드는 Asynchronous call만 지원합니다. 아래는 Async/Await 방식으로 작성되어 있습니다.
 
-// 꼬꼬마와 은전한닢 분석기의 1.9.1 버전을 참조합니다.
-koalanlp.initialize({
-  packages: [TYPES.KKMA, TYPES.EUNJEON], 
-  version: "1.9.1",
-  javaOptions: ["-Xmx4g"],
-  debug: true,
-})
+```javascript
+const {initialize} = require('koalanlp/Util');
+
+async function someAsyncFunction(){
+    // 꼬꼬마와 은전한닢 분석기의 2.0.4 버전을 참조합니다.
+    await initialize({
+      packages: {KKMA:'2.0.4', EUNJEON:'2.0.4'},
+      javaOptions: ["-Xmx4g"],
+      verbose: true,
+    });
+    
+    // 초기화 다음 작업...
+}
+
+someAsyncFunction().then(
+    () => console.log('Finished'),
+    (error) => console.error('Error', error)
+);
 ```
 
 * 첫번째 인자는 초기화 option입니다.
-  * `packages` 인자는 Python 프로그램에서 사용할 모든 패키지의 array입니다. (상단 표 참고)
-  * `version` 인자는 다운로드할 해당 패키지의 버전 string입니다. (상단 표 참고)
-  * `java_options` 인자는 JVM을 실행하기 위한 option string의 array입니다.
-  * `debug`는 초기화 과정을 표시할지를 결정하는 인자입니다. `true`이면 초기화 과정이 표시됩니다.
-* Promise 객체가 반환됩니다.
+  * `packages` 인자는 Python 프로그램에서 사용할 모든 패키지의 버전을 정의합니다. (상단 표 참고)
+  * `javaOptions` 인자는 JVM을 실행하기 위한 option string의 array입니다.
+  * `verbose`는 초기화 과정을 표시할지를 결정하는 인자입니다. `true`이면 초기화 과정이 표시되며, 기본값은 true입니다.
 * 아래 문서는 초기화 과정이 모두 완료되었다고 보고 진행합니다.
-* API 참고: [initialize](https://koalanlp.github.io/nodejs-support/module-koalanlp.html#.initialize)
+* API 참고: [initialize](https://koalanlp.github.io/nodejs-support/module-koalanlp_Util.html#.initialize)
 
 ## Python 3
 우선 Java 8 이상을 설치하고, `JAVA_HOME`을 환경변수에 등록해주십시오.

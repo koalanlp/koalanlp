@@ -89,24 +89,51 @@ List<Sentence> parsed = parser.analyze("이 문단을 분석합니다. 문단 �
 System.out.println(parsed.get(0).getSyntaxTree().getTreeString()); // 첫번째 문장의 구문구조 트리를 출력합니다.
 ```
 
-#### JavaScript (구현중)
-Reference: [Parser](https://koalanlp.github.io/nodejs-support/module-koalanlp.Parser.html)
+#### JavaScript
+Reference: [Parser](https://koalanlp.github.io/nodejs-support/module-koalanlp_proc.Parser.html)
+
+* 아래 코드는 ES8과 호환되는 CommonJS (NodeJS > 8) 기준으로 작성되어 있습니다.
+
+##### Async/Await
 
 ```javascript
-let Parser = koalanlp.Parser;
-let parser = new Parser(API.HNN);
+const {Parser} = require('koalanlp/proc');
+const {HNN} = require('koalanlp/API');
 
-/****** Asynchronous request ******/
-let promise = parser.analyze("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
-promise.then(function(result){ 
-    /* Result는 Sentence[] 타입입니다. */ 
+async function someAsyncFunction(){
+    // ....
+    
+    let parser = new Parser(HNN);
+    let result = await parser("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
+    // 또는 parser.analyze(...)
+
+    /* Result는 Sentence[] 타입입니다. */
     console.log(result[0].getSyntaxTree().getTreeString());  // 첫번째 문장의 구문구조 트리를 출력합니다.
-});
+    
+    // ...
+}
 
-/****** Synchronous request ******/
-let parsed = parser.analyzeSync("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
-console.log(parsed[0].getSyntaxTree().getTreeString());  // 첫번째 문장의 구문구조 트리를 출력합니다.
+someAsyncFunction().then(
+    () => console.log('After function finished'),
+    (error) => console.error('Error occurred!', error)
+);
 ```
+
+##### Promise
+
+```javascript
+const {Parser} = require('koalanlp/proc');
+const {HNN} = require('koalanlp/API');
+
+let parser = new Parser(HNN);
+parser("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")  // 또는 parser.analyze(...)
+    .then((result) => {
+        /* Result는 Sentence[] 타입입니다. */
+        console.log(result[0].getSyntaxTree().getTreeString());  // 첫번째 문장의 구문구조 트리를 출력합니다.
+    }, (error) => console.error('Error occurred!', error));
+```
+
+##### Synchronous Call (준비중)
 
 #### Python 3
 Reference: [Parser](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.Parser)

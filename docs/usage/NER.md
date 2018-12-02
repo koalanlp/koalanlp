@@ -99,30 +99,61 @@ for(Entity entity : parsed[0].getEntities()) {
 }
 ```
 
-#### JavaScript (구현중)
-Reference: [EntityRecognizer](https://koalanlp.github.io/nodejs-support/module-koalanlp.EntityRecognizer.html)
+#### JavaScript
+Reference: [EntityRecognizer](https://koalanlp.github.io/nodejs-support/module-koalanlp_proc.EntityRecognizer.html)
+
+* 아래 코드는 ES8과 호환되는 CommonJS (NodeJS > 8) 기준으로 작성되어 있습니다.
+
+##### Async/Await
 
 ```javascript
-let EntityRecognizer = koalanlp.EntityRecognizer;
-let recognizer = new EntityRecognizer(API.ETRI, {'apiKey': API_KEY});
+const {EntityRecognizer} = require('koalanlp/proc');
+const {ETRI} = require('koalanlp/API');
 
-/****** Asynchronous request ******/
-let promise = recognizer.analyze("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
-promise.then(function(result){ 
-    /* Result는 Sentence[] 타입입니다. */
+const API_KEY = /** ETRI에서 발급받은 키 **/
+
+async function someAsyncFunction(){
+    // ....
     
+    let recognizer = new EntityRecognizer(ETRI, {apiKey: API_KEY});
+    let result = await recognizer("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
+    // 또는 recognizer.analyze(...)
+
+    /* Result는 Sentence[] 타입입니다. */
     // 첫번째 문장의 개체명들을 출력합니다.
-    result[0].getEntities().forEach((entity) => console.log(entity));
-});
+    for(const entity of parsed[0].getEntities()){
+        console.log(entity.toString());
+    }
+        
+    // ...
+}
 
-/****** Synchronous request ******/
-let parsed = recognizer.analyzeSync("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
-// 첫번째 문장의 의존구조를 출력합니다.
-parsed[0].getEntities().forEach((entity) => console.log(entity));
-
-
-
+someAsyncFunction().then(
+    () => console.log('After function finished'),
+    (error) => console.error('Error occurred!', error)
+);
 ```
+
+##### Promise
+
+```javascript
+const {EntityRecognizer} = require('koalanlp/proc');
+const {ETRI} = require('koalanlp/API');
+
+const API_KEY = /** ETRI에서 발급받은 키 **/
+
+let recognizer = new EntityRecognizer(ETRI, {apiKey: API_KEY});
+recognizer("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")  // 또는 recognizer.analyze(...)
+    .then((result) => {
+        /* Result는 Sentence[] 타입입니다. */
+        // 첫번째 문장의 개체명들을 출력합니다.
+        for(const entity of parsed[0].getEntities()){
+            console.log(entity.toString());
+        }
+    }, (error) => console.error('Error occurred!', error));
+```
+
+##### Synchronous Call (준비중)
 
 #### Python 3
 Reference: [EntityRecognizer](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.EntityRecognizer)

@@ -1452,7 +1452,7 @@ class Sentence(private val words: List<Word>) : CanHaveProperty(), List<Word> by
     fun getNouns(): List<Word> = words.filter { w ->
         val inclusion = w.indexOfLast { it.isNoun() || it.hasTagOneOf("ETN", "XSN") }
         val exclusion = w.indexOfLast { it.hasTagOneOf("XSV", "XSA", "XSM") }
-        inclusion != -1 && (exclusion == -1 || inclusion > exclusion)
+        inclusion != -1 && inclusion > exclusion
     }
 
     /**
@@ -1473,7 +1473,7 @@ class Sentence(private val words: List<Word>) : CanHaveProperty(), List<Word> by
     fun getVerbs(): List<Word> = words.filter { w ->
         val inclusion = w.indexOfLast { it.isPredicate() || it.tag == POS.XSV }
         val exclusion = w.indexOfLast { it.hasTagOneOf("ETN", "ETM", "XSN", "XSA", "XSM") }
-        inclusion != -1 && (exclusion == -1 || inclusion > exclusion)
+        inclusion != -1 && inclusion > exclusion
     }
 
     /**
@@ -1492,9 +1492,9 @@ class Sentence(private val words: List<Word>) : CanHaveProperty(), List<Word> by
      * @return 수식언 또는 수식언 성격의 어휘를 포함하는 어절의 목록
      */
     fun getModifiers(): List<Word> = words.filter { w ->
-        val inclusion = w.indexOfLast { it.isNoun() || it.hasTagOneOf("ETM", "XSA", "XSM") }
+        val inclusion = w.indexOfLast { it.isModifier() || it.hasTagOneOf("ETM", "XSA", "XSM") }
         val exclusion = w.indexOfLast { it.hasTagOneOf("ETN", "XSN", "XSV") }
-        inclusion != -1 && (exclusion == -1 || inclusion > exclusion)
+        inclusion != -1 && inclusion > exclusion
     }
     /********** Equalities **********/
 

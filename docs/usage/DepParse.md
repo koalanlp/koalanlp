@@ -108,31 +108,53 @@ for(DepEdge dep: parsed[0].getDependencies()){
 }
 ```
 
-#### JavaScript (구현중)
-Reference: [Parser](https://koalanlp.github.io/nodejs-support/module-koalanlp.Parser.html)
+#### JavaScript
+Reference: [Parser](https://koalanlp.github.io/nodejs-support/module-koalanlp_proc.Parser.html)
+
+* 아래 코드는 ES8과 호환되는 CommonJS (NodeJS > 8) 기준으로 작성되어 있습니다.
+
+##### Async/Await
 
 ```javascript
-let Parser = koalanlp.Parser;
-let parser = new Parser(API.HNN); // 또는 API.KKMA, API.ETRI
-// ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: new Parser(API.ETRI, {'apiKey': API_KEY})
+const {Parser} = require('koalanlp/proc');
+const {HNN} = require('koalanlp/API');
 
-/****** Asynchronous request ******/
-let promise = parser.analyze("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
-promise.then(function(result){ 
-    /* Result는 Sentence[] 타입입니다. */
+async function someAsyncFunction(){
+    // ....
     
+    let parser = new Parser(HNN);
+    let result = await parser("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
+    // 또는 parser.analyze(...)
+
+    /* Result는 Sentence[] 타입입니다. */
     // 첫번째 문장의 의존구조를 출력합니다.
     result[0].getDependencies().forEach((dep) => console.log(dep));
-});
+    
+    // ...
+}
 
-/****** Synchronous request ******/
-let parsed = parser.analyzeSync("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
-// 첫번째 문장의 의존구조를 출력합니다.
-parsed[0].getDependencies().forEach((dep) => console.log(dep));
-
-
-
+someAsyncFunction().then(
+    () => console.log('After function finished'),
+    (error) => console.error('Error occurred!', error)
+);
 ```
+
+##### Promise
+
+```javascript
+const {Parser} = require('koalanlp/proc');
+const {HNN} = require('koalanlp/API');
+
+let parser = new Parser(HNN);
+parser("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")  // 또는 parser.analyze(...)
+    .then((result) => {
+        /* Result는 Sentence[] 타입입니다. */
+        // 첫번째 문장의 의존구조를 출력합니다.
+        result[0].getDependencies().forEach((dep) => console.log(dep));
+    }, (error) => console.error('Error occurred!', error));
+```
+
+##### Synchronous Call (준비중)
 
 #### Python 3
 Reference: [Parser](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.Parser)

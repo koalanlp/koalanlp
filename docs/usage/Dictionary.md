@@ -114,27 +114,64 @@ Dictionary.INSTANCE.getBaseEntries(pos -> {
 }); // 시스템 사전 항목
 ```
 
-#### JavaScript (구현중)
-Reference: [Dictionary](https://koalanlp.github.io/nodejs-support/module-koalanlp.Dictionary.html)
+#### JavaScript
+Reference: [Dictionary](https://koalanlp.github.io/nodejs-support/module-koalanlp_proc.Dictionary.html)
+
+* 아래 코드는 ES8과 호환되는 CommonJS (NodeJS > 8) 기준으로 작성되어 있습니다.
+* `addUserDictionary`와 `contains`는 synchronous call만 지원합니다.
 
 ```javascript
+const {Dictionary} = require('koalanlp/proc');
+const {KKMA, EUNJEON} = require('koalanlp/API');
+const {POS} = require('koalanlp/types');
 
-let KDict = new Dictionary(API.KKMA);
+let KDict = new Dictionary(KKMA);
 /***** 사전에 등록하기 *****/
-KDict.addUserDictionary("코알라NLP", POS.NNP); // 1개 등록
-KDict.addUserDictionary(["코모란", POS.NNP], ["은전한닢", POS.NNP]); // 2개 이상 등록
+KDict.addUserDictionary({'surface':"코알라NLP", 'tag':POS.NNP}); // 1개 등록
+KDict.addUserDictionary({'surface':"코모란", 'tag':POS.NNP}, {'surface':"은전한닢", 'tag':POS.NNP}); // 2개 이상 등록
 
 /***** 사전에 있는지 확인하기 *****/
-KDict.contains("코알라NLP", [POS.NNP, POS.NNG]);
-KDict.contains(["코알라NLP", POS.NNP]);
+KDict.contains("코알라NLP", POS.NNP, POS.NNG);
+KDict.contains("코알라NLP", POS.NNP);
+```
 
+* `importFrom`, `items`, `getBaseEntries` 등은 asynchronous call만 지원합니다.
+
+##### Async/Await
+
+```javascript
+async function someAsyncFunction(){
+    /***** 다른 패키지 사전에서 단어 불러오기 *****/
+    let EDict = new Dictionary(EUNJEON);
+    KDict.importFrom(EDict);
+    
+    /***** 사전 항목 추출하기 *****/
+    KDict.items(); // 사용자 사전 항목
+    KDict.getBaseEntries(POS.isNoun); // 시스템 사전 항목
+}
+
+someAsyncFunction().then(() => {...}, (error) => {...});
+```
+
+##### Promise
+
+```javascript
 /***** 다른 패키지 사전에서 단어 불러오기 *****/
-let EDict = new Dictionary(API.EUNJEON)
-KDict.importFrom(EDict);
+let EDict = new Dictionary(EUNJEON);
+KDict.importFrom(EDict).then(() => {...}, (error) => {...});;
 
 /***** 사전 항목 추출하기 *****/
-KDict.items(); // 사용자 사전 항목
-KDict.getBaseEntries(POS.isNoun); // 시스템 사전 항목
+KDict.items().then((items) => {
+        // 사용자 사전 항목
+        //items는 Array<{'surface': string, 'tag': POS}> 입니다.
+        ...        
+    }, (error) => {...});
+KDict.getBaseEntries(POS.isNoun).then((items) => {
+        // 시스템 사전 항목
+        //items는 Generator<{'surface': string, 'tag': POS}> 입니다.
+        ...        
+    }, (error) => {...}); 
+
 ```
 
 #### Python 3

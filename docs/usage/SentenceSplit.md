@@ -77,23 +77,52 @@ System.out.println(paragraph.get(1)); //== 간단하죠?
 ```
 
 #### JavaScript
-Reference: [SentenceSplitter](https://koalanlp.github.io/nodejs-support/module-koalanlp.SentenceSplitter.html)
+Reference: [SentenceSplitter](https://koalanlp.github.io/nodejs-support/module-koalanlp_proc.SentenceSplitter.html)
+
+* 아래 코드는 ES8과 호환되는 CommonJS (NodeJS > 8) 기준으로 작성되어 있습니다.
+
+##### Async/Await
+
 ```javascript
-let SentenceSplitter = koalanlp.SentenceSplitter;
-let splitter = new SentenceSplitter(API.HANNANUM); // 또는 API.OKT
+const {SentenceSplitter} = require('koalanlp/proc');
+const {HNN} = require('koalanlp/API');
 
-// Asynchronous request
-let promise = sentSplit.sentences("분리할 문장을 이렇게 넣으면 문장이 분리됩니다. 간단하죠?");
-promise.then(function(result){
-  console.log(result[0]); //== 분리할 문장을 이렇게 넣으면 문장이 분리됩니다.
-  console.log(result[1]); //== 간단하죠?
-});
+async function someAsyncFunction(){
+    // ....
+    
+    let splitter = new SentenceSplitter(HNN);
+    let result = await splitter("분리할 문장을 이렇게 넣으면 문장이 분리됩니다. 간단하죠?");
+    // 또는 splitter.sentences(...) 
 
-// Synchronous request
-let paragraph = sentSplit.sentencesSync("분리할 문장을 이렇게 넣으면 문장이 분리됩니다. 간단하죠?");
-console.log(paragraph[0]); //== 분리할 문장을 이렇게 넣으면 문장이 분리됩니다.
-console.log(paragraph[1]); //== 간단하죠?
+    /* Result는 string[] 타입입니다. */
+    console.log(result[0]); //== 분리할 문장을 이렇게 넣으면 문장이 분리됩니다.
+    console.log(result[1]); //== 간단하죠?
+        
+    // ...
+}
+
+someAsyncFunction().then(
+    () => console.log('After function finished'),
+    (error) => console.error('Error occurred!', error)
+);
 ```
+
+##### Promise
+
+```javascript
+const {SentenceSplitter} = require('koalanlp/proc');
+const {HNN} = require('koalanlp/API');
+
+let splitter = new SentenceSplitter(HNN);
+splitter("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")  // 또는 splitter.sentences(...)
+    .then((result) => {
+        /* Result는 string[] 타입입니다. */
+        console.log(result[0]); //== 분리할 문장을 이렇게 넣으면 문장이 분리됩니다.
+        console.log(result[1]); //== 간단하죠?
+    }, (error) => console.error('Error occurred!', error));
+```
+
+##### Synchronous Call (준비중)
 
 #### Python 3
 Reference: [SentenceSplitter](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.SentenceSplitter)

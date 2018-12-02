@@ -11,6 +11,7 @@ include 'kkma'    // KKMA by SNU IDS Lab
 include 'okt'     // Open Korean Text (Twitter-korean의 후속)
 include 'rhino'   // RHINO by 최석재
 include 'arirang' // Arirang by 이수명
+inlcude 'khaiii'  // Khaiii by Kakao
 
 findProject(':core')?.name = 'koalanlp-core'
 findProject(':komoran')?.name = 'koalanlp-kmr'
@@ -22,3 +23,4 @@ findProject(':kkma')?.name = 'koalanlp-kkma'
 findProject(':okt')?.name = 'koalanlp-okt'
 findProject(':rhino')?.name = 'koalanlp-rhino'
 findProject(':arirang')?.name = 'koalanlp-arirang'
+findProject(':khaiii')?.name = 'koalanlp-khaiii'

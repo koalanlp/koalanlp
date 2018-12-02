@@ -187,24 +187,27 @@ ExtUtil.assembleHangul(null, '\u1161'); // '아'
 ExtUtil.assembleHangul('\u1100', null, '\u11A8'); // '극'
 ```
 
-#### NodeJS (구현중)
-Reference: [ExtUtil](https://koalanlp.github.io/nodejs-support/module-koalanlp.ExtUtil.html)
+#### JavaScript
+Reference: [ExtUtil](https://koalanlp.github.io/nodejs-support/module-koalanlp_ExtUtil.html)
+
+* 아래 코드는 ES8과 호환되는 CommonJS (NodeJS > 8) 기준으로 작성되어 있습니다.
+* ExtUtil의 기능은 Synchronous call만 지원합니다.
 
 ```javascript
-let ExtUtil = koalanlp.ExtUtil;
+const ExtUtil = require('koalanlp/ExtUtil');
 
 /**** 한글 여부 확인 ****/
-ExtUtil.isHangul('가'); // true
-ExtUtil.isHangul('ㄱ'); // true
-ExtUtil.isHangul('a'); // false
+ExtUtil.isHangul('가'); // [true]
+ExtUtil.isHangul('ㄱ'); // [true]
+ExtUtil.isHangul('a'); // [false]
 
 ExtUtil.isHangulEnding("갤럭시S는"); // true
 ExtUtil.isHangulEnding("abc"); // false
 ExtUtil.isHangulEnding("보기 ㄱ"); // true
 
-ExtUtil.isCompleteHangul('가'); // true
-ExtUtil.isCompleteHangul('ㄱ'); // false
-ExtUtil.isCompleteHangul('a'); // false
+ExtUtil.isCompleteHangul('가'); // [true]
+ExtUtil.isCompleteHangul('ㄱ'); // [false]
+ExtUtil.isCompleteHangul('a'); // [false]
 
 /**** 종성으로 끝나는지 확인 ****/
 ExtUtil.isJongsungEnding('각'); // true
@@ -212,30 +215,30 @@ ExtUtil.isJongsungEnding('가'); // false
 ExtUtil.isJongsungEnding('m'); // false
 
 /**** 초, 중, 종성 한글 자모 값으로 분해 ****/
-ExtUtil.getChosung('가'); // 'ㄱ'에 해당하는 초성 문자 \u1100
-ExtUtil.getJungsung('가'); // 'ㅏ'에 해당하는 초성 문자 \u1161
-ExtUtil.getJongsung('가'); // null
-ExtUtil.getJongsung('각'); // 'ㄱ'에 해당하는 종성문자 \u11A8
-ExtUtil.getChosung('ㄱ'); // null
-ExtUtil.dissembleHangul('가'); // ['\u1100', '\u1161', null]
-ExtUtil.dissembleHangul('각'); // ['\u1100', '\u1161', '\u11A8']
+ExtUtil.getChosung('가'); // 'ㄱ'에 해당하는 초성 문자 [\u1100]
+ExtUtil.getJungsung('가'); // 'ㅏ'에 해당하는 초성 문자 [\u1161]
+ExtUtil.getJongsung('가'); // [undefined]
+ExtUtil.getJongsung('각'); // 'ㄱ'에 해당하는 종성문자 [\u11A8]
+ExtUtil.getChosung('ㄱ'); // [undefined]
+ExtUtil.dissembleHangul('가'); // '\u1100\u1161'
+ExtUtil.dissembleHangul('각'); // '\u1100\u1161\u11A8'
 ExtUtil.dissembleHangul("가각"); // "\u1100\u1161\u1100\u1161\u11A8" (문자 사이를 띄워서 표시하면: 'ᄀ ᅡ ᄀ ᅡ ᆨ')
 
 /**** 종성 한글 자모값으로 변환 ****/
 ChoToJong.get('ㄵ'); // \u11AC
 
 /**** 한글 자모 범위에 속하는 초, 중, 종성인지 확인 ****/
-ExtUtil.isChosungJamo('ㄱ'); // false
-ExtUtil.isChosungJamo('\u1100'); // true
-ExtUtil.isJungsungJamo('ㅏ'); // false
-ExtUtil.isJungsungJamo('\u1161'); // true
-ExtUtil.isJongsungJamo('ㄱ'); // false
-ExtUtil.isJongsungJamo('\u11A8'); // true
+ExtUtil.isChosungJamo('ㄱ'); // [false]
+ExtUtil.isChosungJamo('\u1100'); // [true]
+ExtUtil.isJungsungJamo('ㅏ'); // [false]
+ExtUtil.isJungsungJamo('\u1161'); // [true]
+ExtUtil.isJongsungJamo('ㄱ'); // [false]
+ExtUtil.isJongsungJamo('\u11A8'); // [true]
 
 /**** 한글 자모 결합 ****/
 ExtUtil.assembleHangul("\u1100\u1161\u1102\u1161\u11ab"); // "가난"
-ExtUtil.assembleHangul(null, '\u1161'); // '아'
-ExtUtil.assembleHangul('\u1100', null, '\u11A8'); // '극'
+ExtUtil.assembleHangulTriple(undefined, '\u1161'); // '아'
+ExtUtil.assembleHangulTriple('\u1100', undefined, '\u11A8'); // '극'
 ```
 
 #### Python 3

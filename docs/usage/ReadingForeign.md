@@ -97,11 +97,14 @@ ExtUtil.hanjaToHangul("300 兩의 돈"); // "300 냥의 돈"
 ExtUtil.hanjaToHangul("樂園"); // "낙원" (두음법칙)
 ```
 
-#### NodeJS (구현중)
-Reference: [ExtUtil](https://koalanlp.github.io/nodejs-support/module-koalanlp.ExtUtil.html)
+#### JavaScript
+Reference: [ExtUtil](https://koalanlp.github.io/nodejs-support/module-koalanlp_ExtUtil.html)
+
+* 아래 코드는 ES8과 호환되는 CommonJS (NodeJS > 8) 기준으로 작성되어 있습니다.
+* ExtUtil의 기능은 Synchronous call만 지원합니다.
 
 ```javascript
-let ExtUtil = koalanlp.ExtUtil;
+const ExtUtil = require('koalanlp/ExtUtil');
 
 ExtUtil.alphaToHangul("ABCD"); // "에이비씨디"
 ExtUtil.alphaToHangul("갤럭시S"); // "갤럭시에스"

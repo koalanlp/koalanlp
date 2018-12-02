@@ -46,10 +46,10 @@ ETRI [RoleLabeler](https://koalanlp.github.io/koalanlp/api/koalanlp/kr.bydelta.k
 import kr.bydelta.koala.etri.RoleLabeler
 
 val API_KEY = /** ETRI에서 발급받은 키 **/
-val recognizer = RoleLabeler(API_KEY)
+val labeler = RoleLabeler(API_KEY)
 
-val parsed = recognizer.analyze("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.") 
-// 또는 recognizer(...), recognizer.invoke(...)
+val parsed = labeler.analyze("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.") 
+// 또는 labeler(...), labeler.invoke(...)
 
 // 첫번째 문장의 의미역들을 출력합니다.
 parsed[0].getRoles().forEach{ role ->
@@ -68,10 +68,10 @@ import kr.bydelta.koala.etri.EntityRecognizer
 import kr.bydelta.koala.Implicits._
 
 val API_KEY = /** ETRI에서 발급받은 키 **/
-val recognizer = new RoleLabeler(API_KEY)
+val labeler = new RoleLabeler(API_KEY)
 
-val parsed = recognizer.analyze("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.") 
-// 또는 recognizer(...), recognizer.invoke(...)
+val parsed = labeler.analyze("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.") 
+// 또는 labeler(...), labeler.invoke(...)
 
 // 첫번째 문장의 의미역들을 출력합니다.
 parsed[0].getRoles().forEach{ role =>
@@ -89,10 +89,10 @@ import kr.bydelta.koala.data.Sentence;
 import kr.bydelta.koala.data.RoleEdge;
 
 String API_KEY = /** ETRI에서 발급받은 키 **/
-RoleLabeler recognizer = new RoleLabeler(API_KEY);
+RoleLabeler labeler = new RoleLabeler(API_KEY);
 
-List<Sentence> parsed = recognizer.analyze("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.") 
-// 또는 recognizer.invoke(...)
+List<Sentence> parsed = labeler.analyze("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.") 
+// 또는 labeler.invoke(...)
 
 // 첫번째 문장의 의미역들을 출력합니다.
 for(RoleEdge role : parsed[0].getRoles()) {
@@ -100,30 +100,59 @@ for(RoleEdge role : parsed[0].getRoles()) {
 }
 ```
 
-#### JavaScript (구현중)
-Reference: [RoleLabeler](https://koalanlp.github.io/nodejs-support/module-koalanlp.RoleLabeler.html)
+#### JavaScript
+Reference: [RoleLabeler](https://koalanlp.github.io/nodejs-support/module-koalanlp_proc.RoleLabeler.html)
+
+* 아래 코드는 ES8과 호환되는 CommonJS (NodeJS > 8) 기준으로 작성되어 있습니다.
+
+##### Async/Await
 
 ```javascript
-let RoleLabeler = koalanlp.RoleLabeler;
-let recognizer = new RoleLabeler(API.ETRI, {'apiKey': API_KEY});
+const {RoleLabeler} = require('koalanlp/proc');
+const {ETRI} = require('koalanlp/API');
 
-/****** Asynchronous request ******/
-let promise = recognizer.analyze("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
-promise.then(function(result){ 
-    /* Result는 Sentence[] 타입입니다. */
+const API_KEY = /** ETRI에서 발급받은 키 **/
+
+async function someAsyncFunction(){
+    // ....
     
-    // 첫번째 문장의 의미역들을 출력합니다.
-    result[0].getRoles().forEach((role) => console.log(role));
-});
+    let labeler = new RoleLabeler(ETRI, {apiKey: API_KEY});
+    let result = await labeler("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
+    // 또는 labeler.analyze(...)
 
-/****** Synchronous request ******/
-let parsed = recognizer.analyzeSync("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
-// 첫번째 문장의 의존구조를 출력합니다.
-parsed[0].getRoles().forEach((role) => console.log(role));
+    /* Result는 Sentence[] 타입입니다. */
+    for(const role of result[0].getRoles()){
+        console.log(role.toString()); // 첫번째 문장의 의미역들을 출력합니다.
+    }
+        
+    // ...
+}
 
-
-
+someAsyncFunction().then(
+    () => console.log('After function finished'),
+    (error) => console.error('Error occurred!', error)
+);
 ```
+
+##### Promise
+
+```javascript
+const {RoleLabeler} = require('koalanlp/proc');
+const {ETRI} = require('koalanlp/API');
+
+const API_KEY = /** ETRI에서 발급받은 키 **/
+
+let labeler = new RoleLabeler(ETRI, {apiKey: API_KEY});
+labeler("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")  // 또는 labeler.analyze(...)
+    .then((result) => {
+        /* Result는 Sentence[] 타입입니다. */
+        for(const role of result[0].getRoles()){
+            console.log(role.toString()); // 첫번째 문장의 의미역들을 출력합니다.
+        }
+    }, (error) => console.error('Error occurred!', error));
+```
+
+##### Synchronous Call (준비중)
 
 #### Python 3
 Reference: [RoleLabeler](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.RoleLabeler)
@@ -132,10 +161,10 @@ Reference: [RoleLabeler](https://koalanlp.github.io/python-support/html/koalanlp
 from koalanlp import API
 from koalanlp.proc import EntityRecognizer
 
-recognizer = RoleLabeler(API.ETRI, apiKey=API_KEY)
+labeler = RoleLabeler(API.ETRI, apiKey=API_KEY)
 
-parsed = recognizer("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")
-# 또는 recognizer.analyze(...), recognizer.invoke(...)
+parsed = labeler("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")
+# 또는 labeler.analyze(...), labeler.invoke(...)
 
 # 첫번째 문장의 의미역들을 출력합니다.
 for role in parsed[0].getRoles():

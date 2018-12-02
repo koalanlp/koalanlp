@@ -97,26 +97,51 @@ List<Sentence> taggedParagraph = tagger.tag("문단을 분석합니다. 자동�
 println(taggedParagraph.get(0).singleLineString()) // "문단을 분석합니다."의 품사분석 결과 출력
 ```
 
-#### JavaScript (구현중)
-Reference: [Tagger](https://koalanlp.github.io/nodejs-support/module-koalanlp.Tagger.html)
+#### JavaScript
+Reference: [Tagger](https://koalanlp.github.io/nodejs-support/module-koalanlp_proc.Tagger.html)
+
+* 아래 코드는 ES8과 호환되는 CommonJS (NodeJS > 8) 기준으로 작성되어 있습니다.
+
+##### Async/Await
 
 ```javascript
-let Tagger = koalanlp.Tagger;
-let tagger = new Tagger(API.EUNJEON); // 또는 다른 API 값.
-// 코모란 분석기는 경량 분석기를 사용하는 옵션이 있습니다. 예: new Tagger(API.KMR, {'useLightTagger: true})
-// ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: new Tagger(API.ETRI, {'apiKey': API_KEY})
+const {Tagger} = require('koalanlp/proc');
+const {EUNJEON} = require('koalanlp/API');
 
-/****** Asynchronous request ******/
-let paraPromise = tagger.tag("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다.");
-paraPromise.then(function(taggedParagraph){
-    console.log(taggedParagraph[0].singleLineString()); // "문단을 분석합니다."의 품사분석 결과 출력
-    /* 결과는 Sentence[] 타입입니다. */ 
-});
+async function someAsyncFunction(){
+    // ....
+    
+    let tagger = new Tagger(EUNJEON);
+    let result = await tagger("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다.");
+    // 또는 tagger.sentences(...) 
 
-/****** Synchronous request ******/
-let taggedParagraph = tagger.tagSync("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다."); // Sentence[] 타입
-console.log(taggedParagraph[0].singleLineString()); // "문단을 분석합니다."의 품사분석 결과 출력
+    /* Result는 string[] 타입입니다. */
+    console.log(result[0].singleLineString()); // "문단을 분석합니다."의 품사분석 결과 출력
+        
+    // ...
+}
+
+someAsyncFunction().then(
+    () => console.log('After function finished'),
+    (error) => console.error('Error occurred!', error)
+);
 ```
+
+##### Promise
+
+```javascript
+const {Tagger} = require('koalanlp/proc');
+const {EUNJEON} = require('koalanlp/API');
+
+let tagger = new Tagger(EUNJEON);
+tagger("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다.")  // 또는 tagger.sentences(...)
+    .then((result) => {
+        /* Result는 string[] 타입입니다. */
+        console.log(result[0].singleLineString()); // "문단을 분석합니다."의 품사분석 결과 출력
+    }, (error) => console.error('Error occurred!', error));
+```
+
+##### Synchronous Call (준비중)
 
 #### Python 3
 Reference: [Tagger](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.Tagger)
