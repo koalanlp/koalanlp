@@ -18,7 +18,7 @@ import java.net.ConnectException
  */
 class APIException(val statusCode: Int, val msg: String) : Exception(msg)
 
-/**
+/**a character
  * ETRI Open API와 통신을 하는 부분입니다.
  */
 interface CanCommunicateETRIApi {
@@ -103,8 +103,10 @@ interface CanParseWithETRI : CanCommunicateETRIApi, CanAnalyzeProperty<SentenceR
      * @return 분석기가 받아들일 수 있는 형태의 데이터입니다. 각 Pair의 [Pair.first] 값은 변환된 문장 객체이며, [Pair.second] 값은 해당 문장의 String 값입니다.
      */
     override fun convert(sentence: String): List<Pair<SentenceResponse, String>> {
-        val result = request(apiKey, requestType, sentence)
+        if (sentence.isBlank())
+            return emptyList()
 
+        val result = request(apiKey, requestType, sentence)
         return result.sentences.map { it to it.surfaceString }
     }
 
