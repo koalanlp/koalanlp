@@ -187,14 +187,14 @@ object RandomSentenceTest : Spek({
     describe("RoleLabeler") {
         it("should not throw any exception") {
             val analyzer = RoleLabeler(API_KEY)
-            val examples = Examples.exampleSequence(1) //.take(10)
+            val examples = Examples.exampleSequence(1).take(10)
 
             for ((_, testText) in examples) {
                 // 반복 요청을 막기 위해 적절한 시간동안 멈춥니다.
-                Thread.sleep(1000 + Random().nextInt(10) * 1000L);
-                println(testText);
+                Thread.sleep(1000 + Random().nextInt(10) * 1000L)
+                print('.');
 
-                analyzer(testText)[0] //} `should not throw` AnyException
+                { analyzer(testText)[0] } `should not throw` AnyException
             }
         }
     }

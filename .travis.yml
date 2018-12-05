@@ -16,6 +16,7 @@ cache:
   - $HOME/.gradle/wrapper/
   - $HOME/khaiii-orig
   - $HOME/.hunter
+  - $HOME/.local/lib/python3.6
 install:
 - sh khaiii/install.sh
 before_script:

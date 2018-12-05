@@ -335,7 +335,11 @@ class Khaiii @JvmOverloads constructor(resourceDirectory: String = "", val opt: 
 class Tagger(resourceDirectory: String = "", option: KhaiiiConfig = KhaiiiConfig()) : CanTagOnlyASentence<KhaiiiWord?>() {
 
     val khaiii by lazy {
-        Khaiii(resourceDirectory, option)
+        val api = Khaiii(resourceDirectory, option)
+        assert(api.version() == "0.1", {
+            "API가 변화하고 있어, 0.1버전만 지원합니다. ${api.version()} 버전은 아직 모르니 issue를 등록해주세요!"
+        })
+        api
     }
 
 

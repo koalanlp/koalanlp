@@ -2,25 +2,25 @@ rootProject.name = 'koalanlp'
 
 include 'core' //Core API package
 
-include 'komoran' // Komoran 3.x by Shineware
-include 'eunjeon' // SEunjeon (Mecab-ko의 변형)
+include 'arirang' // Arirang by 이수명
 include 'daon'    // Daon-core by Rasoio
+include 'eunjeon' // SEunjeon (Mecab-ko의 변형)
 include 'etri'    // ETRI REST API by ETRI
 include 'hannanum' // Hannanum + NLPHub by KAIST Semantic Web group
+include 'khaiii'  // Khaiii by Kakao
 include 'kkma'    // KKMA by SNU IDS Lab
+include 'komoran' // Komoran 3.x by Shineware
 include 'okt'     // Open Korean Text (Twitter-korean의 후속)
 include 'rhino'   // RHINO by 최석재
-include 'arirang' // Arirang by 이수명
-include 'khaiii'  // Khaiii by Kakao
 
 findProject(':core')?.name = 'koalanlp-core'
-findProject(':komoran')?.name = 'koalanlp-kmr'
-findProject(':eunjeon')?.name = 'koalanlp-eunjeon'
+findProject(':arirang')?.name = 'koalanlp-arirang'
 findProject(':daon')?.name = 'koalanlp-daon'
+findProject(':eunjeon')?.name = 'koalanlp-eunjeon'
 findProject(':etri')?.name = 'koalanlp-etri'
 findProject(':hannanum')?.name = 'koalanlp-hnn'
+findProject(':khaiii')?.name = 'koalanlp-khaiii'
 findProject(':kkma')?.name = 'koalanlp-kkma'
+findProject(':komoran')?.name = 'koalanlp-kmr'
 findProject(':okt')?.name = 'koalanlp-okt'
 findProject(':rhino')?.name = 'koalanlp-rhino'
-findProject(':arirang')?.name = 'koalanlp-arirang'
-findProject(':khaiii')?.name = 'koalanlp-khaiii'
