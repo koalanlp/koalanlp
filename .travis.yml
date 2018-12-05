@@ -1,7 +1,12 @@
 language: java
 os: linux
 dist: xenial
-python: "3.6"
+addons:
+  apt:
+    sources:
+    - ppa:jonathonf/python-3.6
+    packages:
+    - python3.6
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
