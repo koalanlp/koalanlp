@@ -4,7 +4,7 @@ dist: xenial
 addons:
   apt:
     sources:
-    - ppa:jonathonf/python-3.6
+    - sourceline: "ppa:jonathonf/python-3.6"
     packages:
     - python3.6
 before_cache:
