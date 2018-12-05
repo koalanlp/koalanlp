@@ -8,7 +8,7 @@ then
 fi
 
 cd khaiii-orig
-curl https://bootstrap.pypa.io/get-pip.py
+wget https://bootstrap.pypa.io/get-pip.py
 python3.6 get-pip.py --user
 python3.6 -m pip install --user -r requirements.txt
 
