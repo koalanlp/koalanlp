@@ -7,7 +7,15 @@ import kr.bydelta.koala.TaggerSpek
 import kr.bydelta.koala.khaiii.*
 import org.spekframework.spek2.Spek
 
-val KHAIII_RSC = System.getenv("KHAIII_RSC") ?: ""
+val KHAIII_RSC: String by lazy {
+    System.setProperty("jna.library.path", System.getenv("KHAIII_LIB") ?: "")
+    println("Set jna.library.path = ${System.getProperty("jna.library.path")}")
+
+    val rsc = System.getenv("KHAIII_RSC") ?: ""
+    println("Set KHAIII_RSC = $rsc")
+
+    rsc
+}
 
 object KhaiiiTaggerTest : Spek(TaggerSpek(getTagger = { Tagger(KHAIII_RSC) },
         tagSentByOrig = {
