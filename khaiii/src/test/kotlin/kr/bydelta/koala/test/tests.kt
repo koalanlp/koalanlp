@@ -1,5 +1,6 @@
 package kr.bydelta.koala.test
 
+import com.sun.jna.NativeLibrary
 import kr.bydelta.koala.Conversion
 import kr.bydelta.koala.POS
 import kr.bydelta.koala.TagConversionSpek
@@ -8,8 +9,8 @@ import kr.bydelta.koala.khaiii.*
 import org.spekframework.spek2.Spek
 
 val KHAIII_RSC: String by lazy {
-    System.setProperty("jna.library.path", System.getenv("KHAIII_LIB") ?: "")
-    println("Set jna.library.path = ${System.getProperty("jna.library.path")}")
+    NativeLibrary.addSearchPath("libkhaiii", System.getenv("KHAIII_LIB") ?: "")
+    println("Add path to libkhaiii: ${System.getenv("KHAIII_LIB")}")
 
     val rsc = System.getenv("KHAIII_RSC") ?: ""
     println("Set KHAIII_RSC = $rsc")
