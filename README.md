@@ -28,6 +28,7 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 * 최석재님의 [RHINO v2.5.4](https://github.com/SukjaeChoi/RHINO)
 * 김상준님의 [Daon 분석기](https://github.com/rasoio/daon/tree/master/daon-core)
 * ETRI의 [공공 인공지능 Open API](http://aiopen.etri.re.kr/doc_language.php)
+* Kakao의 [카이(Khaiii) v0.1](https://github.com/kakao/khaiii) <sup>(별도설치 필요)</sup>
 
 > <sup>주1-1</sup> Arirang 분석기의 출력을 형태소분석에 적합하게 조금 다듬었으므로, 원본과 약간 다른 결과를 낼 수도 있습니다.
 
@@ -78,6 +79,7 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 * RHINO: [GPL v3](https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)) (참고: 다운로드 위치별로 조항 상이함)
 * Daon: 지정된 조항 없음
 * ETRI: 별도 API 키 발급 동의 필요
+* Khaiii: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
 
 # Dependency 추가
 
@@ -92,6 +94,7 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 | `koalanlp-arirang` | 아리랑 Wrapper / 분석범위: 형태소 <sup>2-1</sup>                        | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-arirang.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-arirang) | Apache 2.0 |
 | `koalanlp-rhino`   | RHINO Wrapper / 분석범위: 형태소 <sup>2-1</sup>                        | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-rhino.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-rhino)     | GPL v3 |
 | `koalanlp-daon`    | Daon Wrapper / 분석범위: 형태소 <sup>2-1</sup>                         | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-daon.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-daon)       | MIT(별도 지정 없음) |
+| `koalanlp-khaiii`  | Kakao Khaiii Wrapper / 분석범위: 형태소 <sup>2-3</sup>                 | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-khaiii.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-khaiii)       | Apache 2.0 |
 | `koalanlp-okt`     | Open Korean Text Wrapper / 분석범위: 문장분리, 형태소                    | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-okt.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-okt)        | Apache 2.0  |
 | `koalanlp-kkma`    | 꼬꼬마 Wrapper / 분석범위: 형태소, 의존구문 <sup>2-1</sup>                | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kkma.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-kkma)       | GPL v2    |
 | `koalanlp-hnn`     | 한나눔 Wrapper / 분석범위: 문장분리, 형태소, 구문분석, 의존구문 <sup>2-1</sup>| [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-hnn.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-hnn)        | GPL v3    |
@@ -103,14 +106,16 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 >
 > <sup>주2-2</sup> ETRI의 경우 Open API를 접근하기 위한 코드 부분은 KoalaNLP의 License 정책에 귀속되지만, Open API 접근 이후의 사용권에 관한 조항은 ETRI에서 별도로 정한 바를 따릅니다.
 > 따라서, ETRI의 사용권 조항에 동의하시고 키를 발급하셔야 하며, 다음 위치에서 발급을 신청할 수 있습니다: [키 발급 신청](http://aiopen.etri.re.kr/key_main.php)
+>
+> <sup>주2-3</sup> Khaiii 분석기의 경우는 Java가 아닌 C++로 구현되어 사용 전 분석기의 설치가 필요합니다. Python3.6 및 CMake 3.10+만 설치되어 있다면 설치 자체가 복잡한 편은 아니니 [여기](https://github.com/kakao/khaiii/blob/v0.1/doc/setup.md)를 참조하여 설치해보세요. (단, v0.1에서는 빌드시 'python3' 호출시 'python3.6'이 연결되어야 합니다.) 참고로, KoalaNLP가 Travis CI에서 패키지를 자동 테스트하기 위해 구현된 bash script는 [여기](https://github.com/koalanlp/koalanlp/blob/master/khaiii/install.sh)에 있습니다.
 
 ## 실행환경
-* KoalaNLP의 모든 코드는 Java 8을 기준으로 컴파일되고 테스트 되었습니다.
-* Kotlin의 경우는 1.2.71이 기준입니다.
+* KoalaNLP의 모든 코드는 Java 8을 기준으로 컴파일되고 OpenJDK 11에서 테스트 되었습니다.
+* Kotlin의 경우는 1.3.10이 기준입니다.
 * Scala의 경우는 `KoalaNLP-scala` 패키지의 버전에 따릅니다.
-  단, 은전한닢과 Open Korean Text는 의존하는 라이브러리가 Scala에서 개발되어 Scala에서 사용시 제한이 있을 수 있으며, 이는 [koalanlp-scala](https://koalanlp.github.io/scala-support)를 참조하십시오.  
+  단, 은전한닢과 Open Korean Text는 의존하는 라이브러리가 Scala에서 개발되어 Scala에서 사용시 제한이 있을 수 있으며, 이는 [![scala-koalanlp](https://img.shields.io/badge/Scala-KoalaNLP-red.svg?style=flat-square)](https://koalanlp.github.io/scala-support)를 참조하십시오.  
 * Python과 NodeJS는 각각의 저장소를 참고하십시오: 
-    [![nodejs-koalanlp](https://img.shields.io/badge/Nodejs-KoalaNLP-blue.svg?style=flat-square)](https://koalanlp.github.io/nodejs-support)
+    [![nodejs-koalanlp](https://img.shields.io/badge/Nodejs-KoalaNLP-green.svg?style=flat-square)](https://koalanlp.github.io/nodejs-support)
     [![py-koalanlp](https://img.shields.io/badge/Python-KoalaNLP-blue.svg?style=flat-square)](https://koalanlp.github.io/python-support)
 
 ## Gradle
@@ -119,6 +124,7 @@ ext.koala_version = '2.0.0'
 
 repositories {
     mavenCentral()
+    jcenter()
     maven { url "https://jitpack.io" } // 코모란의 경우에만 추가.
 }
 
