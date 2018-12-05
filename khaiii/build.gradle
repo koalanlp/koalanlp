@@ -7,14 +7,15 @@ plugins {
 }
 
 group 'kr.bydelta'
-version "2.0.5-SNAPSHOT"
+version "2.0.0-alpha.1"
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "kr.bydelta:koalanlp-core:${corePublishedVer}"
     implementation 'net.java.dev.jna:jna:5.1.0'
+    implementation 'com.beust:klaxon:4.0.1'
+    implementation "org.jetbrains.kotlin:kotlin-reflect"
 
-    testImplementation "org.jetbrains.kotlin:kotlin-reflect"
     testImplementation "kr.bydelta:koalanlp-core:${corePublishedVer}:tests"
     testRuntime "org.jetbrains.kotlin:kotlin-test"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
