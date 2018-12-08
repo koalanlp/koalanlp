@@ -152,7 +152,26 @@ labeler("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.
     }, (error) => console.error('Error occurred!', error));
 ```
 
-##### Synchronous Call (준비중)
+##### Synchronous Call
+
+```javascript
+const {RoleLabeler} = require('koalanlp/proc');
+const {ETRI} = require('koalanlp/API');
+
+const API_KEY = /** ETRI에서 발급받은 키 **/
+
+// ....
+
+let labeler = new RoleLabeler(ETRI, {apiKey: API_KEY});
+let result = labeler.analyzeSync("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
+
+/* Result는 Sentence[] 타입입니다. */
+for(const role of result[0].getRoles()){
+    console.log(role.toString()); // 첫번째 문장의 의미역들을 출력합니다.
+}
+        
+// ...
+```
 
 #### Python 3
 Reference: [RoleLabeler](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.RoleLabeler)

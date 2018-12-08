@@ -135,6 +135,21 @@ parser("이 문단을 분석합니다. 문단 구분은 자동으로 합니다."
 
 ##### Synchronous Call (준비중)
 
+```javascript
+const {Parser} = require('koalanlp/proc');
+const {HNN} = require('koalanlp/API');
+
+// ....
+
+let parser = new Parser(HNN);
+let result = parser.analyzeSync("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
+
+/* Result는 Sentence[] 타입입니다. */
+console.log(result[0].getSyntaxTree().getTreeString());  // 첫번째 문장의 구문구조 트리를 출력합니다.
+
+// ...
+```
+
 #### Python 3
 Reference: [Parser](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.Parser)
 

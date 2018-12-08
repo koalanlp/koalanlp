@@ -154,7 +154,23 @@ parser("이 문단을 분석합니다. 문단 구분은 자동으로 합니다."
     }, (error) => console.error('Error occurred!', error));
 ```
 
-##### Synchronous Call (준비중)
+##### Synchronous Call
+
+```javascript
+const {Parser} = require('koalanlp/proc');
+const {HNN} = require('koalanlp/API');
+
+// ....
+
+let parser = new Parser(HNN);
+let result = parser.analyzeSync("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
+
+/* Result는 Sentence[] 타입입니다. */
+// 첫번째 문장의 의존구조를 출력합니다.
+result[0].getDependencies().forEach((dep) => console.log(dep));
+
+// ...
+```
 
 #### Python 3
 Reference: [Parser](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.Parser)

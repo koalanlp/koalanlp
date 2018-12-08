@@ -118,7 +118,7 @@ Dictionary.INSTANCE.getBaseEntries(pos -> {
 Reference: [Dictionary](https://koalanlp.github.io/nodejs-support/module-koalanlp_proc.Dictionary.html)
 
 * 아래 코드는 ES8과 호환되는 CommonJS (NodeJS > 8) 기준으로 작성되어 있습니다.
-* `addUserDictionary`와 `contains`는 synchronous call만 지원합니다.
+* `addUserDictionary`와 `contains`는 synchronous 동작입니다.
 
 ```javascript
 const {Dictionary} = require('koalanlp/proc');

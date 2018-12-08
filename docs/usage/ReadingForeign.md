@@ -101,7 +101,7 @@ ExtUtil.hanjaToHangul("樂園"); // "낙원" (두음법칙)
 Reference: [ExtUtil](https://koalanlp.github.io/nodejs-support/module-koalanlp_ExtUtil.html)
 
 * 아래 코드는 ES8과 호환되는 CommonJS (NodeJS > 8) 기준으로 작성되어 있습니다.
-* ExtUtil의 기능은 Synchronous call만 지원합니다.
+* ExtUtil의 기능은 모두 Synchronous 동작입니다.
 
 ```javascript
 const ExtUtil = require('koalanlp/ExtUtil');

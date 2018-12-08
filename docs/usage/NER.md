@@ -153,7 +153,27 @@ recognizer("이 문단을 분석합니다. 문단 구분은 자동으로 합니�
     }, (error) => console.error('Error occurred!', error));
 ```
 
-##### Synchronous Call (준비중)
+##### Synchronous Call
+
+```javascript
+const {EntityRecognizer} = require('koalanlp/proc');
+const {ETRI} = require('koalanlp/API');
+
+const API_KEY = /** ETRI에서 발급받은 키 **/
+
+// ....
+
+let recognizer = new EntityRecognizer(ETRI, {apiKey: API_KEY});
+let result = recognizer.analyzeSync("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
+
+/* Result는 Sentence[] 타입입니다. */
+// 첫번째 문장의 개체명들을 출력합니다.
+for(const entity of parsed[0].getEntities()){
+    console.log(entity.toString());
+}
+    
+// ...
+```
 
 #### Python 3
 Reference: [EntityRecognizer](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.EntityRecognizer)

@@ -148,7 +148,27 @@ splitter("이 문단을 분석합니다. 문단 구분은 자동으로 합니다
     }, (error) => console.error('Error occurred!', error));
 ```
 
-##### Synchronous Call (준비중)
+##### Synchronous Call
+
+```javascript
+const {SentenceSplitter, Tagger, Parser} = require('koalanlp/proc');
+const {OKT, KMR, HNN} = require('koalanlp/API');
+
+// ....
+
+let splitter = new SentenceSplitter(OKT);
+let tagger = new Tagger(KMR);
+let parser = new Parser(HNN);
+
+let splits = splitter.sentencesSync("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
+let tagged = tagger.tagSentenceSync(splits);
+let parsed = parser.analyzeSync(tagged);
+
+/* Result는 Sentence[] 타입입니다. */
+for(const sent of parsed){
+    console.log(sent.getSyntaxTree().getTreeString())
+}
+```
 
 
 #### Python 3

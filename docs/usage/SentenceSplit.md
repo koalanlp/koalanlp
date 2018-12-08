@@ -122,7 +122,23 @@ splitter("이 문단을 분석합니다. 문단 구분은 자동으로 합니다
     }, (error) => console.error('Error occurred!', error));
 ```
 
-##### Synchronous Call (준비중)
+##### Synchronous Call
+
+```javascript
+const {SentenceSplitter} = require('koalanlp/proc');
+const {HNN} = require('koalanlp/API');
+
+// ....
+
+let splitter = new SentenceSplitter(HNN);
+let result = splitter.sentencesSync("분리할 문장을 이렇게 넣으면 문장이 분리됩니다. 간단하죠?");
+
+/* Result는 string[] 타입입니다. */
+console.log(result[0]); //== 분리할 문장을 이렇게 넣으면 문장이 분리됩니다.
+console.log(result[1]); //== 간단하죠?
+    
+// ...
+```
 
 #### Python 3
 Reference: [SentenceSplitter](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.SentenceSplitter)

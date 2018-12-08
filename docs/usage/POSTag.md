@@ -113,7 +113,7 @@ async function someAsyncFunction(){
     
     let tagger = new Tagger(EUNJEON);
     let result = await tagger("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다.");
-    // 또는 tagger.sentences(...) 
+    // 또는 tagger.tag(...) 
 
     /* Result는 string[] 타입입니다. */
     console.log(result[0].singleLineString()); // "문단을 분석합니다."의 품사분석 결과 출력
@@ -134,14 +134,29 @@ const {Tagger} = require('koalanlp/proc');
 const {EUNJEON} = require('koalanlp/API');
 
 let tagger = new Tagger(EUNJEON);
-tagger("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다.")  // 또는 tagger.sentences(...)
+tagger("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다.")  // 또는 tagger.tag(...)
     .then((result) => {
         /* Result는 string[] 타입입니다. */
         console.log(result[0].singleLineString()); // "문단을 분석합니다."의 품사분석 결과 출력
     }, (error) => console.error('Error occurred!', error));
 ```
 
-##### Synchronous Call (준비중)
+##### Synchronous Call
+
+```javascript
+const {Tagger} = require('koalanlp/proc');
+const {EUNJEON} = require('koalanlp/API');
+
+// ....
+
+let tagger = new Tagger(EUNJEON);
+let result = await tagger.tagSync("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다."); 
+
+/* Result는 string[] 타입입니다. */
+console.log(result[0].singleLineString()); // "문단을 분석합니다."의 품사분석 결과 출력
+    
+// ...
+```
 
 #### Python 3
 Reference: [Tagger](https://koalanlp.github.io/python-support/html/koalanlp.html#koalanlp.proc.Tagger)
