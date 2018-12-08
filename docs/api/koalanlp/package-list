@@ -3,6 +3,7 @@ $dokka.linkExtension:html
 $dokka.location:kr.bydelta.koala$alphaToHangul(kotlin.CharSequence)kr.bydelta.koala/kotlin.-char-sequence/alpha-to-hangul.html
 $dokka.location:kr.bydelta.koala$assembleHangul(kotlin.CharSequence)kr.bydelta.koala/kotlin.-char-sequence/assemble-hangul.html
 $dokka.location:kr.bydelta.koala$assembleHangul(kotlin.Triple((kotlin.Char, , )))kr.bydelta.koala/kotlin.-triple/assemble-hangul.html
+$dokka.location:kr.bydelta.koala$assembleHangulString(kotlin.CharSequence)kr.bydelta.koala/kotlin.-char-sequence/assemble-hangul-string.html
 $dokka.location:kr.bydelta.koala$contains(kotlin.CharSequence, kr.bydelta.koala.POS)kr.bydelta.koala/kotlin.-char-sequence/contains.html
 $dokka.location:kr.bydelta.koala$contains(kotlin.collections.Iterable((kotlin.String)), kr.bydelta.koala.CoarseEntityType)kr.bydelta.koala/kotlin.collections.-iterable/contains.html
 $dokka.location:kr.bydelta.koala$contains(kotlin.collections.Iterable((kotlin.String)), kr.bydelta.koala.DependencyTag)kr.bydelta.koala/kotlin.collections.-iterable/contains.html
@@ -32,6 +33,9 @@ $dokka.location:kr.bydelta.koala.eunjeon$toSejongPOS(kotlin.String)kr.bydelta.k
 $dokka.location:kr.bydelta.koala.hnn$toETRIDepTag(kotlin.String)kr.bydelta.koala.hnn/kotlin.-string/to-e-t-r-i-dep-tag.html
 $dokka.location:kr.bydelta.koala.hnn$toETRIPhraseTag(kotlin.String)kr.bydelta.koala.hnn/kotlin.-string/to-e-t-r-i-phrase-tag.html
 $dokka.location:kr.bydelta.koala.hnn$toSejongPOS(kotlin.String)kr.bydelta.koala.hnn/kotlin.-string/to-sejong-p-o-s.html
+$dokka.location:kr.bydelta.koala.khaiii$byteAlignment(kotlin.String)kr.bydelta.koala.khaiii/kotlin.-string/byte-alignment.html
+$dokka.location:kr.bydelta.koala.khaiii$getSpdlogLevel(java.util.logging.Level)kr.bydelta.koala.khaiii/java.util.logging.-level/get-spdlog-level.html
+$dokka.location:kr.bydelta.koala.khaiii$toSejongPOS(kotlin.String)kr.bydelta.koala.khaiii/kotlin.-string/to-sejong-p-o-s.html
 $dokka.location:kr.bydelta.koala.kkma$toETRIDepTag(kotlin.String)kr.bydelta.koala.kkma/kotlin.-string/to-e-t-r-i-dep-tag.html
 $dokka.location:kr.bydelta.koala.kkma$toETRIPhraseTag(kotlin.String)kr.bydelta.koala.kkma/kotlin.-string/to-e-t-r-i-phrase-tag.html
 $dokka.location:kr.bydelta.koala.kkma$toSejongPOS(kotlin.String)kr.bydelta.koala.kkma/kotlin.-string/to-sejong-p-o-s.html
@@ -44,6 +48,7 @@ kr.bydelta.koala.data
 kr.bydelta.koala.etri
 kr.bydelta.koala.eunjeon
 kr.bydelta.koala.hnn
+kr.bydelta.koala.khaiii
 kr.bydelta.koala.kkma
 kr.bydelta.koala.kmr
 kr.bydelta.koala.okt

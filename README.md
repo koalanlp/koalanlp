@@ -18,16 +18,17 @@ KoalaNLP
 KoalaNLP는 한국어 처리의 통합 인터페이스를 지향하는 Java/Kotlin/Scala Library입니다.
 
 이 프로젝트는 __서로 다른 형태의 형태소 분석기를__ 모아,
-__동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이 목적입니다.
-* KAIST의 [한나눔 형태소 분석기](http://kldp.net/projects/hannanum/)와 [NLP_HUB 구문분석기](http://semanticweb.kaist.ac.kr/home/index.php/NLP_HUB)
-* 서울대의 [꼬꼬마 형태소/구문 분석기 v2.1](http://kkma.snu.ac.kr/documents/index.jsp)
+__동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이 목적입니다. (정렬은 개발단체/개발자명 국문 가나다순)
+
+* 김상준님의 [Daon 분석기](https://github.com/rasoio/daon/tree/master/daon-core)
 * Shineware의 [코모란 v3.3.4](https://github.com/shin285/KOMORAN)
+* 서울대의 [꼬꼬마 형태소/구문 분석기 v2.1](http://kkma.snu.ac.kr/documents/index.jsp)
+* ETRI의 [공공 인공지능 Open API](http://aiopen.etri.re.kr/doc_language.php)
 * OpenKoreanText의 [오픈 소스 한국어 처리기 v2.2.0](http://openkoreantext.org) (구 Twitter 한국어 분석기)
 * 은전한닢 프로젝트의 [SEunjeon(S은전)](https://bitbucket.org/eunjeon/seunjeon) (Mecab-ko의 Scala/Java 판본)
 * 이수명님의 [Arirang Morpheme Analyzer](http://cafe.naver.com/korlucene) <sup>1-1</sup>
 * 최석재님의 [RHINO v2.5.4](https://github.com/SukjaeChoi/RHINO)
-* 김상준님의 [Daon 분석기](https://github.com/rasoio/daon/tree/master/daon-core)
-* ETRI의 [공공 인공지능 Open API](http://aiopen.etri.re.kr/doc_language.php)
+* KAIST의 [한나눔 형태소 분석기](http://kldp.net/projects/hannanum/)와 [NLP_HUB 구문분석기](http://semanticweb.kaist.ac.kr/home/index.php/NLP_HUB)
 * Kakao의 [카이(Khaiii) v0.1](https://github.com/kakao/khaiii) <sup>(별도설치 필요)</sup>
 
 > <sup>주1-1</sup> Arirang 분석기의 출력을 형태소분석에 적합하게 조금 다듬었으므로, 원본과 약간 다른 결과를 낼 수도 있습니다.
@@ -87,7 +88,7 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 | 패키지명            | 설명                                                                 |  버전    | License (원본)     |
 | ------------------ | ------------------------------------------------------------------ | ------- | ------------ |
 | `koalanlp-core`    | 통합 인터페이스의 정의가 등재된 중심 묶음입니다.                            | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-core) | MIT |
-| `koalanlp-scala`   | Scala를 위한 편의기능 (Implicit conversion 등)                         | (준비중) | MIT |
+| `koalanlp-scala`   | Scala를 위한 편의기능 (Implicit conversion 등)                         | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-scala_2.12.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-scala) | MIT |
 | `koalanlp-server`  | HTTP 서비스 구성을 위한 패키지입니다.                                    | (2.x 개발중) | MIT |
 | `koalanlp-kmr`     | 코모란 Wrapper / 분석범위: 형태소                                       | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kmr.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-kmr)         | Apache 2.0 |
 | `koalanlp-eunjeon` | 은전한닢 Wrapper / 분석범위: 형태소                                     | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-eunjeon) | Apache 2.0 |
@@ -120,7 +121,7 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 
 ## Gradle
 ```groovy
-ext.koala_version = '2.0.0'
+ext.koala_version = '2.0.5'
 
 repositories {
     mavenCentral()
@@ -147,6 +148,8 @@ dependencies{
     implementation "kr.bydelta:koalanlp-hnn:${ext.koala_version}:assembly" 
     // ETRI Open API의 경우
     implementation "kr.bydelta:koalanlp-etri:${ext.koala_version}"
+    // Khaiii의 경우 (Khaiii C++ 별도 설치 필요)
+    implementation "kr.bydelta:koalanlp-khaiii:2.0.0-alpha.1"
     // REST Server Service의 경우 (준비중)
     implementation "kr.bydelta:koalanlp-server:${ext.koala_version}"
 }
@@ -185,6 +188,10 @@ libraryDependencies += "kr.bydelta" % "koalanlp-hannanum" % koalaVer classifier 
 // ETRI 분석기의 경우
 resolvers += Resolver.JCenterRepository
 libraryDependencies += "kr.bydelta" % "koalanlp-etri" % koalaVer
+
+// Khaiii 분석기의 경우 (Khaiii C++ 별도 설치 필요)
+resolvers += Resolver.JCenterRepository
+libraryDependencies += "kr.bydelta" % "koalanlp-khaiii" % "2.0.0-alpha.1"
 
 // REST Server Service의 경우 (준비중)
 libraryDependencies += "kr.bydelta" % "koalanlp-server" % koalaVer

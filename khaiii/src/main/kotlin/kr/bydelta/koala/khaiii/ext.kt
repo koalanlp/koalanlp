@@ -35,6 +35,9 @@ fun POS.fromSejongPOS(): String =
             POS.NF -> "ZN"
             POS.NV -> "ZV"
             POS.NA -> "ZZ"
+            POS.XPV -> "ZZ"
+            POS.XSM -> "ZZ"
+            POS.XSO -> "ZZ"
             else -> this.toString()
         }
 
@@ -74,7 +77,7 @@ fun String?.toSejongPOS(): POS =
 
 /**
  * 주어진 string의 UTF-8 바이트 표현에 맞춰 문자 index를 표기함.
- * 예) '한글 english'는 [0,0,0, 1,1,1, 2, 3, 4, 5, 6, 7, 8, 9]가 됨
+ * 예) '한글 english'는 (0,0,0, 1,1,1, 2, 3, 4, 5, 6, 7, 8, 9)가 됨
  * @return 각 바이트당 실제 string의 문자 위치를 표현한 list
  */
 fun String.byteAlignment(): List<Int> {

@@ -76,6 +76,7 @@ object KhaiiiTagConversionTest : Spek(TagConversionSpek(from = { it.toSejongPOS(
                 POS.NV -> listOf(Conversion("ZV"))
                 POS.NF -> listOf(Conversion("ZN"))
                 POS.SW -> listOf(Conversion("SW"), Conversion("SWK", toTagger = false))
+                POS.XPV, POS.XSM, POS.XSO -> listOf(Conversion("ZZ", toSejong = false))
                 else -> listOf(Conversion(it.toString()))
             }
         }))

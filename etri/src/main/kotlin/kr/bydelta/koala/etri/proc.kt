@@ -308,7 +308,7 @@ class Parser(override val apiKey: String) : CanParseDependency<SentenceResponse>
  *
  * 아래를 참고해보세요.
  * * [Word.getArgumentRoles] 어절이 술어인 논항들의 [RoleEdge] 목록을 가져오는 API
- * * [Word.getPredicateRole] 어절이 논항인 [RoleEdge]의 술어를 가져오는 API
+ * * [Word.getPredicateRoles] 어절이 논항인 [RoleEdge]의 술어를 가져오는 API
  * * [Sentence.getRoles] 전체 문장을 분석한 의미역 구조 [RoleEdge]를 가져오는 API
  * * [RoleEdge] 의미역 구조를 저장하는 형태
  * * [RoleType] 의미역 분류를 갖는 Enum 값

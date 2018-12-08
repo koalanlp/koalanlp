@@ -62,8 +62,6 @@ dokka {
         })
         
         includes = ['docs/index.md', *subprojects.collect { "${it.projectDir}/index.md" }]
-        
-        file(outputDirectory).deleteDir()
     }
 }
 

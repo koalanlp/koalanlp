@@ -44,6 +44,12 @@ dokka {
         suffix = "#L"
     }
 
+    if(projectDir.name != 'core') {
+        externalDocumentationLink {
+            url = new URL("https://koalanlp.github.io/koalanlp/api/koalanlp/")
+        }
+    }
+
     includes = ["index.md"]
 }
 

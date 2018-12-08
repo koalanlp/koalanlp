@@ -26,7 +26,7 @@ interface KhaiiiLibrary : Library {
     /**
      * Khaiii 연결
      *
-     * **[참고]** Khaiii를 사용한 이후에는 반드시 [close] 함수를 불러 연결을 종료해주셔야 합니다.
+     * **(참고)** Khaiii를 사용한 이후에는 반드시 [khaiii_close] 함수를 불러 연결을 종료해주셔야 합니다.
      *
      * @param rscDir 리소스 디렉터리
      * @param optStr 옵션 (JSON 형식의 String)
@@ -334,6 +334,9 @@ class Khaiii @JvmOverloads constructor(resourceDirectory: String = "", val opt: 
  */
 class Tagger(resourceDirectory: String = "", option: KhaiiiConfig = KhaiiiConfig()) : CanTagOnlyASentence<KhaiiiWord?>() {
 
+    /**
+     * Khaiii Library의 JNA Wrapper
+     */
     val khaiii by lazy {
         val api = Khaiii(resourceDirectory, option)
         assert(api.version() == "0.1", {
