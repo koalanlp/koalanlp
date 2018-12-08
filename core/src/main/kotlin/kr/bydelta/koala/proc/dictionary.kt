@@ -63,6 +63,14 @@ interface CanCompileDict {
     fun getBaseEntries(filter: (POS) -> Boolean): Iterator<DicEntry>
 
     /**
+     * 원본 사전에 등재된 항목 중에서, 지정된 형태소의 항목만을 가져옵니다. (복합 품사 결합 형태는 제외)
+     *
+     * @param posTag 가져올 품사들 (가변인자)
+     * @return (형태소, 품사)의 Iterator.
+     */
+    fun getBaseEntriesOfPOS(vararg posTag: POS): Iterator<DicEntry> = getBaseEntries { it in posTag }
+
+    /**
      * 사전에 등재되어 있는지 확인합니다. 품사 후보 [posTag] 중의 하나라도 참이면 참이라고 판정합니다.
      *
      * @param word   확인할 형태소
@@ -116,6 +124,17 @@ interface CanCompileDict {
      * @param dict       참조할 사전
      */
     fun importFrom(dict: CanCompileDict) = importFrom(dict, false) { it.isNoun() }
+
+    /**
+     * 다른 사전을 참조하여, 선택된 사전에 없는 단어를 사용자사전으로 추가합니다.
+     *
+     * @param dict       참조할 사전
+     * @param fastAppend 선택된 사전에 존재하는지를 검사하지 않고, 빠르게 추가하고자 할 때 (기본값 false)
+     * @param posTag     추가할 품사들 (가변인자)
+     */
+    fun importFromTags(dict: CanCompileDict,
+                       fastAppend: Boolean,
+                       vararg posTag: POS) = importFrom(dict, fastAppend) { it in posTag }
 }
 
 /**
