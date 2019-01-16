@@ -266,7 +266,7 @@ class Khaiii @JvmOverloads constructor(resourceDirectory: String = "", val opt: 
                             """Khaiii 라이브러리 파일 (libkhaiii.so/libkhaiii.dylib)를 시스템에서 찾을 수 없습니다.
                             |Khaiii는 C++로 구현되어 KoalaNLP는 이를 자동으로 설치하지 않습니다.
                             |Khaiii가 설치되어 있는지, LD_LIBRARY_PATH 등의 환경 변수가 제대로 설정되었는지 확인해주세요. \" +\n" +
-                            |설치가 필요한 경우, 설치법은 https://github.com/kakao/khaiii/blob/v0.1/doc/setup.md 에서 확인해주세요.""".trimMargin())
+                            |설치가 필요한 경우, 설치법은 https://github.com/kakao/khaiii/blob/v0.2/doc/setup.md 에서 확인해주세요.""".trimMargin())
                 }
             }
         }
@@ -279,7 +279,7 @@ class Khaiii @JvmOverloads constructor(resourceDirectory: String = "", val opt: 
  * * 이 Wrapper는 아직 실험 단계입니다.
  *
  * * Khaiii Shared Object가 이미 설치되어 있어야 합니다. (자동설치 하지 않으며, 설치 방법은
- *   [Khaiii:설치](https://github.com/kakao/khaiii/blob/v0.1/doc/setup.md)를 참조하세요.)
+ *   [Khaiii:설치](https://github.com/kakao/khaiii/blob/v0.2/doc/setup.md)를 참조하세요.)
  *
  * * Shared object와 JNI를 통한 송수신 과정에서 Exception 또는 Segmentation fault 등이 발생할 수 있습니다.
  *
@@ -339,8 +339,8 @@ class Tagger(resourceDirectory: String = "", option: KhaiiiConfig = KhaiiiConfig
      */
     val khaiii by lazy {
         val api = Khaiii(resourceDirectory, option)
-        assert(api.version() == "0.1", {
-            "API가 변화하고 있어, 0.1버전만 지원합니다. ${api.version()} 버전은 아직 모르니 issue를 등록해주세요!"
+        assert(api.version() <= "0.2", {
+            "API가 변화하고 있어, 0.2버전만 지원합니다. ${api.version()} 버전은 아직 모르니 issue를 등록해주세요!"
         })
         api
     }
