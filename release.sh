@@ -11,7 +11,7 @@ extract_version()
         JAR_VER_INCRM=$(echo $JAR_VER | cut -d. -f3)
         JAR_VER_CURRENT=$JAR_VER_MAJOR.$JAR_VER_MINOR.$JAR_VER_INCRM
     elif [ -f './build.gradle' ]; then
-        JAR_VER=$(cat build.gradle | grep "version " | cut -d\' -f2 | cut -d- -f1)
+        JAR_VER=$(cat build.gradle | grep "version " | cut -d\" -f2 | cut -d- -f1)
         JAR_VER_MAJOR=$(echo $JAR_VER | cut -d. -f1)
         JAR_VER_MINOR=$(echo $JAR_VER | cut -d. -f2)
         JAR_VER_INCRM=$(echo $JAR_VER | cut -d. -f3)
@@ -170,6 +170,7 @@ case ${ACTION} in
         ;;
     *)
         if [ -f "$ACTION/build.gradle" ]; then
+            read_module_name $ACTION
             cd $ACTION
             extract_version
 
@@ -180,7 +181,7 @@ case ${ACTION} in
                 set_version $JAR_VER_CURRENT
             fi
 
-            read_module_name
+            cd ..
             ask_proceed "UPLOAD"
             if [ ${YN,,} != "p" ]; then
                 ./gradlew $MODULE_NAME:clean $MODULE_NAME:uploadArchives --info
@@ -191,6 +192,7 @@ case ${ACTION} in
                 ./gradlew closeAndReleaseRepository
             fi
 
+            cd $ACTION
             ask_proceed "SET NEXT"
             if [ ${YN,,} != "p" ]; then
                 add_incremental_ver

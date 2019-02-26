@@ -23,7 +23,7 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 * 김상준님의 [Daon 분석기](https://github.com/rasoio/daon/tree/master/daon-core)
 * Shineware의 [코모란 v3.3.4](https://github.com/shin285/KOMORAN)
 * 서울대의 [꼬꼬마 형태소/구문 분석기 v2.1](http://kkma.snu.ac.kr/documents/index.jsp)
-* ETRI의 [공공 인공지능 Open API](http://aiopen.etri.re.kr/doc_language.php)
+* ETRI의 [공공 인공지능 Open API](http://aiopen.etri.re.kr/)
 * OpenKoreanText의 [오픈 소스 한국어 처리기 v2.3.1](http://openkoreantext.org) (구 Twitter 한국어 분석기)
 * 은전한닢 프로젝트의 [SEunjeon(S은전)](https://bitbucket.org/eunjeon/seunjeon) (Mecab-ko의 Scala/Java 판본)
 * 이수명님의 [Arirang Morpheme Analyzer](http://cafe.naver.com/korlucene) <sup>1-1</sup>
