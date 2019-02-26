@@ -12,7 +12,7 @@ version "2.0.6-SNAPSHOT"
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "kr.bydelta:koalanlp-core:${corePublishedVer}"
-    implementation "org.openkoreantext:open-korean-text:2.3.0"
+    implementation "org.openkoreantext:open-korean-text:2.3.1"
 
     testImplementation "kr.bydelta:koalanlp-core:${corePublishedVer}:tests"
     testRuntime "org.jetbrains.kotlin:kotlin-reflect"
