@@ -19,15 +19,10 @@ cache:
   - $HOME/.local/lib/python3.6
 install:
 - sh khaiii/install.sh
-before_script:
-- export DISPLAY=:99.0
 script:
 - ./gradlew clean
 - ./gradlew check -PexcludeTests=**/RhinoOrigin* --info
-- sh -e /etc/init.d/xvfb start
-- sleep 3
-- ./gradlew :koalanlp-rhino:test --tests *OriginTest --info
-- sh -e /etc/init.d/xvfb stop
+- xvfb-run ./gradlew :koalanlp-rhino:test --tests *OriginTest --info
 - ./gradlew :koalanlp-rhino:jacocoTestReport
 after_success:
 - bash ./git-manage.sh
