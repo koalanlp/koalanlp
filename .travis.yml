@@ -1,14 +1,26 @@
 language: java
-os: linux
-dist: xenial
-services:
-  - xvfb
-addons:
-  apt:
-    sources:
-    - sourceline: "ppa:jonathonf/python-3.6"
-    packages:
-    - python3.6
+matrix:
+  include:
+    - name: "Ubuntu Xenial with OpenJDK 8"
+      dist: xenial
+      jdk: openjdk8
+      before_install: pyenv install 3.6.4
+      services: xvfb
+    - name: "Ubuntu Xenial with OpenJDK 12"
+      dist: xenial
+      jdk: openjdk12
+      before_install: pyenv install 3.6.4
+      services: xvfb
+    - name: "OSX with OpenJDK 8"
+      os: osx
+      osx_image: xcode10.2
+      language: shell
+      jdk: openjdk8
+    - name: "OSX with OpenJDK 12"
+      os: osx
+      osx_image: xcode10.2
+      language: shell
+      jdk: openjdk12
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -18,7 +30,6 @@ cache:
   - $HOME/.gradle/wrapper/
   - $HOME/khaiii-orig
   - $HOME/.hunter
-  - $HOME/.local/lib/python3.6
 install:
 - sh khaiii/install.sh
 script:
