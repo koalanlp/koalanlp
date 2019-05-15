@@ -15,11 +15,6 @@ matrix:
         - pyenv install --list
         - pyenv install 3.6.3
       services: xvfb
-    - name: "OSX with OpenJDK 8"
-      os: osx
-      osx_image: xcode10.2
-      language: shell
-      jdk: openjdk8
     - name: "OSX with OpenJDK 12"
       os: osx
       osx_image: xcode10.2
@@ -29,12 +24,12 @@ matrix:
       os: windows
       language: shell
       before_install:
-        - chocolatey install openjdk --version 11.0
+        - chocolatey install openjdk --version 11.0 -y
     - name: "Windows with OpenJDK 12"
       os: windows
       language: shell
       before_install:
-        - chocolatey install openjdk --version 12.0.0
+        - chocolatey install openjdk --version 12.0.0 -y
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -52,6 +47,9 @@ before_install:
 - ssh-add deploy.key
 install:
 - if [ "$TRAVIS_OS_NAME" != "windows" ]; then sh khaiii/install.sh; fi
+before_script:
+- pwd
+- ls $HOME/khaiii-orig
 script:
 - ./gradlew clean
 - if [ "$TRAVIS_OS_NAME" != "windows" ]; then ./gradlew check -PexcludeTests=**/RhinoOrigin* --info; fi
