@@ -30,12 +30,12 @@ git checkout -f tags/$KHAIII_LATEST
 
 ### Python 3.6 Pypi install
 wget https://bootstrap.pypa.io/get-pip.py
-PYTHONCALL get-pip.py --user
-PYTHONCALL -m pip install --user -r requirements.txt
+$PYTHONCALL get-pip.py --user
+$PYTHONCALL -m pip install --user -r requirements.txt
 echo "\033[34mPython3.6 installation finished\033[0m"
 
 ### Note original python version for checking.
-PYVER=$(PYTHONCALL --version)
+PYVER=$($PYTHONCALL --version)
 echo $PYVER
 
 ### Make build files
