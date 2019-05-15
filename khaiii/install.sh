@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+if [ "$TRAVIS_OS_NAME" = "linux" ]
+then
+    PYTHONCALL=python3.6
+elif [ "$TRAVIS_OS_NAME" = "osx" ]
+then
+    PYTHONCALL=python3
+else
+    PYTHONCALL=python3
+fi
+
 ### Khaiii 저장소 clone
 if [ ! -d "$HOME/khaiii-orig/.git" ]
 then
@@ -20,12 +30,12 @@ git checkout -f tags/$KHAIII_LATEST
 
 ### Python 3.6 Pypi install
 wget https://bootstrap.pypa.io/get-pip.py
-python3.6 get-pip.py --user
-python3.6 -m pip install --user -r requirements.txt
+PYTHONCALL get-pip.py --user
+PYTHONCALL -m pip install --user -r requirements.txt
 echo "\033[34mPython3.6 installation finished\033[0m"
 
 ### Note original python version for checking.
-PYVER=$(python3.6 --version)
+PYVER=$(PYTHONCALL --version)
 echo $PYVER
 
 ### Make build files
