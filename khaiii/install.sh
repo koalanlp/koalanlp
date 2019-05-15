@@ -10,7 +10,7 @@ then
     echo "\033[34mClone finished!\033[0m"
 else
     ### Travis CI에 이미 Caching된 데이터가 있다면, pull
-    cd khaiii-orig
+    cd $HOME/khaiii-orig
     git pull origin master
     echo "\033[34mPull finished!\033[0m"
 fi
