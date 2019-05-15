@@ -20,16 +20,12 @@ matrix:
       osx_image: xcode10.2
       language: shell
       jdk: openjdk12
-    - name: "Windows with OpenJDK 11"
-      os: windows
-      language: shell
-      before_install:
-        - chocolatey install openjdk --version 11.0 -y
     - name: "Windows with OpenJDK 12"
       os: windows
       language: shell
+      filter_secrets: false
       before_install:
-        - chocolatey install openjdk --version 12.0.0 -y
+        - choco install openjdk --version 12.0.0 -y
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
