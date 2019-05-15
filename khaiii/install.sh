@@ -32,9 +32,10 @@ echo $PYVER
 if [ ! -d "build" ]
 then
     mkdir build
-    cd build
-    cmake ..
 fi
+
+cd build
+cmake ..
 
 ### Make shared object file
 if [ ! -f "lib/libkhaiii.so.${KHAIII_LATEST}" ]
