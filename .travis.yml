@@ -6,14 +6,14 @@ matrix:
       jdk: openjdk8
       before_install:
         - pyenv install --list
-        - pyenv install 3.6.4
+        - pyenv install 3.6
       services: xvfb
     - name: "Ubuntu Xenial with OpenJDK 12"
       dist: xenial
       jdk: openjdk12
       before_install:
         - pyenv install --list
-        - pyenv install 3.6.4
+        - pyenv install 3.6
       services: xvfb
     - name: "OSX with OpenJDK 8"
       os: osx
@@ -29,10 +29,14 @@ matrix:
       os: windows
       language: shell
       jdk: openjdk8
+      before_install:
+        - export JAVA_HOME="/c/Program Files/OpenJDK/jdk-8"
     - name: "Windows with OpenJDK 12"
       os: windows
       language: shell
       jdk: openjdk12
+      before_install:
+        - export JAVA_HOME="/c/Program Files/OpenJDK/jdk-12"
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -42,6 +46,12 @@ cache:
   - $HOME/.gradle/wrapper/
   - $HOME/khaiii-orig
   - $HOME/.hunter
+before_install:
+- openssl aes-256-cbc -K $encrypted_61168456aa19_key -iv $encrypted_61168456aa19_iv
+  -in deploy.key.enc -out deploy.key -d
+- chmod 600 deploy.key
+- eval `ssh-agent -s`
+- ssh-add deploy.key
 install:
 - if [ "$TRAVIS_OS_NAME" != "windows" ]; then sh khaiii/install.sh; fi
 script:
@@ -51,13 +61,7 @@ script:
 - if [ "$TRAVIS_OS_NAME" = "windows" ]; then ./gradlew check -PexcludeTests=**/Khaii* --info; fi
 - ./gradlew :koalanlp-rhino:jacocoTestReport
 after_success:
-- bash ./git-manage.sh
-before_install:
-- openssl aes-256-cbc -K $encrypted_61168456aa19_key -iv $encrypted_61168456aa19_iv
-  -in deploy.key.enc -out deploy.key -d
-- chmod 600 deploy.key
-- eval `ssh-agent -s`
-- ssh-add deploy.key
+- if [ "$TRAVIS_JOB_NUMBER" = "${TRAVIS_BUILD_NUMBER}.1" ]; bash ./git-manage.sh; fi
 env:
   global:
   - secure: C5rYSRoBPS7vbgxD8SKQ9bVqzYHmNDM3ccQQ3fbMrieTUibfBv31Lf9973mrp7gOiqldj7mu/G0ERVz8eSD5HY8KhXwG+WFtE604UWzDXW2Qh+/FNhtP2ogBpF5yIjToJKXMyfKivSlCUQwRa1cUsuzHi6xlY2oWLBSUA0nsRqzNxEx2bXsl1eXdR8Xe2iea9k1EZJZeH+MnHNlrI4WieEFra0fgpOHflG3DRyIRnniNYt3acWm1Jgu1WwFy+eFaTANsTmrb1sQMXhbmchYHp0QnyGE3KSoYLY2BGEC/Zs/o+2b1dSSI+rVBoY6TuS6orR80agnf7D97ip1ILXDnqbo+gM2QHLBgYxdjoWjpC07aeUyAX3/niWXruu54dtix/TjAzs5MBI2a0tA7d+1RPE665/KcjnvMLusutHwd5RqDSYsfJR4sHudniGUEc+goXCckSbE1SCkGM7GFJBazvNNeYR6rJPQJzOh3ISR3uVDzFTXEBRM8sPctBmveebj1uCuZTv19JfEEGB7x6PJEfhFQibH6kcTWqTz85rGJ2uOvjVkm0y4aRBaLY9ZV5ldtBfv8CCVvTV8+CLNYV7/x7/WFYs/G9BRtmqvFWlgqJ3td5ga9foaGNYuD7UM0JsHVqWjMoCe5eiPH4vz3Rf5DWFVkSOcCAUYYYDcHVQQPywE=
