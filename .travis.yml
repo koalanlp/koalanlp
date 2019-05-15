@@ -55,7 +55,7 @@ install:
 script:
 - ./gradlew clean
 - if [ "$TRAVIS_OS_NAME" != "windows" ]; then ./gradlew check -PexcludeTests=**/RhinoOrigin* --info; fi
-- if [ "$TRAVIS_OS_NAME" = "linux" ]; then xvfb-run ./gradlew :koalanlp-rhino:test --tests *OriginTest --info; fi
+- if [ "$TRAVIS_OS_NAME" = "linux" ]; then xvfb-run -a -e /dev/stdout ./gradlew :koalanlp-rhino:test --tests *OriginTest --info; fi
 - if [ "$TRAVIS_OS_NAME" = "windows" ]; then ./gradlew check -PexcludeTests=**/Khaii* --info; fi
 - ./gradlew :koalanlp-rhino:jacocoTestReport
 after_success:
