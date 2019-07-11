@@ -19,14 +19,14 @@ dependencies {
     testImplementation "kr.bydelta:koalanlp-core:${corePublishedVer}:tests"
     testRuntime "org.jetbrains.kotlin:kotlin-reflect"
     testRuntime "org.jetbrains.kotlin:kotlin-test"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
-    testImplementation("org.amshove.kluent:kluent:1.42") {
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.0"
+    testImplementation("org.amshove.kluent:kluent:1.49") {
         exclude group: 'org.jetbrains.kotlin'
     }
-    testImplementation('org.spekframework.spek2:spek-dsl-jvm:2.0.0-rc.1') {
+    testImplementation('org.spekframework.spek2:spek-dsl-jvm:2.0.5') {
         exclude group: 'org.jetbrains.kotlin'
     }
-    testRuntimeOnly('org.spekframework.spek2:spek-runner-junit5:2.0.0-rc.1') {
+    testRuntimeOnly('org.spekframework.spek2:spek-runner-junit5:2.0.5') {
         exclude group: 'org.jetbrains.kotlin'
     }
 }

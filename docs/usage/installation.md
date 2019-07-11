@@ -197,6 +197,7 @@ someAsyncFunction().then(
     () => console.log('Finished'),
     (error) => console.error('Error', error)
 );
+
 ```
 
 * 첫번째 인자는 초기화 option입니다.
@@ -211,7 +212,6 @@ someAsyncFunction().then(
 그런 다음, 아래와 같이 설치하십시오. (현재 python-koalanlp 버전은 [![PyPI](https://img.shields.io/pypi/v/koalanlp.svg?style=flat-square)](https://github.com/koalanlp/python-support)입니다.)
 
 ```bash
-$ pip install Cython # Cython은 koalanlp 설치에 앞서 별도 설치가 필요합니다.
 $ pip install koalanlp
 ```
 
@@ -233,15 +233,20 @@ $ pip install koalanlp
 > <sup>주2-2</sup> ETRI의 경우 Open API를 접근하기 위한 코드 부분은 KoalaNLP의 License 정책에 귀속되지만, Open API 접근 이후의 사용권에 관한 조항은 ETRI에서 별도로 정한 바를 따릅니다.
 > 따라서, ETRI의 사용권 조항에 동의하시고 키를 발급하셔야 하며, 다음 위치에서 발급을 신청할 수 있습니다: [키 발급 신청](http://aiopen.etri.re.kr/key_main.php)
 
-### 초기화
+### 초기화 & 사용종료
 초기화 과정에서 KoalaNLP는 필요한 Java Library를 자동으로 다운로드하여 설치합니다. 설치에는 시간이 다소 소요됩니다.
 때문에, 프로그램 실행시 최초 1회에 한하여 초기화 작업이 필요합니다.
 
+* 사용이 종료된 이후에는 `finalize()`를 실행하여 KoalaNLP가 사용중인 관련 프로그램을 종료하는 것을 권합니다.
+
 ```python
-from koalanlp.Util import initialize
+from koalanlp.Util import initialize, finalize
 
 # 꼬꼬마와 ETRI 분석기의 2.0.4 버전을 참조합니다.
 initialize(java_options="-Xmx4g", KKMA="2.0.4", ETRI="2.0.4")
+
+# 사용이 끝나면 아래와 같이 사용을 종료합니다.
+finalize()
 ```
 
 * `java_options` 인자는 JVM을 실행하기 위한 option string입니다.
