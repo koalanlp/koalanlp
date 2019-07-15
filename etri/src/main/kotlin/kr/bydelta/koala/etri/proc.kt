@@ -5,6 +5,7 @@ package kr.bydelta.koala.etri
 
 import com.beust.klaxon.JsonObject
 import com.beust.klaxon.Klaxon
+import com.github.kittinunf.fuel.core.extensions.jsonBody
 import com.github.kittinunf.fuel.httpPost
 import kr.bydelta.koala.*
 import kr.bydelta.koala.data.*

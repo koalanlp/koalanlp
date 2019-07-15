@@ -351,6 +351,8 @@ object HNNDepParserTest : Spek(ParserSpek<Sentence, CanParseDependency<Sentence>
 
 
 object HNNOriginalWrapperTest : Spek({
+    defaultTimeout = 300000L  // 5 minutes
+
     val tagger = Tagger()
 
     describe("MorphemeAnalyzerWrap") {

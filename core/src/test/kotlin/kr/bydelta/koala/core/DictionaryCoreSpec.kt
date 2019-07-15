@@ -1,6 +1,7 @@
 package kr.bydelta.koala.core
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import kr.bydelta.koala.POS
@@ -158,7 +159,7 @@ object DictionaryCoreSpec : Spek({
             {
                 val paths = runBlocking {
                     (0..5).map {
-                        async(Dispatchers.Default) {
+                        async(Dispatchers.Default + NonCancellable) {
                             sampleCER2.extractResource()
                         }
                     }.map {

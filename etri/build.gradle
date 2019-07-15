@@ -12,7 +12,7 @@ version "2.0.6-SNAPSHOT"
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "kr.bydelta:koalanlp-core:${corePublishedVer}"
-    implementation 'com.github.kittinunf.fuel:fuel:1.16.0'
+    implementation 'com.github.kittinunf.fuel:fuel:2.1.0'
     implementation 'com.beust:klaxon:4.0.1'
     implementation "org.jetbrains.kotlin:kotlin-reflect"
 

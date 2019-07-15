@@ -1,6 +1,7 @@
 package kr.bydelta.koala
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import kr.bydelta.koala.proc.*
@@ -121,6 +122,8 @@ object Examples {
 fun SplitterSpek(getSplitter: () -> CanSplitSentence,
                  originalSplitCounter: (String) -> Int): Root.() -> Unit {
     return {
+        defaultTimeout = 300000L  // 5 minutes
+
         describe("SentenceSplitter") {
             it("handles empty sentence") {
                 val sent = getSplitter().sentences("")
@@ -138,7 +141,7 @@ fun SplitterSpek(getSplitter: () -> CanSplitSentence,
 
                 val multiThreaded = runBlocking {
                     sents.map {
-                        async(Dispatchers.Default) {
+                        async(Dispatchers.Default + NonCancellable) {
                             getSplitter()(it.second)
                         }
                     }.flatMap {
@@ -198,9 +201,9 @@ fun TaggerSpek(getTagger: () -> CanTag,
     fun expectThreadSafe(str: List<String>) {
         val tagger = getTagger()
         val single = str.map { tagSentByKoala(it, tagger) }
-        val multiInit = runBlocking {
+        val multiInit = runBlocking(NonCancellable) {
             str.map {
-                async(Dispatchers.Default) {
+                async(Dispatchers.Default + NonCancellable) {
                     tagSentByKoala(it, getTagger())
                 }
             }.map {
@@ -208,9 +211,9 @@ fun TaggerSpek(getTagger: () -> CanTag,
                 it.await()
             }
         }
-        val multiShared = runBlocking {
+        val multiShared = runBlocking(NonCancellable) {
             str.map {
-                async(Dispatchers.Default) {
+                async(Dispatchers.Default + NonCancellable) {
                     tagSentByKoala(it, tagger)
                 }
             }.map {
@@ -232,6 +235,8 @@ fun TaggerSpek(getTagger: () -> CanTag,
     }
 
     return {
+        defaultTimeout = 300000L  // 5 minutes
+
         describe("Tagger") {
             it("handles empty sentence") {
                 val sent = getTagger().tag("")
@@ -332,6 +337,8 @@ fun DictSpek(dict: CanCompileDict,
              modifierOn: Boolean = true,
              importFilter: (POS) -> Boolean = { true }): Root.() -> Unit {
     return {
+        defaultTimeout = 300000L  // 5 minutes
+
         describe("Dictionary") {
             it("adds a noun") {
                 { dict.addUserDictionary("갑질", POS.NNG) } `should not throw` AnyException
@@ -488,9 +495,9 @@ fun <O, P : CanAnalyzeProperty<O>> ParserSpek(getParser: () -> P,
     fun expectThreadSafe(str: List<String>) {
         val tagger = getParser()
         val single = str.map { parseSentByKoala(it, tagger) }
-        val multiInit = runBlocking {
+        val multiInit = runBlocking(NonCancellable) {
             str.map {
-                async(Dispatchers.Default) {
+                async(Dispatchers.Default + NonCancellable) {
                     parseSentByKoala(it, getParser())
                 }
             }.map {
@@ -498,9 +505,9 @@ fun <O, P : CanAnalyzeProperty<O>> ParserSpek(getParser: () -> P,
                 it.await()
             }
         }
-        val multiShared = runBlocking {
+        val multiShared = runBlocking(NonCancellable) {
             str.map {
-                async(Dispatchers.Default) {
+                async(Dispatchers.Default + NonCancellable) {
                     parseSentByKoala(it, tagger)
                 }
             }.map {
@@ -524,6 +531,8 @@ fun <O, P : CanAnalyzeProperty<O>> ParserSpek(getParser: () -> P,
     }
 
     return {
+        defaultTimeout = 300000L  // 5 minutes
+
         describe("Parser") {
             it("handles empty sentence") {
                 val sent = getParser().analyze("")

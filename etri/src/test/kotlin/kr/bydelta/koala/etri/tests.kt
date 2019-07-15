@@ -10,6 +10,8 @@ import org.spekframework.spek2.style.specification.describe
 import java.util.*
 
 object KlaxonTest : Spek({
+    defaultTimeout = 300000L  // 5 minutes
+
     describe("Json") {
         it("should deparse JSON string correctly") {
             val klaxon = Klaxon()
@@ -50,6 +52,8 @@ object KlaxonTest : Spek({
 })
 
 object ETRICommunicationTest : Spek({
+    defaultTimeout = 300000L  // 5 minutes
+
     val API_KEY = System.getenv("ETRI_KEY")
     val testText = "중국 관영매체가 그동안 북한에 자제를 요구한 적은 있지만, 군사지원 의무제공 포기 가능성과 함께 유엔 안보리 제재안을 먼저 제시한 것은 이례적입니다."
 
@@ -182,6 +186,8 @@ object ETRICommunicationTest : Spek({
 })
 
 object RandomSentenceTest : Spek({
+    defaultTimeout = 300000L  // 5 minutes
+
     val API_KEY = System.getenv("ETRI_KEY")
 
     describe("RoleLabeler") {
