@@ -15,7 +15,7 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 * 최석재님의 [RHINO v2.5.4](https://github.com/SukjaeChoi/RHINO)
 * 김상준님의 [Daon 분석기](https://github.com/rasoio/daon/tree/master/daon-core)
 * ETRI의 [공공 인공지능 Open API](http://aiopen.etri.re.kr/)
-* Kakao의 [카이(Khaiii) v0.3](https://github.com/kakao/khaiii) <sup>(별도설치 필요)</sup>
+* Kakao의 [카이(Khaiii) v0.4](https://github.com/kakao/khaiii) <sup>(별도설치 필요)</sup>
 
 > <sup>주1-1</sup> Arirang 분석기의 출력을 형태소분석에 적합하게 조금 다듬었으므로, 원본과 약간 다른 결과를 낼 수도 있습니다.
 

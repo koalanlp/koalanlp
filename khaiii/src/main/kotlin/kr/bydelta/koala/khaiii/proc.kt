@@ -260,7 +260,9 @@ class Khaiii @JvmOverloads constructor(resourceDirectory: String = "", val opt: 
                 // 인코딩 지정
                 System.setProperty("jna.encoding", "UTF-8")
                 try {
-                    Native.load("libkhaiii", KhaiiiLibrary::class.java) as KhaiiiLibrary
+                    // In OSX, loader automatically adds prefix "lib".
+                    Native.load(if (Platform.isMac()) "khaiii" else "libkhaiii",
+                            KhaiiiLibrary::class.java) as KhaiiiLibrary
                 } catch (e: Exception) {
                     throw UnsatisfiedLinkError(
                             """Khaiii 라이브러리 파일 (libkhaiii.so/libkhaiii.dylib)를 시스템에서 찾을 수 없습니다.

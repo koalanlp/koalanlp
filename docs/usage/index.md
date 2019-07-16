@@ -6,7 +6,11 @@
 
 # 목차
 
-1. [설치](./installation.md)
+1. 설치 방법
+
+    1. [OS별 사전 설치 항목](./PlatformInstall.md)
+    
+    1. [KoalaNLP 설치](./installation.md)
 
 1. 기초 사용법
 
