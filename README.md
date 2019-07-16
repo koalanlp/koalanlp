@@ -111,8 +111,8 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 > <sup>주2-3</sup> Khaiii 분석기의 경우는 Java가 아닌 C++로 구현되어 사용 전 분석기의 설치가 필요합니다. Python3.6 및 CMake 3.10+만 설치되어 있다면 설치 자체가 복잡한 편은 아니니 [여기](https://github.com/kakao/khaiii/wiki/빌드-및-설치)를 참조하여 설치해보세요. 참고로, KoalaNLP가 Travis CI에서 패키지를 자동 테스트하기 위해 구현된 bash script는 [여기](https://github.com/koalanlp/koalanlp/blob/master/khaiii/install.sh)에 있습니다.
 
 ## 실행환경
-* KoalaNLP의 모든 코드는 Java 8을 기준으로 컴파일되고 OpenJDK 11에서 테스트 되었습니다.
-* Kotlin의 경우는 1.3.10이 기준입니다.
+* KoalaNLP의 모든 코드는 Java 8을 기준으로 컴파일되고 OpenJDK 12에서 테스트 되었습니다.
+* Kotlin의 경우는 1.3.30이 기준입니다.
 * Scala의 경우는 `KoalaNLP-scala` 패키지의 버전에 따릅니다.
   단, 은전한닢과 Open Korean Text는 의존하는 라이브러리가 Scala에서 개발되어 Scala에서 사용시 제한이 있을 수 있으며, 이는 [![scala-koalanlp](https://img.shields.io/badge/Scala-KoalaNLP-red.svg?style=flat-square)](https://koalanlp.github.io/scala-support)를 참조하십시오.  
 * Python과 NodeJS는 각각의 저장소를 참고하십시오: 
@@ -121,7 +121,7 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 
 ## Gradle
 ```groovy
-ext.koala_version = '2.0.5'
+ext.koala_version = '2.0.6'
 
 repositories {
     mavenCentral()
@@ -141,7 +141,7 @@ dependencies{
     // Daon의 경우
     implementation "kr.bydelta:koalanlp-daon:${ext.koala_version}"
     // OpenKoreanText의 경우
-    implementation "kr.bydelta:koalanlp-okt:${ext.koala_version}" 
+    implementation "kr.bydelta:koalanlp-okt:2.0.6.1" 
     // 꼬꼬마의 경우
     implementation "kr.bydelta:koalanlp-kkma:${ext.koala_version}:assembly"
     // 한나눔의 경우
@@ -149,7 +149,7 @@ dependencies{
     // ETRI Open API의 경우
     implementation "kr.bydelta:koalanlp-etri:${ext.koala_version}"
     // Khaiii의 경우 (Khaiii C++ 별도 설치 필요)
-    implementation "kr.bydelta:koalanlp-khaiii:2.0.0-alpha.1"
+    implementation "kr.bydelta:koalanlp-khaiii:2.0.0-alpha.4"
     // REST Server Service의 경우 (준비중)
     implementation "kr.bydelta:koalanlp-server:${ext.koala_version}"
 }
@@ -158,7 +158,7 @@ dependencies{
 ## SBT
 (버전은 Latest Release 기준입니다. SNAPSHOT을 사용하시려면, `latest.integration`을 사용하세요.)
 ```sbtshell
-val koalaVer = "2.0.0"
+val koalaVer = "2.0.6"
 
 // 코모란 분석기의 경우
 resolvers += "jitpack" at "https://jitpack.io/"
@@ -177,7 +177,7 @@ libraryDependencies += "kr.bydelta" % "koalanlp-rhino" % koalaVer classifier "as
 libraryDependencies += "kr.bydelta" % "koalanlp-daon" % koalaVer
 
 // Open Korean Text 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-okt" % koalaVer
+libraryDependencies += "kr.bydelta" % "koalanlp-okt" % "2.0.6.1"
 
 // 꼬꼬마 분석기의 경우
 libraryDependencies += "kr.bydelta" % "koalanlp-kkma" % koalaVer classifier "assembly"
@@ -191,7 +191,7 @@ libraryDependencies += "kr.bydelta" % "koalanlp-etri" % koalaVer
 
 // Khaiii 분석기의 경우 (Khaiii C++ 별도 설치 필요)
 resolvers += Resolver.JCenterRepository
-libraryDependencies += "kr.bydelta" % "koalanlp-khaiii" % "2.0.0-alpha.1"
+libraryDependencies += "kr.bydelta" % "koalanlp-khaiii" % "2.0.0-alpha.4"
 
 // REST Server Service의 경우 (준비중)
 libraryDependencies += "kr.bydelta" % "koalanlp-server" % koalaVer

@@ -4,12 +4,14 @@ matrix:
     - name: "Ubuntu Xenial with OpenJDK 8"
       dist: xenial
       jdk: openjdk8
-      before_install: pyenv shell 3.6.7
+      before_install:
+      - pyenv shell 3.6.7
       services: xvfb
     - name: "Ubuntu Xenial with OpenJDK 12"
       dist: xenial
       jdk: openjdk12
-      before_install: pyenv shell 3.6.7
+      before_install:
+      - pyenv shell 3.6.7
       services: xvfb
     - name: "OSX with OpenJDK 12"
       os: osx
