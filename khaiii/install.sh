@@ -59,3 +59,5 @@ then
 else
     echo libkhaiii.so.${KHAIII_LATEST} already exists.
 fi
+
+make install

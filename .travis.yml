@@ -4,12 +4,12 @@ matrix:
     - name: "Ubuntu Xenial with OpenJDK 8"
       dist: xenial
       jdk: openjdk8
-      before_install: pyenv install 3.6.7
+      before_install: pyenv shell 3.6.7
       services: xvfb
     - name: "Ubuntu Xenial with OpenJDK 12"
       dist: xenial
       jdk: openjdk12
-      before_install: pyenv install 3.6.7
+      before_install: pyenv shell 3.6.7
       services: xvfb
     - name: "OSX with OpenJDK 12"
       os: osx
@@ -39,7 +39,7 @@ install:
 - if [ $TRAVIS_OS_NAME != 'windows' ]; then sh khaiii/install.sh; fi
 script:
 - ./gradlew clean
-- ./gradlew check -PexcludeTests=**/RhinoOrigin*:**/Khaiii* --info
+- ./gradlew check -PexcludeTests=**/RhinoOrigin*,**/Khaiii* --info
 - if [ $TRAVIS_OS_NAME != 'windows' ]; then ./gradlew :koalanlp-khaiii:test --info; fi
 - if [ $TRAVIS_OS_NAME == 'linux' ]; then xvfb-run ./gradlew :koalanlp-rhino:test --tests *OriginTest --info; fi
 - if [ $TRAVIS_OS_NAME == 'linux' ]; then ./gradlew :koalanlp-rhino:jacocoTestReport --info; fi

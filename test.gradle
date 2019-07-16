@@ -2,7 +2,7 @@ test {
     failFast true
 
     if (project.hasProperty('excludeTests')) {
-        exclude project.property('excludeTests').toString().split(':').toList()
+        exclude project.property('excludeTests').toString().split(',').toList()
     }
 
     useJUnitPlatform {

@@ -89,6 +89,15 @@
 </tr>
 <tr>
 <td>
+<p><a href="../../kr.bydelta.koala.proc/-can-compile-dict/get-base-entries-of-p-o-s.html">getBaseEntriesOfPOS</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">getBaseEntriesOfPOS</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="kr.bydelta.koala.proc.CanCompileDict$getBaseEntriesOfPOS(kotlin.Array((kr.bydelta.koala.POS)))/posTag">posTag</span><span class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala/-p-o-s/index.html"><span class="identifier">POS</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/index.html"><span class="identifier">Iterator</span></a><span class="symbol">&lt;</span><a href="../../kr.bydelta.koala.proc/-dic-entry.html"><span class="identifier">DicEntry</span></a><span class="symbol">&gt;</span></code>
+<p>원본 사전에 등재된 항목 중에서, 지정된 형태소의 항목만을 가져옵니다. (복합 품사 결합 형태는 제외)</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="../../kr.bydelta.koala.proc/-can-compile-dict/import-from.html">importFrom</a></p>
 </td>
 <td>
@@ -96,6 +105,15 @@
 <p>다른 사전을 참조하여, 선택된 사전에 없는 단어를 사용자사전으로 추가합니다.</p>
 <code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">importFrom</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.proc.CanCompileDict$importFrom(kr.bydelta.koala.proc.CanCompileDict)/dict">dict</span><span class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala.proc/-can-compile-dict/index.html"><span class="identifier">CanCompileDict</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>다른 사전을 참조하여, 선택된 사전에 없는 체언(<a href="../../kr.bydelta.koala/-p-o-s/is-noun.html">POS.isNoun</a>이 true인 값)을 사용자사전으로 추가합니다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../kr.bydelta.koala.proc/-can-compile-dict/import-from-tags.html">importFromTags</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">importFromTags</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.proc.CanCompileDict$importFromTags(kr.bydelta.koala.proc.CanCompileDict, kotlin.Boolean, kotlin.Array((kr.bydelta.koala.POS)))/dict">dict</span><span class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala.proc/-can-compile-dict/index.html"><span class="identifier">CanCompileDict</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.proc.CanCompileDict$importFromTags(kr.bydelta.koala.proc.CanCompileDict, kotlin.Boolean, kotlin.Array((kr.bydelta.koala.POS)))/fastAppend">fastAppend</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="keyword">vararg</span> <span class="identifier" id="kr.bydelta.koala.proc.CanCompileDict$importFromTags(kr.bydelta.koala.proc.CanCompileDict, kotlin.Boolean, kotlin.Array((kr.bydelta.koala.POS)))/posTag">posTag</span><span class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala/-p-o-s/index.html"><span class="identifier">POS</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>다른 사전을 참조하여, 선택된 사전에 없는 단어를 사용자사전으로 추가합니다.</p>
 </td>
 </tr>
 <tr>
