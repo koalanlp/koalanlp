@@ -60,4 +60,8 @@ else
     echo libkhaiii.so.${KHAIII_LATEST} already exists.
 fi
 
-make install
+
+if [ "$TRAVIS_OS_NAME" != "linux" ]
+then
+    make install
+fi
