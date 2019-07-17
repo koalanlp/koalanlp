@@ -7,17 +7,44 @@ matrix:
       before_install:
       - pyenv shell 3.6.7
       services: xvfb
+      before_cache:
+      - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+      - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      cache:
+        directories:
+        - $HOME/.gradle/caches/
+        - $HOME/.gradle/wrapper/
+        - $HOME/khaiii-orig
+        - $HOME/.hunter
     - name: "Ubuntu Xenial with OpenJDK 12"
       dist: xenial
       jdk: openjdk12
       before_install:
       - pyenv shell 3.6.7
       services: xvfb
+      before_cache:
+      - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+      - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      cache:
+        directories:
+        - $HOME/.gradle/caches/
+        - $HOME/.gradle/wrapper/
+        - $HOME/khaiii-orig
+        - $HOME/.hunter
     - name: "OSX with OpenJDK 12"
       os: osx
       osx_image: xcode10.2
       language: shell
       jdk: openjdk12
+      before_cache:
+      - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+      - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      cache:
+        directories:
+        - $HOME/.gradle/caches/
+        - $HOME/.gradle/wrapper/
+        - $HOME/khaiii-orig
+        - $HOME/.hunter
     - name: "Windows with OpenJDK 12"
       os: windows
       language: shell
@@ -28,22 +55,13 @@ matrix:
       env:
       - JAVA_HOME="/c/Progra~1/OpenJDK/jdk-12"
       - PATH="$JAVA_HOME/bin:$PATH"
-before_cache:
-- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-  - $HOME/.gradle/caches/
-  - $HOME/.gradle/wrapper/
-  - $HOME/khaiii-orig
-  - $HOME/.hunter
 install:
 - if [ $TRAVIS_OS_NAME != 'windows' ]; then sh khaiii/install.sh; fi
 script:
 - ./gradlew clean
 - ./gradlew check -PexcludeTests="**/RhinoOrigin*.class,**/Khaiii*.class" --info
 - if [ $TRAVIS_OS_NAME != 'windows' ]; then ./gradlew :koalanlp-khaiii:test --info; fi
-- if [ $TRAVIS_OS_NAME == 'linux' ]; then xvfb-run ./gradlew :koalanlp-rhino:test --tests *OriginTest --info; fi
+- if [ $TRAVIS_OS_NAME == 'linux' ]; then xvfb-run -a ./gradlew :koalanlp-rhino:test --tests *OriginTest --info; fi
 - if [ $TRAVIS_OS_NAME == 'linux' ]; then ./gradlew :koalanlp-rhino:jacocoTestReport --info; fi
 after_success:
 - bash ./git-manage.sh
