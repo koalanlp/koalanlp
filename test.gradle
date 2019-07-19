@@ -1,8 +1,16 @@
 test {
     failFast true
 
-    if (project.hasProperty('excludeTests')) {
-        exclude project.property('excludeTests').toString().split(',').toList()
+    if (project.hasProperty('notTest')){
+        def testProperty = project.property('notTest').toString()
+        def prefix = '**' + File.separator
+
+        if (testProperty.contains('JNA')){
+            exclude prefix + 'KhaiiiTaggerTest.class'
+        }
+        if (testProperty.contains('GUI')){
+            exclude prefix + 'RhinoOriginDictionaryReaderTest.class', prefix + 'RhinoOriginExtraTest.class', prefix + 'RhinoOriginTagger.test'
+        }
     }
 
     useJUnitPlatform {

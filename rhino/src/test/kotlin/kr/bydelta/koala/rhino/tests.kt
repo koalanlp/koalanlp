@@ -36,6 +36,8 @@ object RhinoOriginTaggerTest : Spek(TaggerSpek(
 ))
 
 object RhinoOriginDictionaryReaderTest : Spek({
+    defaultTimeout = 300000L  // 5 min
+
     val fa = FileAnalyzer("./src/main/resources/rhino/")
 
     describe("DictionaryReader") {
@@ -107,6 +109,8 @@ object RhinoOriginDictionaryReaderTest : Spek({
 
 
 object RhinoOriginExtraTest : Spek({
+    defaultTimeout = 300000L  // 5 min
+
     describe("RHINOTagger") {
         it("split sentence as the same way") {
             Examples.exampleSequence().forEach { pair ->
@@ -121,6 +125,8 @@ object RhinoOriginExtraTest : Spek({
 })
 
 object RhinoCLITest : Spek({
+    defaultTimeout = 300000L  // 5 min
+
     describe("RhinoTagger") {
         it("tag sentences") {
             { Tagger() } `should not throw` AnyException
