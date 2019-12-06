@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>UTaggerLibrary - koalanlp</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.utagger</a>&nbsp;/&nbsp;<a href="./index.html">UTaggerLibrary</a><br/>
+<br/>
+<h1>UTaggerLibrary</h1>
+<code><span class="keyword">interface </span><span class="identifier">UTaggerLibrary</span></code> <a href="https://github.com/koalanlp/koalanlp/blob/master/utagger/src/main/kotlin/kr/bydelta/koala/utagger/proc.kt#L25">(source)</a>
+<p>UTagger Shared object와 소통하기 위한 JNA Wrapper</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-global_init2.html">Global_init2</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">Global_init2</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.utagger.UTaggerLibrary$Global_init2(, kotlin.Int)/configPath">configPath</span><span class="symbol">:</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.utagger.UTaggerLibrary$Global_init2(, kotlin.Int)/v2">v2</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code>
+<p>UTagger 설정파일 불러오기</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-global_release.html">Global_release</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">Global_release</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>UTagger 연결 종료</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="cma-set-newline-n.html">cmaSetNewlineN</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">cmaSetNewlineN</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.utagger.UTaggerLibrary$cmaSetNewlineN(kotlin.Int)/analyzerIndex">analyzerIndex</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>UTagger의 출력에서 carriage return(\r)을 삭제한다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="cma_tag_line_json2.html">cma_tag_line_json2</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">cma_tag_line_json2</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.utagger.UTaggerLibrary$cma_tag_line_json2(kotlin.Int, , kotlin.Int)/analyzerIndex">analyzerIndex</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.utagger.UTaggerLibrary$cma_tag_line_json2(kotlin.Int, , kotlin.Int)/inStr">inStr</span><span class="symbol">:</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.utagger.UTaggerLibrary$cma_tag_line_json2(kotlin.Int, , kotlin.Int)/styleOption">styleOption</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code>
+<p>UTagger를 사용하여 형태소 분석을 수행한다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="cma_tag_target_word_json2.html">cma_tag_target_word_json2</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">cma_tag_target_word_json2</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.utagger.UTaggerLibrary$cma_tag_target_word_json2(kotlin.Int, , kotlin.Int)/analyzerIndex">analyzerIndex</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.utagger.UTaggerLibrary$cma_tag_target_word_json2(kotlin.Int, , kotlin.Int)/inStr">inStr</span><span class="symbol">:</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.utagger.UTaggerLibrary$cma_tag_target_word_json2(kotlin.Int, , kotlin.Int)/translateTo">translateTo</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code>
+<p>UTagger를 사용하여 대역어를 확인한다.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="delete-u-c-m-a.html">deleteUCMA</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">deleteUCMA</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.utagger.UTaggerLibrary$deleteUCMA(kotlin.Int)/analyzerIndex">analyzerIndex</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>UTagger thread를 닫는다</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="new-u-c-m-a2.html">newUCMA2</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">newUCMA2</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.utagger.UTaggerLibrary$newUCMA2(kotlin.Int)/analyzerIndex">analyzerIndex</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code>
+<p>새로운 UTagger Thread 생성</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

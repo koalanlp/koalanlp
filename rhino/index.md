@@ -3,7 +3,7 @@
 Open Korean Text 형태소분석기의 Wrapper를 정의합니다.
 
 Open Korean Text 형태소 분석기는 최석재님이 개발한 것으로,
-원본 분석기는 [RHINO v2.5.4](https://github.com/SukjaeChoi/RHINO)에서 확인 가능합니다.
+원본 분석기는 [RHINO v2.7.3](https://github.com/SukjaeChoi/RHINO)에서 확인 가능합니다.
 
 원본의 저작권 조항은 업로드 위치별로 다르게 지정되어 있습니다. 
 - sourceforge에는 Creative Commons Attribution License로 지정되어 있으나 구체적인 조항은 확인할 수 없습니다.

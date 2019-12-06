@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>UWord - koalanlp</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.utagger</a>&nbsp;/&nbsp;<a href="./index.html">UWord</a><br/>
+<br/>
+<h1>UWord</h1>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">UWord</span></code> <a href="https://github.com/koalanlp/koalanlp/blob/master/utagger/src/main/kotlin/kr/bydelta/koala/utagger/data.kt#L54">(source)</a>
+<p>UTagger의 어절 JSON 표현 규격</p>
+<h3>Parameters</h3>
+<p><a name="surface"></a>
+<code>surface</code> - 어절의 표면형.</p>
+<p><a name="morphemes"></a>
+<code>morphemes</code> - 형태소 목록. List&lt;<a href="../-u-morpheme/index.html">UMorpheme</a>&gt;.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">UWord</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.utagger.UWord$<init>(kotlin.String, kotlin.collections.List((kr.bydelta.koala.utagger.UMorpheme)))/surface">surface</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.utagger.UWord$<init>(kotlin.String, kotlin.collections.List((kr.bydelta.koala.utagger.UMorpheme)))/morphemes">morphemes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-u-morpheme/index.html"><span class="identifier">UMorpheme</span></a><span class="symbol">&gt;</span><span class="symbol">)</span></code>
+<p>UTagger의 어절 JSON 표현 규격</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="morphemes.html">morphemes</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">morphemes</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-u-morpheme/index.html"><span class="identifier">UMorpheme</span></a><span class="symbol">&gt;</span></code>
+<p>형태소 목록. List&lt;<a href="../-u-morpheme/index.html">UMorpheme</a>&gt;.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="surface.html">surface</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">surface</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>어절의 표면형.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="to-word.html">toWord</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toWord</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../kr.bydelta.koala.data/-word/index.html"><span class="identifier">Word</span></a></code>
+<p>KoalaNLP의 <a href="../../kr.bydelta.koala.data/-word/index.html">Word</a> 형태로 변환</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

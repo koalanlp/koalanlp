@@ -3,7 +3,7 @@
 Open Korean Text 형태소분석기의 Wrapper를 정의합니다.
 
 Open Korean Text 형태소 분석기는 [Open Korean Text group](http://github.com/open-korean-text)에서 관리하며,
-원본 분석기는 [오픈 소스 한국어 처리기 v2.2.0](http://openkoreantext.org)에서 확인 가능합니다.
+원본 분석기는 [오픈 소스 한국어 처리기 v2.3.1](http://openkoreantext.org)에서 확인 가능합니다.
 
 원본의 저작권 조항은 [Apache 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))을 따르며,
 KoalaNLP 코드의 저작권 조항은 MIT license를 따릅니다.

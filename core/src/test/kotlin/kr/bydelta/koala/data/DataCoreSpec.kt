@@ -144,12 +144,12 @@ object DataCoreSpec : Spek({
 
             // getWordSense, setProperty(T), setProperty(K, T),
             it("can save WordSense property") {
-                { dummy1.setWordSense(1) } `should not throw` AnyException
-                { dummy2.setWordSense(2) } `should not throw` AnyException
+                { dummy1.setWordSense("1") } `should not throw` AnyException
+                { dummy2.setWordSense("2") } `should not throw` AnyException
 
                 sent2[0][0].getWordSense() `should be` null
-                dummy1.getWordSense() `should equal` 1
-                dummy2.getWordSense() `should equal` 2
+                dummy1.getWordSense() `should equal` "1"
+                dummy2.getWordSense() `should equal` "2"
 
                 dummy1.getWordSense() `should be` dummy1.getProperty<WordSense>(Key.WORD_SENSE)?.id
                 dummy2.getWordSense() `should be` dummy2.getProperty<WordSense>(Key.WORD_SENSE)?.id
@@ -637,28 +637,28 @@ object DataCoreSpec : Spek({
         describe("WordSense") {
             // value
             it("should contain an integer value") {
-                val value = WordSense(5)
-                value.id `should be equal to` 5
+                val value = WordSense("5")
+                value.id `should be equal to` "5"
 
-                val value2 = WordSense(7)
-                value2.id `should be equal to` 7
+                val value2 = WordSense("7")
+                value2.id `should be equal to` "7"
             }
 
             // data class
             it("should be a data class") {
-                val value = WordSense(5)
+                val value = WordSense("5")
                 value.toString() `should be equal to` "WordSense(id=5)"
 
                 val (comp) = value
-                comp `should be equal to` 5
+                comp `should be equal to` "5"
 
-                value.copy(id = 6) `should equal` WordSense(6)
+                value.copy(id = "6") `should equal` WordSense("6")
             }
 
             // Serializable
             it("can be serialized") {
                 var outputBytes: ByteArray? = null
-                val value = WordSense(5);
+                val value = WordSense("5");
 
                 {
                     val output = ByteArrayOutputStream(10240)
@@ -679,16 +679,16 @@ object DataCoreSpec : Spek({
         }
 
         describe("ListProperty") {
-            val dummy1 = ListProperty(mutableListOf(WordSense(1), WordSense(2), WordSense(3)))
-            val dummy2 = ListProperty(mutableListOf(WordSense(1), WordSense(2), WordSense(3)))
-            val dummy3 = ListProperty(mutableListOf(WordSense(1), WordSense(3), WordSense(2)))
-            val dummy4 = ListProperty(mutableListOf(WordSense(1), WordSense(3)))
+            val dummy1 = ListProperty(mutableListOf(WordSense("1"), WordSense("2"), WordSense("3")))
+            val dummy2 = ListProperty(mutableListOf(WordSense("1"), WordSense("2"), WordSense("3")))
+            val dummy3 = ListProperty(mutableListOf(WordSense("1"), WordSense("3"), WordSense("2")))
+            val dummy4 = ListProperty(mutableListOf(WordSense("1"), WordSense("3")))
 
             // children
             it("should correctly handle children") {
-                dummy1[0] `should equal` WordSense(1)
-                dummy1[1] `should equal` WordSense(2)
-                dummy1[2] `should equal` WordSense(3)
+                dummy1[0] `should equal` WordSense("1")
+                dummy1[1] `should equal` WordSense("2")
+                dummy1[2] `should equal` WordSense("3")
                 dummy1[0] `should not equal` dummy1[1]
             }
 
@@ -706,7 +706,7 @@ object DataCoreSpec : Spek({
                 dummy1.lastIndexOf(dummy3[1]) `should be equal to` 2
 
                 (dummy2[0] in dummy1) `should be` true
-                (WordSense(7) in dummy1) `should be` false
+                (WordSense("7") in dummy1) `should be` false
             }
 
             // equal, hashcode

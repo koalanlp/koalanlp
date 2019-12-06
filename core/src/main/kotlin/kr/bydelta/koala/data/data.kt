@@ -247,13 +247,13 @@ class ListProperty<T : Property> internal constructor(internal val values: Mutab
  * @constructor 정수값을 저장하는 [Property]를 생성합니다.
  * @param[id] 저장될 정수 값
  */
-data class WordSense(val id: Int) : Property {
+data class WordSense(val id: String) : Property {
     /** Static Fields */
     companion object {
-        /** Serialization Version ID: ver 2.0.0 (hexadecimal) */
+        /** Serialization Version ID: ver 2.1.0 (hexadecimal) */
         @Suppress("unused")
         @JvmStatic
-        private val serialVersionUid: Long = 0x200L // Version 2.0.0
+        private val serialVersionUid: Long = 0x210L // Version 2.1.0
     }
 }
 
@@ -814,18 +814,22 @@ class Morpheme constructor(val surface: String, val tag: POS,
 
     /**
      * 이 형태소의 의미번호를 저장합니다.
+     * 보통, 앞 두자리는 동형이의어를 분리하고, 뒷 네자리가 다의어를 분해합니다. (예: 050000은 05번 동형이의어의 0000번 의미)
+     *
+     * @param id 의미/어깨번호 값
      */
-    fun setWordSense(id: Int) = setProperty(Key.WORD_SENSE, WordSense(id))
+    fun setWordSense(id: String) = setProperty(Key.WORD_SENSE, WordSense(id))
 
     /**
      * 다의어 분석 결과인, 이 형태소의 사전 속 의미/어깨번호 값을 돌려줍니다.
+     * 보통, 앞 두자리는 동형이의어를 분리하고, 뒷 네자리가 다의어를 분해합니다. (예: 050000은 05번 동형이의어의 0000번 의미)
      *
      * 다의어 분석을 한 적이 없다면 null을 돌려줍니다.
      *
      * @since 2.0.0
      * @return 의미/어깨번호 값
      * */
-    fun getWordSense(): Int? = getProperty<WordSense>(Key.WORD_SENSE)?.id
+    fun getWordSense(): String? = getProperty<WordSense>(Key.WORD_SENSE)?.id
 
     /**
      * 개체명 분석을 했다면, 현재 형태소가 속한 개체명 값을 돌려줍니다.

@@ -267,7 +267,7 @@ class Khaiii @JvmOverloads constructor(resourceDirectory: String = "", val opt: 
                     throw UnsatisfiedLinkError(
                             """Khaiii 라이브러리 파일 (libkhaiii.so/libkhaiii.dylib)를 시스템에서 찾을 수 없습니다.
                             |Khaiii는 C++로 구현되어 KoalaNLP는 이를 자동으로 설치하지 않습니다.
-                            |Khaiii가 설치되어 있는지, LD_LIBRARY_PATH 등의 환경 변수가 제대로 설정되었는지 확인해주세요. \" +\n" +
+                            |Khaiii가 설치되어 있는지, LD_LIBRARY_PATH 등의 환경 변수가 제대로 설정되었는지 확인해주세요.
                             |설치가 필요한 경우, 설치법은 https://github.com/kakao/khaiii/wiki/빌드-및-설치 에서 확인해주세요.""".trimMargin())
                 }
             }

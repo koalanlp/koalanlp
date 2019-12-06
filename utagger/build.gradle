@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id "org.jetbrains.kotlin.jvm"
+    id "org.jetbrains.dokka"
+    id "com.bmuschko.nexus"
+}
+
+group 'kr.bydelta'
+version "2.1.0-alpha.1"
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "kr.bydelta:koalanlp-core:${corePublishedVer}"
+    implementation 'net.java.dev.jna:jna:5.1.0'
+    implementation ('com.beust:klaxon:5.0.7') {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    implementation "org.jetbrains.kotlin:kotlin-reflect"
+
+    testImplementation "kr.bydelta:koalanlp-core:${corePublishedVer}:tests"
+    testRuntime "org.jetbrains.kotlin:kotlin-test"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.0"
+    testImplementation("org.amshove.kluent:kluent:1.49") {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    testImplementation('org.spekframework.spek2:spek-dsl-jvm:2.0.5') {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    testRuntimeOnly('org.spekframework.spek2:spek-runner-junit5:2.0.5') {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+}
+
+apply from: rootProject.file('test.gradle')
+apply from: rootProject.file('publish.gradle')

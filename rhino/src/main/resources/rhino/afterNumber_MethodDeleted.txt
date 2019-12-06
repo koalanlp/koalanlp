@@ -1133,6 +1133,7 @@ umol	umol/SL
 외국어	외국어/NNG
 운영계	운영/NNG + 계/XSN
 원가량	원/NNB + 가량/NNG
+원만큼	원/NNB + 만큼/JKB
 원벌이	원/NNB + 벌이/NNG
 원어찌	원/NNB + 어찌/NNB
 원어치	원/NNB + 어치/NNG

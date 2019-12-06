@@ -33,7 +33,7 @@ data class MorphemeResponse(val id: Int,
  * @param id 의미 분석의 순번
  * @param text 분석 단위의 표면형
  * @param type 형태소 품사 분류
- * @param scode 의미 번호 (동형이의어는 2자리, 다의어는 6자리)
+ * @param scode 의미 번호 (앞 2자리는 동형이의어, 뒷 6자리는 다의어)
  * @param weight 의미 분석 결과의 신뢰도
  * @param position 의미 분석 결과의 텍스트 내 위치
  * @param begin 의미 분석 결과의 시작 형태소 번호
@@ -46,7 +46,7 @@ data class WordSenseResponse(val id: Int, val text: String, val type: String,
     /** 의미 분석에 해당하는 형태소 결과값 */
     internal val morpheme: Morpheme by lazy {
         val morph = Morpheme(text, POS.valueOf(type), type)
-        morph.setWordSense(scode.toInt())
+        morph.setWordSense(scode)
         morph
     }
 }

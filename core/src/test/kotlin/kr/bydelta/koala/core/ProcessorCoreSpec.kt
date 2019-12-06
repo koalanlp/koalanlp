@@ -240,7 +240,7 @@ object ProcessorCoreSpec : Spek({
         val propertyAttacher = object : CanAnalyzeProperty<List<String>> {
             override fun attachProperty(item: List<String>, sentence: String): Sentence {
                 val res = convert(item)
-                res.setProperty(Key.WORD_SENSE, WordSense(1))
+                res.setProperty(Key.WORD_SENSE, WordSense("1"))
                 return res
             }
 
@@ -264,7 +264,7 @@ object ProcessorCoreSpec : Spek({
             val sent = "안녕하세요.\n졸린 일요일입니다."
 
             propertyAttacher.analyze(sent) `should equal` propertyAttacher(sent)
-            propertyAttacher.analyze(sent)[0].getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` 1
+            propertyAttacher.analyze(sent)[0].getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` "1"
 
             val sentInst = Sentence(
                     listOf(
@@ -288,10 +288,10 @@ object ProcessorCoreSpec : Spek({
                     )
             )
 
-            propertyAttacher.analyze(sentInst).getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` 1
+            propertyAttacher.analyze(sentInst).getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` "1"
             sentInst.removeProperty(Key.WORD_SENSE)
 
-            propertyAttacher(sentInst).getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` 1
+            propertyAttacher(sentInst).getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` "1"
             sentInst.removeProperty(Key.WORD_SENSE)
 
             val sentInst2 = Sentence(
@@ -312,12 +312,12 @@ object ProcessorCoreSpec : Spek({
             )
 
             val sents = propertyAttacher.analyze(listOf(sentInst, sentInst2))
-            sents[0].getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` 1
-            sents[1].getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` 1
+            sents[0].getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` "1"
+            sents[1].getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` "1"
 
             val sents2 = propertyAttacher(listOf(sentInst, sentInst2))
-            sents2[0].getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` 1
-            sents2[1].getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` 1
+            sents2[0].getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` "1"
+            sents2[1].getProperty<WordSense>(Key.WORD_SENSE)?.id `should equal` "1"
         }
     }
 })

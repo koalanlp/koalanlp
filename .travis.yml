@@ -5,7 +5,7 @@ matrix:
       dist: xenial
       jdk: openjdk8
       before_install:
-      - pyenv shell 3.6.7
+      - pyenv shell 3.6.3
       services: xvfb
       before_cache:
       - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

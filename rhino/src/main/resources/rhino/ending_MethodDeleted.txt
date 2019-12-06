@@ -1,4 +1,4 @@
-﻿abcdefghijklmnopqrstuvwxyz	abcdefghijklmnopqrstuvwxyz/SL	SEPA
+﻿시작에들어가는가상글	시작에들어가는가상글/NNG	SEPA
 게살기운동중앙협의회	게/EC + 살/VV + 기/ETN + 운동/NNG + 중앙/NNG + 협의회/NNG	SEPA
 내려와버리더라는겔세	내리/VV + 어/EC + 오/VV + 아/EC + 버리/VX + 더라는/ETM + 것/NNB + 이/VCP + ㄹ세/EF	SEPA
 떠밀려나오다시피해서	떠밀리/VV + 어/EC + 나오/VV + 다시피/EC + 하/VX + 아서/EC	SEPA
@@ -13,7 +13,7 @@
 권공동대책위원회	권/XSN + 공동/NNG + 대책/NNG + 위원회/NNG	SEPA
 권쓰레기매립장이	권/XSN + 쓰레기/NNG + 매립장/NNG + 이/JKS	SEPA
 권쓰레기매립지로	권/XSN + 쓰레기/NNG + 매립지/NNG + 로/JKB	SEPA
-기다려보십시오이	기다리/VV + 어/EC + 보/VX + 시/EP + ㅂ시오이/EF	SEPA
+기다려보십시오이	기다리/VV + 어/EC + 보/VX + 시/EP + ㅂ시오/EF + 이/EF	SEPA
 기운동중앙협의회	기/ETN + 운동/NNG + 중앙/NNG + 협의회/NNG	SEPA
 까다로워져서일까	까다롭/VA + 어/EC + 지/VX + 어서/EC + 이/VCP + ㄹ까/EC	SEPA
 데간데없어집니다	데/NNB + 가/VV + ㄴ/ETM + 데/NNB + 없/VA + 어/EC + 지/VX + ㅂ니다/EF	SEPA
@@ -34,7 +34,7 @@
 용개인정보도우미	용/XSN + 개인/NNG + 정보/NNG + 도우미/NNG	SEPA
 우스꽝스러운데요	우스꽝스럽/VA + ㄴ데요/EC	SEPA
 적재산권으로부터	적/XSN + 재산/NNG + 권/XSN + 으로부터/JKB	SEPA
-주었나보다던데요	주/VX + 었/EP + 나/EC + 보/VX + 다/EC + 던/EC + 데요/EF	SEPA
+주었나보다던데요	주/VV + 었/EP + 나/EC + 보/VX + 다/EC + 던/EC + 데요/EF	SEPA
 퍼질러앉아버린다	퍼지르/VV + 어/EC + 앉/VV + 아/EC + 버리/VX + ㄴ다/EF	SEPA
 하면서부터입니다	하/VV + 면서/EC + 부터/JX + 이/VCP + ㅂ니다/EF	SEPA
 가르쳐주십시오	가르치/VV + 어/EC + 주/VX + 시/EP + ㅂ시오/EF	SEPA
@@ -276,7 +276,7 @@
 었으니망정이지	었/EP + 으니/EC + 망정/NNB + 이/VCP + 지/EC	SEPA
 에게서부터인지	에게서/JKB + 부터/JX + 이/VCP + ㄴ지/EC	SEPA
 에서라기보다는	에서/JKB + 이/VCP + 라기/ETN + 보다/JKB + 는/JX	SEPA
-오면서부터이다	오/VX + 면서/EC + 부터/JX + 이/VCP + 다/EF	SEPA
+오면서부터이다	오/VV + 면서/EC + 부터/JX + 이/VCP + 다/EF	SEPA
 올라와기실는지	올라오/VV + 아/EC + 계시/VX + ㄹ는지/EF	SEPA
 왔다갔다해본다	오/VV + 았/EP + 다/EC + 가/VV + 았/EP + 다/EC + 하/VX + 아/EC + 보/VX + ㄴ다/EF	SEPA
 외로우셨나봐요	외롭/VA + 으시/EP + 었/EP + 나/EF + 보/VX + 아요/EF	SEPA
@@ -317,7 +317,7 @@
 적이었으리라는	적/XSN + 이/VCP + 었/EP + 으리라는/ETM	SEPA
 적표현이라고는	적/XSN + 표현/NNG + 이/VCP + 라고/EC + 는/JX	SEPA
 제이론으로서도	제/XSN + 이론/NNG + 으로서/JKB + 도/JX	SEPA
-주겠노라고까지	주/VX + 겠/EP + 노라고/EC + 까지/JX	SEPA
+주겠노라고까지	주/VV + 겠/EP + 노라고/EC + 까지/JX	SEPA
 징그러우리만치	징그럽/VA + 으리만치/EC	SEPA
 징그러워한다요	징그럽/VA + 어/EC + 하/VX + ㄴ다요/EF	SEPA
 짜리들이었는데	짜리/XSN + 들/XSN + 이/VCP + 었/EP + 는데/EC	SEPA
@@ -354,7 +354,7 @@
 흘러나와서인지	흘러나/VV + 아서/EC + 이/VCP + ㄴ지/EC	SEPA
 흥얼거려진다는	흥얼거리/VV + 어/EC + 지/VX + ㄴ다는/ETM	SEPA
 흥얼거린다니까	흥얼거리/VV + ㄴ다니까/EF	SEPA
-가겠사옵니다	가/VX + 겠/EP + 사오/EP + ㅂ니다/EF	SEPA
+가겠사옵니다	가/VV + 겠/EP + 사오/EP + ㅂ니다/EF	SEPA
 가까와진다니	가깝/VA + 아/EC + 지/VX + ㄴ다니/EC	SEPA
 가까와질수록	가깝/VA + 아/EC + 지/VX + ㄹ수록/EC	SEPA
 가까우리라는	가깝/VA + 으리라는/ETM	SEPA
@@ -501,6 +501,7 @@
 기언어상실증	기/ETN + 언어/NNG + 상실증/NNG	SEPA
 기우뚱거린다	기우뚱거리/VV + ㄴ다/EF	SEPA
 기운동에서는	기/ETN + 운동/NNG + 에서/JKB + 는/JX	SEPA
+기웃거립니다	기웃거리/VV + ㅂ니다/EF	SEPA
 기울어진다는	기울어지/VV + ㄴ다는/ETM	SEPA
 기울여준다고	기울이/VV + 어/EC + 주/VX + ㄴ다고/EC	SEPA
 기울인다거나	기울이/VV + ㄴ다거나/EC	SEPA
@@ -667,7 +668,7 @@
 돌아간다면서	돌아가/VV + ㄴ다면서/EC	SEPA
 돌아간답니다	돌아가/VV + ㄴ답니다/EF	SEPA
 돌아갈지어다	돌아가/VV + ㄹ지어다/EF	SEPA
-돌아갓입니다	돌아가/VV + 앗/EC + 이/VCP + ㅂ니다/EF	SEPA
+돌아갓입니다	돌아가/VV + 아/EF + 이/VCP + ㅂ니다/EF	SEPA
 돌아갔다는게	돌아가/VV + 았/EP + ㄴ다는/ETM + 것/NNB + 이/JKS	SEPA
 돌아다녀봐도	돌아다니/VV + 어/EC + 보/VX + 아도/EC	SEPA
 돌아다녀봐야	돌아다니/VV + 어/EC + 보/VX + 아야/EC	SEPA
@@ -988,6 +989,8 @@
 부터였는지도	부터/JX + 이/VCP + 었/EP + 는지/EC + 도/JX	SEPA
 부터였습니까	부터/JX + 이/VCP + 었/EP + 습니까/EF	SEPA
 부터였습니다	부터/JX + 이/VCP + 었/EP + 습니다/EF	SEPA
+북적거린다고	북적거리/VV + ㄴ다고/EC	SEPA
+북적거린다면	북적거리/VV + ㄴ다면/EC	SEPA
 분다기로서니	불/VV + ㄴ다기로서니/EC	SEPA
 불거져나와서	불거지/VV + 어/EC + 나오/VV + 아서/EC	SEPA
 불러드릴게요	부르/VV + 어/EC + 드리/VX + ㄹ게요/EF	SEPA
@@ -1173,6 +1176,7 @@
 시켰으면서도	시키/XSV + 었/EP + 으면서/EC + 도/JX	SEPA
 시켰음직하다	시키/XSV + 었/EP + 음직/EC + 하/VX + 다/EF	SEPA
 시큰거린다는	시큰거리/VV + ㄴ다는/ETM	SEPA
+시큰거린다능	시큰거리/VV + ㄴ다는/ETM	SEPA
 시키겠노라고	시키/XSV + 겠/EP + 노라고/EC	SEPA
 시키기까지는	시키/XSV + 기/ETN + 까지/JX + 는/JX	SEPA
 시키기는커녕	시키/XSV + 기/ETN + 는커녕/JX	SEPA
@@ -1683,7 +1687,7 @@
 역겨워한다고	역겹/VA + 어/EC + 하/VX + ㄴ다고/EC	SEPA
 역사학잡니다	역사/NNG + 학자/NNG + 이/VCP + ㅂ니다/EF	SEPA
 예뻐한다느니	예쁘/VA + 어/EC + 하/VX + ㄴ다느니/EC	SEPA
-오겠구만이라	오/VX + 겠/EP + 구먼/EC + 이/VCP + 라/EF	SEPA
+오겠구만이라	오/VV + 겠/EP + 구먼/EC + 이/VCP + 라/EF	SEPA
 오라비에게는	오라비/NNG + 에게/JKB + 는/JX	SEPA
 오라비에게서	오라비/NNG + 에게서/JKB	SEPA
 오르내린다는	오르내리/VV + ㄴ다는/ETM	SEPA
@@ -1911,12 +1915,12 @@
 좋아한답니다	좋아하/VV + ㄴ답니다/EF	SEPA
 좋아했음직한	좋아하/VV + 았/EP + 음직/EC + 하/VX + ㄴ/ETM	SEPA
 주물럭거려야	주무르/VV + 어야/EC	SEPA
-주시겠습니까	주/VX + 시/EP + 겠/EP + 습니까/EC	SEPA
-주시겠습니다	주/VX + 시/EP + 겠/EP + 습니다/EF	SEPA
-주시더라구요	주/VX + 시/EP + 더라구요/EF	SEPA
-주십시오라고	주/VX + 시/EP + ㅂ시오라고/EC	SEPA
-주어야겠다는	주/VX + 어야/EC + 겠/EP + 다는/ETM	SEPA
-주었으리라고	주/VX + 었/EP + 으리라고/EC	SEPA
+주시겠습니까	주/VV + 시/EP + 겠/EP + 습니까/EC	SEPA
+주시겠습니다	주/VV + 시/EP + 겠/EP + 습니다/EF	SEPA
+주시더라구요	주/VV + 시/EP + 더라구요/EF	SEPA
+주십시오라고	주/VV + 시/EP + ㅂ시오라고/EC	SEPA
+주어야겠다는	주/VV + 어야/EC + 겠/EP + 다는/ETM	SEPA
+주었으리라고	주/VV + 었/EP + 으리라고/EC	SEPA
 죽여버린다고	죽이/VV + 어/EC + 버리/VX + ㄴ다고/EC	SEPA
 죽여버린다는	죽이/VV + 어/EC + 버리/VX + ㄴ다는/ETM	SEPA
 죽여버릴거야	죽이/VV + 어/EC + 버리/VX + ㄹ거야/EF	SEPA
@@ -2080,15 +2084,15 @@
 해주셔야지요	하/VV + 아/EC + 주/VX + 시/EP + 어야지요/EF	SEPA
 해주어야겠다	하/VV + 아/EC + 주/VX + 어야/EC + 하/VX + 겠/EP + 다고/EF	SEPA
 해치워야지요	해치우/VV + 어야지요/EF	SEPA
-허겠다는군유	하/XSV + 겠/EP + 다는군유/EF	SEPA
+허겠다는군유	허/XSV + 겠/EP + 다는군유/EF	SEPA
 허덕일지라도	허덕이/VV + ㄹ지라도/EC	SEPA
 허둥거려진다	허둥거리/VV + 어/EC + 지/VX + ㄴ다/EF	SEPA
 허둥지둥거린	허둥지둥거리/VV + ㄴ/ETM	SEPA
 허물어뜨려야	허물어뜨리/VV + 어야/EC	SEPA
 허물어져간다	허물어지/VV + 어/EC + 가/VX + ㄴ다/EF	SEPA
 허물어져버린	허물어지/VV + 어/EC + 버리/VX	SEPA
-허셨습니까요	하/XSA + 시/EP + 었/EP + 습니까요/EF	SEPA
-허십니다그려	하/XSA + 시/EP + ㅂ니다/EC + 그려/JX	SEPA
+허셨습니까요	허/XSV + 시/EP + 었/EP + 습니까요/EF	SEPA
+허십니다그려	허/XSV + 시/EP + ㅂ니다/EC + 그려/JX	SEPA
 허우적거려도	허우적거리/VV + 어도/EC	SEPA
 허우적거려야	허우적거리/VV + 어야/EC	SEPA
 허우적거린다	허우적거리/VV + ㄴ다/EF	SEPA
@@ -2121,7 +2125,7 @@
 형업체로까지	형/XSN + 업체/NNG + 로/JKB + 까지/JX	SEPA
 형업체부도로	형/XSN + 업체/NNG + 부도/NNG + 로/JKB	SEPA
 형우량주들이	형/XSN + 우량주/NNG + 들/XSN + 이/JKS	SEPA
-형유통업체와	형/XSN + 유통/NNG + 업체/NNG + 와/JKB	SEPA
+형유통업체와	형/XSN + 유통/NNG + 업체/NNG + 와/JC	SEPA
 형의문문부터	형/XSN + 의문문/NNG + 부터/JX	SEPA
 형정세포까지	형/XSN + 정세포/NNG + 까지/JX	SEPA
 형제조회사의	형/XSN + 제조/NNG + 회사/NNG + 의/JKG	SEPA
@@ -2202,7 +2206,7 @@
 히히덕거린다	히히덕거리/VV + ㄴ다/EF	SEPA
 힐끔거린다는	힐끔거리/VV + ㄴ다는/ETM	SEPA
 힘써주십시오	힘쓰/VV + 어/EC + 주/VX + 시/EP + ㅂ시오/EC	SEPA
-가겠노라고	가/VX + 겠/EP + 노라고/EC	SEPA
+가겠노라고	가/VV + 겠/EP + 노라고/EC	SEPA
 가겠습니다	가/VV + 겠/EP + 습니다/EF	SEPA
 가까와진다	가깝/VA + 아/EC + 지/VX + ㄴ다/EF	SEPA
 가까우면서	가깝/VA + 으면서/EC	SEPA
@@ -2259,7 +2263,7 @@
 가리킴인데	가리키/VV + ㅁ/ETN + 이/VCP + ㄴ데/EC	SEPA
 가리킵니까	가리키/VV + ㅂ니까/EF	SEPA
 가리킵니다	가리키/VV + ㅂ니다/EF	SEPA
-가면서까지	가/VX + 면서/EC + 까지/JX	SEPA
+가면서까지	가/VV + 면서/EC + 까지/JX	SEPA
 가무시하고	가/JKS + 무시/NNG + 하/XSV + 고/EC	SEPA
 가물거린다	가물거리/VV + ㄴ다/EF	SEPA
 가벼운데다	가볍/VA + ㄴ데다/EC	SEPA
@@ -2521,6 +2525,7 @@
 고있느냐는	고/EC + 있/VX + 느냐는/ETM	SEPA
 고있는가를	고/EC + 있/VX + 는가/EC + 를/JKO	SEPA
 고있습니다	고/EC + 있/VX + 습니다/EF	SEPA
+고자합니다	고자/EC + 하/VX + ㅂ니다/EF	SEPA
 고짜고하는	고/EC + 짜/VV + 고/EC + 하/VV + 는/ETM	SEPA
 고쳐나간다	고치/VV + 어/EC + 나가/VX + ㄴ다/EF	SEPA
 고쳐주셔요	고치/VV + 어/EC + 주/VX + 시/EP + 어요/EC	SEPA
@@ -2616,7 +2621,7 @@
 권인물들의	권/XSN + 인물/NNG + 들/XSN + 의/JKG	SEPA
 권지역에서	권/XSN + 지역/NNG + 에서/JKB	SEPA
 권침해라며	권/XSN + 침해/NNG + 이/VCP + 라며/EC	SEPA
-권핵심부와	권/XSN + 핵심부/NNG + 와/JKB	SEPA
+권핵심부와	권/XSN + 핵심부/NNG + 와/JC	SEPA
 권핵심부의	권/XSN + 핵심부/NNG + 의/JKG	SEPA
 권협회측은	권/XSN + 협회/NNG + 측/NNB + 은/JX	SEPA
 권회복이니	권/XSN + 회복/NNG + 이/VCP + 니/EC	SEPA
@@ -3938,7 +3943,7 @@
 들썽거린다	들썽거리/VV + ㄴ다/EF	SEPA
 들쑤셔내서	들쑤시/VV + 어/EC + 내/VX + 어서/EC	SEPA
 들쑤셔놔서	들쑤시/VV + 어/EC + 놓/VX + 아서/EC	SEPA
-들어가기가	들/VX + 어/EC + 가/VX + 기/ETN + 가/JKS	SEPA
+들어가기가	들/VV + 어/EC + 가/VX + 기/ETN + 가/JKS	SEPA
 들어가기도	들어가/VV + 기/ETN + 도/JX	SEPA
 들어가듯이	들어가/VV + 듯이/EC	SEPA
 들어가면서	들어가/VV + 면서/EC	SEPA
@@ -4024,7 +4029,7 @@
 들으섰세요	듣/VV + 으시/EP + 었/EP + 시/EP + 어요/EC	SEPA
 들으실래요	듣/VV + 으시/EP + ㄹ래요/EF	SEPA
 들으십시오	듣/VV + 으시/EP + ㅂ시오/EF	SEPA
-들음으로써	들/VX + 음/ETN + 으로써/JKB	SEPA
+들음으로써	들/VV + 음/ETN + 으로써/JKB	SEPA
 들이거든요	들/XSN + 이/VCP + 거든요/EF	SEPA
 들이건간에	들/XSN + 이/VCP + 건/EC + 간/NNB + 에/JKB	SEPA
 들이겠구나	들/XSN + 이/VCP + 겠/EP + 구나/EC	SEPA
@@ -4302,7 +4307,7 @@
 류연구소를	류/XSN + 연구소/NNG + 를/JKO	SEPA
 률게임대회	률/XSN + 게임/NNG + 대회/NNG	SEPA
 률게임에서	률/XSN + 게임/NNG + 에서/JKB	SEPA
-률보장이란	률/XSN + 보장/NNG + 이/VCP + 란/ETM	SEPA
+률보장이란	률/XSN + 보장/NNG + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 를배경으로	를/JKO + 배경/NNG + 으로/JKB	SEPA
 를보급하는	를/JKO + 보급/NNG + 하/XSV + 는/ETM	SEPA
 를분리하는	를/JKO + 분리/NNG + 하/XSV + 는/ETM	SEPA
@@ -4486,6 +4491,7 @@
 못해서인지	못하/VV + 아서/EC + 이/VCP + ㄴ지/EC	SEPA
 못해서일까	못하/VV + 아서/EC + 이/VCP + ㄹ까/EF	SEPA
 못했다한다	못하/VV + 았/EP + 다/EC + 하/VV + ㄴ다/EF	SEPA
+못했던적이	못하/VV + 았/EP + 던/ETM + 적/NNB + 이/JKS	SEPA
 못했음인가	못하/VV + 았/EP + 음/ETN + 이/VCP + ㄴ가/EF	SEPA
 못했음인데	못하/VV + 았/EP + 음/ETN + 이/VCP + ㄴ데/EC	SEPA
 못했음인지	못하/VV + 았/EP + 음/ETN + 이/VCP + ㄴ지/EC	SEPA
@@ -5089,6 +5095,7 @@
 생각난다네	생각나/VV + ㄴ다네/EF	SEPA
 생각난다며	생각나/VV + ㄴ다며/EC	SEPA
 생각납니다	생각나/VV + ㅂ니다/EF	SEPA
+생각해보니	생각하/VV + 어/EC + 보/VX + 니/EC	SEPA
 생겨난다는	생기/VV + ㄴ다는/ETM	SEPA
 생겨날까요	생기/VV + ㄹ까요/EF	SEPA
 생겨납니다	생기/VV + ㅂ니다/EF	SEPA
@@ -5271,7 +5278,7 @@
 스러움이기	스럽/XSA + ㅁ/ETN + 이/VCP + 기/ETN	SEPA
 스러움이나	스럽/XSA + ㅁ/ETN + 이나/JC	SEPA
 스러움이다	스럽/XSA + ㅁ/ETN + 이/VCP + 다/EF	SEPA
-스러움이란	스럽/XSA + ㅁ/ETN + 이란/JX	SEPA
+스러움이란	스럽/XSA + ㅁ/ETN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 스러움이요	스럽/XSA + ㅁ/ETN + 이/VCP + 요/EC	SEPA
 스러워서가	스럽/XSA + 어서/EC + 가/JKC	SEPA
 스러워져서	스럽/XSA + 어/EC + 지/VX + 어서/EC	SEPA
@@ -5436,7 +5443,7 @@
 시켜버린듯	시키/XSV + 어/EC + 버리/VX + ㄴ/ETM + 듯/NNB	SEPA
 시켜보고자	시키/XSV + 어/EC + 보/VX + 고자/EC	SEPA
 시켜보려고	시키/XSV + 어/EC + 보/VX + 려고/EC	SEPA
-시켜보세요	시키/XSV + 어/EC + 보/VX + 세요/EF	SEPA
+시켜보세요	시키/XSV + 어/EC + 보/VX + 시/EP + 어요/EF	SEPA
 시켜보였다	시키/XSV + 어/EC + 보/VX + 았/EP + 다/EF	SEPA
 시켜본다면	시키/XSV + 어/EC + 보/VX + ㄴ다면/EC	SEPA
 시켜야겠다	시키/XSV + 어야/EC + 하/VX + 겠/EP + 다/EF	SEPA
@@ -5851,7 +5858,7 @@
 아니었겠나	아니/VCN + 었/EP + 겠/EP + 나/EC	SEPA
 아니었겠죠	아니/VCN + 었/EP + 겠/EP + 죠/EF	SEPA
 아니었겠지	아니/VCN + 었/EP + 겠/EP + 지/EC	SEPA
-아니었고요	아니/VCN + 었/EP + 고요/EC	SEPA
+아니었고요	아니/VCN + 었/EP + 고요/EF	SEPA
 아니었구나	아니/VCN + 었/EP + 구나/EC	SEPA
 아니었군요	아니/VCN + 었/EP + 군요/EF	SEPA
 아니었기에	아니/VCN + 었/EP + 기에/EC	SEPA
@@ -6266,6 +6273,8 @@
 아한다지만	아/EC + 하/VX + ㄴ다지만/EC	SEPA
 아했습니다	아/EC + 하/VX + 았/EP + 습니다/EF	SEPA
 아흔들었어	아/EC + 흔들/VV + 었/EP + 어/EF	SEPA
+안걸린다는	안/MAG + 걸리/VV + ㄴ다는/EC	SEPA
+안걸린다능	안/MAG + 걸리/VV + ㄴ다는/EC	SEPA
 안겨다준다	안기/VV + 어다/EC + 주/VX + ㄴ다/EF	SEPA
 안겨준다면	안기/VV + 어/EC + 주/VX + ㄴ다면/EC	SEPA
 안겨줄까요	안기/VV + 어/EC + 주/VX + ㄹ까요/EF	SEPA
@@ -6335,7 +6344,7 @@
 았다면서요	았/EP + 다면서요/EF	SEPA
 았더라구요	았/EP + 더라구요/EF	SEPA
 았던지간에	았/EP + 던지/EC + 간/NNB + 에/JKB	SEPA
-았드랬세요	았/EP + 드랬세요/EF	SEPA
+았드랬세요	았/EP + 드랬시/EP + 어요/EF	SEPA
 았사옵니다	았/EP + 사옵니다/EF	SEPA
 았습니다만	았/EP + 습니다/EC + 만/JX	SEPA
 았습니다요	았/EP + 습니다요/EF	SEPA
@@ -6842,7 +6851,7 @@
 어볼라치면	어/EC + 보/VX + ㄹ라치면/EC	SEPA
 어봄으로써	어/EC + 보/VX + ㅁ/ETN + 으로써/JKB	SEPA
 어봐야겠다	어/EC + 보/VX + 아야/EC + 겠/EP + 다/EF	SEPA
-어봐주세요	어/EC + 보아주/VV + 세요/EF	SEPA
+어봐주세요	어/EC + 보아주/VV + 시/EP + 어요/EF	SEPA
 어봤느냐고	어/EC + 보/VX + 았/EP + 느냐고/EC	SEPA
 어봤는데요	어/EC + 보/VX + 았/EP + 는데요/EF	SEPA
 어봤습니다	어/EC + 보/VX + 았/EP + 습니다/EF	SEPA
@@ -7450,6 +7459,7 @@
 예뻐진다고	예쁘/VA + 어/EC + 지/VX + ㄴ다고/EC	SEPA
 예뻐진다는	예쁘/VA + 어/EC + 지/VX + ㄴ다는/ETM	SEPA
 예뻐한다면	예쁘/VA + 어/EC + 하/VX + ㄴ다면/EC	SEPA
+오글거려서	오글거리/VV + 어서/EC	SEPA
 오라비인들	오라비/NNG + 이/VCP + ㄴ들/EC	SEPA
 오래간다고	오래가/VV + ㄴ다고/EC	SEPA
 오르내려야	오르내리/VV + 어야/EC	SEPA
@@ -7461,7 +7471,7 @@
 오므라든다	오므라들/VV + ㄴ다/EF	SEPA
 온다는구나	오/VV + ㄴ다는구나/EF	SEPA
 온다는군요	오/VV + ㄴ다는군요/EF	SEPA
-온다니까욧	오/VV + ㄴ다니까욧/EF	SEPA
+온다니까욧	오/VV + ㄴ다니까요/EF + ㅅ/EF	SEPA
 온다던가요	오/VV + ㄴ다던가요/EF	SEPA
 올라가봐야	올라가/VV + 아/EC + 보/VX + 아야/EC	SEPA
 올라간게요	올라가/VV + ㄴ/ETM + 것/NNB + 이/VCP + 오/EF	SEPA
@@ -7612,7 +7622,7 @@
 으라니까요	으라니까요/EF	SEPA
 으려고라도	으려고/EC + 이/VCP + 라도/EC	SEPA
 으려구까지	으려구/EC + 까지/JX	SEPA
-으려는이란	으려는/ETM + 이/VCP + 란/ETM	SEPA
+으려는이란	으려는/ETM + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 으려는지라	으려는지라/EC	SEPA
 으로까지는	으로/JKB + 까지/JX + 는/JX	SEPA
 으로밖에는	으로/JKB + 밖에/JX + 는/JX	SEPA
@@ -8305,35 +8315,35 @@
 좋아할걸요	좋아하/VV + ㄹ걸요/EF	SEPA
 좋아할까요	좋아하/VV + ㄹ까요/EF	SEPA
 좋아합니다	좋아하/VV + ㅂ니다/EF	SEPA
-주겠노라고	주/VX + 겠/EP + 노라고/EC	SEPA
-주겠다면서	주/VX + 겠/EP + 다면서/EC	SEPA
-주겠습니다	주/VX + 겠/EP + 습니다/EF	SEPA
-주기는커녕	주/VX + 기/ETN + 는커녕/JX	SEPA
-주기보다는	주/VX + 기/ETN + 보다/JKB + 는/JX	SEPA
+주겠노라고	주/VV + 겠/EP + 노라고/EC	SEPA
+주겠다면서	주/VV + 겠/EP + 다면서/EC	SEPA
+주겠습니다	주/VV + 겠/EP + 습니다/EF	SEPA
+주기는커녕	주/VV + 기/ETN + 는커녕/JX	SEPA
+주기보다는	주/VV + 기/ETN + 보다/JKB + 는/JX	SEPA
 주무실래요	주무시/VV + ㄹ래요/EF	SEPA
 주무십시다	주무시/VV + ㅂ시다/EF	SEPA
 주무십시오	주무시/VV + ㅂ시오/EF	SEPA
 주뼛거려야	주뼛거리/VV + 어야/EC	SEPA
-주셔야지요	주/VX + 시/EP + 어야지요/EF	SEPA
-주시겠다고	주/VX + 시/EP + 겠/EP + 다고/EC	SEPA
-주시겠어요	주/VX + 시/EP + 겠/EP + 어요/EF	SEPA
-주시기까지	주/VX + 시/EP + 기/ETN + 까지/JX	SEPA
-주시는지를	주/VX + 시/EP + 는지/EC + 를/JKO	SEPA
-주시옵소서	주/VX + 시/EP + 옵/EP + 소서/EF	SEPA
-주어야겠다	주/VX + 어야/EC + 하/VX + 겠/EP + 다고/EF	SEPA
+주셔야지요	주/VV + 시/EP + 어야지요/EF	SEPA
+주시겠다고	주/VV + 시/EP + 겠/EP + 다고/EC	SEPA
+주시겠어요	주/VV + 시/EP + 겠/EP + 어요/EF	SEPA
+주시기까지	주/VV + 시/EP + 기/ETN + 까지/JX	SEPA
+주시는지를	주/VV + 시/EP + 는지/EC + 를/JKO	SEPA
+주시옵소서	주/VV + 시/EP + 옵/EP + 소서/EF	SEPA
+주어야겠다	주/VV + 어야/EC + 하/VX + 겠/EP + 다고/EF	SEPA
 주어진다고	주어지/VV + ㄴ다고/EC	SEPA
 주어진다는	주어지/VV + ㄴ다는/ETM	SEPA
 주어진다면	주어지/VV + ㄴ다면/EC	SEPA
 주억거린다	주억거리/VV + ㄴ다/EF	SEPA
-주었는가에	주/VX + 었/EP + 는가/EC + 에/JKB	SEPA
-주었는지도	주/VX + 었/EP + 는지/EC + 도/JX	SEPA
-주었다는데	주/VX + 었/EP + 다는데/EC	SEPA
-주었답니다	주/VX + 었/EP + 답니다/EF	SEPA
-주었더라면	주/VX + 었/EP + 더라면/EC	SEPA
-주었습니다	주/VX + 었/EP + 습니다/EF	SEPA
-주었으므로	주/VX + 었/EP + 으므로/EC	SEPA
-주었을게요	주/VX + 었/EP + 을/ETM + 것/NNB + 이/VCP + 오/EF	SEPA
-주었음에도	주/VX + 었/EP + 음/ETN + 에/JKB + 도/JX	SEPA
+주었는가에	주/VV + 었/EP + 는가/EC + 에/JKB	SEPA
+주었는지도	주/VV + 었/EP + 는지/EC + 도/JX	SEPA
+주었다는데	주/VV + 었/EP + 다는데/EC	SEPA
+주었답니다	주/VV + 었/EP + 답니다/EF	SEPA
+주었더라면	주/VV + 었/EP + 더라면/EC	SEPA
+주었습니다	주/VV + 었/EP + 습니다/EF	SEPA
+주었으므로	주/VV + 었/EP + 으므로/EC	SEPA
+주었을게요	주/VV + 었/EP + 을/ETM + 것/NNB + 이/VCP + 오/EF	SEPA
+주었음에도	주/VV + 었/EP + 음/ETN + 에/JKB + 도/JX	SEPA
 주저앉혀선	주저앉히/VV + 어서/EC + ㄴ/JX	SEPA
 죽여버려도	죽이/VV + 어/EC + 버리/VX + 어도/EC	SEPA
 죽여버려라	죽이/VV + 어/EC + 버리/VX + 어라/EF	SEPA
@@ -8345,7 +8355,7 @@
 죽일지언정	죽이/VV + ㄹ지언정/EC	SEPA
 죽임당해온	죽이/VV + ㅁ/ETN + 당하/XSV + 아/EC + 오/VX + ㄴ/ETM	SEPA
 죽임입니다	죽이/VV + ㅁ/ETN + 이/VCP + ㅂ니다/EF	SEPA
-준다면서요	주/VX + ㄴ다면서요/EF	SEPA
+준다면서요	주/VV + ㄴ다면서요/EF	SEPA
 줄어든다고	줄어들/VV + ㄴ다고/EC	SEPA
 줄어든다는	줄어들/VV + ㄴ다는/ETM	SEPA
 줄어듭니다	줄어들/VV + ㅂ니다/EF	SEPA
@@ -8871,7 +8881,7 @@
 하더라면서	하/VV + 더라면서/EC	SEPA
 하도록이나	하/VV + 도록/EC + 이나/JX	SEPA
 하든지간에	하/VV + 든지/EC + 간/NNB + 에/JKB	SEPA
-하디지루한	하/VX + 디/EC + 지루하/VA + ㄴ/ETM	SEPA
+하디지루한	하/VV + 디/EC + 지루하/VA + ㄴ/ETM	SEPA
 하라고까지	하/VV + 라고/EC + 까지/JX	SEPA
 하라느냐고	하/VV + 라/EC + 느냐고/EC	SEPA
 하라면서도	하/VV + 라면서/EC + 도/JX	SEPA
@@ -9047,7 +9057,7 @@
 하진못했다	하/VV + 지/EC + ㄴ/JX + 못하/VX + 았/EP + 다/EF	SEPA
 한것입니다	하/VV + ㄴ/ETM + 것/NNB + 이/VCP + ㅂ니다/EF	SEPA
 한국에서도	한국/NNP + 에서/JKB + 도/JX	SEPA
-한다는거다	한다/EF + 라고/JKQ + 하/VX + 는/ETM + 것/NNB + 이다/EF	SEPA
+한다는거다	한다/EF + 라고/JKQ + 하/VX + 는/ETM + 것/NNB + 이/VCP + 다/EF	SEPA
 한다는구만	하/VV + ㄴ다는구만/EF	SEPA
 한다는군요	하/VV + ㄴ다는군요/EF	SEPA
 한다는밖에	하/VV + ㄴ다는밖에/EF	SEPA
@@ -9115,21 +9125,21 @@
 행해진다면	행하/VV + 아/EC + 지/VX + ㄴ다면/EC	SEPA
 행해질수록	행하/VV + 아/EC + 지/VX + ㄹ수록/EC	SEPA
 향해서인지	향하/VV + 아서/EC + 이/VCP + ㄴ지/EC	SEPA
-허겄는디요	하/XSV + 겄/EP + 는디요/EC	SEPA
-허겄습니다	하/XSV + 겄/EP + 습니다/EF	SEPA
-허겠소이까	하/XSV + 겠/EP + 소이까/EF	SEPA
-허구먼이요	하/XSA + 구먼이요/EF	SEPA
-허기로소니	하/XSA + 기/ETN + 로소니/EC	SEPA
-허는겝니까	하/XSV + 는/ETM + 것/NNB + 이/VCP + ㅂ니까/EF	SEPA
-허대니깐유	하/XSV + 대니깐유/EF	SEPA
+허겄는디요	허/XSV + 겄/EP + 는디요/EC	SEPA
+허겄습니다	허/XSV + 겄/EP + 습니다/EF	SEPA
+허겠소이까	허/XSV + 겠/EP + 소이까/EF	SEPA
+허구먼이요	허/XSV + 구먼이요/EF	SEPA
+허기로소니	허/XSV + 기/ETN + 로소니/EC	SEPA
+허는겝니까	허/XSV + 는/ETM + 것/NNB + 이/VCP + ㅂ니까/EF	SEPA
+허대니깐유	허/XSV + 대니깐유/EF	SEPA
 허둥거린다	허둥거리/VV + ㄴ다/EF	SEPA
 허물어뜨려	허물어뜨리/VV + 어/EC	SEPA
 허물어뜨린	허물어뜨리/VV + ㄴ/ETM	SEPA
 허물어져서	허물어지/VV + 어서/EC	SEPA
 허부적거린	허부적거리/VV + ㄴ/ETM	SEPA
-허셨구먼요	하/XSV + 시/EP + 었/EP + 구먼요/EC	SEPA
-허시기라우	하/XSV + 시/EP + 기/ETN + 이/VCP + 라우/EF	SEPA
-허시랍디다	하/XSV + 시/EP + 랍디다/EF	SEPA
+허셨구먼요	허/XSV + 시/EP + 었/EP + 구먼요/EC	SEPA
+허시기라우	허/XSV + 시/EP + 기/ETN + 이/VCP + 라우/EF	SEPA
+허시랍디다	허/XSV + 시/EP + 랍디다/EF	SEPA
 허여멀건한	허여멀겋/VA + ㄴ/ETM + 하/VX + ㄴ/ETM	SEPA
 허우적거린	허우적거리/VV + ㄴ/ETM	SEPA
 허우적거릴	허우적거리/VV + ㄹ/ETM	SEPA
@@ -9137,6 +9147,7 @@
 헌다는겐가	헐/VV + ㄴ다는/ETM + 것/NNB + 이/VCP + ㄴ가/EF	SEPA
 헐거워져서	헐겁/VA + 어/EC + 지/VX + 어서/EC	SEPA
 헐떡거린다	헐떡거리/VV + ㄴ다/EF	SEPA
+험할지라도	험하/VA + ㄹ지라도/EC	SEPA
 헝클어뜨린	헝클어뜨리/VV + ㄴ/ETM	SEPA
 헝클어뜨릴	헝클어뜨리/VV + ㄹ/ETM	SEPA
 헝클어져서	헝클어지/VV + 어서/EC	SEPA
@@ -9462,22 +9473,22 @@
 흘러갑니다	흘러가/VV + ㅂ니다/EF	SEPA
 흘러갔다간	흐르/VV + 어/EC + 가/VX + 았/EP + 다가/EC + ㄴ/JX	SEPA
 흘러나간다	흐르/VV + 어/EC + 나가/VX + ㄴ다/EF	SEPA
-흘러나갈까	흘러나/VV + ㄹ까/EF	SEPA
-흘러나온다	흘러나/VV + ㄴ다/EF	SEPA
-흘러나올까	흘러나/VV + ㄹ까/EC	SEPA
-흘러나올지	흘러나/VV + ㄹ지/EC	SEPA
-흘러나와도	흘러나/VV + 아도/EC	SEPA
-흘러나와요	흘러나/VV + 아요/EF	SEPA
-흘러내려간	흘러내리/VV + 어/EC + 가/VX + ㄴ/ETM	SEPA
-흘러내려도	흘러내리/VV + 어도/EC	SEPA
-흘러내려온	흘러내리/VV + 어/EC + 오/VX + ㄴ/ETM	SEPA
-흘러내려와	흘러내리/VV + 어/EC + 오/VX + 아/EC	SEPA
-흘러내린다	흘러내리/VV + ㄴ다/EF	SEPA
-흘러넘친다	흘러넘치/VV + ㄴ다/EF	SEPA
+흘러나갈까	흐르/VV + 어/EC + 나가/VX + ㄹ까/EF	SEPA
+흘러나온다	흐르/VV + 어/EC + 나오/VX + ㄴ다/EF	SEPA
+흘러나올까	흐르/VV + 어/EC + 나오/VX + ㄹ까/EC	SEPA
+흘러나올지	흐르/VV + 어/EC + 나오/VX + ㄹ지/EC	SEPA
+흘러나와도	흐르/VV + 어/EC + 나오/VX + 아도/EC	SEPA
+흘러나와요	흐르/VV + 어/EC + 나오/VX + 아요/EF	SEPA
+흘러내려간	흐르/VV + 어/EC + 내리/VX + 어/EC + 가/VX + ㄴ/ETM	SEPA
+흘러내려도	흐르/VV + 어/EC + 내리/VX + 어도/EC	SEPA
+흘러내려온	흐르/VV + 어/EC + 내리/VX + 어/EC + 오/VX + ㄴ/ETM	SEPA
+흘러내려와	흐르/VV + 어/EC + 내리/VX + 어/EC + 오/VX + 아/EC	SEPA
+흘러내린다	흐르/VV + 어/EC + 내리/VX + ㄴ다/EF	SEPA
+흘러넘친다	흐르/VV + 어/EC + 넘치/VX + ㄴ다/EF	SEPA
 흘러들어가	흐르/VV + 어/EC + 들어가/VV + 아/EC	SEPA
 흘러들어온	흐르/VV + 어/EC + 들어오/VV + ㄴ/ETM	SEPA
 흘러들어와	흐르/VV + 어/EC + 들어오/VV + 아/EC	SEPA
-흘려버린다	흘리/VV + ㄴ다/EF	SEPA
+흘려버린다	흘리/VV + 어/EC + 버리/VX + ㄴ다/EF	SEPA
 흘려서인지	흘리/VV + 어서/EC + 이/VCP + ㄴ지/EC	SEPA
 흘렸나봐요	흘리/VV + 었/EP + 나/EC + 보/VX + 아요/EF	SEPA
 흩날려간다	흩날리/VV + 어/EC + 가/VX + ㄴ다/EC	SEPA
@@ -9495,14 +9506,14 @@
 힘겨워보여	힘겹/VA + 어/EC + 보이/VV + 어/EC	SEPA
 힘겨워한다	힘겹/VA + 어/EC + 하/VX + ㄴ다/EF	SEPA
 가개혁이	가/XSN + 개혁/NNG + 이/JKS	SEPA
-가겠다고	가/VX + 겠/EP + 다고/EC	SEPA
-가겠다는	가/VX + 겠/EP + 다는/ETM	SEPA
-가겠지요	가/VX + 겠/EP + 지요/EF	SEPA
+가겠다고	가/VV + 겠/EP + 다고/EC	SEPA
+가겠다는	가/VV + 겠/EP + 다는/ETM	SEPA
+가겠지요	가/VV + 겠/EP + 지요/EF	SEPA
 가경찰서	가/XSN + 경찰서/NNG	SEPA
-가고있는	가/VX + 고/EC + 있/VX + 는/ETM	SEPA
+가고있는	가/VV + 고/EC + 있/VX + 는/ETM	SEPA
 가구매를	가/XSN + 구매/NNG + 를/JKO	SEPA
-가기에는	가/VX + 기/ETN + 에/JKB + 는/JX	SEPA
-가기에도	가/VX + 기/ETN + 에/JKB + 도/JX	SEPA
+가기에는	가/VV + 기/ETN + 에/JKB + 는/JX	SEPA
+가기에도	가/VV + 기/ETN + 에/JKB + 도/JX	SEPA
 가까와도	가깝/VA + 아/EC + 오/VX + 아도/EC	SEPA
 가까와져	가깝/VA + 아/EC + 지/VX + 어/EC	SEPA
 가까와진	가깝/VA + 아/EC + 지/VX + ㄴ/ETM	SEPA
@@ -9525,15 +9536,15 @@
 가끼리다	가/XSN + 끼리/XSN + 이/VCP + 다/EF	SEPA
 가냘파진	가냘프/VA + 아/EC + 지/VX + ㄴ/ETM	SEPA
 가냘퍼서	가냘프/VA + 어서/EC	SEPA
-가느냐에	가/VX + 느냐/EC + 에/JKB	SEPA
-가느냐의	가/VX + 느냐/EC + 의/JKG	SEPA
+가느냐에	가/VV + 느냐/EC + 에/JKB	SEPA
+가느냐의	가/VV + 느냐/EC + 의/JKG	SEPA
 가느다란	가느다랗/VA + ㄴ/ETM	SEPA
-가는지도	가/VX + 는지/EC + 도/JX	SEPA
+가는지도	가/VV + 는지/EC + 도/JX	SEPA
 가늘다란	가느다랗/VA + ㄴ/ETM	SEPA
 가늡니다	가늘/VA + ㅂ니다/EF	SEPA
-가더군요	가/VX + 더군요/EF	SEPA
-가더라구	가/VX + 더라구/EC	SEPA
-가더라는	가/VX + 더라는/ETM	SEPA
+가더군요	가/VV + 더군요/EF	SEPA
+가더라구	가/VV + 더라구/EC	SEPA
+가더라는	가/VV + 더라는/ETM	SEPA
 가둬놔라	가두/VV + 어/EC + 놓/VX + 아라/EF	SEPA
 가들이다	가/XSN + 들/XSN + 이/VCP + 다/EF	SEPA
 가라사대	가라사대/VV	SEPA
@@ -9541,10 +9552,10 @@
 가라앉힌	가라앉히/VV + ㄴ/ETM	SEPA
 가라앉힐	가라앉히/VV + ㄹ/ETM	SEPA
 가라운데	가렵/VA + ㄴ데/EC	SEPA
-가려고만	가/VX + 려고/EC + 만/JX	SEPA
+가려고만	가/VV + 려고/EC + 만/JX	SEPA
 가려낸다	가리/VV + 어/EC + 내/VX + ㄴ다/EF	SEPA
 가려낼지	가리/VV + 어/EC + 내/VX +ㄹ지/EC	SEPA
-가려니까	가/VX + 려니까/EC	SEPA
+가려니까	가/VV + 려니까/EC	SEPA
 가려버린	가리/VV + 어/EC + 버리/VX + ㄴ/ETM	SEPA
 가려봐야	가리/VV + 어/EC + 보/VX + 아야/EC	SEPA
 가려져서	가리/VV + 어/EC + 지/VX + 어서/EC	SEPA
@@ -9573,7 +9584,7 @@
 가르켜서	가르키/VV + 어서/EC	SEPA
 가르킨다	가르키/VV + ㄴ다/EF	SEPA
 가른다면	가르/VV + ㄴ다면/EC	SEPA
-가리라는	가/VX + 리라는/ETM	SEPA
+가리라는	가/VV + 리라는/ETM	SEPA
 가리온다	가리우/VV + ㄴ다/EC	SEPA
 가리워져	가리/VV + 어/EC + 지/VX + 어/EC	SEPA
 가리워줄	가리/VV + 어/EC + 주/VX + ㄹ/ETM	SEPA
@@ -9592,10 +9603,10 @@
 가릴래야	가리/VV + ㄹ래야/EC	SEPA
 가마진이	가/XSN + 마진/NNG + 이/JKS	SEPA
 가막혀서	가/JKS + 막히/VV + 어서/EC	SEPA
-가면서도	가/VX + 면서/EC + 도/JX	SEPA
+가면서도	가/VV + 면서/EC + 도/JX	SEPA
 가물거릴	가물거리/VV + ㄹ/ETM	SEPA
 가발생해	가/JKS + 발생/NNG + 하/XSV + 아/EC	SEPA
-가버려서	가/VX + 아/EC + 버리/VX + 어서/EC	SEPA
+가버려서	가/VV + 아/EC + 버리/VX + 어서/EC	SEPA
 가벌어져	가/JKS + 벌어지/VV + 어/EC	SEPA
 가벼운데	가볍/VA + ㄴ데/EF	SEPA
 가벼운지	가볍/VA + ㄴ지/EC	SEPA
@@ -9612,8 +9623,8 @@
 가셔지긴	가시/VV + 어/EC + 지/VX + 기/ETN + ㄴ/JX	SEPA
 가셔지질	가시/VV + 어/EC + 지/VX + 지/EC + ㄹ/JKO	SEPA
 가시낸데	가시내/NNG + 이/VCP + ㄴ데/EC	SEPA
-가시라는	가/VX + 시/EP + 라는/ETM	SEPA
-가십시오	가/VX + 시/EP + ㅂ시오/EF	SEPA
+가시라는	가/VV + 시/EP + 라는/ETM	SEPA
+가십시오	가/VV + 시/EP + ㅂ시오/EF	SEPA
 가아니라	가/JKC + 아니/VCN + 라/EC	SEPA
 가여워서	가엽/VA + 어서/EC	SEPA
 가운동을	가/XSN + 운동/NNG + 을/JKO	SEPA
@@ -9727,6 +9738,7 @@
 갈랍니다	가/VV + ㄹ랍니다/EC	SEPA
 갈랍니더	가/VV + ㄹ랍니더/EF	SEPA
 갈려고요	가/VV + ㄹ려고요/EF	SEPA
+갈려구요	가/VV + ㄹ려고요/EF	SEPA
 갈린다는	갈리/VV + ㄴ다는/ETM	SEPA
 갈아붙일	갈아붙이/VV + ㄹ/ETM	SEPA
 갈아입혀	갈아입히/VV + 어/EC	SEPA
@@ -9759,6 +9771,7 @@
 갔다와서	가/VV + 았/EP + 다/EC + 오/VV + 아서/EC	SEPA
 갔다와요	가/VV + 았/EP + 다/EC + 오/VV + 아요/EF	SEPA
 갔다왔음	가/VV + 았/EP + 다/EC + 오/VV + 았/EP + 으면/EC	SEPA
+갔더랬죠	가/VV + 았/EP + 더랬죠/EF	SEPA
 갔을까봐	가/VV + 았/EP + 을까/EC + 보/VX + 아/EC	SEPA
 갔을텐데	가/VV + 았/EP + 을/ETM + 터/NNB + 이/VCP + ㄴ데/EF	SEPA
 강아진가	강아지/NNG + 이/VCP + ㄴ가/EC	SEPA
@@ -9784,7 +9797,7 @@
 거나간에	거나/EC + 간/NNB + 에/JKB	SEPA
 거나또는	거나/EC + 또는/MAG	SEPA
 거나라는	거나/EC + 라는/ETM	SEPA
-거나이다	거나/EC + 이다/EF	SEPA
+거나이다	거나/EC + 이/VCP + 다/EF	SEPA
 거느려서	거느리/VV + 어서/EC	SEPA
 거느려온	거느리/VV + 어/EC + 오/VX + ㄴ/ETM	SEPA
 거느려요	거느리/VV + 어요/EF	SEPA
@@ -9807,6 +9820,7 @@
 거들랑요	거들랑요/EF	SEPA
 거듭난다	거듭나/VV + ㄴ다/EF	SEPA
 거듭니다	거들/VV + ㅂ니다/EF	SEPA
+거라잖아	것/NNB + 이/VCP + 라고/EC + 하/VX + 지/EC + 않/VX + 아/EF	SEPA
 거른다는	거르/VV + ㄴ다는/ETM	SEPA
 거머쥔다	거머쥐/VV + ㄴ다/EF	SEPA
 거머쥘까	거머쥐/VV + ㄹ까/EF	SEPA
@@ -9815,6 +9829,9 @@
 거슬러온	거스르/VV + 어/EC + 오/VX + ㄴ/ETM	SEPA
 거슬린다	거슬리/VV + ㄴ다/EF	SEPA
 거슬린단	거슬리/VV + ㄴ단/ETM	SEPA
+거여서요	것/NNB + 이/VCP + 어서요/EF	SEPA
+거여서용	것/NNB + 이/VCP + 어서요/EF + ㅇ/EF	SEPA
+거여서욤	것/NNB + 이/VCP + 어서요/EF	SEPA
 거쳐가야	거치/VV + 어/EC + 가/VX + 아야/EC	SEPA
 거쳐간다	거치/VV + 어/EC + 가/VX + ㄴ다/EF	SEPA
 거쳐나온	거치/VV + 어/EC + 나오/VV + ㄴ/ETM	SEPA
@@ -9913,7 +9930,7 @@
 것이라고	것/NNB + 이/VCP + 라고/EC	SEPA
 것이라는	것/NNB + 이/VCP + 라는/ETM	SEPA
 것이라도	것/NNB + 이/VCP + 라도/EC	SEPA
-것이란다	것/NNB + 이/VCP + 란다/EC	SEPA
+것이란다	것/NNB + 이/VCP + 이/VCP + 라고/EC + 하/VX + ㄴ다/EF	SEPA
 것이어서	것/NNB + 이/VCP + 어서/EC	SEPA
 것이지만	것/NNB + 이/VCP + 지만/EC	SEPA
 것일까요	것/NNB + 이/VCP + ㄹ까요/EF	SEPA
@@ -10052,6 +10069,7 @@
 겠습니까	겠/EP + 습니까/EF	SEPA
 겠습니꺼	겠/EP + 습니까/EF	SEPA
 겠습니다	겠/EP + 습니다/EF	SEPA
+겠습니당	겠/EP + 습니다/EF	SEPA
 겠습디다	겠/EP + 습디다/EF	SEPA
 겠십니꺼	겠/EP + 시/EP + ㅂ니까/EF	SEPA
 겠으니까	겠/EP + 으니까/EC	SEPA
@@ -10227,8 +10245,8 @@
 고마워할	고맙/VA + ㄹ/ETM	SEPA
 고만둬라	고만두/VV + 어라/EC	SEPA
 고많으나	고/EC + 많/VA + 으나/EC	SEPA
-고말고요	고/EC + 말/VX + 고요/EF	SEPA
-고말고지	고/EC + 말/VX + 고/EC + 지/EF	SEPA
+고말고요	고말고/EC + 요/EF	SEPA
+고말고지	고말고/EC + 지/EF	SEPA
 고말았다	고/EC + 말/VX + 았/EP + 다/EF	SEPA
 고말이지	고/EC + 말/NNG + 이/VCP + 지/EF	SEPA
 고먹거나	고/EC + 먹/VX + 거나/EC	SEPA
@@ -10278,9 +10296,10 @@
 고있으니	고/EC + 있/VX + 으니/EC	SEPA
 고있으며	고/EC + 있/VX + 으며/EC	SEPA
 고있지만	고/EC + 있/VX + 지만/EC	SEPA
-고자거든	고자/EC + 하/VV + 거든/EC	SEPA
+고자거든	고자/EC + 하/VX + 거든/EC	SEPA
 고자하는	고자/EC + 하/VX + 는/ETM	SEPA
-고자하여	고자/EC + 하/VV + 아/EC	SEPA
+고자하여	고자/EC + 하/VX + 아/EC	SEPA
+고자해요	고자/EC + 하/VX + 아/EC + 아요/EF	SEPA
 고자했던	고자/EC + 하/VX + 았/EP + 던/ETM	SEPA
 고주시오	고/EC + 주/VX + 시/EP + 오/EF	SEPA
 고쫓기는	고/EC + 쫓기/VV + 는/ETM	SEPA
@@ -10298,7 +10317,7 @@
 고칩니다	고치/VV + ㅂ니다/EF	SEPA
 고파진다	고/EC + 싶/VX + 어/EC + 지/VX + ㄴ다/EF	SEPA
 고플텐데	고프/VA + ㄹ/ETM + 터/NNB + 이/VCP + ㄴ데/EC	SEPA
-고하세요	고/EC + 하/VV + 세요/EF	SEPA
+고하세요	고/EC + 하/VV + 시/EP + 어요/EF	SEPA
 고하였다	고/EC + 하/VX + 았/EP + 다/EF	SEPA
 고함쳐서	고함지르/VV + 어서/EC	SEPA
 고함친다	고함지르/VV + ㄴ다/EF	SEPA
@@ -10775,7 +10794,7 @@
 기만해도	기/ETN + 만/JX + 하/VX + 아도/EC	SEPA
 기만했다	기/ETN + 만/JX + 하/VX + 았/EP + 다/EF	SEPA
 기만했던	기/ETN + 만/JX + 하/VV + 았/EP + 던/ETM	SEPA
-기말고도	기/ETN + 말/VV + 고/EC + 도/JX	SEPA
+기말고도	기/ETN + 말/VX + 고/EC + 도/JX	SEPA
 기맥힐라	기막히/VA + ㄹ라/EF	SEPA
 기버튼을	기/ETN + 버튼/NNG + 을/JKO	SEPA
 기보다는	기/ETN + 보다/JKB + 는/JX	SEPA
@@ -11085,7 +11104,7 @@
 꾼들이나	꾼/XSN + 들/XSN + 이나/JC	SEPA
 꾼들이다	꾼/XSN + 들/XSN + 이/VCP + 다/EF	SEPA
 꾼들이라	꾼/XSN + 들/XSN + 이/VCP + 라/EC	SEPA
-꾼들이란	꾼/XSN + 들/XSN + 이란/JX	SEPA
+꾼들이란	꾼/XSN + 들/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 꾼들이야	꾼/XSN + 들/XSN + 이야/JX	SEPA
 꾼들이여	꾼/XSN + 들/XSN + 이여/JKV	SEPA
 꾼들이오	꾼/XSN + 들/XSN + 이/VCP + 오/EF	SEPA
@@ -11245,6 +11264,7 @@
 나가려면	나가/VX + 려면/EC	SEPA
 나가리라	나가/VX + 리라/EC	SEPA
 나가면서	나가/VX + 면서/EC	SEPA
+나가사와	나가/VV + 사/VV + 아/EC + 오/VV + 아/EF	SEPA
 나가신다	나가/VX + 시/EP + ㄴ다/EF	SEPA
 나가야만	나가/VX + 야/EC + 만/JX	SEPA
 나가자는	나가/VX + 자는/ETM	SEPA
@@ -11297,6 +11317,7 @@
 나뉜다고	나뉘/VV + ㄴ다고/EC	SEPA
 나뉜다는	나뉘/VV + ㄴ다는/ETM	SEPA
 나뉩니다	나뉘/VV + ㅂ니다/EF	SEPA
+나더군요	나/VV + 더군요/EF	SEPA
 나돈다고	나돌/VV + ㄴ다고/EC	SEPA
 나돈다는	나돌/VV + ㄴ다는/ETM	SEPA
 나뒹군다	나뒹굴/VV + ㄴ다/EC	SEPA
@@ -11334,6 +11355,7 @@
 나빠져서	나쁘/VA + 아/EC + 지/VX + 어서/EC	SEPA
 나빠진다	나쁘/VA + 아/EC + 지/VX + ㄴ다/EF	SEPA
 나빠진단	나빠지/VV + ㄴ단/ETM	SEPA
+나쁩니다	나쁘/VA + ㅂ니다/EF	SEPA
 나선다고	나서/VV + ㄴ다고/EC	SEPA
 나선다는	나서/VV + ㄴ다는/ETM	SEPA
 나선다면	나서/VV + ㄴ다면/EC	SEPA
@@ -11389,6 +11411,7 @@
 나와주질	나오/VV + 아/EC + 주/VX + 지/EC + ㄹ/JKO	SEPA
 나와줘서	나오/VV + 아/EC + 주/VX + 어서/EC	SEPA
 나왔다간	나오/VV + 았/EP + 다가/EC + ㄴ/JX	SEPA
+나을지도	낫/VV + 을지/EC + 도/JX	SEPA
 나인지라	나이/NNG + 이/VCP + ㄴ지라/EC	SEPA
 나입니다	나이/NNG + 이/VCP + ㅂ니다/EF	SEPA
 나자빠져	나자빠지/VV + 어/EC	SEPA
@@ -11475,6 +11498,8 @@
 납디다요	나/VV + ㅂ디다요/EF	SEPA
 납신다는	납시/VV + ㄴ다는/ETM	SEPA
 납실게다	납시/VV + ㄹ게다/EF	SEPA
+났겠지만	나/VV + 았/EP + 겠/EP + 지만/EC	SEPA
+났습니다	나/VV + 았/EP + 습니다/EF	SEPA
 낮춘다는	낮추/VV + ㄴ다는/ETM	SEPA
 낮춘다니	낮추/VV + ㄴ다니/EC	SEPA
 낮출수록	낮추/VV + ㄹ수록/EC	SEPA
@@ -11882,6 +11907,8 @@
 누빈다면	누비/VV + ㄴ다면/EC	SEPA
 누우세요	눕/VV + 으시/EP + 어요/EF	SEPA
 누우시길	눕/VV + 으시/EP + 기/ETN + ㄹ/JKO	SEPA
+누우니까	눕/VV + 으/EP + 니까/EC	SEPA
+누우라고	눕/VV + 으라고/EC	SEPA
 누워계신	눕/VV + 어/EC + 계시/VX + ㄴ/ETM	SEPA
 누워버린	눕/VV + 어/EC + 버리/VX + ㄴ/ETM	SEPA
 누워본다	눕/VV + 어/EC + 보/VX + ㄴ다/EF	SEPA
@@ -12000,6 +12027,7 @@
 는건데요	는/ETM + 것/NNB + 이/VCP + ㄴ데요/EF	SEPA
 는걸이요	는걸이요/EF	SEPA
 는걸입쇼	는걸입쇼/EF	SEPA
+는겁니다	는/ETM + 것/NNB + 이/VCP + ㅂ니다/EF	SEPA
 는것까지	는/ETM + 것/NNB + 까지/JX	SEPA
 는것들도	는/ETM + 것/NNB + 들/XSN + 도/JX	SEPA
 는것들은	는/ETM + 것/NNB + 들/XSN + 은/JX	SEPA
@@ -13399,11 +13427,11 @@
 듣기로는	듣/VV + 기/ETN + 로/JKB + 는/JX	SEPA
 들간에는	들/XSN + 간/NNB + 에/JKB + 는/JX	SEPA
 들간에도	들/XSN + 간/NNB + 에/JKB + 도/JX	SEPA
-들겠다고	들/VX + 겠/EP + 다고/EC	SEPA
+들겠다고	들/VV + 겠/EP + 다고/EC	SEPA
 들겸업형	들/XSN + 겸업/NNG + 형/XSN	SEPA
 들과라면	들/XSN + 과/JKB + 이/VCP + 라면/EC	SEPA
 들과자기	들/XSN + 과/JC + 자기/NNG	SEPA
-들기까지	들/VX + 기/ETN + 까지/JX	SEPA
+들기까지	들/VV + 기/ETN + 까지/JX	SEPA
 들까부른	들까부르/VV + ㄴ/ETM	SEPA
 들까지가	들/XSN + 까지/JX + 가/JKS	SEPA
 들까지는	들/XSN + 까지/JX + 는/JX	SEPA
@@ -13418,7 +13446,7 @@
 들끼리만	들/XSN + 끼리/XSN + 만/JX	SEPA
 들끼리의	들/XSN + 끼리/XSN + 의/JKG	SEPA
 들내에서	들/XSN + 내/NNB + 에서/JKB	SEPA
-들다가도	들/VX + 다가/EC + 도/JX	SEPA
+들다가도	들/VV + 다가/EC + 도/JX	SEPA
 들다왔다	들/XSN + 답/XSA + 았/EP + 다/EF	SEPA
 들답기도	들/XSN + 답/XSA + 기/ETN + 도/JX	SEPA
 들대로의	들/XSN + 대로/JX + 의/JKG	SEPA
@@ -13458,6 +13486,7 @@
 들릅니다	들르/VV + ㅂ니다/EF	SEPA
 들린다고	들리/VV + ㄴ다고/EC	SEPA
 들린다는	들리/VV + ㄴ다는/ETM	SEPA
+들린다면	들리/VV + ㄴ다면/ETM	SEPA
 들릴까봐	들리/VV + ㄹ까/EC + 보/VX + 아/EC	SEPA
 들릴는지	들리/VV + ㄹ는지/EC	SEPA
 들릴런지	들리/VV + ㄹ런지/EC	SEPA
@@ -13470,14 +13499,14 @@
 들만치의	들/XSN + 만치/NNB + 의/JKG	SEPA
 들만큼도	들/XSN + 만큼/JKB + 도/JX	SEPA
 들만큼은	들/XSN + 만큼/JKB + 은/JX	SEPA
-들말고도	들/XSN + 말/VV + 고/EC + 도/JX	SEPA
+들말고도	들/XSN + 말/VX + 고/EC + 도/JX	SEPA
 들맨치로	들/XSN + 맨치로/JKB	SEPA
 들먹거릴	들먹거리/VV + ㄹ/ETM	SEPA
 들먹여도	들먹이/VV + 어도/EC	SEPA
 들먹여서	들먹이/VV + 어서/EC	SEPA
 들먹여요	들먹이/VV + 어요/EF	SEPA
 들먹인다	들먹이/VV + ㄴ다/EF	SEPA
-들면서도	들/VX + 면서/EC + 도/JX	SEPA
+들면서도	들/VV + 면서/EC + 도/JX	SEPA
 들모습을	들/XSN + 모습/NNG + 을/JKO	SEPA
 들밖에는	들/XSN + 밖에/JX + 는/JX	SEPA
 들보고도	들/XSN + 보고/JKB + 도/JX	SEPA
@@ -13493,7 +13522,7 @@
 들뿐이다	들/XSN + 뿐/JX + 이/VCP + 다/EF	SEPA
 들뿐이던	들/XSN + 뿐/NNB + 이/VCP + 던/ETM	SEPA
 들뿐이라	들/XSN + 뿐/JX + 이/VCP + 라/EC	SEPA
-들뿐이란	들/XSN + 뿐/NNB + 이/VCP + 란/ETM	SEPA
+들뿐이란	들/XSN + 뿐/NNB + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 들뿐이랴	들/XSN + 뿐/JX + 이/VCP + 랴/EF	SEPA
 들뿐이야	들/XSN + 뿐/JX + 이/VCP + 야/EF	SEPA
 들뿐이죠	들/XSN + 뿐/NNB + 이/VCP + 죠/EF	SEPA
@@ -13518,7 +13547,7 @@
 들어가듯	들어가/VV + 듯/EC	SEPA
 들어가려	들어가/VV + 려/EC	SEPA
 들어가며	들어가/VV + 며/EC	SEPA
-들어가면	들/VX + 어/EC + 가/VX + 면/EC	SEPA
+들어가면	들/VV + 어/EC + 가/VX + 면/EC	SEPA
 들어가본	들어가/VV + 아/EC + 보/VV + ㄴ/ETM	SEPA
 들어가서	들어가/VV + 아서/EC	SEPA
 들어가야	들어가/VV + 아야/EC	SEPA
@@ -13670,7 +13699,7 @@
 들이라서	들/XSN + 이/VCP + 라서/EC	SEPA
 들이라야	들/XSN + 이/VCP + 라야/EC	SEPA
 들이라지	들/XSN + 이/VCP + 라지/EC	SEPA
-들이란다	들/XSN + 이/VCP + 란다/EF	SEPA
+들이란다	들/XSN + 이/VCP + 이/VCP + 라고/EC + 하/VX + ㄴ다/EF	SEPA
 들이랄까	들/XSN + 이/VCP + 랄까/EF	SEPA
 들이래야	들/XSN + 이/VCP + 래야/EC	SEPA
 들이래요	들/XSN + 이/VCP + 래요/EF	SEPA
@@ -13821,6 +13850,7 @@
 따라와봐	따라오/VV + 아/EC + 보/VX + 아/EC	SEPA
 따라와서	따라오/VV + 아서/EC	SEPA
 따라잡힌	따라잡히/VV + ㄴ/ETM	SEPA
+따라잡힐	따라잡히/VV + ㄹ/ETM	SEPA
 따라주질	따르/VV + 아/EC + 주/VX + 지/EC + ㄹ/JKO	SEPA
 따라준다	따르/VV + 아/EC + 주/VX + ㄴ다/EF	SEPA
 따라줄지	따르/VV + 아/EC + 주/VX + ㄹ지/EC	SEPA
@@ -14091,7 +14121,7 @@
 러세웠다	러/EC + 세우/VV + 었/EP + 다/EF	SEPA
 러오라고	러/EC + 오/VV + 라고/EC	SEPA
 러오라는	러/EC + 오/VV + 라는/ETM	SEPA
-러오세요	러/EC + 오/VX + 세요/EF	SEPA
+러오세요	러/EC + 오/VV + 시/EP + 어요/EF	SEPA
 러온다고	러/EC + 오/VV + ㄴ다고/EC	SEPA
 러올린다	러/EC + 올리/VV + ㄴ다/EF	SEPA
 러왔다는	러/EC + 오/VX + 았/EP + 다는/ETM	SEPA
@@ -14562,6 +14592,7 @@
 멈춰진다	멈추/VV + 어/EC + 지/VX + ㄴ다/EF	SEPA
 멈칫거린	멈칫거리/VV + ㄴ/ETM	SEPA
 멋들어진	멋들어지/VA + ㄴ/ETM	SEPA
+멋드러진	멋들어지/VA + ㄴ/ETM	SEPA
 멋져보일	멋지/VA + 어/EC + 보이/VV + ㄹ/ETM	SEPA
 멋진데요	멋지/VA + ㄴ데요/EF	SEPA
 멍든다고	멍들/VV + ㄴ다고/EC	SEPA
@@ -14692,6 +14723,7 @@
 몰려와도	몰려오/VV + 아도/EC	SEPA
 몰려와서	몰려오/VV + 아서/EC	SEPA
 몰려와요	몰려오/VV + 아요/EF	SEPA
+몰린다고	몰리/VV + ㄴ다고/EC	SEPA
 몰린다면	몰리/VV + ㄴ다면/EC	SEPA
 몰릴까봐	몰리/VV + ㄹ까/EC + 보/VX + 아/EC	SEPA
 몰아간다	몰아가/VV + ㄴ다/EF	SEPA
@@ -14845,6 +14877,7 @@
 물어봐도	물어보/VV + 아도/EC	SEPA
 물어봐라	물어보/VV + 아라/EC	SEPA
 물어봐야	물어보/VV + 아야/EC	SEPA
+물어봤다	물어보/VV + 았/EP + 다/EF	SEPA
 물어온다	묻어오/VV + ㄴ다/EF	SEPA
 물어올까	묻어오/VV + ㄹ까/EC	SEPA
 물어와서	묻어오/VV + 아서/EC	SEPA
@@ -16033,7 +16066,8 @@
 사십니까	살/VV + 으시/EP + ㅂ니까/EF	SEPA
 사십니다	살/VV + 으시/EP + ㅂ니다/EF	SEPA
 사십디다	살/VV + 으시/EP + ㅂ디다/EF	SEPA
-사십시오	살/VV + 시/EP + ㅂ시오/EF	SEPA
+사십시다	살/VV + 으시/EP + ㅂ시다/EF	SEPA
+사십시오	살/VV + 으시/EP + ㅂ시오/EF	SEPA
 사오니까	사오니까/EF	SEPA
 사오리까	사오리까/EF	SEPA
 사오이까	사오이까/EF	SEPA
@@ -16454,6 +16488,8 @@
 셔야지요	시/EP + 어야지요/EF	SEPA
 셔야지유	시/EP + 어야지유/EF	SEPA
 셨나봐요	시/EP + 었/EP + 나/EF + 보/VX + 아요/EF	SEPA
+셨습니다	시/EP + 었/EP + 습니다/EF	SEPA
+셨습니까	시/EP + 었/EP + 습니까/EF	SEPA
 셨을텐데	시/EP + 었/EP + 을/ETM + 터/NNB + 이/VCP + ㄴ데/EF	SEPA
 소경으로	소경/NNG + 으로/JKB	SEPA
 소곤거려	소곤거리/VV + 어/EC	SEPA
@@ -16584,6 +16620,7 @@
 스러웠다	스럽/XSA + 었/EP + 다/EF	SEPA
 스러웠던	스럽/XSA + 었/EP + 던/ETM	SEPA
 스러웠어	스럽/XSA + 었/EP + 어/EF	SEPA
+스러웠음	스럽/XSA + 었/EP + 음/ETN	SEPA
 스러웠을	스럽/XSA + 었/EP + 을/ETM	SEPA
 스러웠죠	스럽/XSA + 었/EP + 죠/EF	SEPA
 스러웠지	스럽/XSA + 었/EP + 지/EC	SEPA
@@ -17729,7 +17766,7 @@
 아두려고	아/EC + 두/VX + 려고/EC	SEPA
 아두려는	아/EC + 두/VX + 려는/ETM	SEPA
 아두믄서	아/EC + 두/VX + 면서/EC	SEPA
-아두세요	아/EC + 두/VX + 세요/EF	SEPA
+아두세요	아/EC + 두/VX + 시/EP + 어요/EF	SEPA
 아두시라	아/EC + 두/VX + 시/EP + 라/EF	SEPA
 아두어라	아/EC + 두/VX + 어라/EF	SEPA
 아두어야	아/EC + 두/VX + 어야/EC	SEPA
@@ -17860,7 +17897,7 @@
 아보려니	아/EC + 보/VX + 려니/EC	SEPA
 아보리라	아/EC + 보/VX + 리라/EC	SEPA
 아보면서	아/EC + 보/VX + 면서/EC	SEPA
-아보세요	아/EC + 보/VX + 세요/EF	SEPA
+아보세요	아/EC + 보/VX + 시/EP + 어요/EF	SEPA
 아보시란	아/EC + 보/VX + 시/EP + 란/ETM	SEPA
 아보아서	아/EC + 보/VX + 아서/EC	SEPA
 아보아야	아/EC + 보/VX + 아야/EC	SEPA
@@ -18350,6 +18387,7 @@
 아헤맸오	아/EC + 헤매/VV + 었/EP + 오/EF	SEPA
 아흐르는	아/EC + 흐르/VV + 는/ETM	SEPA
 아흐르며	아/EC + 흐르/VV + 며/EC	SEPA
+안걸린다	안/MAG + 걸리/VV + ㄴ다/EF	SEPA
 안겨다준	안기/VV + 어다/EC + 주/VX + ㄴ/ETM	SEPA
 안겨져야	안기/VV + 어/EC + 지/VX + 어야/EC	SEPA
 안겨주진	안기/VV + 어/EC + 주/VX + 지/EC + ㄴ/JX	SEPA
@@ -18527,6 +18565,7 @@
 았더라면	았/EP + 더라면/EC	SEPA
 았더란다	았/EP + 더란다/EF	SEPA
 았더랬다	았/EP + 더랬다/EF	SEPA
+았더랬죠	았/EP + 더랬죠/EF	SEPA
 았더랬오	았/EP + 더라/EC + 하/VX + 았/EP + 오/EF	SEPA
 았던가는	았/EP + 던가/EC + 는/JX	SEPA
 았던가를	았/EP + 던가/EC + 를/JKO	SEPA
@@ -19078,7 +19117,7 @@
 어두려는	어/EC + 두/VX + 려는/ETM	SEPA
 어두려면	어/EC + 두/VX + 려면/EC	SEPA
 어두면서	어/EC + 두/VX + 면서/EC	SEPA
-어두세요	어/EC + 두/VX + 세요/EF	SEPA
+어두세요	어/EC + 두/VX + 시/EP + 어요/EF	SEPA
 어두셨다	어/EC + 두/VX + 시/EP + 었/EP + 다/EF	SEPA
 어두시고	어/EC + 두/VX + 시/EP + 고/EC	SEPA
 어두어라	어/EC + 두/VX + 어라/EF	SEPA
@@ -19331,7 +19370,7 @@
 어보면서	어/EC + 보/VX + 면서/EC	SEPA
 어보세요	어/EC + 보/VX + 시/EP + 어요/EF	SEPA
 어보셔서	어/EC + 보/VX + 시/EP + 어서/EC	SEPA
-어보셔요	어/EC + 보/VX + 세요/EF	SEPA
+어보셔요	어/EC + 보/VX + 시/EP + 어요/EF	SEPA
 어보셔유	어/EC + 보/VX + 시/EP + 어유/EF	SEPA
 어보시고	어/EC + 보/VX + 시/EP + 고/EC	SEPA
 어보시네	어/EC + 보/VX + 시/EP + 네/EF	SEPA
@@ -19382,7 +19421,9 @@
 어볼까요	어/EC + 보/VX + ㄹ까요/EF	SEPA
 어볼래요	어/EC + 보/VX + ㄹ래요/EF	SEPA
 어볼려구	어/EC + 보/VX + ㄹ려구/EC	SEPA
-어볼만한	어/EC + 보/VX + ㄹ/ETM + 만/NNB + 하/XSA + ㄴ/ETM	SEPA
+어볼만한	어/EC + 볼만하/VA + ㄴ/ETM	SEPA
+어볼만할	어/EC + 볼만하/VA + ㄹ/ETM	SEPA
+어볼만했	어/EC + 볼만하/VA + 었/EP	SEPA
 어봄직한	어/EC + 보/VX + ㅁ직/EC + 하/XSA + ㄴ/ETM	SEPA
 어봅시다	어/EC + 보/VX + ㅂ시다/EF	SEPA
 어봐라이	어/EC + 보/VX + 아라이/EF	SEPA
@@ -20182,8 +20223,9 @@
 었더라도	었/EP + 더라도/EC	SEPA
 었더라며	었/EP + 더라며/EC	SEPA
 었더라면	었/EP + 더라면/EC	SEPA
-었더랬다	었/EP + 더라/EC + 하/VX + 았/EP + 다/EF	SEPA
-었더랬지	었/EP + 더라/EC + 하/VV + 았/EP + 지/EF	SEPA
+었더랬다	었/EP + 더랬다/EF	SEPA
+었더랬지	었/EP + 더랬지/EF	SEPA
+었더랬죠	었/EP + 더랬죠/EF	SEPA
 었던가는	었/EP + 던가/EC + 는/JX	SEPA
 었던가를	었/EP + 던가/EC + 를/JKO	SEPA
 었던가요	었/EP + 던가요/EF	SEPA
@@ -20327,7 +20369,7 @@
 에둘러서	에두르/VV + 어서/EC	SEPA
 에마저도	에/JKB + 마저/JX + 도/JX	SEPA
 에만일뿐	에/JKB + 만/JX + 이/VCP + ㄹ/ETM + 뿐/NNB	SEPA
-에말고는	에/JKB + 말/VV + 고/EC + 는/JX	SEPA
+에말고는	에/JKB + 말/VX + 고/EC + 는/JX	SEPA
 에보다는	에/JKB + 보다/JKB + 는/JX	SEPA
 에서가진	에서/JKB + 가지/VV + ㄴ/ETM	SEPA
 에서까지	에서/JKB + 까지/JX	SEPA
@@ -20589,6 +20631,7 @@
 열어제낄	열어제끼/VV + ㄹ/ETM	SEPA
 염한다고	염하/VV + ㄴ다고/EC	SEPA
 엿보인다	엿보이/VV + ㄴ다/EF	SEPA
+였더랬죠	었/EP + 더랬죠/EF	SEPA
 였습니다	이/VCP + 었/EP + 습니다/EF	SEPA
 였을지도	이/VCP + 었/EP + 을지/EC + 도/JX	SEPA
 영환데요	영화/NNG + 이/VCP + ㄴ데요/EF	SEPA
@@ -20603,21 +20646,22 @@
 옛스러운	옛스럽/VA + ㄴ/ETM	SEPA
 오간다고	오가/VV + ㄴ다고/EC	SEPA
 오갑니다	오가/VV + ㅂ니다/EF	SEPA
-오겠느냔	오/VX + 겠/EP + 느냔/ETM	SEPA
+오겠느냔	오/VV + 겠/EP + 느냔/ETM	SEPA
 오겠다고	오/VV + 겠/EP + 다고/EC	SEPA
 오그라든	오그라들/VV + ㄴ/ETM	SEPA
 오그라져	오그라지/VV + 어/EC	SEPA
 오그라진	오그라지/VV + ㄴ/ETM	SEPA
 오그린다	오그리/VV + ㄴ다/EF	SEPA
-오기까지	오/VX + 기/ETN + 까지/JX	SEPA
+오글거려	오글거리/VV + 어/EC	SEPA
+오기까지	오/VV + 기/ETN + 까지/JX	SEPA
 오기운동	오/VV + 기/ETN + 운동/NNG	SEPA
-오느냐는	오/VX + 느냐는/ETM	SEPA
-오는데도	오/VX + 는데/EC + 도/JX	SEPA
+오느냐는	오/VV + 느냐는/ETM	SEPA
+오는데도	오/VV + 는데/EC + 도/JX	SEPA
 오니이까	오니이까/EF	SEPA
-오다시피	오/VX + 다시피/EC	SEPA
+오다시피	오/VV + 다시피/EC	SEPA
 오더군요	오/EP + 더군요/EF	SEPA
-오더라는	오/VX + 더라는/ETM	SEPA
-오더라도	오/VX + 더라도/EC	SEPA
+오더라는	오/VV + 더라는/ETM	SEPA
+오더라도	오/VV + 더라도/EC	SEPA
 오라버닌	오라버니/NNG + ㄴ/JX	SEPA
 오라빈지	오라비/NNG + 이/VCP + ㄴ지/EC	SEPA
 오라시며	오/VV + 라/EC + 시/EP + 며/EC	SEPA
@@ -20635,8 +20679,8 @@
 오른다는	오르/VV + ㄴ다는/ETM	SEPA
 오를만한	오르/VV + ㄹ/ETM + 만/NNB + 하/XSA + ㄴ/ETM	SEPA
 오릅니다	오르/VV + ㅂ니다/EF	SEPA
-오리라는	오/VX + 리라는/ETM	SEPA
-오면서도	오/VX + 면서/EC + 도/JX	SEPA
+오리라는	오/VV + 리라는/ETM	SEPA
+오면서도	오/VV + 면서/EC + 도/JX	SEPA
 오므라든	오므라들/VV + ㄴ/ETM	SEPA
 오이다만	오이다/EF + 만/JX	SEPA
 온겁니다	오/VV + ㄴ/ETM + 것/NNB + 이/VCP + ㅂ니다/EF	SEPA
@@ -20713,12 +20757,13 @@
 올릴수록	올리/VV + ㄹ수록/EC	SEPA
 올립니까	올리/VV + ㅂ니까/EF	SEPA
 올립니다	올리/VV + ㅂ니다/EF	SEPA
+올립시다	올리/VV + ㅂ시다/EF	SEPA
 올립지요	올리/VV + ㅂ지요/EF	SEPA
 올빼민지	올빼미/NNG + 이/VCP + ㄴ지/EC	SEPA
 올습니다	올습니다/EF	SEPA
 올작시면	오/VV + ㄹ작시면/EC	SEPA
 올지갈지	오/VV + ㄹ지/EC + 가/VV + ㄹ지/EC	SEPA
-올지라도	오/VX + ㄹ지라도/EC	SEPA
+올지라도	오/VV + ㄹ지라도/EC	SEPA
 옮겨가서	옮기/VV + 어/EC + 가/VX + 아서/EC	SEPA
 옮겨가야	옮기/VV + 어/EC + 가/VV + 아야/EC	SEPA
 옮겨간다	옮기/VV + 어/EC + 가/VX + ㄴ다/EF	SEPA
@@ -20957,6 +21002,9 @@
 웬일인가	웬일/NNG + 이/VCP + ㄴ가/EC	SEPA
 웬일인지	웬일/NNG + 이/VCP + ㄴ지/EC	SEPA
 웬일일까	웬일/NNG + 이/VCP + ㄹ까/EF	SEPA
+위태로와	위태롭/VA + 어/EC	SEPA
+위태로어	위태롭/VA + 어/EC	SEPA
+위태로워	위태롭/VA + 어/EC	SEPA
 위한다고	위하/VV + ㄴ다고/EC	SEPA
 위한다는	위하/VV + ㄴ다는/ETM	SEPA
 위한다면	위하/VV + ㄴ다면/EC	SEPA
@@ -21127,7 +21175,7 @@
 으셨다면	으시/EP + 었/EP + 다면/EC	SEPA
 으셨단다	으시/EP + 었/EP + 단다/EF	SEPA
 으셨든가	으시/EP + 었/EP + 든가/EF	SEPA
-으셨세요	으시/EP + 었/EP + 세요/EF	SEPA
+으셨세요	으시/EP + 었/EP + 시/EP + 어요/EF	SEPA
 으셨시유	으시/EP + 었/EP + 시유/EF	SEPA
 으셨어도	으시/EP + 었/EP + 어도/EC	SEPA
 으셨어두	으시/EP + 었/EP + 어두/EC	SEPA
@@ -21482,7 +21530,7 @@
 이겨라고	이기/VV + 어라고/EC	SEPA
 이겨야지	이기/VV + 어야지/EF	SEPA
 이고간에	이/VCP + 고/EC + 간/NNB + 에/JKB	SEPA
-이고말고	이/VCP + 고/EC + 말/VX + 고/EF	SEPA
+이고말고	이/VCP + 고말고/EF	SEPA
 이고보니	이/VCP + 고/EC + 보/VX + 니/EC	SEPA
 이구나이	이/VCP + 구나이/EF	SEPA
 이구만요	이/VCP + 구만요/EF	SEPA
@@ -21636,8 +21684,8 @@
 이라함은	이/VCP + 라/EC + 하/VX + ㅁ/ETN + 은/JX	SEPA
 이라해도	이/VCP + 라/EC + 하/VX + 아도/EC	SEPA
 이라했다	이/VCP + 라/EC + 하/VX + 았/EP + 다/EF	SEPA
-이란다고	이/VCP + 란다고/EC	SEPA
-이란다면	이/VCP + 란/ETM + 다면/EC	SEPA
+이란다고	이/VCP + 이/VCP + 라고/EC + 하/VX + ㄴ다/EF + 고/EC	SEPA
+이란다면	이/VCP + 라고/EC + 하/VX + ㄴ다면/EC	SEPA
 이랄까가	이/VCP + 랄까/EC + 가/JKS	SEPA
 이랄까에	이/VCP + 랄까/EC + 에/JKB	SEPA
 이랄까요	이/VCP + 랄까요/EF	SEPA
@@ -21703,6 +21751,8 @@
 이면서도	이/VCP + 면서/EC + 도/JX	SEPA
 이뻐지길	이쁘/VA + 어/EC + 지/VX + 기/ETN + ㄹ/JKO	SEPA
 이뻐해야	이쁘/VA + 어/EC + 하/VX + 아야/EC	SEPA
+이쁩니다	이쁘/VA + ㅂ니다/EF	SEPA
+예쁩니다	예쁘/VA + ㅂ니다/EF	SEPA
 이서라도	이서/JKS + 라도/EC	SEPA
 이셨군요	이/VCP + 시/EP + 었/EP + 군요/EF	SEPA
 이셨기에	이/VCP + 시/EP + 었/EP + 기에/EC	SEPA
@@ -21751,6 +21801,7 @@
 이어서는	이/VCP + 어서/EC + 는/JX	SEPA
 이어서다	이/VCP + 어서다/EF	SEPA
 이어서도	이/VCP + 어서/EC + 도/JX	SEPA
+이어서요	이/VCP + 어서/EC + 요/EF	SEPA
 이어선가	이/VCP + 어선가/EF	SEPA
 이어야만	이/VCP + 어야/EC + 만/JX	SEPA
 이어야지	이/VCP + 어야지/EC	SEPA
@@ -22100,6 +22151,7 @@
 잦아진다	잦아지/VV + ㄴ다/EF	SEPA
 재그러운	재그럽/VA + ㄴ/ETM	SEPA
 재밌었음	재미있/VA + 었/EP + 음/ETN	SEPA
+재밌었나	재미있/VA + 었/EP + 나/EF	SEPA
 재빨라서	재빠르/VA + 어서/EC	SEPA
 쟁이같은	쟁이/XSN + 같/VA + 은/ETM	SEPA
 쟁이거나	쟁이/XSN + 이/VCP + 거나/EC	SEPA
@@ -22158,6 +22210,7 @@
 저버려야	저버리/VV + 어야/EC	SEPA
 저수진데	저수지/NNG + 이/VCP + ㄴ데/EC	SEPA
 저어질지	젓/VV + 어/EC + 지/VX + ㄹ지/EC	SEPA
+저으세요	젓/VV + 으시/EP + 어요/EF	SEPA
 저지른다	저지르/VV + ㄴ다/EF	SEPA
 저지를지	저지르/VV + ㄹ지/EC	SEPA
 저질러논	저지르/VV + 어/EC + 놓/VX + ㄴ/ETM	SEPA
@@ -22452,6 +22505,7 @@
 제적이고	제/XSN + 적/XSN + 이/VCP + 고/EC	SEPA
 제정국이	제/XSN + 정국/NNG + 이/JKS	SEPA
 제형성의	제/XSN + 형성/NNG + 의/JKG	SEPA
+제칠지도	제치/VV + ㄹ지/EC + 도/JX	SEPA
 져간다는	지/VX + 어/EC + 가/VX + ㄴ다는/ETM	SEPA
 져갑니다	지/VX + 어/EC + 가/VV + ㅂ니다/EF	SEPA
 져나가야	지/VX + 어/EC + 나가/VV + 아야/EC	SEPA
@@ -22500,49 +22554,49 @@
 좋아해서	좋아하/VV + 아서/EC	SEPA
 좋아해야	좋아하/VV + 아야/EC	SEPA
 좋아해요	좋아하/VV + 아요/EF	SEPA
-주겠느냐	주/VX + 겠/EP + 느냐/EC	SEPA
-주겠는가	주/VX + 겠/EP + 는가/EF	SEPA
-주겠다고	주/VX + 겠/EP + 다고/EC	SEPA
-주겠다네	주/VX + 겠/EP + 다네/EF	SEPA
-주겠다는	주/VX + 겠/EP + 다는/ETM	SEPA
-주겠다던	주/VX + 겠/EP + 다던/ETM	SEPA
-주겠다며	주/VX + 겠/EP + 다며/EC	SEPA
-주겠대요	주/VX + 겠/EP + 대요/EF	SEPA
-주겠더라	주/VX + 겠/EP + 더라/EF	SEPA
-주겠어요	주/VX + 겠/EP + 어요/EF	SEPA
-주겠지만	주/VX + 겠/EP + 지만/EC	SEPA
-주기까지	주/VX + 기/ETN + 까지/JX	SEPA
-주기부터	주/VX + 기/ETN + 부터/JX	SEPA
-주느냐고	주/VX + 느냐고/EC	SEPA
-주느냐구	주/VX + 느냐구/EC	SEPA
-주느라고	주/VX + 느라고/EC	SEPA
-주는가가	주/VX + 는가/EC + 가/JKS	SEPA
-주는구나	주/VX + 는구나/EC	SEPA
-주는구려	주/VX + 는구려/EF	SEPA
-주는군요	주/VX + 는군요/EF	SEPA
-주는데도	주/VX + 는데/EC + 도/JX	SEPA
-주는데요	주/VX + 는데요/EF	SEPA
-주는도다	주/VX + 는도다/EF	SEPA
-주는지와	주/VX + 는지/EC + 와/JC	SEPA
-주니까요	주/VX + 니까요/EF	SEPA
-주다시피	주/VX + 다시피/EC	SEPA
-주더군요	주/VX + 더군요/EF	SEPA
-주더라고	주/VX + 더라고/EC	SEPA
-주더라구	주/VX + 더라구/EF	SEPA
-주더라도	주/VX + 더라도/EC	SEPA
-주더래요	주/VX + 더래요/EF	SEPA
-주던가요	주/VX + 던가요/EF	SEPA
-주던데요	주/VX + 던데요/EC	SEPA
+주겠느냐	주/VV + 겠/EP + 느냐/EC	SEPA
+주겠는가	주/VV + 겠/EP + 는가/EF	SEPA
+주겠다고	주/VV + 겠/EP + 다고/EC	SEPA
+주겠다네	주/VV + 겠/EP + 다네/EF	SEPA
+주겠다는	주/VV + 겠/EP + 다는/ETM	SEPA
+주겠다던	주/VV + 겠/EP + 다던/ETM	SEPA
+주겠다며	주/VV + 겠/EP + 다며/EC	SEPA
+주겠대요	주/VV + 겠/EP + 대요/EF	SEPA
+주겠더라	주/VV + 겠/EP + 더라/EF	SEPA
+주겠어요	주/VV + 겠/EP + 어요/EF	SEPA
+주겠지만	주/VV + 겠/EP + 지만/EC	SEPA
+주기까지	주/VV + 기/ETN + 까지/JX	SEPA
+주기부터	주/VV + 기/ETN + 부터/JX	SEPA
+주느냐고	주/VV + 느냐고/EC	SEPA
+주느냐구	주/VV + 느냐구/EC	SEPA
+주느라고	주/VV + 느라고/EC	SEPA
+주는가가	주/VV + 는가/EC + 가/JKS	SEPA
+주는구나	주/VV + 는구나/EC	SEPA
+주는구려	주/VV + 는구려/EF	SEPA
+주는군요	주/VV + 는군요/EF	SEPA
+주는데도	주/VV + 는데/EC + 도/JX	SEPA
+주는데요	주/VV + 는데요/EF	SEPA
+주는도다	주/VV + 는도다/EF	SEPA
+주는지와	주/VV + 는지/EC + 와/JC	SEPA
+주니까요	주/VV + 니까요/EF	SEPA
+주다시피	주/VV + 다시피/EC	SEPA
+주더군요	주/VV + 더군요/EF	SEPA
+주더라고	주/VV + 더라고/EC	SEPA
+주더라구	주/VV + 더라구/EF	SEPA
+주더라도	주/VV + 더라도/EC	SEPA
+주더래요	주/VV + 더래요/EF	SEPA
+주던가요	주/VV + 던가요/EF	SEPA
+주던데요	주/VV + 던데요/EC	SEPA
 주둥아릴	주둥아리/NNG + ㄹ/JKO	SEPA
-주라니요	주/VX + 라니요/EF	SEPA
-주려거든	주/VX + 려거든/EC	SEPA
-주려고만	주/VX + 려고/EC + 만/JX	SEPA
-주려구요	주/VX + 려구요/EF	SEPA
-주려므나	주/VX + 려므나/EF	SEPA
-주리라고	주/VX + 리라고/EC	SEPA
-주리라는	주/VX + 리라는/ETM	SEPA
-주리라던	주/VX + 리라던/ETM	SEPA
-주면서도	주/VX + 면서/EC + 도/JX	SEPA
+주라니요	주/VV + 라니요/EF	SEPA
+주려거든	주/VV + 려거든/EC	SEPA
+주려고만	주/VV + 려고/EC + 만/JX	SEPA
+주려구요	주/VV + 려구요/EF	SEPA
+주려므나	주/VV + 려므나/EF	SEPA
+주리라고	주/VV + 리라고/EC	SEPA
+주리라는	주/VV + 리라는/ETM	SEPA
+주리라던	주/VV + 리라던/ETM	SEPA
+주면서도	주/VV + 면서/EC + 도/JX	SEPA
 주무세요	주무시/VV + 어요/EF	SEPA
 주무셔도	주무시/VV + 어도/EC	SEPA
 주무셔요	주무시/VV + 어요/EF	SEPA
@@ -22550,75 +22604,75 @@
 주무실걸	주무시/VV + ㄹ걸/EF	SEPA
 주무십쇼	주무시/VV + ㅂ쇼/EF	SEPA
 주물러도	주무르/VV + 어도/EC	SEPA
-주셔서요	주/VX + 시/EP + 어서요/EF	SEPA
-주셔서유	주/VX + 시/EP + 어서유/EF	SEPA
-주셔야지	주/VX + 시/EP + 어야지/EC	SEPA
-주시거나	주/VX + 시/EP + 거나/EC	SEPA
-주시고는	주/VX + 시/EP + 고/EC + 는/JX	SEPA
-주시구요	주/VX + 시/EP + 구요/EF	SEPA
-주시기를	주/VX + 시/EP + 기/ETN + 를/JKO	SEPA
-주시는데	주/VX + 시/EP + 는데/EC	SEPA
-주시는지	주/VX + 시/EP + 는지/EC	SEPA
-주시더라	주/VX + 시/EP + 더라/EC	SEPA
-주시도록	주/VX + 시/EP + 도록/EC	SEPA
-주시라는	주/VX + 시/EP + 라는/ETM	SEPA
-주시려고	주/VX + 시/EP + 려고/EC	SEPA
-주시리라	주/VX + 시/EP + 리라/EC	SEPA
-주시면서	주/VX + 시/EP + 면서/EC	SEPA
-주시어요	주/VX + 시/EP + 어요/EC	SEPA
-주시옵기	주/VX + 시/EP + 옵/EP + 기/ETN	SEPA
-주신다고	주/VX + 시/EP + ㄴ다고/EC	SEPA
-주신다는	주/VX + 시/EP + ㄴ다는/ETM	SEPA
-주신다면	주/VX + 시/EP + ㄴ다면/EC	SEPA
-주실래요	주/VX + 시/EP + ㄹ래요/EF	SEPA
-주십니다	주/VX + 시/EP + ㅂ니다/EF	SEPA
-주십사고	주/VX + 시/EP + ㅂ사고/EC	SEPA
-주십사구	주/VX + 시/EP + ㅂ사구/EC	SEPA
-주십시오	주/VX + 시/EP + ㅂ시오/EC	SEPA
-주십시요	주/VX + 십시요/EF	SEPA
-주어서야	주/VX + 어서/EC + 야/JX	SEPA
-주어야만	주/VX + 어야/EC + 만/JX	SEPA
-주어야지	주/VX + 어야지/EF	SEPA
-주어오던	주/VX + 어/EC + 오/VX + 던/ETM	SEPA
+주셔서요	주/VV + 시/EP + 어서요/EF	SEPA
+주셔서유	주/VV + 시/EP + 어서유/EF	SEPA
+주셔야지	주/VV + 시/EP + 어야지/EC	SEPA
+주시거나	주/VV + 시/EP + 거나/EC	SEPA
+주시고는	주/VV + 시/EP + 고/EC + 는/JX	SEPA
+주시구요	주/VV + 시/EP + 구요/EF	SEPA
+주시기를	주/VV + 시/EP + 기/ETN + 를/JKO	SEPA
+주시는데	주/VV + 시/EP + 는데/EC	SEPA
+주시는지	주/VV + 시/EP + 는지/EC	SEPA
+주시더라	주/VV + 시/EP + 더라/EC	SEPA
+주시도록	주/VV + 시/EP + 도록/EC	SEPA
+주시라는	주/VV + 시/EP + 라는/ETM	SEPA
+주시려고	주/VV + 시/EP + 려고/EC	SEPA
+주시리라	주/VV + 시/EP + 리라/EC	SEPA
+주시면서	주/VV + 시/EP + 면서/EC	SEPA
+주시어요	주/VV + 시/EP + 어요/EC	SEPA
+주시옵기	주/VV + 시/EP + 옵/EP + 기/ETN	SEPA
+주신다고	주/VV + 시/EP + ㄴ다고/EC	SEPA
+주신다는	주/VV + 시/EP + ㄴ다는/ETM	SEPA
+주신다면	주/VV + 시/EP + ㄴ다면/EC	SEPA
+주실래요	주/VV + 시/EP + ㄹ래요/EF	SEPA
+주십니다	주/VV + 시/EP + ㅂ니다/EF	SEPA
+주십사고	주/VV + 시/EP + ㅂ사고/EC	SEPA
+주십사구	주/VV + 시/EP + ㅂ사구/EC	SEPA
+주십시오	주/VV + 시/EP + ㅂ시오/EC	SEPA
+주십시요	주/VV + 십시요/EF	SEPA
+주어서야	주/VV + 어서/EC + 야/JX	SEPA
+주어야만	주/VV + 어야/EC + 만/JX	SEPA
+주어야지	주/VV + 어야지/EF	SEPA
+주어오던	주/VV + 어/EC + 오/VX + 던/ETM	SEPA
 주어져도	주어지/VV + 어도/EC	SEPA
 주어져서	주어지/VV + 어서/EC	SEPA
 주어져야	주어지/VV + 어야/EC	SEPA
 주어진다	주어지/VV + ㄴ다/EF	SEPA
 주억거릴	주억거리/VV + ㄹ/ETM	SEPA
-주었군요	주/VX + 었/EP + 군요/EF	SEPA
-주었냐고	주/VX + 었/EP + 냐고/EF	SEPA
-주었는데	주/VX + 었/EP + 는데/EC	SEPA
-주었는지	주/VX + 었/EP + 는지/EC	SEPA
-주었다가	주/VX + 었/EP + 다가/EC	SEPA
-주었다고	주/VX + 었/EP + 다고/EC	SEPA
-주었다구	주/VX + 었/EP + 다구/EC	SEPA
-주었다는	주/VX + 었/EP + 다는/ETM	SEPA
-주었다니	주/VX + 었/EP + 다니/EC	SEPA
-주었다던	주/VX + 었/EP + 다던/ETM	SEPA
-주었다면	주/VX + 었/EP + 다면/EC	SEPA
-주었더니	주/VX + 었/EP + 더니/EC	SEPA
-주었더면	주/VX + 었/EP + 더면/EC	SEPA
-주었던가	주/VX + 었/EP + 던가/EF	SEPA
-주었듯이	주/VX + 었/EP + 듯이/EC	SEPA
-주었어야	주/VX + 었/EP + 어야/EC	SEPA
-주었어요	주/VX + 었/EP + 어요/EF	SEPA
-주었었다	주/VX + 었었/EP + 다/EF	SEPA
-주었으나	주/VX + 었/EP + 으나/EC	SEPA
-주었으니	주/VX + 었/EP + 으니/EC	SEPA
-주었으며	주/VX + 었/EP + 으며/EC	SEPA
-주었으면	주/VX + 었/EP + 으면/EC	SEPA
-주었을까	주/VX + 었/EP + 을까/EF	SEPA
-주었음에	주/VX + 었/EP + 음/ETN + 에/JKB	SEPA
-주었지만	주/VX + 었/EP + 지만/EC	SEPA
-주었지요	주/VX + 었/EP + 지요/EF	SEPA
-주옵소서	주/VX + 옵/EP + 소서/EF	SEPA
+주었군요	주/VV + 었/EP + 군요/EF	SEPA
+주었냐고	주/VV + 었/EP + 냐고/EF	SEPA
+주었는데	주/VV + 었/EP + 는데/EC	SEPA
+주었는지	주/VV + 었/EP + 는지/EC	SEPA
+주었다가	주/VV + 었/EP + 다가/EC	SEPA
+주었다고	주/VV + 었/EP + 다고/EC	SEPA
+주었다구	주/VV + 었/EP + 다구/EC	SEPA
+주었다는	주/VV + 었/EP + 다는/ETM	SEPA
+주었다니	주/VV + 었/EP + 다니/EC	SEPA
+주었다던	주/VV + 었/EP + 다던/ETM	SEPA
+주었다면	주/VV + 었/EP + 다면/EC	SEPA
+주었더니	주/VV + 었/EP + 더니/EC	SEPA
+주었더면	주/VV + 었/EP + 더면/EC	SEPA
+주었던가	주/VV + 었/EP + 던가/EF	SEPA
+주었듯이	주/VV + 었/EP + 듯이/EC	SEPA
+주었어야	주/VV + 었/EP + 어야/EC	SEPA
+주었어요	주/VV + 었/EP + 어요/EF	SEPA
+주었었다	주/VV + 었었/EP + 다/EF	SEPA
+주었으나	주/VV + 었/EP + 으나/EC	SEPA
+주었으니	주/VV + 었/EP + 으니/EC	SEPA
+주었으며	주/VV + 었/EP + 으며/EC	SEPA
+주었으면	주/VV + 었/EP + 으면/EC	SEPA
+주었을까	주/VV + 었/EP + 을까/EF	SEPA
+주었음에	주/VV + 었/EP + 음/ETN + 에/JKB	SEPA
+주었지만	주/VV + 었/EP + 지만/EC	SEPA
+주었지요	주/VV + 었/EP + 지요/EF	SEPA
+주옵소서	주/VV + 옵/EP + 소서/EF	SEPA
 주우려고	줍/VV + 으려고/EC	SEPA
 주우려는	줍/VV + 으려는/EC	SEPA
 주우면서	줍/VV + 으면서/EC	SEPA
 주워가도	줍/VV + 어/EC + 가/VX + 아도/EC	SEPA
 주워다가	줍/VV + 어다가/EC	SEPA
 주워섬겨	줍/VV + 어/EC	SEPA
-주이소마	주/VX + 이소마/EF	SEPA
+주이소마	주/VV + 이소마/EF	SEPA
 주저앉혀	주저앉히/VV + 어/EC	SEPA
 주절거린	주절거리/VV + ㄴ/ETM	SEPA
 주춤거릴	주춤거리/VV + ㄹ/ETM	SEPA
@@ -22644,10 +22698,10 @@
 죽임당한	죽이/VV + ㅁ/ETN + 당하/XSV + ㄴ/ETM	SEPA
 죽임당해	죽이/VV + ㅁ/ETN + 당하/XSV + 아/EC	SEPA
 죽입니까	죽이/VV + ㅂ니까/EF	SEPA
-준다거나	주/VX + ㄴ다거나/EC	SEPA
-준다구유	주/VX + ㄴ다구유/EF	SEPA
-준답시고	주/VX + ㄴ답시고/EC	SEPA
-준대더라	주/VX + ㄴ대더라/EF	SEPA
+준다거나	주/VV + ㄴ다거나/EC	SEPA
+준다구유	주/VV + ㄴ다구유/EF	SEPA
+준답시고	주/VV + ㄴ답시고/EC	SEPA
+준대더라	주/VV + ㄴ대더라/EF	SEPA
 준한다고	준하/VV + ㄴ다고/EC	SEPA
 준한다는	준하/VV + ㄴ다는/ETM	SEPA
 줄거라곤	주/VV + ㄹ/ETM + 것/NNB + 이/VCP + 라고/EC + ㄴ/JX	SEPA
@@ -22668,13 +22722,13 @@
 줄일수록	줄이/VV + ㄹ수록/EC	SEPA
 줄입니다	줄이/VV + ㅂ니다/EF	SEPA
 줄입시다	줄이/VV + ㅂ시다/EC	SEPA
-줄지라도	주/VX + ㄹ지라도/EC	SEPA
+줄지라도	주/VV + ㄹ지라도/EC	SEPA
 줄지어선	줄짓/VV + ㄴ/ETM	SEPA
-줄지언정	주/VX + ㄹ지언정/EC	SEPA
+줄지언정	주/VV + ㄹ지언정/EC	SEPA
 줄행랑쳐	줄행랑치/VV + 어/EC	SEPA
 줄행랑친	줄행랑치/VV + ㄴ/ETM	SEPA
 줍시다유	주/VV + ㅂ시다유/EF	SEPA
-줍시사구	주/VX + ㅂ시사구/EC	SEPA
+줍시사구	주/VV + ㅂ시사구/EC	SEPA
 중얼거려	중얼거리/VV + 어/EC	SEPA
 중얼거린	중얼거리/VV + ㄴ/ETM	SEPA
 중얼거릴	중얼거리/VV + ㄹ/ETM	SEPA
@@ -22682,7 +22736,7 @@
 중입니다	중/NNB + 이/VCP + ㅂ니다/EF	SEPA
 중할수록	중하/VA + ㄹ수록/EC	SEPA
 줘야지요	주/VV + 어야지요/EC	SEPA
-줘야해요	주/VX + 어야/EC + 하/VX + 아요/EC	SEPA
+줘야해요	주/VV + 어야/EC + 하/VX + 아요/EC	SEPA
 쥐어뜯겨	쥐어뜯/VV + 어/EC	SEPA
 쥐어박힌	쥐어박히/VV + ㄴ/ETM	SEPA
 쥐여준다	쥐이/VV + 어/EC + 주/VX + ㄴ다/EF	SEPA
@@ -22694,6 +22748,7 @@
 즐거울까	즐겁/VA + ㄹ까/EF	SEPA
 즐거워라	즐겁/VA + 어라/EC	SEPA
 즐거워서	즐겁/VA + 어서/EC	SEPA
+즐거워요	즐겁/VA + 어요/EF	SEPA
 즐거워진	즐겁/VA + 어/EC + 지/VX + ㄴ/ETM	SEPA
 즐거워한	즐겁/VA + ㄴ/ETM	SEPA
 즐거워할	즐겁/VA + ㄹ/ETM	SEPA
@@ -22796,6 +22851,7 @@
 지던가요	지/VX + 던가요/EF	SEPA
 지던지요	지/VX + 던지요/EF	SEPA
 지려다가	지/VX + 려다가/EC	SEPA
+지루하긴	지루하/VA + 기/ETN + ㄴ/ETM	SEPA
 지른다고	지르/VV + ㄴ다고/EC	SEPA
 지른다면	지르/VV + ㄴ다면/EC	SEPA
 지릅니다	지르/VV + ㅂ니다/EF	SEPA
@@ -22856,7 +22912,7 @@
 지워버릴	지우/VV + 어/EC + 버리/VX + ㄹ/ETM	SEPA
 지워줘야	지우/VV + 어/EC + 주/VX + 어야/EC	SEPA
 지으랄땐	짓/VV + 으라/EC + ㄹ/ETM + 때/NNG + ㄴ/JX	SEPA
-지으면서	지/VX + 으면서/EC	SEPA
+지으면서	짓/VV + 으면서/EC	SEPA
 지으셔야	짓/VV + 으시/EP + 어야/EC	SEPA
 지으신다	짓/VV + 으시/EP + 시/EP + ㄴ다/EF	SEPA
 지자마자	지/VX + 자마자/EC	SEPA
@@ -22886,7 +22942,7 @@
 지켜주길	지키/VV + 어/EC + 주/VX + 기/ETN + 를/JKO	SEPA
 지켜주실	지키/VV + 어/EC + 주/VX + 시/EP + ㄹ/ETM	SEPA
 지켜준다	지키/VV + 어/EC + 주/VX + ㄴ다/EF	SEPA
-지켜줄게	지키/VV + 어/EC + 주/VX - ㄹ게/EF	SEPA
+지켜줄게	지키/VV + 어/EC + 주/VX + ㄹ게/EF	SEPA
 지켜줄지	지키/VV + 어/EC + 주/VX + ㄹ지/EC	SEPA
 지켜줘서	지키/VV + 어/EC + 주/VX + 어서/EC	SEPA
 지켜줘야	지키/VV + 어/EC + 주/VX + 어야/EC	SEPA
@@ -23596,6 +23652,7 @@
 틀린다고	틀리/VV + ㄴ다고/EC	SEPA
 틀린다는	틀리/VV + ㄴ다는/ETM	SEPA
 틀립니까	틀리/VV + ㅂ니까/EF	SEPA
+틀립니다	틀리/VV + ㅂ니다/EF	SEPA
 틀어박혀	틀어박히/VV + 어/EC	SEPA
 틀어박힌	틀어박히/VV + ㄴ/ETM	SEPA
 틀어박힐	틀어박히/VV + ㄹ/ETM	SEPA
@@ -23699,6 +23756,7 @@
 펼쳐질까	펼치/VV + ㄹ까/EF	SEPA
 펼쳐질지	펼치/VV + ㄹ지/EC	SEPA
 펼칩니다	펼치/VV + ㅂ니다/EF	SEPA
+펼칩시다	펼치/VV + ㅂ시다/EF	SEPA
 포개어져	포개어지/VV + 어/EC	SEPA
 포개진다	포개지/VV + ㄴ다/EF	SEPA
 포도준데	포도주/NNG + 이/VCP + ㄴ데/EC	SEPA
@@ -23953,6 +24011,7 @@
 하다싶을	하/VV + 다/EC + 싶/VX + 을/ETM	SEPA
 하다지만	하/VV + 다지만/EC	SEPA
 하답니다	하/VV + 답니다/EF	SEPA
+하답니당	하/VV + 답니다/EF	SEPA
 하더구나	하/VV + 더구나/EF	SEPA
 하더구만	하/VV + 더구만/EF	SEPA
 하더구먼	하/VV + 더구먼/EF	SEPA
@@ -24153,6 +24212,7 @@
 하실까요	하/VV + 시/EP + ㄹ까요/EF	SEPA
 하실라꼬	하/VV + 시/EP + ㄹ라꼬/EC	SEPA
 하실래요	하/VV + 시/EP + ㄹ래요/EF	SEPA
+하실수도	하/VV + 시/EP + ㄹ/ETM + 수/NNB + 도/JX	SEPA
 하실지도	하/VV + 시/EP + ㄹ지/EC + 도/JX	SEPA
 하실테니	하/VV + 시/EP + ㄹ/ETM + 터/NNB + 이/VCP + 니/EC	SEPA
 하심같이	하/VV + 시/EP + ㅁ/ETN + 같이/JKB	SEPA
@@ -24203,10 +24263,10 @@
 하여지며	하/VV + 아/EC + 지/VX + 며/EC	SEPA
 하여진다	하/VV + 아/EC + 지/VX + ㄴ다/EF	SEPA
 하여짐을	하/VV + 아/EC + 지/VX + ㅁ/ETN + 을/JKO	SEPA
-하였%다	하/VV + 았/EP + 다/EF	SEPA
 하였거나	하/VV + 았/EP + 거나/EC	SEPA
 하였거늘	하/VV + 았/EP + 거늘/EC	SEPA
 하였건만	하/VV + 았/EP + 건만/EF	SEPA
+하였겠다	하/VV + 았/EP + 겠/EP + 다/EF	SEPA
 하였겠소	하/VV + 았/EP + 겠/EP + 소/EF	SEPA
 하였구나	하/VV + 았/EP + 구나/EF	SEPA
 하였기로	하/VV + 았/EP + 기/ETN + 로/JKB	SEPA
@@ -24291,7 +24351,7 @@
 학굔지요	학교/NNG + 이/VCP + ㄴ지요/EF	SEPA
 학굡니다	학교/NNG + 이/VCP + ㅂ니다/EF	SEPA
 한것일까	하/VV + ㄴ/ETM + 것/NNB + 이/VCP + ㄹ까/EF	SEPA
-한다고봄	하/VX + ㄴ/ETM + 다고/EC + 보/VV + ㅁ/ETN	SEPA
+한다고봄	하/VV + ㄴ/ETM + 다고/EC + 보/VV + ㅁ/ETN	SEPA
 한다고요	하/VV + ㄴ다고요/EC	SEPA
 한다구요	하/VV + ㄴ다구요/EF	SEPA
 한다기에	하/VV + ㄴ다기에/EC	SEPA
@@ -24327,7 +24387,6 @@
 한대잖아	하/VV + ㄴ대지/EC + 않/VA + 아/EF	SEPA
 한댔어요	하/VV + ㄴ댔어요/EF	SEPA
 한새로운	하/VV + ㄴ/ETM + 새롭/VA + ㄴ/ETM	SEPA
-한양댄가	한양대/NNP + 이/VCP + ㄴ가/EC	SEPA
 한테까지	한테/JKB + 까지/JX	SEPA
 한테꺼정	한테/JKB + 꺼정/JX	SEPA
 한테라도	한테/JKB + 이/VCP + 라도/EC	SEPA
@@ -24400,6 +24459,7 @@
 해보다는	해/NNG + 보다/JKB + 는/JX	SEPA
 해보세요	하/VV + 아/EC + 보/VX + 시/EP + 어요/EF	SEPA
 해보셔유	하/VV + 아/EC + 보/VX + 시/EP + 어유/EF	SEPA
+해보신분	하/VV + 아/EC + 보/VX + 시/EP + ㄴ/ETM + 분/NNB	SEPA
 해보여야	하/VV + 아/EC + 보이/VV + 어야/EC	SEPA
 해보인다	하/VV + 아/EC + 보이/VV + ㄴ다/EF	SEPA
 해본다는	하/VV + 아/EC + 보/VX + ㄴ다는/ETM	SEPA
@@ -24477,6 +24537,9 @@
 했을거요	하/VV + 았/EP + 을/ETM + 것/NNB + 이/VCP + 오/EF	SEPA
 했을텐데	하/VV + 았/EP + 을/ETM + 터/NNB + 이/VCP + ㄴ데/EC	SEPA
 했음인지	하/VV + 았/EP + 음/ETN + 이/VCP + ㄴ지/EC	SEPA
+했더랬죠	하/VV + 았/EP + 더랬죠/EF	SEPA
+했던적이	하/VV + 았/EP + 던/ETM + 적/NNB + 이/JKS	SEPA
+했던적을	하/VV + 았/EP + 던/ETM + 적/NNB + 을/JKO	SEPA
 했음직한	하/VV + 았/EP + 음직/EC + 하/VX + ㄴ/ETM	SEPA
 행위체인	행위/NNG + 체/NNG + 이/VCP + ㄴ/ETM	SEPA
 행윕니다	행위/VV + ㅂ니다/EF	SEPA
@@ -24493,70 +24556,70 @@
 향합니다	향하/VV + ㅂ니다/EF	SEPA
 향해선지	향하/VV + 아서/EC + 이/VCP + ㄴ지/EC	SEPA
 향해져야	향하/VV + 아/EC + 지/VX + 어야/EC	SEPA
-허겄능가	하/XSV + 겄/EP + 능가/EF	SEPA
-허겠는감	하/XSA + 겠/EP + 는감/EF	SEPA
+허겄능가	허/XSV + 겄/EP + 능가/EF	SEPA
+허겠는감	허/XSV + 겠/EP + 는감/EF	SEPA
 허구다가	하고/JKB + 다가/JX	SEPA
-허구만유	하/XSA + 구만유/EF	SEPA
-허구먼유	하/XSA + 구먼유/EF	SEPA
+허구만유	허/XSV + 구만유/EF	SEPA
+허구먼유	허/XSV + 구먼유/EF	SEPA
 허기져도	허기지/VV + 어도/EC	SEPA
 허기져서	허기지/VV + 어서/EC	SEPA
-허네마는	하/XSV + 네마는/EC	SEPA
-허는게냐	하/XSV + 는/ETM + 것/NNB + 이/VCP + 냐/EF	SEPA
-허는게다	하/XSV + 는/ETM + 것/NNB + 이/VCP + 다/EF	SEPA
-허는게야	하/XSV + 는/ETM + 것/NNB + 야/JKV	SEPA
-허는겐가	하/XSV + 는/ETM + 것/NNB + 이/VCP + ㄴ가/EF	SEPA
-허는구려	하/XSV + 는구려/EF	SEPA
-허는구먼	하/XSV + 는구먼/EF	SEPA
-허니라고	하/XSV + 니라고/EC	SEPA
-허다가는	하/XSA + 다가/EC + 는/JX	SEPA
-허다고유	하/XSA + 다고유/EF	SEPA
+허네마는	허/XSV + 네마는/EC	SEPA
+허는게냐	허/XSV + 는/ETM + 것/NNB + 이/VCP + 냐/EF	SEPA
+허는게다	허/XSV + 는/ETM + 것/NNB + 이/VCP + 다/EF	SEPA
+허는게야	허/XSV + 는/ETM + 것/NNB + 야/JKV	SEPA
+허는겐가	허/XSV + 는/ETM + 것/NNB + 이/VCP + ㄴ가/EF	SEPA
+허는구려	허/XSV + 는구려/EF	SEPA
+허는구먼	허/XSV + 는구먼/EF	SEPA
+허니라고	허/XSV + 니라고/EC	SEPA
+허다가는	허/XSV + 다가/EC + 는/JX	SEPA
+허다고유	허/XSV + 다고유/EF	SEPA
 허덕인다	허덕이/VV + ㄴ다/EF	SEPA
 허둥거릴	허둥거리/VV + ㄹ/ETM	SEPA
 허둥댄다	허둥대/VV + ㄴ다/EF	SEPA
-허드라고	하/XSV + 드라고/EF	SEPA
+허드라고	허/XSV + 드라고/EF	SEPA
 허물어져	허물어지/VV + 어/EC	SEPA
 허물어진	허물어지/VV + ㄴ/ETM	SEPA
 허물어질	허물어지/VV + ㄹ/ETM	SEPA
-허셨든지	하/XSV + 시/EP + 었/EP + 든지/EC	SEPA
-허셨시유	하/XSV + 시/EP + 었/EP + 시유/EF	SEPA
-허셨지유	하/XSV + 시/EP + 었/EP + 지유/EF	SEPA
-허시네유	하/XSV + 시/EP + 네유/EF	SEPA
-허시는데	하/XSV + 시/EP + 는데/EC	SEPA
-허시는지	하/XSV + 시/EP + 는지/EC	SEPA
-허시니까	하/XSV + 시/EP + 니까/EC	SEPA
-허시다구	하/XSA + 시/EP + 다구/EC	SEPA
-허시다만	하/XSA + 시/EP + 다/EC + 만/JX	SEPA
-허신다구	하/XSV + 시/EP + ㄴ다구/EC	SEPA
-허신대믄	하/XSV + 시/EP + ㄴ대믄/EC	SEPA
-허십니까	하/XSV + 시/EP + ㅂ니까/EF	SEPA
+허셨든지	허/XSV + 시/EP + 었/EP + 든지/EC	SEPA
+허셨시유	허/XSV + 시/EP + 었/EP + 시유/EF	SEPA
+허셨지유	허/XSV + 시/EP + 었/EP + 지유/EF	SEPA
+허시네유	허/XSV + 시/EP + 네유/EF	SEPA
+허시는데	허/XSV + 시/EP + 는데/EC	SEPA
+허시는지	허/XSV + 시/EP + 는지/EC	SEPA
+허시니까	허/XSV + 시/EP + 니까/EC	SEPA
+허시다구	허/XSV + 시/EP + 다구/EC	SEPA
+허시다만	허/XSV + 시/EP + 다/EC + 만/JX	SEPA
+허신다구	허/XSV + 시/EP + ㄴ다구/EC	SEPA
+허신대믄	허/XSV + 시/EP + ㄴ대믄/EC	SEPA
+허십니까	허/XSV + 시/EP + ㅂ니까/EF	SEPA
 허우적댄	허우적대/VV + ㄴ/ETM	SEPA
-허지라우	하/XSV + 지라우/EF	SEPA
-허지마는	하/XSV + 지마는/EC	SEPA
-허지요이	하/XSA + 지요이/EF	SEPA
-헌겝니까	하/VV + ㄴ/ETM + 것/NNB + 이/VCP + ㅂ니까/EF	SEPA
-헌겝니다	하/VV + ㄴ/ETM + 것/NNB + 이/VCP + ㅂ니다/EF	SEPA
+허지라우	허/XSV + 지라우/EF	SEPA
+허지마는	허/XSV + 지마는/EC	SEPA
+허지요이	허/XSV + 지요이/EF	SEPA
+헌겝니까	허/VV + ㄴ/ETM + 것/NNB + 이/VCP + ㅂ니까/EF	SEPA
+헌겝니다	허/VV + ㄴ/ETM + 것/NNB + 이/VCP + ㅂ니다/EF	SEPA
 헌다요오	헐/VV + ㄴ다요오/EF	SEPA
 헌다지요	헐/VV + ㄴ다지요/EF	SEPA
 헌답니다	헐/VV + ㄴ답니다/EF	SEPA
 헌답디다	헐/VV + ㄴ답디다/EF	SEPA
-헌답시구	하/VV + ㄴ답시구/EC	SEPA
+헌답시구	허/VV + ㄴ답시구/EC	SEPA
 헌테까지	한테/JKB + 까지/JX	SEPA
 헌티다가	한테/JKB + 다가/JX	SEPA
 헐갭니까	헐/VV + ㄹ갭니까/EF	SEPA
 헐거워져	헐겁/VA + 어/EC + 지/VX + 어/EC	SEPA
 헐거워진	헐겁/VA + 어/EC + 지/VX + ㄴ/ETM	SEPA
-헐겝니다	하/VV + ㄹ/ETM + 것/NNB + 이/VCP + ㅂ니다/EF	SEPA
+헐겝니다	허/VV + ㄹ/ETM + 것/NNB + 이/VCP + ㅂ니다/EF	SEPA
 헐떡거려	헐떡거리/VV + 어/EC	SEPA
 헐떡거릴	헐떡거리/VV + ㄹ/ETM	SEPA
 헐떡인다	헐떡이/VV + ㄴ다/EF	SEPA
 헐려다가	헐/VV + ㄹ려다가/EC	SEPA
 헐린다고	헐리/VV + ㄴ다고/EC	SEPA
 헐어빠진	헐/VV + 어/EC + 빠지/VX + ㄴ/ETM	SEPA
-헐합니다	하/VV + ㅂ니다/EF	SEPA
+헐합니다	허/VV + ㅂ니다/EF	SEPA
 험할는지	험하/VA + ㄹ는지/EC	SEPA
 험합니다	험하/VA + ㅂ니다/EF	SEPA
 험해져서	험하/VA + 아/EC + 지/VX + 어서/EC	SEPA
-헙니다요	하/VV + ㅂ니다요/EF	SEPA
+헙니다요	허/VV + ㅂ니다요/EF	SEPA
 헛디뎌서	헛디디/VV + 어서/EC	SEPA
 헝크러져	헝클어지/VV + 어/EC	SEPA
 헝크러질	헝클어지/VV + ㄹ/ETM	SEPA
@@ -25132,6 +25195,7 @@
 흐트러진	흐트리/VV + ㄴ/ETM	SEPA
 흐트러질	흐트리/VV + ㄹ/ETM	SEPA
 흐트러짐	흐트리/VV + ㅁ/ETN	SEPA
+흔드세요	흔들/VV + 시/EP + 어요/EF	SEPA
 흔든다고	흔들/VV + ㄴ다고/EC	SEPA
 흔든다는	흔들/VV + ㄴ다는/ETM	SEPA
 흔들거려	흔들거리/VV + 어/EC	SEPA
@@ -25215,19 +25279,19 @@
 힘쓴다고	힘쓰/VV + ㄴ다고/EC	SEPA
 힘쓴다면	힘쓰/VV + ㄴ다면/EC	SEPA
 힘쓸려고	힘쓰/VV + ㄹ려고/EC	SEPA
-가거나	가/VX + 거나/EC	SEPA
-가겠니	가/VX + 겠/EP + 니/EF	SEPA
-가겠다	가/VX + 겠/EP + 다/EC	SEPA
-가겠단	가/VX + 겠/EP + 단/ETM	SEPA
-가겠어	가/VX + 겠/EP + 어/EF	SEPA
-가겠죠	가/VX + 겠/EP + 죠/EF	SEPA
-가기는	가/VX + 기/ETN + 는/JX	SEPA
-가기도	가/VX + 기/ETN + 도/JX	SEPA
-가기란	가/VX + 기/ETN + 란/JX	SEPA
-가기로	가/VX + 기/ETN + 로/JKB	SEPA
-가기를	가/VX + 기/ETN + 를/JKO	SEPA
+가거나	가/VV + 거나/EC	SEPA
+가겠니	가/VV + 겠/EP + 니/EF	SEPA
+가겠다	가/VV + 겠/EP + 다/EC	SEPA
+가겠단	가/VV + 겠/EP + 단/ETM	SEPA
+가겠어	가/VV + 겠/EP + 어/EF	SEPA
+가겠죠	가/VV + 겠/EP + 죠/EF	SEPA
+가기는	가/VV + 기/ETN + 는/JX	SEPA
+가기도	가/VV + 기/ETN + 도/JX	SEPA
+가기란	가/VV + 기/ETN + 란/JX	SEPA
+가기로	가/VV + 기/ETN + 로/JKB	SEPA
+가기를	가/VV + 기/ETN + 를/JKO	SEPA
 가기만	가/VV + 기/ETN + 만/JX	SEPA
-가기엔	가/VX + 기/ETN + 에/JKB + ㄴ/JX	SEPA
+가기엔	가/VV + 기/ETN + 에/JKB + ㄴ/JX	SEPA
 가기준	가/XSN + 기준/NNG	SEPA
 가까와	가깝/VA + 아/EC	SEPA
 가까운	가깝/VA + ㄴ/ETM	SEPA
@@ -25253,35 +25317,35 @@
 가눔을	가/XSN + 눔/NNB + 을/JKO	SEPA
 가눔의	가/XSN + 눔/NNB + 의/JKG	SEPA
 가눔이	가/XSN + 눔/NNB + 이/JKS	SEPA
-가느냐	가/VX + 느냐/EC	SEPA
-가느라	가/VX + 느라/EC	SEPA
+가느냐	가/VV + 느냐/EC	SEPA
+가느라	가/VV + 느라/EC	SEPA
 가느란	가느랗/VA + ㄴ/ETM	SEPA
-가는가	가/VX + 는가/EF	SEPA
-가는것	가/VX + 는/ETM + 것/NNB	SEPA
-가는군	가/VX + 는군/EF	SEPA
-가는데	가/VX + 는데/EC	SEPA
-가는지	가/VX + 는지/EC	SEPA
-가니까	가/VX + 니까/EC	SEPA
+가는가	가/VV + 는가/EF	SEPA
+가는것	가/VV + 는/ETM + 것/NNB	SEPA
+가는군	가/VV + 는군/EF	SEPA
+가는데	가/VV + 는데/EC	SEPA
+가는지	가/VV + 는지/EC	SEPA
+가니까	가/VV + 니까/EC	SEPA
 가다가	가/VV + 다가/EC	SEPA
 가대로	가/XSN + 대로/JX	SEPA
-가더니	가/VX + 더니/EC	SEPA
-가도록	가/VX + 도록/EC	SEPA
+가더니	가/VV + 더니/EC	SEPA
+가도록	가/VV + 도록/EC	SEPA
 가된다	가/JKS + 되/VV + ㄴ다/EF	SEPA
 가둬둔	가두/VV + 어/EC + 두/VX + ㄴ/ETM	SEPA
 가둬둘	가두/VV + 어/EC + 두/VX + ㄹ/ETM	SEPA
-가든가	가/VX + 든가/EC	SEPA
+가든가	가/VV + 든가/EC	SEPA
 가들을	가/XSN + 들/XSN + 을/JKO	SEPA
 가들이	가/XSN + 들/XSN + 이/JKS	SEPA
-가듯이	가/VX + 듯이/EC	SEPA
-가라고	가/VX + 라고/EC	SEPA
+가듯이	가/VV + 듯이/EC	SEPA
+가라고	가/VV + 라고/EC	SEPA
 가라는	가/XSN + 이/VCP + 라는/ETM	SEPA
 가라워	가렵/VA + 어/EC	SEPA
 가래를	가래/NNG + 를/JKO	SEPA
-가려고	가/VX + 려고/EC	SEPA
+가려고	가/VV + 려고/EC	SEPA
 가려내	가리/VV + 어/EC + 내/VX + 어/EC	SEPA
 가려낸	가리/VV + 어/EC + 내/VX + ㄴ/ETM	SEPA
 가려낼	가리/VV + 어/EC + 내/VX +ㄹ/ETM	SEPA
-가려는	가/VX + 려는/ETM	SEPA
+가려는	가/VV + 려는/ETM	SEPA
 가려도	가리/VV + 어도/EC	SEPA
 가려본	가리/VV + 어/EC + 보/VX + ㄴ/ETM	SEPA
 가려서	가리/VV + 어서/EC	SEPA
@@ -25306,7 +25370,7 @@
 가른다	가르/VV + ㄴ다/EF	SEPA
 가른데	가르/VV + ㄴ데/EC	SEPA
 가리갤	가리개/NNG + ㄹ/JKO	SEPA
-가리라	가/VX + 리라/EC	SEPA
+가리라	가/VV + 리라/EC	SEPA
 가리운	가리우/VV + ㄴ/ETM	SEPA
 가리울	가리우/VV + ㄹ/ETM	SEPA
 가리워	가리/VV + 어/EC	SEPA
@@ -25319,10 +25383,10 @@
 가만둘	가만두/VV + ㄹ/ETM	SEPA
 가만을	가/XSN + 만/JX + 을/JKO	SEPA
 가매매	가/XSN + 매매/NNG	SEPA
-가면서	가/VX + 면서/EC	SEPA
+가면서	가/VV + 면서/EC	SEPA
 가문다	가물/VV + ㄴ다/EF	SEPA
-가므로	가/VX + 므로/EC	SEPA
-가믄서	가/VX  + 면서/EC	SEPA
+가므로	가/VV + 므로/EC	SEPA
+가믄서	가/VV  + 면서/EC	SEPA
 가버려	가버리/VV + 어/EF	SEPA
 가벼운	가볍/VA + ㄴ/ETM	SEPA
 가벼울	가볍/VA + ㄹ/ETM	SEPA
@@ -25341,11 +25405,12 @@
 가셔진	가시/VV + 어/EC + 지/VX + ㄴ/ETM	SEPA
 가셔질	가시/VV + 어/EC + 지/VX + ㄹ/ETM	SEPA
 가슴근	가슴/NNG + 근/NNG	SEPA
-가시나	가/VX + 시/EP + 나/EF	SEPA
-가시요	가/VV + 시요/EF	SEPA
-가시우	가/VX + 시/EP + 우/EF	SEPA
-가신다	가시/VV + ㄴ다/EF	SEPA
-가야지	가/VX + 아야지/EF	SEPA
+가시나	가/VV + 시/EP + 나/EF	SEPA
+가시요	가/VV + 시/EP + 어요/EF	SEPA
+가세요	가/VV + 시/EP + 어요/EF	SEPA
+가시우	가/VV + 시/EP + 우/EF	SEPA
+가신다	가/VV + 시/EP + ㄴ다/EF	SEPA
+가야지	가/VV + 아야지/EF	SEPA
 가없어	가/JKS + 없/VA + 어/EF	SEPA
 가에게	가/XSN + 에게/JKB	SEPA
 가에겐	가/XSN + 에게/JKB + ㄴ/JX	SEPA
@@ -25365,9 +25430,9 @@
 가이자	가/XSN + 이/VCP + 자/EC	SEPA
 가인들	가/XSN + 이/VCP + ㄴ들/EC	SEPA
 가일지	가/XSN + 이/VCP + ㄹ지/EC	SEPA
-가자고	가/VX + 자고/EC	SEPA
-가자는	가/VX + 자는/ETM	SEPA
-가자면	가/VX + 자면/EC	SEPA
+가자고	가/VV + 자고/EC	SEPA
+가자는	가/VV + 자는/ETM	SEPA
+가자면	가/VV + 자면/EC	SEPA
 가제도	가/XSN + 제도/NNG	SEPA
 가져간	가지/VV + ㄴ/ETM	SEPA
 가져갈	가지/VV + ㄹ/ETM	SEPA
@@ -25386,13 +25451,13 @@
 가져줄	가지/VV + 어/EC + 주/VX + ㄹ/ETM	SEPA
 가져줘	가지/VV + 어/EC + 주/VX + 어/EF	SEPA
 가지가	가지/NNG + 가/JKS	SEPA
-가지고	가지/VX + 고/EC	SEPA
-가지구	가지/VX + 구/EC	SEPA
-가지는	가/VX + 지/EC + 는/JX	SEPA
+가지고	가지/VV + 고/EC	SEPA
+가지구	가지/VV + 구/EC	SEPA
+가지는	가/VV + 지/EC + 는/JX	SEPA
 가지를	가지/NNG + 를/JKO	SEPA
-가지만	가/VX + 지만/EC	SEPA
+가지만	가/VV + 지만/EC	SEPA
 가지에	가지/NNG + 에/JKB	SEPA
-가지요	가/VX + 지요/EF	SEPA
+가지요	가/VV + 지요/EF	SEPA
 가진가	가지/NNG + ㄴ가/EF	SEPA
 가진다	가지/VV + ㄴ다/EF	SEPA
 가진데	가지/VV + ㄴ데/EC	SEPA
@@ -25611,6 +25676,7 @@
 거든다	거들/VV + ㄴ다/EF	SEPA
 거든요	거든요/EF	SEPA
 거든유	거든유/EF	SEPA
+거덩요	거덩요/EF	SEPA
 거들떠	거들뜨/VV + 어/EC	SEPA
 거들랑	거들랑/EC	SEPA
 거듭난	거듭나/VV + ㄴ/ETM	SEPA
@@ -25621,6 +25687,7 @@
 거라군	것/NNB + 이/VCP + 라구/EC + ㄴ/JX	SEPA
 거라이	거라이/EF	SEPA
 거래이	거래이/EF	SEPA
+거려서	거리/VV + 어서/EC	SEPA
 거른다	거르/VV + ㄴ다/EF	SEPA
 거름진	거름지/VA + ㄴ/ETM	SEPA
 거리가	거리/NNB + 가/JKS	SEPA
@@ -25628,10 +25695,7 @@
 거리껴	거리끼/VV + 어/EC	SEPA
 거리낄	거리끼/VV + ㄹ/ETM	SEPA
 거리다	거리다/XSN	SEPA
-거리로	거리/NNB + 로/JKB	SEPA
-거리를	거리/NNB + 를/JKO	SEPA
-거리에	거리/NNG + 에/JKB	SEPA
-거리의	거리/NNB + 의/JKG	SEPA
+거린다	거리/XSV + ㄴ다/EF	SEPA
 거머쥔	거머쥐/VV + ㄴ/ETM	SEPA
 거머쥘	거머쥐/VV + ㄹ/ETM	SEPA
 거센가	거세/VA + ㄴ가/EC	SEPA
@@ -25789,34 +25853,35 @@
 것이고	것/NNB + 이/VCP + 고/EC	SEPA
 것이나	것/NNB + 이나/JC	SEPA
 것이다	것/NNB + 이/VCP + 다/EF	SEPA
-것이란	것/NNB + 이/VCP + 란/ETM	SEPA
+것이란	것/NNB + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 것이랄	것/NNB + 이/VCP + 랄/ETM	SEPA
 것이며	것/NNB + 이/VCP + 며/EC	SEPA
 것이지	것/NNB + 이/VCP + 지/EC	SEPA
 것인가	것/NNB + 이/VCP + ㄴ가/EC	SEPA
 것인지	것/NNB + 이/VCP + ㄴ지/EC	SEPA
 것일까	것/NNB + 이/VCP + ㄹ까/EF	SEPA
-겄구나	겄/EP + 구나/EF	SEPA
-겄구만	겄/EP + 구만/EF	SEPA
-겄구먼	겄/EP + 구먼/EF	SEPA
-겄네유	겄/EP + 네유/EF	SEPA
-겄느냐	겄/EP + 느냐/EC	SEPA
-겄는가	겄/EP + 는가/EF	SEPA
-겄는데	겄/EP + 는데/EC	SEPA
-겄는디	겄/EP + 는디/EC	SEPA
-겄능가	겄/EP + 능가/EF	SEPA
-겄다고	겄/EP + 다고/EC	SEPA
-겄다구	겄/EP + 다구/EC	SEPA
-겄다는	겄/EP + 다는/ETM	SEPA
-겄다만	겄/EP + 다/EC + 만/JX	SEPA
-겄소만	겄/EP + 소/EC + 만/JX	SEPA
-겄시유	겄/EP + 시유/EF	SEPA
-겄어요	겄/EP + 어요/EF	SEPA
-겄어유	겄/EP + 어유/EF	SEPA
-겄으면	겄/EP + 으면/EC	SEPA
-겄지만	겄/EP + 지만/EC	SEPA
-겄지요	겄/EP + 지요/EF	SEPA
-겄지유	겄/EP + 지유/EF	SEPA
+겄구나	겠/EP + 구나/EF	SEPA
+겄구만	겠/EP + 구만/EF	SEPA
+겄구먼	겠/EP + 구먼/EF	SEPA
+겄네유	겠/EP + 네유/EF	SEPA
+겄느냐	겠/EP + 느냐/EC	SEPA
+겄는가	겠/EP + 는가/EF	SEPA
+겄는데	겠/EP + 는데/EC	SEPA
+것는데	겠/EP + 는데/EC	SEPA
+겄는디	겠/EP + 는디/EC	SEPA
+겄능가	겠/EP + 능가/EF	SEPA
+겄다고	겠/EP + 다고/EC	SEPA
+겄다구	겠/EP + 다구/EC	SEPA
+겄다는	겠/EP + 다는/ETM	SEPA
+겄다만	겠/EP + 다/EC + 만/JX	SEPA
+겄소만	겠/EP + 소/EC + 만/JX	SEPA
+겄시유	겠/EP + 시유/EF	SEPA
+겄어요	겠/EP + 어요/EF	SEPA
+겄어유	겠/EP + 어유/EF	SEPA
+겄으면	겠/EP + 으면/EC	SEPA
+겄지만	겠/EP + 지만/EC	SEPA
+겄지요	겠/EP + 지요/EF	SEPA
+겄지유	겠/EP + 지유/EF	SEPA
 겉꾸밈	겉꾸미/VV + ㅁ/ETN	SEPA
 겉돈다	겉돌/VV + ㄴ다/EF	SEPA
 게곱게	게/EC + 곱/VA + 게/EC	SEPA
@@ -25948,7 +26013,7 @@
 겠도다	겠/EP + 도다/EF	SEPA
 겠든디	겠/EP + 든디/EC	SEPA
 겠등만	겠/EP + 등만/EF	SEPA
-겠세요	겠/EP + 세요/EF	SEPA
+겠세요	겠/EP + 시/EP + 어요/EF	SEPA
 겠소만	겠/EP + 소/EC + 만/JX	SEPA
 겠소잉	겠/EP + 소잉/EF	SEPA
 겠습죠	겠/EP + 습죠/EF	SEPA
@@ -26177,7 +26242,7 @@
 고만둘	고만두/VV + ㄹ/ETM	SEPA
 고만의	고/EC + 만/JX + 의/JKG	SEPA
 고많은	고/EC + 많/VA + 은/ETM	SEPA
-고말고	고/EC + 말/VX + 고/EF	SEPA
+고말고	고말고/EF	SEPA
 고먹고	고/EC + 먹/VV + 고/EC	SEPA
 고먹는	고/EC + 먹/VX + 는/ETM	SEPA
 고먼데	고/EC + 멀/VA + ㄴ데/EC	SEPA
@@ -26371,7 +26436,6 @@
 교육에	교육/NNG + 에/JKB	SEPA
 교육을	교육/NNG + 을/JKO	SEPA
 교횐가	교회/NNG + 이/VCP + ㄴ가/EC	SEPA
-구간에	구/EC + 간/NNB + 에/JKB	SEPA
 구겨서	구기/VV + 어서/EC	SEPA
 구겨져	구기/VV + 어/EC + 지/VX + 어/EC	SEPA
 구겨진	구기/VV + 어/EC + 지/VX + ㄴ/ETM	SEPA
@@ -26430,7 +26494,6 @@
 구워져	굽/VV + 어/EC + 지/VX + 어/EC	SEPA
 구워진	굽/VV + 어/EC + 지/VX + ㄴ/ETM	SEPA
 구파서	구/EC + 싶/VX + 아서/EC	SEPA
-구하는	구/EC + 하/VX + 는/ETM	SEPA
 구한다	구하/VV + ㄴ다/EF	SEPA
 구해내	구하/VV + 아/EC + 내/VX + 어/EC	SEPA
 구해낸	구하/VV + 아/EC + 내/VX + ㄴ/ETM	SEPA
@@ -26566,7 +26629,7 @@
 권이다	권/XSN + 이/VCP + 다/EF	SEPA
 권이던	권/XSN + 이/VCP + 던/ETM	SEPA
 권이라	권/XSN + 이/VCP + 라/EC	SEPA
-권이란	권/XSN + 이/VCP + 란/ETM	SEPA
+권이란	권/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 권이며	권/XSN + 이/VCP + 며/EC	SEPA
 권이요	권/XSN + 이/VCP + 요/EC	SEPA
 권이지	권/XSN + 이/VCP + 지/EC	SEPA
@@ -26792,7 +26855,7 @@
 기만을	기/ETN + 만/JX + 을/JKO	SEPA
 기만큼	기/ETN + 만큼/JKB	SEPA
 기만한	기/ETN + 만/JX + 하/VV + ㄴ/ETM	SEPA
-기말고	기/ETN + 말/VV + 고/EC	SEPA
+기말고	기/ETN + 말/VX + 고/EC	SEPA
 기면서	기/ETN + 면서/EC	SEPA
 기밖에	기/ETN + 밖에/JX	SEPA
 기반사	기/ETN + 반사/NNG	SEPA
@@ -27121,7 +27184,7 @@
 꼴이고	꼴/XSN + 이/VCP + 고/EC	SEPA
 꼴이다	꼴/XSN + 이/VCP + 다/EF	SEPA
 꼴이라	꼴/XSN + 이/VCP + 라/EC	SEPA
-꼴이란	꼴/XSN + 이/VCP + 란/ETM	SEPA
+꼴이란	꼴/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 꼴이오	꼴/XSN + 이/VCP + 오/EF	SEPA
 꼴이요	꼴/XSN + 이/VCP + 요/EC	SEPA
 꼴인가	꼴/XSN + 이/VCP + ㄴ가/EF	SEPA
@@ -27213,7 +27276,7 @@
 꾼이든	꾼/XSN + 이/VCP + 든/EC	SEPA
 꾼이따	꾼/XSN + 이/VCP + 따/EF	SEPA
 꾼이라	꾼/XSN + 이/VCP + 라/EC	SEPA
-꾼이란	꾼/XSN + 이란/JX	SEPA
+꾼이란	꾼/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 꾼이며	꾼/XSN + 이/VCP + 며/EC	SEPA
 꾼이면	꾼/XSN + 이/VCP + 면/EC	SEPA
 꾼이신	꾼/XSN + 이/VCP + 시/EP + ㄴ/ETM	SEPA
@@ -27458,8 +27521,12 @@
 나바를	나/EC + 바르/VV + ㄹ/JKO	SEPA
 나보네	나/EC + 보/VX + 네/EF	SEPA
 나보다	나/EC + 보/VX + 다/EF	SEPA
+나보당	나/EC + 보/VX + 다/EF	SEPA
+나부다	나/EC + 보/VX + 다/EF	SEPA
+나부당	나/EC + 보/VX + 다/EF	SEPA
 나보던	나/EC + 보/VX + 던/EF	SEPA
 나보죠	나/EC + 보/VX + 죠/EF	SEPA
+나보죵	나/EC + 보/VX + 죠/EF	SEPA
 나보지	나/EC + 보/VX + 지/EF	SEPA
 나봐라	나/EC + 보/VX + 아라/EF	SEPA
 나봐요	나/EC + 보/VV + 아요/EF	SEPA
@@ -27477,6 +27544,7 @@
 나빠할	나쁘/VA + 아/EC + 하/VX + ㄹ/ETM	SEPA
 나쁜가	나쁘/VA + ㄴ가/EF	SEPA
 나쁜데	나쁘/VA + ㄴ데/EF	SEPA
+나쁜디	나쁘/VA + ㄴ데/EF	SEPA
 나쁜지	나쁘/VA + ㄴ지/EC	SEPA
 나쁠건	나쁘/VA + ㄹ/ETM + 것/NNB + ㄴ/JX	SEPA
 나쁠까	나쁘/VA + ㄹ까/EF	SEPA
@@ -27537,7 +27605,6 @@
 나타낸	나타내/VV + ㄴ/ETM	SEPA
 나타낼	나타내/VV + ㄹ/ETM	SEPA
 나타냄	나타내/VV + ㅁ/ETN	SEPA
-나하고	나/JX + 하고/JKB	SEPA
 나하는	나/EC + 하/XSV + 는/ETM	SEPA
 낙지가	낙지/NNG + 가/JKS	SEPA
 낙지를	낙지/NNG + 를/JKO	SEPA
@@ -27618,6 +27685,7 @@
 남아날	남아나/VV + ㄹ/ETM	SEPA
 남잔데	남자/NNG + 이/VCP + ㄴ데/EC	SEPA
 남잔지	남자/NNG + 이/VCP + ㄴ지/EC	SEPA
+남주나	남/NNG + 주/VV + 나/EF	SEPA
 납니까	나/VV + ㅂ니까/EF	SEPA
 납니다	나/VV + ㅂ니다/EF	SEPA
 났당게	나/VV + 았/EP + 당게/EF	SEPA
@@ -27682,21 +27750,21 @@
 내디딘	내디디/VV + ㄴ/ETM	SEPA
 내디딜	내디디/VV + ㄹ/ETM	SEPA
 내뛴다	내뛰/VV + ㄴ다/EF	SEPA
-내라고	내/VX + 라고/EC	SEPA
-내라는	내/VX + 라는/ETM	SEPA
+내라고	내/VV + 라고/EC	SEPA
+내라는	내/VV + 라는/ETM	SEPA
 내려가	내려가/VV + 아/EC	SEPA
 내려간	내려가/VV + ㄴ/ETM	SEPA
 내려갈	내려가/VV + ㄹ/ETM	SEPA
 내려감	내려가/VV + ㅁ/ETN	SEPA
-내려고	내/VX + 려고/EC	SEPA
+내려고	내/VV + 려고/EC	SEPA
 내려논	내려놓/VV + ㄴ/ETM	SEPA
 내려놔	내려놓/VV + 아/EF	SEPA
-내려는	내/VX + 려는/ETM	SEPA
+내려는	내/VV + 려는/ETM	SEPA
 내려다	내/VV + 려다/EC	SEPA
-내려던	내/VX + 려던/ETM	SEPA
+내려던	내/VV + 려던/ETM	SEPA
 내려도	내리/VV + 어도/EC	SEPA
 내려라	내리/VV + 어라/EF	SEPA
-내려면	내/VX + 려면/EC	SEPA
+내려면	내/VV + 려면/EC	SEPA
 내려본	내리/VV + 어/EC + 보/VX + ㄴ/ETM	SEPA
 내려볼	내리/VV + 어/EC + 보/VX + ㄹ/ETM	SEPA
 내려서	내리/VV + 어서/EC	SEPA
@@ -27742,7 +27810,7 @@
 내맡겨	내맡기/VV + 어/EC	SEPA
 내맡긴	내맡기/VV + ㄴ/ETM	SEPA
 내맡길	내맡기/VV + ㄹ/ETM	SEPA
-내면서	내/VX + 면서/EC	SEPA
+내면서	내/VV + 면서/EC	SEPA
 내몬다	내몰/VV + ㄴ다/EF	SEPA
 내몰려	내몰리/VV + 어/EC	SEPA
 내몰린	내몰리/VV + ㄴ/ETM	SEPA
@@ -27768,15 +27836,15 @@
 내비칠	내비치/VV + ㄹ/ETM	SEPA
 내뺀다	내빼/VV + ㄴ다/EF	SEPA
 내뻗쳐	내뻗치/VV + 어/EC	SEPA
-내세요	내/VX + 시/EP + 어요/EF	SEPA
+내세요	내/VV + 시/EP + 어요/EF	SEPA
 내세운	내세우/VV + ㄴ/ETM	SEPA
 내세울	내세우/VV + ㄹ/ETM	SEPA
 내세움	내세우/VV + ㅁ/ETN	SEPA
 내세워	내세우/VV + 어/EC	SEPA
 내쉰다	내쉬/VV + ㄴ다/EF	SEPA
-내야만	내/VX + 야/EC + 만/JX	SEPA
-내야지	내/VX + 어야지/EF	SEPA
-내어도	내/VX + 어도/EC	SEPA
+내야만	내/VV + 야/EC + 만/JX	SEPA
+내야지	내/VV + 어야지/EF	SEPA
+내어도	내/VV + 어도/EC	SEPA
 내었고	내/VX + 었/EP + 고/EC	SEPA
 내었다	내/VX + 었/EP + 다/EF	SEPA
 내었던	내/VX + 었/EP + 던/ETM	SEPA
@@ -27951,7 +28019,7 @@
 네마는	네마는/EC	SEPA
 네마저	네/XSN + 마저/JX	SEPA
 네만은	네/XSN + 만/JX + 은/JX	SEPA
-네말고	네/XSN + 말/VV + 고/EC	SEPA
+네말고	네/XSN + 말/VX + 고/EC	SEPA
 네모난	네모나/VA + ㄴ/ETM	SEPA
 네모진	네모나/VA + ㄴ/ETM	SEPA
 네밥을	네/XSN + 밥/NNG + 을/JKO	SEPA
@@ -28189,6 +28257,7 @@
 누벼진	누비/VV + 어/EC + 지/VX + ㄴ/ETM	SEPA
 누빈다	누비/VV + ㄴ다/EF	SEPA
 누우니	눕/VV + 으니/EC	SEPA
+누우라	눕/VV + 으라/EC	SEPA
 누우며	눕/VV + 으며/EC	SEPA
 누우면	눕/VV + 으면/EC	SEPA
 누우신	눕/VV + 시/EP + ㄴ/ETM	SEPA
@@ -28410,7 +28479,7 @@
 는샐새	는/ETM + 새/NNG + 이/VCP + ㄹ새/EC	SEPA
 는이가	는/ETM + 이/NNB + 가/JKS	SEPA
 는이는	는/ETM + 이/NNB + 는/JX	SEPA
-는이란	는/ETM + 이/VCP + 란/ETM	SEPA
+는이란	는/ETM + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 는이로	는/ETM + 이/NNB + 로/JKB	SEPA
 는이를	는/ETM + 이/NNB + 를/JKO	SEPA
 는이어	는/JX + 이/VCP + 어/EC	SEPA
@@ -28564,7 +28633,7 @@
 님이던	님/XSN + 이/VCP + 던/EC	SEPA
 님이든	님/XSN + 이/VCP + 든/EC	SEPA
 님이라	님/XSN + 이/VCP + 라/EC	SEPA
-님이란	님/XSN + 이/VCP + 란/ETM	SEPA
+님이란	님/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 님이랑	님/XSN + 이랑/JKB	SEPA
 님이며	님/XSN + 이/VCP + 며/EC	SEPA
 님이면	님/XSN + 이/VCP + 면/EC	SEPA
@@ -29235,6 +29304,7 @@
 더래두	더래도/EC	SEPA
 더래요	더래요/EF	SEPA
 더래지	더래지/EC	SEPA
+더랬죠	더랬죠/EF	SEPA
 더러는	더러/JKB + 는/JX	SEPA
 더러도	더러/JKB + 도/JX	SEPA
 더러두	더러/JKB + 도/JX	SEPA
@@ -29309,11 +29379,11 @@
 덜만헐	들/XSN + 만/JX + 하/VV + ㄹ/ETM	SEPA
 덜버텀	들/XSN + 버텀/JX	SEPA
 덜보고	들/XSN + 보/VV + 고/EC	SEPA
-덜보구	들/XSN + 보구/JKB	SEPA
+덜보구	들/XSN + 보고/JKB	SEPA
 덜부터	들/XSN + 부터/JX	SEPA
 덜에게	들/XSN + 에게/JKB	SEPA
 덜이나	들/XSN + 이나/JX	SEPA
-덜이란	들/XSN + 이란/JX	SEPA
+덜이란	들/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 덜이야	들/XSN + 이야/JX	SEPA
 덜이여	들/XSN + 이/VCP + 여/EF	SEPA
 덜이유	들/XSN + 이/VCP + 유/EC	SEPA
@@ -29405,6 +29475,7 @@
 도사려	도사리/VV + 어/EC	SEPA
 도사린	도사리/VV + ㄴ/ETM	SEPA
 도새도	도/JX + 새/NNG + 도/JX	SEPA
+도세요	돌/VV + 으시/EP + 어요/EF	SEPA
 도없이	도/JX + 없이/MAG	SEPA
 도에서	도/JX + 에서/JKB	SEPA
 도와다	돕/VV + 아다/EC	SEPA
@@ -29751,7 +29822,7 @@
 두려워	두렵/VA + 어/EC	SEPA
 두른다	두르/VV + ㄴ다/EF	SEPA
 두면서	두/VX + 면서/EC	SEPA
-두세요	두/VX + 세요/EF	SEPA
+두세요	두/VX + 시/EP + 어요/EF	SEPA
 두셔서	두/VX + 시/EP + 어서/EC	SEPA
 두시고	두/VX + 시/EP + 고/EC	SEPA
 두시는	두/VX + 시/EP + 는/ETM	SEPA
@@ -29890,6 +29961,7 @@
 드구만	드구만/EF	SEPA
 드군요	드군요/EF	SEPA
 드나든	드나들/VV + ㄴ/ETM	SEPA
+드네요	들/VV + 네요/EF	SEPA
 드높여	드높이/VV + 어/EC	SEPA
 드높인	드높이/VV + ㄴ/ETM	SEPA
 드높일	드높이/VV + ㄹ/ETM	SEPA
@@ -29949,9 +30021,14 @@
 드먼유	드먼유/EF	SEPA
 드문데	드물/VA + ㄴ데/EC	SEPA
 드세요	들/VV + 시/EP + 어요/EF	SEPA
+드세용	들/VV + 시/EP + 어요/EF + ㅇ/EF	SEPA
+드세욤	들/VV + 시/EP + 어요/EF + ㅁ/EF	SEPA
+드세영	들/VV + 시/EP + 어여/EF + ㅇ/EF	SEPA
 드셔도	들/VV + 시/EP + 어도/EC	SEPA
 드셔야	들/VV + 시/EP + 어야/EC	SEPA
 드셔요	들/VV + 시/EP + 어요/EF	SEPA
+드셔용	들/VV + 시/EP + 어요/EF + ㅇ/EF	SEPA
+드셔영	들/VV + 시/EP + 어여/EF + ㅇ/EF	SEPA
 드신다	들/VV + 시/EP + ㄴ다/EF	SEPA
 든가배	든가배/EF	SEPA
 든가벼	든가/EC + 비/VX + 어/EF	SEPA
@@ -29970,21 +30047,21 @@
 들간에	들/XSN + 간/NNB + 에/JKB	SEPA
 들간의	들/XSN + 간/NNB + 의/JKG	SEPA
 들같이	들/XSN + 같이/JKB	SEPA
-들거나	들/VX + 거나/EC	SEPA
+들거나	들/VV + 거나/EC	SEPA
 들거치	들/XSN + 거치/JKB	SEPA
 들고는	들/VV + 고/EC + 는/JX	SEPA
-들고만	들/VX + 고/EC + 만/JX	SEPA
+들고만	들/VV + 고/EC + 만/JX	SEPA
 들과는	들/XSN + 과/JKB + 는/JX	SEPA
 들과도	들/XSN + 과/JKB + 도/JX	SEPA
 들과두	들/XSN + 과/JKB + 도/JX	SEPA
 들과를	들/XSN + 과/JKB + 를/JKO	SEPA
 들과요	들/XSN + 과/JKB + 요/JX	SEPA
 들과의	들/XSN + 과/JKB + 의/JKG	SEPA
-들기가	들/VX + 기/ETN + 가/JKS	SEPA
-들기도	들/VX + 기/ETN + 도/JX	SEPA
-들기를	들/VX + 기/ETN + 를/JKO	SEPA
+들기가	들/VV + 기/ETN + 가/JKS	SEPA
+들기도	들/VV + 기/ETN + 도/JX	SEPA
+들기를	들/VV + 기/ETN + 를/JKO	SEPA
 들기만	들/VV + 기/ETN + 만/JX	SEPA
-들기에	들/VX + 기/ETN + 에/JKB	SEPA
+들기에	들/VV + 기/ETN + 에/JKB	SEPA
 들까지	들/XSN + 까지/JX	SEPA
 들깨워	들깨우/VV + 어/EC	SEPA
 들께는	들/XSN + 께/JKB + 는/JX	SEPA
@@ -29995,13 +30072,13 @@
 들끼리	들/XSN + 끼리/XSN	SEPA
 들내에	들/XSN + 내/NNB + 에/JKB	SEPA
 들내의	들/XSN + 내/NNB + 의/JKG	SEPA
-들다가	들/VX + 다가/EC	SEPA
+들다가	들/VV + 다가/EC	SEPA
 들다운	들/XSN + 답/XSA + ㄴ/ETM	SEPA
 들답게	들/XSN + 답/XSA + 게/EC	SEPA
 들대로	들/XSN + 대로/JX	SEPA
 들더러	들/XSN + 더러/JKB	SEPA
-들든지	들/VX + 든지/EC	SEPA
-들듯이	들/VX + 듯이/EC	SEPA
+들든지	들/VV + 든지/EC	SEPA
+들듯이	들/VV + 듯이/EC	SEPA
 들떠서	들뜨/VV + 어서/EC	SEPA
 들떠야	들뜨/VV + 어야/EC	SEPA
 들떠질	들뜨/VV + 어/EC + 지/VX + ㄹ/ETM	SEPA
@@ -30014,7 +30091,7 @@
 들러요	들르/VV + 어요/EF	SEPA
 들러준	들르/VV + 어/EC + 주/VX + ㄴ/ETM	SEPA
 들려고	들/VV + 려고/EC	SEPA
-들려는	들/VX + 려는/ETM	SEPA
+들려는	들/VV + 려는/ETM	SEPA
 들려도	들리/VV + 어도/EC	SEPA
 들려본	들리/VV + 어/EC + 보/VX + ㄴ/ETM	SEPA
 들려서	들리/VV + 어서/EC	SEPA
@@ -30055,12 +30132,12 @@
 들만이	들/XSN + 만/JX + 이/JKS	SEPA
 들만큼	들/XSN + 만큼/JKB	SEPA
 들만한	들/XSN + 만/JX + 하/VX + ㄴ/ETM	SEPA
-들말고	들/XSN + 말/VV + 고/EC	SEPA
+들말고	들/XSN + 말/VX + 고/EC	SEPA
 들먹여	들먹이/VV + 어/EC	SEPA
 들먹인	들먹이/VV + ㄴ/ETM	SEPA
 들먹일	들먹이/VV + ㄹ/ETM	SEPA
 들면서	들/VV + 면서/EC	SEPA
-들므로	들/VX + 므로/EC	SEPA
+들므로	들/VV + 므로/EC	SEPA
 들밖에	들/XSN + 밖에/JX	SEPA
 들보고	들/XSN + 보고/JKB	SEPA
 들보다	들/XSN + 보다/JKB	SEPA
@@ -30071,7 +30148,7 @@
 들뿐인	들/XSN + 뿐/JX + 이/VCP + ㄴ/ETM	SEPA
 들뿐일	들/XSN + 뿐/JX + 이/VCP + ㄹ/ETM	SEPA
 들사이	들/XSN + 사이/NNG	SEPA
-들수록	들/VX + ㄹ수록/EC	SEPA
+들수록	들/VV + ㄹ수록/EC	SEPA
 들썩인	들썩이/VV + ㄴ/ETM	SEPA
 들썩일	들썩이/VV + ㄹ/ETM	SEPA
 들쑤셔	들쑤시/VV + 어/EC	SEPA
@@ -30083,13 +30160,13 @@
 들어갈	들어가/VV + ㄹ/ETM	SEPA
 들어낸	들어내/VV + ㄴ/ETM	SEPA
 들어낼	들어내/VV + ㄹ/ETM	SEPA
-들어도	들/VX + 어도/EC	SEPA
+들어도	들/VV + 어도/EC	SEPA
 들어둘	듣/VV + 어/EC + 두/VX + ㄹ/ETM	SEPA
 들어둬	듣/VV + 어/EC + 두/VX + 어/EF	SEPA
 들어본	듣/VV + 어/EC + 보/VX + ㄴ/ETM	SEPA
 들어볼	듣/VV + 어/EC + 보/VX + ㄹ/ETM	SEPA
 들어봐	듣/VV + 어/EC + 보/VX + 아/EF	SEPA
-들어서	들/VX + 어서/EC	SEPA
+들어서	들/VV + 어서/EC	SEPA
 들어선	들어서/VV + ㄴ/ETM	SEPA
 들어설	들어서/VV + ㄹ/ETM	SEPA
 들어야	들/VV + 어야/EC	SEPA
@@ -30152,7 +30229,7 @@
 들이던	들/XSN + 이/VCP + 던/ETM	SEPA
 들이되	들/XSN + 이/VCP + 되/EC	SEPA
 들이라	들/XSN + 이/VCP + 라/EC	SEPA
-들이란	들/XSN + 이란/JX	SEPA
+들이란	들/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 들이람	들/XSN + 이/VCP + 람/EF	SEPA
 들이랑	들/XSN + 이랑/JKB	SEPA
 들이로	들이/XSN + 로/JKB	SEPA
@@ -30194,8 +30271,8 @@
 들입죠	들/XSN + 이/VCP + ㅂ죠/EF	SEPA
 들조차	들/XSN + 조차/JX	SEPA
 들중의	들/XSN + 중/NNB + 의/JKG	SEPA
-들지는	들/VX + 지/EC + 는/JX	SEPA
-들지요	들/VX + 지요/EF	SEPA
+들지는	들/VV + 지/EC + 는/JX	SEPA
+들지요	들/VV + 지요/EF	SEPA
 들쪽이	들/XSN + 쪽/NNG + 이/JKS	SEPA
 들처럼	들/XSN + 처럼/JKB	SEPA
 들쳐낸	들치/VV + 어/EC + 내/VX + ㄴ/ETM	SEPA
@@ -30511,6 +30588,7 @@
 띵해질	띵하/VA + 아/EC + 지/VX + ㄹ/ETM	SEPA
 라가라	라/EC + 가/VV + 라/EC	SEPA
 라갔다	라/EC + 가/VV + 았/EP + 다/EF	SEPA
+ㄹ수록	ㄹ수록/EC	SEPA
 라거나	라거나/EC	SEPA
 라거든	라거든/EC	SEPA
 라겄어	라/EC + 겄/EP + 어/EF	SEPA
@@ -30801,7 +30879,7 @@
 론이니	론/XSN + 이/VCP + 니/EC	SEPA
 론이다	론/XSN + 이/VCP + 다/EF	SEPA
 론이라	론/XSN + 이/VCP + 라/EC	SEPA
-론이란	론/XSN + 이란/JX	SEPA
+론이란	론/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 론이며	론/XSN + 이/VCP + 며/EC	SEPA
 론이요	론/XSN + 이/VCP + 요/EC	SEPA
 론이자	론/XSN + 이/VCP + 자/EC	SEPA
@@ -30866,7 +30944,7 @@
 류로는	류/XSN + 로/JKB + 는/JX	SEPA
 류로서	류/XSN + 로서/JKB	SEPA
 류만은	류/XSN + 만/JX + 은/JX	SEPA
-류말고	류/XSN + 말/VV + 고/EC	SEPA
+류말고	류/XSN + 말/VX + 고/EC	SEPA
 류별로	류/XSN + 별/XSN + 로/JKB	SEPA
 류보다	류/XSN + 보다/JKB	SEPA
 류부터	류/XSN + 부터/JX	SEPA
@@ -30903,7 +30981,7 @@
 률에선	률/XSN + 에서/JKB + ㄴ/JX	SEPA
 률이나	률/XSN + 이나/JC	SEPA
 률이다	률/XSN + 이/VCP + 다/EF	SEPA
-률이란	률/XSN + 이란/JX	SEPA
+률이란	률/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 률인하	률/XSN + 인하/NNG	SEPA
 를갖고	를/JKO + 갖/VV + 고/EC	SEPA
 를내는	를/JKO + 내/VV + 는/ETM	SEPA
@@ -30957,6 +31035,7 @@
 마리안	마리아/NNG + ㄴ/JX	SEPA
 마무릴	마무리/NNG + ㄹ/JKO	SEPA
 마세요	말/VV + 으시/EP + 어요/EF	SEPA
+마세유	말/VV + 으시/EP + 어요/EF	SEPA
 마셔도	마시/VV + 어도/EC	SEPA
 마셔라	마시/VV + 어라/EF	SEPA
 마셔본	마시/VV + 어/EC + 보/VX + ㄴ/ETM	SEPA
@@ -31086,7 +31165,7 @@
 만했다	만/JX + 하/VV + 았/EP + 다/EF	SEPA
 만허게	만/JX + 하/VV + 게/EC	SEPA
 말개진	말개지/VV + ㄴ/ETM	SEPA
-말고도	말고/JX + 도/JX	SEPA
+말고도	말/VX + 고/EC + 도/JX	SEPA
 말까를	말/VX + 까/EC + 를/JKO	SEPA
 말까요	말/VV + ㄹ까요/EF	SEPA
 말까한	말/VV + ㄹ까/EC + 하/VV + ㄴ/ETM	SEPA
@@ -31786,6 +31865,7 @@
 바빠요	바쁘/VA + 아요/EF	SEPA
 바빠진	바쁘/VA + 아/EC + 지/VX + ㄴ/ETM	SEPA
 바빠질	바쁘/VA + 아/EC + 지/VX + ㄹ/ETM	SEPA
+바쁘게	바쁘/VA + 게EC	SEPA
 바쁜가	바쁘/VA + ㄴ가/EF	SEPA
 바쁜데	바쁘/VA + ㄴ데/EC	SEPA
 바쁜지	바쁘/VA + ㄴ지/EC	SEPA
@@ -32160,7 +32240,6 @@
 보고는	보고/JKB + 는/JX	SEPA
 보고도	보고/JKB + 도/JX	SEPA
 보고만	보/VV + 고/EC + 만/JX	SEPA
-보고서	보/VX + 고서/EC	SEPA
 보고자	보/VX + 고자/EC	SEPA
 보고픈	보/VX + 고픈/ETM	SEPA
 보구나	보/VX + 구나/EF	SEPA
@@ -32338,8 +32417,9 @@
 볼래요	보/VX + ㄹ래요/EF	SEPA
 볼려고	보/VV + ㄹ려고/EC	SEPA
 볼려구	보/VX + ㄹ려구/EC	SEPA
-볼만한	보/VV + ㄹ/ETM + 만/NNB + 하/XSA + ㄴ/ETM	SEPA
-볼만할	보/VV + ㄹ/ETM + 만/NNB + 하/XSA + ㄹ/ETM	SEPA
+볼만한	볼만하/VA + ㄴ/ETM	SEPA
+볼만할	볼만하/VA + ㄹ/ETM	SEPA
+볼만했	볼만하/VA + 었/EP	SEPA
 볼세라	보/VV + ㄹ세라/EC	SEPA
 볼수록	보/VV + ㄹ수록/EC	SEPA
 볼진대	보/VV + ㄹ진대/EC	SEPA
@@ -32933,7 +33013,7 @@
 뿐이니	뿐/JX + 이/VCP + 니/EC	SEPA
 뿐이다	뿐/JX + 이/VCP + 다/EF	SEPA
 뿐이라	뿐/JX + 이/VCP + 라/EC	SEPA
-뿐이란	뿐/JX + 이/VCP + 란/ETM	SEPA
+뿐이란	뿐/JX + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 뿐이랴	뿐/JX + 이/VCP + 랴/EF	SEPA
 뿐이며	뿐/JX + 이/VCP + 며/EC	SEPA
 뿐이면	뿐/JX + 이/VCP + 면/EC	SEPA
@@ -32977,6 +33057,7 @@
 사람들	사람/NNG + 들/XSN	SEPA
 사람이	사람/NNG + 이/JKS	SEPA
 사랑을	사랑/NNG + 을/JKO	SEPA
+사랑해	사랑하/VV + 아/EC	SEPA
 사려문	사려물/VV + ㄴ/ETM	SEPA
 사려야	사리/VV + 어야/EC	SEPA
 사뢴다	사뢰/VV + ㄴ다/EC	SEPA
@@ -32987,7 +33068,7 @@
 사무칠	사무치/VV + ㄹ/ETM	SEPA
 사셔도	살/VV + 으시/EP + 어도/EC	SEPA
 사셔야	살/VV + 으시/EP + 어야/EC	SEPA
-사셔요	살/VV + 세요/EF	SEPA
+사셔요	살/VV + 시/EP + 어요/EF	SEPA
 사시질	살/VV + 시/EP + 지/EC + ㄹ/JKO	SEPA
 사신다	살/VV + 으시/EP + ㄴ다/EF	SEPA
 사오나	사오나/EC	SEPA
@@ -33071,6 +33152,8 @@
 살아올	살아오/VV + ㄹ/ETM	SEPA
 살아와	살아오/VV + 아/EC	SEPA
 살았다	살/VV + 았/EP + 다/EF	SEPA
+살인가	살/NNB + 이/VCP + ㄴ가/EC	SEPA
+살인지	살/NNB + 이/VCP + ㄴ지/EC	SEPA
 살찌운	살찌/VV + ㄴ/ETM	SEPA
 살찌울	살찌/VV + ㄹ/ETM	SEPA
 살찌워	살찌/VV + 어/EC	SEPA
@@ -33292,6 +33375,8 @@
 서성댈	서성대/VV + ㄹ/ETM	SEPA
 서성여	서성이/VV + 어/EC	SEPA
 서성일	서성이/VV + ㄹ/ETM	SEPA
+서세요	서/VV + 시/EP + 어요/EF	SEPA
+스세요	서/VV + 시/EP + 어요/EF	SEPA
 서였고	서/JKB + 이/VCP + 었/EP + 고/EC	SEPA
 서였다	서/JKB + 이/VCP + 었/EP + 다/EF	SEPA
 서였을	서/JKB + 이/VCP + 었/EP + 을/ETM	SEPA
@@ -33338,7 +33423,7 @@
 설워서	섧/VA + 어서/EC	SEPA
 설이나	설/XSN + 이나/JC	SEPA
 설이다	설/XSN + 이/VCP + 다/EF	SEPA
-설이란	설/XSN + 이/VCP + 란/ETM	SEPA
+설이란	설/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 설쳐댄	설치/VV + 어/EC + 대/VX + ㄴ/ETM	SEPA
 설쳐댈	설치/VV + 어/EC + 대/VX + ㄹ/ETM	SEPA
 설쳐도	설치/VV + 어도/EC	SEPA
@@ -33421,7 +33506,7 @@
 성이다	성/XSN + 이/VCP + 다/EF	SEPA
 성이든	성/XSN + 이/VCP + 든/EC	SEPA
 성이라	성/XSN + 이/VCP + 라/EC	SEPA
-성이란	성/XSN + 이란/JX	SEPA
+성이란	성/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 성이론	성/XSN + 이론/NNG	SEPA
 성이며	성/XSN + 이/VCP + 며/EC	SEPA
 성이야	성/XSN + 이야/JX	SEPA
@@ -33440,7 +33525,6 @@
 성있던	성/XSN + 있/VV + 던/ETM	SEPA
 성쟁취	성/XSN + 쟁취/NNG	SEPA
 성적의	성/XSN + 적/XSN + 의/JKG	SEPA
-성적이	성/XSN + 적/XSN + 이/JKS	SEPA
 성정보	성/XSN + 정보/NNG	SEPA
 성조차	성/XSN + 조차/JX	SEPA
 성지방	성/XSN + 지방/NNG	SEPA
@@ -33475,6 +33559,7 @@
 세모난	세모나/VA + ㄴ/ETM	SEPA
 세모진	세모지/VA + ㄴ/ETM	SEPA
 세야지	세/VV + 어야지/EF	SEPA
+세였던	세/NNB + 이/VCP + 었/EP + 던/ETM	SEPA
 세요오	시/EP + 어요오/EF	SEPA
 세우고	세우/VV + 고/EC	SEPA
 세우는	세우/VV + 는/ETM	SEPA
@@ -33536,7 +33621,6 @@
 소서를	소서/EC + 를/JKO	SEPA
 소오소	소/EC + 오/VV + 소/EC	SEPA
 소이까	소이까/EF	SEPA
-소이다	소이다/EF	SEPA
 소이만	소이/EC + 만/JX	SEPA
 속도로	속도/NNG + 로/JKB	SEPA
 속삭여	속삭이/VV + 어/EC	SEPA
@@ -34000,6 +34084,7 @@
 신겨져	신기/VV + 어/EC + 지/VX + 어/EC	SEPA
 신곤가	신고/NNG + 이/VCP + ㄴ가/EC	SEPA
 신긴다	신기/VV + ㄴ다/EF	SEPA
+신난다	신나/VA + ㄴ다/EF	SEPA
 신느라	신/VV + 느라/EC	SEPA
 신다고	시/EP + ㄴ다고/EC	SEPA
 신다구	시/EP + ㄴ다구/EF	SEPA
@@ -34008,6 +34093,9 @@
 신다면	시/EP + ㄴ다면/EC	SEPA
 신대도	시/EP + ㄴ대도/EC	SEPA
 신들린	신들리/VV + ㄴ/ETM	SEPA
+신선한	신선하/VA + ㄴ/ETM	SEPA
+신선할	신선하/VA + ㄹ/ETM	SEPA
+신선했	신선하/VA + 았/EP	SEPA
 신셀세	신세/NNG + 이/VCP + ㄹ세/EF	SEPA
 신지요	시/EP + ㄴ지요/EF	SEPA
 신하는	신하/NNG + 는/JX	SEPA
@@ -34472,6 +34560,7 @@
 아닌게	아니/VCN + ㄴ/ETM + 것/NNB + 이/JKC	SEPA
 아닌께	아니/VCN + ㄴ께/EC	SEPA
 아닌데	아니/VCN + ㄴ데/EC	SEPA
+아닌뎅	아니/VCN + ㄴ데/EC	SEPA
 아닌듯	아니/VCN + ㄴ/ETM + 듯/NNB	SEPA
 아닌디	아니/VCN + ㄴ디/EC	SEPA
 아닌즉	아니/VCN + ㄴ즉/EC	SEPA
@@ -35075,6 +35164,7 @@
 았대도	았/EP + 다/EC + 하/VX + 아도/EC	SEPA
 았대서	았/EP + 대서/EC	SEPA
 았대야	았/EP + 대야/EC	SEPA
+았데요	았/EP + 대요/EF	SEPA
 았대요	았/EP + 대요/EF	SEPA
 았대지	았/EP + 대지/EC	SEPA
 았더군	았/EP + 더군/EF	SEPA
@@ -35098,7 +35188,7 @@
 았듯이	았/EP + 듯이/EC	SEPA
 았디야	았/EP + 디야/EF	SEPA
 았불라	았/EP + 버리/VX + ㄹ라/EC	SEPA
-았세요	았/EP + 세요/EF	SEPA
+았세요	았/EP + 시/EP + 어요/EF	SEPA
 았소만	았/EP + 소/EC + 만/JX	SEPA
 았스예	았/EP + 으예/EF	SEPA
 았스요	았/EP + 으요/EF	SEPA
@@ -35775,7 +35865,7 @@
 어야만	어야/EC + 만/JX	SEPA
 어야제	어야제/EF	SEPA
 어야죠	어야죠/EF	SEPA
-어야쥬	어야쥬/EF	SEPA
+어야쥬	어야/EC + 지유/EF	SEPA
 어야지	어야지/EF	SEPA
 어야할	어야/EC + 하/VX + ㄹ/ETM	SEPA
 어야해	어야/EC + 하/VX + 아/EF	SEPA
@@ -36250,7 +36340,7 @@
 었등만	었/EP + 등만/EF	SEPA
 었디야	었/EP + 디/EC + 이/VCP + 아/EF	SEPA
 었뿌고	었/EP + 버리/VX + 고/EC	SEPA
-었세요	었/EP + 세요/EF	SEPA
+었세요	었/EP + 시/EP + 어요/EF	SEPA
 었소만	었/EP + 소/EC + 만/JX	SEPA
 었습죠	었/EP + 습죠/EF	SEPA
 었시유	었/EP + 시유/EF	SEPA
@@ -36565,8 +36655,6 @@
 여배운	여배우/NNG + ㄴ/JX	SEPA
 여벌의	여/XSN + 벌/NNB + 의/JKG	SEPA
 여병의	여/XSN + 병/NNG + 의/JKG	SEPA
-여부로	여/XSN + 부/NNB + 로/JKB	SEPA
-여부를	여/XSN + 부/NNB + 를/JKO	SEPA
 여분간	여/XSN + 분/NNB + 간/NNG	SEPA
 여분씩	여/XSN + 분/NNB + 씩/XSN	SEPA
 여분에	여/XSN + 분/NNB + 에/JKB	SEPA
@@ -36712,6 +36800,7 @@
 엿봐도	엿보/VV + 아도/EC	SEPA
 엿봐야	엿보/VV + 아야/EC	SEPA
 였는데	이/VCP + 었/EP + 는데/EC	SEPA
+였다고	이/VCP + 었/EP + 다고/EC	SEPA
 였으며	이/VCP + 었/EP + 으며/EC	SEPA
 였지만	이/VCP + 었/EP + 지만/EC	SEPA
 영근다	영글/VV + ㄴ다/EF	SEPA
@@ -36734,32 +36823,33 @@
 오간다	오가/VV + ㄴ다/EF	SEPA
 오간데	오가/VV + ㄴ데/EC	SEPA
 오갈까	오가/VV + ㄹ까/EF	SEPA
-오거나	오/VX + 거나/EC	SEPA
+오거나	오/VV + 거나/EC	SEPA
 오거라	오/VV + 거라/EF	SEPA
-오건대	오/VX + 건대/EC	SEPA
-오고도	오/VX + 고/EC + 도/JX	SEPA
-오고서	오/VX + 고서/EC	SEPA
+오건대	오/VV + 건대/EC	SEPA
+오고도	오/VV + 고/EC + 도/JX	SEPA
+오고서	오/VV + 고서/EC	SEPA
 오그린	오그리/VV + ㄴ/ETM	SEPA
-오기나	오/VX + 기/ETN + 나/JX	SEPA
-오기는	오/VX + 기/ETN + 는/JX	SEPA
-오기도	오/VX + 기/ETN + 도/JX	SEPA
-오기로	오/VX + 기/ETN + 로/JKB	SEPA
-오기를	오/VX + 기/ETN + 를/JKO	SEPA
-오기만	오/VX + 기/ETN + 만/JX	SEPA
-오기에	오/VX + 기에/EC	SEPA
+오기나	오/VV + 기/ETN + 나/JX	SEPA
+오기는	오/VV + 기/ETN + 는/JX	SEPA
+오기도	오/VV + 기/ETN + 도/JX	SEPA
+오기로	오/VV + 기/ETN + 로/JKB	SEPA
+오기를	오/VV + 기/ETN + 를/JKO	SEPA
+오기만	오/VV + 기/ETN + 만/JX	SEPA
+오기에	오/VV + 기에/EC	SEPA
 오너라	오/VV + 아라/EC	SEPA
-오는데	오/VX + 는데/EC	SEPA
-오는지	오/VX + 는지/EC	SEPA
-오다가	오/VX + 다가/EC	SEPA
+오는데	오/VV + 는데/EC	SEPA
+오는지	오/VV + 는지/EC	SEPA
+오다가	오/VV + 다가/EC	SEPA
 오다니	오/VV + 다니/EC	SEPA
-오더니	오/VX + 더니/EC	SEPA
-오도록	오/VX + 도록/EC	SEPA
+오더니	오/VV + 더니/EC	SEPA
+오도록	오/VV + 도록/EC	SEPA
 오든지	오/VV + 든지/EC	SEPA
-오라고	오/VX + 라고/EC	SEPA
+오라고	오/VV + 라고/EC	SEPA
 오라구	오/VV + 라구/EC	SEPA
-오라네	오/VX + 라네/EC	SEPA
+오라네	오/VV + 라네/EC	SEPA
 오래갈	오래가/VV + ㄹ/ETM	SEPA
 오래빌	오래비/NNG + ㄹ/JKO	SEPA
+오랬죠	오/VV + 랬죠/EF	SEPA
 오려낸	오리/VV + 어/EC + 내/VX + ㄴ/ETM	SEPA
 오려서	오리/VV + 어서/EC	SEPA
 오려야	오리/VV + 어야/EC	SEPA
@@ -36781,21 +36871,22 @@
 오무려	오므리/VV + 어/EC	SEPA
 오무린	오므리/VV + ㄴ/ETM	SEPA
 오므려	오므리/VV + 어/EC	SEPA
-오므로	오/VX + 므로/EC	SEPA
+오므로	오/VV + 므로/EC	SEPA
 오므린	오므리/VV + ㄴ/ETM	SEPA
 오빠나	오빠/NNG + 나/JC	SEPA
-오셔서	오/VX + 시/EP + 어서/EC	SEPA
+오세요	오/VV + 시/EP + 어요/EF	SEPA
+오셔서	오/VV + 시/EP + 어서/EC	SEPA
 오시니	오/EC + 시/EP + 니/EC	SEPA
-오시던	오/VX + 시/EP + 던/ETM	SEPA
-오시오	오/VX + 시/EP + 오/EC	SEPA
+오시던	오/VV + 시/EP + 던/ETM	SEPA
+오시오	오/VV + 시/EP + 오/EC	SEPA
 오십쇼	오/VV + 시/EP + ㅂ쇼/EF	SEPA
 오이까	오이까/EF	SEPA
 오이다	오이다/EF	SEPA
-오자는	오/VX + 자는/ETM	SEPA
+오자는	오/VV + 자는/ETM	SEPA
 오져서	오지/VV + 어서/EC	SEPA
-오지는	오/VX + 지/EC + 는/JX	SEPA
-오지만	오/VX + 지만/EC	SEPA
-오지요	오/VX + 지요/EF	SEPA
+오지는	오/VV + 지/EC + 는/JX	SEPA
+오지만	오/VV + 지만/EC	SEPA
+오지요	오/VV + 지요/EF	SEPA
 오하고	오/EC + 하/VX + 고/EC	SEPA
 옥죄인	옥죄이/VV + ㄴ/ETM	SEPA
 옥죈다	옥죄/VV + ㄴ다/EF	SEPA
@@ -36880,6 +36971,7 @@
 올바름	올바르/VA + ㅁ/ETN	SEPA
 올수록	오/VV + ㄹ수록/EC	SEPA
 올시다	올시다/EF	SEPA
+올씨다	올시다/EF	SEPA
 올케가	올케/NNG + 가/JKS	SEPA
 올케는	올케/NNG + 는/JX	SEPA
 올케를	올케/NNG + 를/JKO	SEPA
@@ -36928,6 +37020,7 @@
 옵네라	옵/EP + 네라/EC	SEPA
 옵니까	오/VV + ㅂ니까/EF	SEPA
 옵니다	오/VV + ㅂ니다/EF	SEPA
+옵니당	오/VV + ㅂ니다/EF	SEPA
 옵디다	오/VV + ㅂ디다/EF	SEPA
 옵소사	옵/EP + 소사/EC	SEPA
 옵소서	옵/EP + 소서/EF	SEPA
@@ -36944,6 +37037,7 @@
 와같이	와/JKB + 같이/MAG	SEPA
 와관련	와/JKB + 관련/NNG	SEPA
 와기신	오/VV + 아/EC + 계시/VX + ㄴ/ETM	SEPA
+와달라	오/VV + 아/EC + 달/VX + 라/EF	SEPA
 와버린	오/VV + 아/EC + 버리/VX + ㄴ/ETM	SEPA
 와본단	오/VV + 아/EC + 보/VX + ㄴ단/ETM	SEPA
 와봐도	오/VV + 아/EC + 보/VX + 아도/EC	SEPA
@@ -36967,6 +37061,7 @@
 왔나봐	오/VV + 았/EP + 나/EC + 보/VX + 아/EF	SEPA
 왔다간	오/VV + 았/EP + 다/EC + 가/VV + ㄴ/ETM	SEPA
 왔다갈	오/VV + 았/EP + 다/EC + 가/VV + ㄹ/ETM	SEPA
+왔던데	오/VV + 았/EP + 던데/EC	SEPA
 외따른	외딸/VV + ㄴ/ETM	SEPA
 외로운	외롭/VA + ㄴ/ETM	SEPA
 외로울	외롭/VA + ㄹ/ETM	SEPA
@@ -37068,6 +37163,7 @@
 우린들	우리/NP + 이/VCP + ㄴ들/EC	SEPA
 우벼낸	우비/VV + 어/EC + 내/VV + ㄴ/ETM	SEPA
 우셔요	울/VV + 시/EP + 어요/EF	SEPA
+우세요	울/VV + 으시/EP + 어요/EF	SEPA
 우스운	우습/VA + ㄴ/ETM	SEPA
 우스울	우습/VA + ㄹ/ETM	SEPA
 우스워	우습/VA + 어/EC	SEPA
@@ -37213,7 +37309,8 @@
 으냐로	으냐/EC + 로/JKB	SEPA
 으냐를	으냐/EC + 를/JKO	SEPA
 으냐에	으냐/EC + 에/JKB	SEPA
-으네요	으네요/EC	SEPA
+으네요	으네요/EF	SEPA
+으네용	으네요/EF + ㅇ/EF	SEPA
 으네유	으네유/EF	SEPA
 으니까	으니까/EC	SEPA
 으니깐	으니깐/EF	SEPA
@@ -37657,7 +37754,7 @@
 음이니	음/ETN + 이/VCP + 니/EC	SEPA
 음이다	음/ETN + 이/VCP + 다/EF	SEPA
 음이라	음/ETN + 이/VCP + 라/EC	SEPA
-음이란	음/ETN + 이란/JX	SEPA
+음이란	음/ETN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 음이며	음/ETN + 이며/JC	SEPA
 음이여	음/ETN + 이여/JKV	SEPA
 음이요	음/ETN + 이/VCP + 요/EC	SEPA
@@ -37774,6 +37871,7 @@
 이까내	이까내/EC	SEPA
 이까네	이까네/EC	SEPA
 이께네	이께네/EC	SEPA
+이끄는	이끌/VV + 는/ETM	SEPA
 이끈다	이끌/VV + ㄴ다/EF	SEPA
 이끈데	이끌/VV + ㄴ데/EC	SEPA
 이끌려	이끌리/VV + 어/EC	SEPA
@@ -37885,9 +37983,9 @@
 이라할	이/VCP + 라/EC + 하/VX + ㄹ/ETM	SEPA
 이라함	이/VCP + 라/EC + 하/VX + ㅁ/ETN	SEPA
 이락두	이/VCP + 락두/EC	SEPA
-이란걸	이/VCP + 란/ETM + 것/NNB + ㄹ/JKO	SEPA
-이란게	이/VCP + 란/ETM + 것/NNB + 이/JKS	SEPA
-이란다	이/VCP + 란다/EF	SEPA
+이란걸	이/VCP + 라고/EC + 하/VX + 는/ETM + 것/NNB + ㄹ/JKO	SEPA
+이란게	이/VCP + 라고/EC + 하/VX + 는/ETM + 것/NNB + 이/JKS	SEPA
+이란다	이/VCP + 라고/EC + 하/VX + ㄴ다/EF	SEPA
 이랄까	이/VCP + 랄까/EC	SEPA
 이랄지	이/VCP + 랄지/EC	SEPA
 이람사	이/VCP + 람사/EC	SEPA
@@ -38183,6 +38281,9 @@
 일으킴	일으키/VV + ㅁ/ETN	SEPA
 일이야	일/NNG + 이/VCP + 야/EC	SEPA
 일진대	이/VCP + ㄹ진대/EC	SEPA
+일컫는	일컫/VV + 는/ETM	SEPA
+일컬을	일컫/VV + 을/ETM	SEPA
+일텐데	이/VCP + ㄹ/ETM + 터/NNB + 이/VCP + ㄴ데/EC	SEPA
 읽혀도	읽히/VV + 어도/EC	SEPA
 읽혀서	읽히/VV + 어서/EC	SEPA
 읽혀야	읽히/VV + 어야/EC	SEPA
@@ -38221,33 +38322,33 @@
 잇따라	잇따르/VV + 아/EC	SEPA
 잇따른	잇따르/VV + ㄴ/ETM	SEPA
 잇따를	잇따르/VV + ㄹ/ETM	SEPA
-있거나	있/VX + 거나/EC	SEPA
-있기도	있/VX + 기/ETN + 도/JX	SEPA
-있기를	있/VX + 기/ETN + 를/JKO	SEPA
-있기만	있/VX + 기/ETN + 만/JX	SEPA
-있는데	있/VX + 는데/EC	SEPA
-있는듯	있/VX + 는/ETM + 듯/NNB	SEPA
-있는지	있/VX + 는지/EC	SEPA
-있다가	있/VX + 다가/EC	SEPA
-있다고	있/VX + 다고/EC	SEPA
-있다는	있/VX + 다는/ETM	SEPA
-있다면	있/VX + 다면/EC	SEPA
-있듯이	있/VX + 듯이/EC	SEPA
-있어서	있/VX + 어서/EC	SEPA
-있어야	있/VX + 어야/EC	SEPA
-있었고	있/VX + 었/EP + 고/EC	SEPA
-있었기	있/VX + 었/EP + 기/ETN	SEPA
-있었다	있/VX + 었/EP + 다/EF	SEPA
-있었던	있/VX + 었/EP + 던/ETM	SEPA
-있었을	있/VX + 었/EP + 을/ETM	SEPA
-있으나	있/VX + 으나/EC	SEPA
-있으니	있/VX + 으니/EC	SEPA
-있으며	있/VX + 으며/EC	SEPA
-있으면	있/VX + 으면/EC	SEPA
-있을까	있/VX + 을까/EF	SEPA
-있음을	있/VX + 음/ETN + 을/JKO	SEPA
-있지만	있/VX + 지만/EC	SEPA
-있지요	있/VX + 지요/EF	SEPA
+있거나	있/VV + 거나/EC	SEPA
+있기도	있/VV + 기/ETN + 도/JX	SEPA
+있기를	있/VV + 기/ETN + 를/JKO	SEPA
+있기만	있/VV + 기/ETN + 만/JX	SEPA
+있는데	있/VV + 는데/EC	SEPA
+있는듯	있/VV + 는/ETM + 듯/NNB	SEPA
+있는지	있/VV + 는지/EC	SEPA
+있다가	있/VV + 다가/EC	SEPA
+있다고	있/VV + 다고/EC	SEPA
+있다는	있/VV + 다는/ETM	SEPA
+있다면	있/VV + 다면/EC	SEPA
+있듯이	있/VV + 듯이/EC	SEPA
+있어서	있/VV + 어서/EC	SEPA
+있어야	있/VV + 어야/EC	SEPA
+있었고	있/VV + 었/EP + 고/EC	SEPA
+있었기	있/VV + 었/EP + 기/ETN	SEPA
+있었다	있/VV + 었/EP + 다/EF	SEPA
+있었던	있/VV + 었/EP + 던/ETM	SEPA
+있었을	있/VV + 었/EP + 을/ETM	SEPA
+있으나	있/VV + 으나/EC	SEPA
+있으니	있/VV + 으니/EC	SEPA
+있으며	있/VV + 으며/EC	SEPA
+있으면	있/VV + 으면/EC	SEPA
+있을까	있/VV + 을까/EF	SEPA
+있음을	있/VV + 음/ETN + 을/JKO	SEPA
+있지만	있/VV + 지만/EC	SEPA
+있지요	있/VV + 지요/EF	SEPA
 잉깨로	잉/VCP + 깨로/EF	SEPA
 잊혀져	잊히/VV + 어/EC + 지/VX + 어/EC	SEPA
 잊혀진	잊히/VV + 어/EC + 지/VX + ㄴ/ETM	SEPA
@@ -38352,7 +38453,7 @@
 잖구서	지/EC + 않/VX + 구서/EF	SEPA
 잖는가	지/EC + 않/VX + 는가/EF	SEPA
 잖아요	지/EC + 않/VX + 아요/EF	SEPA
-잖아욧	지/EC + 않/VX + 아욧/EF	SEPA
+잖아욧	지/EC + 않/VX + 아요/EF + ㅅ/EF	SEPA
 잖아유	지/EC + 않/VX + 아유/EF	SEPA
 잖어요	지/EC + 않/VX + 어요/EF	SEPA
 잖은가	지/EC + 않/VX + 은가/EF	SEPA
@@ -38459,7 +38560,7 @@
 장이도	장이/XSN + 도/JX	SEPA
 장이들	장이/XSN + 들/XSN	SEPA
 장이라	장이/XSN + 이/VCP + 라/EC	SEPA
-장이란	장이/XSN + 이/VCP + 란/ETM	SEPA
+장이란	장이/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 장이랑	장이/XSN + 랑/JC	SEPA
 장이로	장이/XSN + 로/JKB	SEPA
 장이를	장이/XSN + 를/JKO	SEPA
@@ -38483,6 +38584,7 @@
 재미난	재미나/VV + ㄴ/ETM	SEPA
 재민가	재미/NNG + 이/VCP + ㄴ가/EF	SEPA
 재밀세	재미/NNG + 이/VCP + ㄹ세/EF	SEPA
+재밌었	재미있/VA + 었/EP	SEPA
 재바른	재바르/VA + ㄴ/ETM	SEPA
 재빠른	재빠르/VA + ㄴ/ETM	SEPA
 재우쳐	재우치/VV + 어/EC	SEPA
@@ -38510,7 +38612,7 @@
 쟁이도	쟁이/XSN + 도/JX	SEPA
 쟁이들	쟁이/XSN + 들/XSN	SEPA
 쟁이라	쟁이/XSN + 이/VCP + 라/EC	SEPA
-쟁이란	쟁이/XSN + 이/VCP + 란/ETM	SEPA
+쟁이란	쟁이/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 쟁이랑	쟁이/XSN + 랑/JKB	SEPA
 쟁이로	쟁이/XSN + 로/JKB	SEPA
 쟁이를	쟁이/XSN + 를/JKO	SEPA
@@ -38549,6 +38651,8 @@
 저민다	저미/VV + ㄴ다/EF	SEPA
 저버린	저버리/VV + ㄴ/ETM	SEPA
 저버릴	저버리/VV + ㄹ/ETM	SEPA
+저어라	젓/VV + 어라/EF	SEPA
+저을래	젓/VV + ㄹ래/EF	SEPA
 저지른	저지르/VV + ㄴ/ETM	SEPA
 저지를	저지르/VV + ㄹ/ETM	SEPA
 저질러	저지르/VV + 어/EC	SEPA
@@ -38561,11 +38665,11 @@
 적능력	적/XSN + 능력/NNG	SEPA
 적단을	적/XSN + 단/NNG + 을/JKO	SEPA
 적동기	적/XSN + 동기/NNG	SEPA
-적들과	적/XSN + 들/XSN + 과/JKB	SEPA
-적들에	적/XSN + 들/XSN + 에/JKB	SEPA
-적들은	적/XSN + 들/XSN + 은/JX	SEPA
-적들을	적/XSN + 들/XSN + 을/JKO	SEPA
-적들의	적/XSN + 들/XSN + 의/JKG	SEPA
+적들과	적/NNG + 들/XSN + 과/JKB	SEPA
+적들에	적/NNG + 들/XSN + 에/JKB	SEPA
+적들은	적/NNG + 들/XSN + 은/JX	SEPA
+적들을	적/NNG + 들/XSN + 을/JKO	SEPA
+적들의	적/NNG + 들/XSN + 의/JKG	SEPA
 적마다	적/NNB + 마다/JX	SEPA
 적망명	적/XSN + 망명/NNG	SEPA
 적무늬	적/XSN + 무늬/NNG	SEPA
@@ -38608,7 +38712,7 @@
 적이든	적/XSN + 이/VCP + 든/EC	SEPA
 적이듯	적/XSN + 이/VCP + 듯/EC	SEPA
 적이라	적/XSN + 이/VCP + 라/EC	SEPA
-적이란	적/XSN + 이/VCP + 란/ETM	SEPA
+적이란	적/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 적이랄	적/XSN + 이/VCP + 랄/ETM	SEPA
 적이려	적/XSN + 이/VCP + 려/EC	SEPA
 적이며	적/XSN + 이/VCP + 며/EC	SEPA
@@ -38865,133 +38969,133 @@
 죕니다	죄/NNG + 이/VCP + ㅂ니다/EF	SEPA
 죠니까	죠니까/EC	SEPA
 죠마는	죠/EC + 마는/JX	SEPA
-주거나	주/VX + 거나/EC	SEPA
-주거든	주/VX + 거든/EC	SEPA
-주건만	주/VX + 건만/EC	SEPA
-주것냐	주/VX + 것/EP + 냐/EF	SEPA
-주겄냐	주/VX + 겄/EP + 냐/EF	SEPA
-주게나	주/VX + 게나/EF	SEPA
-주겠나	주/VX + 겠/EP + 나/EF	SEPA
-주겠냐	주/VX + 겠/EP + 냐/EF	SEPA
-주겠노	주/VX + 겠/EP + 노/EF	SEPA
-주겠니	주/VX + 겠/EP + 니/EF	SEPA
-주겠다	주/VX + 겠/EP + 다/EF	SEPA
-주겠소	주/VX + 겠/EP + 소/EF	SEPA
-주겠어	주/VX + 겠/EP + 어/EF	SEPA
-주겠지	주/VX + 겠/EP + 지/EF	SEPA
-주고는	주/VX + 고/EC + 는/JX	SEPA
-주고도	주/VX + 고/EC + 도/JX	SEPA
-주고만	주/VX + 고/EC + 만/JX	SEPA
-주고야	주/VX + 고/EC + 야/JX	SEPA
-주고자	주/VX + 고자/EC	SEPA
-주고픈	주/VX + 고/EC + 프/VX + ㄴ/ETM	SEPA
-주구려	주/VX + 구려/EC	SEPA
-주기가	주/VX + 기/ETN + 가/JKS	SEPA
-주기나	주/VX + 기/ETN + 나/JX	SEPA
-주기는	주/VX + 기/ETN + 는/JX	SEPA
-주기도	주/VX + 기/ETN + 도/JX	SEPA
-주기로	주/VX + 기/ETN + 로/JKB	SEPA
-주기루	주/VX + 기/ETN + 루/JKB	SEPA
-주기를	주/VX + 기/ETN + 를/JKO	SEPA
-주기만	주/VX + 기/ETN + 만/JX	SEPA
-주기에	주/VX + 기/ETN + 에/JKB	SEPA
-주기와	주/VX + 기/ETN + 와/JKB	SEPA
-주네요	주/VX + 네요/EF	SEPA
-주느냐	주/VX + 느냐/EF	SEPA
-주느라	주/VX + 느라/EC	SEPA
-주는가	주/VX + 는가/EF	SEPA
-주는군	주/VX + 는군/EF	SEPA
-주는데	주/VX + 는데/EC	SEPA
-주는지	주/VX + 는지/EC	SEPA
-주니까	주/VX + 니까/EC	SEPA
-주니께	주/VX + 니께/EC	SEPA
-주다가	주/VX + 다가/EC	SEPA
-주다니	주/VX + 다니/EF	SEPA
-주더군	주/VX + 더군/EF	SEPA
-주더냐	주/VX + 더냐/EF	SEPA
-주더니	주/VX + 더니/EC	SEPA
-주더라	주/VX + 더라/EC	SEPA
-주도록	주/VX + 도록/EC	SEPA
-주든가	주/VX + 든가/EF	SEPA
-주든지	주/VX + 든지/EC	SEPA
-주듯이	주/VX + 듯이/EC	SEPA
-주라고	주/VX + 라고/EC	SEPA
-주라구	주/VX + 라구/EF	SEPA
-주라는	주/VX + 라는/ETM	SEPA
-주려고	주/VX + 려고/EC	SEPA
-주려구	주/VX + 려구/EC	SEPA
-주려나	주/VX + 려나/EC	SEPA
-주려는	주/VX + 려는/ETM	SEPA
-주려니	주/VX + 려니/EF	SEPA
-주려다	주/VX + 려다/EC	SEPA
-주려면	주/VX + 려면/EC	SEPA
+주거나	주/VV + 거나/EC	SEPA
+주거든	주/VV + 거든/EC	SEPA
+주건만	주/VV + 건만/EC	SEPA
+주것냐	주/VV + 것/EP + 냐/EF	SEPA
+주겄냐	주/VV + 겄/EP + 냐/EF	SEPA
+주게나	주/VV + 게나/EF	SEPA
+주겠나	주/VV + 겠/EP + 나/EF	SEPA
+주겠냐	주/VV + 겠/EP + 냐/EF	SEPA
+주겠노	주/VV + 겠/EP + 노/EF	SEPA
+주겠니	주/VV + 겠/EP + 니/EF	SEPA
+주겠다	주/VV + 겠/EP + 다/EF	SEPA
+주겠소	주/VV + 겠/EP + 소/EF	SEPA
+주겠어	주/VV + 겠/EP + 어/EF	SEPA
+주겠지	주/VV + 겠/EP + 지/EF	SEPA
+주고는	주/VV + 고/EC + 는/JX	SEPA
+주고도	주/VV + 고/EC + 도/JX	SEPA
+주고만	주/VV + 고/EC + 만/JX	SEPA
+주고야	주/VV + 고/EC + 야/JX	SEPA
+주고자	주/VV + 고자/EC	SEPA
+주고픈	주/VV + 고/EC + 프/VX + ㄴ/ETM	SEPA
+주구려	주/VV + 구려/EC	SEPA
+주기가	주/VV + 기/ETN + 가/JKS	SEPA
+주기나	주/VV + 기/ETN + 나/JX	SEPA
+주기는	주/VV + 기/ETN + 는/JX	SEPA
+주기도	주/VV + 기/ETN + 도/JX	SEPA
+주기로	주/VV + 기/ETN + 로/JKB	SEPA
+주기루	주/VV + 기/ETN + 루/JKB	SEPA
+주기를	주/VV + 기/ETN + 를/JKO	SEPA
+주기만	주/VV + 기/ETN + 만/JX	SEPA
+주기에	주/VV + 기/ETN + 에/JKB	SEPA
+주기와	주/VV + 기/ETN + 와/JKB	SEPA
+주네요	주/VV + 네요/EF	SEPA
+주느냐	주/VV + 느냐/EF	SEPA
+주느라	주/VV + 느라/EC	SEPA
+주는가	주/VV + 는가/EF	SEPA
+주는군	주/VV + 는군/EF	SEPA
+주는데	주/VV + 는데/EC	SEPA
+주는지	주/VV + 는지/EC	SEPA
+주니까	주/VV + 니까/EC	SEPA
+주니께	주/VV + 니께/EC	SEPA
+주다가	주/VV + 다가/EC	SEPA
+주다니	주/VV + 다니/EF	SEPA
+주더군	주/VV + 더군/EF	SEPA
+주더냐	주/VV + 더냐/EF	SEPA
+주더니	주/VV + 더니/EC	SEPA
+주더라	주/VV + 더라/EC	SEPA
+주도록	주/VV + 도록/EC	SEPA
+주든가	주/VV + 든가/EF	SEPA
+주든지	주/VV + 든지/EC	SEPA
+주듯이	주/VV + 듯이/EC	SEPA
+주라고	주/VV + 라고/EC	SEPA
+주라구	주/VV + 라구/EF	SEPA
+주라는	주/VV + 라는/ETM	SEPA
+주려고	주/VV + 려고/EC	SEPA
+주려구	주/VV + 려구/EC	SEPA
+주려나	주/VV + 려나/EC	SEPA
+주려는	주/VV + 려는/ETM	SEPA
+주려니	주/VV + 려니/EF	SEPA
+주려다	주/VV + 려다/EC	SEPA
+주려면	주/VV + 려면/EC	SEPA
 주려서	주리/VV + 어서/EC	SEPA
-주련만	주/VX + 련만/EC	SEPA
-주리다	주/VX + 리다/EF	SEPA
-주리라	주/VX + 리라/EC	SEPA
-주마고	주/VX + 마고/EC	SEPA
-주마는	주/VX + 마는/ETM	SEPA
-주면서	주/VX + 면서/EC	SEPA
+주련만	주/VV + 련만/EC	SEPA
+주리다	주/VV + 리다/EF	SEPA
+주리라	주/VV + 리라/EC	SEPA
+주마고	주/VV + 마고/EC	SEPA
+주마는	주/VV + 마는/ETM	SEPA
+주면서	주/VV + 면서/EC	SEPA
 주무른	주무르/VV + ㄴ/ETM	SEPA
 주무를	주무르/VV + ㄹ/ETM	SEPA
 주무실	주무시/VV + ㄹ/ETM	SEPA
 주물러	주무르/VV + 어/EC	SEPA
-주므로	주/VX + 므로/EC	SEPA
-주세서	주/VX + 시/EP + 어서/EC	SEPA
+주므로	주/VV + 므로/EC	SEPA
+주세서	주/VV + 시/EP + 어서/EC	SEPA
 주세요	주/VV + 시/EP + 어요/EF	SEPA
-주세유	주/VX + 시/EP + 어유/EF	SEPA
-주셔도	주/VX + 시/EP + 어도/EC	SEPA
+주세유	주/VV + 시/EP + 어유/EF	SEPA
+주셔도	주/VV + 시/EP + 어도/EC	SEPA
 주셔서	주/VV + 시/EP + 어서/EC	SEPA
-주셔야	주/VX + 시/EP + 어야/EC	SEPA
-주셔요	주/VX + 시/EP + 어요/EF	SEPA
-주소서	주/VX + 소서/EF	SEPA
-주시고	주/VX + 시/EP + 고/EC	SEPA
-주시곤	주/VX + 시/EP + 곤/EC	SEPA
-주시구	주/VX + 시/EP + 구/EC	SEPA
-주시군	주/VX + 시/EP + 군/EC	SEPA
-주시기	주/VX + 시/EP + 기/ETN	SEPA
-주시긴	주/VX + 시/EP + 기/ETN + ㄴ/JX	SEPA
-주시길	주/VX + 시/EP + 기/ETN + ㄹ/JKO	SEPA
-주시는	주/VX + 시/EP + 는/ETM	SEPA
-주시니	주/VX + 시/EP + 니/EC	SEPA
-주시던	주/VX + 시/EP + 던/ETM	SEPA
-주시든	주/VX + 시/EP + 든/EF	SEPA
-주시듯	주/VX + 시/EP + 듯/EC	SEPA
-주시라	주/VX + 시/EP + 라/EF	SEPA
-주시려	주/VX + 시/EP + 려/EC	SEPA
-주시며	주/VX + 시/EP + 며/EC	SEPA
-주시면	주/VX + 시/EP + 면/EC	SEPA
-주시믄	주/VX + 시/EP + 면/EC	SEPA
-주시어	주/VX + 시/EP + 어/EC	SEPA
-주시오	주/VX + 시/EP + 오/EC	SEPA
-주시우	주/VX + 시/EP + 우/EF	SEPA
-주시죠	주/VX + 시/EP + 죠/EF	SEPA
-주시지	주/VX + 시/EP + 지/EC	SEPA
-주신다	주/VX + 시/EP + ㄴ다/EF	SEPA
-주십사	주/VX + 시/EP + ㅂ사/EC	SEPA
-주십쇼	주/VX + 시/EP + ㅂ쇼/EF	SEPA
-주씨요	주/VX + 씨오/EF	SEPA
-주어도	주/VX + 어도/EC	SEPA
-주어라	주/VX + 어라/EF	SEPA
-주어서	주/VX + 어서/EC	SEPA
-주어야	주/VX + 어야/EC	SEPA
+주셔야	주/VV + 시/EP + 어야/EC	SEPA
+주셔요	주/VV + 시/EP + 어요/EF	SEPA
+주소서	주/VV + 소서/EF	SEPA
+주시고	주/VV + 시/EP + 고/EC	SEPA
+주시곤	주/VV + 시/EP + 곤/EC	SEPA
+주시구	주/VV + 시/EP + 구/EC	SEPA
+주시군	주/VV + 시/EP + 군/EC	SEPA
+주시기	주/VV + 시/EP + 기/ETN	SEPA
+주시긴	주/VV + 시/EP + 기/ETN + ㄴ/JX	SEPA
+주시길	주/VV + 시/EP + 기/ETN + ㄹ/JKO	SEPA
+주시는	주/VV + 시/EP + 는/ETM	SEPA
+주시니	주/VV + 시/EP + 니/EC	SEPA
+주시던	주/VV + 시/EP + 던/ETM	SEPA
+주시든	주/VV + 시/EP + 든/EF	SEPA
+주시듯	주/VV + 시/EP + 듯/EC	SEPA
+주시라	주/VV + 시/EP + 라/EF	SEPA
+주시려	주/VV + 시/EP + 려/EC	SEPA
+주시며	주/VV + 시/EP + 며/EC	SEPA
+주시면	주/VV + 시/EP + 면/EC	SEPA
+주시믄	주/VV + 시/EP + 면/EC	SEPA
+주시어	주/VV + 시/EP + 어/EC	SEPA
+주시오	주/VV + 시/EP + 오/EC	SEPA
+주시우	주/VV + 시/EP + 우/EF	SEPA
+주시죠	주/VV + 시/EP + 죠/EF	SEPA
+주시지	주/VV + 시/EP + 지/EC	SEPA
+주신다	주/VV + 시/EP + ㄴ다/EF	SEPA
+주십사	주/VV + 시/EP + ㅂ사/EC	SEPA
+주십쇼	주/VV + 시/EP + ㅂ쇼/EF	SEPA
+주씨요	주/VV + 씨오/EF	SEPA
+주어도	주/VV + 어도/EC	SEPA
+주어라	주/VV + 어라/EF	SEPA
+주어서	주/VV + 어서/EC	SEPA
+주어야	주/VV + 어야/EC	SEPA
 주어져	주어지/VV + 어/EC	SEPA
 주어진	주어지/VV + ㄴ/ETM	SEPA
 주어질	주어지/VV + ㄹ/ETM	SEPA
 주어짐	주어지/VV + ㅁ/ETN	SEPA
-주었고	주/VX + 었/EP + 고/EC	SEPA
-주었기	주/VX + 었/EP + 기/ETN	SEPA
-주었나	주/VX + 었/EP + 나/EF	SEPA
-주었냐	주/VX + 었/EP + 냐/EF	SEPA
-주었네	주/VX + 었/EP + 네/EF	SEPA
-주었다	주/VX + 었/EP + 다/EF	SEPA
-주었던	주/VX + 었/EP + 던/ETM	SEPA
-주었든	주/VX + 었/EP + 든/EC	SEPA
-주었소	주/VX + 었/EP + 소/EF	SEPA
-주었어	주/VX + 었/EP + 어/EF	SEPA
-주었을	주/VX + 었/EP + 을/ETM	SEPA
-주었죠	주/VX + 었/EP + 죠/EF	SEPA
-주었지	주/VX + 었/EP + 지/EF	SEPA
+주었고	주/VV + 었/EP + 고/EC	SEPA
+주었기	주/VV + 었/EP + 기/ETN	SEPA
+주었나	주/VV + 었/EP + 나/EF	SEPA
+주었냐	주/VV + 었/EP + 냐/EF	SEPA
+주었네	주/VV + 었/EP + 네/EF	SEPA
+주었다	주/VV + 었/EP + 다/EF	SEPA
+주었던	주/VV + 었/EP + 던/ETM	SEPA
+주었든	주/VV + 었/EP + 든/EC	SEPA
+주었소	주/VV + 었/EP + 소/EF	SEPA
+주었어	주/VV + 었/EP + 어/EF	SEPA
+주었을	주/VV + 었/EP + 을/ETM	SEPA
+주었죠	주/VV + 었/EP + 죠/EF	SEPA
+주었지	주/VV + 었/EP + 지/EF	SEPA
 주에는	주/NNG + 에/JKB + 는/JX	SEPA
 주에도	주/NNG + 에/JKB + 도/JX	SEPA
 주우러	줍/VV + 으러/EC	SEPA
@@ -39002,16 +39106,16 @@
 주워서	줍/VV + 어서/EC	SEPA
 주워온	줍/VV + 어/EC + 오/VX + ㄴ/ETM	SEPA
 주워와	줍/VV + 어/EC + 오/VV + 아/EC	SEPA
-주이소	주/VX + 이소/EC	SEPA
-주자고	주/VX + 자고/EF	SEPA
-주자는	주/VX + 자는/ETM	SEPA
-주자니	주/VX + 자니/EC	SEPA
-주잖아	주/VX + 지/EC + 않/VA + 아/EF	SEPA
-주지는	주/VX + 지/EC + 는/JX	SEPA
-주지도	주/VX + 지/EC + 도/JX	SEPA
-주지를	주/VX + 지/EC + 를/JKO	SEPA
-주지만	주/VX + 지만/EC	SEPA
-주지요	주/VX + 지요/EF	SEPA
+주이소	주/VV + 이소/EC	SEPA
+주자고	주/VV + 자고/EF	SEPA
+주자는	주/VV + 자는/ETM	SEPA
+주자니	주/VV + 자니/EC	SEPA
+주잖아	주/VV + 지/EC + 않/VA + 아/EF	SEPA
+주지는	주/VV + 지/EC + 는/JX	SEPA
+주지도	주/VV + 지/EC + 도/JX	SEPA
+주지를	주/VV + 지/EC + 를/JKO	SEPA
+주지만	주/VV + 지만/EC	SEPA
+주지요	주/VV + 지요/EF	SEPA
 주질러	주지르/VV + 어/EC	SEPA
 주체적	주체/NNG + 적/XSN	SEPA
 죽는다	죽/VV + 는다/EC	SEPA
@@ -39038,7 +39142,8 @@
 죽일지	죽이/VV + ㄹ지/EC	SEPA
 죽자고	죽/VV + 자고/EC	SEPA
 죽쳐야	죽치/VV + 어야/EC	SEPA
-준다던	주/VX + ㄴ다던/EC	SEPA
+준다나	주/VV + ㄴ다나/EC	SEPA
+준다던	주/VV + ㄴ다던/EC	SEPA
 준한다	준하/VV + ㄴ다/EF	SEPA
 준해서	준하/VV + 아서/EC	SEPA
 준해야	준하/VV + 아야/EC	SEPA
@@ -39059,15 +39164,15 @@
 줄인다	줄이/VV + ㄴ다/EF	SEPA
 줄인데	줄이/VV + ㄴ데/EC	SEPA
 줄일께	줄이/VV + ㄹ께/EF	SEPA
-줄테니	주/VX + ㄹ테니/EC	SEPA
+줄테니	주/VV + ㄹ테니/EC	SEPA
 줍시다	주/VV + ㅂ시다/EF	SEPA
 중한가	중하/VA + ㄴ가/EF	SEPA
 중한지	중하/VA + ㄴ지/EC	SEPA
 중해도	중하/VA + 아도/EC	SEPA
-줘봐야	주/VX + 어/EC + 보/VX + 아야/EC	SEPA
+줘봐야	주/VV + 어/EC + 보/VX + 아야/EC	SEPA
 줘봐요	주/VV + 어/EC + 보/VX + 아요/EF	SEPA
 줘야돼	주/VV + 어야/EC + 되/VV + 어/EF	SEPA
-줘야죠	주/VX + 어야죠/EF	SEPA
+줘야죠	주/VV + 어야죠/EF	SEPA
 줘야지	주/VV + 어야지/EF	SEPA
 줘야해	주/VV + 어야/EC + 하/VX + 아/EC	SEPA
 쥐어짠	쥐어짜/VV + ㄴ/ETM	SEPA
@@ -39364,7 +39469,7 @@
 질이니	질/XSN + 이/VCP + 니/EC	SEPA
 질이다	질/XSN + 이/VCP + 다/EF	SEPA
 질이라	질/XSN + 이/VCP + 라/EC	SEPA
-질이란	질/XSN + 이/VCP + 란/ETM	SEPA
+질이란	질/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 질이래	질/XSN + 이/VCP + 래/EF	SEPA
 질이며	질/XSN + 이/VCP + 며/EC	SEPA
 질이야	질/XSN + 이/VCP + 야/EF	SEPA
@@ -39918,7 +40023,7 @@
 층이니	층/XSN + 이/VCP + 니/EC	SEPA
 층이다	층/XSN + 이/VCP + 다/EF	SEPA
 층이라	층/XSN + 이/VCP + 라/EC	SEPA
-층이란	층/XSN + 이란/JX	SEPA
+층이란	층/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 층이며	층/XSN + 이/VCP + 며/EC	SEPA
 층인데	층/XSN + 이/VCP + ㄴ데/EC	SEPA
 층일까	층/XSN + 이/VCP + ㄹ까/EF	SEPA
@@ -39979,6 +40084,7 @@
 치받칠	치받치/VV + ㄹ/ETM	SEPA
 치받힌	치받히/VV + ㄴ/ETM	SEPA
 치보다	치/XSN + 보다/JKB	SEPA
+치세요	치/VV + 시/EP + 어요/EF	SEPA
 치어난	치어나/VV + ㄴ/ETM	SEPA
 치에는	치/XSN + 에/JKB + 는/JX	SEPA
 치에서	치/XSN + 에서/JKB	SEPA
@@ -40366,6 +40472,7 @@
 편으로	편/NNG + 으로/JKB	SEPA
 편진데	편지/NNG + 이/VCP + ㄴ데/EC	SEPA
 편한가	편하/VA + ㄴ가/EF	SEPA
+편한게	편하/VA + ㄴ/ETM + 것/NNB + 이/JKC	SEPA
 편한지	편하/VA + ㄴ지/EC	SEPA
 편할까	편하/VA + ㄹ까/EF	SEPA
 편할지	편하/VA + ㄹ지/EC	SEPA
@@ -40516,8 +40623,6 @@
 하겠지	하/VV + 겠/EP + 지/EF	SEPA
 하고가	하/VV + 고/EC + 가/JKS	SEPA
 하고나	하고/JKB + 나/JX	SEPA
-하고는	하/VV + 고/EC + 는/JX	SEPA
-하고도	하/VV + 고/EC + 도/JX	SEPA
 하고든	하고/JKB + 이/VCP + 든/EC	SEPA
 하고들	하/VV + 고/EC + 들/XSN	SEPA
 하고로	하고/JKB + 로/JKB	SEPA
@@ -40656,7 +40761,6 @@
 하든가	하/VV + 든가/EC	SEPA
 하든지	하/VV + 든지/EC	SEPA
 하듯이	하/VV + 듯이/EC	SEPA
-하라」	하/VV + 라/EC	SEPA
 하라고	하/VV + 라고/EC	SEPA
 하라구	하/VV + 라구/EF	SEPA
 하라는	하/VV + 라는/ETM	SEPA
@@ -40707,7 +40811,7 @@
 하면은	하/VV + 면은/EC	SEPA
 하므로	하/VV + 므로/EC	SEPA
 하세요	하/VV + 시/EP + 어요/EF	SEPA
-하세욧	하/VV + 시/EP + 어욧/EF	SEPA
+하세욧	하/VV + 시/EP + 어요/EF + ㅅ/EF	SEPA
 하세유	하/VV + 세유/EF	SEPA
 하셔도	하/VV + 시/EP + 어도/EC	SEPA
 하셔서	하/VV + 시/EP + 어서/EC	SEPA
@@ -40752,7 +40856,7 @@
 하시문	하/VV + 시/EP + 면/EC	SEPA
 하시어	하/VV + 시/EP + 어/EC	SEPA
 하시오	하/VV + 시/EP + 오/EF	SEPA
-하시욧	하/VV + 시/EP + 욧/EF	SEPA
+하시욧	하/VV + 시/EP + 요/EF + ㅅ/EF	SEPA
 하시우	하/VV + 시/EP + 우/EF	SEPA
 하시자	하/VV + 시/EP + 자/EC	SEPA
 하시죠	하/VV + 시/EP + 죠/EF	SEPA
@@ -40764,6 +40868,7 @@
 하신단	하/VV + 시/EP + ㄴ단/ETM	SEPA
 하신지	하/VV + 시/EP + ㄴ지/EC	SEPA
 하실까	하/VV + 시/EP + ㄹ까/EF	SEPA
+하실수	하/VV + 시/EP + ㄹ/ETM + 수/NNB	SEPA
 하실지	하/VV + 시/EP + ㄹ지/EC	SEPA
 하심에	하/VV + 시/EP + ㅁ/ETN + 에/JKB	SEPA
 하심은	하/VV + 시/EP + ㅁ/ETN + 은/JX	SEPA
@@ -40798,6 +40903,7 @@
 하였네	하/VV + 았/EP + 네/EF	SEPA
 하였는	하/VV + 았/EP + 는/ETM	SEPA
 하였다	하/VV + 았/EP + 다/EF	SEPA
+하였따	하/VV + 았/EP + 다/EF	SEPA
 하였던	하/VV + 았/EP + 던/ETM	SEPA
 하였든	하/VV + 았/EP + 든/EC	SEPA
 하였소	하/VV + 았/EP + 소/EF	SEPA
@@ -41050,6 +41156,7 @@
 핵굔디	학교/NNG + 이/VCP + ㄴ디/EC	SEPA
 했나봐	하/VV + 았/EP + 나/EC + 보/VX + 아/EF	SEPA
 했다간	하/VV + 았/EP + 다가/EC + ㄴ/JX	SEPA
+했던적	하/VV + 았/EP + 던/ETM + 적/NNB	SEPA
 행사도	행사/NNG + 도/JX	SEPA
 행위일	행위/NNG + 이/VCP + ㄹ/ETM	SEPA
 행이고	행/XSN + 이/VCP + 고/EC	SEPA
@@ -41070,95 +41177,95 @@
 향해서	향하/VV + 아서/EC	SEPA
 향해야	향하/VV + 아야/EC	SEPA
 향해진	향하/VV + 아/EC + 지/VX + ㄴ/ETM	SEPA
-허것다	하/XSA + 것/EP + 다/EC	SEPA
-허게두	하/XSA + 게두/EC	SEPA
-허게들	하/XSA + 게/EC + 들/XSN	SEPA
-허게만	하/XSA + 게/EC + 만/JX	SEPA
-허겠네	하/XSV + 겠/EP + 네/EF	SEPA
-허겠니	하/XSV + 겠/EP + 니/EF	SEPA
-허겠다	하/XSV + 겠/EP + 다/EF	SEPA
-허겠소	하/XSV + 겠/EP + 소/EF	SEPA
-허겠쥬	하/XSA + 겠/EP + 쥬/EF	SEPA
+허것다	허/XSV + 것/EP + 다/EC	SEPA
+허게두	허/XSV + 게두/EC	SEPA
+허게들	허/XSV + 게/EC + 들/XSN	SEPA
+허게만	허/XSV + 게/EC + 만/JX	SEPA
+허겠네	허/XSV + 겠/EP + 네/EF	SEPA
+허겠니	허/XSV + 겠/EP + 니/EF	SEPA
+허겠다	허/XSV + 겠/EP + 다/EF	SEPA
+허겠소	허/XSV + 겠/EP + 소/EF	SEPA
+허겠쥬	허/XSV + 겠/EP + 지유/EF	SEPA
 허고는	하고/JKB + 는/JX	SEPA
-허고도	하/XSA + 고/EC + 도/JX	SEPA
-허고자	하/XSV + 고자/EC	SEPA
+허고도	허/XSV + 고/EC + 도/JX	SEPA
+허고자	허/XSV + 고자/EC	SEPA
 허구나	하고/JKB + 나/EC	SEPA
 허구는	하고/JKB + 는/JX	SEPA
 허구두	하고/JKB + 도/JX	SEPA
-허구먼	하/XSA + 구먼/EF	SEPA
-허구유	하/XSV + 구유/EF	SEPA
-허기가	하/XSA + 기/ETN + 가/JKS	SEPA
-허기는	하/XSV + 기/ETN + 는/JX	SEPA
-허기도	하/XSV + 기/ETN + 도/JX	SEPA
-허기두	하/XSA + 기/ETN + 도/JX	SEPA
-허기루	하/XSV + 기/ETN + 루/JKB	SEPA
-허기를	하/XSV + 기/ETN + 를/JKO	SEPA
-허기만	하/XSA + 기/ETN + 만/JX	SEPA
-허기요	하/XSV + 기요/EF	SEPA
+허구먼	허/XSV + 구먼/EF	SEPA
+허구유	허/XSV + 구유/EF	SEPA
+허기가	허/XSV + 기/ETN + 가/JKS	SEPA
+허기는	허/XSV + 기/ETN + 는/JX	SEPA
+허기도	허/XSV + 기/ETN + 도/JX	SEPA
+허기두	허/XSV + 기/ETN + 도/JX	SEPA
+허기루	허/XSV + 기/ETN + 루/JKB	SEPA
+허기를	허/XSV + 기/ETN + 를/JKO	SEPA
+허기만	허/XSV + 기/ETN + 만/JX	SEPA
+허기요	허/XSV + 기요/EF	SEPA
 허기져	허기지/VV + 어/EC	SEPA
 허기진	허기지/VV + ㄴ/ETM	SEPA
-허느냐	하/XSV + 느냐/EF	SEPA
-허느라	하/XSV + 느라/EC	SEPA
-허는가	하/XSV + 는가/EF	SEPA
-허는데	하/XSV + 는데/EC	SEPA
-허는디	하/XSV + 는디/EC	SEPA
-허니까	하/XSV + 니까/EC	SEPA
-허니께	하/XSV + 니께/EC	SEPA
-허다가	하/XSV + 다가/EC	SEPA
-허다구	하/XSA + 다구/EC	SEPA
-허다네	하/XSA + 다네/EF	SEPA
-허다는	하/XSA + 다는/ETM	SEPA
-허다니	하/XSV + 다니/EC	SEPA
-허다면	하/XSA + 다면/EC	SEPA
+허느냐	허/XSV + 느냐/EF	SEPA
+허느라	허/XSV + 느라/EC	SEPA
+허는가	허/XSV + 는가/EF	SEPA
+허는데	허/XSV + 는데/EC	SEPA
+허는디	허/XSV + 는디/EC	SEPA
+허니까	허/XSV + 니까/EC	SEPA
+허니께	허/XSV + 니께/EC	SEPA
+허다가	허/XSV + 다가/EC	SEPA
+허다구	허/XSV + 다구/EC	SEPA
+허다네	허/XSV + 다네/EF	SEPA
+허다는	허/XSV + 다는/ETM	SEPA
+허다니	허/XSV + 다니/EC	SEPA
+허다면	허/XSV + 다면/EC	SEPA
 허덕여	허덕이/VV + 어/EC	SEPA
 허덕인	허덕이/VV + ㄴ/ETM	SEPA
 허덕일	허덕이/VV + ㄹ/ETM	SEPA
-허동만	하/XSV + 동만/EC	SEPA
+허동만	허/XSV + 동만/EC	SEPA
 허둥댈	허둥대/VV + ㄹ/ETM	SEPA
-허드만	하/XSV + 드만/EF	SEPA
-허든가	하/XSV + 든가/EF	SEPA
-허라구	하/XSV + 라구/EC	SEPA
-허라면	하/XSV + 라면/EC	SEPA
-허려는	하/XSV + 려는/ETM	SEPA
-허렷다	하/XSA + 렷다/EF	SEPA
-허리다	하/XSV + 리다/EF	SEPA
-허며는	하/XSV + 며/EC + 는/JX	SEPA
+허드만	허/XSV + 드만/EF	SEPA
+허든가	허/XSV + 든가/EF	SEPA
+허라구	허/XSV + 라구/EC	SEPA
+허라면	허/XSV + 라면/EC	SEPA
+허려는	허/XSV + 려는/ETM	SEPA
+허렷다	허/XSV + 렷다/EF	SEPA
+허리다	허/XSV + 리다/EF	SEPA
+허며는	허/XSV + 며/EC + 는/JX	SEPA
 허문다	허물/VV + ㄴ다/EF	SEPA
-허문서	하/XSV + 문서/EC	SEPA
-허문야	하/XSV + 면/EC + 야/JX	SEPA
-허세요	하/XSV + 시/EP + 어요/EF	SEPA
-허소서	하/XSV + 소서/EF	SEPA
-허시고	하/XSV + 시/EP + 고/EC	SEPA
-허시구	하/XSA + 시/EP + 구/EF	SEPA
-허시는	하/XSV + 시/EP + 는/ETM	SEPA
-허시니	하/XSV + 시/EP + 니/EC	SEPA
-허시던	하/XSA + 시/EP + 던/ETM	SEPA
-허시문	하/XSA + 시/EP + 면/EC	SEPA
-허시사	하/XSV + 시/EP + 사/EC	SEPA
-허시오	하/XSV + 시/EP + 오/EF	SEPA
-허시요	하/XSV + 시/EP + 요/EF	SEPA
-허시우	하/XSA + 시/EP + 우/EF	SEPA
-허시제	하/XSV + 시/EP + 제/EF	SEPA
-허신가	하/XSA + 시/EP + ㄴ가/EF	SEPA
-허씨요	하/XSV + 씨요/EF	SEPA
+허문서	허/XSV + 문서/EC	SEPA
+허문야	허/XSV + 면/EC + 야/JX	SEPA
+허세요	허/XSV + 시/EP + 어요/EF	SEPA
+허소서	허/XSV + 소서/EF	SEPA
+허시고	허/XSV + 시/EP + 고/EC	SEPA
+허시구	허/XSV + 시/EP + 구/EF	SEPA
+허시는	허/XSV + 시/EP + 는/ETM	SEPA
+허시니	허/XSV + 시/EP + 니/EC	SEPA
+허시던	허/XSV + 시/EP + 던/ETM	SEPA
+허시문	허/XSV + 시/EP + 면/EC	SEPA
+허시사	허/XSV + 시/EP + 사/EC	SEPA
+허시오	허/XSV + 시/EP + 오/EF	SEPA
+허시요	허/XSV + 시/EP + 요/EF	SEPA
+허시우	허/XSV + 시/EP + 우/EF	SEPA
+허시제	허/XSV + 시/EP + 제/EF	SEPA
+허신가	허/XSV + 시/EP + ㄴ가/EF	SEPA
+허씨요	허/XSV + 씨요/EF	SEPA
 허예진	하예지/VV + ㄴ/ETM	SEPA
 허이연	허옇/VA + ㄴ/ETM	SEPA
-허자구	하/XSV + 자구/EC	SEPA
-허자는	하/XSV + 자는/ETM	SEPA
-허자면	하/XSV + 자면/EC	SEPA
-허자믄	하/XSV + 자믄/EC	SEPA
-허지는	하/XSA + 지/EC + 는/JX	SEPA
-허지도	하/XSA + 지/EC + 도/JX	SEPA
-허지만	하/XSA + 지만/EC	SEPA
-허지유	하/XSA + 지유/EF	SEPA
+허자구	허/XSV + 자구/EC	SEPA
+허자는	허/XSV + 자는/ETM	SEPA
+허자면	허/XSV + 자면/EC	SEPA
+허자믄	허/XSV + 자믄/EC	SEPA
+허지는	허/XSV + 지/EC + 는/JX	SEPA
+허지도	허/XSV + 지/EC + 도/JX	SEPA
+허지만	허/XSV + 지만/EC	SEPA
+허지유	허/XSV + 지유/EF	SEPA
 허한다	허하/VV + ㄴ다/EC	SEPA
 허해져	허하/VA + 아/EC + 지/VX + 어/EC	SEPA
 허해진	허하/VA + 아/EC + 지/VX + ㄴ/ETM	SEPA
 헌다고	헐/VV + ㄴ다고/EC	SEPA
-헌다구	하/VV + ㄴ다구/EC	SEPA
+헌다구	허/VV + ㄴ다구/EC	SEPA
 헌다냐	헐/VV + ㄴ다냐/EF	SEPA
-헌다는	하/VV + ㄴ다는/ETM	SEPA
-헌다면	하/VV + ㄴ다면/EC	SEPA
+헌다는	허/VV + ㄴ다는/ETM	SEPA
+헌다면	허/VV + ㄴ다면/EC	SEPA
 헌다문	헐/VV + ㄴ다문/EC	SEPA
 헌다믄	헐/VV + ㄴ다믄/EC	SEPA
 헌단다	헐/VV + ㄴ단다/EF	SEPA
@@ -41176,18 +41283,18 @@
 헌티두	한테/JKB + 도/JX	SEPA
 헐거운	헐겁/VA + ㄴ/ETM	SEPA
 헐게다	헐/VV + ㄹ게다/EF	SEPA
-헐는지	하/VV + ㄹ는지/EC	SEPA
+헐는지	허/VV + ㄹ는지/EC	SEPA
 헐떡일	헐떡이/VV + ㄹ/ETM	SEPA
 헐떡임	헐떡이/VV + ㅁ/ETN	SEPA
-헐라고	하/VV + ㄹ라고/EC	SEPA
-헐라구	하/VV + ㄹ라구/EC	SEPA
-헐란다	하/VV + ㄹ란다/EF	SEPA
-헐래믄	하/VV + ㄹ래믄/EC	SEPA
-헐랴구	하/VV + ㄹ랴구/EC	SEPA
+헐라고	허/VV + ㄹ라고/EC	SEPA
+헐라구	허/VV + ㄹ라구/EC	SEPA
+헐란다	허/VV + ㄹ란다/EF	SEPA
+헐래믄	허/VV + ㄹ래믄/EC	SEPA
+헐랴구	허/VV + ㄹ랴구/EC	SEPA
 헐려져	헐리/VV + 어/EC + 지/VX + 어/EC	SEPA
 헐린다	헐리/VV + ㄴ다/EF	SEPA
 헐벗겨	헐벗기/VV + 어/EC	SEPA
-험시로	하/VV + ㅁ시로/EF	SEPA
+험시로	허/VV + ㅁ시로/EF	SEPA
 험해도	험하/VA + 아도/EC	SEPA
 험해라	험하/VA + 아라/EF	SEPA
 험해서	험하/VA + 아서/EC	SEPA
@@ -41198,9 +41305,9 @@
 헙니다	헐/VV + ㅂ니다/EF	SEPA
 헙디까	헐/VV + ㅂ디까/EF	SEPA
 헙디다	헐/VV + ㅂ디다/EF	SEPA
-헙디여	하/VV + ㅂ디여/EF	SEPA
+헙디여	허/VV + ㅂ디여/EF	SEPA
 헙시다	헐/VV + ㅂ시다/EF	SEPA
-헙지요	하/VV + ㅂ지요/EF	SEPA
+헙지요	허/VV + ㅂ지요/EF	SEPA
 헛갈려	헛갈리/VV + 어/EC	SEPA
 헛갈린	헛갈리/VV + ㄴ/ETM	SEPA
 헛갈릴	헛갈리/VV + ㄹ/ETM	SEPA
@@ -41240,7 +41347,7 @@
 헹궈서	헹구/VV + 어서/EC	SEPA
 헹복한	행복하/VA + 하/VV + ㄴ/ETM	SEPA
 혀야지	혀/XSV + 어야지/EF	SEPA
-혀야혀	하/VV + 어야/EC + 하/VX + 어/EF	SEPA
+혀야혀	허/VV + 어야/EC + 허/VX + 어/EF	SEPA
 형TV	형/XSN + TV/SL	SEPA
 형간염	형/XSN + 간염/NNG	SEPA
 형거울	형/XSN + 거울/NNG	SEPA
@@ -41297,7 +41404,7 @@
 형이던	형/XSN + 이/VCP + 던/ETM	SEPA
 형이든	형/XSN + 이/VCP + 든/EC	SEPA
 형이라	형/XSN + 이/VCP + 라/EC	SEPA
-형이란	형/XSN + 이란/JX	SEPA
+형이란	형/XSN + 이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 형이며	형/XSN + 이/VCP + 며/EC	SEPA
 형이오	형/XSN + 이/VCP + 오/EF	SEPA
 형이요	형/XSN + 이/VCP + 요/EC	SEPA
@@ -41730,40 +41837,40 @@
 힘으로	힘/NNG + 으로/JKB	SEPA
 힘줘서	힘주/VV + 어서/EC	SEPA
 힘찬가	힘차/VA + ㄴ가/EC	SEPA
-가게	가/VX + 게/EC	SEPA
-가고	가/VX + 고/EC	SEPA
-가곤	가/VX + 곤/EC	SEPA
-가기	가/VX + 기/ETN	SEPA
-가길	가/VX + 기/ETN + ㄹ/JKO	SEPA
+가게	가/VV + 게/EC	SEPA
+가고	가/VV + 고/EC	SEPA
+가곤	가/VV + 곤/EC	SEPA
+가기	가/VV + 기/ETN	SEPA
+가길	가/VV + 기/ETN + ㄹ/JKO	SEPA
 가꾼	가꾸/VV + ㄴ/ETM	SEPA
 가꿀	가꾸/VV + ㄹ/ETM	SEPA
 가꿔	가꾸/VV + 어/EC	SEPA
-가냐	가/VX + 냐/EF	SEPA
+가냐	가/VV + 냐/EF	SEPA
 가놈	가/XSN + 놈/NNB	SEPA
 가눌	가누/VV + ㄹ/ETM	SEPA
+가는	가/VV + 는/ETM	SEPA
 가눔	가/XSN + 눔/NNB	SEPA
-가니	가/VX + 니/EC	SEPA
+가니	가/VV + 니/EC	SEPA
 가다	가/XSN + 이/VCP + 다/EC	SEPA
-가던	가/VX + 던/ETM	SEPA
+가던	가/VV + 던/ETM	SEPA
 가도	가/VV + 아도/EC	SEPA
 가둔	가두/VV + ㄴ/ETM	SEPA
 가둘	가두/VV + ㄹ/ETM	SEPA
 가둠	가두/VV + ㅁ/ETN	SEPA
 가둬	가두/VV + 어/EC	SEPA
-가든	가/VX + 든/EC	SEPA
+가든	가/VV + 든/EC	SEPA
 가들	가/XSN + 들/XSN	SEPA
-가듯	가/VX + 듯/EC	SEPA
+가듯	가/VV + 듯/EC	SEPA
 가라	가/XSN + 이/VCP + 라/EC	SEPA
 가란	가/XSN + 이/VCP + 란/ETM	SEPA
 가랑	가/XSN + 랑/JKB	SEPA
-가려	가리/VV + 어/EC	SEPA
 가로	가/XSN + 로/JKB	SEPA
 가른	가르/VV + ㄴ/ETM	SEPA
 가린	가리/VV + ㄴ/ETM	SEPA
 가릴	가리/VV + ㄹ/ETM	SEPA
 가림	가리/VV + ㅁ/ETN	SEPA
-가며	가/VX + 며/EC	SEPA
-가면	가/VX + 면/EC	SEPA
+가며	가/VV + 며/EC	SEPA
+가면	가/VV + 면/EC	SEPA
 가문	가물/VV + ㄴ/ETM	SEPA
 가본	가/VV + 아/EC + 보/VX + ㄴ/ETM	SEPA
 가봐	가/EC + 보/VX + 아/EF	SEPA
@@ -41783,7 +41890,7 @@
 가유	가유/EF	SEPA
 가의	가/XSN + 의/JKG	SEPA
 가인	가/XSN + 이/VCP + ㄴ/ETM	SEPA
-가자	가/VX + 자/EC	SEPA
+가자	가/VV + 자/EC	SEPA
 가잘	가/JKS + 잘/MAG	SEPA
 가져	가지/VV + 어/EC	SEPA
 가진	가지/VV + ㄴ/ETM	SEPA
@@ -41880,8 +41987,9 @@
 거나	거나/EC	SEPA
 거늘	거늘/EC	SEPA
 거니	거니/EC	SEPA
-거다	것/NNB + 이다/EF	SEPA
+거다	것/NNB + 이/VCP + 다/EF	SEPA
 거던	거던/EC	SEPA
+거덩	거덩/EF	SEPA
 거둔	거두/VV + ㄴ/ETM	SEPA
 거둘	거두/VV + ㄹ/ETM	SEPA
 거둬	거두/VV + 어/EC	SEPA
@@ -41895,8 +42003,14 @@
 거센	거세/VA + ㄴ/ETM	SEPA
 거셀	거세/VA + ㄹ/ETM	SEPA
 거야	것/VV + 이/VCP + 아/EF	SEPA
+거얌	것/VV + 이/VCP + 아/EF	SEPA
+거양	것/VV + 이/VCP + 아/EF	SEPA
 거여	것/NNB + 이/VCP + 어/EF	SEPA
+거염	것/NNB + 이/VCP + 어/EF	SEPA
+거영	것/NNB + 이/VCP + 어/EF	SEPA
 거요	것/NNB + 이/VCP + 오/EF	SEPA
+거욤	것/NNB + 이/VCP + 오/EF	SEPA
+거용	것/NNB + 이/VCP + 오/EF + ㅇ/EF	SEPA
 거처	거치/VV + 어/EC	SEPA
 거쳐	거치/VV + 어/EC	SEPA
 거칠	거치/VV + ㄹ/ETM	SEPA
@@ -42227,7 +42341,8 @@
 구서	구서/EC	SEPA
 구선	구서/EC + ㄴ/JX	SEPA
 구야	구/EC + 야/JX	SEPA
-구요	구요/EF	SEPA
+구여	고요/EF	SEPA
+구요	고요/EF	SEPA
 구운	굽/VV + ㄴ/ETM	SEPA
 구울	굽/VV + ㄹ/ETM	SEPA
 구워	굽/VV + 어/EC	SEPA
@@ -42239,6 +42354,7 @@
 구해	구하/VV + 아/EC	SEPA
 군요	군요/EF	SEPA
 군은	군/NNB + 은/JX	SEPA
+군요	군요/EF	SEPA
 군의	군/XSN + 의/JKG	SEPA
 굳센	굳세/VA + ㄴ/ETM	SEPA
 굳혀	굳히/VV + 어/EC	SEPA
@@ -42652,7 +42768,7 @@
 나간	나가/VV + ㄴ/ETM	SEPA
 나갈	나가/VV + ㄹ/ETM	SEPA
 나감	나가/VV + ㅁ/ETN	SEPA
-나갓	나가/VV + 앗/EF	SEPA
+나갓	나가/VV + 아/EF	SEPA
 나게	나/VX + 게/EC	SEPA
 나고	나/VX + 고/EC	SEPA
 나곤	나/VX + 곤/EC	SEPA
@@ -42693,13 +42809,13 @@
 나옴	나오/VV + ㅁ/ETN	SEPA
 나와	나오/VV + 아/EC	SEPA
 나왔	나오/VV + 았/EP	SEPA
+나용	나요/EF + ㅇ/EF	SEPA
 나유	나유/EF	SEPA
 나인	나이/NNG + ㄴ/JX	SEPA
 나지	나/VX + 지/EC	SEPA
 낚실	낚시/NNG + ㄹ/JKO	SEPA
 낚인	낚이/VV + ㄴ/ETM	SEPA
 낚일	낚이/VV + ㄹ/ETM	SEPA
-난다	날/VV + ㄴ다/EF	SEPA
 난단	날/VV + ㄴ단/ETM	SEPA
 난데	나/NP + 이/VCP + ㄴ데/EC	SEPA
 난들	나/NP + 이/VCP + ㄴ들/EC	SEPA
@@ -42726,11 +42842,12 @@
 남긴	남기/VV + ㄴ/ETM	SEPA
 남길	남기/VV + ㄹ/ETM	SEPA
 남김	남기/VV + ㅁ/ETN	SEPA
+남아	남/VV + 아/EC	SEPA
 남유	남유/EF	SEPA
 남잔	남자/NNG + ㄴ/JX	SEPA
 납실	납시/VV + ㄹ/ETM	SEPA
 낫울	낫우/VV + ㄹ/ETM	SEPA
-낮은	낮/VA + 은/JX	SEPA
+낮은	낮/VA + 은/ETM	SEPA
 낮춘	낮추/VV + ㄴ/ETM	SEPA
 낮출	낮추/VV + ㄹ/ETM	SEPA
 낮춰	낮추/VV + 어/EC	SEPA
@@ -42764,9 +42881,9 @@
 내린	내리/VV + ㄴ/ETM	SEPA
 내릴	내리/VV + ㄹ/ETM	SEPA
 내림	내리/VV + ㅁ/ETN	SEPA
-내만	내/NNG + 만/JX	SEPA
-내며	내/VX + 며/EC	SEPA
-내면	내/VX + 면/EC	SEPA
+내만	나/NP + 만/JX	SEPA
+내며	내/VV + 며/EC	SEPA
+내면	내/VV + 면/EC	SEPA
 내몬	내몰/VV + ㄴ/ETM	SEPA
 내민	내밀/VV + ㄴ/ETM	SEPA
 내밴	내배/VV + ㄴ/ETM	SEPA
@@ -42873,10 +42990,11 @@
 네식	네/XSN + 식/NNB	SEPA
 네야	네/XSN + 야/JX	SEPA
 네에	네/XSN + 에/JKB	SEPA
-네여	네여/EF	SEPA
-네예	네예/EF	SEPA
+네여	네요/EF	SEPA
+네예	네요/EF	SEPA
 네와	네/XSN + 와/JC	SEPA
 네요	네요/EF	SEPA
+네용	네요/EF + ㅇ/EF	SEPA
 네유	네유/EF	SEPA
 네의	네/XSN + 의/JKG	SEPA
 네이	네이/EC	SEPA
@@ -43123,6 +43241,7 @@
 니난	니난/EC	SEPA
 니는	니/EC + 는/JX	SEPA
 니다	ㅂ니다/EF	SEPA
+니당	ㅂ니다/EF	SEPA
 니더	니더/EF	SEPA
 니라	니라/EF	SEPA
 니로	니/EC + 로/JKB	SEPA
@@ -43196,8 +43315,9 @@
 다름	다르/VA + ㅁ/ETN	SEPA
 다린	다리/VV + ㄴ/ETM	SEPA
 다릴	다리/VV + ㄹ/JKO	SEPA
-다만	다/EC + 말/VX + ㄴ/ETM	SEPA
+다만	다만/EC	SEPA
 다며	다며/EC	SEPA
+다묘	다며/EC	SEPA
 다면	다면/EC	SEPA
 다문	다물/VV + ㄴ/ETM	SEPA
 다믄	다면/EC	SEPA
@@ -43256,13 +43376,11 @@
 달도	달/NNG + 도/JX	SEPA
 달떠	달뜨/VV + 어/EC	SEPA
 달뜬	달뜨/VV + ㄴ/ETM	SEPA
-달라	다르/VA + 아/EC	SEPA
 달란	달/VX + 란/ETM	SEPA
 달랄	달/VX + 랄/ETM	SEPA
 달래	달래/VV + 아/EC	SEPA
 달랜	달래/VV + ㄴ/ETM	SEPA
 달랠	달래/VV + ㄹ/ETM	SEPA
-달러	다르/VA + 어/EC	SEPA
 달려	달리/VV + 어/EC	SEPA
 달린	달리/VV + ㄴ/ETM	SEPA
 달릴	달리/VV + ㄹ/ETM	SEPA
@@ -43344,7 +43462,6 @@
 대네	대/VX + 네/EF	SEPA
 대는	대/XSN + 는/JX	SEPA
 대니	대니/EF	SEPA
-대다	대/XSN + 이/VCP + 다/EF	SEPA
 대던	대/VX + 던/ETM	SEPA
 대도	대도/EC	SEPA
 대두	대두/EF	SEPA
@@ -43372,7 +43489,6 @@
 대지	대지/EF	SEPA
 대질	대/VX + 지/EC + ㄹ/JKO	SEPA
 대찬	대차/VA + ㄴ/ETM	SEPA
-대한	대하/VV + ㄴ/ETM	SEPA
 대할	대하/VV + ㄹ/ETM	SEPA
 대해	대하/VV + 아/EC	SEPA
 대활	대화/NNG + ㄹ/JKO	SEPA
@@ -43427,6 +43543,7 @@
 던듯	던/ETM + 듯/NNB	SEPA
 던디	던디/EC	SEPA
 던바	던바/EC	SEPA
+던적	던/ETM + 적/NNB	SEPA
 던져	던지/VV + 어/EC	SEPA
 던중	던/ETM + 중/NNB	SEPA
 던지	던지/EC	SEPA
@@ -43723,17 +43840,17 @@
 듣는	듣/VV + 는/ETM	SEPA
 들간	들/XSN + 간/NNB	SEPA
 들걸	들/XSN + 것/NNB	SEPA
-들게	들/VX + 게/EC	SEPA
-들곤	들/VX + 곤/EC	SEPA
+들게	들/VV + 게/EC	SEPA
+들곤	들/VV + 곤/EC	SEPA
 들과	들/XSN + 과/JKB	SEPA
 들구	들/VV + 구/EC	SEPA
-들기	들/VX + 기/ETN	SEPA
+들기	들/VV + 기/ETN	SEPA
 들께	들/XSN + 께/JKB	SEPA
-들다	들/VX + 다/EC	SEPA
-들던	들/VX + 던/ETM	SEPA
+들다	들/VV + 다/EC	SEPA
+들던	들/VV + 던/ETM	SEPA
 들도	들/XSN + 도/JX	SEPA
 들두	들/XSN + 도/JX	SEPA
-들듯	들/VX + 듯/EC	SEPA
+들듯	들/VV + 듯/EC	SEPA
 들떠	들뜨/VV + 어/EC	SEPA
 들또	들/XSN + 또/JX	SEPA
 들뜬	들뜨/VV + ㄴ/ETM	SEPA
@@ -43747,29 +43864,28 @@
 들릴	들리/VV + ㄹ/ETM	SEPA
 들림	들리/VV + ㅁ/ETN	SEPA
 들만	들/XSN + 만/JX	SEPA
-들며	들/VX + 며/EC	SEPA
-들면	들/VX + 면/EC	SEPA
+들며	들/VV + 며/EC	SEPA
+들면	들/VV + 면/EC	SEPA
 들뿐	들/XSN + 뿐/JX	SEPA
 들쓴	들쓰/VV + ㄴ/ETM	SEPA
 들아	들/XSN + 아/JKV	SEPA
 들야	들/XSN + 야/JX	SEPA
-들어	들/VX + 어/EC	SEPA
+들어	들/VV + 어/EC	SEPA
+들었	듣/VV + 었/EP	SEPA
 들에	들/XSN + 에/JKB	SEPA
 들엔	들/XSN + 에/JKB + ㄴ/JX	SEPA
 들여	들이/VV + 어/EC	SEPA
 들요	들/XSN + 요/JX	SEPA
-들은	들/XSN + 은/JX	SEPA
-들을	들/XSN + 을/JKO	SEPA
 들의	들/XSN + 의/JKG	SEPA
 들이	들/XSN + 이/JKS	SEPA
 들인	들/XSN + 이/VCP + ㄴ/ETM	SEPA
 들일	들이/VV + ㄹ/ETM	SEPA
-들자	들/VX + 자/EC	SEPA
+들자	들/VV + 자/EC	SEPA
 들져	들/XSN + 져/EC	SEPA
-들죠	들/VX + 지요/EF	SEPA
+들죠	들/VV + 지요/EF	SEPA
 들중	들/XSN + 중/NNB	SEPA
-들지	들/VX + 지/EC	SEPA
-들진	들/VX + 지/EC + ㄴ/JX	SEPA
+들지	들/VV + 지/EC	SEPA
+들진	들/VV + 지/EC + ㄴ/JX	SEPA
 들쳐	들치/VV + 어/EC	SEPA
 들춘	들추/VV + ㄴ/ETM	SEPA
 들출	들추/VV + ㄹ/ETM	SEPA
@@ -44060,6 +44176,9 @@
 로써	로써/JKB	SEPA
 로야	로/JKB + 야/JX	SEPA
 로요	로/JKB + 요/JX	SEPA
+로와	롭/XSA + 어/EC	SEPA
+로어	롭/XSA + 어/EC	SEPA
+로워	롭/XSA + 어/EC	SEPA
 로의	로/JKB + 의/JKG	SEPA
 로이	로/JKB + 이/JKC	SEPA
 로한	로/JKB + 하/XSV + ㄴ/ETM	SEPA
@@ -44197,7 +44316,7 @@
 만활	만화/NNG + ㄹ/JKO	SEPA
 말간	말갛/VA + ㄴ/ETM	SEPA
 말걸	말/VV + ㄹ걸/EF	SEPA
-말고	말고/JX	SEPA
+말고	말/VX + 고/EC	SEPA
 말까	말/VV + ㄹ까/EC	SEPA
 말도	말/NNG + 도/JX	SEPA
 말라	마르/VV + 아/EC	SEPA
@@ -44538,8 +44657,6 @@
 박혀	박히/VV + 어/EC	SEPA
 박힌	박히/VV + ㄴ/ETM	SEPA
 박힐	박히/VV + ㄹ/ETM	SEPA
-밖에	밖에/JX	SEPA
-밖엔	밖에/JX + ㄴ/JX	SEPA
 반겨	반기/VV + 어/EC	SEPA
 반긴	반기/VV + ㄴ/ETM	SEPA
 반길	반기/VV + ㄹ/ETM	SEPA
@@ -44619,6 +44736,8 @@
 백힌	박히/VV + ㄴ/ETM	SEPA
 밴다	배/VV + ㄴ다/EF	SEPA
 뱀이	뱀/NNG + 이/JKS	SEPA
+버는	벌/VV + 는/EC	SEPA
+버니	벌/VV + 으니/EC	SEPA
 버덤	버덤/JKB	SEPA
 버려	버리/VV + 어/EC	SEPA
 버렷	버리/VV + 엇/EF	SEPA
@@ -44702,7 +44821,6 @@
 별난	별나/VA + ㄴ/ETM	SEPA
 별도	별/XSN + 도/JX	SEPA
 별러	벼르/VV + 어/EC	SEPA
-별로	별/XSN + 로/JKB	SEPA
 별뿐	별/XSN + 뿐/JX	SEPA
 별에	별/XSN + 에/JKB	SEPA
 별은	별/XSN + 은/JX	SEPA
@@ -44719,7 +44837,7 @@
 병일	병/NNG + 이/VCP + ㄹ/ETM	SEPA
 보게	보/VX + 게/EF	SEPA
 보곤	보/VX + 곤/EC	SEPA
-보구	보구/JKB	SEPA
+보구	보고/JKB	SEPA
 보군	보/VX + 군/EC	SEPA
 보기	보/VX + 기/ETN	SEPA
 보긴	보/VV + 기/ETN + ㄴ/JX	SEPA
@@ -44733,6 +44851,7 @@
 보네	보/VX + 네/EF	SEPA
 보는	보/VX + 는/ETM	SEPA
 보니	보/VX + 니/EC	SEPA
+보다	보다/JKB	SEPA
 보단	보다/JKB + ㄴ/JX	SEPA
 보담	보담/JKB	SEPA
 보더	보더/JKB	SEPA
@@ -44752,8 +44871,8 @@
 보세	보/VX + 세/EF	SEPA
 보쇼	보/VX + 쇼/EF	SEPA
 보슈	보/VX + 슈/EF	SEPA
-보신	보/VV + 시/EP + ㄴ/ETM	SEPA
-보실	보/VV + 시/EP + ㄹ/ETM	SEPA
+보신	보/VX + 시/EP + ㄴ/ETM	SEPA
+보실	보/VX + 시/EP + ㄹ/ETM	SEPA
 보아	보/VX + 아/EC	SEPA
 보얀	보얗/VA + ㄴ/ETM	SEPA
 보여	보이/VV + 어/EC	SEPA
@@ -45066,6 +45185,7 @@
 사귈	사귀/VV + ㄹ/ETM	SEPA
 사낸	사내/NNG + ㄴ/JX	SEPA
 사낼	사내/NNG + ㄹ/JKO	SEPA
+사는	살/VV + 는/ETM	SEPA
 사려	사리/VV + 어/EC	SEPA
 사른	사르/VV + ㄴ/ETM	SEPA
 사린	사리/VV + ㄴ/ETM	SEPA
@@ -45074,7 +45194,6 @@
 사신	살/VV + 으시/EP + ㄴ/ETM	SEPA
 사실	살/VV + 으시/EP + ㄹ/ETM	SEPA
 사쓸	사/VV + 아/EC + 쓰/VV + ㄹ/ETM	SEPA
-사와	사오아/EC	SEPA
 사윈	사위/NNG + ㄴ/ETM	SEPA
 삭여	삭이/VV + 어/EC	SEPA
 삭인	삭이/VV + ㄴ/ETM	SEPA
@@ -45089,6 +45208,7 @@
 산단	살/VV + ㄴ단/ETM	SEPA
 산담	살/VV + ㄴ담/EC	SEPA
 산대	살/VV + ㄴ대/EF	SEPA
+산댔	살/VV + ㄴ다/EC + 하/VV + 았/EP	SEPA
 산도	산/XSN + 도/JX	SEPA
 산들	살/VV + ㄴ들/EC	SEPA
 산만	산/NNG + 만/JX	SEPA
@@ -45183,17 +45303,10 @@
 생중	생/XSN + 중/NNB	SEPA
 생쯤	생/XSN + 쯤/XSN	SEPA
 서가	서/JKB + 가/JKS	SEPA
-서건	서/JKB + 이/VCP + 건/EC	SEPA
 서게	서/VV + 게/EC	SEPA
-서고	서/JKB + 이/VCP + 고/EC	SEPA
-서구	서/JKB + 이/VCP + 구/EC	SEPA
 서기	서/VV + 기/ETN	SEPA
 서껀	서껀/JX	SEPA
-서나	서/JKB + 나/JX	SEPA
-서는	서/JKB + 는/JX	SEPA
-서다	서/JKB + 이/VCP + 다/EF	SEPA
-서도	서/JKB + 도/JX	SEPA
-서두	서/JKB + 도/JX	SEPA
+서대	서/VV + 대/EF	SEPA
 서둔	서두르/VV + ㄴ/ETM	SEPA
 서든	서/JKB + 이/VCP + 든/EC	SEPA
 서들	서/JKB + 들/XSN	SEPA
@@ -45284,7 +45397,9 @@
 세나	세나/EF	SEPA
 세낸	세내/VV + ㄴ/ETM	SEPA
 세낼	세내/VV + ㄹ/ETM	SEPA
-세요	세요/EF	SEPA
+세요	시/EP + 어요/EF	SEPA
+세용	시/EP + 어요/EF + ㅇ/EF	SEPA
+세영	세여/EF + ㅇ/EF	SEPA
 세운	세우/VV + ㄴ/ETM	SEPA
 세울	세우/VV + ㄹ/ETM	SEPA
 세움	세우/VV + ㅁ/ETN	SEPA
@@ -45459,7 +45574,7 @@
 시자	시/EP + 자/EC	SEPA
 시잔	시/EP + 잔/ETM	SEPA
 시죠	시/EP + 죠/EF	SEPA
-시쥬	시/EP + 쥬/EF	SEPA
+시쥬	시/EP + 지유/EF	SEPA
 시지	시/EP + 지/EC	SEPA
 시진	시/EP + 지/EC + ㄴ/JX	SEPA
 시질	시/EP + 지/EC + ㄹ/JKO	SEPA
@@ -45547,6 +45662,7 @@
 쌘게	세/VA + ㄴ/ETM + 것/NNB + 이/JKS	SEPA
 써낸	써내/VV + ㄴ/ETM	SEPA
 써낼	써내/VV + ㄹ/ETM	SEPA
+써니	썰/VV + 니/EC	SEPA
 써댄	쓰/VV + 어/EC + 대/VX + ㄴ/ETM	SEPA
 써도	쓰/VV + 어도/EC	SEPA
 써라	쓰/VV + 어라/EF	SEPA
@@ -45661,7 +45777,6 @@
 아내	아/EC + 내/VX + 어/EC	SEPA
 아낸	아/EC + 내/VX + ㄴ/ETM	SEPA
 아낼	아/EC + 내/VX + ㄹ/ETM	SEPA
-아냐	아니/VCN + 야/EF	SEPA
 아넌	아/EC + 널/VV + ㄴ/ETM	SEPA
 아녀	아니/VCN + 어/EF	SEPA
 아논	아/EC + 놓/VX + ㄴ/ETM	SEPA
@@ -45713,12 +45828,12 @@
 아올	아/EC + 오/VX + ㄹ/ETM	SEPA
 아와	아/EC + 오/VX + 아/EC	SEPA
 아요	아요/EF	SEPA
+아용	아요/EF + ㅇ/EF	SEPA
 아유	아유/EF	SEPA
 아의	아/EC + 의/JKG	SEPA
 아인	아이/NNG + ㄴ/JX	SEPA
 아일	아이/NNG + ㄹ/JKO	SEPA
 아져	아/EC + 지/VX + 어/EC	SEPA
-아주	아/EC + 주/VX + 우/EF	SEPA
 아준	아/EC + 주/VX + ㄴ/ETM	SEPA
 아줄	아/EC + 주/VX + ㄹ/ETM	SEPA
 아줘	아/EC + 주/VX + 어/EF	SEPA
@@ -45810,6 +45925,7 @@
 았수	았/EP + 수/EF	SEPA
 았슈	았/EP + 슈/EF	SEPA
 았어	았/EP + 어/EF	SEPA
+았엉	았/EP + 어/EF + ㅇ/EF	SEPA
 았오	았/EP + 오/EF	SEPA
 았우	았/EP + 우/EF	SEPA
 았을	았/EP + 을/ETM	SEPA
@@ -45905,6 +46021,7 @@
 어들	어/EC + 들/VX + ㄹ/ETM	SEPA
 어딘	어디/NP + 이/VCP + ㄴ/ETM	SEPA
 어딜	어디/NP + ㄹ/JKO	SEPA
+오딜	어디/NP + ㄹ/JKO	SEPA
 어따	어디/NP + 다/JX	SEPA
 어때	어떠하/VA + 아/EF	SEPA
 어떤	어떻/VA + ㄴ/ETM	SEPA
@@ -45937,7 +46054,9 @@
 어올	어/EC + 오/VX + ㄹ/ETM	SEPA
 어와	어/EC + 오/VX + 아/EC	SEPA
 어요	어요/EF	SEPA
-어용	어용/EF	SEPA
+어용	어요/EF + ㅇ/EF	SEPA
+어영	어여/EF + ㅇ/EF	SEPA
+어욥	어요/EF + ㅂ/EF	SEPA
 어유	어유/EF	SEPA
 어이	어이/JKB	SEPA
 어젠	어제/NNG + ㄴ/JX	SEPA
@@ -46023,6 +46142,8 @@
 었수	었/EP + 수/EF	SEPA
 었슈	었/EP + 슈/EF	SEPA
 었어	었/EP + 어/EF	SEPA
+었엄	었/EP + 어/EF	SEPA
+었엉	었/EP + 어/EF	SEPA
 었오	었/EP + 오/EF	SEPA
 었을	었/EP + 을/ETM	SEPA
 었음	었/EP + 음/ETN	SEPA
@@ -46155,34 +46276,28 @@
 엿다	이/VCP + 었/EP + 다/EF	SEPA
 엿본	엿보/VV + ㄴ/ETM	SEPA
 엿볼	엿보/VV + ㄹ/ETM	SEPA
-였고	이/VCP + 었/EP + 고/EC	SEPA
-였기	이/VCP + 었/EP + 기/ETN	SEPA
-였나	이/VCP + 었/EP + 나/EC	SEPA
-였는	이/VCP + 었/EP + 는/EC	SEPA
-였다	이/VCP + 었/EP + 다/EF	SEPA
-였을	이/VCP + 었/EP + 을/ETN	SEPA
-였음	이/VCP + 었/EP + 음/ETN	SEPA
 영근	영글/VV + ㄴ/ETM	SEPA
 옆을	옆/NNG + 을/JKO	SEPA
 예뻐	예쁘/VA + 어/EC	SEPA
 예쁜	예쁘/VA + ㄴ/ETM	SEPA
 예쁠	예쁘/VA + ㄹ/ETM	SEPA
 예쁨	예쁘/VA + ㅁ/ETN	SEPA
+이쁨	이쁘/VA + ㅁ/ETN	SEPA
 예요	이/VCP + 에요/EF	SEPA
 예울	예우/NNG + ㄹ/JKO	SEPA
 오간	오가/VV + ㄴ/ETM	SEPA
 오갈	오가/VV + ㄹ/ETM	SEPA
-오게	오/VX + 게/EC	SEPA
-오고	오/VX + 고/EC	SEPA
-오곤	오/VX + 곤/EC	SEPA
+오게	오/VV + 게/EC	SEPA
+오고	오/VV + 고/EC	SEPA
+오곤	오/VV + 곤/EC	SEPA
 오구	오/VV + 구/EC	SEPA
-오기	오/VX + 기/ETN	SEPA
-오다	오/VX + 다/EC	SEPA
-오던	오/VX + 던/ETM	SEPA
-오되	오/VX + 되/EC	SEPA
-오듯	오/VX + 듯/EC	SEPA
+오기	오/VV + 기/ETN	SEPA
+오다	오/VV + 다/EC	SEPA
+오던	오/VV + 던/ETM	SEPA
+오되	오/VV + 되/EC	SEPA
+오듯	오/VV + 듯/EC	SEPA
 오라	오/VV + 라/EC	SEPA
-오러	오/VX + 러/EC	SEPA
+오러	오/VV + 러/EC	SEPA
 오려	오리/VV + 어/EC	SEPA
 오른	오르/VV + ㄴ/ETM	SEPA
 오를	오르/VV + ㄹ/ETM	SEPA
@@ -46190,22 +46305,21 @@
 오리	오리/EC	SEPA
 오만	오/EC + 만/JX	SEPA
 오며	오며/EC	SEPA
-오면	오면/EC	SEPA
 오빤	오빠/NNG + ㄴ/JX	SEPA
 오빨	오빠/NNG + ㄹ/JKO	SEPA
 오신	오/VV + 시/EP + ㄴ/ETM	SEPA
-오어	오/VX + 어/EC	SEPA
-오우	오/VX + 우/EF	SEPA
-오자	오/VX + 자/EC	SEPA
-오지	오/VX + 지/EC	SEPA
+오어	오/VV + 어/EC	SEPA
+오우	오/VV + 우/EF	SEPA
+오자	오/VV + 자/EC	SEPA
+오지	오/VV + 지/EC	SEPA
 오진	오지/VV + ㄴ/ETM	SEPA
-오질	오/VX + 지/EC + ㄹ/JKO	SEPA
+오질	오/VV + 지/EC + ㄹ/JKO	SEPA
 오핼	오해/NNG + ㄹ/JKO	SEPA
 옥죌	옥죄/VV + ㄹ/ETM	SEPA
 온걸	오/VV + ㄴ걸/EC	SEPA
-온게	오/VX + ㄴ/ETM + 것/NNB + 이/JKS	SEPA
+온게	오/VV + ㄴ/ETM + 것/NNB + 이/JKS	SEPA
 온나	오/VV + ㄴ나/EF	SEPA
-온다	오/VX + ㄴ다/EF	SEPA
+온다	오/VV + ㄴ다/EF	SEPA
 온단	오/VV + ㄴ단/ETM	SEPA
 온대	오/VV + ㄴ대/EF	SEPA
 온데	오/VV + ㄴ데/EC	SEPA
@@ -46244,8 +46358,6 @@
 옹근	옹글/VV + ㄴ/ETM	SEPA
 와나	와/JKB + 나/JX	SEPA
 와는	와/JKB + 는/JX	SEPA
-와도	와/JKB + 도/JX	SEPA
-와두	와/JKB + 도/JX	SEPA
 와라	오/VV + 아라/EF	SEPA
 와를	와/JKB + 를/JKO	SEPA
 와만	와/JKB + 만/JX	SEPA
@@ -46256,6 +46368,8 @@
 와선	오/VV + 아서/EC + ㄴ/JX	SEPA
 와야	오/VV + 아야/EC	SEPA
 와요	오/VV + 아요/EF	SEPA
+와여	오/VV + 아요/EF	SEPA
+와옇	오/VV + 아요/EF	SEPA
 와의	와/JKB + 의/JKG	SEPA
 와이	와/JC + 이/MM	SEPA
 와져	아/EC + 지/VX + 어/EC	SEPA
@@ -46263,6 +46377,9 @@
 와줄	오/VV + 아/EC + 주/VX + ㄹ/ETM	SEPA
 와진	아/EC + 지/VX + ㄴ/ETM	SEPA
 와질	아/EC + 지/VX + ㄹ/ETM	SEPA
+왔지	오/VV + 았/EP + 지/EF	SEPA
+왔냐	오/VV + 았/EP + 냐/EF	SEPA
+왔어	오/VV + 았/EP + 어/EF	SEPA
 왔오	오/VV + 았/EP + 오/EF	SEPA
 왠고	왜/MAG + 이/VCP + ㄴ고/EC	SEPA
 외다	외다/EF	SEPA
@@ -46501,6 +46618,8 @@
 을라	을라/EC	SEPA
 을랑	을랑/JX	SEPA
 을래	을래/EF	SEPA
+을램	을래/EF	SEPA
+을랭	을래/EF	SEPA
 을리	을/ETM + 리/NNB	SEPA
 을만	을/ETM + 만/NNB	SEPA
 을뻔	을/ETM + 뻔/NNB	SEPA
@@ -46558,9 +46677,11 @@
 이끈	이끌/VV + ㄴ/ETM	SEPA
 이나	이나/JC	SEPA
 이난	이/JKS + 나/VV + ㄴ/ETM	SEPA
-이내	이/VCP + 아/EC + 내/VX + 어/EC	SEPA
+이네	이/VCP + 네/EF	SEPA
+이넹	이/VCP + 네/EF + ㅇ/EF	SEPA
 이냐	이/VCP + 냐/EC	SEPA
 이냔	이/VCP + 냔/ETM	SEPA
+이냥	이/VCP + 냐/EF + ㅇ/EF	SEPA
 이뇨	이/VCP + 뇨/EF	SEPA
 이니	이/VCP + 니/EC	SEPA
 이다	이/VCP + 다/EF	SEPA
@@ -46579,7 +46700,7 @@
 이딴	이따/MAG + ㄴ/JX	SEPA
 이땐	이때/MAG + ㄴ/JX	SEPA
 이라	이/VCP + 라/EC	SEPA
-이란	이란/JX	SEPA
+이란	이/VCP + 라고/EC + 하/VX + 는/ETM	SEPA
 이랄	이/VCP + 랄/ETM	SEPA
 이람	이/VCP + 람/EF	SEPA
 이랑	이랑/JC	SEPA
@@ -46636,7 +46757,7 @@
 이제	이/VCP + 제/EF	SEPA
 이젠	이제/NNG + ㄴ/JX	SEPA
 이죠	이/VCP + 죠/EF	SEPA
-이쥬	이/VCP + 쥬/EF	SEPA
+이쥬	이/VCP + 지유/EF	SEPA
 이지	이/VCP + 지/EC	SEPA
 이진	이/VCP + 지/EC + ㄴ/JX	SEPA
 이질	이/VCP + 지/EC + ㄹ/JKO	SEPA
@@ -46646,8 +46767,8 @@
 익힌	익히/VV + ㄴ/ETM	SEPA
 익힐	익히/VV + ㄹ/ETM	SEPA
 인가	이/VCP + ㄴ가/EC	SEPA
-인다	일/VV + ㄴ다/EF	SEPA
 인데	이/VCP + ㄴ데/EC	SEPA
+인디	이/VCP + ㄴ데/EC	SEPA
 인듯	이/VCP + ㄴ/ETM + 듯/NNB	SEPA
 인살	인사/NNG + ㄹ/JKO	SEPA
 인젠	인제/NNG + ㄴ/JX	SEPA
@@ -46655,6 +46776,7 @@
 인한	인하/VV + ㄴ/ETM	SEPA
 인할	인하/VV + ㄹ/ETM	SEPA
 인해	인하/VV + 아/EC	SEPA
+일거	이/VCP + ㄹ/ETM + 것/NNB	SEPA
 일과	일/NNG + 과/JC	SEPA
 일군	일구/VV + ㄴ/ETM	SEPA
 일굴	일구/VV + ㄹ/ETM	SEPA
@@ -46693,20 +46815,23 @@
 입힐	입히/VV + ㄹ/ETM	SEPA
 잇단	잇따르/VV + ㄴ/ETM	SEPA
 있게	있/VX + 게/EC	SEPA
-있고	있/VX + 고/EC	SEPA
-있기	있/VX + 기/ETN	SEPA
-있긴	있/VX + 기/ETN + ㄴ/JX	SEPA
-있나	있/VX + 나/EC	SEPA
+있고	있/VV + 고/EC	SEPA
+있기	있/VV + 기/ETN	SEPA
+있긴	있/VV + 기/ETN + ㄴ/JX	SEPA
+있나	있/VV + 나/EC	SEPA
 있네	있/VX + 네/EF	SEPA
 있는	있/VX + 는/ETM	SEPA
-있다	있/VX + 다/EF	SEPA
+있다	있/VV + 다/EF	SEPA
 있단	있/VX + 단/ETM	SEPA
 있던	있/VX + 던/ETM	SEPA
-있어	있/VX + 어/EC	SEPA
+있어	있/VV + 어/EC	SEPA
 있오	있/VX + 오/EF	SEPA
 있을	있/VX + 을/ETM	SEPA
-있자	있/VX + 자/EC	SEPA
-있지	있/VX + 지/EC	SEPA
+있자	있/VV + 자/EC	SEPA
+있정	있/VV + 어/EF	SEPA
+있쩡	있/VV + 어/EF	SEPA
+있쪙	있/VV + 어/EF	SEPA
+있지	있/VV + 지/EC	SEPA
 있질	있/VX + 지/EC + ㄹ/JKO	SEPA
 잊혀	잊히/VV + 어/EC	SEPA
 잊힐	잊히/VV + ㄹ/ETM	SEPA
@@ -46841,6 +46966,7 @@
 저며	저미/VV + 어/EC	SEPA
 저문	저물/VV + ㄴ/ETM	SEPA
 저민	저미/VV + ㄴ/ETM	SEPA
+저어	젓/VV + 어/EF	SEPA
 저인	저이/NP + ㄴ/JX	SEPA
 저흰	저희/NP + ㄴ/JX	SEPA
 적고	적/XSN + 이/VCP + 고/EC	SEPA
@@ -46988,56 +47114,56 @@
 죄진	죄짓/VV + ㄴ/ETM	SEPA
 죈다	죄/VV + ㄴ다/EF	SEPA
 죠만	죠/EC + 만/JX	SEPA
-주간	주/VX + 간/EF	SEPA
-주게	주/VX + 게/EC	SEPA
-주고	주/VX + 고/EC	SEPA
-주곤	주/VX + 곤/EC	SEPA
-주구	주/VX + 구/EC	SEPA
-주기	주/VX + 기/ETN	SEPA
-주긴	주/VX + 기/ETN + ㄴ/JX	SEPA
-주길	주/VX + 기/ETN + ㄹ/JKO	SEPA
-주께	주/VX + 께/EF	SEPA
-주나	주/VX + 나/EC	SEPA
-주냐	주/VX + 냐/EF	SEPA
-주네	주/VX + 네/EC	SEPA
-주노	주/VX + 노/EF	SEPA
-주는	주/VX + 는/ETM	SEPA
-주니	주/VX + 니/EF	SEPA
-주다	주/VX + 다/EC	SEPA
-주던	주/VX + 던/ETM	SEPA
-주데	주/VX + 데/EC	SEPA
-주되	주/VX + 되/EC	SEPA
+주간	주/VV + 간/EF	SEPA
+주게	주/VV + 게/EC	SEPA
+주고	주/VV + 고/EC	SEPA
+주곤	주/VV + 곤/EC	SEPA
+주구	주/VV + 구/EC	SEPA
+주기	주/VV + 기/ETN	SEPA
+주긴	주/VV + 기/ETN + ㄴ/JX	SEPA
+주길	주/VV + 기/ETN + ㄹ/JKO	SEPA
+주께	주/VV + 께/EF	SEPA
+주나	주/VV + 나/EF	SEPA
+주냐	주/VV + 냐/EF	SEPA
+주네	주/VV + 네/EF	SEPA
+주노	주/VV + 노/EF	SEPA
+주는	주/VV + 는/ETM	SEPA
+주니	주/VV + 니/EF	SEPA
+주다	주/VV + 다/EF	SEPA
+주던	주/VV + 던/ETM	SEPA
+주데	주/VV + 데/EC	SEPA
+주되	주/VV + 되/EC	SEPA
 주된	주되/VV + ㄴ/ETM	SEPA
-주든	주/VX + 든/EC	SEPA
-주듯	주/VX + 듯/EC	SEPA
-주디	주/VX + 디/EF	SEPA
-주라	주/VX + 라/EC	SEPA
-주랴	주/VX + 랴/EF	SEPA
-주러	주/VX + 러/EC	SEPA
-주려	주/VX + 려/EC	SEPA
-주련	주/VX + 련/EF	SEPA
-주렴	주/VX + 렴/EC	SEPA
+주든	주/VV + 든/EC	SEPA
+주듯	주/VV + 듯/EC	SEPA
+주디	주/VV + 디/EF	SEPA
+주라	주/VV + 라/EC	SEPA
+주랴	주/VV + 랴/EF	SEPA
+주러	주/VV + 러/EC	SEPA
+주려	주/VV + 려/EC	SEPA
+주련	주/VV + 련/EF	SEPA
+주렴	주/VV + 렴/EC	SEPA
 주린	주리/VV + ㄴ/ETM	SEPA
-주마	주/VX + 마/EF	SEPA
-주며	주/VX + 며/EC	SEPA
-주면	주/VX + 면/EC	SEPA
+주마	주/VV + 마/EF	SEPA
+주며	주/VV + 며/EC	SEPA
+주면	주/VV + 면/EC	SEPA
 주믄	주/VV + 면/EC	SEPA
-주소	주/VX + 소/EF	SEPA
-주쇼	주/VX + 쇼/EF	SEPA
-주슈	주/VX + 슈/EF	SEPA
+주소	주/VV + 소/EF	SEPA
+주쇼	주/VV + 쇼/EF	SEPA
+주슈	주/VV + 슈/EF	SEPA
 주신	주/VV + 시/EP + ㄴ/ETM	SEPA
 주실	주/VV + 시/EP + ㄹ/ETM	SEPA
-주어	주/VX + 어/EC	SEPA
+주어	주/VV + 어/EC	SEPA
 주에	주/NNG + 에/JKB	SEPA
-주오	주/VX + 오/EC	SEPA
+주오	주/VV + 오/EC	SEPA
 주운	줍/VV + ㄴ/ETM	SEPA
 주울	줍/VV + ㄹ/ETM	SEPA
 주워	줍/VV + 어/EC	SEPA
-주자	주/VX + 자/EC	SEPA
-주죠	주/VX + 죠/EC	SEPA
-주지	주/VX + 지/EC	SEPA
-주진	주/VX + 지/EC + 는/JX	SEPA
-주질	주/VX + 지/EC + ㄹ/JKO	SEPA
+주자	주/VV + 자/EC	SEPA
+주죠	주/VV + 죠/EC	SEPA
+주지	주/VV + 지/EC	SEPA
+주진	주/VV + 지/EC + 는/JX	SEPA
+주질	주/VV + 지/EC + ㄹ/JKO	SEPA
 죽게	죽/VV + 게/EC	SEPA
 죽고	죽/VV + 고/EC	SEPA
 죽는	죽/VV + 는/ETM	SEPA
@@ -47053,12 +47179,11 @@
 준한	준하/VV + ㄴ/ETM	SEPA
 준해	준하/VV + 아/EC	SEPA
 줄여	줄이/VV + 어/EC	SEPA
-줄을	줄/NNB + 을/JKO	SEPA
 줄인	줄이/VV + ㄴ/ETM	SEPA
 줄일	줄이/VV + ㄹ/ETM	SEPA
 줄임	줄이/VV + ㅁ/ETN	SEPA
-줌세	주/VX + ㅁ세/EF	SEPA
-줍네	주/VX + ㅂ네/EC	SEPA
+줌세	주/VV + ㅁ세/EF	SEPA
+줍네	주/VV + ㅂ네/EC	SEPA
 줍쇼	주/VV + ㅂ쇼/EF	SEPA
 중한	중하/VA + ㄴ/ETM	SEPA
 중헌	중하/VA + ㄴ/ETM	SEPA
@@ -47070,7 +47195,7 @@
 줘선	주/VV + 어서/EC + ㄴ/JX	SEPA
 줘야	주/VV + 어야/EC	SEPA
 줘예	주/VV + 어예/EF	SEPA
-줘온	주/VX + 어/EC + 오/VX + ㄴ/ETM	SEPA
+줘온	주/VV + 어/EC + 오/VX + ㄴ/ETM	SEPA
 줘요	주/VV + 어요/EF	SEPA
 줬단	주/VV + 었/EP + 다/EC + ㄴ/JX	SEPA
 쥐고	쥐/VV + 고/EC	SEPA
@@ -47129,7 +47254,7 @@
 지라	지라/EF	SEPA
 지려	지/VX + 려/EC	SEPA
 지로	지/EC + 로/JKB	SEPA
-지롱	지롱/EC	SEPA
+지롱	지롱/EF	SEPA
 지른	지르/VV + ㄴ/ETM	SEPA
 지를	지/EC + 를/JKO	SEPA
 지린	지리/VV + ㄴ/ETM	SEPA
@@ -47146,12 +47271,14 @@
 지오	지/VX + 오/EF	SEPA
 지와	지/EC + 오/VX + 아/EC	SEPA
 지요	지요/EF	SEPA
+지용	지요/EF + ㅇ/EF	SEPA
+지영	지여/EF + ㅇ/EF	SEPA
 지운	지우/VV + ㄴ/ETM	SEPA
 지울	지우/VV + ㄹ/ETM	SEPA
 지움	지우/VV + ㅁ/ETN	SEPA
 지워	지우/VV + 어/EC	SEPA
 지유	지유/EF	SEPA
-지은	지/VX + 은/ETM	SEPA
+지은	짓/VV + 은/ETM	SEPA
 지의	지/EC + 의/JKG	SEPA
 지이	지/EC + 이/JKS	SEPA
 지자	지/VX + 자/EC	SEPA
@@ -47469,22 +47596,14 @@
 층일	층/XSN + 이/VCP + ㄹ/ETM	SEPA
 층화	층/XSN + 화/XSN	SEPA
 치가	치/XSN + 가/JKS	SEPA
-치고	치고/JX	SEPA
 치곤	치고/JX + ㄴ/JX	SEPA
 치구	치구/JX	SEPA
 치군	치군/JX	SEPA
-치기	치/XSN + 이/VCP + 기/ETN	SEPA
-치나	치/XSN + 나/JX	SEPA
-치는	치/XSN + 는/JX	SEPA
-치다	치/XSN + 이/VCP + 다/EF	SEPA
 치댄	치대/VV + ㄴ/ETM	SEPA
 치댈	치대/VV + ㄹ/ETM	SEPA
 치도	치/XSN + 도/JX	SEPA
-치듯	치/XSN + 이/VCP + 듯/EC	SEPA
 치떠	치뜨/VV + 어/EC	SEPA
 치뜬	치뜨/VV + ㄴ/ETM	SEPA
-치라	치/XSN + 이/VCP + 라/EC	SEPA
-치러	치르/VV + 어/EC	SEPA
 치럿	치르/VV + 엇/EC	SEPA
 치레	치레/XSN	SEPA
 치로	치/XSN + 로/JKB	SEPA
@@ -47495,7 +47614,6 @@
 치를	치/XSN + 를/JKO	SEPA
 치만	치/XSN + 만/JX	SEPA
 치말	치마/NNG + ㄹ/JKO	SEPA
-치며	치/XSN + 이/VCP + 며/EC	SEPA
 치민	치밀/VV + ㄴ/ETM	SEPA
 치씩	치/XSN + 씩/XSN	SEPA
 치에	치/XSN + 에/JKB	SEPA
@@ -47803,7 +47921,6 @@
 ㅎㅎ	ㅎㅎ/IC	SEPA
 하건	하/VV + 건/EC	SEPA
 하게	하/VV + 게/EC	SEPA
-하고	하/VV + 고/EC	SEPA
 하곤	하/VV + 곤/EC	SEPA
 하구	하구/JKB	SEPA
 하군	하/VV + 군/EF	SEPA
@@ -47831,6 +47948,7 @@
 하듯	하/VV + 듯/EC	SEPA
 하디	하/VV + 디/EC	SEPA
 하라	하/VV + 라/EC	SEPA
+하래	하/VV + 아라/EF	SEPA
 하란	하/VV + 란/ETM	SEPA
 하랴	하/VV + 랴/EC	SEPA
 하러	하/VV + 러/EC	SEPA
@@ -47874,9 +47992,9 @@
 하쟤	하/VV + 쟤/EF	SEPA
 하제	하/VV + 제/EF	SEPA
 하죠	하/VV + 죠/EF	SEPA
-하지	하/VX + 지/EC	SEPA
-하진	하/VX + 지/EC + ㄴ/JX	SEPA
-하질	하/VX + 지/EC + ㄹ/JKO	SEPA
+하지	하/VV + 지/EC	SEPA
+하진	하/VV + 지/EC + ㄴ/JX	SEPA
+하질	하/VV + 지/EC + ㄹ/JKO	SEPA
 학굔	학교/NNG + ㄴ/JX	SEPA
 한가	하/VV + ㄴ가/EF	SEPA
 한건	하/VV + ㄴ/ETM + 것/NNB + 이/VCP + ㄴ/ETM	SEPA
@@ -47886,7 +48004,9 @@
 한단	하/VV + ㄴ단/ETM	SEPA
 한담	하/VV + ㄴ담/EF	SEPA
 한대	하/VV + ㄴ대/EF	SEPA
+한댕	하/VV + ㄴ대/EF	SEPA
 한데	하/VV + ㄴ데/EC	SEPA
+한뎅	하/VV + ㄴ데/EC	SEPA
 한들	하/VV + ㄴ들/EC	SEPA
 한듯	하/VV + ㄴ/ETM + 듯/NNB	SEPA
 한디	하/VV + ㄴ디/EC	SEPA
@@ -47941,6 +48061,7 @@
 해둘	하/VV + 아/EC + 두/VX + ㄹ/ETM	SEPA
 해둬	하/VV + 아/EC + 두/VX + 어/EF	SEPA
 해라	하/VV + 아라/EF	SEPA
+해랏	하/VV + 아라/EF	SEPA
 해로	해/NNG + 로/JKB	SEPA
 해만	해/NNG + 만/JX	SEPA
 해말	해/NNG + 말/NNB	SEPA
@@ -47959,16 +48080,15 @@
 해올	하/VV + 아/EC + 오/VX + ㄹ/ETM	SEPA
 해와	하/VV + 아/EC + 오/VX + 아/EC	SEPA
 해요	하/VV + 아요/EF	SEPA
-해용	하/VV + 아용/EC	SEPA
+해용	하/VV + 아요/EF + ㅇ/EF	SEPA
+해영	하/VV + 아여/EF + ㅇ/EF	SEPA
 해유	하/VV + 아유/EF	SEPA
 해의	해/NNG + 의/JKG	SEPA
 해져	하/VV + 지/VX + 어/EC	SEPA
 해준	하/VV + 아/EC + 주/VX + ㄴ/ETM	SEPA
 해줄	하/VV + 아/EC + 주/VX + ㄹ/ETM	SEPA
 해줘	하/VV + 아/EC + 주/VX + 어/EF	SEPA
-해지	하/VV + 아지/EF	SEPA
-해진	해지/VV + ㄴ/ETM	SEPA
-해질	해지/VV + ㄹ/ETM	SEPA
+해지	하/VV + 아/EC + 지/VX	SEPA
 해쳐	해치/VV + 어/EC	SEPA
 해친	해치/VV + ㄴ/ETM	SEPA
 해칠	해치/VV + ㄹ/ETM	SEPA
@@ -47983,38 +48103,38 @@
 향할	향하/VV + ㄹ/ETM	SEPA
 향해	향하/VV + 아/EC	SEPA
 허갈	허가/NNG + ㄹ/JKO	SEPA
-허게	하/XSA + 게/EC	SEPA
+허게	허/XSV + 게/EC	SEPA
 허고	하고/JKB	SEPA
 허구	하고/JKB	SEPA
 허군	하구/JKB + ㄴ/JX	SEPA
-허기	하/XSV + 기/ETN	SEPA
-허긴	하/XSA + 기/ETN + ㄴ/JX	SEPA
-허길	하/XSA + 기/ETN + ㄹ/JKO	SEPA
-허나	하/XSV + 나/EF	SEPA
-허냐	하/XSA + 냐/EF	SEPA
-허네	하/XSA + 네/EF	SEPA
-허는	하/XSV + 는/ETM	SEPA
-허니	하/XSA + 니/EC	SEPA
-허다	하/XSA + 다/EF	SEPA
-허단	하/XSA + 단/ETM	SEPA
-허던	하/XSV + 던/ETM	SEPA
-허든	하/XSV + 든/EC	SEPA
-허듯	하/XSV + 듯/EC	SEPA
-허랴	하/XSV + 랴/EC	SEPA
-허러	하/XSV + 러/EC	SEPA
+허기	허/XSV + 기/ETN	SEPA
+허긴	허/XSV + 기/ETN + ㄴ/JX	SEPA
+허길	허/XSV + 기/ETN + ㄹ/JKO	SEPA
+허나	허/XSV + 나/EF	SEPA
+허냐	허/XSV + 냐/EF	SEPA
+허네	허/XSV + 네/EF	SEPA
+허는	허/XSV + 는/ETM	SEPA
+허니	허/XSV + 니/EC	SEPA
+허다	허/XSV + 다/EF	SEPA
+허단	허/XSV + 단/ETM	SEPA
+허던	허/XSV + 던/ETM	SEPA
+허든	허/XSV + 든/EC	SEPA
+허듯	허/XSV + 듯/EC	SEPA
+허랴	허/XSV + 랴/EC	SEPA
+허러	허/XSV + 러/EC	SEPA
 허릴	허리/NNG + ㄹ/JKO	SEPA
-허며	하/XSV + 며/EC	SEPA
-허면	하/XSV + 면/EC	SEPA
+허며	허/XSV + 며/EC	SEPA
+허면	허/XSV + 면/EC	SEPA
 허문	허물/VV + ㄴ/ETM	SEPA
-허믄	하/XSV + 면/EC	SEPA
-허소	하/XSA + 소/EF	SEPA
-허신	하/XSV + 시/EP + ㄴ/ETM	SEPA
-허실	하/XSV + 시/EP + ㄹ/ETM	SEPA
+허믄	허/XSV + 면/EC	SEPA
+허소	허/XSV + 소/EF	SEPA
+허신	허/XSV + 시/EP + ㄴ/ETM	SEPA
+허실	허/XSV + 시/EP + ㄹ/ETM	SEPA
 허연	허옇/VA + ㄴ/ETM	SEPA
-허요	하/XSA + 요/EF	SEPA
-허우	하/XSA + 우/EF	SEPA
-허이	하/XSA + 이/EF	SEPA
-허자	하/XSV + 자/EC	SEPA
+허요	허/XSV + 요/EF	SEPA
+허우	허/XSV + 우/EF	SEPA
+허이	허/XSV + 이/EF	SEPA
+허자	허/XSV + 자/EC	SEPA
 허한	허하/VA + ㄴ/ETM	SEPA
 허할	허하/VA + ㄹ/ETM	SEPA
 허함	허하/VA + ㅁ/ETN	SEPA
@@ -48026,15 +48146,15 @@
 헌테	한테/JKB	SEPA
 헌텐	한테/JKB + ㄴ/JX	SEPA
 헌티	한테/JKB	SEPA
-헐껴	하/VV + ㄹ/ETM + 것/NNB + 이/VCP + 어/EF	SEPA
-헐라	하/VV + ㄹ라/EC	SEPA
-헐래	하/VV + ㄹ래/EF	SEPA
+헐껴	허/VV + ㄹ/ETM + 것/NNB + 이/VCP + 어/EF	SEPA
+헐라	허/VV + ㄹ라/EC	SEPA
+헐래	허/VV + ㄹ래/EF	SEPA
 헐려	헐리/VV + 어/EC	SEPA
 헐린	헐리/VV + ㄴ/ETM	SEPA
 헐릴	헐리/VV + ㄹ/ETM	SEPA
-헐지	하/VV + ㄹ지/EC	SEPA
-헐한	하/VV + ㄴ/ETM	SEPA
-헐헌	하/VV + ㄴ/ETM	SEPA
+헐지	허/VV + ㄹ지/EC	SEPA
+헐한	허/VV + ㄴ/ETM	SEPA
+헐헌	허/VV + ㄴ/ETM	SEPA
 험한	험하/VA + ㄴ/ETM	SEPA
 험할	험하/VA + ㄹ/ETM	SEPA
 험해	험하/VA + 아/EC	SEPA
@@ -48057,12 +48177,10 @@
 헤픈	헤프/VA + ㄴ/ETM	SEPA
 헹군	헹구/VV + ㄴ/ETM	SEPA
 헹굴	헹구/VV + ㄹ/ETM	SEPA
-혀두	하/VV + 어도/EC	SEPA
-혀라	하/VV + 어라/EF	SEPA
-혀서	하/VV + 어서/EC	SEPA
-혀야	하/VV + 어야/EC	SEPA
-형B	형/XSN + B/SL	SEPA
-형C	형/XSN + C/SL	SEPA
+혀두	허/VV + 어도/EC	SEPA
+혀라	허/VV + 어라/EF	SEPA
+혀서	허/VV + 어서/EC	SEPA
+혀야	허/VV + 어야/EC	SEPA
 형과	형/XSN + 과/JC	SEPA
 형님	형/NNG + 님/XSN	SEPA
 형대	형/XSN + 대/XSN	SEPA
@@ -48221,7 +48339,7 @@
 ㅡㅡ	ㅡㅡ/IC	SEPA
 갈	가/VV + ㄹ/ETM	SEPA
 감	가/VV + ㅁ/ETN	SEPA
-갓	가/VV + 앗/EC	SEPA
+갓	가/VV + 아/EF	SEPA
 갠	개/VV + ㄴ/ETM	SEPA
 갤	개/VV + ㄹ/ETM	SEPA
 걘	그/MM + 아이/NNG + ㄴ/JX	SEPA
@@ -48252,6 +48370,7 @@
 깰	깨/VV + ㄹ/ETM	SEPA
 꺼	끄/VV + 어/EC	SEPA
 께	께/JKB	SEPA
+껭	께/EF + ㅇ/EF	SEPA
 껴	끼/VV + 어/EC	SEPA
 꼬	꼬/EF	SEPA
 꼰	꼬/VV + ㄴ/ETM	SEPA
@@ -48268,10 +48387,10 @@
 끼	끼/XSN	SEPA
 낀	끼/VV + ㄴ/ETM	SEPA
 낄	끼/VV + ㄹ/ETM	SEPA
-나	나/VV + 아/EC	SEPA
 난	날/VV + ㄴ/ETM	SEPA
 날	나/VX + ㄹ/ETM	SEPA
 남	나/VV + ㅁ/ETN	SEPA
+났	나/VV + 았/EP	SEPA
 내	내/VV + 어/EC	SEPA
 낸	내/VV + ㄴ/ETM	SEPA
 낼	내/VV + ㄹ/ETM	SEPA
@@ -48279,13 +48398,13 @@
 냐	냐/EF	SEPA
 냔	냐는/EC	SEPA
 널	너/NP + ㄹ/JKO	SEPA
+넹	네/EF + ㅇ/EF	SEPA
 노	노/EF	SEPA
 논	놀/VV + ㄴ/ETM	SEPA
 놀	놓/VV + ㄹ/ETM	SEPA
 놔	놓/VV + 아/EC	SEPA
 뇨	뇨/EC	SEPA
 누	누/EF	SEPA
-눈	누/VV + ㄴ/ETM	SEPA
 눌	누/VV + ㄹ/ETM	SEPA
 눔	누/VV + ㅁ/ETN	SEPA
 눠	누/VV + 어/EC	SEPA
@@ -48345,6 +48464,7 @@
 랄	랄/ETM	SEPA
 람	람/EF	SEPA
 랑	랑/JKB	SEPA
+랭	래/EF + ㅇ/EF	SEPA
 랴	랴/EC	SEPA
 러	러/EC	SEPA
 레	레/JX	SEPA
@@ -48352,15 +48472,14 @@
 련	련/EF	SEPA
 렴	렴/EF	SEPA
 로	로/JKB	SEPA
+료	료/XSN	SEPA
 롤	롤/JKB	SEPA
 롭	롭/XSA	SEPA
-료	료/EF	SEPA
 루	루/JKB	SEPA
 류	류/XSN	SEPA
 률	률/XSN	SEPA
 를	를/JKO	SEPA
 리	리/EF	SEPA
-만	만/JX	SEPA
 매	매/EC	SEPA
 맨	매/VV + ㄴ/ETM	SEPA
 맬	매/VV + ㄹ/ETM	SEPA
@@ -48456,7 +48575,8 @@
 아	아/EC	SEPA
 안	알/VV + ㄴ/ETM	SEPA
 앎	알/VV + ㅁ/ETN	SEPA
-앗	앗/EP	SEPA
+앗	았/EP	SEPA
+앙	아/EF + ㅇ/EF	SEPA
 았	았/EP	SEPA
 애	애/EF	SEPA
 앤	아이/NNG + ㄴ/JX	SEPA
@@ -48464,10 +48584,10 @@
 얄	야/EC + 하/VX + ㄹ/ETM	SEPA
 얜	아이/NNG + ㄴ/JX	SEPA
 엇	엇/EP	SEPA
+엉	어/EF + ㅇ/EF	SEPA
 었	었/EP	SEPA
 에	에/JKB	SEPA
 엔	에/JKB + ㄴ/JX	SEPA
-여	여/XSN	SEPA
 연	열/VV + ㄴ/ETM	SEPA
 엿	이/VCP + 었/EP	SEPA
 였	이/VCP + 었/EP	SEPA
@@ -48475,12 +48595,10 @@
 온	오/VV + ㄴ/ETM	SEPA
 올	오/VV + ㄹ/ETM	SEPA
 옴	오/VV + ㅁ/ETN	SEPA
-와	오/VX + 아/EF	SEPA
 왔	았/EP	SEPA
 왼	외/VV + ㄴ/ETM	SEPA
 욀	외/VV + ㄹ/ETM	SEPA
-요	이/VCP + 오/EF	SEPA
-용	용/XSN	SEPA
+요	요/EF	SEPA
 우	우/EF	SEPA
 운	울/VV + ㄴ/ETM	SEPA
 울	울/ETM	SEPA
@@ -48510,9 +48628,10 @@
 죈	죄/VV + ㄴ/ETM	SEPA
 죌	죄/VV + ㄹ/ETM	SEPA
 죠	죠/EF	SEPA
-주	주/VX + 우/EC	SEPA
+주	주/VV + 우/EF	SEPA
 줌	주/VV + ㅁ/ETN	SEPA
 줘	주/VV + 어/EF	SEPA
+줭	주/VV + 어/EF	SEPA
 쥔	쥐/VV + ㄴ/ETM	SEPA
 쥘	쥐/VV + ㄹ/ETM	SEPA
 쥬	지유/EF	SEPA
@@ -48530,8 +48649,8 @@
 찔	찌/VV + ㄹ/ETM	SEPA
 찬	ㄴ/ETM	차
 찰	차/VV + ㄹ/ETM	SEPA
-찻	았/EP	차
-찼	았/EP	차
+찻	차/VV + 았/EP	SEPA
+찼	차/VV + 았/EP	SEPA
 챈	채/VV + ㄴ/ETM	SEPA
 챌	채/VV + ㄹ/ETM	SEPA
 쳐	치/VV + 어/EC	SEPA
@@ -48562,7 +48681,6 @@
 튼	트/VV + ㄴ/ETM	SEPA
 틀	트/VV + ㄹ/ETM	SEPA
 파	파/VV + 아/EC	SEPA
-판	팔/VV + ㄴ/ETM	SEPA
 팔	파/VV + ㄹ/ETM	SEPA
 패	패/VV + 어/EC	SEPA
 팬	패/VV + ㄴ/ETM	SEPA
@@ -48586,10 +48704,13 @@
 헌	헐/VV + ㄴ/ETM	SEPA
 헐	헐/VV + ㄹ/ETM	SEPA
 헬	헤/VV + ㄹ/ETM	SEPA
-혀	하/VV + 어/EC	SEPA
+혀	허/VV + 어/EC	SEPA
 형	형/XSN	SEPA
 화	화/XSN	SEPA
 휜	휘/VV + ㄴ/ETM	SEPA
 휨	휘/VV + ㅁ/ETM	SEPA
 흰	희/VA + ㄴ/ETM	SEPA
 흴	희/VA + ㄹ/ETM	SEPA
+ㅋ	ㅋ/IC	SEPA
+ㅎ	ㅎ/IC	SEPA
+ㅠ	ㅠ/IC	SEPA

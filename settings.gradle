@@ -12,6 +12,7 @@ include 'kkma'    // KKMA by SNU IDS Lab
 include 'komoran' // Komoran 3.x by Shineware
 include 'okt'     // Open Korean Text (Twitter-korean의 후속)
 include 'rhino'   // RHINO by 최석재
+include 'utagger' // UTagger by 울산대학교 한국어처리연구실
 
 findProject(':core')?.name = 'koalanlp-core'
 findProject(':arirang')?.name = 'koalanlp-arirang'
@@ -24,3 +25,4 @@ findProject(':kkma')?.name = 'koalanlp-kkma'
 findProject(':komoran')?.name = 'koalanlp-kmr'
 findProject(':okt')?.name = 'koalanlp-okt'
 findProject(':rhino')?.name = 'koalanlp-rhino'
+findProject(':utagger')?.name = 'koalanlp-utagger'
