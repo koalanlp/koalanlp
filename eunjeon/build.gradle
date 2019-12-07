@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'kr.bydelta'
-version "2.1.1-SNAPSHOT"
+version "2.1.1"
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
@@ -20,14 +20,14 @@ dependencies {
     testImplementation "kr.bydelta:koalanlp-core:${corePublishedVer}:tests"
     testRuntime "org.jetbrains.kotlin:kotlin-reflect"
     testRuntime "org.jetbrains.kotlin:kotlin-test"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.0"
-    testImplementation("org.amshove.kluent:kluent:1.49") {
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2"
+    testImplementation("org.amshove.kluent:kluent:1.58") {
         exclude group: 'org.jetbrains.kotlin'
     }
-    testImplementation('org.spekframework.spek2:spek-dsl-jvm:2.0.5') {
+    testImplementation('org.spekframework.spek2:spek-dsl-jvm:2.0.8') {
         exclude group: 'org.jetbrains.kotlin'
     }
-    testRuntimeOnly('org.spekframework.spek2:spek-runner-junit5:2.0.5') {
+    testRuntimeOnly('org.spekframework.spek2:spek-runner-junit5:2.0.8') {
         exclude group: 'org.jetbrains.kotlin'
     }
 }

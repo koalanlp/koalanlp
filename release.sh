@@ -118,8 +118,10 @@ case ${ACTION} in
             do
                 if [ "$MODULE" != "core" ]; then
                     read_module_name $MODULE
-                    echo ">>"$MODULE_NAME
-                    ./gradlew $MODULE_NAME:check --info
+                    ask_proceed "TEST $MODULE_NAME"
+                    if [ "${YN,,}" != "p" ]; then
+                        ./gradlew $MODULE_NAME:check --info
+                    fi
                 fi
             done
         fi

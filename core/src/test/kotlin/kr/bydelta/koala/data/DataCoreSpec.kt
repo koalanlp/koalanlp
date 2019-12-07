@@ -3,6 +3,7 @@ package kr.bydelta.koala.data
 import kr.bydelta.koala.*
 import org.amshove.kluent.*
 import org.spekframework.spek2.Spek
+import org.spekframework.spek2.lifecycle.CachingMode
 import org.spekframework.spek2.style.specification.describe
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -11,7 +12,7 @@ import java.io.ObjectOutputStream
 
 object DataCoreSpec : Spek({
     describe("kr/bydelta/koala/data/data.kt") {
-        val sent by memoized {
+        val sent by memoized(CachingMode.EACH_GROUP) {
             Sentence(
                     listOf(
                             Word("나는",
@@ -30,7 +31,7 @@ object DataCoreSpec : Spek({
             )
         }
 
-        val sent2 by memoized {
+        val sent2 by memoized(CachingMode.EACH_GROUP) {
             Sentence(
                     listOf(
                             Word("흰",
@@ -54,7 +55,7 @@ object DataCoreSpec : Spek({
             )
         }
 
-        val sent3 by memoized {
+        val sent3 by memoized(CachingMode.EACH_GROUP) {
             Sentence(
                     listOf(
                             Word("흰",
@@ -78,7 +79,7 @@ object DataCoreSpec : Spek({
             )
         }
 
-        val sent4 by memoized {
+        val sent4 by memoized(CachingMode.EACH_GROUP) {
             Sentence(
                     listOf(
                             Word("칠한",
@@ -448,9 +449,9 @@ object DataCoreSpec : Spek({
 
                     val reconst = serializer.readObject() as Word
                     reconst `should equal` dummy2
-                    reconst.getGovernorEdge()!! `should equal`  dummy2.getGovernorEdge()!!
+                    reconst.getGovernorEdge()!! `should equal` dummy2.getGovernorEdge()!!
                     reconst.getArgumentRoles()!! shouldContainSame dummy2.getArgumentRoles()!!
-                    reconst.getPhrase()!! `should equal`  dummy2.getPhrase()!!
+                    reconst.getPhrase()!! `should equal` dummy2.getPhrase()!!
                     reconst.getEntities() shouldContainSame dummy2.getEntities()
 
                     reconst.getEntities().map { it.fineLabel } `should contain` "PS_OTHER"
@@ -615,7 +616,7 @@ object DataCoreSpec : Spek({
                     reconst `should equal` sent2
                     reconst.getRoles()!! shouldContainSame sent2.getRoles()!!
                     reconst.getDependencies()!! shouldContainSame sent2.getDependencies()!!
-                    reconst.getSyntaxTree()!! `should equal`  sent2.getSyntaxTree()!!
+                    reconst.getSyntaxTree()!! `should equal` sent2.getSyntaxTree()!!
                     reconst.getEntities()!! shouldContainSame sent2.getEntities()!!
 
                     reconst.getCorefGroups()?.get(0)?.get(0) `should equal` reconst.getEntities()?.get(0)
@@ -758,31 +759,36 @@ object DataCoreSpec : Spek({
         }
 
         describe("SyntaxTree") {
-            val dummy1 = SyntaxTree(
-                    PhraseTag.S,
-                    null, listOf(
-                    SyntaxTree(PhraseTag.NP, null, listOf(
-                            SyntaxTree(PhraseTag.DP, sent2[0], originalLabel = "DP"),
-                            SyntaxTree(PhraseTag.NP, sent2[1], originalLabel = "NP")
-                    )),
-                    SyntaxTree(PhraseTag.VP, null, listOf(
-                            SyntaxTree(PhraseTag.NP, sent2[2]),
-                            SyntaxTree(PhraseTag.VP, sent2[3])
-                    )))
-            )
+            lateinit var dummy1: SyntaxTree
+            lateinit var dummy2: SyntaxTree
 
-            val dummy2 = SyntaxTree(
-                    PhraseTag.S,
-                    null, listOf(
-                    SyntaxTree(PhraseTag.NP, null, listOf(
-                            SyntaxTree(PhraseTag.DP, sent3[0], originalLabel = "dp"),
-                            SyntaxTree(PhraseTag.NP, sent3[1], originalLabel = "np")
-                    )),
-                    SyntaxTree(PhraseTag.VP, null, listOf(
-                            SyntaxTree(PhraseTag.NP, sent3[2]),
-                            SyntaxTree(PhraseTag.VP, sent3[3])
-                    )))
-            )
+            beforeGroup {
+                dummy1 = SyntaxTree(
+                        PhraseTag.S,
+                        null, listOf(
+                        SyntaxTree(PhraseTag.NP, null, listOf(
+                                SyntaxTree(PhraseTag.DP, sent2[0], originalLabel = "DP"),
+                                SyntaxTree(PhraseTag.NP, sent2[1], originalLabel = "NP")
+                        )),
+                        SyntaxTree(PhraseTag.VP, null, listOf(
+                                SyntaxTree(PhraseTag.NP, sent2[2]),
+                                SyntaxTree(PhraseTag.VP, sent2[3])
+                        )))
+                )
+
+                dummy2 = SyntaxTree(
+                        PhraseTag.S,
+                        null, listOf(
+                        SyntaxTree(PhraseTag.NP, null, listOf(
+                                SyntaxTree(PhraseTag.DP, sent3[0], originalLabel = "dp"),
+                                SyntaxTree(PhraseTag.NP, sent3[1], originalLabel = "np")
+                        )),
+                        SyntaxTree(PhraseTag.VP, null, listOf(
+                                SyntaxTree(PhraseTag.NP, sent3[2]),
+                                SyntaxTree(PhraseTag.VP, sent3[3])
+                        )))
+                )
+            }
 
             // getChildren, getParent, isRoot, hasNonTerminals, getTerminals
             it("should provide ways to access its children") {
@@ -915,11 +921,19 @@ object DataCoreSpec : Spek({
         }
 
         describe("DepEdge") {
-            val dummy1 = DepEdge(sent2[3], sent2[1], PhraseTag.NP, DependencyTag.OBJ)
-            val dummy2 = DepEdge(sent3[3], sent3[1], PhraseTag.NP, DependencyTag.OBJ, "NPobj")
-            val dummy3 = DepEdge(sent3[3], sent3[2], PhraseTag.NP, DependencyTag.SBJ)
-            val dummy4 = DepEdge(sent3[1], sent3[0], PhraseTag.DP)
-            val dummy5 = DepEdge(null, sent3[3], PhraseTag.VP, DependencyTag.ROOT)
+            lateinit var dummy1: DepEdge
+            lateinit var dummy2: DepEdge
+            lateinit var dummy3: DepEdge
+            lateinit var dummy4: DepEdge
+            lateinit var dummy5: DepEdge
+
+            beforeGroup {
+                dummy1 = DepEdge(sent2[3], sent2[1], PhraseTag.NP, DependencyTag.OBJ)
+                dummy2 = DepEdge(sent3[3], sent3[1], PhraseTag.NP, DependencyTag.OBJ, "NPobj")
+                dummy3 = DepEdge(sent3[3], sent3[2], PhraseTag.NP, DependencyTag.SBJ)
+                dummy4 = DepEdge(sent3[1], sent3[0], PhraseTag.DP)
+                dummy5 = DepEdge(null, sent3[3], PhraseTag.VP, DependencyTag.ROOT)
+            }
 
             // governor, dependent, type, depTag
             // label, src, dest
@@ -991,10 +1005,17 @@ object DataCoreSpec : Spek({
         }
 
         describe("RoleEdge") {
-            val dummy1 = RoleEdge(sent2[3], sent2[1], RoleType.ARG1, modifiers = listOf(sent2[0]))
-            val dummy2 = RoleEdge(sent3[3], sent3[1], RoleType.ARG1, originalLabel = "ARG-1")
-            val dummy3 = RoleEdge(sent3[3], sent3[2], RoleType.ARG0)
-            val dummy4 = RoleEdge(sent3[1], sent3[0], RoleType.ARGM_PRD)
+            lateinit var dummy1: RoleEdge
+            lateinit var dummy2: RoleEdge
+            lateinit var dummy3: RoleEdge
+            lateinit var dummy4: RoleEdge
+
+            beforeGroup {
+                dummy1 = RoleEdge(sent2[3], sent2[1], RoleType.ARG1, modifiers = listOf(sent2[0]))
+                dummy2 = RoleEdge(sent3[3], sent3[1], RoleType.ARG1, originalLabel = "ARG-1")
+                dummy3 = RoleEdge(sent3[3], sent3[2], RoleType.ARG0)
+                dummy4 = RoleEdge(sent3[1], sent3[0], RoleType.ARGM_PRD)
+            }
 
             // predicate, argument, label
             // label, src, dest
@@ -1065,10 +1086,17 @@ object DataCoreSpec : Spek({
         }
 
         describe("Entity") {
-            val dummy1 = Entity("나", CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2][0]))
-            val dummy2 = Entity("나", CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2][0]))
-            val dummy3 = Entity("나", CoarseEntityType.PS, "PS_DIFF", listOf(sent3[2][0]))
-            val dummy4 = Entity("흰 밥", CoarseEntityType.PS, "PS_OTHER", sent3[0] + sent3[1])
+            lateinit var dummy1: Entity
+            lateinit var dummy2: Entity
+            lateinit var dummy3: Entity
+            lateinit var dummy4: Entity
+
+            beforeGroup {
+                dummy1 = Entity("나", CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2][0]))
+                dummy2 = Entity("나", CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2][0]))
+                dummy3 = Entity("나", CoarseEntityType.PS, "PS_DIFF", listOf(sent3[2][0]))
+                dummy4 = Entity("흰 밥", CoarseEntityType.PS, "PS_OTHER", sent3[0] + sent3[1])
+            }
 
             //type, fineType
             //words
@@ -1132,10 +1160,17 @@ object DataCoreSpec : Spek({
         }
 
         describe("CorefrerenceGroup") {
-            val dummy1 = CoreferenceGroup(listOf(Entity("나", CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2][0]))))
-            val dummy2 = CoreferenceGroup(listOf(Entity("나", CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2][0]))))
-            val dummy3 = CoreferenceGroup(listOf(Entity("나", CoarseEntityType.PS, "PS_DIFF", listOf(sent3[2][0]))))
-            val dummy4 = CoreferenceGroup(listOf(Entity("흰 밥", CoarseEntityType.PS, "PS_OTHER", sent3[0] + sent3[1])))
+            lateinit var dummy1: CoreferenceGroup
+            lateinit var dummy2: CoreferenceGroup
+            lateinit var dummy3: CoreferenceGroup
+            lateinit var dummy4: CoreferenceGroup
+
+            beforeGroup {
+                dummy1 = CoreferenceGroup(listOf(Entity("나", CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2][0]))))
+                dummy2 = CoreferenceGroup(listOf(Entity("나", CoarseEntityType.PS, "PS_OTHER", listOf(sent3[2][0]))))
+                dummy3 = CoreferenceGroup(listOf(Entity("나", CoarseEntityType.PS, "PS_DIFF", listOf(sent3[2][0]))))
+                dummy4 = CoreferenceGroup(listOf(Entity("흰 밥", CoarseEntityType.PS, "PS_OTHER", sent3[0] + sent3[1])))
+            }
 
             it("should inherit list") {
                 (dummy1[0] in dummy1) `should be` true

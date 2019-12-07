@@ -5,18 +5,11 @@ package kr.bydelta.koala.utagger
 
 import com.beust.klaxon.Klaxon
 import com.sun.jna.*
-import com.sun.jna.ptr.PointerByReference
 import kr.bydelta.koala.POS
 import kr.bydelta.koala.data.Morpheme
 import kr.bydelta.koala.data.Sentence
-import kr.bydelta.koala.data.Word
 import kr.bydelta.koala.proc.CanTagOnlyASentence
 import java.io.File
-import java.lang.IllegalStateException
-import java.lang.NullPointerException
-import java.nio.charset.Charset
-import java.util.logging.Level
-import kotlin.streams.toList
 
 
 /**

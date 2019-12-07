@@ -7,11 +7,10 @@ import kr.bydelta.koala.utagger.UTagger
 import org.spekframework.spek2.Spek
 import java.io.File
 import java.nio.charset.Charset
-import kotlin.streams.toList
 
 val DISTRO_IS_UBUNTU: Boolean by lazy {
     val process = Runtime.getRuntime().exec("uname -a")
-    val output = process.inputStream.bufferedReader().lines().toList().joinToString()
+    val output = process.inputStream.bufferedReader().lineSequence().joinToString()
 
     "ubuntu" in output.toLowerCase()
 }
@@ -34,7 +33,7 @@ val UTAGGER_INIT: UTagger by lazy {
     // 라이브러리 설정파일 수정
     val charset = Charset.forName("euc-kr")
 
-    val lines = configPath.inputStream().bufferedReader(charset).lines().toList()
+    val lines = configPath.inputStream().bufferedReader(charset).lineSequence()
     val writer = configPath.outputStream().bufferedWriter(charset)
 
     lines.forEach {

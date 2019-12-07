@@ -1,10 +1,10 @@
 plugins {
     id 'java'
     id 'jacoco'
-    id "org.jetbrains.kotlin.jvm" version "1.3.30"
-    id "org.jetbrains.dokka" version "0.9.16"
+    id "org.jetbrains.kotlin.jvm" version "1.3.50"
+    id "org.jetbrains.dokka" version "0.10.0"
     id "com.bmuschko.nexus" version "2.3.1"
-    id "io.codearte.nexus-staging" version "0.12.0"
+    id "io.codearte.nexus-staging" version "0.21.1"
 }
 
 allprojects {
@@ -41,31 +41,34 @@ dependencies {
 
 // Dokka aggregation
 dokka {
-    moduleName = "$rootProject.name"
     outputDirectory = "$rootDir/docs/api"
     outputFormat = "html"
-    jdkVersion = 8
-    noStdlibLink = false
 
-    doFirst {
-        sourceDirs = files(subprojects.collect { p ->
-            def path = new File(p.projectDir, "/src/main/kotlin")
+    configuration {
+        moduleName = "$rootProject.name"
+        jdkVersion = 8
+        noStdlibLink = false
 
-            def relativePath = rootDir.toPath().relativize(path.toPath()).toString()
-            linkMapping {
-                dir = path
-                url = "https://github.com/koalanlp/koalanlp/blob/master/$relativePath"
-                suffix = "#L"
-            }
+        doFirst {
+            sourceDirs = files(subprojects.collect { p ->
+                def path = new File(p.projectDir, "/src/main/kotlin")
 
-            return path
-        })
-        
-        includes = ['docs/index.md', *subprojects.collect { "${it.projectDir}/index.md" }]
+                def relativePath = rootDir.toPath().relativize(path.toPath()).toString()
+                linkMapping {
+                    dir = path
+                    url = "https://github.com/koalanlp/koalanlp/blob/master/$relativePath"
+                    suffix = "#L"
+                }
+
+                return path
+            })
+
+            includes = ['docs/index.md', *subprojects.collect { "${it.projectDir}/index.md" }]
+        }
     }
 }
 
 // Test Report Aggregation
 jacoco {
-    toolVersion = "0.8.2"
+    toolVersion = "0.8.4"
 }
