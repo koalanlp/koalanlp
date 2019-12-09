@@ -20,6 +20,8 @@ KoalaNLP 코드의 저작권 조항은 MIT license를 따릅니다.
 
 참고로, KoalaNLP가 Travis CI에서 패키지를 자동 테스트하기 위해 구현된 bash script는 [여기](https://github.com/koalanlp/koalanlp/blob/master/utagger/install.sh)에 있습니다.
 
+> **[참고]** Travis CI에서 울산대 FTP로 접근할 때, 다운로드에 시간이 오래 걸리기 때문에, KoalaNLP의 CI Test 과정에서는 울산대 Tagger에서 일부 사전을 null 처리 한 사전들을 사용하므로, Shell script 실행시 울산대 사전을 그대로 받는지 확인하십시오.
+
 ## 자바 및 스칼라 개발자를 위한 노트
 
 - 여기 수록된 항목 중에서 Types는 Java의 Class를 의미합니다.
