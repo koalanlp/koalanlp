@@ -4,8 +4,6 @@ matrix:
     - name: "Ubuntu Bionic with OpenJDK 12"
       dist: bionic
       jdk: openjdk12
-      before_install:
-        - pyenv shell 3.6.7
       services: xvfb
       before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

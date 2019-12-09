@@ -3,7 +3,7 @@ test {
 
     // set heap size for the test JVM(s)
     minHeapSize = "1g"
-    maxHeapSize = "3g"
+    maxHeapSize = "4g"
 
     if (project.hasProperty('notTest')){
         def testProperty = project.property('notTest').toString()

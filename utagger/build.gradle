@@ -8,7 +8,7 @@ plugins {
 }
 
 group 'kr.bydelta'
-version "2.1.1-alpha.1"
+version "2.1.1-SNAPSHOT"
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"

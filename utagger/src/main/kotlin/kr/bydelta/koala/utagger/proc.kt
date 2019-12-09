@@ -158,7 +158,7 @@ class UTagger {
     fun analyze(inStr: String, tagWithMeaning: Int = 0): List<UWord>? {
         open()
 
-        val result: String = synchronized(LOCK) {
+        val result: String = synchronized(threadId) {
             analyzeAsJSON(inStr, tagWithMeaning)
         }
 
@@ -192,8 +192,8 @@ class UTagger {
     fun analyzeAsJSON(inStr: String, tagWithMeaning: Int = 0): String {
         // UTF-8 WideString으로 변환 후 이 pointer를 전달합니다.
         val wString = WString(inStr)
-        return if (tagWithMeaning > 0) LIB!!.cma_tag_target_word_json2(this.threadId, wString, 3).toString()
-        else LIB!!.cma_tag_line_json2(this.threadId, wString, tagWithMeaning).toString()
+        return if (tagWithMeaning > 0) LIB!!.cma_tag_target_word_json2(this.threadId, wString, tagWithMeaning).toString()
+        else LIB!!.cma_tag_line_json2(this.threadId, wString, 3).toString()
     }
 
     /**
