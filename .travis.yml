@@ -40,10 +40,12 @@ matrix:
       - PATH="$JAVA_HOME/bin:$PATH"
 install:
 - if [ $TRAVIS_OS_NAME != 'windows' ]; then sh khaiii/install.sh; fi
+- if [ $TRAVIS_OS_NAME != 'osx' ]; then sh utagger/install.sh; fi
 script:
 - ./gradlew clean
 - ./gradlew check -PnotTest=GUI,JNA --info
 - if [ $TRAVIS_OS_NAME != 'windows' ]; then ./gradlew :koalanlp-khaiii:test --info; fi
+- if [ $TRAVIS_OS_NAME != 'osx' ]; then ./gradlew :koalanlp-utagger:test --info; fi
 - if [ $TRAVIS_OS_NAME == 'linux' ]; then xvfb-run -a ./gradlew :koalanlp-rhino:test --tests *OriginTest --info; fi
 - if [ $TRAVIS_OS_NAME == 'linux' ]; then ./gradlew :koalanlp-rhino:jacocoTestReport --info; fi
 after_success:
