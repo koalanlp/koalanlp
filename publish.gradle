@@ -10,7 +10,7 @@ publishing {
             artifact tasks.kotlinSourcesJar
             artifact unidocJar
 
-            if (project.name.endsWith("-core")) {
+            if (projectDir.name == "-core") {
                 artifact coreTestJar
             }
 
@@ -65,6 +65,7 @@ dokka {
         if (projectDir.name != 'core') {
             externalDocumentationLink {
                 url = new URL("https://koalanlp.github.io/koalanlp/api/koalanlp/")
+                packageListUrl = new URL("https://koalanlp.github.io/koalanlp/api/koalanlp/package-list")
             }
         }
 
