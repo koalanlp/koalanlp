@@ -1,33 +1,18 @@
 language: java
 matrix:
   include:
-    - name: "Ubuntu Xenial with OpenJDK 8"
-      dist: xenial
-      jdk: openjdk8
-      before_install:
-      - pyenv shell 3.6.3
-      services: xvfb
-      before_cache:
-      - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-      - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-      cache:
-        directories:
-        - $HOME/.gradle/caches/
-        - $HOME/.gradle/wrapper/
-        - $HOME/khaiii-orig
-        - $HOME/.hunter
-    - name: "Ubuntu Xenial with OpenJDK 12"
-      dist: xenial
+    - name: "Ubuntu Bionic with OpenJDK 12"
+      dist: bionic
       jdk: openjdk12
       before_install:
-      - pyenv shell 3.6.7
+        - pyenv shell 3.6.7
       services: xvfb
       before_cache:
-      - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-      - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
       cache:
         directories:
-        - $HOME/.gradle/caches/
+          - $HOME/.gradle/caches/
         - $HOME/.gradle/wrapper/
         - $HOME/khaiii-orig
         - $HOME/.hunter

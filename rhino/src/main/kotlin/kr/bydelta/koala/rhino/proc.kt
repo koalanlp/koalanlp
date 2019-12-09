@@ -29,6 +29,10 @@ internal object RHINOTagger {
     val RETAGGING_EQUAL = "^(는|은|을|세|야|자라고)$".toRegex()
     @JvmStatic
     val MORPH_MATCH = "([^\\s]+)/([A-Z]{2,3})".toRegex()
+    @JvmStatic
+    val VX_MATCH = "^(.*)/(EC|VV|VA|XR|VX)\\s\\+\\s(내|나|보|주|지|치|하|가|버리|드리)/VV(.*)$".toRegex()
+    @JvmStatic
+    val VX_MATCH_INTERNAL = "(^|\\s+)(내|나|보|주|지|치|하|가|버리|드리)/VV(\\s+|$)".toRegex()
 
     @JvmStatic
     fun tag(input: String): List<Word> {
@@ -99,7 +103,7 @@ internal object RHINOTagger {
             }
         }
 
-        /******* 여기서부터는 RHINO에 없는 코드입니다. *******/
+        /******* 여기서부터는 RHINO의 MainClass.MakeFinalForm 코드입니다. *******/
         val sequence = mutableListOf<Word>()
         var indexOfInputArr = 0
 
@@ -108,22 +112,33 @@ internal object RHINOTagger {
                 sequence.add(Word(word, listOf(Morpheme(word, POS.SW, ""))))
             } else {
                 if (word == "." && indexOfInputArr > 0 && inputArr[indexOfInputArr - 1].all { it == '.' }) {
+                    // MakeSE 함수
                     val lastWord = sequence.removeAt(sequence.size - 1)
                     val surf = lastWord.surface + "."
                     sequence.add(Word(surf, listOf(Morpheme(surf, POS.SE, "SE"))))
                 } else if (word == "^" && indexOfInputArr > 0 && inputArr[indexOfInputArr - 1] == "^") {
+                    // MakeIC 함수
                     sequence.removeAt(sequence.size - 1)
                     sequence.add(Word("^^", listOf(Morpheme("^^", POS.IC, "IC"))))
                 } else {
+                    // changeToVX 함수
+                    if (outputArr[indexOfInputArr].matches(VX_MATCH) ||
+                            (indexOfInputArr > 0 && outputArr[indexOfInputArr - 1].endsWith("EC"))) {
+                        outputArr[indexOfInputArr] =
+                                VX_MATCH_INTERNAL.replace(outputArr[indexOfInputArr], "$1$2/VX$3")
+                    }
+
+                    /******* 여기서부터는 RHINO에 없는 코드입니다. *******/
                     val morphs = translateOutputMorpheme(outputArr[indexOfInputArr])
                     sequence.add(Word(word.trim(), morphs))
+                    /******* 없는 코드 끝 *******/
                 }
                 indexOfInputArr += 1
             }
         }
 
         return sequence.filter { it.surface.isNotBlank() }
-        /***** 여기까지 추가수정이었습니다. ******/
+        /***** 여기까지 ******/
     }
 
     @JvmStatic

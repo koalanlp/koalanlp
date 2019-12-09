@@ -38,14 +38,14 @@ interface UTaggerLibrary : Library {
     fun newUCMA2(analyzerIndex: Int): WString
 
     /**
-     * UTagger의 출력에서 carriage return(\r)을 삭제한다.
+     * UTagger의 출력에서 carriage return(\r)을 삭제합니다.
      *
      * @param analyzerIndex 사용할 Thread의 index. 0부터 99까지 가능. (사용 전 반드시 [newUCMA2]를 사용해 생성해야 함)
      */
     fun cmaSetNewlineN(analyzerIndex: Int)
 
     /**
-     * UTagger를 사용하여 형태소 분석을 수행한다.
+     * UTagger를 사용하여 형태소 분석을 수행합니다.
      *
      * @param analyzerIndex 사용할 Thread의 index. 0부터 99까지 가능. (사용 전 반드시 [newUCMA2]를 사용해 생성해야 함)
      * @param inStr 입력할 문자열 WChar 포인터.
@@ -55,7 +55,7 @@ interface UTaggerLibrary : Library {
     fun cma_tag_line_json2(analyzerIndex: Int, inStr: WString, styleOption: Int): WString
 
     /**
-     * UTagger를 사용하여 대역어를 확인한다.
+     * UTagger를 사용하여 대역어를 확인합니다.
      *
      * @param analyzerIndex 사용할 Thread의 index. 0부터 99까지 가능. (사용 전 반드시 [newUCMA2]를 사용해 생성해야 함)
      * @param parsedJsonStr 대역어 분석 결과 JSON WChar 포인터.
@@ -76,7 +76,7 @@ interface UTaggerLibrary : Library {
     fun cma_tag_target_word_json2(analyzerIndex: Int, inStr: WString, translateTo: Int): WString
 
     /**
-     * UTagger thread를 닫는다
+     * UTagger thread를 닫습니다.
      *
      * @param analyzerIndex 닫을 Thread의 index. 0부터 99까지 가능.
      */
@@ -89,9 +89,9 @@ interface UTaggerLibrary : Library {
 }
 
 /**
- * Khaiii 분석기 Wrapper
+ * UTagger 분석기 Wrapper
  *
- * 코드는 Khaiii Python package의 코드를 참조하여 재작성했습니다.
+ * 코드는 UTagger 2018/2019 Python 예시 코드를 참조하여 재작성했습니다.
  */
 class UTagger {
     /**
@@ -377,7 +377,7 @@ class UTagger {
  * @since 2.0.0
  * @constructor 분석기를 생성합니다.
  */
-class Tagger() : CanTagOnlyASentence<List<UWord>?>() {
+class Tagger : CanTagOnlyASentence<List<UWord>?>() {
 
     /**
      * UTagger Library의 JNA Wrapper

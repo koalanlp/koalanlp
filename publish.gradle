@@ -1,32 +1,49 @@
-modifyPom {
-    project {
-        name project.name
-        groupId project.group
-        artifactId project.name
-        version project.version
-        description "KoalaNLP는 한국어 처리의 통합 인터페이스를 지향하는 Java/Kotlin/Scala Library의 묶음입니다."
+task unidocJar(type: Jar, dependsOn: dokka) {
+    classifier 'javadoc'
+    from javadoc.destinationDir
+}
 
-        packaging "jar"
-        url "http://koalanlp.github.io/koalanlp"
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifact tasks.kotlinSourcesJar
+            artifact unidocJar
 
-        scm {
-            connection "scm:git:git@github.com:koalanlp/koalanlp.git"
-            developerConnection "scm:git:git@github.com:koalanlp/koalanlp.git"
-            url "https://github.com/koalanlp/koalanlp"
-        }
-
-        licenses {
-            license {
-                name "MIT License"
-                url "https://tldrlegal.com/license/mit-license"
+            if (project.name.endsWith("-core")) {
+                artifact coreTestJar
             }
-        }
 
-        developers {
-            developer {
-                id "nearbydelta"
-                name "Bugeun Kim"
-                url "http://github.com/nearbydelta"
+            pom {
+                name = project.name
+                groupId = project.group
+                artifactId = project.name
+                version = project.version
+                description = "KoalaNLP는 한국어 처리의 통합 인터페이스를 지향하는 Java/Kotlin/Scala Library의 묶음입니다."
+
+                packaging "jar"
+                url = "http://koalanlp.github.io/koalanlp"
+
+                scm {
+                    connection = "scm:git:git@github.com:koalanlp/koalanlp.git"
+                    developerConnection = "scm:git:git@github.com:koalanlp/koalanlp.git"
+                    url = "https://github.com/koalanlp/koalanlp"
+                }
+
+                licenses {
+                    license {
+                        name = "MIT License"
+                        url = "https://tldrlegal.com/license/mit-license"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = "nearbydelta"
+                        name = "Bugeun Kim"
+                        url = "http://github.com/nearbydelta"
+                    }
+                }
             }
         }
     }
@@ -55,15 +72,6 @@ dokka {
     }
 }
 
-extraArchive {
-    sources = true
-    tests = false
-    javadoc = true
-}
-
 nexus {
     sign = true
 }
-
-tasks.javadoc.enabled = false
-tasks.javadoc.dependsOn tasks.dokka

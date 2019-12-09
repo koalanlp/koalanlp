@@ -37,7 +37,7 @@ val splitterFlow by lazy {
         workflow.appendPlainTextProcessor(SentenceSegmentor(),
                 basePath + File.separator + "conf" + File.separator + "SentenceSegment.json")
         workflow.activateWorkflow(true)
-        print("SplitterFlow initialized")
+        println("SplitterFlow initialized")
         workflow
     }
 }
@@ -361,7 +361,7 @@ object HNNOriginalWrapperTest : Spek({
                 val sent = pair.second
                 tagger.tagParagraphOriginal(sent).forEach { s ->
                     Configuration.hanBaseDir = "./hnnModels/"
-                    print('a')
+                    println("MorphAnalWrap ${s.plainEojeols.joinToString(" ")}")
 
                     val original = HanNanumMorphAnalWrapper.getInstance().getAnalysisResult(s.plainEojeols.joinToString(" "))
                     val reproduced = MorphemeAnalyzerWrap.getAnalysisResult(s)
@@ -386,7 +386,7 @@ object HNNOriginalWrapperTest : Spek({
             Examples.exampleSequence().forEach { pair ->
                 val sent = pair.second
                 tagger.tagParagraphOriginal(sent).forEach { s ->
-                    print('w')
+                    println("ParserWrap ${s.plainEojeols.joinToString(" ")}")
                     val original = parser.parse(s.plainEojeols.joinToString(" "))
                     val reproduced = wrap.parseForced(s)
 

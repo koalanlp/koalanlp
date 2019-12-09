@@ -12,7 +12,7 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 * OpenKoreanText의 [오픈 소스 한국어 처리기 v2.3.1](http://openkoreantext.org) (구 Twitter 한국어 분석기)
 * 은전한닢 프로젝트의 [SEunjeon(S은전)](https://bitbucket.org/eunjeon/seunjeon) (Mecab-ko의 Scala/Java 판본)
 * 이수명님의 [Arirang Morpheme Analyzer](http://cafe.naver.com/korlucene) <sup>1-1</sup>
-* 최석재님의 [RHINO v2.5.4](https://github.com/SukjaeChoi/RHINO)
+* 최석재님의 [RHINO v2.7.3](https://github.com/SukjaeChoi/RHINO)
 * 김상준님의 [Daon 분석기](https://github.com/rasoio/daon/tree/master/daon-core)
 * ETRI의 [공공 인공지능 Open API](http://aiopen.etri.re.kr/)
 * Kakao의 [카이(Khaiii) v0.4](https://github.com/kakao/khaiii) <sup>(별도설치 필요: [설치법](https://github.com/kakao/khaiii/wiki/빌드-및-설치))</sup>

@@ -1,12 +1,16 @@
 test {
     failFast true
 
+    // set heap size for the test JVM(s)
+    minHeapSize = "1g"
+    maxHeapSize = "3g"
+
     if (project.hasProperty('notTest')){
         def testProperty = project.property('notTest').toString()
         def prefix = '**' + File.separator
 
         if (testProperty.contains('JNA')){
-            exclude prefix + 'KhaiiiTaggerTest.class'
+            exclude prefix + 'KhaiiiTaggerTest.class', prefix + 'UTaggerTaggerTest.class'
         }
         if (testProperty.contains('GUI')){
             exclude prefix + 'RhinoOriginDictionaryReaderTest.class', prefix + 'RhinoOriginExtraTest.class', prefix + 'RhinoOriginTagger.test'
@@ -19,7 +23,7 @@ test {
 }
 
 jacoco {
-    toolVersion = "0.8.2"
+    toolVersion = "0.8.4"
 }
 
 jacocoTestReport {

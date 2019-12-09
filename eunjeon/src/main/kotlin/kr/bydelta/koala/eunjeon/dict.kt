@@ -57,7 +57,7 @@ object Dictionary : CanCompileDict {
      * @since 1.x
      */
     @JvmStatic
-    internal val lexiconDict by lazy { LexiconDict().load(needCompress) }
+    internal val lexiconDict by lazy { synchronized(needCompress) { LexiconDict().load(needCompress) } }
 
     /**
      * 은전한닢 연결성 사전.

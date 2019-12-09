@@ -71,8 +71,8 @@ class Tagger @JvmOverloads constructor(useLightTagger: Boolean = false) : CanTag
      */
     val komoran: Komoran by lazy {
         val komoran =
-                if (useLightTagger) Tagger.taggerLight()
-                else Tagger.taggerFull()
+                if (useLightTagger) taggerLight()
+                else taggerFull()
         if (Dictionary.userDict.exists())
             komoran.setUserDic(Dictionary.userDict.absolutePath)
         komoran

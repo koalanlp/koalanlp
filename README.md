@@ -27,7 +27,7 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 * OpenKoreanText의 [오픈 소스 한국어 처리기 v2.3.1](http://openkoreantext.org) (구 Twitter 한국어 분석기)
 * 은전한닢 프로젝트의 [SEunjeon(S은전) v1.5.0](https://bitbucket.org/eunjeon/seunjeon) (Mecab-ko의 Scala/Java 판본)
 * 이수명님의 [Arirang Morpheme Analyzer](http://cafe.naver.com/korlucene) <sup>1-1</sup>
-* 최석재님의 [RHINO v2.5.4](https://github.com/SukjaeChoi/RHINO)
+* 최석재님의 [RHINO v2.7.3](https://github.com/SukjaeChoi/RHINO)
 * KAIST의 [한나눔 형태소 분석기](http://kldp.net/projects/hannanum/)와 [NLP_HUB 구문분석기](http://semanticweb.kaist.ac.kr/home/index.php/NLP_HUB)
 * Kakao의 [카이(Khaiii) v0.4](https://github.com/kakao/khaiii) <sup>(별도설치 필요: [설치법](https://github.com/kakao/khaiii/wiki/빌드-및-설치))</sup>
 * 울산대학교의 [UTagger 2018년 10월 31일자](http://nlplab.ulsan.ac.kr/doku.php?id=start) <sup>1-2, (별도설치 필요: [설치법](https://koalanlp.github.io/usage/Install-UTagger.md))</sup>

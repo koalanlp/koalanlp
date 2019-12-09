@@ -6,7 +6,10 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import kr.bydelta.koala.proc.*
 import org.amshove.kluent.*
+import org.spekframework.spek2.dsl.GroupBody
 import org.spekframework.spek2.dsl.Root
+import org.spekframework.spek2.lifecycle.CachingMode
+import org.spekframework.spek2.style.specification.Suite
 import org.spekframework.spek2.style.specification.describe
 import java.util.*
 
@@ -16,7 +19,7 @@ import java.util.*
 object Examples {
 
     fun exampleSequence(duplicate: Int = 1, requireMultiLine: Boolean = false): List<Pair<Int, String>> {
-        val seq = if (requireMultiLine) exampleSeq.filter { it.first > 1 } else Examples.exampleSeq
+        val seq = if (requireMultiLine) exampleSeq.filter { it.first > 1 } else exampleSeq
         return (0 until duplicate).flatMap { seq }.shuffled().toList()
     }
 
@@ -117,6 +120,16 @@ object Examples {
 }
 
 /**
+ * 테스트의 순차적 실행을 강제하기 위한 DSL 추가
+ */
+fun GroupBody.describeSequential(description: String, body: Suite.() -> Unit) {
+    group(description, failFast = true, defaultCachingMode = CachingMode.EACH_GROUP, preserveExecutionOrder = true) {
+        body(Suite(this))
+    }
+}
+
+
+/**
  * [CanSplitSentence]를 테스트합니다.
  */
 fun SplitterSpek(getSplitter: () -> CanSplitSentence,
@@ -124,7 +137,7 @@ fun SplitterSpek(getSplitter: () -> CanSplitSentence,
     return {
         defaultTimeout = 300000L  // 5 minutes
 
-        describe("SentenceSplitter") {
+        describeSequential("SentenceSplitter") {
             it("handles empty sentence") {
                 val sent = getSplitter().sentences("")
                 sent.size `should be equal to` 0
@@ -184,62 +197,66 @@ fun TaggerSpek(getTagger: () -> CanTag,
                isSentenceSplitterImplemented: Boolean = false,
                isParagraphImplemented: Boolean = true): Root.() -> Unit {
 
-    fun expectCorrectParse(str: String) {
-        print("0")
-        val tagger = getTagger()
-        val (oSurface, oTag) = tagSentByOrig(str)
-        val (tSurface, tTag) = tagSentByKoala(str, tagger)
-
-        if (oTag.isNotEmpty())
-            tTag `should be equal to` oTag
-        if (oSurface.isNotEmpty())
-            tSurface `should be equal to` oSurface
-
-        tSurface.replace("\\s+".toRegex(), "") `should be equal to` str.replace("\\s+".toRegex(), "")
-    }
-
-    fun expectThreadSafe(str: List<String>) {
-        val tagger = getTagger()
-        val single = str.map { tagSentByKoala(it, tagger) }
-        val multiInit = runBlocking(NonCancellable) {
-            str.map {
-                async(Dispatchers.Default + NonCancellable) {
-                    tagSentByKoala(it, getTagger())
-                }
-            }.map {
-                print("1")
-                it.await()
-            }
-        }
-        val multiShared = runBlocking(NonCancellable) {
-            str.map {
-                async(Dispatchers.Default + NonCancellable) {
-                    tagSentByKoala(it, tagger)
-                }
-            }.map {
-                print("1")
-                it.await()
-            }
-        }
-
-        single.zip(multiInit).zip(multiShared).forEach {
-            print("2")
-            val (x, m2) = it
-            val (s, m1) = x
-
-            s.first `should be equal to` m1.first
-            s.second `should be equal to` m1.second
-            s.first `should be equal to` m2.first
-            s.second `should be equal to` m2.second
-        }
-    }
-
     return {
         defaultTimeout = 300000L  // 5 minutes
 
-        describe("Tagger") {
+        val globalTagger = getTagger()
+
+        fun expectCorrectParse(str: String) {
+            println("OriginalTag $str")
+            val (oSurface, oTag) = tagSentByOrig(str)
+            val (tSurface, tTag) = tagSentByKoala(str, globalTagger)
+
+            if (oTag.isNotEmpty())
+                tTag `should be equal to` oTag
+            if (oSurface.isNotEmpty())
+                tSurface `should be equal to` oSurface
+
+            tSurface.replace("\\s+".toRegex(), "") `should be equal to` str.replace("\\s+".toRegex(), "")
+        }
+
+        fun expectThreadSafe(str: List<String>) {
+            val single = str.map { tagSentByKoala(it, globalTagger) }
+
+            val multiInit = runBlocking {
+                str.map {
+                    it to async(Dispatchers.Default) {
+                        tagSentByKoala(it, getTagger())
+                    }
+                }.map {
+                    val (str, deferred) = it
+
+                    println("MultiInitTag $str")
+                    deferred.await()
+                }
+            }
+            val multiShared = runBlocking {
+                str.map {
+                    it to async(Dispatchers.Default) {
+                        tagSentByKoala(it, globalTagger)
+                    }
+                }.map {
+                    val (str, deferred) = it
+
+                    println("SharedThreadTag $str")
+                    deferred.await()
+                }
+            }
+
+            single.zip(multiInit).zip(multiShared).forEach {
+                val (x, m2) = it
+                val (s, m1) = x
+
+                s.first `should be equal to` m1.first
+                s.second `should be equal to` m1.second
+                s.first `should be equal to` m2.first
+                s.second `should be equal to` m2.second
+            }
+        }
+
+        describeSequential("Tagger") {
             it("handles empty sentence") {
-                val sent = getTagger().tag("")
+                val sent = globalTagger.tag("")
                 sent.size `should be equal to` 0
             }
 
@@ -256,11 +273,10 @@ fun TaggerSpek(getTagger: () -> CanTag,
             when {
                 isSentenceSplitterImplemented -> {
                     it("matches sentence split spec") {
-                        val tagger = getTagger()
                         Examples.exampleSequence(requireMultiLine = true).forEach {
-                            print("3")
+                            println("SentenceSplit ${it.first} sentence(s) in ${it.second}")
 
-                            val splits = tagger(it.second)
+                            val splits = globalTagger(it.second)
                             if (splits.size != it.first) {
                                 println(" NOTMATCHED " + splits.map { it.singleLineString() })
                             }
@@ -272,10 +288,9 @@ fun TaggerSpek(getTagger: () -> CanTag,
 
                 isParagraphImplemented -> {
                     it("tags paragraphs") {
-                        val tagger = getTagger()
                         Examples.exampleSequence().forEach {
-                            print("4")
-                            val splits = tagger(it.second)
+                            println("ParagraphTag ${it.first} sentence(s) in ${it.second}")
+                            val splits = globalTagger(it.second)
                             val orig = tagParaByOrig(it.second)
 
                             splits.size `should be equal to` orig.size
@@ -339,7 +354,7 @@ fun DictSpek(dict: CanCompileDict,
     return {
         defaultTimeout = 300000L  // 5 minutes
 
-        describe("Dictionary") {
+        describeSequential("Dictionary") {
             it("adds a noun") {
                 { dict.addUserDictionary("갑질", POS.NNG) } `should not throw` AnyException
                 dict.getNotExists(false, "갑질" to POS.NNG).size `should be equal to` 0
@@ -371,7 +386,7 @@ fun DictSpek(dict: CanCompileDict,
                 val nvms = dict.getBaseEntries { it.isNoun() && importFilter(it) }.asSequence().toList()
                 val rand = Random()
                 (0..1000).forEach {
-                    print('.')
+                    println("TestSystemDict $it/1000")
                     val entry = nvms[rand.nextInt(nvms.size)]
                     val (surface, pos) = entry
                     dict.contains(surface, setOf(pos)) `should be` true
@@ -443,12 +458,12 @@ fun DictSpek(dict: CanCompileDict,
                 val tagger = getTagger()
 
                 val sentenceItems = itemNotExists.filter {
-                    if(it.second.isNoun()){
+                    if (it.second.isNoun()) {
                         val sentence = "우리가 가진 ${it.first}, 그것이 해답이었다."
                         val tagged = tagger.tagSentence(sentence)
 
                         tagged[2][0].surface != it.first || tagged[2][0].tag != it.second
-                    }else false
+                    } else false
                 }
 
                 dict.importFrom(dictSample)
@@ -478,64 +493,66 @@ fun <O, P : CanAnalyzeProperty<O>> ParserSpek(getParser: () -> P,
                                               parseSentByOrig: (String) -> List<Pair<String, String>>,
                                               parseSentByKoala: (String, P) -> List<Pair<String, String>>): Root.() -> Unit {
 
-    fun expectCorrectParse(str: String) {
-        print("5")
-        val parser = getParser()
-        parseSentByOrig(str).zip(parseSentByKoala(str, parser)).map {
-            val (oSurface, oTag) = it.first
-            val (tSurface, tTag) = it.second
-
-            if (oTag.isNotEmpty())
-                tTag `should be equal to` oTag
-            if (oSurface.isNotEmpty())
-                tSurface `should be equal to` oSurface
-        }
-    }
-
-    fun expectThreadSafe(str: List<String>) {
-        val tagger = getParser()
-        val single = str.map { parseSentByKoala(it, tagger) }
-        val multiInit = runBlocking(NonCancellable) {
-            str.map {
-                async(Dispatchers.Default + NonCancellable) {
-                    parseSentByKoala(it, getParser())
-                }
-            }.map {
-                print("1")
-                it.await()
-            }
-        }
-        val multiShared = runBlocking(NonCancellable) {
-            str.map {
-                async(Dispatchers.Default + NonCancellable) {
-                    parseSentByKoala(it, tagger)
-                }
-            }.map {
-                print("1")
-                it.await()
-            }
-        }
-
-        single.zip(multiInit).zip(multiShared).forEach {
-            print("2")
-            val (x, m2) = it
-            val (s, m1) = x
-
-            s.zip(m1).forEach { p ->
-                p.first `should equal` p.second
-            }
-            s.zip(m2).forEach { p ->
-                p.first `should equal` p.second
-            }
-        }
-    }
-
     return {
         defaultTimeout = 300000L  // 5 minutes
+        val globalParser = getParser()
 
-        describe("Parser") {
+        fun expectCorrectParse(str: String) {
+            println("OriginalParse $str")
+            parseSentByOrig(str).zip(parseSentByKoala(str, globalParser)).map {
+                val (oSurface, oTag) = it.first
+                val (tSurface, tTag) = it.second
+
+                if (oTag.isNotEmpty())
+                    tTag `should be equal to` oTag
+                if (oSurface.isNotEmpty())
+                    tSurface `should be equal to` oSurface
+            }
+        }
+
+        fun expectThreadSafe(str: List<String>) {
+            val single = str.map { parseSentByKoala(it, globalParser) }
+            val multiInit = runBlocking {
+                str.map {
+                    it to async(Dispatchers.Default) {
+                        parseSentByKoala(it, getParser())
+                    }
+                }.map {
+                    val (str, deferred) = it
+
+                    println("MultiInitParse $str")
+                    deferred.await()
+                }
+            }
+            val multiShared = runBlocking {
+                str.map {
+                    it to async(Dispatchers.Default) {
+                        parseSentByKoala(it, globalParser)
+                    }
+                }.map {
+                    val (str, deferred) = it
+
+                    println("SharedThreadParse $str")
+                    deferred.await()
+                }
+            }
+
+            single.zip(multiInit).zip(multiShared).forEach {
+                val (x, m2) = it
+                val (s, m1) = x
+
+                s.zip(m1).forEach { p ->
+                    p.first `should equal` p.second
+                }
+                s.zip(m2).forEach { p ->
+                    p.first `should equal` p.second
+                }
+            }
+        }
+
+        describeSequential("Parser") {
             it("handles empty sentence") {
-                val sent = getParser().analyze("")
+                val sent = globalParser.analyze("")
                 sent.size `should be equal to` 0
             }
 
@@ -547,15 +564,14 @@ fun <O, P : CanAnalyzeProperty<O>> ParserSpek(getParser: () -> P,
 
             it("parses a sentence instance") {
                 Examples.exampleSequence().filter { it.first == 1 }.forEach {
-                    val parser = getParser()
-                    val intermediate = parser.convert(it.second)[0].first
-                    val sentence = parser.convert(intermediate)
+                    val intermediate = globalParser.convert(it.second)[0].first
+                    val sentence = globalParser.convert(intermediate)
 
                     // Convert 과정에서 기존 tag가 변화될 수 있으므로, Surface만 비교
-                    val directAnalyze = parser.analyze(it.second)[0].joinToString(" ") { w ->
+                    val directAnalyze = globalParser.analyze(it.second)[0].joinToString(" ") { w ->
                         w.joinToString("+") { m -> m.surface }
                     }
-                    val indirectAnalyze = parser.analyze(sentence).joinToString(" ") { w ->
+                    val indirectAnalyze = globalParser.analyze(sentence).joinToString(" ") { w ->
                         w.joinToString("+") { m -> m.surface }
                     }
 

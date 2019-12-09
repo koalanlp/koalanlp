@@ -51,7 +51,7 @@ val UTAGGER_INIT: UTagger by lazy {
 }
 
 
-object UTaggerTaggerJNATest : Spek(TaggerSpek(getTagger = { Tagger() },
+object UTaggerTaggerTest : Spek(TaggerSpek(getTagger = { Tagger() },
         tagSentByOrig = { str ->
             val tagger = UTAGGER_INIT
             val original = tagger.analyze(str)
