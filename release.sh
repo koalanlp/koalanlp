@@ -186,7 +186,7 @@ case ${ACTION} in
             cd ..
             ask_proceed "UPLOAD"
             if [ ${YN,,} != "p" ]; then
-                ./gradlew $MODULE_NAME:clean $MODULE_NAME:uploadArchives --info
+                ./gradlew $MODULE_NAME:clean $MODULE_NAME:publish --info
             fi
 
             ask_proceed "RELEASE"
