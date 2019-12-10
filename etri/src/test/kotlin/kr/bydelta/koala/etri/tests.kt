@@ -49,7 +49,7 @@ object KlaxonTest : Spek({
                 sentences[0].getEntities() `should not be` null
 
                 sentences[0][0].getGovernorEdge() `should not be` null
-                sentences[0][0].getGovernorEdge().governor `should equal` sentences[0][1]
+                sentences[0][0].getGovernorEdge()!!.governor `should equal` sentences[0][1]
 
                 sentences[0][5].getArgumentRoles() `should not be` null
                 sentences[0][5].getArgumentRoles()!!.map { it.argument } shouldContainSame sentences[0].subList(1, 5)
