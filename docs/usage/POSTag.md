@@ -43,8 +43,12 @@ import kr.bydelta.koala.eunjeon.Tagger
 // 또는 eunjeon 대신 다른 분석기 가능: arirang, daon, etri, eunjeon, hnn, kkma, kmr, okt, rhino 
 
 val tagger = Tagger()
-// 코모란 분석기는 경량 분석기를 사용하는 옵션이 있습니다. 예: Tagger(useLightTagger = true)
-// ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: Tagger(API_KEY)
+// (1) 코모란 분석기는 경량 분석기를 사용하는 옵션이 있습니다. 예: Tagger(useLightTagger = true)
+// (2) ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: Tagger(API_KEY)
+// (3) Khaiii 분석기의 경우 Khaiii 리소스 폴더를 필수적으로 전달해야 합니다. 예: Tagger(resourcePath)
+// (4) UTagger 분석기의 경우 사용 전 아래와 같이 UTagger 초기화 절차가 필요합니다.
+// import kr.bydelta.koala.utagger.UTagger
+// UTagger.setPath(libraryPath, configPath)  // (라이브러리 파일 위치와 설정파일 위치 지정)
 
 val taggedParagraph = tagger.tag("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다.")
 // 또는 tagger(...), tagger.invoke(...)
@@ -65,8 +69,12 @@ import kr.bydelta.koala.Implicits._
 // 또는 eunjeon 대신 다른 분석기 가능: arirang, daon, etri, eunjeon, hnn, kkma, kmr, okt, rhino 
 
 val tagger = new Tagger()
-// 코모란 분석기는 경량 분석기를 사용하는 옵션이 있습니다. 예: new Tagger(true)
-// ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: new Tagger(API_KEY)
+// (1) 코모란 분석기는 경량 분석기를 사용하는 옵션이 있습니다. 예: new Tagger(useLightTagger = true)
+// (2) ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: new Tagger(API_KEY)
+// (3) Khaiii 분석기의 경우 Khaiii 리소스 폴더를 필수적으로 전달해야 합니다. 예: new Tagger(resourcePath)
+// (4) UTagger 분석기의 경우 사용 전 아래와 같이 UTagger 초기화 절차가 필요합니다.
+// import kr.bydelta.koala.utagger.UTagger
+// UTagger.setPath(libraryPath, configPath)  // (라이브러리 파일 위치와 설정파일 위치 지정)
 
 val taggedParagraph = tagger("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다.")
 // 또는 tagger(...), tagger.invoke(...)
@@ -86,8 +94,12 @@ import kr.bydelta.koala.data.Sentence;
 // 또는 eunjeon 대신 다른 분석기 가능: arirang, daon, etri, eunjeon, hnn, kkma, kmr, okt, rhino 
 
 Tagger tagger = new Tagger();
-// 코모란 분석기는 경량 분석기를 사용하는 옵션이 있습니다. 예: new Tagger(true)
-// ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: new Tagger(API_KEY)
+// (1) 코모란 분석기는 경량 분석기를 사용하는 옵션이 있습니다. 예: new Tagger(useLightTagger = true);
+// (2) ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: new Tagger(API_KEY);
+// (3) Khaiii 분석기의 경우 Khaiii 리소스 폴더를 필수적으로 전달해야 합니다. 예: new Tagger(resourcePath);
+// (4) UTagger 분석기의 경우 사용 전 아래와 같이 UTagger 초기화 절차가 필요합니다.
+// import kr.bydelta.koala.utagger.UTagger;
+// UTagger.setPath(libraryPath, configPath);  // (라이브러리 파일 위치와 설정파일 위치 지정)
 
 // 문단을 분석해서 문장들로 얻기 (각 API가 문단 분리를 지원하지 않아도, KoalaNLP가 자동으로 구분합니다)
 List<Sentence> taggedParagraph = tagger.tag("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다.");
@@ -166,8 +178,12 @@ from koalanlp import API
 from koalanlp.proc import Tagger
 
 tagger = Tagger(API.EUNJEON)
-# 코모란 분석기는 경량 분석기를 사용하는 옵션이 있습니다. 예: Tagger(API.KMR, useLightTagger=true)
-# ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: Tagger(API.ETRI, apiKey=API_KEY)
+# (1) 코모란 분석기는 경량 분석기를 사용하는 옵션이 있습니다. 예: Tagger(kmr_light=True)
+# (2) ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: Tagger(etri_key=API_KEY)
+# (3) Khaiii 분석기의 경우 Khaiii 리소스 폴더를 필수적으로 전달해야 합니다. 예: Tagger(khaiii_resource=some_path)
+# (4) UTagger 분석기의 경우 사용 전 아래와 같이 UTagger 초기화 절차가 필요합니다.
+# from koalanlp.proc import UTagger
+# UTagger.setPath(library_path, config_path)  // (라이브러리 파일 위치와 설정파일 위치 지정)
 
 # 문단을 분석해서 문장들로 얻기 (각 API가 문단 분리를 지원하지 않아도, KoalaNLP가 자동으로 구분합니다)
 taggedParagraph = tagger("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다.")

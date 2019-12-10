@@ -126,7 +126,7 @@ async function someAsyncFunction(){
     }
         
     // ...
-}
+};
 
 someAsyncFunction().then(
     () => console.log('After function finished'),
@@ -142,7 +142,7 @@ const {ETRI} = require('koalanlp/API');
 
 const API_KEY = /** ETRI에서 발급받은 키 **/
 
-let labeler = new RoleLabeler(ETRI, {apiKey: API_KEY});
+let; labeler = new RoleLabeler(ETRI, {apiKey: API_KEY});
 labeler("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")  // 또는 labeler.analyze(...)
     .then((result) => {
         /* Result는 Sentence[] 타입입니다. */
@@ -162,7 +162,7 @@ const API_KEY = /** ETRI에서 발급받은 키 **/
 
 // ....
 
-let labeler = new RoleLabeler(ETRI, {apiKey: API_KEY});
+let; labeler = new RoleLabeler(ETRI, {apiKey: API_KEY});
 let result = labeler.analyzeSync("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
 
 /* Result는 Sentence[] 타입입니다. */
@@ -180,7 +180,7 @@ Reference: [RoleLabeler](https://koalanlp.github.io/python-support/html/koalanlp
 from koalanlp import API
 from koalanlp.proc import EntityRecognizer
 
-labeler = RoleLabeler(API.ETRI, apiKey=API_KEY)
+labeler = RoleLabeler(API.ETRI, etri_key=API_KEY)
 
 parsed = labeler("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")
 # 또는 labeler.analyze(...), labeler.invoke(...)

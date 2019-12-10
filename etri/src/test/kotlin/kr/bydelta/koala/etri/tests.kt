@@ -6,13 +6,24 @@ import kr.bydelta.koala.POS
 import kr.bydelta.koala.data.Sentence
 import org.amshove.kluent.*
 import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
+import org.spekframework.spek2.dsl.GroupBody
+import org.spekframework.spek2.lifecycle.CachingMode
+import org.spekframework.spek2.style.specification.Suite
 import java.util.*
+
+/**
+ * 테스트의 순차적 실행을 강제하기 위한 DSL 추가
+ */
+fun GroupBody.describeSequential(description: String, body: Suite.() -> Unit) {
+    group(description, failFast = true, defaultCachingMode = CachingMode.EACH_GROUP, preserveExecutionOrder = true) {
+        body(Suite(this))
+    }
+}
 
 object KlaxonTest : Spek({
     defaultTimeout = 300000L  // 5 minutes
 
-    describe("Json") {
+    describeSequential("Json") {
         it("should deparse JSON string correctly") {
             val klaxon = Klaxon()
             val payload = klaxon.parse<ResultPayload>(POS::class.java.getResourceAsStream("/etri-sample.json"))
@@ -38,7 +49,7 @@ object KlaxonTest : Spek({
                 sentences[0].getEntities() `should not be` null
 
                 sentences[0][0].getGovernorEdge() `should not be` null
-                sentences[0][0].getGovernorEdge()?.governor `should equal` sentences[0][1]
+                sentences[0][0].getGovernorEdge().governor `should equal` sentences[0][1]
 
                 sentences[0][5].getArgumentRoles() `should not be` null
                 sentences[0][5].getArgumentRoles()!!.map { it.argument } shouldContainSame sentences[0].subList(1, 5)
@@ -60,7 +71,7 @@ object ETRICommunicationTest : Spek({
     val klaxon = Klaxon()
     val expectedSentence = klaxon.parse<ResultPayload>(POS::class.java.getResourceAsStream("/etri-sample.json"))!!.result.sentences[0].sentence
 
-    describe("Tagger") {
+    describeSequential("Tagger") {
         it("should correctly communicate with ETRI API Service") {
             // 반복 요청을 막기 위해 적절한 시간동안 멈춥니다.
             Thread.sleep(1000 + Random().nextInt(10) * 100L)
@@ -94,7 +105,7 @@ object ETRICommunicationTest : Spek({
         }
     }
 
-    describe("Parser") {
+    describeSequential("Parser") {
         it("should correctly communicate with ETRI API Service") {
             // 반복 요청을 막기 위해 적절한 시간동안 멈춥니다.
             Thread.sleep(1000 + Random().nextInt(10) * 100L)
@@ -124,7 +135,7 @@ object ETRICommunicationTest : Spek({
         }
     }
 
-    describe("EntityRecognizer") {
+    describeSequential("EntityRecognizer") {
         it("should correctly communicate with ETRI API Service") {
             // 반복 요청을 막기 위해 적절한 시간동안 멈춥니다.
             Thread.sleep(1000 + Random().nextInt(10) * 100L)
@@ -151,7 +162,7 @@ object ETRICommunicationTest : Spek({
         }
     }
 
-    describe("RoleLabeler") {
+    describeSequential("RoleLabeler") {
         it("should correctly communicate with ETRI API Service") {
             // 반복 요청을 막기 위해 적절한 시간동안 멈춥니다.
             Thread.sleep(1000 + Random().nextInt(10) * 100L)
@@ -190,7 +201,7 @@ object RandomSentenceTest : Spek({
 
     val API_KEY = System.getenv("ETRI_KEY")
 
-    describe("RoleLabeler") {
+    describeSequential("RoleLabeler") {
         it("should not throw any exception") {
             val analyzer = RoleLabeler(API_KEY)
             val examples = Examples.exampleSequence(1).take(10)

@@ -203,7 +203,7 @@ fun TaggerSpek(getTagger: () -> CanTag,
         val globalTagger = getTagger()
 
         fun expectCorrectParse(str: String) {
-            println("OriginalTag $str")
+            println("OriginalTag")
             val (oSurface, oTag) = tagSentByOrig(str)
             val (tSurface, tTag) = tagSentByKoala(str, globalTagger)
 
@@ -220,26 +220,22 @@ fun TaggerSpek(getTagger: () -> CanTag,
 
             val multiInit = runBlocking {
                 str.map {
-                    it to async(Dispatchers.Default) {
+                    async(Dispatchers.Default) {
                         tagSentByKoala(it, getTagger())
                     }
                 }.map {
-                    val (str, deferred) = it
-
-                    println("MultiInitTag $str")
-                    deferred.await()
+                    println("MultiInitTag")
+                    it.await()
                 }
             }
             val multiShared = runBlocking {
                 str.map {
-                    it to async(Dispatchers.Default) {
+                    async(Dispatchers.Default) {
                         tagSentByKoala(it, globalTagger)
                     }
                 }.map {
-                    val (str, deferred) = it
-
-                    println("SharedThreadTag $str")
-                    deferred.await()
+                    println("SharedThreadTag")
+                    it.await()
                 }
             }
 
@@ -274,7 +270,7 @@ fun TaggerSpek(getTagger: () -> CanTag,
                 isSentenceSplitterImplemented -> {
                     it("matches sentence split spec") {
                         Examples.exampleSequence(requireMultiLine = true).forEach {
-                            println("SentenceSplit ${it.first} sentence(s) in ${it.second}")
+                            println("SentenceSplit ${it.first} sentence(s)")
 
                             val splits = globalTagger(it.second)
                             if (splits.size != it.first) {
@@ -289,7 +285,7 @@ fun TaggerSpek(getTagger: () -> CanTag,
                 isParagraphImplemented -> {
                     it("tags paragraphs") {
                         Examples.exampleSequence().forEach {
-                            println("ParagraphTag ${it.first} sentence(s) in ${it.second}")
+                            println("ParagraphTag ${it.first} sentence(s)")
                             val splits = globalTagger(it.second)
                             val orig = tagParaByOrig(it.second)
 
@@ -386,7 +382,8 @@ fun DictSpek(dict: CanCompileDict,
                 val nvms = dict.getBaseEntries { it.isNoun() && importFilter(it) }.asSequence().toList()
                 val rand = Random()
                 (0..1000).forEach {
-                    println("TestSystemDict $it/1000")
+                    if (it % 100 == 0)
+                        println("TestSystemDict $it/1000")
                     val entry = nvms[rand.nextInt(nvms.size)]
                     val (surface, pos) = entry
                     dict.contains(surface, setOf(pos)) `should be` true
@@ -421,7 +418,7 @@ fun DictSpek(dict: CanCompileDict,
                 }
 
                 targets.forEach {
-                    println("Userdic Testing: $it")
+                    println("Userdic Testing")
                     dict.contains(it.first, setOf(it.second)) `should be` true
                     ((it.first to it.second) in dict) `should be` true
                 }
@@ -470,7 +467,7 @@ fun DictSpek(dict: CanCompileDict,
                 dict.getItems() `should contain all` itemNotExists
 
                 dictSample.words.forEach {
-                    println("Import Testing: $it")
+                    println("Import Testing")
                     dict.contains(it.first, setOf(it.second)) `should be` true
                     ((it.first to it.second) in dict) `should be` true
                 };
@@ -498,7 +495,7 @@ fun <O, P : CanAnalyzeProperty<O>> ParserSpek(getParser: () -> P,
         val globalParser = getParser()
 
         fun expectCorrectParse(str: String) {
-            println("OriginalParse $str")
+            println("OriginalParse")
             parseSentByOrig(str).zip(parseSentByKoala(str, globalParser)).map {
                 val (oSurface, oTag) = it.first
                 val (tSurface, tTag) = it.second
@@ -514,26 +511,22 @@ fun <O, P : CanAnalyzeProperty<O>> ParserSpek(getParser: () -> P,
             val single = str.map { parseSentByKoala(it, globalParser) }
             val multiInit = runBlocking {
                 str.map {
-                    it to async(Dispatchers.Default) {
+                    async(Dispatchers.Default) {
                         parseSentByKoala(it, getParser())
                     }
                 }.map {
-                    val (str, deferred) = it
-
-                    println("MultiInitParse $str")
-                    deferred.await()
+                    println("MultiInitParse")
+                    it.await()
                 }
             }
             val multiShared = runBlocking {
                 str.map {
-                    it to async(Dispatchers.Default) {
+                    async(Dispatchers.Default) {
                         parseSentByKoala(it, globalParser)
                     }
                 }.map {
-                    val (str, deferred) = it
-
-                    println("SharedThreadParse $str")
-                    deferred.await()
+                    println("SharedThreadParse")
+                    it.await()
                 }
             }
 

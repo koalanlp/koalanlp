@@ -60,7 +60,7 @@
     UTagger.setPath("라이브러리 파일 절대경로", "설정 파일 절대경로")
     ```
    
-    * Python의 경우 (반영 예정)
+    * Python의 경우
     ```python3
     from koalanlp.proc import UTagger
    
@@ -131,7 +131,7 @@
     UTagger.setPath("라이브러리 파일 절대경로", "설정 파일 절대경로")
     ```
    
-    * Python의 경우 (반영 예정)
+    * Python의 경우
     ```python3
     from koalanlp.proc import UTagger
    

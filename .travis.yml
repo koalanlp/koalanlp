@@ -12,11 +12,12 @@ matrix:
         directories:
           - $HOME/.gradle/caches/
           - $HOME/.gradle/wrapper/
+          - $HOME/utagger
           - $HOME/khaiii-orig
           - $HOME/.hunter
-    - name: "OSX with OpenJDK 12"
+    - name: "OSX11.2 with OpenJDK 13"
       os: osx
-      osx_image: xcode10.2
+      osx_image: xcode11.2
       language: shell
       jdk: openjdk12
       before_cache:
@@ -38,6 +39,13 @@ matrix:
       env:
         - JAVA_HOME="/c/Progra~1/OpenJDK/jdk-12"
         - PATH="$JAVA_HOME/bin:$PATH"
+      cache:
+        directories:
+          - $HOME/.gradle/caches/
+          - $HOME/.gradle/wrapper/
+          - $HOME/utagger
+          - $HOME/khaiii-orig
+          - $HOME/.hunter
 before_install:
   - openssl aes-256-cbc -K $encrypted_61168456aa19_key -iv $encrypted_61168456aa19_iv -in deploy.key.enc -out deploy.key -d
   - chmod 600 deploy.key

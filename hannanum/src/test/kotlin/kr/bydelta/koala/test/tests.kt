@@ -245,7 +245,7 @@ object HNNSyntaxParserTest : Spek(ParserSpek<Sentence, CanParseSyntax<Sentence>>
 
                 result.map { s ->
                     // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
-                    "" to s.getSyntaxTree()?.getDFSString(StringBuffer()).toString()
+                    "" to s.getSyntaxTree().getDFSString(StringBuffer()).toString()
                 }
             }
         },
@@ -288,7 +288,7 @@ object HNNSyntaxParserTest : Spek(ParserSpek<Sentence, CanParseSyntax<Sentence>>
         }
 ))
 
-fun DepEdge.getOriginalString() = "${this.originalLabel}(${this.governor?.id ?: -1}, ${this.dependent.id})"
+fun DepEdge.getOriginalString() = "${this.originalLabel}(${this.governor.id ?: -1}, ${this.dependent.id})"
 
 fun DNode.getOriginalString() =
         "${this.correspondingPhrase.phraseTag.split("-")[0]}_${this.getdType()}(${this.head?.wordIdx
@@ -306,7 +306,7 @@ object HNNDepParserTest : Spek(ParserSpek<Sentence, CanParseDependency<Sentence>
 
                 result.map { s ->
                     val deps = s.getDependencies()
-                    val depString = deps?.asSequence()?.map { it.getOriginalString() }?.sorted()?.joinToString() ?: ""
+                    val depString = deps.asSequence().map { it.getOriginalString() }.sorted().joinToString() ?: ""
 
                     // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
                     "" to depString
@@ -361,7 +361,7 @@ object HNNOriginalWrapperTest : Spek({
                 val sent = pair.second
                 tagger.tagParagraphOriginal(sent).forEach { s ->
                     Configuration.hanBaseDir = "./hnnModels/"
-                    println("MorphAnalWrap ${s.plainEojeols.joinToString(" ")}")
+                    println("MorphAnalWrap")
 
                     val original = HanNanumMorphAnalWrapper.getInstance().getAnalysisResult(s.plainEojeols.joinToString(" "))
                     val reproduced = MorphemeAnalyzerWrap.getAnalysisResult(s)
@@ -386,7 +386,7 @@ object HNNOriginalWrapperTest : Spek({
             Examples.exampleSequence().forEach { pair ->
                 val sent = pair.second
                 tagger.tagParagraphOriginal(sent).forEach { s ->
-                    println("ParserWrap ${s.plainEojeols.joinToString(" ")}")
+                    println("ParserWrap")
                     val original = parser.parse(s.plainEojeols.joinToString(" "))
                     val reproduced = wrap.parseForced(s)
 
