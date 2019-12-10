@@ -245,7 +245,7 @@ object HNNSyntaxParserTest : Spek(ParserSpek<Sentence, CanParseSyntax<Sentence>>
 
                 result.map { s ->
                     // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
-                    "" to s.getSyntaxTree().getDFSString(StringBuffer()).toString()
+                    "" to s.getSyntaxTree()!!.getDFSString(StringBuffer()).toString()
                 }
             }
         },
@@ -306,7 +306,7 @@ object HNNDepParserTest : Spek(ParserSpek<Sentence, CanParseDependency<Sentence>
 
                 result.map { s ->
                     val deps = s.getDependencies()
-                    val depString = deps.asSequence().map { it.getOriginalString() }.sorted().joinToString() ?: ""
+                    val depString = deps!!.asSequence().map { it.getOriginalString() }.sorted().joinToString() ?: ""
 
                     // 한나눔 파서의 원본 문장 변형 정도가 심하므로, 원본 문장은 확인하지 않음
                     "" to depString
