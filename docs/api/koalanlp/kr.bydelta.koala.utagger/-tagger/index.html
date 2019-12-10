@@ -8,7 +8,7 @@
 <a href="../../index.html">koalanlp</a>&nbsp;/&nbsp;<a href="../index.html">kr.bydelta.koala.utagger</a>&nbsp;/&nbsp;<a href="./index.html">Tagger</a><br/>
 <br/>
 <h1>Tagger</h1>
-<code><span class="keyword">class </span><span class="identifier">Tagger</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala.proc/-can-tag-only-a-sentence/index.html"><span class="identifier">CanTagOnlyASentence</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-u-word/index.html"><span class="identifier">UWord</span></a><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">&gt;</span></code> <a href="https://github.com/koalanlp/koalanlp/blob/master/utagger/src/main/kotlin/kr/bydelta/koala/utagger/proc.kt#L387">(source)</a>
+<code><span class="keyword">class </span><span class="identifier">Tagger</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala.proc/-can-tag-only-a-sentence/index.html"><span class="identifier">CanTagOnlyASentence</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-u-word/index.html"><span class="identifier">UWord</span></a><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">&gt;</span></code> <a href="https://github.com/koalanlp/koalanlp/blob/master/utagger/src/main/kotlin/kr/bydelta/koala/utagger/proc.kt#L380">(source)</a>
 <p>UTagger 품사 분석 API의 Wrapper입니다.</p>
 <ul><li>이 Wrapper는 아직 실험 단계입니다.</li>
 
@@ -62,12 +62,11 @@ List&lt;Sentence&gt; sentences = tagger.invoke("문장들입니다. 결과는 �
 <tbody>
 <tr>
 <td>
-<p><a href="-init-.html">&lt;init&gt;</a></p>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
 </td>
 <td>
-<code><span class="identifier">Tagger</span><span class="symbol">(</span><span class="symbol">)</span></code>
-<p>분석기를 생성합니다.</p>
-</td>
+<p>UTagger 품사 분석 API의 Wrapper입니다.</p>
+<code><span class="identifier">Tagger</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -76,12 +75,11 @@ List&lt;Sentence&gt; sentences = tagger.invoke("문장들입니다. 결과는 �
 <tbody>
 <tr>
 <td>
-<p><a href="u-tagger.html">uTagger</a></p>
+<h4><a href="u-tagger.html">uTagger</a></h4>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">uTagger</span><span class="symbol">: </span><a href="../-u-tagger/index.html"><span class="identifier">UTagger</span></a></code>
 <p>UTagger Library의 JNA Wrapper</p>
-</td>
+<code><span class="keyword">val </span><span class="identifier">uTagger</span><span class="symbol">: </span><a href="../-u-tagger/index.html"><span class="identifier">UTagger</span></a></code></td>
 </tr>
 </tbody>
 </table>
@@ -90,53 +88,27 @@ List&lt;Sentence&gt; sentences = tagger.invoke("문장들입니다. 결과는 �
 <tbody>
 <tr>
 <td>
-<p><a href="convert-sentence.html">convertSentence</a></p>
+<h4><a href="convert-sentence.html">convertSentence</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">convertSentence</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.utagger.Tagger$convertSentence(kotlin.String, kotlin.collections.List((kr.bydelta.koala.utagger.UWord)))/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.utagger.Tagger$convertSentence(kotlin.String, kotlin.collections.List((kr.bydelta.koala.utagger.UWord)))/result">result</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-u-word/index.html"><span class="identifier">UWord</span></a><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../kr.bydelta.koala.data/-sentence/index.html"><span class="identifier">Sentence</span></a></code>
 <p>List&lt;<a href="../-u-word/index.html">UWord</a>&gt; 타입의 분석결과 <a href="convert-sentence.html#kr.bydelta.koala.utagger.Tagger$convertSentence(kotlin.String, kotlin.collections.List((kr.bydelta.koala.utagger.UWord)))/result">result</a>를 변환, <a href="../../kr.bydelta.koala.data/-sentence/index.html">Sentence</a>를 구성합니다.</p>
-</td>
+<code><span class="keyword">fun </span><span class="identifier">convertSentence</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.utagger.Tagger$convertSentence(kotlin.String, kotlin.collections.List((kr.bydelta.koala.utagger.UWord)))/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.utagger.Tagger$convertSentence(kotlin.String, kotlin.collections.List((kr.bydelta.koala.utagger.UWord)))/result">result</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-u-word/index.html"><span class="identifier">UWord</span></a><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../kr.bydelta.koala.data/-sentence/index.html"><span class="identifier">Sentence</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="finalize.html">finalize</a></p>
+<h4><a href="finalize.html">finalize</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">finalize</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
 <p>Khaiii를 닫을 경우, finalize 단계에서 close하여 handle을 너무 많이 열지 않도록 관리합니다.</p>
-</td>
+<code><span class="keyword">fun </span><span class="identifier">finalize</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="tag-sentence-original.html">tagSentenceOriginal</a></p>
+<h4><a href="tag-sentence-original.html">tagSentenceOriginal</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">tagSentenceOriginal</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.utagger.Tagger$tagSentenceOriginal(kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-u-word/index.html"><span class="identifier">UWord</span></a><span class="symbol">&gt;</span><span class="symbol">?</span></code>
 <p>변환되지않은, <a href="tag-sentence-original.html#kr.bydelta.koala.utagger.Tagger$tagSentenceOriginal(kotlin.String)/text">text</a>의 분석결과 List&lt;<a href="../-u-word/index.html">UWord</a>&gt;를 반환합니다.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3>Inherited Functions</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<p><a href="../../kr.bydelta.koala.proc/-can-tag-only-a-sentence/tag.html">tag</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">tag</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.proc.CanTagOnlyASentence$tag(kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../kr.bydelta.koala.data/-sentence/index.html"><span class="identifier">Sentence</span></a><span class="symbol">&gt;</span></code>
-<p>주어진 문단 <a href="../../kr.bydelta.koala.proc/-can-tag-only-a-sentence/tag.html#kr.bydelta.koala.proc.CanTagOnlyASentence$tag(kotlin.String)/text">text</a>을 분석하여 품사를 부착하고, 결과로 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="../../kr.bydelta.koala.data/-sentence/index.html">Sentence</a>&gt; 객체를 돌려줍니다.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="../../kr.bydelta.koala.proc/-can-tag-only-a-sentence/tag-sentence.html">tagSentence</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">tagSentence</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.proc.CanTagOnlyASentence$tagSentence(kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../kr.bydelta.koala.data/-sentence/index.html"><span class="identifier">Sentence</span></a></code>
-<p>주어진 문장 <a href="../../kr.bydelta.koala.proc/-can-tag-only-a-sentence/tag-sentence.html#kr.bydelta.koala.proc.CanTagOnlyASentence$tagSentence(kotlin.String)/text">text</a>을 분석하여 품사를 부착하고, 결과로 <a href="../../kr.bydelta.koala.data/-sentence/index.html">Sentence</a> 객체를 돌려줍니다.</p>
-</td>
+<code><span class="keyword">fun </span><span class="identifier">tagSentenceOriginal</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.utagger.Tagger$tagSentenceOriginal(kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-u-word/index.html"><span class="identifier">UWord</span></a><span class="symbol">&gt;</span><span class="symbol">?</span></code></td>
 </tr>
 </tbody>
 </table>

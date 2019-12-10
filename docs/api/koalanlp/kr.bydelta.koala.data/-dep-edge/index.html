@@ -35,12 +35,11 @@
 <tbody>
 <tr>
 <td>
-<p><a href="-init-.html">&lt;init&gt;</a></p>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
 </td>
 <td>
-<code><span class="identifier">DepEdge</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.data.DepEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.PhraseTag, kr.bydelta.koala.DependencyTag, kotlin.String)/governor">governor</span><span class="symbol">:</span>&nbsp;<a href="../-word/index.html"><span class="identifier">Word</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.data.DepEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.PhraseTag, kr.bydelta.koala.DependencyTag, kotlin.String)/dependent">dependent</span><span class="symbol">:</span>&nbsp;<a href="../-word/index.html"><span class="identifier">Word</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.data.DepEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.PhraseTag, kr.bydelta.koala.DependencyTag, kotlin.String)/type">type</span><span class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala/-phrase-tag/index.html"><span class="identifier">PhraseTag</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.data.DepEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.PhraseTag, kr.bydelta.koala.DependencyTag, kotlin.String)/depType">depType</span><span class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala/-dependency-tag/index.html"><span class="identifier">DependencyTag</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.data.DepEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.PhraseTag, kr.bydelta.koala.DependencyTag, kotlin.String)/originalLabel">originalLabel</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span></code>
 <p>의존구문구조 분석 결과를 생성합니다.</p>
-</td>
+<code><span class="identifier">DepEdge</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.data.DepEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.PhraseTag, kr.bydelta.koala.DependencyTag, kotlin.String)/governor">governor</span><span class="symbol">:</span>&nbsp;<a href="../-word/index.html"><span class="identifier">Word</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.data.DepEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.PhraseTag, kr.bydelta.koala.DependencyTag, kotlin.String)/dependent">dependent</span><span class="symbol">:</span>&nbsp;<a href="../-word/index.html"><span class="identifier">Word</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.data.DepEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.PhraseTag, kr.bydelta.koala.DependencyTag, kotlin.String)/type">type</span><span class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala/-phrase-tag/index.html"><span class="identifier">PhraseTag</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.data.DepEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.PhraseTag, kr.bydelta.koala.DependencyTag, kotlin.String)/depType">depType</span><span class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala/-dependency-tag/index.html"><span class="identifier">DependencyTag</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.data.DepEdge$<init>(kr.bydelta.koala.data.Word, kr.bydelta.koala.data.Word, kr.bydelta.koala.PhraseTag, kr.bydelta.koala.DependencyTag, kotlin.String)/originalLabel">originalLabel</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -49,80 +48,43 @@
 <tbody>
 <tr>
 <td>
-<p><a href="dep-type.html">depType</a></p>
+<h4><a href="dependent.html">dependent</a></h4>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">depType</span><span class="symbol">: </span><a href="../../kr.bydelta.koala/-dependency-tag/index.html"><span class="identifier">DependencyTag</span></a><span class="symbol">?</span></code>
-<p>의존기능 표지자, <a href="../../kr.bydelta.koala/-dependency-tag/index.html">DependencyTag</a> Enum 값. 별도의 기능이 지정되지 않으면 null. (ETRI 표준안은 구구조+의존기능으로 의존구문구조를 표기함)</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="dependent.html">dependent</a></p>
-</td>
-<td>
-<code><span class="keyword">val </span><span class="identifier">dependent</span><span class="symbol">: </span><a href="../-word/index.html"><span class="identifier">Word</span></a></code>
 <p>의존구조의 피지배소 <a href="../-word/index.html">Word</a></p>
-</td>
+<code><span class="keyword">val </span><span class="identifier">dependent</span><span class="symbol">: </span><a href="../-word/index.html"><span class="identifier">Word</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="governor.html">governor</a></p>
+<h4><a href="dep-type.html">depType</a></h4>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">governor</span><span class="symbol">: </span><a href="../-word/index.html"><span class="identifier">Word</span></a><span class="symbol">?</span></code>
+<p>의존기능 표지자, <a href="../../kr.bydelta.koala/-dependency-tag/index.html">DependencyTag</a> Enum 값. 별도의 기능이 지정되지 않으면 null. (ETRI 표준안은 구구조+의존기능으로 의존구문구조를 표기함)</p>
+<code><span class="keyword">val </span><span class="identifier">depType</span><span class="symbol">: </span><a href="../../kr.bydelta.koala/-dependency-tag/index.html"><span class="identifier">DependencyTag</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="governor.html">governor</a></h4>
+</td>
+<td>
 <p>의존구조의 지배소 <a href="../-word/index.html">Word</a>. 문장의 Root에 해당하는 경우 null.</p>
-</td>
+<code><span class="keyword">val </span><span class="identifier">governor</span><span class="symbol">: </span><a href="../-word/index.html"><span class="identifier">Word</span></a><span class="symbol">?</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="original-label.html">originalLabel</a></p>
+<h4><a href="original-label.html">originalLabel</a></h4>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">originalLabel</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code>
 <p>원본 분석기의 표지자 String 값. 기본값은 null.</p>
-</td>
+<code><span class="keyword">val </span><span class="identifier">originalLabel</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="type.html">type</a></p>
+<h4><a href="type.html">type</a></h4>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">type</span><span class="symbol">: </span><a href="../../kr.bydelta.koala/-phrase-tag/index.html"><span class="identifier">PhraseTag</span></a></code>
 <p>구구조 표지자, <a href="../../kr.bydelta.koala/-phrase-tag/index.html">PhraseTag</a> Enum 값 (ETRI 표준안은 구구조+의존기능으로 의존구문구조를 표기함)</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3>Inherited Properties</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<p><a href="../-d-a-g-edge/dest.html">dest</a></p>
-</td>
-<td>
-<code><span class="keyword">val </span><span class="identifier">dest</span><span class="symbol">: </span><a href="../-d-a-g-edge/index.html#T"><span class="identifier">T</span></a></code>
-<p>Edge의 종점. 의존구문분석인 경우 피지배소, 의미역인 경우 논항.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="../-d-a-g-edge/label.html">label</a></p>
-</td>
-<td>
-<code><span class="keyword">val </span><span class="identifier">label</span><span class="symbol">: </span><a href="../-d-a-g-edge/index.html#L"><span class="identifier">L</span></a><span class="symbol">?</span></code>
-<p>Edge가 나타내는 관계.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="../-d-a-g-edge/src.html">src</a></p>
-</td>
-<td>
-<code><span class="keyword">val </span><span class="identifier">src</span><span class="symbol">: </span><a href="../-d-a-g-edge/index.html#T"><span class="identifier">T</span></a><span class="symbol">?</span></code>
-<p>Edge의 시작점. 의존구문분석인 경우 지배소, 의미역인 경우 동사.</p>
-</td>
+<code><span class="keyword">val </span><span class="identifier">type</span><span class="symbol">: </span><a href="../../kr.bydelta.koala/-phrase-tag/index.html"><span class="identifier">PhraseTag</span></a></code></td>
 </tr>
 </tbody>
 </table>
@@ -131,30 +93,27 @@
 <tbody>
 <tr>
 <td>
-<p><a href="equals.html">equals</a></p>
+<h4><a href="equals.html">equals</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">equals</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.data.DepEdge$equals(kotlin.Any)/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
 <p>Indicates whether some other object is "equal to" this one.</p>
-</td>
+<code><span class="keyword">fun </span><span class="identifier">equals</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.data.DepEdge$equals(kotlin.Any)/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="hash-code.html">hashCode</a></p>
+<h4><a href="hash-code.html">hashCode</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">hashCode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
 <p>Returns a hash code value for the object.  The general contract of hashCode is:</p>
-</td>
+<code><span class="keyword">fun </span><span class="identifier">hashCode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="to-string.html">toString</a></p>
+<h4><a href="to-string.html">toString</a></h4>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
 <p>Returns a string representation of the object.</p>
-</td>
+<code><span class="keyword">fun </span><span class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 </tbody>
 </table>

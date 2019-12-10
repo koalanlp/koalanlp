@@ -23,129 +23,115 @@
 <tbody>
 <tr>
 <td>
-<p><a href="-can-have-property/index.html">CanHaveProperty</a></p>
+<h4><a href="-can-have-property/index.html">CanHaveProperty</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CanHaveProperty</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property.html"><span class="identifier">Property</span></a></code>
 <p>텍스트 분석 과정에서 얻어지는 여러가지 값들을 표현하는 class.</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CanHaveProperty</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property.html"><span class="identifier">Property</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-coreference-group/index.html">CoreferenceGroup</a></p>
+<h4><a href="-coreference-group/index.html">CoreferenceGroup</a></h4>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">CoreferenceGroup</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property.html"><span class="identifier">Property</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-entity/index.html"><span class="identifier">Entity</span></a><span class="symbol">&gt;</span></code>
 <p>공지시어 해소 또는 대용어 분석 결과를 저장할 class입니다.</p>
-</td>
+<code><span class="keyword">class </span><span class="identifier">CoreferenceGroup</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property.html"><span class="identifier">Property</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-entity/index.html"><span class="identifier">Entity</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-d-a-g-edge/index.html">DAGEdge</a></p>
+<h4><a href="-d-a-g-edge/index.html">DAGEdge</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">DAGEdge</span><span class="symbol">&lt;</span><span class="identifier">L</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property.html"><span class="identifier">Property</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-have-property/index.html"><span class="identifier">CanHaveProperty</span></a></code>
 <p><a href="-d-a-g-edge/index.html#T">T</a>-type의 DAG Edge를 저장합니다.</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">DAGEdge</span><span class="symbol">&lt;</span><span class="identifier">L</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property.html"><span class="identifier">Property</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-have-property/index.html"><span class="identifier">CanHaveProperty</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-dep-edge/index.html">DepEdge</a></p>
+<h4><a href="-dep-edge/index.html">DepEdge</a></h4>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">DepEdge</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-d-a-g-edge/index.html"><span class="identifier">DAGEdge</span></a><span class="symbol">&lt;</span><a href="../kr.bydelta.koala/-dependency-tag/index.html"><span class="identifier">DependencyTag</span></a><span class="symbol">,</span>&nbsp;<a href="-word/index.html"><span class="identifier">Word</span></a><span class="symbol">&gt;</span></code>
 <p>의존구문구조 분석의 결과.</p>
-</td>
+<code><span class="keyword">class </span><span class="identifier">DepEdge</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-d-a-g-edge/index.html"><span class="identifier">DAGEdge</span></a><span class="symbol">&lt;</span><a href="../kr.bydelta.koala/-dependency-tag/index.html"><span class="identifier">DependencyTag</span></a><span class="symbol">,</span>&nbsp;<a href="-word/index.html"><span class="identifier">Word</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-entity/index.html">Entity</a></p>
+<h4><a href="-entity/index.html">Entity</a></h4>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">Entity</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-have-property/index.html"><span class="identifier">CanHaveProperty</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-morpheme/index.html"><span class="identifier">Morpheme</span></a><span class="symbol">&gt;</span></code>
 <p>개체명 분석 결과를 저장할 <a href="-property.html">Property</a> class</p>
-</td>
+<code><span class="keyword">class </span><span class="identifier">Entity</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-have-property/index.html"><span class="identifier">CanHaveProperty</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-morpheme/index.html"><span class="identifier">Morpheme</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-list-property/index.html">ListProperty</a></p>
+<h4><a href="-list-property/index.html">ListProperty</a></h4>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">ListProperty</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property.html"><span class="identifier">Property</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property.html"><span class="identifier">Property</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-list-property/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
 <p>속성의 목록을 저장할, 불변형(immutable) 목록 속성 값</p>
-</td>
+<code><span class="keyword">class </span><span class="identifier">ListProperty</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property.html"><span class="identifier">Property</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property.html"><span class="identifier">Property</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-morpheme/index.html">Morpheme</a></p>
+<h4><a href="-morpheme/index.html">Morpheme</a></h4>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">Morpheme</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-have-property/index.html"><span class="identifier">CanHaveProperty</span></a></code>
 <p>형태소를 저장하는 <a href="-property.html">Property</a> class입니다.</p>
-</td>
+<code><span class="keyword">class </span><span class="identifier">Morpheme</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-have-property/index.html"><span class="identifier">CanHaveProperty</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-property.html">Property</a></p>
+<h4><a href="-property.html">Property</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">Property</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="http://docs.oracle.com/javase/8/docs/api/java/io/Serializable.html"><span class="identifier">Serializable</span></a></code>
 <p>텍스트 분석 과정에서 얻어지는 여러가지 값들을 표현하는 타입입니다.</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">Property</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/io/Serializable.html"><span class="identifier">Serializable</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-role-edge/index.html">RoleEdge</a></p>
+<h4><a href="-role-edge/index.html">RoleEdge</a></h4>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">RoleEdge</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-d-a-g-edge/index.html"><span class="identifier">DAGEdge</span></a><span class="symbol">&lt;</span><a href="../kr.bydelta.koala/-role-type/index.html"><span class="identifier">RoleType</span></a><span class="symbol">,</span>&nbsp;<a href="-word/index.html"><span class="identifier">Word</span></a><span class="symbol">&gt;</span></code>
 <p>의미역 구조 분석의 결과.</p>
-</td>
+<code><span class="keyword">class </span><span class="identifier">RoleEdge</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-d-a-g-edge/index.html"><span class="identifier">DAGEdge</span></a><span class="symbol">&lt;</span><a href="../kr.bydelta.koala/-role-type/index.html"><span class="identifier">RoleType</span></a><span class="symbol">,</span>&nbsp;<a href="-word/index.html"><span class="identifier">Word</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-sentence/index.html">Sentence</a></p>
+<h4><a href="-sentence/index.html">Sentence</a></h4>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">Sentence</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-have-property/index.html"><span class="identifier">CanHaveProperty</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-word/index.html"><span class="identifier">Word</span></a><span class="symbol">&gt;</span></code>
 <p>문장을 표현하는 <a href="-property.html">Property</a> class입니다.</p>
-</td>
+<code><span class="keyword">class </span><span class="identifier">Sentence</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-have-property/index.html"><span class="identifier">CanHaveProperty</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-word/index.html"><span class="identifier">Word</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-syntax-tree/index.html">SyntaxTree</a></p>
+<h4><a href="-syntax-tree/index.html">SyntaxTree</a></h4>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">SyntaxTree</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">&lt;</span><a href="../kr.bydelta.koala/-phrase-tag/index.html"><span class="identifier">PhraseTag</span></a><span class="symbol">,</span>&nbsp;<a href="-syntax-tree/index.html"><span class="identifier">SyntaxTree</span></a><span class="symbol">&gt;</span></code>
 <p>구문구조 분석의 결과를 저장할 <a href="-property.html">Property</a>.</p>
-</td>
+<code><span class="keyword">class </span><span class="identifier">SyntaxTree</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">&lt;</span><a href="../kr.bydelta.koala/-phrase-tag/index.html"><span class="identifier">PhraseTag</span></a><span class="symbol">,</span>&nbsp;<a href="-syntax-tree/index.html"><span class="identifier">SyntaxTree</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-tree/index.html">Tree</a></p>
+<h4><a href="-tree/index.html">Tree</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">Tree</span><span class="symbol">&lt;</span><span class="identifier">L</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">&lt;</span><a href="-tree/index.html#L"><span class="identifier">L</span></a><span class="symbol">,</span>&nbsp;<a href="-tree/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-have-property/index.html"><span class="identifier">CanHaveProperty</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-tree/index.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
 <p><a href="-tree/index.html#T">T</a>-type들의 트리 구조를 저장할 <a href="-property.html">Property</a>입니다. <a href="-word/index.html">Word</a>를 묶어서 표현하는 구조에 적용됩니다.</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">Tree</span><span class="symbol">&lt;</span><span class="identifier">L</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">&lt;</span><span class="identifier">L</span><span class="symbol">,</span>&nbsp;<span class="identifier">T</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-have-property/index.html"><span class="identifier">CanHaveProperty</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-word/index.html">Word</a></p>
+<h4><a href="-word/index.html">Word</a></h4>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">Word</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-have-property/index.html"><span class="identifier">CanHaveProperty</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-morpheme/index.html"><span class="identifier">Morpheme</span></a><span class="symbol">&gt;</span></code>
 <p>어절을 표현하는 <a href="-property.html">Property</a> class입니다.</p>
-</td>
+<code><span class="keyword">class </span><span class="identifier">Word</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-have-property/index.html"><span class="identifier">CanHaveProperty</span></a><span class="symbol">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-morpheme/index.html"><span class="identifier">Morpheme</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-word-sense/index.html">WordSense</a></p>
+<h4><a href="-word-sense/index.html">WordSense</a></h4>
 </td>
 <td>
-<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">WordSense</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property.html"><span class="identifier">Property</span></a></code>
 <p>정수형 값을 저장할 <a href="-property.html">Property</a> class.</p>
-</td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">WordSense</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-property.html"><span class="identifier">Property</span></a></code></td>
 </tr>
 </tbody>
 </table>
@@ -154,12 +140,11 @@
 <tbody>
 <tr>
 <td>
-<p><a href="-already-set-i-d-exception/index.html">AlreadySetIDException</a></p>
+<h4><a href="-already-set-i-d-exception/index.html">AlreadySetIDException</a></h4>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">AlreadySetIDException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span class="identifier">Exception</span></a></code>
 <p>ID가 이미 설정되었을 때 발생하는 Exception</p>
-</td>
+<code><span class="keyword">class </span><span class="identifier">AlreadySetIDException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span class="identifier">Exception</span></a></code></td>
 </tr>
 </tbody>
 </table>

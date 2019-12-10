@@ -21,25 +21,29 @@ dokka {
     outputFormat = "html"
 
     configuration {
-        moduleName = "$rootProject.name"
+        moduleName = rootProject.name
         jdkVersion = 8
         noStdlibLink = false
 
-        doFirst {
-            sourceDirs = files(subprojects.collect { p ->
-                def path = new File(p.projectDir, "/src/main/kotlin")
+        subprojects.forEach { p ->
+            def projPath = new File(p.projectDir, "/src/main/kotlin")
+            def relativePath = rootDir.toPath().relativize(projPath.toPath()).toString()
 
-                def relativePath = rootDir.toPath().relativize(path.toPath()).toString()
-                linkMapping {
-                    dir = path
-                    url = "https://github.com/koalanlp/koalanlp/blob/master/$relativePath"
-                    suffix = "#L"
-                }
+            sourceLink {
+                path = projPath
+                url = "https://github.com/koalanlp/koalanlp/blob/master/$relativePath"
+                lineSuffix = "#L"
+            }
 
-                return path
-            })
-
-            includes = ['docs/index.md', *subprojects.collect { "${it.projectDir}/index.md" }]
+            sourceRoot {
+                path = projPath
+            }
         }
+
+        includes = ['docs/index.md', *subprojects.collect { "${it.projectDir}/index.md".toString() }]
     }
 }
+
+// For staging plugin.
+ext.nexusUsername = project.properties.'ossrhUsername' as String ?: 'Foo'
+ext.nexusPassword = project.properties.'ossrhPassword' as String ?: 'Foo'

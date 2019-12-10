@@ -16,12 +16,11 @@ ETRI Open API와 통신을 하는 부분입니다.</p>
 <tbody>
 <tr>
 <td>
-<p><a href="api-key.html">apiKey</a></p>
+<h4><a href="api-key.html">apiKey</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">apiKey</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
 <p>ETRI Open API의 Access Token 값입니다.</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">apiKey</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
 </tr>
 </tbody>
 </table>
@@ -30,21 +29,19 @@ ETRI Open API와 통신을 하는 부분입니다.</p>
 <tbody>
 <tr>
 <td>
-<p><a href="convert-payload.html">convertPayload</a></p>
+<h4><a href="convert-payload.html">convertPayload</a></h4>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">convertPayload</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.etri.CanCommunicateETRIApi$convertPayload(kr.bydelta.koala.etri.SentenceResponse)/result">result</span><span class="symbol">:</span>&nbsp;<a href="../-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../kr.bydelta.koala.data/-sentence/index.html"><span class="identifier">Sentence</span></a></code>
 <p><a href="../-result-payload/index.html">ResultPayload</a> 유형의 요청 결과를 Koala의 <a href="../../kr.bydelta.koala.data/-sentence/index.html">Sentence</a> 목록으로 변환합니다.</p>
-</td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">convertPayload</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.etri.CanCommunicateETRIApi$convertPayload(kr.bydelta.koala.etri.SentenceResponse)/result">result</span><span class="symbol">:</span>&nbsp;<a href="../-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../../kr.bydelta.koala.data/-sentence/index.html"><span class="identifier">Sentence</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="request.html">request</a></p>
+<h4><a href="request.html">request</a></h4>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">request</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.etri.CanCommunicateETRIApi$request(kotlin.String, kotlin.String, kotlin.String)/apiKey">apiKey</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.etri.CanCommunicateETRIApi$request(kotlin.String, kotlin.String, kotlin.String)/type">type</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.etri.CanCommunicateETRIApi$request(kotlin.String, kotlin.String, kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-result-content/index.html"><span class="identifier">ResultContent</span></a></code>
 <p>ETRI Open API와 통신합니다.</p>
-</td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">request</span><span class="symbol">(</span><span class="identifier" id="kr.bydelta.koala.etri.CanCommunicateETRIApi$request(kotlin.String, kotlin.String, kotlin.String)/apiKey">apiKey</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.etri.CanCommunicateETRIApi$request(kotlin.String, kotlin.String, kotlin.String)/type">type</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="kr.bydelta.koala.etri.CanCommunicateETRIApi$request(kotlin.String, kotlin.String, kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-result-content/index.html"><span class="identifier">ResultContent</span></a></code></td>
 </tr>
 </tbody>
 </table>
@@ -53,21 +50,19 @@ ETRI Open API와 통신을 하는 부분입니다.</p>
 <tbody>
 <tr>
 <td>
-<p><a href="../-can-parse-with-e-t-r-i/index.html">CanParseWithETRI</a></p>
+<h4><a href="../-can-parse-with-e-t-r-i/index.html">CanParseWithETRI</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">CanParseWithETRI</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">CanCommunicateETRIApi</span></a><span class="symbol">, </span><a href="../../kr.bydelta.koala.proc/-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span class="symbol">&lt;</span><a href="../-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a><span class="symbol">&gt;</span></code>
 <p>ETRI API와 통신을 하는 <a href="../../kr.bydelta.koala.proc/-can-analyze-property/index.html">CanAnalyzeProperty</a> 인터페이스입니다.</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">CanParseWithETRI</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">CanCommunicateETRIApi</span></a><span class="symbol">, </span><a href="../../kr.bydelta.koala.proc/-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span class="symbol">&lt;</span><a href="../-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="../-tagger/index.html">Tagger</a></p>
+<h4><a href="../-tagger/index.html">Tagger</a></h4>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">Tagger</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala.proc/-can-tag-only-a-paragraph/index.html"><span class="identifier">CanTagOnlyAParagraph</span></a><span class="symbol">&lt;</span><a href="../-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="./index.html"><span class="identifier">CanCommunicateETRIApi</span></a></code>
 <p>ETRI 품사 분석 API의 Wrapper입니다.</p>
-</td>
+<code><span class="keyword">class </span><span class="identifier">Tagger</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../kr.bydelta.koala.proc/-can-tag-only-a-paragraph/index.html"><span class="identifier">CanTagOnlyAParagraph</span></a><span class="symbol">&lt;</span><a href="../-sentence-response/index.html"><span class="identifier">SentenceResponse</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="./index.html"><span class="identifier">CanCommunicateETRIApi</span></a></code></td>
 </tr>
 </tbody>
 </table>

@@ -288,7 +288,7 @@ object HNNSyntaxParserTest : Spek(ParserSpek<Sentence, CanParseSyntax<Sentence>>
         }
 ))
 
-fun DepEdge.getOriginalString() = "${this.originalLabel}(${this.governor.id ?: -1}, ${this.dependent.id})"
+fun DepEdge.getOriginalString() = "${this.originalLabel}(${this.governor?.id ?: -1}, ${this.dependent.id})"
 
 fun DNode.getOriginalString() =
         "${this.correspondingPhrase.phraseTag.split("-")[0]}_${this.getdType()}(${this.head?.wordIdx

@@ -23,167 +23,145 @@
 <tbody>
 <tr>
 <td>
-<p><a href="-can-analyze-property/index.html">CanAnalyzeProperty</a></p>
+<h4><a href="-can-analyze-property/index.html">CanAnalyzeProperty</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">CanAnalyzeProperty</span><span class="symbol">&lt;</span><span class="identifier">INTERMEDIATE</span><span class="symbol">&gt;</span></code>
 <p><a href="../kr.bydelta.koala.data/-sentence/index.html">Sentence</a> 객체에 property를 추가할 수 있는 interface입니다.
 <a href="-can-analyze-property/index.html#INTERMEDIATE">INTERMEDIATE</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">CanAnalyzeProperty</span><span class="symbol">&lt;</span><span class="identifier">INTERMEDIATE</span><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-can-compile-dict/index.html">CanCompileDict</a></p>
+<h4><a href="-can-compile-dict/index.html">CanCompileDict</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">CanCompileDict</span></code>
 <p>사용자 사전추가 기능을 위한 interface입니다.</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">CanCompileDict</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-can-disambiguate-sense.html">CanDisambiguateSense</a></p>
+<h4><a href="-can-disambiguate-sense.html">CanDisambiguateSense</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">CanDisambiguateSense</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span class="symbol">&lt;</span><a href="-can-disambiguate-sense.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
 <p>다의어 분별 (Word sense disambiguation)을 수행하는 Interface입니다.
 매개변수 <a href="-can-disambiguate-sense.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">CanDisambiguateSense</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-can-extract-resource/index.html">CanExtractResource</a></p>
+<h4><a href="-can-extract-resource/index.html">CanExtractResource</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CanExtractResource</span></code>
 <p>Jar Resource에 포함된 모형을 임시디렉터리에 압축해제하기 위한 interface입니다.</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CanExtractResource</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-can-label-semantic-role.html">CanLabelSemanticRole</a></p>
+<h4><a href="-can-label-semantic-role.html">CanLabelSemanticRole</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">CanLabelSemanticRole</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span class="symbol">&lt;</span><a href="-can-label-semantic-role.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
 <p>의미역 분석(Semantic Role Labeling)을 수행하는 Interface입니다.
 매개변수 <a href="-can-label-semantic-role.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">CanLabelSemanticRole</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-can-parse-dependency.html">CanParseDependency</a></p>
+<h4><a href="-can-parse-dependency.html">CanParseDependency</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">CanParseDependency</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span class="symbol">&lt;</span><a href="-can-parse-dependency.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
 <p>의존구문분석을 수행하는 Interface입니다.
 매개변수 <a href="-can-parse-dependency.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">CanParseDependency</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-can-parse-syntax.html">CanParseSyntax</a></p>
+<h4><a href="-can-parse-syntax.html">CanParseSyntax</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">CanParseSyntax</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span class="symbol">&lt;</span><a href="-can-parse-syntax.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
 <p>구문분석을 수행하는 Interface입니다.
 매개변수 <a href="-can-parse-syntax.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">CanParseSyntax</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-can-recognize-entity.html">CanRecognizeEntity</a></p>
+<h4><a href="-can-recognize-entity.html">CanRecognizeEntity</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">CanRecognizeEntity</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span class="symbol">&lt;</span><a href="-can-recognize-entity.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
 <p>개체명 인식 (Named Entity Recognition)을 수행하는 Interface입니다.
 매개변수 <a href="-can-recognize-entity.html#T">T</a>는 각 분석기에서 문장을 분석한 결과물의 중간 형태, 즉 분석기의 입력 형태입니다.</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">CanRecognizeEntity</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-can-resolve-coref.html">CanResolveCoref</a></p>
+<h4><a href="-can-resolve-coref.html">CanResolveCoref</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">CanResolveCoref</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span class="symbol">&lt;</span><a href="-can-resolve-coref.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span></code>
 <p>상호참조 해소, 공지시어 해소 (Coreference Resolution) 또는 대용어 분석 (Anaphora Resolution)을 수행하는 Interface입니다.</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">CanResolveCoref</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-analyze-property/index.html"><span class="identifier">CanAnalyzeProperty</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-can-split-sentence/index.html">CanSplitSentence</a></p>
+<h4><a href="-can-split-sentence/index.html">CanSplitSentence</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">CanSplitSentence</span></code>
 <p>문장분리기 Interface</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">CanSplitSentence</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-can-tag/index.html">CanTag</a></p>
+<h4><a href="-can-tag/index.html">CanTag</a></h4>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">CanTag</span></code>
 <p>품사분석기의 최상위 인터페이스입니다.</p>
-</td>
+<code><span class="keyword">interface </span><span class="identifier">CanTag</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-can-tag-a-paragraph/index.html">CanTagAParagraph</a></p>
+<h4><a href="-can-tag-a-paragraph/index.html">CanTagAParagraph</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CanTagAParagraph</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-tag-a-sentence/index.html"><span class="identifier">CanTagASentence</span></a><span class="symbol">&lt;</span><a href="-can-tag-a-paragraph/index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span></code>
 <p>문단1개, 문장1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 <a href="-can-tag-a-paragraph/index.html#S">S</a> 타입으로 돌려줍니다.</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CanTagAParagraph</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-tag-a-sentence/index.html"><span class="identifier">CanTagASentence</span></a><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-can-tag-a-sentence/index.html">CanTagASentence</a></p>
+<h4><a href="-can-tag-a-sentence/index.html">CanTagASentence</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CanTagASentence</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-tag/index.html"><span class="identifier">CanTag</span></a></code>
 <p>문장 1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 <a href="-can-tag-a-sentence/index.html#S">S</a> 타입으로 돌려줍니다.</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CanTagASentence</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-tag/index.html"><span class="identifier">CanTag</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-can-tag-only-a-paragraph/index.html">CanTagOnlyAParagraph</a></p>
+<h4><a href="-can-tag-only-a-paragraph/index.html">CanTagOnlyAParagraph</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CanTagOnlyAParagraph</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-tag/index.html"><span class="identifier">CanTag</span></a></code>
 <p>문장1개는 불가하지만, 문단1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 <a href="-can-tag-only-a-paragraph/index.html#S">S</a> 타입으로 돌려줍니다.</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CanTagOnlyAParagraph</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-tag/index.html"><span class="identifier">CanTag</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-can-tag-only-a-sentence/index.html">CanTagOnlyASentence</a></p>
+<h4><a href="-can-tag-only-a-sentence/index.html">CanTagOnlyASentence</a></h4>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CanTagOnlyASentence</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-tag/index.html"><span class="identifier">CanTag</span></a></code>
 <p>문단1개는 불가하지만, 문장1개가 분석가능한 품사분석기 interface. 원본 분석기는 문장 분석 결과를 <a href="-can-tag-only-a-sentence/index.html#S">S</a> 타입으로 돌려줍니다.</p>
-</td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">CanTagOnlyASentence</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-can-tag/index.html"><span class="identifier">CanTag</span></a></code></td>
 </tr>
 <tr>
 <td>
-<p><a href="-sentence-splitter/index.html">SentenceSplitter</a></p>
+<h4><a href="-dic-entry.html">DicEntry</a></h4>
 </td>
 <td>
-<code><span class="keyword">object </span><span class="identifier">SentenceSplitter</span></code>
-<p>세종 태그셋에 기반한 Heuristic 문장분리기</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3>Type Aliases</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<p><a href="-dic-entry.html">DicEntry</a></p>
-</td>
-<td>
-<code><span class="keyword">typealias </span><span class="identifier">DicEntry</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html"><span class="identifier">Pair</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="../kr.bydelta.koala/-p-o-s/index.html"><span class="identifier">POS</span></a><span class="symbol">&gt;</span></code>
 <p>Dictionary Entry 타입: 표면형을 나타내는 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> 값과, 품사태그를 나타내는 <a href="../kr.bydelta.koala/-p-o-s/index.html">POS</a>값으로 구성.</p>
+<code><span class="keyword">typealias </span><span class="identifier">DicEntry</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html"><span class="identifier">Pair</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="../kr.bydelta.koala/-p-o-s/index.html"><span class="identifier">POS</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-sentence-splitter/index.html">SentenceSplitter</a></h4>
 </td>
+<td>
+<p>세종 태그셋에 기반한 Heuristic 문장분리기</p>
+<code><span class="keyword">object </span><span class="identifier">SentenceSplitter</span></code></td>
 </tr>
 </tbody>
 </table>
