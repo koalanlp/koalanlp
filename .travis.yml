@@ -49,10 +49,7 @@ install:
 script:
   - ./gradlew clean
   - ./gradlew check -Parch=$TRAVIS_OS_NAME -PnoGUI --info
-  - if [ $TRAVIS_OS_NAME == 'linux' ]
-    then
-    xvfb-run -a ./gradlew :koalanlp-rhino:test :koalanlp-rhino:jacocoTestReport --tests *OriginTest --info
-    fi
+  - if [ $TRAVIS_OS_NAME == 'linux' ]; then xvfb-run -a ./gradlew :koalanlp-rhino:test :koalanlp-rhino:jacocoTestReport --tests *OriginTest --info; fi
 after_success:
   - bash ./git-manage.sh
 env:

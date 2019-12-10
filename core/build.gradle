@@ -10,6 +10,8 @@ plugins {
 group 'kr.bydelta'
 version rootProject.version
 
+apply from: rootProject.file('common.gradle')
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
