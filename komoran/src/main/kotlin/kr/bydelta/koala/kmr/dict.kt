@@ -8,6 +8,7 @@ import kr.bydelta.koala.proc.CanCompileDict
 import kr.bydelta.koala.proc.CanExtractResource
 import kr.bydelta.koala.proc.DicEntry
 import kr.co.shineware.ds.aho_corasick.model.AhoCorasickNode
+import kr.co.shineware.nlp.komoran.constant.FILENAME
 import kr.co.shineware.nlp.komoran.model.ScoredTag
 import kr.co.shineware.nlp.komoran.modeler.model.Observation
 import kr.co.shineware.nlp.komoran.parser.KoreanUnitParser
@@ -43,7 +44,7 @@ object Dictionary : CanExtractResource(), CanCompileDict {
     @JvmStatic
     private val systemdic by lazy {
         val o = Observation()
-        o.load(o::class.java.classLoader.getResourceAsStream("models_full" + File.separator + "observation.model"))
+        o.load(o::class.java.classLoader.getResourceAsStream("${FILENAME.FULL_MODEL}/${FILENAME.OBSERVATION}"))
         o
     }
 

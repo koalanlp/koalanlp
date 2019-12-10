@@ -5,16 +5,17 @@ test {
     minHeapSize = "1g"
     maxHeapSize = "4g"
 
-    if (project.hasProperty('notTest')){
-        def testProperty = project.property('notTest').toString()
-        def prefix = '**' + File.separator
+    if (project.hasProperty('arch')) {
+        def architecture = project.property('arch').toString()
 
-        if (testProperty.contains('JNA')){
-            exclude prefix + 'KhaiiiTaggerTest.class', prefix + 'UTaggerTaggerTest.class'
+        if (architecture == 'windows') {
+            excludes.addAll(['**/KhaiiiTaggerTest.class'])
+        } else if (architecture == 'osx') {
+            excludes.addAll(['**/UTaggerTaggerTest.class'])
         }
-        if (testProperty.contains('GUI')){
-            exclude prefix + 'RhinoOriginDictionaryReaderTest.class', prefix + 'RhinoOriginExtraTest.class', prefix + 'RhinoOriginTagger.test'
-        }
+    }
+    if (project.hasProperty('noGUI')) {
+        excludes.add('**/RhinoOrigin*Test.class')
     }
 
     useJUnitPlatform {

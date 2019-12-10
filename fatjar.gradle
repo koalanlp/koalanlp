@@ -1,0 +1,11 @@
+task fatJar(type: Jar) {
+    classifier "assembly"
+    from {
+        configurations.compile.filter { !it.isDirectory() }.collect { zipTree(it) }
+    }
+    with jar
+}
+
+artifacts{
+    archives fatJar
+}

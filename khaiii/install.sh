@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+if [ $TRAVIS_OS_NAME == 'windows' ]
+then
+    echo "Khaiii does not support Windows architecture."
+    exit 0
+fi
+
 ### Khaiii 저장소 clone
 if [ ! -d "$HOME/khaiii-orig/.git" ]
 then

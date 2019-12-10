@@ -2,30 +2,23 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'maven-publish'
+    id 'signing'
     id "org.jetbrains.kotlin.jvm"
     id "org.jetbrains.dokka"
-    id "com.bmuschko.nexus"
 }
 
 group 'kr.bydelta'
-version "2.1.1"
+version "2.1.1-SNAPSHOT"
+
+apply from: rootProject.file('common.gradle')
+apply from: rootProject.file('dependency.gradle')
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation "kr.bydelta:koalanlp-core:${corePublishedVer}"
     implementation 'net.java.dev.jna:jna:5.5.0'
     implementation ('com.beust:klaxon:5.2') {
         exclude group: 'org.jetbrains.kotlin'
     }
     implementation "org.jetbrains.kotlin:kotlin-reflect"
-
-    testImplementation "kr.bydelta:koalanlp-core:${corePublishedVer}:tests"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2"
-    testImplementation "org.amshove.kluent:kluent:1.58"
-    testImplementation "org.spekframework.spek2:spek-dsl-jvm:2.0.8"
-    testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect"
-    testRuntimeOnly "org.jetbrains.kotlin:kotlin-test"
-    testRuntimeOnly "org.spekframework.spek2:spek-runner-junit5:2.0.8"
 }
 
 apply from: rootProject.file('test.gradle')

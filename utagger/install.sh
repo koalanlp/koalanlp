@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+### Architecture 확인
+if [ $TRAVIS_OS_NAME == 'osx' ]
+then
+    echo "UTagger does not support OSX architecture."
+    exit 0
+fi
+
 ### UTagger 파일 다운로드
 cd $HOME
 if [ -z "$TRAVIS_OS_NAME" ]

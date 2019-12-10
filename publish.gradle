@@ -3,15 +3,36 @@ task unidocJar(type: Jar, dependsOn: dokka) {
     from javadoc.destinationDir
 }
 
+task testDependencyJar(type: Jar, dependsOn: compileTestKotlin){
+    classifier 'tests'
+    from sourceSets.test.output
+    exclude '**/*CoreSpec*'
+    exclude '*.zip'
+}
+
+def nexusUsername = project.properties.'ossrhUsername' as String ?: 'Foo'
+def nexusPassword = project.properties.'ossrhPassword' as String ?: 'Foo'
+def snapshotURL = "https://oss.sonatype.org/content/repositories/snapshots/" 
+def publishURL = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+
 publishing {
+    repositories {
+        maven { 
+            url = project.version.endsWith('SNAPSHOT') ? snapshotURL : publishURL
+            credentials {
+                username nexusUsername
+                password nexusPassword
+            }
+        }
+    }
     publications {
-        maven(MavenPublication) {
+        KoalaNLP(MavenPublication) {
             from components.java
             artifact tasks.kotlinSourcesJar
             artifact unidocJar
 
-            if (projectDir.name == "-core") {
-                artifact coreTestJar
+            if (project.name.endsWith("-core")) {
+                artifact testDependencyJar
             }
 
             pom {
@@ -62,7 +83,7 @@ dokka {
             lineSuffix = "#L"
         }
 
-        if (projectDir.name != 'core') {
+        if (!project.name.endsWith('-core')) {
             externalDocumentationLink {
                 url = new URL("https://koalanlp.github.io/koalanlp/api/koalanlp/")
                 packageListUrl = new URL("https://koalanlp.github.io/koalanlp/api/koalanlp/package-list")
@@ -73,6 +94,8 @@ dokka {
     }
 }
 
-nexus {
-    sign = true
+if (!project.version.endsWith('SNAPSHOT')) {
+    signing {
+        sign publishing.publications.KoalaNLP
+    }
 }
