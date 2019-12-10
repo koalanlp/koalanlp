@@ -18,9 +18,3 @@ repositories {
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     maven { url "https://jitpack.io" }
 }
-
-configurations.all {
-    resolutionStrategy {
-        cacheChangingModulesFor 10, 'minutes'
-    }
-}

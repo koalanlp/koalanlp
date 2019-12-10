@@ -6,16 +6,17 @@ test {
     maxHeapSize = "4g"
 
     if (project.hasProperty('arch')) {
-        def architecture = project.property('arch').toString()
+        def architecture = project.property('arch').toString().trim()
 
-        if (architecture == 'windows') {
-            excludes.addAll(['**/KhaiiiTaggerTest.class'])
-        } else if (architecture == 'osx') {
-            excludes.addAll(['**/UTaggerTaggerTest.class'])
+        if (architecture.equalsIgnoreCase('windows')) {
+            exclude '**/KhaiiiTaggerTest.class'
+        } else if (architecture.equalsIgnoreCase('osx')) {
+            exclude '**/UTaggerTest.class'
         }
     }
+
     if (project.hasProperty('noGUI')) {
-        excludes.add('**/RhinoOrigin*Test.class')
+        exclude '**/RhinoOrigin*Test.class'
     }
 
     useJUnitPlatform {

@@ -1,27 +1,28 @@
 package kr.bydelta.koala.test
 
 import com.sun.jna.Platform
+import kr.bydelta.koala.POS
+import kr.bydelta.koala.Conversion
 import kr.bydelta.koala.TaggerSpek
+import kr.bydelta.koala.TagConversionSpek
 import kr.bydelta.koala.utagger.Tagger
 import kr.bydelta.koala.utagger.UTagger
 import org.spekframework.spek2.Spek
 import java.io.File
 import java.nio.charset.Charset
 
-val DISTRO_IS_UBUNTU: Boolean by lazy {
+private var UTAGGER_INIT: UTagger? = null
 
-    val process = Runtime.getRuntime().exec("uname -a")
-    val output = process.inputStream.bufferedReader().lineSequence().joinToString()
-
-    "ubuntu" in output.toLowerCase()
-}
-
-var UTAGGER_INIT: UTagger? = null
-
-fun initUTagger(): UTagger {
+private fun initUTagger(): UTagger {
     if (UTAGGER_INIT == null) {
         val utaggerPath = File(System.getenv("HOME"), "utagger")
         val binPath = File(utaggerPath, "bin")
+        val DISTRO_IS_UBUNTU: Boolean by lazy {
+            val process = Runtime.getRuntime().exec("uname -a")
+            val output = process.inputStream.bufferedReader().lineSequence().joinToString()
+
+            "ubuntu" in output.toLowerCase()
+        }
 
         val libPath = if (Platform.isWindows() && Platform.is64Bit()) "utagger-win64.dll"
         else if (Platform.isLinux()) {
@@ -58,7 +59,7 @@ fun initUTagger(): UTagger {
 }
 
 
-object UTaggerTaggerTest : Spek(TaggerSpek(
+object UTaggerTest : Spek(TaggerSpek(
         getTagger = {
             initUTagger()
             Tagger()
@@ -77,3 +78,12 @@ object UTaggerTaggerTest : Spek(TaggerSpek(
 
             tagged.surfaceString() to tag
         }, isSentenceSplitterImplemented = true))
+
+
+// Dummy test for test filtering.
+object UTaggerTagConversionTest : Spek(TagConversionSpek(
+        from = {
+            if (it != null) POS.valueOf(it)
+            else POS.NA
+        }, to = { it.toString() },
+        getMapping = { listOf(Conversion(it.toString())) }))
