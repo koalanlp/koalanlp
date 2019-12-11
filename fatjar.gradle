@@ -1,9 +1,15 @@
+def libFileTree = fileTree(dir: 'lib', include: '*.jar')
+
 task fatJar(type: Jar) {
     classifier "assembly"
     from {
-        fileTree(dir: 'lib', include: '*.jar').collect { zipTree(it) }
+        libFileTree.collect { zipTree(it) }
     }
     with jar
+}
+
+dependencies {
+    implementation libFileTree
 }
 
 publishing {

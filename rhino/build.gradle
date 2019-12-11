@@ -12,11 +12,6 @@ version "2.1.4-SNAPSHOT"
 
 apply from: rootProject.file('common.gradle')
 apply from: rootProject.file('dependency.gradle')
-
-dependencies {
-    implementation fileTree(dir: 'lib', include: '*.jar')
-}
-
 apply from: rootProject.file('test.gradle')
 apply from: rootProject.file('publish.gradle')
 apply from: rootProject.file('fatjar.gradle')

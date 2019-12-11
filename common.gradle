@@ -11,10 +11,10 @@ compileTestKotlin {
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
     jcenter()
     maven { url "https://dl.bintray.com/spekframework/spek" }
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     maven { url "https://jitpack.io" }
+    mavenLocal()
 }
