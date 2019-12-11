@@ -124,6 +124,13 @@ async function someAsyncFunction(){
     // ....
     
     let tagger = new Tagger(EUNJEON);
+    // (1) 코모란 분석기는 경량 분석기를 사용하는 옵션이 있습니다. 예: new Tagger(KMR, {kmrLight:true});
+    // (2) ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: new Tagger(ETRI, {etriKey: API_KEY});
+    // (3) Khaiii 분석기의 경우 Khaiii 리소스 폴더를 필수적으로 전달해야 합니다. 예: new Tagger(KHAIII, {khaResource: resourcePath});
+    // (4) UTagger 분석기의 경우 사용 전 아래와 같이 UTagger 초기화 절차가 필요합니다.
+    // const {utagger} = require('koalanlp/proc');
+    // UTagger.setPath(libraryPath, configPath);  // (라이브러리 파일 위치와 설정파일 위치 지정)
+
     let result = await tagger("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다.");
     // 또는 tagger.tag(...) 
 
@@ -146,6 +153,13 @@ const {Tagger} = require('koalanlp/proc');
 const {EUNJEON} = require('koalanlp/API');
 
 let tagger = new Tagger(EUNJEON);
+// (1) 코모란 분석기는 경량 분석기를 사용하는 옵션이 있습니다. 예: new Tagger(KMR, {kmrLight:true});
+// (2) ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: new Tagger(ETRI, {etriKey: API_KEY});
+// (3) Khaiii 분석기의 경우 Khaiii 리소스 폴더를 필수적으로 전달해야 합니다. 예: new Tagger(KHAIII, {khaResource: resourcePath});
+// (4) UTagger 분석기의 경우 사용 전 아래와 같이 UTagger 초기화 절차가 필요합니다.
+// const {utagger} = require('koalanlp/proc');
+// UTagger.setPath(libraryPath, configPath);  // (라이브러리 파일 위치와 설정파일 위치 지정)
+
 tagger("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다.")  // 또는 tagger.tag(...)
     .then((result) => {
         /* Result는 string[] 타입입니다. */
@@ -162,6 +176,13 @@ const {EUNJEON} = require('koalanlp/API');
 // ....
 
 let tagger = new Tagger(EUNJEON);
+// (1) 코모란 분석기는 경량 분석기를 사용하는 옵션이 있습니다. 예: new Tagger(KMR, {kmrLight:true});
+// (2) ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: new Tagger(ETRI, {etriKey: API_KEY});
+// (3) Khaiii 분석기의 경우 Khaiii 리소스 폴더를 필수적으로 전달해야 합니다. 예: new Tagger(KHAIII, {khaResource: resourcePath});
+// (4) UTagger 분석기의 경우 사용 전 아래와 같이 UTagger 초기화 절차가 필요합니다.
+// const {utagger} = require('koalanlp/proc');
+// UTagger.setPath(libraryPath, configPath);  // (라이브러리 파일 위치와 설정파일 위치 지정)
+
 let result = await tagger.tagSync("문단을 분석합니다. 자동으로 분리되어 목록을 만듭니다."); 
 
 /* Result는 string[] 타입입니다. */

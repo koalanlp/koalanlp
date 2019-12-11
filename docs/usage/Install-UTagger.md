@@ -67,7 +67,7 @@
     UTagger.setPath("라이브러리 파일 절대경로", "설정 파일 절대경로")
     ```
    
-    * JavaScript의 경우 (반영 예정)
+    * JavaScript의 경우
     ```ecmascript 6
     const {UTagger} = require('koalanlp/proc');
    
@@ -138,7 +138,7 @@
     UTagger.setPath("라이브러리 파일 절대경로", "설정 파일 절대경로")
     ```
    
-    * JavaScript의 경우 (반영 예정)
+    * JavaScript의 경우
     ```ecmascript 6
     const {UTagger} = require('koalanlp/proc');
    

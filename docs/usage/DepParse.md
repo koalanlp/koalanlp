@@ -123,6 +123,7 @@ async function someAsyncFunction(){
     // ....
     
     let parser = new Parser(HNN);
+    // ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: new Parser(API.ETRI, {etriKey: API_KEY})
     let result = await parser("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
     // 또는 parser.analyze(...)
 
@@ -146,6 +147,8 @@ const {Parser} = require('koalanlp/proc');
 const {HNN} = require('koalanlp/API');
 
 let parser = new Parser(HNN);
+// ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: new Parser(API.ETRI, {etriKey: API_KEY})
+
 parser("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")  // 또는 parser.analyze(...)
     .then((result) => {
         /* Result는 Sentence[] 타입입니다. */
@@ -163,6 +166,8 @@ const {HNN} = require('koalanlp/API');
 // ....
 
 let parser = new Parser(HNN);
+// ETRI 분석기의 경우 API 키를 필수적으로 전달해야 합니다. 예: new Parser(API.ETRI, {etriKey: API_KEY})
+
 let result = parser.analyzeSync("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
 
 /* Result는 Sentence[] 타입입니다. */

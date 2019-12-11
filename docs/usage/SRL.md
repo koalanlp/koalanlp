@@ -111,12 +111,12 @@ Reference: [RoleLabeler](https://koalanlp.github.io/nodejs-support/module-koalan
 const {RoleLabeler} = require('koalanlp/proc');
 const {ETRI} = require('koalanlp/API');
 
-const API_KEY = /** ETRI에서 발급받은 키 **/
+const API_KEY =; ??/** ETRI에서 발급받은 키 **/
 
 async function someAsyncFunction(){
     // ....
     
-    let labeler = new RoleLabeler(ETRI, {apiKey: API_KEY});
+    let labeler = new RoleLabeler(ETRI, {etriKey: API_KEY});
     let result = await labeler("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
     // 또는 labeler.analyze(...)
 
@@ -126,7 +126,7 @@ async function someAsyncFunction(){
     }
         
     // ...
-};
+}
 
 someAsyncFunction().then(
     () => console.log('After function finished'),
@@ -140,9 +140,9 @@ someAsyncFunction().then(
 const {RoleLabeler} = require('koalanlp/proc');
 const {ETRI} = require('koalanlp/API');
 
-const API_KEY = /** ETRI에서 발급받은 키 **/
+const API_KEY =; ??/** ETRI에서 발급받은 키 **/
 
-let; labeler = new RoleLabeler(ETRI, {apiKey: API_KEY});
+let labeler = new RoleLabeler(ETRI, {etriKey: API_KEY});
 labeler("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.")  // 또는 labeler.analyze(...)
     .then((result) => {
         /* Result는 Sentence[] 타입입니다. */
@@ -158,11 +158,11 @@ labeler("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.
 const {RoleLabeler} = require('koalanlp/proc');
 const {ETRI} = require('koalanlp/API');
 
-const API_KEY = /** ETRI에서 발급받은 키 **/
+const API_KEY =; ??/** ETRI에서 발급받은 키 **/
 
 // ....
 
-let; labeler = new RoleLabeler(ETRI, {apiKey: API_KEY});
+let labeler = new RoleLabeler(ETRI, {etriKey: API_KEY});
 let result = labeler.analyzeSync("이 문단을 분석합니다. 문단 구분은 자동으로 합니다.");
 
 /* Result는 Sentence[] 타입입니다. */
