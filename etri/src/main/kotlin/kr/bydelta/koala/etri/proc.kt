@@ -7,6 +7,7 @@ import com.beust.klaxon.JsonObject
 import com.beust.klaxon.Klaxon
 import com.github.kittinunf.fuel.core.extensions.jsonBody
 import com.github.kittinunf.fuel.httpPost
+import com.github.kittinunf.result.Result
 import kr.bydelta.koala.*
 import kr.bydelta.koala.data.*
 import kr.bydelta.koala.proc.*
@@ -49,12 +50,19 @@ interface CanCommunicateETRIApi {
             val (_, resp, res) = "http://aiopen.etri.re.kr:8000/WiseNLU".httpPost()
                     .jsonBody(requestBody).responseString()
 
-            val resString = res.get().replace("\\.0([,}]+)".toRegex(), "$1")
-            val json = klaxon.parse<ResultPayload>(resString)
-            if (json?.code == 0) {
-                return json.result
-            } else {
-                throw APIException(resp.statusCode, json?.msg ?: "HTTP Status code ${resp.statusCode}")
+            when (res){
+                is Result.Failure -> {
+                    throw res.error
+                }
+                is Result.Success -> {
+                    val resString = res.get().replace("\\.0([,}]+)".toRegex(), "$1")
+                    val json = klaxon.parse<ResultPayload>(resString)
+                    if (json?.code == 0) {
+                        return json.result
+                    } else {
+                        throw APIException(resp.statusCode, json?.msg ?: "HTTP Status code ${resp.statusCode}")
+                    }
+                }
             }
         } catch (e: ConnectException) {
             throw APIException(-1, "http://aiopen.etri.re.kr 로 접근할 수 있는지 확인해주십시오. ${e.message}")

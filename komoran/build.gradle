@@ -8,13 +8,13 @@ plugins {
 }
 
 group 'kr.bydelta'
-version "2.1.3-SNAPSHOT"
+version "2.1.4"
 
 apply from: rootProject.file('common.gradle')
 apply from: rootProject.file('dependency.gradle')
 
 dependencies {
-    implementation 'com.github.shin285:KOMORAN:3.3.7'
+    api 'com.github.shin285:KOMORAN:3.3.7'
 }
 
 apply from: rootProject.file('test.gradle')

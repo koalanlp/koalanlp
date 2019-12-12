@@ -123,7 +123,7 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 
 ## Gradle
 ```groovy
-ext.koala_version = '2.1.2'
+ext.koala_version = '2.1.4'
 
 repositories {
     mavenCentral()
@@ -137,17 +137,17 @@ dependencies{
     // 은전한닢 프로젝트(Mecab-ko)의 경우
     implementation "kr.bydelta:koalanlp-eunjeon:${ext.koala_version}"
     // 아리랑의 경우
-    implementation "kr.bydelta:koalanlp-arirang:2.1.3:assembly"
+    implementation "kr.bydelta:koalanlp-arirang:${ext.koala_version}:assembly"
     // RHINO의 경우 
-    implementation "kr.bydelta:koalanlp-rhino:2.1.3:assembly"
+    implementation "kr.bydelta:koalanlp-rhino:${ext.koala_version}:assembly"
     // Daon의 경우
-    implementation "kr.bydelta:koalanlp-daon:2.1.3:assembly"
+    implementation "kr.bydelta:koalanlp-daon:${ext.koala_version}:assembly"
     // OpenKoreanText의 경우
     implementation "kr.bydelta:koalanlp-okt:${ext.koala_version}" 
     // 꼬꼬마의 경우
-    implementation "kr.bydelta:koalanlp-kkma:2.1.3:assembly"
+    implementation "kr.bydelta:koalanlp-kkma:${ext.koala_version}:assembly"
     // 한나눔의 경우
-    implementation "kr.bydelta:koalanlp-hnn:2.1.3:assembly" 
+    implementation "kr.bydelta:koalanlp-hnn:${ext.koala_version}:assembly" 
     // ETRI Open API의 경우
     implementation "kr.bydelta:koalanlp-etri:${ext.koala_version}"
     // Khaiii의 경우 (Khaiii C++ 별도 설치 필요)
@@ -160,7 +160,7 @@ dependencies{
 ## SBT
 (버전은 Latest Release 기준입니다. SNAPSHOT을 사용하시려면, `latest.integration`을 사용하세요.)
 ```sbtshell
-val koalaVer = "2.1.2"
+val koalaVer = "2.1.4"
 
 // 코모란 분석기의 경우
 resolvers += "jitpack" at "https://jitpack.io/"
@@ -170,22 +170,22 @@ libraryDependencies += "kr.bydelta" % "koalanlp-kmr" % koalaVer
 libraryDependencies += "kr.bydelta" % "koalanlp-eunjeon" % koalaVer
 
 // 아리랑 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-arirang" % "2.1.3" classifier "assembly"
+libraryDependencies += "kr.bydelta" % "koalanlp-arirang" % koalaVer classifier "assembly"
 
 // RHINO 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-rhino" % "2.1.3" classifier "assembly"
+libraryDependencies += "kr.bydelta" % "koalanlp-rhino" % koalaVer classifier "assembly"
 
 // Daon 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-daon" % "2.1.3" classifier "assembly"
+libraryDependencies += "kr.bydelta" % "koalanlp-daon" % koalaVer classifier "assembly"
 
 // Open Korean Text 분석기의 경우
 libraryDependencies += "kr.bydelta" % "koalanlp-okt" % koalaVer
 
 // 꼬꼬마 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-kkma" % "2.1.3" classifier "assembly"
+libraryDependencies += "kr.bydelta" % "koalanlp-kkma" % koalaVer classifier "assembly"
 
 // 한나눔 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-hannanum" % "2.1.3" classifier "assembly"
+libraryDependencies += "kr.bydelta" % "koalanlp-hannanum" % koalaVer classifier "assembly"
 
 // ETRI 분석기의 경우
 resolvers += Resolver.JCenterRepository
