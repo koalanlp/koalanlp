@@ -12,6 +12,13 @@ version "2.1.4-SNAPSHOT"
 
 apply from: rootProject.file('common.gradle')
 apply from: rootProject.file('dependency.gradle')
+
+dependencies {
+    implementation "ch.qos.logback:logback-classic:1.2.0" // Daon Core
+    implementation "com.google.protobuf:protobuf-java:3.0.0" // Daon Core
+    // Jar under lib folder will be handled by fatjar.gradle.
+}
+
 apply from: rootProject.file('test.gradle')
 apply from: rootProject.file('publish.gradle')
 apply from: rootProject.file('fatjar.gradle')

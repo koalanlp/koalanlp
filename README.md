@@ -92,7 +92,7 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 | 패키지명            | 설명                                                                 |  버전    | License (원본)     |
 | ------------------ | ------------------------------------------------------------------ | ------- | ------------ |
 | `koalanlp-core`    | 통합 인터페이스의 정의가 등재된 중심 묶음입니다.                            | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-core) | MIT |
-| `koalanlp-scala`   | Scala를 위한 편의기능 (Implicit conversion 등)                         | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-scala_2.12.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-scala) | MIT |
+| `koalanlp-scala`   | Scala를 위한 편의기능 (Implicit conversion 등)                         | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-scala_2.13.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-scala) | MIT |
 | `koalanlp-server`  | HTTP 서비스 구성을 위한 패키지입니다.                                    | (2.x 개발중) | MIT |
 | `koalanlp-kmr`     | 코모란 Wrapper / 분석범위: 형태소                                       | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kmr.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-kmr)         | Apache 2.0 |
 | `koalanlp-eunjeon` | 은전한닢 Wrapper / 분석범위: 형태소                                     | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-eunjeon) | Apache 2.0 |
@@ -118,8 +118,8 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 > <sup>주2-4</sup> UTagger 분석기의 경우에도 C/C++로 구현되어, 사용 전 분석기의 설치가 필요합니다. 윈도우와 리눅스(우분투, CentOS)용 라이브러리 파일만 제공되며, 설치 방법은 [여기](https://koalanlp.github.io/usage/Install-UTagger.md)를 참조하십시오.
 
 ## 실행환경
-* KoalaNLP의 모든 코드는 Java 8을 기준으로 컴파일되고 OpenJDK 12에서 테스트 되었습니다.
-* Kotlin의 경우는 1.3.30이 기준입니다.
+* KoalaNLP의 모든 코드는 OpenJDK 12에서 테스트 되었습니다.
+* Kotlin의 경우는 1.3.50이 기준입니다.
 * Scala의 경우는 `KoalaNLP-scala` 패키지의 버전에 따릅니다.
   단, 은전한닢과 Open Korean Text는 의존하는 라이브러리가 Scala에서 개발되어 Scala에서 사용시 제한이 있을 수 있으며, 이는 [![scala-koalanlp](https://img.shields.io/badge/Scala-KoalaNLP-red.svg?style=flat-square)](https://koalanlp.github.io/scala-support)를 참조하십시오.  
 * Python과 NodeJS는 각각의 저장소를 참고하십시오: 
@@ -128,7 +128,7 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 
 ## Gradle
 ```groovy
-ext.koala_version = '2.0.5'
+ext.koala_version = '2.1.2'
 
 repositories {
     mavenCentral()
@@ -142,21 +142,21 @@ dependencies{
     // 은전한닢 프로젝트(Mecab-ko)의 경우
     implementation "kr.bydelta:koalanlp-eunjeon:${ext.koala_version}"
     // 아리랑의 경우
-    implementation "kr.bydelta:koalanlp-arirang:${ext.koala_version}:assembly"
+    implementation "kr.bydelta:koalanlp-arirang:2.1.3:assembly"
     // RHINO의 경우 
-    implementation "kr.bydelta:koalanlp-rhino:${ext.koala_version}:assembly"
+    implementation "kr.bydelta:koalanlp-rhino:2.1.3:assembly"
     // Daon의 경우
-    implementation "kr.bydelta:koalanlp-daon:${ext.koala_version}"
+    implementation "kr.bydelta:koalanlp-daon:2.1.3:assembly"
     // OpenKoreanText의 경우
     implementation "kr.bydelta:koalanlp-okt:${ext.koala_version}" 
     // 꼬꼬마의 경우
-    implementation "kr.bydelta:koalanlp-kkma:${ext.koala_version}:assembly"
+    implementation "kr.bydelta:koalanlp-kkma:2.1.3:assembly"
     // 한나눔의 경우
-    implementation "kr.bydelta:koalanlp-hnn:${ext.koala_version}:assembly" 
+    implementation "kr.bydelta:koalanlp-hnn:2.1.3:assembly" 
     // ETRI Open API의 경우
     implementation "kr.bydelta:koalanlp-etri:${ext.koala_version}"
     // Khaiii의 경우 (Khaiii C++ 별도 설치 필요)
-    implementation "kr.bydelta:koalanlp-khaiii:2.0.0-alpha.1"
+    implementation "kr.bydelta:koalanlp-khaiii:${ext.koala_version}"
     // REST Server Service의 경우 (준비중)
     implementation "kr.bydelta:koalanlp-server:${ext.koala_version}"
 }
@@ -165,7 +165,7 @@ dependencies{
 ## SBT
 (버전은 Latest Release 기준입니다. SNAPSHOT을 사용하시려면, `latest.integration`을 사용하세요.)
 ```sbtshell
-val koalaVer = "2.0.0"
+val koalaVer = "2.1.2"
 
 // 코모란 분석기의 경우
 resolvers += "jitpack" at "https://jitpack.io/"
@@ -175,22 +175,22 @@ libraryDependencies += "kr.bydelta" % "koalanlp-kmr" % koalaVer
 libraryDependencies += "kr.bydelta" % "koalanlp-eunjeon" % koalaVer
 
 // 아리랑 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-arirang" % koalaVer classifier "assembly"
+libraryDependencies += "kr.bydelta" % "koalanlp-arirang" % "2.1.3" classifier "assembly"
 
 // RHINO 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-rhino" % koalaVer classifier "assembly"
+libraryDependencies += "kr.bydelta" % "koalanlp-rhino" % "2.1.3" classifier "assembly"
 
 // Daon 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-daon" % koalaVer
+libraryDependencies += "kr.bydelta" % "koalanlp-daon" % "2.1.3" classifier "assembly"
 
 // Open Korean Text 분석기의 경우
 libraryDependencies += "kr.bydelta" % "koalanlp-okt" % koalaVer
 
 // 꼬꼬마 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-kkma" % koalaVer classifier "assembly"
+libraryDependencies += "kr.bydelta" % "koalanlp-kkma" % "2.1.3" classifier "assembly"
 
 // 한나눔 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-hannanum" % koalaVer classifier "assembly"
+libraryDependencies += "kr.bydelta" % "koalanlp-hannanum" % "2.1.3" classifier "assembly"
 
 // ETRI 분석기의 경우
 resolvers += Resolver.JCenterRepository
@@ -198,7 +198,11 @@ libraryDependencies += "kr.bydelta" % "koalanlp-etri" % koalaVer
 
 // Khaiii 분석기의 경우 (Khaiii C++ 별도 설치 필요)
 resolvers += Resolver.JCenterRepository
-libraryDependencies += "kr.bydelta" % "koalanlp-khaiii" % "2.0.0-alpha.1"
+libraryDependencies += "kr.bydelta" % "koalanlp-khaiii" % koalaVer
+
+// UTagger 분석기의 경우 (UTagger C++ 별도 설치 필요)
+resolvers += Resolver.JCenterRepository
+libraryDependencies += "kr.bydelta" % "koalanlp-utagger" % koalaVer
 
 // REST Server Service의 경우 (준비중)
 libraryDependencies += "kr.bydelta" % "koalanlp-server" % koalaVer
@@ -219,13 +223,13 @@ Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 
   <classifier>assembly</classifier>
 ```
 
-예를 들어서, 꼬꼬마 분석기(koalanlp-kkma) 버전 2.0.0를 추가하고자 한다면, 아래와 같습니다.
+예를 들어서, 꼬꼬마 분석기(koalanlp-kkma) 버전 2.1.3을 추가하고자 한다면, 아래와 같습니다.
 ```xml
 <dependency>
   <groupId>kr.bydelta</groupId>
   <artifactId>koalanlp-kkma</artifactId>
   <classifier>assembly</classifier>
-  <version>2.0.0</version>
+  <version>2.1.3</version>
 </dependency>
 ```
 

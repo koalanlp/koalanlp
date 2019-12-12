@@ -7,6 +7,12 @@ then
     exit 0
 fi
 
+if [ -f "$HOME/utagger/Hlxcfg.txt" ]
+then
+    echo "UTagger already installed."
+    exit 0
+fi
+
 ### UTagger 파일 다운로드
 cd $HOME
 if [ -z "$TRAVIS_OS_NAME" ]

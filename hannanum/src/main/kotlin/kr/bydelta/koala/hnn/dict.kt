@@ -87,13 +87,15 @@ object Dictionary : CanCompileDict, CanExtractResource() {
      * @param dict 추가할 (표면형, 품사)의 순서쌍들 (가변인자). 즉, [Pair]<[String], [POS]>들
      */
     override fun addUserDictionary(vararg dict: DicEntry) {
-        val writer = FileOutputStream(usrDicPath, true).bufferedWriter()
-        dict.forEach {
-            val (morph, tag) = it
+        synchronized(usrDicPath) {
+            val writer = FileOutputStream(usrDicPath, true).bufferedWriter()
+            dict.forEach {
+                val (morph, tag) = it
 
-            writer.write("$morph\t${tag.fromSejongPOS().toLowerCase()}\n")
+                writer.write("$morph\t${tag.fromSejongPOS().toLowerCase()}\n")
+            }
+            writer.close()
         }
-        writer.close()
     }
 
     /**
@@ -131,9 +133,11 @@ object Dictionary : CanCompileDict, CanExtractResource() {
      * @return (형태소, 통합품사)의 Sequence.
      */
     override fun getItems(): Set<DicEntry> {
-        usrBuffer += usrDicPath.readLines().asSequence().map {
-            val segments = it.split('\t')
-            segments[0] to segments[1].toSejongPOS()
+        usrBuffer += synchronized(usrDicPath){
+            usrDicPath.readLines().asSequence().map {
+                val segments = it.split('\t')
+                segments[0] to segments[1].toSejongPOS()
+            }
         }
 
         return usrBuffer

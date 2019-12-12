@@ -18,18 +18,19 @@
 | 패키지명            | 설명                                                                 |  버전    | License (원본)     |
 | ------------------ | ------------------------------------------------------------------ | ------- | ------------ |
 | `koalanlp-core`    | 통합 인터페이스의 정의가 등재된 중심 묶음입니다.                            | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-core.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-core) | MIT |
-| `koalanlp-scala`   | Scala를 위한 편의기능 (Implicit conversion 등)                         | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-scala_2.12.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-scala_2.12) | MIT |
+| `koalanlp-scala`   | Scala를 위한 편의기능 (Implicit conversion 등)                         | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-scala_2.13.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-scala) | MIT |
 | `koalanlp-server`  | HTTP 서비스 구성을 위한 패키지입니다.                                    | (2.x 개발중) | MIT |
-| `koalanlp-kmr`     | 코모란 Wrapper, 분석범위: 형태소                                       | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kmr.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-kmr)         | Apache 2.0 |
-| `koalanlp-eunjeon` | 은전한닢 Wrapper, 분석범위: 형태소                                     | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-eunjeon) | Apache 2.0 |
-| `koalanlp-arirang` | 아리랑 Wrapper, 분석범위: 형태소 <sup>2-1</sup>                        | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-arirang.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-arirang) | Apache 2.0 |
-| `koalanlp-rhino`   | RHINO Wrapper, 분석범위: 형태소 <sup>2-1</sup>                        | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-rhino.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-rhino)     | GPL v3 |
-| `koalanlp-daon`    | Daon Wrapper, 분석범위: 형태소 <sup>2-1</sup>                         | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-daon.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-daon)       | MIT(별도 지정 없음) |
+| `koalanlp-kmr`     | 코모란 Wrapper / 분석범위: 형태소                                       | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kmr.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-kmr)         | Apache 2.0 |
+| `koalanlp-eunjeon` | 은전한닢 Wrapper / 분석범위: 형태소                                     | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-eunjeon) | Apache 2.0 |
+| `koalanlp-arirang` | 아리랑 Wrapper / 분석범위: 형태소 <sup>2-1</sup>                        | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-arirang.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-arirang) | Apache 2.0 |
+| `koalanlp-rhino`   | RHINO Wrapper / 분석범위: 형태소 <sup>2-1</sup>                        | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-rhino.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-rhino)     | GPL v3 |
+| `koalanlp-daon`    | Daon Wrapper / 분석범위: 형태소 <sup>2-1</sup>                         | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-daon.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-daon)       | MIT(별도 지정 없음) |
 | `koalanlp-khaiii`  | Kakao Khaiii Wrapper / 분석범위: 형태소 <sup>2-3</sup>                 | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-khaiii.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-khaiii)       | Apache 2.0 |
-| `koalanlp-okt`     | Open Korean Text Wrapper, 분석범위: 문장분리, 형태소                    | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-okt.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-okt)        | Apache 2.0  |
-| `koalanlp-kkma`    | 꼬꼬마 Wrapper, 분석범위: 형태소, 의존구문 <sup>2-1</sup>                | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kkma.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-kkma)       | GPL v2    |
-| `koalanlp-hnn`     | 한나눔 Wrapper, 분석범위: 문장분리, 형태소, 구문분석, 의존구문 <sup>2-1</sup>| [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-hnn.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-hnn)        | GPL v3    |
-| `koalanlp-etri`    | ETRI Open API Wrapper, 분석범위: 형태소, 구문분석, 의존구문, 개체명, 의미역 | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-etri.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-etri)      | MIT<sup>2-2</sup> |
+| `koalanlp-utagger` | 울산대 UTagger Wrapper / 분석범위: 형태소 <sup>2-4</sup>                 | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-utagger.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-utagger)       | 교육/연구용 무료, 상업용 별도협약 |
+| `koalanlp-okt`     | Open Korean Text Wrapper / 분석범위: 문장분리, 형태소                    | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-okt.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-okt)        | Apache 2.0  |
+| `koalanlp-kkma`    | 꼬꼬마 Wrapper / 분석범위: 형태소, 의존구문 <sup>2-1</sup>                | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kkma.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-kkma)       | GPL v2    |
+| `koalanlp-hnn`     | 한나눔 Wrapper / 분석범위: 문장분리, 형태소, 구문분석, 의존구문 <sup>2-1</sup>| [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-hnn.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-hnn)        | GPL v3    |
+| `koalanlp-etri`    | ETRI Open API Wrapper / 분석범위: 형태소, 구문분석, 의존구문, 개체명, 의미역 | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-etri.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-etri)      | MIT<sup>2-2</sup> |
 
 > <sup>주2-1</sup> 꼬꼬마, 한나눔, 아리랑, RHINO 분석기는 타 분석기와 달리 Maven repository에 등재되어 있지 않아, 원래는 수동으로 직접 추가하셔야 합니다.
 > 이 점이 불편하다는 것을 알기에, KoalaNLP는 assembly 형태로 해당 패키지를 포함하여 배포하고 있습니다. 포함된 패키지를 사용하려면, `assembly` classifier를 사용하십시오.
@@ -38,11 +39,13 @@
 > <sup>주2-2</sup> ETRI의 경우 Open API를 접근하기 위한 코드 부분은 KoalaNLP의 License 정책에 귀속되지만, Open API 접근 이후의 사용권에 관한 조항은 ETRI에서 별도로 정한 바를 따릅니다.
 > 따라서, ETRI의 사용권 조항에 동의하시고 키를 발급하셔야 하며, 다음 위치에서 발급을 신청할 수 있습니다: [키 발급 신청](http://aiopen.etri.re.kr/key_main.php)
 >
-> <sup>주2-3</sup> Khaiii 분석기의 경우는 Java가 아닌 C++로 구현되어 사용 전 분석기의 설치가 필요합니다. Python3.6 및 CMake 3.10+만 설치되어 있다면 설치 자체가 복잡한 편은 아니니 [여기](https://github.com/kakao/khaiii/blob/v0.1/doc/setup.md)를 참조하여 설치해보세요. (단, v0.1에서는 빌드시 'python3' 호출시 'python3.6'이 연결되어야 합니다.) 참고로, KoalaNLP가 Travis CI에서 패키지를 자동 테스트하기 위해 구현된 bash script는 [여기](https://github.com/koalanlp/koalanlp/blob/master/khaiii/install.sh)에 있습니다.
+> <sup>주2-3</sup> Khaiii 분석기의 경우는 Java가 아닌 C++로 구현되어 사용 전 분석기의 설치가 필요합니다. Python3.6 및 CMake 3.10+만 설치되어 있다면 설치 자체가 복잡한 편은 아니니 [여기](https://github.com/kakao/khaiii/wiki/빌드-및-설치)를 참조하여 설치해보세요. 참고로, KoalaNLP가 Travis CI에서 패키지를 자동 테스트하기 위해 구현된 bash script는 [여기](https://github.com/koalanlp/koalanlp/blob/master/khaiii/install.sh)에 있습니다.
+>
+> <sup>주2-4</sup> UTagger 분석기의 경우에도 C/C++로 구현되어, 사용 전 분석기의 설치가 필요합니다. 윈도우와 리눅스(우분투, CentOS)용 라이브러리 파일만 제공되며, 설치 방법은 [여기](https://koalanlp.github.io/usage/Install-UTagger.md)를 참조하십시오.
 
-### Gradle
+## Gradle
 ```groovy
-ext.koala_version = '2.0.5'
+ext.koala_version = '2.1.2'
 
 repositories {
     mavenCentral()
@@ -56,30 +59,33 @@ dependencies{
     // 은전한닢 프로젝트(Mecab-ko)의 경우
     implementation "kr.bydelta:koalanlp-eunjeon:${ext.koala_version}"
     // 아리랑의 경우
-    implementation "kr.bydelta:koalanlp-arirang:${ext.koala_version}:assembly"
+    implementation "kr.bydelta:koalanlp-arirang:2.1.3:assembly"
     // RHINO의 경우 
-    implementation "kr.bydelta:koalanlp-rhino:${ext.koala_version}:assembly"
+    implementation "kr.bydelta:koalanlp-rhino:2.1.3:assembly"
     // Daon의 경우
-    implementation "kr.bydelta:koalanlp-daon:${ext.koala_version}"
+    implementation "kr.bydelta:koalanlp-daon:2.1.3:assembly"
     // OpenKoreanText의 경우
     implementation "kr.bydelta:koalanlp-okt:${ext.koala_version}" 
     // 꼬꼬마의 경우
-    implementation "kr.bydelta:koalanlp-kkma:${ext.koala_version}:assembly"
+    implementation "kr.bydelta:koalanlp-kkma:2.1.3:assembly"
     // 한나눔의 경우
-    implementation "kr.bydelta:koalanlp-hnn:${ext.koala_version}:assembly" 
+    implementation "kr.bydelta:koalanlp-hnn:2.1.3:assembly" 
     // ETRI Open API의 경우
     implementation "kr.bydelta:koalanlp-etri:${ext.koala_version}"
     // Khaiii의 경우 (Khaiii C++ 별도 설치 필요)
-    implementation "kr.bydelta:koalanlp-khaiii:2.0.0-alpha.1"
+    implementation "kr.bydelta:koalanlp-khaiii:${ext.koala_version}"
     // REST Server Service의 경우 (준비중)
     implementation "kr.bydelta:koalanlp-server:${ext.koala_version}"
 }
 ```
 
-### SBT
+## SBT
 (버전은 Latest Release 기준입니다. SNAPSHOT을 사용하시려면, `latest.integration`을 사용하세요.)
 ```sbtshell
-val koalaVer = "2.0.0"
+val koalaVer = "2.1.2"
+
+// Implicit method 사용시 Scala support 추가
+libraryDependencies += "kr.bydelta" %% "koalanlp-scala" % koalaScalaVer
 
 // 코모란 분석기의 경우
 resolvers += "jitpack" at "https://jitpack.io/"
@@ -89,22 +95,22 @@ libraryDependencies += "kr.bydelta" % "koalanlp-kmr" % koalaVer
 libraryDependencies += "kr.bydelta" % "koalanlp-eunjeon" % koalaVer
 
 // 아리랑 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-arirang" % koalaVer classifier "assembly"
+libraryDependencies += "kr.bydelta" % "koalanlp-arirang" % "2.1.3" classifier "assembly"
 
 // RHINO 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-rhino" % koalaVer classifier "assembly"
+libraryDependencies += "kr.bydelta" % "koalanlp-rhino" % "2.1.3" classifier "assembly"
 
 // Daon 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-daon" % koalaVer
+libraryDependencies += "kr.bydelta" % "koalanlp-daon" % "2.1.3" classifier "assembly"
 
 // Open Korean Text 분석기의 경우
 libraryDependencies += "kr.bydelta" % "koalanlp-okt" % koalaVer
 
 // 꼬꼬마 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-kkma" % koalaVer classifier "assembly"
+libraryDependencies += "kr.bydelta" % "koalanlp-kkma" % "2.1.3" classifier "assembly"
 
 // 한나눔 분석기의 경우
-libraryDependencies += "kr.bydelta" % "koalanlp-hannanum" % koalaVer classifier "assembly"
+libraryDependencies += "kr.bydelta" % "koalanlp-hannanum" % "2.1.3" classifier "assembly"
 
 // ETRI 분석기의 경우
 resolvers += Resolver.JCenterRepository
@@ -112,13 +118,14 @@ libraryDependencies += "kr.bydelta" % "koalanlp-etri" % koalaVer
 
 // Khaiii 분석기의 경우 (Khaiii C++ 별도 설치 필요)
 resolvers += Resolver.JCenterRepository
-libraryDependencies += "kr.bydelta" % "koalanlp-khaiii" % "2.0.0-alpha.1"
+libraryDependencies += "kr.bydelta" % "koalanlp-khaiii" % koalaVer
 
-// REST Server Service의 경우 (준비중)
-libraryDependencies += "kr.bydelta" % "koalanlp-server" % koalaVer
+// UTagger 분석기의 경우 (UTagger C++ 별도 설치 필요)
+resolvers += Resolver.JCenterRepository
+libraryDependencies += "kr.bydelta" % "koalanlp-utagger" % koalaVer
 ```
 
-### Maven
+## Maven
 Maven을 사용하시는 경우, 다음과 같습니다. `${TAGGER_PACK}`위치에는 원하는 품사분석기의 패키지를 써주시고, `${TAGGER_VER}`위치에는 품사분석기의 버전을 써주세요.
 ```xml
 <dependency>
@@ -133,13 +140,13 @@ Classifier를 추가하실 경우, `<artifactId>`다음 행에 다음 코드를 
   <classifier>assembly</classifier>
 ```
 
-예를 들어서, 꼬꼬마 분석기(koalanlp-kkma) 버전 2.0.0를 추가하고자 한다면, 아래와 같습니다.
+예를 들어서, 꼬꼬마 분석기(koalanlp-kkma) 버전 2.1.3을 추가하고자 한다면, 아래와 같습니다.
 ```xml
 <dependency>
   <groupId>kr.bydelta</groupId>
   <artifactId>koalanlp-kkma</artifactId>
   <classifier>assembly</classifier>
-  <version>2.0.0</version>
+  <version>2.1.3</version>
 </dependency>
 ```
 
