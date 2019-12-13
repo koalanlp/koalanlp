@@ -128,6 +128,7 @@ case ${ACTION} in
 
         ask_proceed "UPLOAD"
         if [ "${YN,,}" != "p" ]; then
+            ./gradlew :koalanlp-eunjeon:run  #Extract dictionary
             for MODULE in $MODULES
             do
                 if [ "$MODULE" != "core" ]; then
@@ -181,6 +182,10 @@ case ${ACTION} in
             ask_proceed "SET VERISON"
             if [ ${YN,,} != "p" ]; then
                 set_version $JAR_VER_CURRENT
+            fi
+
+            if [ "$ACTION" == "eunjeon" ]; then
+                ./gradlew :koalanlp-eunjeon:run  #Extract dictionary
             fi
 
             cd ..

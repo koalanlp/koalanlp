@@ -54,6 +54,7 @@ install:
   - bash utagger/install.sh
 script:
   - ./gradlew clean
+  - ./gradlew :koalanlp-eunjeon:run  #Extract dictionary
   - ./gradlew check -Parch=$TRAVIS_OS_NAME -PnoGUI --info
   - if [ $TRAVIS_OS_NAME == 'linux' ]; then xvfb-run -a ./gradlew :koalanlp-rhino:test --tests *OriginTest --info; fi
   - if [ $TRAVIS_OS_NAME == 'linux' ]; then ./gradlew :koalanlp-rhino:jacocoTestReport --info; fi
