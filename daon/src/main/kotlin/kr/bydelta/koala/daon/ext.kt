@@ -65,6 +65,7 @@ fun POS.fromSejongPOS(): String =
 fun String?.toSejongPOS(): POS =
         when (this?.toUpperCase()) {
             null -> POS.NA
+            "UNKNOWN" -> POS.NA
             "XSB" -> POS.XSM
             else -> POS.valueOf(this.toUpperCase())
         }

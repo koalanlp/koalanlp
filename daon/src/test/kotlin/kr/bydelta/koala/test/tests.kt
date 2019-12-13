@@ -18,6 +18,7 @@ object DaonTagConversionTest : Spek(TagConversionSpek(
                 POS.NNM -> listOf(Conversion("NNB", toSejong = false, toTagger = true))
                 POS.XSM -> listOf(Conversion("XSB"))
                 POS.XSO -> emptyList()
+                POS.NA -> listOf(Conversion("NA"), Conversion("UNKNOWN", toTagger = false))
                 else -> listOf(Conversion(it.toString()))
             }
         }

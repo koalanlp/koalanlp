@@ -16,7 +16,6 @@ import scala.collection.mutable.WrappedArray
 import java.io.*
 import java.nio.ByteBuffer
 import java.nio.charset.Charset
-import kotlin.system.exitProcess
 
 
 /**
@@ -84,6 +83,24 @@ class SafeCompressedMorpheme(private var _surface: ByteArray = byteArrayOf(),
             return feature.map { CompressionHelper.getStrCached(it) }
         }
 
+        @JvmStatic
+        internal fun apply(morpheme: Morpheme) : SafeCompressedMorpheme {
+            val surface: ByteArray = morpheme.surface.toByteArray(UTF_8)
+            val leftId: Short = morpheme.leftId
+            val rightId: Short = morpheme.rightId
+            val cost: Int = morpheme.cost
+            val feature: List<String> = deDupeFeatureArray(morpheme.feature.split(","))
+            val mType: Byte = morpheme.mType.id().toByte()
+            val poses: ByteArray by lazy {
+                val buffer = ByteBuffer.allocate(morpheme.poses.length())
+                buffer.rewind()
+                morpheme.poses.foreach { buffer.put(it.id().toByte()) }
+                buffer.array()
+            }
+
+            return SafeCompressedMorpheme(surface, leftId, rightId, cost, feature, mType, poses)
+        }
+
         /**
          * Scala 2.12의 WrappedArray가 포함되어 De-Serialization에 문제가 있던 TermDict를 다시 추출합니다.
          * 실행은 ./gradlew :koalanlp-eunjeon:run으로 간단히 수행되며,
@@ -98,7 +115,7 @@ class SafeCompressedMorpheme(private var _surface: ByteArray = byteArrayOf(),
 
             if (!file.exists()) {
                 val lexicon = LexiconDict().load(true)
-                val termDict = lexicon.termDict()
+                val termDict = lexicon.termDict().map { apply(it) }.toTypedArray()
                 val objectOutputStream = ObjectOutputStream(File("./src/main/resources/" + DictBuilder.TERM_DICT() + ".koala")
                         .outputStream().buffered(16 * 1024))
                 objectOutputStream.writeObject(termDict)

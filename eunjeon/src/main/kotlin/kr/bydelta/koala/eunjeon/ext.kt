@@ -4,7 +4,6 @@
 package kr.bydelta.koala.eunjeon
 
 import kr.bydelta.koala.POS
-import scala.collection.`JavaConverters$`.`MODULE$`
 
 /**
  * 세종 품사 표기를 은전한닢의 품사로 변환합니다
@@ -78,8 +77,26 @@ fun String?.toSejongPOS(): POS {
     }
 }
 
+/**
+ * Kotlin to Scala iterator
+ */
+internal class ScalaIterator<T>(private val x: scala.collection.Iterator<T>): Iterator<T> {
+    override fun next(): T = x.next()
+    override fun hasNext(): Boolean = x.hasNext()
+}
+
+/**
+ * Scala to Kotlin iterator
+ */
+internal class JavaIterator<T>(private val x: Iterator<T>): scala.collection.Iterator<T> {
+    override fun next(): T = x.next()
+    override fun hasNext(): Boolean = x.hasNext()
+}
+
 /** Scala Collection --> Java Collection */
-internal fun <T> scala.collection.Iterable<T>.asJava() = `MODULE$`.asJavaCollection(this).toList<T>()
+@Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN", "UNCHECKED_CAST")
+internal fun <T> scala.collection.Iterable<T>.asJava(): List<T> = ScalaIterator(this.toIterator()).asSequence().toList()
 
 /** Java Collection --> Scala Collection */
-internal fun <T> kotlin.collections.Iterable<T>.asScala() = `MODULE$`.asScalaIterator(this.iterator())
+@Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN", "UNCHECKED_CAST")
+internal fun <T> Iterable<T>.asScala(): scala.collection.Iterator<T> = JavaIterator(this.iterator())

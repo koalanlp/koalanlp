@@ -9,7 +9,7 @@ plugins {
 }
 
 group 'kr.bydelta'
-version "2.1.6-SNAPSHOT"
+version "2.1.7-SNAPSHOT"
 
 apply from: rootProject.file('common.gradle')
 apply from: rootProject.file('dependency.gradle')
