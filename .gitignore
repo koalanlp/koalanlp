@@ -29,3 +29,5 @@ target/
 hs_err_pid*
 
 */build/
+*.dat.koala
+.gradle/

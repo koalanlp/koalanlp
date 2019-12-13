@@ -3,12 +3,13 @@ plugins {
     id 'jacoco'
     id 'maven-publish'
     id 'signing'
+    id 'application'
     id "org.jetbrains.kotlin.jvm"
     id "org.jetbrains.dokka"
 }
 
 group 'kr.bydelta'
-version "2.1.4"
+version "2.1.6-SNAPSHOT"
 
 apply from: rootProject.file('common.gradle')
 apply from: rootProject.file('dependency.gradle')
@@ -22,3 +23,8 @@ dependencies {
 
 apply from: rootProject.file('test.gradle')
 apply from: rootProject.file('publish.gradle')
+
+// 아래는 CompressedMorpheme을 추출하여 Java에서 무리 없이 읽을 수 있도록 resource를 추출하기 위한 코드.
+project.mainClassName = 'kr.bydelta.koala.eunjeon.SafeCompressedMorpheme'
+tasks.jar.dependsOn(tasks.run)
+tasks.testClasses.dependsOn(tasks.run)

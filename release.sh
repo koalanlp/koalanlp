@@ -102,7 +102,7 @@ case ${ACTION} in
         # Upload core and close, because of the dependencies
         ask_proceed "UPLOAD CORE"
         if [ "${YN,,}" != "p" ]; then
-            ./gradlew clean :koalanlp-core:publish --info
+            ./gradlew clean :koalanlp-core:publish :koalanlp-core:publishToMavenLocal --info
         fi
 
         ask_proceed "RELEASE CORE"
@@ -133,7 +133,7 @@ case ${ACTION} in
                 if [ "$MODULE" != "core" ]; then
                     read_module_name $MODULE
                     echo ">>"$MODULE_NAME
-                    ./gradlew $MODULE_NAME:publish --info
+                    ./gradlew $MODULE_NAME:publish $MODULE_NAME:publishToMavenLocal --info
                 fi
             done
         fi
@@ -186,7 +186,7 @@ case ${ACTION} in
             cd ..
             ask_proceed "UPLOAD"
             if [ ${YN,,} != "p" ]; then
-                ./gradlew $MODULE_NAME:clean $MODULE_NAME:publish --info
+                ./gradlew $MODULE_NAME:clean $MODULE_NAME:publish $MODULE_NAME:publishToMavenLocal --info
             fi
 
             ask_proceed "RELEASE"
