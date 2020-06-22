@@ -1,4 +1,5 @@
 ### 기초정보
+- Python은 koalanlp/python-support, NodeJS는 koalanlp/nodejs-support repository에 등록해주세요.
 - KoalaNLP 버전은 얼마였나요? 
 - 어떤 프로그래밍 언어에서 문제가 생겼습니까? ([]안에 x표하여 표기해주세요)
   - [ ] Kotlin
