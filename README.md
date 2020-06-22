@@ -4,7 +4,7 @@ KoalaNLP
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 [![API Doc](https://img.shields.io/badge/doc-Java,Kotlin,Scala-blue.svg?style=flat-square)](http://koalanlp.github.io/koalanlp/api/koalanlp/index)
 
-[![Build Status](https://img.shields.io/travis/koalanlp/koalanlp.svg?style=flat-square&branch=master)](https://travis-ci.org/koalanlp/koalanlp)
+[![Build Status](https://travis-ci.com/koalanlp/koalanlp.svg?branch=master)](https://travis-ci.com/koalanlp/koalanlp)
 [![Code coverage](https://img.shields.io/codecov/c/github/koalanlp/koalanlp.svg?style=flat-square)](https://codecov.io/gh/koalanlp/koalanlp)
 [![Known Vulnerabilities](https://snyk.io/test/github/koalanlp/koalanlp/badge.svg?style=flat-square)](https://snyk.io/test/github/koalanlp/koalanlp)
 
