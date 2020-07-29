@@ -1,26 +1,26 @@
 language: java
 matrix:
   include:
-    - name: "Windows with OpenJDK 12"
+    - name: "Windows with OpenJDK 14"
       os: windows
       language: shell
       filter_secrets: false
       before_install:
-        - choco install openjdk --version 12.0.0 -y
+        - choco install openjdk --version 14.0.1 -y
         - java --version
       env:
-        - JAVA_HOME="/c/Progra~1/OpenJDK/jdk-12"
+        - JAVA_HOME="/c/Progra~1/OpenJDK/jdk-14.0.1"
         - PATH="$JAVA_HOME/bin:$PATH"
       cache:
         directories:
           - $HOME/.gradle/wrapper/
           - $HOME/utagger
           - $HOME/.hunter
-    - name: "OSX11.2 with OpenJDK 13"
+    - name: "OSX12 with OpenJDK 14"
       os: osx
-      osx_image: xcode11.2
+      osx_image: xcode12u
       language: shell
-      jdk: openjdk12
+      jdk: openjdk14
       before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -30,10 +30,9 @@ matrix:
           - $HOME/.gradle/wrapper/
           - $HOME/khaiii-orig
           - $HOME/.hunter
-    - name: "Ubuntu Bionic with OpenJDK 12"
+    - name: "Ubuntu Bionic with OpenJDK 14"
       dist: bionic
-      jdk: openjdk12
-      services: xvfb
+      jdk: openjdk14
       before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -55,9 +54,7 @@ install:
 script:
   - ./gradlew clean
   - ./gradlew :koalanlp-eunjeon:run  #Extract dictionary
-  - ./gradlew check -Parch=$TRAVIS_OS_NAME -PnoGUI --info
-  - if [ $TRAVIS_OS_NAME == 'linux' ]; then xvfb-run -a ./gradlew :koalanlp-rhino:test --tests *OriginTest --info; fi
-  - if [ $TRAVIS_OS_NAME == 'linux' ]; then ./gradlew :koalanlp-rhino:jacocoTestReport --info; fi
+  - ./gradlew check -Parch=$TRAVIS_OS_NAME --info
 after_success:
   - bash ./git-manage.sh
   - ./gradlew --stop

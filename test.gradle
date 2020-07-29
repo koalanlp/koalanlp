@@ -15,10 +15,6 @@ test {
         }
     }
 
-    if (project.hasProperty('noGUI')) {
-        exclude '**/RhinoOrigin*Test.class'
-    }
-
     useJUnitPlatform {
         includeEngines 'spek2'
     }

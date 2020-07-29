@@ -24,119 +24,119 @@
             "lemma": "중국",
             "type": "NNP",
             "position": 0,
-            "weight": 0.0892692
+            "weight": 0.128545
           },
           {
             "id": 1,
             "lemma": "관영",
             "type": "NNG",
             "position": 7,
-            "weight": 0.275816
+            "weight": 0.120613
           },
           {
             "id": 2,
             "lemma": "매체",
             "type": "NNG",
             "position": 13,
-            "weight": 0.9
+            "weight": 0.0624481
           },
           {
             "id": 3,
             "lemma": "가",
             "type": "JKS",
             "position": 19,
-            "weight": 0.066324
+            "weight": 0.058098
           },
           {
             "id": 4,
             "lemma": "그",
-            "type": "NNG",
+            "type": "MM",
             "position": 23,
-            "weight": 0.0001
+            "weight": 0.0569788
           },
           {
             "id": 5,
             "lemma": "동안",
             "type": "NNG",
             "position": 26,
-            "weight": 0.184748
+            "weight": 0.0569788
           },
           {
             "id": 6,
             "lemma": "북한",
             "type": "NNP",
             "position": 33,
-            "weight": 0.00674901
+            "weight": 1
           },
           {
             "id": 7,
             "lemma": "에",
             "type": "JKB",
             "position": 39,
-            "weight": 0.0823628
+            "weight": 0.117824
           },
           {
             "id": 8,
             "lemma": "자제",
             "type": "NNG",
             "position": 43,
-            "weight": 0.9
+            "weight": 0.0931308
           },
           {
             "id": 9,
             "lemma": "를",
             "type": "JKO",
             "position": 49,
-            "weight": 0.137686
+            "weight": 0.117207
           },
           {
             "id": 10,
             "lemma": "요구",
             "type": "NNG",
             "position": 53,
-            "weight": 0.9
+            "weight": 0.0801363
           },
           {
             "id": 11,
             "lemma": "하",
             "type": "XSV",
             "position": 59,
-            "weight": 0.0001
+            "weight": 0.0315923
           },
           {
             "id": 12,
             "lemma": "ㄴ",
             "type": "ETM",
             "position": 59,
-            "weight": 0.392321
+            "weight": 0.0315923
           },
           {
             "id": 13,
             "lemma": "적",
             "type": "NNB",
             "position": 63,
-            "weight": 0.0420604
+            "weight": 0.0622721
           },
           {
             "id": 14,
             "lemma": "은",
             "type": "JX",
             "position": 66,
-            "weight": 0.0688243
+            "weight": 0.0978153
           },
           {
             "id": 15,
             "lemma": "있",
             "type": "VA",
             "position": 70,
-            "weight": 0.0558599
+            "weight": 0.0888238
           },
           {
             "id": 16,
             "lemma": "지만",
             "type": "EC",
             "position": 73,
-            "weight": 0.315566
+            "weight": 0.0782114
           },
           {
             "id": 17,
@@ -150,185 +150,178 @@
             "lemma": "군사",
             "type": "NNG",
             "position": 81,
-            "weight": 0.9
+            "weight": 0.108043
           },
           {
             "id": 19,
             "lemma": "지원",
             "type": "NNG",
             "position": 87,
-            "weight": 0.183669
+            "weight": 0.0804958
           },
           {
             "id": 20,
             "lemma": "의무",
             "type": "NNG",
             "position": 94,
-            "weight": 0.9
+            "weight": 0.100152
           },
           {
             "id": 21,
-            "lemma": "제",
-            "type": "XSN",
+            "lemma": "제공",
+            "type": "NNG",
             "position": 100,
-            "weight": 0.00596315
+            "weight": 0.0469844
           },
           {
             "id": 22,
-            "lemma": "공",
-            "type": "NNG",
-            "position": 103,
-            "weight": 0.124495
-          },
-          {
-            "id": 23,
             "lemma": "포기",
             "type": "NNG",
             "position": 107,
-            "weight": 0.9
+            "weight": 0.0676947
           },
           {
-            "id": 24,
+            "id": 23,
             "lemma": "가능",
             "type": "NNG",
             "position": 114,
-            "weight": 0.184025
+            "weight": 0.103793
           },
           {
-            "id": 25,
+            "id": 24,
             "lemma": "성",
             "type": "XSN",
             "position": 120,
-            "weight": 0.0161708
+            "weight": 0.103793
           },
           {
-            "id": 26,
+            "id": 25,
             "lemma": "과",
             "type": "JKB",
             "position": 123,
-            "weight": 0.0399165
+            "weight": 0.0779669
           },
           {
-            "id": 27,
+            "id": 26,
             "lemma": "함께",
             "type": "MAG",
             "position": 127,
-            "weight": 0.9
+            "weight": 0.103324
           },
           {
-            "id": 28,
+            "id": 27,
             "lemma": "유엔",
             "type": "NNP",
             "position": 134,
-            "weight": 0.0253639
+            "weight": 1
           },
           {
-            "id": 29,
+            "id": 28,
             "lemma": "안보",
             "type": "NNG",
             "position": 141,
-            "weight": 0.9
+            "weight": 0.0737926
           },
           {
-            "id": 30,
+            "id": 29,
             "lemma": "리",
             "type": "NNG",
             "position": 147,
-            "weight": 0.0138908
+            "weight": 0.0737926
           },
           {
-            "id": 31,
+            "id": 30,
             "lemma": "제재",
             "type": "NNG",
             "position": 151,
-            "weight": 0.9
+            "weight": 0.0510821
           },
           {
-            "id": 32,
+            "id": 31,
             "lemma": "안",
             "type": "NNG",
             "position": 157,
-            "weight": 0.0903732
+            "weight": 0.0510821
           },
           {
-            "id": 33,
+            "id": 32,
             "lemma": "을",
             "type": "JKO",
             "position": 160,
-            "weight": 0.129611
+            "weight": 0.0881869
           },
           {
-            "id": 34,
+            "id": 33,
             "lemma": "먼저",
             "type": "MAG",
             "position": 164,
-            "weight": 0.0660597
+            "weight": 0.0705442
           },
           {
-            "id": 35,
+            "id": 34,
             "lemma": "제시",
             "type": "NNG",
             "position": 171,
-            "weight": 0.168687
+            "weight": 0.0531414
           },
           {
-            "id": 36,
+            "id": 35,
             "lemma": "하",
             "type": "XSV",
             "position": 177,
-            "weight": 0.0001
+            "weight": 0.0531414
           },
           {
-            "id": 37,
+            "id": 36,
             "lemma": "ㄴ",
             "type": "ETM",
             "position": 177,
-            "weight": 0.392321
+            "weight": 0.0478701
           },
           {
-            "id": 38,
+            "id": 37,
             "lemma": "것",
             "type": "NNB",
             "position": 181,
-            "weight": 0.228788
+            "weight": 0.132122
           },
           {
-            "id": 39,
+            "id": 38,
             "lemma": "은",
             "type": "JX",
             "position": 184,
-            "weight": 0.0688243
+            "weight": 0.124513
           },
           {
-            "id": 40,
+            "id": 39,
             "lemma": "이례",
             "type": "NNG",
             "position": 188,
-            "weight": 0.2
+            "weight": 0.0369792
           },
           {
-            "id": 41,
+            "id": 40,
             "lemma": "적",
             "type": "XSN",
             "position": 194,
-            "weight": 0.0168756
+            "weight": 0.0369792
           },
           {
-            "id": 42,
+            "id": 41,
             "lemma": "이",
             "type": "VCP",
             "position": 197,
-            "weight": 0.0165001
+            "weight": 0.0714358
           },
           {
-            "id": 43,
+            "id": 42,
             "lemma": "ㅂ니다",
             "type": "EF",
             "position": 197,
-            "weight": 0.36174
+            "weight": 0.100338
           },
           {
-            "id": 44,
+            "id": 43,
             "lemma": ".",
             "type": "SF",
             "position": 206,
@@ -341,7 +334,7 @@
             "text": "중국",
             "type": "NNP",
             "scode": "01",
-            "weight": 4.4,
+            "weight": 7.6,
             "position": 0,
             "begin": 0,
             "end": 0
@@ -378,26 +371,36 @@
           },
           {
             "id": 4,
-            "text": "그동안",
-            "type": "NNG",
-            "scode": "00",
-            "weight": 0,
+            "text": "그",
+            "type": "MM",
+            "scode": "01",
+            "weight": 9.2,
             "position": 23,
             "begin": 4,
-            "end": 5
+            "end": 4
           },
           {
             "id": 5,
+            "text": "동안",
+            "type": "NNG",
+            "scode": "01",
+            "weight": 5.8,
+            "position": 26,
+            "begin": 5,
+            "end": 5
+          },
+          {
+            "id": 6,
             "text": "북한",
             "type": "NNP",
             "scode": "03",
-            "weight": 4,
+            "weight": 5,
             "position": 33,
             "begin": 6,
             "end": 6
           },
           {
-            "id": 6,
+            "id": 7,
             "text": "에",
             "type": "JKB",
             "scode": "00",
@@ -407,17 +410,17 @@
             "end": 7
           },
           {
-            "id": 7,
+            "id": 8,
             "text": "자제",
             "type": "NNG",
-            "scode": "02",
-            "weight": 2.5,
+            "scode": "01",
+            "weight": 3.2,
             "position": 43,
             "begin": 8,
             "end": 8
           },
           {
-            "id": 8,
+            "id": 9,
             "text": "를",
             "type": "JKO",
             "scode": "00",
@@ -427,7 +430,7 @@
             "end": 9
           },
           {
-            "id": 9,
+            "id": 10,
             "text": "요구하",
             "type": "VV",
             "scode": "00",
@@ -437,7 +440,7 @@
             "end": 11
           },
           {
-            "id": 10,
+            "id": 11,
             "text": "ㄴ",
             "type": "ETM",
             "scode": "00",
@@ -447,7 +450,7 @@
             "end": 12
           },
           {
-            "id": 11,
+            "id": 12,
             "text": "적",
             "type": "NNB",
             "scode": "03",
@@ -457,7 +460,7 @@
             "end": 13
           },
           {
-            "id": 12,
+            "id": 13,
             "text": "은",
             "type": "JX",
             "scode": "00",
@@ -467,17 +470,17 @@
             "end": 14
           },
           {
-            "id": 13,
+            "id": 14,
             "text": "있",
             "type": "VA",
             "scode": "01",
-            "weight": 11,
+            "weight": 9.8,
             "position": 70,
             "begin": 15,
             "end": 15
           },
           {
-            "id": 14,
+            "id": 15,
             "text": "지만",
             "type": "EC",
             "scode": "00",
@@ -487,7 +490,7 @@
             "end": 16
           },
           {
-            "id": 15,
+            "id": 16,
             "text": ",",
             "type": "SP",
             "scode": "00",
@@ -497,27 +500,27 @@
             "end": 17
           },
           {
-            "id": 16,
+            "id": 17,
             "text": "군사",
             "type": "NNG",
             "scode": "04",
-            "weight": 4.26286,
+            "weight": 5.46286,
             "position": 81,
             "begin": 18,
             "end": 18
           },
           {
-            "id": 17,
+            "id": 18,
             "text": "지원",
             "type": "NNG",
             "scode": "02",
-            "weight": 6.35652,
+            "weight": 7.35652,
             "position": 87,
             "begin": 19,
             "end": 19
           },
           {
-            "id": 18,
+            "id": 19,
             "text": "의무",
             "type": "NNG",
             "scode": "01",
@@ -527,194 +530,194 @@
             "end": 20
           },
           {
-            "id": 19,
+            "id": 20,
             "text": "제공",
             "type": "NNG",
             "scode": "04",
             "weight": 4.2,
             "position": 100,
             "begin": 21,
-            "end": 22
-          },
-          {
-            "id": 20,
-            "text": "포기",
-            "type": "NNG",
-            "scode": "02",
-            "weight": 1.75,
-            "position": 107,
-            "begin": 23,
-            "end": 23
+            "end": 21
           },
           {
             "id": 21,
+            "text": "포기",
+            "type": "NNG",
+            "scode": "02",
+            "weight": 0.75,
+            "position": 107,
+            "begin": 22,
+            "end": 22
+          },
+          {
+            "id": 22,
             "text": "가능성",
             "type": "NNG",
             "scode": "00",
             "weight": 0,
             "position": 114,
-            "begin": 24,
-            "end": 25
+            "begin": 23,
+            "end": 24
           },
           {
-            "id": 22,
+            "id": 23,
             "text": "과",
             "type": "JKB",
             "scode": "00",
             "weight": 1,
             "position": 123,
-            "begin": 26,
-            "end": 26
+            "begin": 25,
+            "end": 25
           },
           {
-            "id": 23,
+            "id": 24,
             "text": "함께",
             "type": "MAG",
             "scode": "00",
             "weight": 0,
             "position": 127,
-            "begin": 27,
-            "end": 27
+            "begin": 26,
+            "end": 26
           },
           {
-            "id": 24,
+            "id": 25,
             "text": "유엔",
             "type": "NNP",
             "scode": "00",
             "weight": 0,
             "position": 134,
-            "begin": 28,
-            "end": 28
+            "begin": 27,
+            "end": 27
           },
           {
-            "id": 25,
+            "id": 26,
             "text": "안보리",
             "type": "NNG",
             "scode": "00",
             "weight": 0,
             "position": 141,
-            "begin": 29,
-            "end": 30
+            "begin": 28,
+            "end": 29
           },
           {
-            "id": 26,
+            "id": 27,
             "text": "제재",
             "type": "NNG",
             "scode": "01",
             "weight": 3.5,
             "position": 151,
-            "begin": 31,
-            "end": 31
+            "begin": 30,
+            "end": 30
           },
           {
-            "id": 27,
+            "id": 28,
             "text": "안",
             "type": "NNG",
             "scode": "04",
             "weight": 5.42161,
             "position": 157,
-            "begin": 32,
-            "end": 32
+            "begin": 31,
+            "end": 31
           },
           {
-            "id": 28,
+            "id": 29,
             "text": "을",
             "type": "JKO",
             "scode": "00",
             "weight": 1,
             "position": 160,
-            "begin": 33,
-            "end": 33
+            "begin": 32,
+            "end": 32
           },
           {
-            "id": 29,
+            "id": 30,
             "text": "먼저",
             "type": "MAG",
             "scode": "00",
             "weight": 0,
             "position": 164,
-            "begin": 34,
-            "end": 34
+            "begin": 33,
+            "end": 33
           },
           {
-            "id": 30,
+            "id": 31,
             "text": "제시하",
             "type": "VV",
             "scode": "01",
             "weight": 3.2,
             "position": 171,
-            "begin": 35,
-            "end": 36
+            "begin": 34,
+            "end": 35
           },
           {
-            "id": 31,
+            "id": 32,
             "text": "ㄴ",
             "type": "ETM",
             "scode": "00",
             "weight": 1,
             "position": 177,
-            "begin": 37,
-            "end": 37
+            "begin": 36,
+            "end": 36
           },
           {
-            "id": 32,
+            "id": 33,
             "text": "것",
             "type": "NNB",
             "scode": "01",
             "weight": 6.6,
             "position": 181,
-            "begin": 38,
-            "end": 38
+            "begin": 37,
+            "end": 37
           },
           {
-            "id": 33,
+            "id": 34,
             "text": "은",
             "type": "JX",
             "scode": "00",
             "weight": 1,
             "position": 184,
-            "begin": 39,
-            "end": 39
+            "begin": 38,
+            "end": 38
           },
           {
-            "id": 34,
+            "id": 35,
             "text": "이례적",
             "type": "NNG",
             "scode": "00",
             "weight": 0,
             "position": 188,
-            "begin": 40,
-            "end": 41
+            "begin": 39,
+            "end": 40
           },
           {
-            "id": 35,
+            "id": 36,
             "text": "이",
             "type": "VCP",
             "scode": "01",
+            "weight": 1,
+            "position": 197,
+            "begin": 41,
+            "end": 41
+          },
+          {
+            "id": 37,
+            "text": "ㅂ니다",
+            "type": "EF",
+            "scode": "00",
             "weight": 1,
             "position": 197,
             "begin": 42,
             "end": 42
           },
           {
-            "id": 36,
-            "text": "ㅂ니다",
-            "type": "EF",
-            "scode": "00",
-            "weight": 1,
-            "position": 197,
-            "begin": 43,
-            "end": 43
-          },
-          {
-            "id": 37,
+            "id": 38,
             "text": ".",
             "type": "SF",
             "scode": "00",
             "weight": 1,
             "position": 206,
-            "begin": 44,
-            "end": 44
+            "begin": 43,
+            "end": 43
           }
         ],
         "word": [
@@ -786,77 +789,77 @@
             "text": "의무제공",
             "type": "",
             "begin": 20,
-            "end": 22
+            "end": 21
           },
           {
             "id": 10,
             "text": "포기",
             "type": "",
-            "begin": 23,
-            "end": 23
+            "begin": 22,
+            "end": 22
           },
           {
             "id": 11,
             "text": "가능성과",
             "type": "",
-            "begin": 24,
-            "end": 26
+            "begin": 23,
+            "end": 25
           },
           {
             "id": 12,
             "text": "함께",
             "type": "",
-            "begin": 27,
-            "end": 27
+            "begin": 26,
+            "end": 26
           },
           {
             "id": 13,
             "text": "유엔",
             "type": "",
-            "begin": 28,
-            "end": 28
+            "begin": 27,
+            "end": 27
           },
           {
             "id": 14,
             "text": "안보리",
             "type": "",
-            "begin": 29,
-            "end": 30
+            "begin": 28,
+            "end": 29
           },
           {
             "id": 15,
             "text": "제재안을",
             "type": "",
-            "begin": 31,
-            "end": 33
+            "begin": 30,
+            "end": 32
           },
           {
             "id": 16,
             "text": "먼저",
             "type": "",
-            "begin": 34,
-            "end": 34
+            "begin": 33,
+            "end": 33
           },
           {
             "id": 17,
             "text": "제시한",
             "type": "",
-            "begin": 35,
-            "end": 37
+            "begin": 34,
+            "end": 36
           },
           {
             "id": 18,
             "text": "것은",
             "type": "",
-            "begin": 38,
-            "end": 39
+            "begin": 37,
+            "end": 38
           },
           {
             "id": 19,
             "text": "이례적입니다.",
             "type": "",
-            "begin": 40,
-            "end": 44
+            "begin": 39,
+            "end": 43
           }
         ],
         "NE": [
@@ -866,7 +869,7 @@
             "type": "LCP_COUNTRY",
             "begin": 0,
             "end": 0,
-            "weight": 0.58032,
+            "weight": 0.561948,
             "common_noun": 0
           },
           {
@@ -875,28 +878,20 @@
             "type": "LCP_COUNTRY",
             "begin": 6,
             "end": 6,
-            "weight": 0.865098,
+            "weight": 0.740553,
             "common_noun": 0
           },
           {
             "id": 2,
-            "text": "군사지원 의무제",
-            "type": "CV_POLICY",
-            "begin": 18,
-            "end": 21,
-            "weight": 0.291524,
-            "common_noun": 0
-          },
-          {
-            "id": 3,
             "text": "유엔 안보리",
             "type": "OGG_POLITICS",
-            "begin": 28,
-            "end": 30,
-            "weight": 0.294838,
+            "begin": 27,
+            "end": 29,
+            "weight": 0.391967,
             "common_noun": 0
           }
         ],
+        "NE_Link": [],
         "dependency": [
           {
             "id": 0,
@@ -904,7 +899,7 @@
             "head": 1,
             "label": "NP",
             "mod": [],
-            "weight": 0.608774
+            "weight": 0.579632
           },
           {
             "id": 1,
@@ -914,7 +909,7 @@
             "mod": [
               0
             ],
-            "weight": 0.467139
+            "weight": 0.373368
           },
           {
             "id": 2,
@@ -922,7 +917,7 @@
             "head": 5,
             "label": "NP_AJT",
             "mod": [],
-            "weight": 0.550084
+            "weight": 0.540878
           },
           {
             "id": 3,
@@ -930,7 +925,7 @@
             "head": 5,
             "label": "NP_AJT",
             "mod": [],
-            "weight": 0.759309
+            "weight": 0.759218
           },
           {
             "id": 4,
@@ -938,7 +933,7 @@
             "head": 5,
             "label": "NP_OBJ",
             "mod": [],
-            "weight": 0.728306
+            "weight": 0.711459
           },
           {
             "id": 5,
@@ -951,7 +946,7 @@
               3,
               4
             ],
-            "weight": 0.581125
+            "weight": 0.576216
           },
           {
             "id": 6,
@@ -961,7 +956,7 @@
             "mod": [
               5
             ],
-            "weight": 0.652642
+            "weight": 0.616483
           },
           {
             "id": 7,
@@ -971,7 +966,7 @@
             "mod": [
               6
             ],
-            "weight": 0.76043
+            "weight": 0.74769
           },
           {
             "id": 8,
@@ -979,7 +974,7 @@
             "head": 9,
             "label": "NP",
             "mod": [],
-            "weight": 0.439829
+            "weight": 0.370032
           },
           {
             "id": 9,
@@ -989,7 +984,7 @@
             "mod": [
               8
             ],
-            "weight": 0.213347
+            "weight": 0.240301
           },
           {
             "id": 10,
@@ -999,7 +994,7 @@
             "mod": [
               9
             ],
-            "weight": 0.488654
+            "weight": 0.495724
           },
           {
             "id": 11,
@@ -1009,7 +1004,7 @@
             "mod": [
               10
             ],
-            "weight": 0.50681
+            "weight": 0.532857
           },
           {
             "id": 12,
@@ -1019,7 +1014,7 @@
             "mod": [
               11
             ],
-            "weight": 0.713346
+            "weight": 0.713419
           },
           {
             "id": 13,
@@ -1027,7 +1022,7 @@
             "head": 14,
             "label": "NP",
             "mod": [],
-            "weight": 0.565201
+            "weight": 0.537479
           },
           {
             "id": 14,
@@ -1037,7 +1032,7 @@
             "mod": [
               13
             ],
-            "weight": 0.578199
+            "weight": 0.5904
           },
           {
             "id": 15,
@@ -1047,7 +1042,7 @@
             "mod": [
               14
             ],
-            "weight": 0.738773
+            "weight": 0.74565
           },
           {
             "id": 16,
@@ -1055,7 +1050,7 @@
             "head": 17,
             "label": "AP",
             "mod": [],
-            "weight": 0.708444
+            "weight": 0.70287
           },
           {
             "id": 17,
@@ -1067,7 +1062,7 @@
               15,
               16
             ],
-            "weight": 0.730651
+            "weight": 0.717175
           },
           {
             "id": 18,
@@ -1077,7 +1072,7 @@
             "mod": [
               17
             ],
-            "weight": 0.636787
+            "weight": 0.615125
           },
           {
             "id": 19,
@@ -1088,7 +1083,7 @@
               7,
               18
             ],
-            "weight": 0.0000226787
+            "weight": 0.0000145891
           }
         ],
         "SRL": [
@@ -1096,31 +1091,31 @@
             "verb": "요구",
             "sense": 1,
             "word_id": 5,
-            "weight": 0.173536,
+            "weight": 0.192032,
             "argument": [
               {
                 "type": "ARG0",
                 "word_id": 1,
                 "text": "중국 관영매체",
-                "weight": 0.164409
+                "weight": 0.176022
               },
               {
                 "type": "ARGM-TMP",
                 "word_id": 2,
                 "text": "그동안",
-                "weight": 0.180215
+                "weight": 0.171497
               },
               {
                 "type": "ARG2",
                 "word_id": 3,
                 "text": "북한",
-                "weight": 0.142641
+                "weight": 0.179825
               },
               {
                 "type": "ARG1",
                 "word_id": 4,
                 "text": "자제",
-                "weight": 0.20688
+                "weight": 0.240785
               }
             ]
           },
@@ -1128,13 +1123,13 @@
             "verb": "있",
             "sense": 1,
             "word_id": 7,
-            "weight": 0.161867,
+            "weight": 0.23716,
             "argument": [
               {
                 "type": "ARG1",
                 "word_id": 6,
                 "text": "적",
-                "weight": 0.161867
+                "weight": 0.23716
               }
             ]
           },
@@ -1142,25 +1137,13 @@
             "verb": "제시",
             "sense": 1,
             "word_id": 17,
-            "weight": 0.183956,
+            "weight": 0.239181,
             "argument": [
-              {
-                "type": "ARGM-MNR",
-                "word_id": 12,
-                "text": "함께",
-                "weight": 0.150996
-              },
               {
                 "type": "ARG1",
                 "word_id": 15,
                 "text": "유엔 안보리 제재안",
-                "weight": 0.25613
-              },
-              {
-                "type": "ARGM-TMP",
-                "word_id": 16,
-                "text": "먼저",
-                "weight": 0.144741
+                "weight": 0.239181
               }
             ]
           }

@@ -52,7 +52,7 @@ interface CanCommunicateETRIApi {
 
             when (res){
                 is Result.Failure -> {
-                    throw res.error
+                    throw APIException(resp.statusCode, "통신 과정에서 오류가 발생했습니다: ${res.error.localizedMessage}")
                 }
                 is Result.Success -> {
                     val resString = res.get().replace("\\.0([,}]+)".toRegex(), "$1")

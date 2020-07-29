@@ -4,7 +4,7 @@ SEunjeon 형태소분석기의 Wrapper를 정의합니다.
 
 코모란 분석기는 Shineware에서 개발한 것으로,
 형태소분석기의 저작권은 [Shineware](http://www.shineware.co.kr)에게 있으며, 
-원본 분석기는 [코모란 v3.3.8](https://github.com/shin285/KOMORAN)에서 확인 가능합니다.
+원본 분석기는 [코모란 v3.3.9](https://github.com/shin285/KOMORAN)에서 확인 가능합니다.
 
 원본의 저작권 조항은 [Apache 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))을 따르며,
 KoalaNLP 코드의 저작권 조항은 MIT license를 따릅니다.

@@ -14,7 +14,7 @@ apply from: rootProject.file('common.gradle')
 apply from: rootProject.file('dependency.gradle')
 
 dependencies {
-    api 'com.github.shin285:KOMORAN:3.3.7'
+    api 'com.github.shin285:KOMORAN:3.3.9'
 }
 
 apply from: rootProject.file('test.gradle')

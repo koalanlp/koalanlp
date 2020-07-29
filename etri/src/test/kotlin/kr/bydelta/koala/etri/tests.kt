@@ -32,11 +32,11 @@ object KlaxonTest : Spek({
 
             if (payload != null) {
                 payload.result.sentences.size `should be equal to` 1
-                payload.result.sentences[0].morphemes.size `should be equal to` 45
-                payload.result.sentences[0].senses.size `should be equal to` 38
+                payload.result.sentences[0].morphemes.size `should be equal to` 44
+                payload.result.sentences[0].senses.size `should be equal to` 39
                 payload.result.sentences[0].words.size `should be equal to` 20
                 payload.result.sentences[0].deps.size `should be equal to` 20
-                payload.result.sentences[0].entities.size `should be equal to` 4
+                payload.result.sentences[0].entities.size `should be equal to` 3
                 payload.result.sentences[0].roles.size `should be equal to` 3
 
                 var nullableSent: List<Sentence>? = null
@@ -54,8 +54,8 @@ object KlaxonTest : Spek({
                 sentences[0][5].getArgumentRoles() `should not be` null
                 sentences[0][5].getArgumentRoles()!!.map { it.argument } shouldContainSame sentences[0].subList(1, 5)
 
-                sentences[0].getEntities()!!.map { it.surface } shouldContainSame listOf("중국", "북한", "군사지원 의무제", "유엔 안보리")
-                sentences[0].getRoles()!!.size `should be equal to` 8
+                sentences[0].getEntities()!!.map { it.surface } shouldContainSame listOf("중국", "북한", "유엔 안보리")
+                sentences[0].getRoles()!!.size `should be equal to` 6
                 sentences[0].getDependencies()!!.size `should be equal to` 20
             }
         }

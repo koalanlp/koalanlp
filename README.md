@@ -21,20 +21,23 @@ KoalaNLP는 한국어 처리의 통합 인터페이스를 지향하는 Java/Kotl
 __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이 목적입니다. (정렬은 개발단체/개발자명 국문 가나다순)
 
 * 김상준님의 [Daon 분석기](https://github.com/rasoio/daon/tree/master/daon-core)
-* Shineware의 [코모란 v3.3.8](https://github.com/shin285/KOMORAN)
+* Shineware의 [코모란 v3.3.9](https://github.com/shin285/KOMORAN)
 * 서울대의 [꼬꼬마 형태소/구문 분석기 v2.1](http://kkma.snu.ac.kr/documents/index.jsp)
 * ETRI의 [공공 인공지능 Open API](http://aiopen.etri.re.kr/)
 * OpenKoreanText의 [오픈 소스 한국어 처리기 v2.3.1](http://openkoreantext.org) (구 Twitter 한국어 분석기)
+* 울산대학교의 [UTagger 2018년 10월 31일자](http://nlplab.ulsan.ac.kr/doku.php?id=start) <sup>1-2, (별도설치 필요: [설치법](https://koalanlp.github.io/usage/Install-UTagger.md))</sup>
 * 은전한닢 프로젝트의 [SEunjeon(S은전) v1.5.0](https://bitbucket.org/eunjeon/seunjeon) (Mecab-ko의 Scala/Java 판본)
 * 이수명님의 [Arirang Morpheme Analyzer](http://cafe.naver.com/korlucene) <sup>1-1</sup>
-* 최석재님의 [RHINO v2.7.3](https://github.com/SukjaeChoi/RHINO)
+* 최석재님의 [RHINO v2.7.3](https://github.com/SukjaeChoi/RHINO)<sup>1-3</sup>
 * KAIST의 [한나눔 형태소 분석기](http://kldp.net/projects/hannanum/)와 [NLP_HUB 구문분석기](http://semanticweb.kaist.ac.kr/home/index.php/NLP_HUB)
 * Kakao의 [카이(Khaiii) v0.4](https://github.com/kakao/khaiii) <sup>(별도설치 필요: [설치법](https://github.com/kakao/khaiii/wiki/빌드-및-설치))</sup>
-* 울산대학교의 [UTagger 2018년 10월 31일자](http://nlplab.ulsan.ac.kr/doku.php?id=start) <sup>1-2, (별도설치 필요: [설치법](https://koalanlp.github.io/usage/Install-UTagger.md))</sup>
 
 > <sup>주1-1</sup> Arirang 분석기의 출력을 형태소분석에 적합하게 조금 다듬었으므로, 원본과 약간 다른 결과를 낼 수도 있습니다.
 >
 > <sup>주1-2</sup> UTagger의 2019-7 버전도 공개되어 있지만, 리눅스 개발환경을 위한 라이브러리 파일이 공개되어있지 않아 지원하지 않습니다.
+>
+> <sup>주1-3</sup> RHINO 분석기를 2.x에서 3.x로 판올림하려 시도하였으나, KoalaNLP에서 사용중인 테스트 문장들의 분석 과정에서 원본 문장을 복원하지 못하거나, 단어의 일부 부분을 누락하는 오류가 발견되었습니다.
+> 기존에도 발생한 여러 문제를 KoalaNLP가 교정하여 제공하고 있었으나, 판올림마다 발생하는 신규 코드를 따라갈 수 없어서 3.x 판으로의 교체는 포기하기로 했으니 이 점 양해 부탁드립니다.
 
 분석기의 개선이나 추가 등을 하고 싶으시다면,
 * 개발이 직접 가능하시다면 pull request를 보내주세요. 테스트 후 반영할 수 있도록 하겠습니다.
@@ -78,13 +81,13 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 * KKMA: [GPL v2](https://tldrlegal.com/license/gnu-general-public-license-v2) (GPL v2를 따르지 않더라도, 상업적 이용시 별도 협의 가능)
 * KOMORAN 3.x: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
 * Open Korean Text: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
+* UTagger: 교육 및 연구용으로 사용시 제한 없음. 상업용인 경우 울산대와 기술이전 등의 유료 협약 필요
 * SEunjeon: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
 * 아리랑: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
-* RHINO: [GPL v3](https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)) (참고: 다운로드 위치별로 조항 상이함)
+* RHINO: [MIT](https://tldrlegal.com/license/mit-license) (참고: 이전 버전은 GPL v3)
 * Daon: 지정된 조항 없음
 * ETRI: 별도 API 키 발급 동의 필요
 * Khaiii: [Apache License 2.0](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0))
-* UTagger: 교육 및 연구용으로 사용시 제한 없음. 상업용인 경우 울산대와 기술이전 등의 유료 협약 필요
 
 # Dependency 추가
 
@@ -97,7 +100,7 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 | `koalanlp-kmr`     | 코모란 Wrapper / 분석범위: 형태소                                       | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-kmr.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-kmr)         | Apache 2.0 |
 | `koalanlp-eunjeon` | 은전한닢 Wrapper / 분석범위: 형태소                                     | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-eunjeon.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-eunjeon) | Apache 2.0 |
 | `koalanlp-arirang` | 아리랑 Wrapper / 분석범위: 형태소 <sup>2-1</sup>                        | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-arirang.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-arirang) | Apache 2.0 |
-| `koalanlp-rhino`   | RHINO Wrapper / 분석범위: 형태소 <sup>2-1</sup>                        | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-rhino.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-rhino)     | GPL v3 |
+| `koalanlp-rhino`   | RHINO Wrapper / 분석범위: 형태소 <sup>2-1</sup>                        | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-rhino.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-rhino)     | MIT |
 | `koalanlp-daon`    | Daon Wrapper / 분석범위: 형태소 <sup>2-1</sup>                         | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-daon.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-daon)       | MIT(별도 지정 없음) |
 | `koalanlp-khaiii`  | Kakao Khaiii Wrapper / 분석범위: 형태소 <sup>2-3</sup>                 | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-khaiii.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-khaiii)       | Apache 2.0 |
 | `koalanlp-utagger` | 울산대 UTagger Wrapper / 분석범위: 형태소 <sup>2-4</sup>                 | [![Version](https://img.shields.io/maven-central/v/kr.bydelta/koalanlp-utagger.svg?style=flat-square&label=r)](http://search.maven.org/search?q=koalanlp-utagger)       | 교육/연구용 무료, 상업용 별도협약 |
