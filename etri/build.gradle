@@ -14,7 +14,7 @@ apply from: rootProject.file('common.gradle')
 apply from: rootProject.file('dependency.gradle')
 
 dependencies {
-    implementation 'com.github.kittinunf.fuel:fuel:2.2.1'
+    implementation 'com.github.kittinunf.fuel:fuel:2.2.3'
     api ('com.beust:klaxon:5.2')  {
         exclude group: 'org.jetbrains.kotlin'
     }
