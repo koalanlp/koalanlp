@@ -1,0 +1,39 @@
+---
+---
+
+@import 'jekyll-theme-cayman';
+@font-face {
+  font-family: 'S-CoreDream-L'; 
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-B'; 
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-EB'; 
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
+
+body {
+  font-family: 'S-CoreDream-L', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+h1 {
+  font-family: 'S-CoreDream-EB', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h2, h3, h4 {
+  font-family: 'S-CoreDream-B', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
