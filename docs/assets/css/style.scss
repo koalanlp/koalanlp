@@ -2,6 +2,8 @@
 ---
 
 @import 'jekyll-theme-cayman';
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
 @font-face {
   font-family: 'S-CoreDream-L'; 
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
@@ -23,8 +25,6 @@
   font-style: normal;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
-
 body {
   font-family: 'S-CoreDream-L', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.6;
@@ -36,4 +36,8 @@ h1 {
 
 h2, h3, h4 {
   font-family: 'S-CoreDream-B', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+code, pre {
+  font-family: 'Nanum Gothic Coding', Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, monospace;
 }

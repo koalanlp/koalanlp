@@ -7,138 +7,95 @@ import kr.bydelta.koala.POS
 import kr.bydelta.koala.data.Morpheme
 import kr.bydelta.koala.data.Sentence
 import kr.bydelta.koala.data.Word
+import kr.bydelta.koala.proc.CanExtractResource
 import kr.bydelta.koala.proc.CanTagOnlyASentence
-import rhino.lexicon.LexiconInterface
-import java.util.*
+import rhino.FileAnalyzer
+import rhino.RHINO
+import rhino.datastructure.TST
+import java.io.File
 
 
 /**
- * RHINO에서 구현했던 Tagger의 Kotlin 버전입니다.
- * 불필요하게 참조되고 있는 Swing JFrame을 삭제하기 위해 재작성했습니다.
- *
- * 이 코드의 원본은 `rhino.MainClass`이며, 본 object 코드의 저작권은 RHINO의 저작자에게 귀속됩니다.
+ * RHINO Resource를 불러들이는 부분입니다.
+ * 이 코드의 원본은 rhino.ExternInit 및 rhino.SetFileLists입니다.
  */
-internal object RHINOTagger {
-    @JvmStatic
-    val SPECIALS = "([■▶◀◆▲◇◈☎【】]+)".toRegex()
-    @JvmStatic
-    val TOKENIZE = " .?!。‘’“”`\'\"(){}[]─,ㆍ·:;/…_~∼∽□+-=±÷×*^><｜|％%&￦₩\\＄$¥￥£￡°㎞㎏@©ⓒ↑|#♥♡★☆♪♬■▶◀◆▲◇◈☎【】"
-    @JvmStatic
-    val RETAGGING_CONTAIN = "(는|은|을|세|야|자라고)".toRegex()
-    @JvmStatic
-    val RETAGGING_EQUAL = "^(는|은|을|세|야|자라고)$".toRegex()
-    @JvmStatic
-    val MORPH_MATCH = "([^\\s]+)/([A-Z]{2,3})".toRegex()
-    @JvmStatic
-    val VX_MATCH = "^(.*)/(EC|VV|VA|XR|VX)\\s\\+\\s(내|나|보|주|지|치|하|가|버리|드리)/VV(.*)$".toRegex()
-    @JvmStatic
-    val VX_MATCH_INTERNAL = "(^|\\s+)(내|나|보|주|지|치|하|가|버리|드리)/VV(\\s+|$)".toRegex()
+internal object RHINOTagger : CanExtractResource() {
+    override val modelName: String = "rhino"
 
     @JvmStatic
-    fun tag(input: String): List<Word> {
-        val arr = split(input)
-        val inputArr = arr.filter { it.second }.map { it.first }.toTypedArray()
-        val outputArr = (1..arr.size).map { "" }.toTypedArray()
+    val MORPH_MATCH = "([^\\s]+)/\\s*([A-Z]{2,3})".toRegex()
 
-        val interf = LexiconInterface(
-                DictionaryReader.complexStem_MethodDeleted,
-                DictionaryReader.stem_MethodDeleted,
-                DictionaryReader.afterNumber_MethodDeleted,
-                DictionaryReader.ending_MethodDeleted,
-                DictionaryReader.stem_List,
-                DictionaryReader.ending_List,
-                inputArr, outputArr,
-                DictionaryReader.nonEndingList,
-                DictionaryReader.aspgStem,
-                DictionaryReader.aspgEnding)
+    @JvmStatic
+    internal val tagger by lazy {
+        val fa = FileAnalyzer(RHINOTagger.getExtractedPath() + File.separator)
 
-        inputArr.indices.forEach { i ->
-            if (interf.FindMethod(inputArr[i], DictionaryReader.combiMethods_List)) {
-                outputArr[i] = interf.BindingWordInMethod(i, "combi", inputArr[i])
-            } else if (interf.FindSentenceMark(inputArr[i])) {
-                outputArr[i] = interf.GetSentenceMarkResult()
-            } else if (interf.CheckNumber(i)) {
-                try {
-                    outputArr[i] = interf.FindArabicNumberPlus(i, DictionaryReader.afterNumber_MethodDeleted, DictionaryReader.afterNumber_List)
-                } catch (_: Throwable) {
-                    // RHINO Exception Handling 안되는 부분
-                    outputArr[i] = inputArr[i] + "/NF"
-                }
-            } else {
-                val (head, eogan, eomi) = interf.FindMorph(i, inputArr[i])
-                val full = head?.replace("/NA \\+ /NA \\+ /NA$".toRegex(), "/NA")
-                        ?.replace("/NNG \\+ ([하되])/(VV|VX|XSV)".toRegex(), "$1/VV") ?: "NA"
+        val coM = fa.MakeMethodsList("rhino.lexicon.combi.combi")
+        val ssM = fa.MakeMethodsList("rhino.lexicon.stem.stem")
+        val eM = fa.MakeMethodsList("rhino.lexicon.ending.ending")
+        val csN = fa.MakeFileAllContentsArray("complexStem_MethodDeleted.txt", 2)
+        val ssN = fa.MakeFileAllContentsArray("stem_MethodDeleted.txt", 2)
+        val eN = fa.MakeFileAllContentsArray("ending_MethodDeleted.txt", 3)
+        val anN = fa.MakeFileAllContentsArray("afterNumber_MethodDeleted.txt", 2)
+        val kN = fa.MakeFileAllContentsArray("koreanName.txt", 2)
+        val alsoxr = fa.MakeFileAllContentsArray("alsoXR.txt", 2)
 
-                outputArr[i] = full
+        // Initialize static variables in RHINO
+        RHINO.combi = TST()
+        RHINO.stem = TST()
+        RHINO.stemR = TST()
+        RHINO.stemM = TST()
+        RHINO.endingR = TST()
+        RHINO.endingM = TST()
+        RHINO.afterNum = TST()
+        RHINO.koreanName = TST()
+        RHINO.alsoXR = TST()
 
-                if (eogan != null && eomi != null) {
-                    if (RETAGGING_CONTAIN.containsMatchIn(eomi)) {
-                        val eomiForm =
-                                eomi.split(" + ").joinToString("") { it.substring(0, it.indexOf("/")) }
+        coM.forEach { RHINO.combi.insert(it, "coM") }
+        ssM.forEach { RHINO.stem.insert(it, "ssM") }
+        ssM.forEach { RHINO.stemR.insertR(it, "ssM", "N") }
+        ssM.forEach { RHINO.stemM.insert(it, "ssM") }
+        eM.forEach { RHINO.endingR.insertR(it, "eM", "N") }
+        eM.forEach { RHINO.endingM.insertR(it, "eM", "N") }
+        csN.forEach { RHINO.stem.insert(it[0], it[1]) }
+        csN.forEach { RHINO.stemR.insertR(it[0], it[1], "N") }
+        ssN.forEach { RHINO.stem.insert(it[0], it[1]) }
+        ssN.forEach { RHINO.stemR.insertR(it[0], it[1], "N") }
+        eN.forEach { RHINO.endingR.insertR(it[0], it[1], it[2]) }
+        anN.forEach { RHINO.afterNum.insert(it[0], it[1]) }
+        kN.forEach { RHINO.koreanName.insert(it[0], it[1]) }
+        alsoxr.forEach { RHINO.stem.insert(it[0], it[1]) }
+        alsoxr.forEach { RHINO.stemR.insertR(it[0], it[1], "N") }
 
-                        if (eomiForm.matches(RETAGGING_EQUAL)) {
-                            val newEomi =
-                                    try {
-                                        if (interf.FindMethod(eomiForm, DictionaryReader.endingMethods_List)) {
-                                            interf.BindingWordInMethod(i, "ending", eomiForm, true).split("_".toRegex(), 3)[1]
-                                        } else eomi
-                                    } catch (_: Throwable) {
-                                        eomi
-                                    }
+        RHINO()
+    }
 
-                            if (eogan != "") {
-                                outputArr[i] = "$eogan + $newEomi"
-                            } else {
-                                outputArr[i] = newEomi
-                            }
-                        }
-                    }
-                }
-
-                /***** 여기서부터는 RHINO에 없는 코드입니다: 어간/어미 분리 오류로 인한 해석 불가능 문제 해결 (2018.10.23) ******/
-                if (outputArr[i] == "/NA") {
-                    outputArr[i] = inputArr[i] + "/NA"
-                }
-                /***** 여기까지 추가 수정입니다. (2018.10.23) ******/
+    @JvmStatic
+    internal fun tag(string: String): Sentence {
+        val wordsWithoutSpecials = synchronized(tagger) {
+            tagger.ExternCall(string).trim().split("\n").map { word ->
+                val (surface, morphemesString) = word.trim().split("\t")
+                val morphemes = translateOutputMorpheme(morphemesString)
+                Word(surface, morphemes)
             }
         }
 
-        /******* 여기서부터는 RHINO의 MainClass.MakeFinalForm 코드입니다. *******/
-        val sequence = mutableListOf<Word>()
-        var indexOfInputArr = 0
-
-        for ((word, isSymbol) in arr) {
-            if (!isSymbol) {
-                sequence.add(Word(word, listOf(Morpheme(word, POS.SW, ""))))
+        // Rhino 특수문자 복원 전까지 수동 복원
+        val words = mutableListOf<Word>()
+        var remainingString = string
+        var wordId = 0
+        while (remainingString.isNotEmpty()) {
+            if (remainingString.startsWith(wordsWithoutSpecials[wordId].surface)) {
+                words.add(wordsWithoutSpecials[wordId])
+                remainingString = remainingString.substring(wordsWithoutSpecials[wordId].surface.length)
+                wordId += 1
             } else {
-                if (word == "." && indexOfInputArr > 0 && inputArr[indexOfInputArr - 1].all { it == '.' }) {
-                    // MakeSE 함수
-                    val lastWord = sequence.removeAt(sequence.size - 1)
-                    val surf = lastWord.surface + "."
-                    sequence.add(Word(surf, listOf(Morpheme(surf, POS.SE, "SE"))))
-                } else if (word == "^" && indexOfInputArr > 0 && inputArr[indexOfInputArr - 1] == "^") {
-                    // MakeIC 함수
-                    sequence.removeAt(sequence.size - 1)
-                    sequence.add(Word("^^", listOf(Morpheme("^^", POS.IC, "IC"))))
-                } else {
-                    // changeToVX 함수
-                    if (outputArr[indexOfInputArr].matches(VX_MATCH) ||
-                            (indexOfInputArr > 0 && outputArr[indexOfInputArr - 1].endsWith("EC"))) {
-                        outputArr[indexOfInputArr] =
-                                VX_MATCH_INTERNAL.replace(outputArr[indexOfInputArr], "$1$2/VX$3")
-                    }
-
-                    /******* 여기서부터는 RHINO에 없는 코드입니다. *******/
-                    val morphs = translateOutputMorpheme(outputArr[indexOfInputArr])
-                    sequence.add(Word(word.trim(), morphs))
-                    /******* 없는 코드 끝 *******/
-                }
-                indexOfInputArr += 1
+                val char = remainingString.substring(0, 1)
+                words.add(Word(char, listOf(Morpheme(surface = char, tag = POS.SW, originalTag = ""))))
+                remainingString = remainingString.substring(1)
             }
         }
 
-        return sequence.filter { it.surface.isNotBlank() }
-        /***** 여기까지 ******/
+        return Sentence(words.toList())
     }
 
     @JvmStatic
@@ -146,25 +103,8 @@ internal object RHINOTagger {
             MORPH_MATCH.findAll(morphStr).map {
                 val surf = it.groupValues[1]
                 val raw = it.groupValues[2]
-
                 Morpheme(surf.trim(), POS.valueOf(raw), raw)
             }.toList()
-
-    @JvmStatic
-    internal fun split(input: String): List<Pair<String, Boolean>> {
-        val tokens = StringTokenizer(input.replace("\\s+".toRegex(), " "), TOKENIZE, true)
-        val buffer = mutableListOf<Pair<String, Boolean>>()
-
-        while (tokens.hasMoreTokens()) {
-            val token = tokens.nextToken()
-
-            if (token.isNotBlank()) {
-                buffer.add(token to !SPECIALS.containsMatchIn(token))
-            }
-        }
-
-        return buffer.toList()
-    }
 }
 
 /**

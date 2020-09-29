@@ -1,8 +1,41 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300i,400,700);
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
+@font-face {
+    font-family: 'S-CoreDream-L';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'S-CoreDream-B';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'S-CoreDream-EB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body, table {
+    font: 14px/1.6 'S-CoreDream-L', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+    font-family: 'S-CoreDream-EB', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h2, h3, h4 {
+    font-family: 'S-CoreDream-B', "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
 body, table {
     padding:50px;
-    font:14px/1.5 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
     color:#555;
     font-weight:300;
     margin-left: auto;
@@ -12,19 +45,19 @@ body, table {
 
 .keyword {
     color:black;
-    font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+    font-family:'Nanum Gothic Coding', Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
     font-size:12px;
 }
 
 .symbol {
-    font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+    font-family:'Nanum Gothic Coding', Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
     font-size:12px;
 }
 
 .identifier {
     color: darkblue;
     font-size:12px;
-    font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+    font-family:'Nanum Gothic Coding', Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -83,7 +116,7 @@ blockquote {
 }
 
 code, pre {
-    font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+    font-family:'Nanum Gothic Coding', Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
     color:#333;
     font-size:12px;
 }

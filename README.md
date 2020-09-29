@@ -28,7 +28,7 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 * 울산대학교의 [UTagger 2018년 10월 31일자](http://nlplab.ulsan.ac.kr/doku.php?id=start) <sup>1-2, (별도설치 필요: [설치법](https://koalanlp.github.io/usage/Install-UTagger.md))</sup>
 * 은전한닢 프로젝트의 [SEunjeon(S은전) v1.5.0](https://bitbucket.org/eunjeon/seunjeon) (Mecab-ko의 Scala/Java 판본)
 * 이수명님의 [Arirang Morpheme Analyzer](http://cafe.naver.com/korlucene) <sup>1-1</sup>
-* 최석재님의 [RHINO v2.7.3](https://github.com/SukjaeChoi/RHINO)<sup>1-3</sup>
+* 최석재님의 [RHINO v3.7.8](https://github.com/SukjaeChoi/RHINO)
 * KAIST의 [한나눔 형태소 분석기](http://kldp.net/projects/hannanum/)와 [NLP_HUB 구문분석기](http://semanticweb.kaist.ac.kr/home/index.php/NLP_HUB)
 * Kakao의 [카이(Khaiii) v0.4](https://github.com/kakao/khaiii) <sup>(별도설치 필요: [설치법](https://github.com/kakao/khaiii/wiki/빌드-및-설치))</sup>
 
@@ -36,8 +36,6 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 >
 > <sup>주1-2</sup> UTagger의 2019-7 버전도 공개되어 있지만, 리눅스 개발환경을 위한 라이브러리 파일이 공개되어있지 않아 지원하지 않습니다.
 >
-> <sup>주1-3</sup> RHINO 분석기는 3.x판도 배포하고 있으나, issue [#29](https://github.com/koalanlp/koalanlp/issues/29) 해결 이전에는 2.x 버전을 사용하고 있습니다.
-> RHINO 개발자님과 의견 교환 중이니, 3.x 판으로의 교체는 잠시 기다려주시기 바랍니다. 양해 부탁드립니다.
 
 분석기의 개선이나 추가 등을 하고 싶으시다면,
 * 개발이 직접 가능하시다면 pull request를 보내주세요. 테스트 후 반영할 수 있도록 하겠습니다.
