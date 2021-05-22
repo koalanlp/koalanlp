@@ -12,12 +12,12 @@
     - [Kotlin](#kotlin)
     - [Scala](#scala)
     - [Java](#java)
-    - [NodeJS](#javascript) (구현중)
+    - [NodeJS](#javascript)
     - [Python 3](#python-3)
 2. [품사 분석 결과를 토대로 문장을 분리하는 경우](#품사-부착-후-분리-방법)
     - [Kotlin, Scala](#kotlin-scala)
     - [Java](#java-1)
-    - [NodeJS](#javascript-1) (구현중)
+    - [NodeJS](#javascript-1)
     - [Python 3](#python-3-1)
 
 ### 품사 분석 없이 문장을 분리하는 경우

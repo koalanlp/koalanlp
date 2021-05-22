@@ -10,7 +10,7 @@
 - [Kotlin](#kotlin)
 - [Scala](#scala)
 - [Java](#java)
-- [NodeJS](#javascript) (구현중)
+- [NodeJS](#javascript)
 - [Python 3](#python-3)
 
 ## 사전 사용하기

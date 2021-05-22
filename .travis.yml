@@ -1,26 +1,26 @@
 language: java
 matrix:
   include:
-    - name: "Windows with OpenJDK 14"
+    - name: "Windows with OpenJDK 16"
       os: windows
       language: shell
       filter_secrets: false
       before_install:
-        - choco install openjdk --version 14.0.1 -y
+        - choco install openjdk --version 16.0.1 -y
         - java --version
       env:
-        - JAVA_HOME="/c/Progra~1/OpenJDK/jdk-14.0.1"
+        - JAVA_HOME="/c/Progra~1/OpenJDK/jdk-16.0.1"
         - PATH="$JAVA_HOME/bin:$PATH"
       cache:
         directories:
           - $HOME/.gradle/wrapper/
           - $HOME/utagger
           - $HOME/.hunter
-    - name: "OSX12 with OpenJDK 14"
+    - name: "OSX11.3 with OpenJDK 16"
       os: osx
-      osx_image: xcode12u
+      osx_image: xcode12.5
       language: shell
-      jdk: openjdk14
+      jdk: openjdk16.0.1
       before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -31,8 +31,8 @@ matrix:
           - $HOME/khaiii-orig
           - $HOME/.hunter
     - name: "Ubuntu Bionic with OpenJDK 14"
-      dist: bionic
-      jdk: openjdk14
+      dist: focal
+      jdk: openjdk16
       before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
