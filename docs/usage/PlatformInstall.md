@@ -40,10 +40,10 @@
     choco install python --version 3.9.5 -y
     ```
     
-    * Node.JS의 설치는 다음 명령으로 가능합니다. (마찬가지로 명령 프롬프트에서 입력합니다 / ![Chocolatey Version](https://img.shields.io/chocolatey/v/nodejs?label=%ED%98%84%EC%9E%AC%20%EC%B5%9C%EC%8B%A0%20%EB%B2%84%EC%A0%84&style=flat-square))
+    * Node.JS의 설치는 다음 명령으로 가능합니다. (마찬가지로 명령 프롬프트에서 입력합니다 / ![Chocolatey Version](https://img.shields.io/chocolatey/v/nodejs-lts?label=%ED%98%84%EC%9E%AC%20%EC%B5%9C%EC%8B%A0%20%EB%B2%84%EC%A0%84&style=flat-square))
     
     ```commandline
-    choco install nodejs --version 16.2.0 -y
+    choco install nodejs-lts --version 14.17.0 -y
     ```
     
     * Scala 2.12 또는 2.13의 설치는 [홈페이지](http://scala-lang.org)에서 다운받아 실행해야 합니다.
@@ -71,20 +71,20 @@
     
 3. Java를 사용하지 않고 다른 언어를 사용할 계획이라면, 해당 언어를 설치합니다.
 
-    * Python 3.6.8의 설치는 다음 명령으로 가능합니다. (마찬가지로 터미널에서 입력합니다.)
+    * Python 3.9.5의 설치는 다음 명령으로 가능합니다. (마찬가지로 터미널에서 입력합니다.)
     
     ```bash
     brew install python3
     brew install --ignore-dependencies https://raw.githubusercontent.com/Homebrew/homebrew-core/f2a764ef944b1080be64bd88dca9a1d80130c558/Formula/python.rb --ignore-dependencies
     ```
     
-    * Node.JS 12.6.0의 설치는 다음 명령으로 가능합니다. (마찬가지로 터미널에서 입력합니다.)
+    * Node.JS 16.2.0의 설치는 다음 명령으로 가능합니다. (마찬가지로 터미널에서 입력합니다.)
     
     ```bash
     brew install nodejs
     ```
     
-    * Scala 2.13.0의 설치는 다음 명령으로 가능합니다. (마찬가지로 터미널에서 입력합니다.)
+    * Scala 2.13.6의 설치는 다음 명령으로 가능합니다. (마찬가지로 터미널에서 입력합니다.)
     
     ```bash
     brew install scala
