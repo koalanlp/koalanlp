@@ -6,6 +6,7 @@ package kr.bydelta.koala.etri
 import com.beust.klaxon.Json
 import kr.bydelta.koala.*
 import kr.bydelta.koala.data.*
+import kotlin.math.max
 
 /********* RESPONSE PAYLOADS *********/
 /**
@@ -159,8 +160,18 @@ data class SRLResponse(@Json(name = "word_id") val id: Int,
         val predicateWord = words[id]
         return arguments.map {
             val argWord = words[it.id]
-            val wordCount = it.text.count { ch -> ch == ' ' }
-            val modifiers = words.subList(it.id - wordCount, it.id).sortedBy { w -> w.id }
+            val textWords = it.text.trim().split(' ')
+            val wordIndex = textWords.indexOf(argWord.surface)
+
+            val begin = max(0, if (wordIndex == -1) {
+                // 찾을 수 없는 경우
+                it.id - textWords.size
+            } else {
+                it.id - wordIndex
+            })
+
+            val end = begin + textWords.size
+            val modifiers = words.subList(begin, end).sortedBy { w -> w.id }.filterNot { w -> it.id == w.id }
 
             val type = RoleType.valueOf(when (it.type) {
                 "ARGA" -> "ARG0"

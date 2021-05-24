@@ -10,8 +10,8 @@ test {
 
         if (architecture.equalsIgnoreCase('windows')) {
             exclude '**/KhaiiiTaggerTest.class'
-        } else if (architecture.equalsIgnoreCase('osx')) {
-            exclude '**/UTaggerTest.class'
+        } else {
+            exclude '**/UTaggerTest.class'  // Windows & Ubuntu 18.04
         }
     }
 
