@@ -24,24 +24,25 @@ fi
 KHAIII_LATEST=$(git tag -l | tail -n 1)
 git checkout -f tags/$KHAIII_LATEST
 
-### Python 3.6 Pypi install
-wget https://bootstrap.pypa.io/get-pip.py
-python3.6 get-pip.py --user
-python3.6 -m pip install --user -r requirements.txt
-echo "\033[34mPython3.6 installation finished\033[0m"
-
-### Note original python version for checking.
-PYVER=$(python3.6 --version)
-echo $PYVER
-
 ### Make build files
 if [ ! -d "build" ]
 then
     mkdir build
-    cd build
-    cmake ..
+fi
+
+# OS Release check (khaiii/khaiii#103)
+if [ $TRAVIS_OS_NAME == 'linux' ]
+then
+    RELEASE=`lsb_release -cs`
 else
-    cd build
+    RELEASE=none
+fi
+
+cd build
+if [ $RELEASE == 'focal' ]
+then
+    cmake -E env CXXFLAGS="-w" cmake ..
+else
     cmake ..
 fi
 

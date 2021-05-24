@@ -1,26 +1,25 @@
 language: java
 matrix:
   include:
-    - name: "Windows with OpenJDK 16"
+    - name: "Windows with OpenJDK 11 (LTS)"
       os: windows
       language: shell
       filter_secrets: false
       before_install:
-        - choco install openjdk --version 16.0.1 -y
+        - choco install openjdk@11 -y
+        - export PATH=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$PATH' ")
+        - export JAVA_HOME=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$JAVA_HOME' ")
         - java --version
-      env:
-        - JAVA_HOME="/c/Progra~1/OpenJDK/jdk-16.0.1"
-        - PATH="$JAVA_HOME/bin:$PATH"
       cache:
         directories:
           - $HOME/.gradle/wrapper/
           - $HOME/utagger
           - $HOME/.hunter
-    - name: "OSX11.3 with OpenJDK 16"
+    - name: "OSX11.3 with OpenJDK 11 (LTS)"
       os: osx
       osx_image: xcode12.5
       language: shell
-      jdk: openjdk16.0.1
+      jdk: openjdk11
       before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -30,9 +29,9 @@ matrix:
           - $HOME/.gradle/wrapper/
           - $HOME/khaiii-orig
           - $HOME/.hunter
-    - name: "Ubuntu Bionic with OpenJDK 14"
+    - name: "Ubuntu Focal with OpenJDK 11 (LTS)"
       dist: focal
-      jdk: openjdk16
+      jdk: openjdk11
       before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -fr $HOME/.gradle/caches/*/plugin-resolution/

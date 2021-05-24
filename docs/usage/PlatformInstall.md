@@ -26,10 +26,13 @@
    ```
 
 2. 사용하려는 언어에 상관 없이 Java JDK 설치가 필요합니다. 명령 프롬프트에서 다음을 입력하고 ENTER를 누릅니다.
-   단, 버전은 최신 버전을 선택합니다. ![Chocolatey Version](https://img.shields.io/chocolatey/v/openjdk?label=%ED%98%84%EC%9E%AC%20%EC%B5%9C%EC%8B%A0%20%EB%B2%84%EC%A0%84&style=flat-square) 을 참조하여 입력하세요 (v는 입력하지 않습니다.)
+   
+   단, 버전은 최신 장기지원(LTS) 버전을 선택합니다. ![Chocolatey Version](https://img.shields.io/chocolatey/v/openjdk11?label=%ED%98%84%EC%9E%AC%20%EC%B5%9C%EC%8B%A0%20%EB%B2%84%EC%A0%84&style=flat-square) 을 참조하여 입력하세요 (v는 입력하지 않습니다.)
+   
+   KoalaNLP는 2021년 5월 현재 Java의 장기지원 버전인 11.x를 기준으로 테스트하고 있습니다.
 
    ```commandline
-   choco install openjdk --version 16.0.1 -y
+   choco install openjdk --version 11.0.11.9 -y
    ```
    
 3. Java를 사용하지 않고 다른 언어를 사용할 계획이라면, 해당 언어를 설치합니다.
@@ -63,10 +66,10 @@
     ``   
 
 2. 사용하려는 언어에 상관 없이 Java JDK 설치가 필요합니다. 터미널에서 다시 다음을 입력하고 ENTER를 눌러 실행합니다.
-
+   KoalaNLP는 2021년 5월 현재 Java의 장기지원 버전인 11.x를 기준으로 테스트하고 있습니다.
+   
     ```bash
-    brew cask info java
-    brew cask install java
+    brew install openjdk@11
     ```
     
 3. Java를 사용하지 않고 다른 언어를 사용할 계획이라면, 해당 언어를 설치합니다.
@@ -95,15 +98,16 @@
 ## Linux
 
 1. 사용하려는 언어에 상관 없이 Java JDK 설치가 필요합니다. 다음을 실행하여 자바를 설치합니다.
-
-   (Debian 계열의 경우, JDK 14를 설치한다고 가정했을 때)
+   KoalaNLP는 2021년 5월 현재 Java의 장기지원 버전인 11.x를 기준으로 테스트하고 있습니다.
+   
+   (Debian 계열의 경우, JDK 11을 설치한다고 가정했을 때)
    ```bash
-   sudo apt install openjdk-14-jdk
+   sudo apt install openjdk-11-jdk
    ```
    
-   (RedHat 계열의 경우, JDK 14를 설치한다고 가정했을 때)
+   (RedHat 계열의 경우, JDK 11을 설치한다고 가정했을 때)
    ```bash
-   sudo yum install java-1.14.0-openjdk
+   sudo yum install java-1.11.0-openjdk
    ```
    
 2. Java를 사용하지 않고 다른 언어를 사용할 계획이라면, 해당 언어를 설치합니다.
