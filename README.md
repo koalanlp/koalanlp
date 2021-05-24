@@ -4,7 +4,7 @@ KoalaNLP
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 [![API Doc](https://img.shields.io/badge/doc-Java,Kotlin,Scala-blue.svg?style=flat-square)](http://koalanlp.github.io/koalanlp/api/koalanlp/index)
 
-[![Build Status](https://travis-ci.com/koalanlp/koalanlp.svg?branch=master)](https://travis-ci.com/koalanlp/koalanlp)
+[![Build Status](https://travis-ci.org/koalanlp/koalanlp.svg?branch=master)](https://travis-ci.com/koalanlp/koalanlp)
 [![Code coverage](https://img.shields.io/codecov/c/github/koalanlp/koalanlp.svg?style=flat-square)](https://codecov.io/gh/koalanlp/koalanlp)
 [![Known Vulnerabilities](https://snyk.io/test/github/koalanlp/koalanlp/badge.svg?style=flat-square)](https://snyk.io/test/github/koalanlp/koalanlp)
 
@@ -25,7 +25,7 @@ __동일한 인터페이스__ 아래에서 사용할 수 있도록 하는 것이
 * 서울대의 [꼬꼬마 형태소/구문 분석기 v2.1](http://kkma.snu.ac.kr/documents/index.jsp)
 * ETRI의 [공공 인공지능 Open API](http://aiopen.etri.re.kr/)
 * OpenKoreanText의 [오픈 소스 한국어 처리기 v2.3.1](http://openkoreantext.org) (구 Twitter 한국어 분석기)
-* 울산대학교의 [UTagger 2018년 10월 31일자](http://nlplab.ulsan.ac.kr/doku.php?id=start) <sup>1-2, (별도설치 필요: [설치법](https://koalanlp.github.io/usage/Install-UTagger.md))</sup>
+* 울산대학교의 [UTagger 2018년 10월 31일자](http://nlplab.ulsan.ac.kr/doku.php?id=start) <sup>1-2, (별도설치 필요: [설치법](https://koalanlp.github.io/koalnlp/usage/Install-UTagger.md))</sup>
 * 은전한닢 프로젝트의 [SEunjeon(S은전) v1.5.0](https://bitbucket.org/eunjeon/seunjeon) (Mecab-ko의 Scala/Java 판본)
 * 이수명님의 [Arirang Morpheme Analyzer](http://cafe.naver.com/korlucene) <sup>1-1</sup>
 * 최석재님의 [RHINO v3.7.8](https://github.com/SukjaeChoi/RHINO)
@@ -116,7 +116,7 @@ KoalaNLP는 다음과 같은 특징을 가지고 있습니다.
 >
 > <sup>주2-3</sup> Khaiii 분석기의 경우는 Java가 아닌 C++로 구현되어 사용 전 분석기의 설치가 필요합니다. Python3.6 및 CMake 3.10+만 설치되어 있다면 설치 자체가 복잡한 편은 아니니 [여기](https://github.com/kakao/khaiii/wiki/빌드-및-설치)를 참조하여 설치해보세요. 참고로, KoalaNLP가 Travis CI에서 패키지를 자동 테스트하기 위해 구현된 bash script는 [여기](https://github.com/koalanlp/koalanlp/blob/master/khaiii/install.sh)에 있습니다.
 >
-> <sup>주2-4</sup> UTagger 분석기의 경우에도 C/C++로 구현되어, 사용 전 분석기의 설치가 필요합니다. 윈도우와 리눅스(우분투, CentOS)용 라이브러리 파일만 제공되며, 설치 방법은 [여기](https://koalanlp.github.io/usage/Install-UTagger.md)를 참조하십시오.
+> <sup>주2-4</sup> UTagger 분석기의 경우에도 C/C++로 구현되어, 사용 전 분석기의 설치가 필요합니다. 윈도우와 리눅스(우분투, CentOS)용 라이브러리 파일만 제공되며, 설치 방법은 [여기](https://koalanlp.github.io/koalnlp/usage/Install-UTagger.md)를 참조하십시오.
 
 ## 실행환경
 * KoalaNLP의 모든 코드는 OpenJDK 12에서 테스트 되었습니다.

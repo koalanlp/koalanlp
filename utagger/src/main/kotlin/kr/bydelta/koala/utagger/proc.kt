@@ -257,7 +257,7 @@ class UTagger {
                         throw UnsatisfiedLinkError(
                                 """UTagger 라이브러리 파일을 ${libPath}에서 찾을 수 없습니다.
                         |UTagger는 C/C++로 구현되어 KoalaNLP는 이를 자동으로 설치하지 않습니다. UTagger가 설치되어 있는지 확인해주세요.
-                        |설치가 필요한 경우, 설치법은 https://koalanlp.github.io/usage/Install-UTagger.md 에서 확인해주세요.""".trimMargin())
+                        |설치가 필요한 경우, 설치법은 https://koalanlp.github.io/koalnlp/usage/Install-UTagger.md 에서 확인해주세요.""".trimMargin())
                     }
 
                     // 인코딩 문제로 인해 CP949 byte array로 강제 전환 후 이 pointer를 전달합니다.
@@ -326,7 +326,7 @@ class UTagger {
  * * UTagger 2018이 지원하는 기능 중에서, Dependency parsing은 Segmentation fault가 많이 발생하여 지원되지 않습니다.
  *
  * * UTagger Shared Object가 이미 설치되어 있어야 합니다. (자동설치 하지 않으며, 설치 방법은
- *   [UTagger 설치 방법](https://koalanlp.github.io/usage/Install-UTagger.md)를 참조하세요.)
+ *   [UTagger 설치 방법](https://koalanlp.github.io/koalnlp/usage/Install-UTagger.md)를 참조하세요.)
  *
  * * Shared object와 JNI를 통한 송수신 과정에서 Exception 또는 Segmentation fault 등이 발생할 수 있습니다.
  *

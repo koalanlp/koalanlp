@@ -16,7 +16,7 @@ KoalaNLP 코드의 저작권 조항은 MIT license를 따릅니다.
 `utagger` 분석기는 C로 개발되어, 현재 KoalaNLP가 자동으로 설치하는 범위에는 포함되지 않습니다.
 따라서, 사용 전 분석기의 설치가 필요합니다. 
 
-울산대는 미리 컴파일 된 파일을 제공하므로, 설치 자체가 복잡한 편은 아니니 [여기](https://koalanlp.github.io/usage/Install-UTagger.md)를 참조하여 설치해보세요. (단, 일부 환경에서는 지원하지 않습니다.) 
+울산대는 미리 컴파일 된 파일을 제공하므로, 설치 자체가 복잡한 편은 아니니 [여기](https://koalanlp.github.io/koalnlp/usage/Install-UTagger.md)를 참조하여 설치해보세요. (단, 일부 환경에서는 지원하지 않습니다.) 
 
 참고로, KoalaNLP가 Travis CI에서 패키지를 자동 테스트하기 위해 구현된 bash script는 [여기](https://github.com/koalanlp/koalanlp/blob/master/utagger/install.sh)에 있습니다.
 

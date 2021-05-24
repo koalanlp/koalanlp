@@ -6,10 +6,11 @@ matrix:
       language: shell
       filter_secrets: false
       before_install:
-        - choco install openjdk@11 -y
+        - choco install openjdk11 -y
         - export PATH=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$PATH' ")
-        - export JAVA_HOME=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$JAVA_HOME' ")
         - java --version
+      env:
+        - JAVA_HOME="/c/Progra~1/OpenJDK/jdk-11.0.11.9"
       cache:
         directories:
           - $HOME/.gradle/wrapper/
