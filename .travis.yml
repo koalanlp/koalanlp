@@ -10,7 +10,7 @@ matrix:
         - export PATH=$(cmd.exe //c "refreshenv > nul & C:\Progra~1\Git\bin\bash -c 'echo \$PATH' ")
         - java --version
       env:
-        - JAVA_HOME="/c/Progra~1/OpenJDK/jdk-11.0.11_9"
+        - JAVA_HOME="/c/Progra~1/OpenJDK/openjdk-11.0.11_9"
       cache:
         directories:
           - $HOME/.gradle/wrapper/
