@@ -202,16 +202,36 @@ object RandomSentenceTest : Spek({
     val API_KEY = System.getenv("ETRI_KEY")
 
     describeSequential("RoleLabeler") {
+//        it("should handle quote-included sentence properly.") {
+//            val testText = "홍 회장은 \"제가 강남에 집이나 땅이 하나도 없어서 알아보던 중에 부동산에 아는 사람을 통해서 삼성동 자택이 매물로 나온 걸 알게 되었다\"며 \"처음에는 조금 부담되었지만 집사람도 크게 문제가 없다고 해서 매입하였다\"고 말하였다."
+//            val analyzer = RoleLabeler(API_KEY);
+//
+//            { analyzer(testText)[0] } `should not throw` AnyException
+//
+//            val testText2 = "이어 \"조만간 이사를 할 생각이지만 난방이나 이런게 다 망가졌다기에 보고나서 이사를 하려한다\"며 \"집부터 먼저 봐야될 것 같다\"고 하였다."
+//
+//            { analyzer(testText2)[0] } `should not throw` AnyException
+//        }
+
         it("should not throw any exception") {
             val analyzer = RoleLabeler(API_KEY)
-            val examples = Examples.exampleSequence(1).take(10)
+            // 따옴표(")를 포함한 경우의 출력이 오류를 일으키는 경우가 많아, "를 포함한 문장만 테스트
+            Examples.exampleSequence(1).filter { it.second.contains("[\"']+".toRegex()) }.forEach {
+                val (_, testText) = it
 
-            for ((_, testText) in examples) {
                 // 반복 요청을 막기 위해 적절한 시간동안 멈춥니다.
                 Thread.sleep(1000 + Random().nextInt(10) * 1000L)
                 print('.');
 
-                { analyzer(testText)[0] } `should not throw` AnyException
+                {
+                    try{
+                        analyzer(testText)[0]
+                    }catch(e: Exception){
+                        println(testText)
+                        e.printStackTrace()
+                        throw e
+                    }
+                } `should not throw` AnyException
             }
         }
     }

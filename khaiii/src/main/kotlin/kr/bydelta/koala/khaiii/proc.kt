@@ -261,7 +261,7 @@ class Khaiii @JvmOverloads constructor(resourceDirectory: String = "", val opt: 
                 System.setProperty("jna.encoding", "UTF-8")
                 try {
                     // In OSX, loader automatically adds prefix "lib".
-                    Native.load(if (Platform.isMac()) "khaiii" else "libkhaiii",
+                    Native.load(if (Platform.isMac()) "libkhaiii.dylib" else "libkhaiii.so",
                             KhaiiiLibrary::class.java) as KhaiiiLibrary
                 } catch (e: Exception) {
                     throw UnsatisfiedLinkError(
